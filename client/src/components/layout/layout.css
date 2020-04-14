@@ -1,0 +1,17 @@
+/* -------------------- -------------------- HEADER -------------------- -------------------- */
+.headerMain {
+    height: 100px;
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/* -------------------- -------------------- FOOTER -------------------- -------------------- */
+.footerMain {
+    height: 70px;
+    border-top: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
