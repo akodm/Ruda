@@ -1,3 +1,62 @@
 .main-main {
-    
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    height: 700px;
+    justify-content: space-around;
+}
+
+.main-intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 100px;
+}
+
+.main-title {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.main-h1 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-left: 50px;
+}
+
+.main-form {
+    background-color: rgba(231, 231, 231, 0.315);
+    width: 350px;
+    height: 200px;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.main-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 70%;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.main-login {
+    background-color: white;
+    width: 250px;
+    height: 40px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.main-insert {
+    background-color: white;
+    width: 250px;
+    height: 40px;
+    padding-top: 10px;
+    text-align: center;
 }

@@ -9,6 +9,8 @@ import MainIndex from './components/main/index';
 import MypageIndex from './components/main/mypage/mypage';
 // 로그인 페이지
 import Login from './components/main/login/login';
+// 회원가입 페이지
+import Insert from './components/main/insert/insert';
 
 function App() {
     return (
@@ -19,6 +21,7 @@ function App() {
                           <Route exact path="/" component={MainIndex} />
                           <Route path="/mypage" component={MypageIndex} />
                           <Route path="/login" component={Login} />
+                          <Route path="/insert" component={Insert} />
                       </Switch>
                 }/>
             </Router>
