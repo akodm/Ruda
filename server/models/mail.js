@@ -1,35 +1,32 @@
 module.exports = (sequelize, DataTypes) => {
-    const User = sequelize.define("user", {
-        userId : {
-            type: DataTypes.STRING,
+    const Mail = sequelize.define("mail", {
+        id : {
+            type: DataTypes.INTEGER,
             primaryKey : true,
             allowNull: false
         },
-        userPass : {
+        userAndCompanyId : {
             type: DataTypes.STRING,
             allowNull: false
         },
-        userName : {
+        title : {
             type: DataTypes.STRING,
             allowNull: false
         },
-        userEmail : {
-            type: DataTypes.STRING,
-        },
-        userPhone : {
+        content : {
             type: DataTypes.STRING,
             allowNull: false
         },
-        userAdd : {
-            type: DataTypes.STRING,
-        },
-        userCate : {
+        files : {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        readState : {
+            type: DataTypes.STRING,
         },
     });
     // User.associate = function(models) {
     //     User.hasMany(models.slackchat)
     // }
-    return User;
+    return Mail;
 };
