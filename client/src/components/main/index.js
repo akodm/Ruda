@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 class MainIndex extends React.Component {
     render() {
         return (
-            <div>
-                Main
+            <div className="main-main">
                 <Link to="/mypage">Mypage</Link>
             </div>
         );

@@ -13,15 +13,15 @@ import Login from './components/main/login/login';
 function App() {
     return (
         <div className="app-main">
-            <Root main={
-              <Router>
-                  <Switch>
-                      <Route exact path="/" component={MainIndex} />
-                      <Route path="/mypage" component={MypageIndex} />
-                      <Route path="/login" component={Login} />
-                  </Switch>
-              </Router>
-            }/>
+            <Router>
+                <Root main={
+                      <Switch>
+                          <Route exact path="/" component={MainIndex} />
+                          <Route path="/mypage" component={MypageIndex} />
+                          <Route path="/login" component={Login} />
+                      </Switch>
+                }/>
+            </Router>
         </div>
     );
 }
