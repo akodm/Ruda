@@ -8,20 +8,6 @@
     align-items: center;
 }
 
-.header-logo {
-    font-size: 36px;
-    font-weight: bold;
-    color: rgb(209, 0, 0);
-    margin-right: 40px;
-}
-
-.header-menuSpan {
-    font-size: 16px;
-    font-weight: 600;
-    margin-left: 25px;
-    margin-right: 25px;
-}
-
 /* -------------------- -------------------- FOOTER -------------------- -------------------- */
 .footerMain {
     height: 120px;
