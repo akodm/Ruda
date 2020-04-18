@@ -10,38 +10,31 @@ let http = require('http');
 let moment = require('moment');
 // let redis = require('redis');
 // let client = redis.createClient();
-
 let configs = require('../server-configs');
 const models = require("../models");
-
-// client.get('key', redis.print); -> redis test
 
 /**
  * Get port from environment and store in Express.
  */
-
 var port = normalizePort(process.env.PORT || configs.app.port);
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
-
 var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
-
-models.sequelize.query("SET FOREIGN_KEY_CHECKS = 1", {raw: true}).then(() => {
-models.sequelize.sync({ force:true }).then(()=>{
+models.sequelize.query("SET FOREIGN_KEY_CHECKS = 0", {raw: true}).then(() => {
+models.sequelize.sync({ force:false }).then(()=>{
     server.listen(port, async() => {
-        console.log(`app running on port ${port}`);
+        console.log(`서버 시작 포트번호 :  ${port}`);
         try {
-            let nowtimeString = moment(new Date()).format('HH:mm')
-            console.log('현재 시간 : ', nowtimeString);
+            console.log('[현재 시간 : ', moment(new Date()).format("M/D/ddd | HH시mm분]"));
         } catch(err){
-            console.log("app running err ( sql db created ) : " + err);
+            console.log("서버 시작 에러 / 데이터베이스 생성 에러 : " + err);
         }
     });
     server.on('error', onError);
@@ -52,7 +45,6 @@ models.sequelize.sync({ force:true }).then(()=>{
 /**
  * Normalize a port into a number, string, or false.
  */
-
 function normalizePort(val) {
   var port = parseInt(val, 10);
 
@@ -72,7 +64,6 @@ function normalizePort(val) {
 /**
  * Event listener for HTTP server "error" event.
  */
-
 function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
@@ -100,7 +91,6 @@ function onError(error) {
 /**
  * Event listener for HTTP server "listening" event.
  */
-
 function onListening() {
   var addr = server.address();
   var bind = typeof addr === 'string'

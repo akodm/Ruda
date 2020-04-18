@@ -1,9 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
     const UserInfo = sequelize.define("userInfo", {
-        userId : {
-            type: DataTypes.STRING,
+        id : {
+            type: DataTypes.INTEGER,
             primaryKey : true,
-            allowNull: false
+            autoIncrement: true
         },
         userTraning : {
             type: DataTypes.STRING,
@@ -62,8 +62,5 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
         },
     });
-    // User.associate = function(models) {
-    //     User.hasMany(models.slackchat)
-    // }
     return UserInfo;
 };
