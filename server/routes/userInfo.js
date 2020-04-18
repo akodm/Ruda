@@ -19,4 +19,7 @@ router.get("/all", async (req, res) => {
 	}
 });
 
+// 유저 정보 등록 및 수정하기
+
+
 module.exports = router;

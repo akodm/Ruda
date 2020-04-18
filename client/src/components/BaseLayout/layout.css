@@ -61,14 +61,12 @@ header{
 
 /* -------------------- -------------------- FOOTER -------------------- -------------------- */
 .footerMain {
-    height: 100px;
+    height: 120px;
     background-color: rgba(199, 199, 199, 0.541);
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
     text-align: center; 
 }
 
