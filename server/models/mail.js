@@ -3,11 +3,7 @@ module.exports = (sequelize, DataTypes) => {
         id : {
             type: DataTypes.INTEGER,
             primaryKey : true,
-            allowNull: false
-        },
-        userAndCompanyId : {
-            type: DataTypes.STRING,
-            allowNull: false
+            autoIncrement: true
         },
         title : {
             type: DataTypes.STRING,
@@ -25,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
         },
     });
-    // User.associate = function(models) {
-    //     User.hasMany(models.slackchat)
-    // }
+    Mail.associate = function(models) {
+        Mail.belongsTo(models.user)
+    }
     return Mail;
 };

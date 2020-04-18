@@ -1,10 +1,10 @@
 import React, { userState } from 'react';
-import Header from './layout/header';
-import Footer from './layout/footer';
+import Header from './header';
+import Footer from './footer';
 
 const Root = (props) => (
     <div className="root-main">
-        <Header />
+        <Header />         
         <div className="root-mainDiv">
             {props.main}
         </div>
