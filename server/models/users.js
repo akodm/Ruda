@@ -18,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         userPhone : {
             type: DataTypes.STRING,
-            allowNull: false
         },
         userAdd : {
             type: DataTypes.STRING,
@@ -28,8 +27,12 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
     });
-    // User.associate = function(models) {
-    //     User.hasMany(models.slackchat)
-    // }
+    User.associate = function(models) {
+        User.hasOne(models.userInfo);
+        User.hasOne(models.hireBoard);
+        User.hasOne(models.companyInfo);
+        User.hasOne(models.companyHire);
+        User.hasMany(models.mail);
+    }
     return User;
 };

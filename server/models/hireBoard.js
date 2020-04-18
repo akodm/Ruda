@@ -3,11 +3,7 @@ module.exports = (sequelize, DataTypes) => {
         id : {
             type: DataTypes.INTEGER,
             primaryKey : true,
-            allowNull: false
-        },
-        companyId : {
-            type: DataTypes.STRING,
-            allowNull: false
+            autoIncrement: true
         },
         title : {
             type: DataTypes.STRING,
@@ -25,8 +21,5 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
         },
     });
-    // User.associate = function(models) {
-    //     User.hasMany(models.slackchat)
-    // }
     return HireBoard;
 };

@@ -33,7 +33,7 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-models.sequelize.query("SET FOREIGN_KEY_CHECKS = 1", {raw: true}).then(() => {
+models.sequelize.query("SET FOREIGN_KEY_CHECKS = 0", {raw: true}).then(() => {
 models.sequelize.sync({ force:true }).then(()=>{
     server.listen(port, async() => {
         console.log(`app running on port ${port}`);
