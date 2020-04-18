@@ -1,0 +1,115 @@
+
+/*회원가입 메인*/
+.insert-choice{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 220px;
+    
+}
+.insert-choice button{
+    width: 200px;
+    height: 50px;
+    color: white;
+    background-color:#f31515 ;
+    margin: 15px;
+    border: none;
+    font-weight: 600;
+    font-size: 14px;
+}
+/*회원가입 폼 양식*/
+.insert-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.insert-title {
+    font-size: 30px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.insert-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.insert-formSpan {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.insert-formID {
+    width: 150px;
+}
+
+.insert-formPass {
+    width: 150px;
+}
+
+.insert-formName {
+    width: 150px;
+}
+
+.insert-formEmail {
+    width: 150px;
+}
+
+.insert-formPhone {
+    width: 150px;
+}
+
+.insert-formAddDiv {
+
+}
+
+.insert-formAddNo {
+    width: 150px;
+    margin-right: 5px;
+}
+
+.insert-formAdd {
+    width: 180px;
+    margin-top: 15px;
+    margin-right: 5px;
+}
+
+.insert-formAdd2 {
+    width: 150px;
+}
+
+.insert-formAdd3 {
+    width: 150px;
+}
+
+.insert-formSelt {
+    width: 150px;
+}
+
+.insert-formOpt {
+
+}
+
+.insert-btns {
+    margin-top: 100px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.insert-insertBtn {
+    width: 130px;
+    height: 40px;
+}
+
+.insert-insertCancel {
+    width: 130px;
+    height: 40px;
+}

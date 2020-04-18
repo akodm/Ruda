@@ -8,9 +8,13 @@ let app = require('../app');
 let debug = require('debug')('server:server');
 let http = require('http');
 let moment = require('moment');
+// let redis = require('redis');
+// let client = redis.createClient();
 
 let configs = require('../server-configs');
 const models = require("../models");
+
+// client.get('key', redis.print); -> redis test
 
 /**
  * Get port from environment and store in Express.

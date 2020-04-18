@@ -1,6 +1,14 @@
-.app-main, #root, .root-main {
-    height: 100%;
+html, body, .app-main, #root, .root-main {
     width: 100%;
+}
+
+html {
+    overflow-y: scroll;
+}
+
+a { 
+  text-decoration: none;
+  color: black;
 }
 
 .root-main {
@@ -9,10 +17,11 @@
 }
 
 .root-mainDiv {
+    margin-top: 100px;
+    margin-bottom: 100px;
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
     height: 100%;
 }

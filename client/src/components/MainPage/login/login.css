@@ -1,0 +1,56 @@
+.login-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.login-title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+.login_box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
+    margin-top: 50px;
+    margin-bottom: 250px;
+}
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid black;
+}
+
+.login-formID {
+}
+
+.login-formPass {
+}
+
+.login-line {
+    height: 200px;
+    margin-left: 50px;
+    border-right: 1px solid black;
+    background-color: rgba(63, 63, 63, 0.562);
+}
+
+.login-choice{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+.login-choice button{
+    width: 200px;
+    height: 50px;
+    color: white;
+    background-color:#f31515 ;
+    margin: 15px;
+    border: none;
+    font-weight: 600;
+    font-size: 14px; 
+}

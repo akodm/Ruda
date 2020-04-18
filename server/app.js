@@ -6,6 +6,12 @@ let logger = require('morgan');
 
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
+let companyHireRouter = require('./routes/companyHire');
+let companyInfoRouter = require('./routes/companyInfo');
+let hireBoardRouter = require('./routes/hireBoard');
+let mailRouter = require('./routes/mail');
+let userInfoRouter = require('./routes/userInfo');
+
 const configs = require('./server-configs.js');
 
 let app = express();
@@ -22,6 +28,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/companyHires', companyHireRouter);
+app.use('/companyInfos', companyInfoRouter);
+app.use('/hireBoards', hireBoardRouter);
+app.use('/mails', mailRouter);
+app.use('/userInfos', userInfoRouter);
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", configs.app.c_local);
