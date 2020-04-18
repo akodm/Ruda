@@ -10,17 +10,17 @@ class Insert extends React.Component {
                     <span>회원가입</span>
                 </div>
                 <div className="insert-form">
-                    <span className="insert-formSpan">*아이디</span>
+                    <span className="insert-formSpan">아이디<span className="star">*</span></span>
                     <input type="text" className="insert-formID"></input>
-                    <span className="insert-formSpan">*비밀번호</span>
+                    <span className="insert-formSpan">비밀번호<span className="star">*</span></span>
                     <input type="password" className="insert-formPass"></input>
-                    <span className="insert-formSpan">*비밀번호 확인</span>
+                    <span className="insert-formSpan">비밀번호 확인<span className="star">*</span></span>
                     <input type="password" className="insert-formPass"></input>
-                    <span className="insert-formSpan">*이름</span>
+                    <span className="insert-formSpan">이름<span className="star">*</span></span>
                     <input type="text" className="insert-formName"></input>
                     <span className="insert-formSpan">이메일</span>
                     <input type="text" className="insert-formEmail"></input>
-                    <span className="insert-formSpan">*전화번호</span>
+                    <span className="insert-formSpan">전화번호<span className="star">*</span></span>
                     <input type="number" className="insert-formPhone"></input>
                     <span className="insert-formSpan">주소</span>
                     <div className="insert-formAddDiv">
@@ -31,7 +31,7 @@ class Insert extends React.Component {
                         <input type="text" className="insert-formAdd"></input>
                         <input type="text" className="insert-formAdd2"></input>
                     </div>
-                    <span className="insert-formSpan">*사용자 구분</span>
+                    <span className="insert-formSpan">사용자 구분<span className="star">*</span></span>
                     <select className="insert-formSelt">
                         <option className="insert-formOpt">신입 구직자</option>
                         <option className="insert-formOpt">기업</option>

@@ -11,10 +11,9 @@ class Login extends React.Component {
                 </div>
                 <div className="login_box">
                     <div className="login-form">
-                        <span className="login-formSpan">*아이디</span>
-                        <input type="text" className="login-formID"></input>
-                        <span className="login-formSpan">*비밀번호</span>
-                        <input type="password" className="login-formPass"></input>
+                        <input type="text" className="login-formID" placeholder="아이디"></input>
+                        <input type="password" className="login-formPass" placeholder="비밀번호"></input>
+                        <button>로그인</button>
                     </div>
                     <div className="login-line"></div>
                     <div className="login-choice">
@@ -23,7 +22,7 @@ class Login extends React.Component {
                         <Link to = ""><button>구글로그인</button></Link>
                     </div>
                 </div>
-        </div>
+            </div>
         );
     }
 }

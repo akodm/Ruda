@@ -15,27 +15,28 @@
     justify-content: space-around;
     align-items: center;
     width: 50%;
-    margin-top: 50px;
-    margin-bottom: 250px;
+    margin-top: 100px;
+    margin-bottom: 300px;
 }
 .login-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border: 1px solid black;
 }
 
-.login-formID {
-}
-
-.login-formPass {
+.login-formID , .login-formPass {
+    width: 180px;
+    height: 40px;
+    border: none;
+    background-color:rgba(231, 231, 231, 0.315);
+    margin-bottom: 13px;
+    padding: 0px 10px 0px 10px;
+    font-size: 12pt;
 }
 
 .login-line {
     height: 200px;
-    margin-left: 50px;
-    border-right: 1px solid black;
-    background-color: rgba(63, 63, 63, 0.562);
+    border-right: 1px solid gray ;
 }
 
 .login-choice{
@@ -44,12 +45,12 @@
     justify-content: center;
     
 }
-.login-choice button{
+.login_box button,.login-choice button{
     width: 200px;
-    height: 50px;
+    height: 45px;
     color: white;
     background-color:#f31515 ;
-    margin: 15px;
+    margin-bottom: 13px;
     border: none;
     font-weight: 600;
     font-size: 14px; 
