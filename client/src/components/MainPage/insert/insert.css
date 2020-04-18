@@ -1,3 +1,24 @@
+
+/*회원가입 메인*/
+.insert-choice{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 220px;
+    
+}
+.insert-choice button{
+    width: 200px;
+    height: 50px;
+    color: white;
+    background-color:#f31515 ;
+    margin: 15px;
+    border: none;
+    font-weight: 600;
+    font-size: 14px;
+}
+/*회원가입 폼 양식*/
 .insert-main {
     display: flex;
     flex-direction: column;
