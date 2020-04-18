@@ -6,9 +6,13 @@ html {
     overflow-y: scroll;
 }
 
-a { 
+a, ul, li { 
   text-decoration: none;
   color: black;
+}
+
+button {
+    cursor: pointer;
 }
 
 .root-main {
