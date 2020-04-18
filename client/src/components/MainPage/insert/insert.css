@@ -4,16 +4,16 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 100px;
     margin-bottom: 220px;
     
 }
 .insert-choice button{
     width: 200px;
-    height: 50px;
+    height: 45px;
     color: white;
     background-color:#f31515 ;
-    margin: 15px;
+    margin-bottom: 20px;
     border: none;
     font-weight: 600;
     font-size: 14px;
@@ -30,6 +30,7 @@
     display: flex;
     justify-content: center;
     margin-top: 30px;
+    
 }
 
 .insert-form {
@@ -43,59 +44,40 @@
     font-weight: bold;
     margin-top: 15px;
     margin-bottom: 5px;
+    padding-left: 3px;
+}
+.star{
+    color:red;
+    font-size: 12pt;
+    font-weight: 600;
+    margin-left: 5px;
 }
 
-.insert-formID {
-    width: 150px;
+.insert-formID,.insert-formPass,.insert-formName,.insert-formEmail ,.insert-formPhone,.insert-formAddNo, .insert-formAdd,.insert-formAdd2,.insert-formSelt {
+    width: 170px;
+    height: 38px;
+    border: none;
+    background-color:rgba(231, 231, 231, 0.315);
+    margin-bottom: 13px;
+    padding: 0px 10px 0px 10px;
+    font-size: 12pt;
 }
-
-.insert-formPass {
-    width: 150px;
+.insert-formAddBtn{
+    width: 80px;
+    height: 30px;
+    margin-left: 7px;
+    border: none;
+    background-color:gray;
+    color:white;
+    font-size: 10pt;
 }
-
-.insert-formName {
-    width: 150px;
+.insert-formAdd2{
+    margin-left: 7px;
 }
-
-.insert-formEmail {
-    width: 150px;
+.insert-formSelt{
+    border: none;
 }
-
-.insert-formPhone {
-    width: 150px;
-}
-
-.insert-formAddDiv {
-
-}
-
-.insert-formAddNo {
-    width: 150px;
-    margin-right: 5px;
-}
-
-.insert-formAdd {
-    width: 180px;
-    margin-top: 15px;
-    margin-right: 5px;
-}
-
-.insert-formAdd2 {
-    width: 150px;
-}
-
-.insert-formAdd3 {
-    width: 150px;
-}
-
-.insert-formSelt {
-    width: 150px;
-}
-
-.insert-formOpt {
-
-}
-
+ 
 .insert-btns {
     margin-top: 100px;
     width: 100%;
@@ -107,9 +89,17 @@
 .insert-insertBtn {
     width: 130px;
     height: 40px;
+    background-color:#f31515 ;
+    border: none;
+    color:white;
+    font-weight: 600;
 }
 
 .insert-insertCancel {
     width: 130px;
     height: 40px;
+    background-color: gray;
+    border: none;
+    color:white;
+    font-weight: 600;
 }
