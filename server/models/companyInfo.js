@@ -54,5 +54,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
         },
     });
+    CompanyInfo.associate = function(models) {
+        CompanyInfo.belongsTo(models.user);
+    }
     return CompanyInfo;
 };

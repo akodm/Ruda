@@ -4,7 +4,6 @@ let models = require("../models");
 
 // DB Setting --------------------------------------------------------
 const User = models.user;
-const UserInfo = models.userInfo;
 
 // DB CRUD -----------------------------------------------------------
 
@@ -24,7 +23,7 @@ router.get("/one", async (req, res) => {
 	try {
 		const result = await User.findOne({
 			where : {
-				userId : req.query.userId,
+				id : req.query.userId,
 			}
 		});
 		res.send(result);
@@ -40,10 +39,10 @@ router.post("/create", async(req, res) => {
     try{
         await User.findOrCreate({
             where : {
-                userId : req.body.userId,
+                id : req.body.userId,
             },
             defaults : {
-                userId : req.body.userId,
+                id : req.body.userId,
                 userPass: req.body.userPass, 
                 userName: req.body.userName, 
                 userEmail: req.body.userEmail, 
@@ -51,7 +50,7 @@ router.post("/create", async(req, res) => {
                 userAdd: req.body.userAdd, 
                 userCate: req.body.userCate, 
             }
-        }).spread((none, created)=>{
+        }).spread(async(none, created)=>{
             if(created){
                 result = true;
             }
@@ -75,7 +74,7 @@ router.put("/update", async(req, res) => {
             userCate : req.body.userCate,
             }, {
             where: {
-                userId : req.body.userId
+                id : req.body.userId
             }
         });
         result = true;
@@ -92,7 +91,7 @@ router.delete("/delete", async(req, res) => {
     try {
         await User.destroy({
             where: {
-                userId: req.query.userId
+                id: req.query.userId
             }
 		});
 		result = true;
@@ -101,6 +100,5 @@ router.delete("/delete", async(req, res) => {
 	}
 	res.send(result);
 });
-
 
 module.exports = router;

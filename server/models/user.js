@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define("user", {
-        userId : {
+        id : {
             type: DataTypes.STRING,
             primaryKey : true,
             allowNull: false
@@ -28,10 +28,6 @@ module.exports = (sequelize, DataTypes) => {
         },
     });
     User.associate = function(models) {
-        User.hasOne(models.userInfo);
-        User.hasOne(models.hireBoard);
-        User.hasOne(models.companyInfo);
-        User.hasOne(models.companyHire);
         User.hasMany(models.mail);
     }
     return User;

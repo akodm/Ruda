@@ -7,11 +7,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         userTraning : {
             type: DataTypes.STRING,
-            allowNull: false
         },
         userUnvcity : {
             type: DataTypes.STRING,
-            allowNull: false
         },
         userSubject : {
             type: DataTypes.STRING,
@@ -62,5 +60,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
         },
     });
+    UserInfo.associate = function(models) {
+        UserInfo.belongsTo(models.user);
+    }
     return UserInfo;
 };
