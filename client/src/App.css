@@ -14,18 +14,3 @@ a, ul, li {
 button {
     cursor: pointer;
 }
-
-.root-main {
-    display: flex;
-    flex-direction: column;
-}
-
-.root-mainDiv {
-    padding-top: 100px;
-    padding-bottom: 100px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-}
