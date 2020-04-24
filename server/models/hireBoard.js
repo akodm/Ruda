@@ -21,5 +21,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
         },
     });
+    HireBoard.associate = function(models) {
+        HireBoard.belongsTo(models.user);
+    }
     return HireBoard;
 };

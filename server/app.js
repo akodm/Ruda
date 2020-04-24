@@ -3,6 +3,7 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
+let jwt = require('jsonwebtoken');
 
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
@@ -39,6 +40,34 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token");
   next();
+});
+
+// -------------------- 토큰 생성 및 검증 함수 --------------------
+function getToken(data){
+  try {
+      const getToken = jwt.sign({
+          userId : data.userId,
+      },
+          configs.app.secretKey,
+      {
+          expiresIn : '1200m'
+      });
+      return getToken;
+  } catch(err) {
+      console.log(__filename + " : 토큰 생성 에러 : " + err);
+  }
+}
+
+app.get('/verify', (req,res)=>{
+  try {
+      const token = req.headers['x-access-token'] || req.query.token;
+      const getToken = jwt.verify(token, configs.app.secretKey);
+      console.log("토큰 인증 완료");
+      res.send(getToken);
+  } catch(err) {
+      console.log(__filename + " : 토큰 검증 에러 : " + err);
+      res.send("err");
+  }
 });
 
 // catch 404 and forward to error handler

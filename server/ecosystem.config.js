@@ -2,7 +2,7 @@ module.exports = {
   apps : [{
     name: 'server',
     script: './bin/www',
-    instances: 2,
+    instances: 1,
     watch: true,
     ignore_watch : ['node_modules'],
     exec_mode : 'cluster',

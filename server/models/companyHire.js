@@ -15,5 +15,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.JSON,
         },
     });
+    CompanyHire.associate = function(models) {
+        CompanyHire.belongsTo(models.user);
+    }
     return CompanyHire;
 };
