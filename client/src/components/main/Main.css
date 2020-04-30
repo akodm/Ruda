@@ -6,7 +6,6 @@
 
 .main-title {
     height: 308px;
-    width: 100%;
     background-image:url(/Image/main_title_bg.png) ;
     display: flex;
     justify-content: center;
@@ -18,11 +17,11 @@
     color: white;
     font-weight: 600;
 }
-.main_btn{
+.main_btn {
     display: flex;
     flex-direction: row;
-    margin-top: 60px;
-    padding-left: 2.5%;
+    margin-top: 30px;
+    padding-left: 3.5%;
 }
 .main_btn_login , .main_btn_insert{
      background-color: white;
@@ -34,7 +33,6 @@
      margin: 15px;
      font-family: 'HYHeadLine',H2HDRM;
      border-radius: 2px;
-     
 }
 .main_btn :hover{
     color: white;

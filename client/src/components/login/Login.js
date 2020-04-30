@@ -28,8 +28,8 @@ class Login extends Component {
                     <span className="login-mainDivBottom-span">간편하게 로그인하기</span>
                     <div className="login-mainDivBottom-btns">
                         <img src="/Image/google.png" alt="google" className="login-oauth"></img>
-                        <img src="/Image/google.png" alt="facebook" className="login-oauth"></img>
-                        <img src="/Image/google.png" alt="github" className="login-oauth"></img>
+                        <img src="/Image/facebook.png" alt="facebook" className="login-oauth"></img>
+                        <img src="/Image/git32.png" alt="github" className="login-oauth"></img>
                     </div>
                 </div>
             </div>
