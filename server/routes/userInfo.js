@@ -32,7 +32,7 @@ router.get("/one", async (req, res) => {
 				{ model: User }
 			],
 			where : {
-				userId : req.query.userId
+				userEmail : req.query.userEmail
 			},
 		});
 		res.send(result);
@@ -42,16 +42,16 @@ router.get("/one", async (req, res) => {
 	}
 });
 
-// 전체 유저 정보 가져오기
+// 유저 정보 생성
 router.post("/create", async (req, res) => {
 	let result = false;
 	try {
 		await UserInfo.findOrCreate({
 			where : {
-				userId : req.body.userId
+				userEmail : req.body.userEmail
 			},
 			defaults : {
-				userId : req.body.userId
+				userEmail : req.body.userEmail
 			}
 		}).spread((none, created)=>{
 			if(created)
@@ -87,7 +87,7 @@ router.put("/update", async(req, res) => {
             userState : req.body.userState,
             }, {
             where: {
-                userId : req.body.userId
+                userEmail : req.body.userEmail
             }
         });
         result = true;
@@ -104,7 +104,7 @@ router.delete("/delete", async(req, res) => {
     try {
         await UserInfo.destroy({
             where: {
-                userId: req.query.userId
+                userEmail: req.query.userEmail
             }
 		});
 		result = true;

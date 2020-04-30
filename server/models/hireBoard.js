@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         },
     });
     HireBoard.associate = function(models) {
-        HireBoard.belongsTo(models.user);
+        HireBoard.belongsTo(models.company);
     }
     return HireBoard;
 };

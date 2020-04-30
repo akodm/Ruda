@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         },
     });
     CompanyHire.associate = function(models) {
-        CompanyHire.belongsTo(models.user);
+        CompanyHire.belongsTo(models.company);
     }
     return CompanyHire;
 };

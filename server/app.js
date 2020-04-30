@@ -7,14 +7,13 @@ let jwt = require('jsonwebtoken');
 
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
+let companyRouter = require('./routes/userInfo');
 let companyHireRouter = require('./routes/companyHire');
 let companyInfoRouter = require('./routes/companyInfo');
 let hireBoardRouter = require('./routes/hireBoard');
 let mailRouter = require('./routes/mail');
 let userInfoRouter = require('./routes/userInfo');
-
 const configs = require('./server-configs.js');
-
 let app = express();
 
 // view engine setup
@@ -29,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/companys', companyRouter);
 app.use('/companyHires', companyHireRouter);
 app.use('/companyInfos', companyInfoRouter);
 app.use('/hireBoards', hireBoardRouter);
@@ -46,7 +46,7 @@ app.use(function(req, res, next) {
 function getToken(data){
   try {
       const getToken = jwt.sign({
-          userId : data.userId,
+          userId : data,
       },
           configs.app.secretKey,
       {

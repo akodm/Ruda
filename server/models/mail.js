@@ -22,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
         },
     });
     Mail.associate = function(models) {
-        Mail.belongsTo(models.user)
+        Mail.belongsToMany(models.user, {through: 'mailId'})
+        Mail.belongsToMany(models.company, {through: 'mailId'})
     }
     return Mail;
 };

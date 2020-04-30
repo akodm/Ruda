@@ -25,7 +25,7 @@ router.get("/one", async (req, res) => {
 	try {
 		const result = await User.findOne({
 			where : {
-				id : req.query.userId,      // 유저 아이디를 토대로 검색
+				email : req.query.userEmail,      // 유저 아이디를 토대로 검색
 			}
 		});
 		res.send(result);
@@ -42,16 +42,13 @@ router.post("/create", async(req, res) => {
     try{
         await User.findOrCreate({
             where : {
-                id : req.body.userId,   // 동일한 아이디로는 생성 불가
+                email : req.body.userEmail,   // 동일한 아이디로는 생성 불가
             },
             defaults : {
-                id : req.body.userId,
+                email : req.body.userEmail,
                 userPass: userPass, 
                 userName: req.body.userName, 
-                userEmail: req.body.userEmail, 
-                userPhone: req.body.userPhone, 
                 userAdd: req.body.userAdd, 
-                userCate: req.body.userCate, 
             }
         }).spread(async(none, created)=>{
             if(created){
@@ -72,13 +69,12 @@ router.put("/update", async(req, res) => {
         await User.update({ 
             userPass: userPass,
             userName: req.body.userName, 
-            userEmail : req.body.userEmail,
             userPhone : req.body.userPhone,
             userAdd : req.body.userAdd,
             userCate : req.body.userCate,
             }, {
             where: {
-                id : req.body.userId
+                email : req.body.userEmail
             }
         });
         result = true;
@@ -95,7 +91,7 @@ router.delete("/delete", async(req, res) => {
     try {
         await User.destroy({
             where: {
-                id: req.query.userId
+                email: req.query.userEmail
             }
 		});
 		result = true;
@@ -114,7 +110,7 @@ router.post("/loginuser", async (req, res) => {
 	try {
 		const result = await User.findOne({
 			where : {
-                id : req.body.userId,
+                email : req.body.userEmail,
                 userPass : userPass,
 			}
         });
@@ -127,14 +123,13 @@ router.post("/loginuser", async (req, res) => {
     res.send(check);
 });
 
-// 유저 아이디 찾기
+// 유저 이메일 찾기
 router.get("/userid", async (req, res) => {
     let check = false;
 	try {
 		const result = await User.findOne({
 			where : {
                 userName : req.query.userName,
-                userEmail :  req.query.userEmail,
                 userPhone :  req.query.userPhone,
 			}
         });
@@ -142,7 +137,7 @@ router.get("/userid", async (req, res) => {
             check = true;
         }
 	} catch (err) {
-		console.log(__filename + " 에서 유저 아이디 찾기 에러 발생 내용= " + err);
+		console.log(__filename + " 에서 유저 이메일 찾기 에러 발생 내용= " + err);
     }
     res.send(check);
 });
@@ -153,8 +148,8 @@ router.get("/userpass", async (req, res) => {
 	try {
 		const result = await User.findOne({
 			where : {
-                id : req.query.userId,
-                userEmail :  req.query.userEmail,
+                userName : req.query.userName,
+                email :  req.query.userEmail,
                 userPhone :  req.query.userPhone,
 			}
         });

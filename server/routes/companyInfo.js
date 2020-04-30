@@ -2,9 +2,115 @@ var express = require("express");
 var router = express.Router();
 let models = require("../models");
 
-/* GET users listing. */
-router.get("/", function (req, res, next) {
-	res.send("respond with a resource");
+// DB Setting --------------------------------------------------------
+const CompanyInfo = models.companyInfo;
+const Company = models.company;
+const Op = models.sequelize.Op;
+
+// DB CRUD -----------------------------------------------------------
+
+// 기업 정보 전체 조회
+router.get("/all", async (req, res) => {
+	try {
+		const result = await CompanyInfo.findAll({
+			include : [
+				{ model: Company }
+			]
+		});
+		res.send(result);
+	} catch (err) {
+		console.log(__filename + " 에서 기업 정보 전체 검색 에러 발생 내용= " + err);
+		res.send(false);
+	}
+});
+
+// 기업 정보 한명 조회
+router.get("/one", async (req, res) => {
+	try {
+		const result = await CompanyInfo.findOne({
+			include : [
+				{ model: Company }
+			],
+			where : {
+				companyEmail : req.query.companyEmail
+			},
+		});
+		res.send(result);
+	} catch (err) {
+		console.log(__filename + " 에서 기업 정보 한명 검색 에러 발생 내용= " + err);
+		res.send(false);
+	}
+});
+
+// 기업 정보 생성
+router.post("/create", async (req, res) => {
+	let result = false;
+	try {
+		await CompanyInfo.findOrCreate({
+			where : {
+				companyEmail : req.body.companyEmail
+			},
+			defaults : {
+				companyEmail : req.body.companyEmail
+			}
+		}).spread((none, created)=>{
+			if(created)
+				result = true;
+		})
+	} catch (err) {
+		console.log(__filename + " 에서 기업 정보 생성 에러 발생 내용= " + err);
+	}
+	res.send(result);
+});
+
+// 기업 정보 수정
+router.put("/update", async(req, res) => {
+    let result = null;
+    try {
+        await CompanyInfo.update({ 
+            companyCEO: req.body.companyCEO,
+            companyQuestion: req.body.companyQuestion,
+            companyRule: req.body.companyRule,
+            companyAwards: req.body.companyAwards, 
+            companyOccupation : req.body.companyOccupation,
+            companyIntro : req.body.companyIntro,
+            companyAgeAvg : req.body.companyAgeAvg,
+            companyRequest : req.body.companyRequest,
+            companySince : req.body.companySince,
+            companyFile : req.body.companyFile,
+            companyPortfolio : req.body.companyPortfolio,
+            companyLike : req.body.companyLike,
+            companyClick : req.body.companyClick,
+            companyWorkDate : req.body.companyWorkDate,
+            companyWelfare : req.body.companyWelfare,
+            companyState : req.body.companyState,
+            }, {
+            where: {
+                companyEmail : req.body.companyEmail
+            }
+        });
+        result = true;
+    } catch(err) {
+        console.log(__filename + " 에서 기업 정보 업데이트 에러 발생 내용= " + err);
+        result = false;
+    }
+    res.send(result);
+});
+
+// 기업 정보 삭제
+router.delete("/delete", async(req, res) => {
+	let result = false;
+    try {
+        await CompanyInfo.destroy({
+            where: {
+                companyEmail: req.query.companyEmail
+            }
+		});
+		result = true;
+    } catch(err) {
+		console.log(__filename + " 에서 기업 정보 삭제 에러 발생 내용= " + err);
+	}
+	res.send(result);
 });
 
 module.exports = router;

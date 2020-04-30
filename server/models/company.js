@@ -1,28 +1,28 @@
 module.exports = (sequelize, DataTypes) => {
-    const User = sequelize.define("user", {
+    const Company = sequelize.define("company", {
         email : {
             type: DataTypes.STRING,
             primaryKey : true,
             allowNull: false
         },
-        userPass : {
+        companyPass : {
             type: DataTypes.STRING,
         },
-        userName : {
+        companyName : {
             type: DataTypes.STRING,
         },
-        userPhone : {
+        companyPhone : {
             type: DataTypes.STRING,
         },
-        userAdd : {
+        companyAdd : {
             type: DataTypes.STRING,
         },
-        userCate : {
+        companyCate : {
             type: DataTypes.STRING,
         },
     });
-    User.associate = function(models) {
-        User.hasMany(models.mail);
+    Company.associate = function(models) {
+        Company.hasMany(models.mail);
     }
-    return User;
+    return Company;
 };

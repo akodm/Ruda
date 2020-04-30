@@ -2,9 +2,12 @@ var express = require("express");
 var router = express.Router();
 let models = require("../models");
 
-/* GET users listing. */
-router.get("/", function (req, res, next) {
-	res.send("respond with a resource");
-});
+// DB Setting --------------------------------------------------------
+const CompanyInfo = models.companyInfo;
+const CompanyHire = models.companyHire;
+const Company = models.company;
+const Op = models.sequelize.Op;
+
+// DB CRUD -----------------------------------------------------------
 
 module.exports = router;
