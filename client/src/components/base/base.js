@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import './base.css';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -17,20 +19,18 @@ class Base extends Component {
     render() {
         return (
             <div className="base-main">
-                <Header />
                 <Router>
-                    <Switch>
-                        <Route exact path="/"><Main /></Route>
-                        <Route exact path="/insert"><Insert /></Route>
-                        <Route path="/insert/rookie"><InsertRookie /></Route>
-                        <Route path="/insert/company"><InsertCompany /></Route>
-                        <Route path="/login"><Login /></Route>
-                        <Route path="/board"><Board /></Route>
-                        <Route path="/u_mypage"><RookieMypage /></Route>
-                        <Route path="/c_mypage"><CompanyMypage /></Route>
-                    </Switch>
+                    <Header />
+                    <Route exact path="/"><Main /></Route>
+                    <Route exact path="/insert"><Insert /></Route>
+                    <Route path="/insert/rookie"><InsertRookie /></Route>
+                    <Route path="/insert/company"><InsertCompany /></Route>
+                    <Route path="/login"><Login /></Route>
+                    <Route path="/board"><Board /></Route>
+                    <Route path="/u_mypage"><RookieMypage /></Route>
+                    <Route path="/c_mypage"><CompanyMypage /></Route>
+                    <Footer />
                 </Router>
-                <Footer />
             </div>
         );
     }
