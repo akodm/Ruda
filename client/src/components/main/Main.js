@@ -5,8 +5,14 @@ export default class Main extends Component {
     render() {
         return (
             <div className="main-main">
-                <div className="main-color">
-                    <img src="/Image/main_title_bg.png" alt="MainBackgound" className="main-image"></img>
+                <div className="main-title">
+                    <div>
+                        <span className="title_text">당신의 첫 직장을 RUDA와 함께하세요</span>
+                    </div>
+                    <div className="main_btn">
+                        <button className="main_btn_insert">회원가입</button>
+                        <button className="main_btn_login">로그인</button>
+                    </div>
                 </div>
             </div>
         );
