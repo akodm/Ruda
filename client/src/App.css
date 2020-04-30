@@ -1,5 +1,6 @@
-html, body, .app-main, #root, .root-main {
+html, body, .app-main, #root, .app-main {
     width: 100%;
+    height: 100%;
 }
 
 html {

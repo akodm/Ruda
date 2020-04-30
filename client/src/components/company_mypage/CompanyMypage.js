@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 class CompanyMypage extends Component {
     render() {
         return (
-            <div>
-                
+            <div className="company-main">
+                CM
             </div>
         );
     }
