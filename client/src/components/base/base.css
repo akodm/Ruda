@@ -26,6 +26,10 @@
     width: 280px;
 }
 
+.header-logo {
+    cursor: pointer;
+}
+
 .header-logo-span {
     font-family: NanumSquareR;
     font-size: 16px;
