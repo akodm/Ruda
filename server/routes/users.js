@@ -1,10 +1,11 @@
-var express = require("express");
-var router = express.Router();
+let express = require("express");
+let router = express.Router();
 let models = require("../models");
+let crypto = require("crypto");
+let configs = require("../server-configs");
 
 // DB Setting --------------------------------------------------------
 const User = models.user;
-const UserInfo = models.userInfo;
 
 // DB CRUD -----------------------------------------------------------
 
@@ -24,7 +25,7 @@ router.get("/one", async (req, res) => {
 	try {
 		const result = await User.findOne({
 			where : {
-				userId : req.query.userId,
+				id : req.query.userId,      // 유저 아이디를 토대로 검색
 			}
 		});
 		res.send(result);
@@ -37,21 +38,22 @@ router.get("/one", async (req, res) => {
 // 유저 생성
 router.post("/create", async(req, res) => {
     let result = false;
+    let userPass = await hashFunc(req.body.userPass);
     try{
         await User.findOrCreate({
             where : {
-                userId : req.body.userId,
+                id : req.body.userId,   // 동일한 아이디로는 생성 불가
             },
             defaults : {
-                userId : req.body.userId,
-                userPass: req.body.userPass, 
+                id : req.body.userId,
+                userPass: userPass, 
                 userName: req.body.userName, 
                 userEmail: req.body.userEmail, 
                 userPhone: req.body.userPhone, 
                 userAdd: req.body.userAdd, 
                 userCate: req.body.userCate, 
             }
-        }).spread((none, created)=>{
+        }).spread(async(none, created)=>{
             if(created){
                 result = true;
             }
@@ -65,9 +67,10 @@ router.post("/create", async(req, res) => {
 // 유저 업데이트
 router.put("/update", async(req, res) => {
     let result = null;
+    let userPass = await hashFunc(req.body.userPass);
     try {
         await User.update({ 
-            userPass: req.body.userPass,
+            userPass: userPass,
             userName: req.body.userName, 
             userEmail : req.body.userEmail,
             userPhone : req.body.userPhone,
@@ -75,7 +78,7 @@ router.put("/update", async(req, res) => {
             userCate : req.body.userCate,
             }, {
             where: {
-                userId : req.body.userId
+                id : req.body.userId
             }
         });
         result = true;
@@ -92,7 +95,7 @@ router.delete("/delete", async(req, res) => {
     try {
         await User.destroy({
             where: {
-                userId: req.query.userId
+                id: req.query.userId
             }
 		});
 		result = true;
@@ -102,5 +105,77 @@ router.delete("/delete", async(req, res) => {
 	res.send(result);
 });
 
+// ------------------------------------- 기본 CURD 외의 라우터 및 함수 --------------------------//
+
+// 유저 로그인 체크
+router.post("/loginuser", async (req, res) => {
+    let check = false;
+    let userPass = await hashFunc(req.body.userPass);
+	try {
+		const result = await User.findOne({
+			where : {
+                id : req.body.userId,
+                userPass : userPass,
+			}
+        });
+        if(result && result.dataValues) {
+            check = true;
+        }
+	} catch (err) {
+		console.log(__filename + " 에서 유저 로그인 체크 에러 발생 내용= " + err);
+    }
+    res.send(check);
+});
+
+// 유저 아이디 찾기
+router.get("/userid", async (req, res) => {
+    let check = false;
+	try {
+		const result = await User.findOne({
+			where : {
+                userName : req.query.userName,
+                userEmail :  req.query.userEmail,
+                userPhone :  req.query.userPhone,
+			}
+        });
+        if(result && result.dataValues) {
+            check = true;
+        }
+	} catch (err) {
+		console.log(__filename + " 에서 유저 아이디 찾기 에러 발생 내용= " + err);
+    }
+    res.send(check);
+});
+
+// 유저 비밀번호 찾기
+router.get("/userpass", async (req, res) => {
+    let check = false;
+	try {
+		const result = await User.findOne({
+			where : {
+                id : req.query.userId,
+                userEmail :  req.query.userEmail,
+                userPhone :  req.query.userPhone,
+			}
+        });
+        if(result && result.dataValues) {
+            check = true;
+        }
+	} catch (err) {
+		console.log(__filename + " 에서 유저 비밀번호 찾기 에러 발생 내용= " + err);
+    }
+    res.send(check);
+});
+
+// 크립토 모듈을 이용한 해싱 암호화 함수
+async function hashFunc(pass) {
+    let hash = null;
+    try {
+        hash = await crypto.createHmac(configs.app.sha, configs.app.salt).update(pass).digest(configs.app.base); 
+    } catch(err) {
+        console.log(__filename + " 에서 크립토 모듈 에러 : " + err);
+    }
+    return hash;
+}
 
 module.exports = router;
