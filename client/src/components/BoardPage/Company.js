@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-
 class Company extends Component {
     render() {
         return (
-            <div>
-                
+            <div className="h">
+                <button></button>
             </div>
         );
     }
