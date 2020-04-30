@@ -25,6 +25,10 @@
     width: 280px;
 }
 
+.header-logo {
+    cursor: pointer;
+}
+
 .header-logo-span {
     font-size: 16px;
     font-weight: noter;
