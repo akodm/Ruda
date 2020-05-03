@@ -16,7 +16,7 @@
 .title_text{
     font-size: 25px;
     color: white;
-    font-family: H2HDRM;
+    font-family: 'HYHeadLine',H2HDRM;
 }
 .main_btn {
     display: flex;
@@ -30,11 +30,11 @@
      height: 38px;
      font-size: 1em;
      margin: 15px;
-     font-family: H2HDRM;
+     font-family: 'HYHeadLine',H2HDRM;
      border-radius: 2px;
      color:rgb(160, 160, 160);
 }
 .main_btn_login:hover ,.main_btn_insert:hover{
     color: white;
-    background-color: #7972b9;
+    background-color: #dfb4fa;
 }
