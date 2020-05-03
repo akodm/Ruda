@@ -7,11 +7,11 @@
 
 .main-title {
     height: 308px;
-    background-image:url(/Image/main_title_bg.png) ;
+    background-image:url(/Image/main_title_bg2.png) ;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding-left: 25%;
+    align-items: center;
 }
 .title_text{
     font-size: 25px;
@@ -21,8 +21,7 @@
 .main_btn {
     display: flex;
     flex-direction: row;
-    margin-top: 55px;
-    padding-left: 3.5%;
+    margin-top: 50px;
 }
 .main_btn_login , .main_btn_insert{
      background-color: white;
@@ -37,5 +36,5 @@
 }
 .main_btn_login:hover ,.main_btn_insert:hover{
     color: white;
-    background-color: #c09ffd;
+    background-color: #7972b9;
 }
