@@ -5,7 +5,7 @@ export default class Footer extends Component {
         return (
             <div className="footer-main">
                 <div className="footer_logo">
-                    <img src="/Image/base_footer_logo.png"></img>
+                    <img src="/Image/base_footer_logo.png" alt="FOOTERIMG"></img>
                 </div>
                 <div className="footer_notice">
                     <span className="footer_text">ADD   |  경기도 안양시  |  TELL  |  032)1234-1234</span>
