@@ -1,3 +1,5 @@
+@import url(/client/public/Fonts/NanumSquareRoundR.ttf);
+
 .base-main {
     width: 100%;
     height: 100%;
@@ -33,6 +35,8 @@
     font-size: 16px;
     font-weight: noter;
     color: #5a5a5a;
+    font-family: 나눔스퀘어라운드;
+    font-weight: 600;
 }
 
 .header-buttonDiv {
@@ -54,12 +58,33 @@
     color: #ffffff;
     margin-right: 9px;
     border: none;
+    font-family: 나눔스퀘어라운드;
 }
 
 /* ---------------------------- FOOTER ------------------------- */
 
 .footer-main {
     width: 100%;
-    height: 98px;
+    height: 120px;
     background-color: #eeeeee;
+    font-family: 나눔스퀘어라운드;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
+.footer_logo{
+    margin-right: 2%;
+}
+.footer_notice{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-size: 9pt;
+    color: #c7c7c7;
+}
+.footer_text{
+    margin: 5px;
+}
+

@@ -1,3 +1,5 @@
+@import url(/client/public/Fonts/NanumSquareRoundR.ttf);
+
 .login-main {
     height: 928px;
     width: 100%;
@@ -19,9 +21,10 @@
 .login-title {
     margin-top: 35px;
     margin-bottom: 31px;
-    font-family: NanumSquareB;
+    font-family: 나눔스퀘어라운드;
     font-size: 24px;
     color: #626262;
+    font-weight: 600;
 }
 
 .login-form {
@@ -45,7 +48,7 @@
     height: 42px;
     border: solid 1px #eeeeee;
     background-color: #64a3e5;
-    font-family: NanumSquareR;
+    font-family: 나눔스퀘어라운드;
     font-size: 16px;
     color: #ffffff;
 }
@@ -71,7 +74,7 @@
 }
 
 .login-etc-span {
-    font-family: NanumSquareR;
+    font-family: 나눔스퀘어라운드;
     font-size: 11px;
     color: #777777;
 }
@@ -86,7 +89,7 @@
 }
 
 .login-mainDivBottom-span {
-    font-family: NanumSquareR;
+    font-family: 나눔스퀘어라운드;
     font-size: 16px;
     color: #bbbbbb;
 }

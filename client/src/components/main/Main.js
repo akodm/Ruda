@@ -11,8 +11,8 @@ export default class Main extends Component {
                         <span className="title_text">당신의 첫 직장을 RUDA와 함께하세요</span>
                     </div>
                     <div className="main_btn">
-                        <button className="main_btn_insert"><Link to="/insert">회원가입</Link></button>
-                        <button className="main_btn_login"><Link to="/login">로그인</Link></button>
+                    <Link to="/insert"><button className="main_btn_insert">회원가입</button></Link>
+                    <Link to="/login"><button className="main_btn_login">로그인</button></Link>
                     </div>
                 </div>
             </div>
