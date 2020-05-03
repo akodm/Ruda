@@ -15,3 +15,9 @@ a, ul, li {
 button {
     cursor: pointer;
 }
+
+input::placeholder {
+    color: #bbbbbb;
+    font-family: 나눔스퀘어;
+    font-size: 14px;
+}

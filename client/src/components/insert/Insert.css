@@ -1,8 +1,180 @@
 .insert-main {
     width: 100%;
-    height: 928px;
+    height: 820px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-.insert_rookie {
-    width: 250px;
-    height: 600px;
+
+.insert-title {
+    font-family: 나눔스퀘어;
+    font-size: 24px;
+    color: #626262;
+    margin-top: 94px;
+    font-weight: bold;
+}
+
+.insert-imgDiv  {
+    margin-top: 82px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 510px;
+}
+
+.insert-img {
+    width: 214px;
+    height: 342px;
+    border: solid 1px #eeeeee;
+    background-color: #fcfbfb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.insert-imgSrc {
+    width: 142px;
+    height: 134px;
+    padding-top: 66px;
+    padding-bottom: 36px;
+}
+
+.insert-imgSpan {
+    font-family: NanumSquareB;
+    font-size: 20px;
+    color: #626262;
+    font-weight: 600;
+}
+
+/* ---------------------------- 기업 / 신입 회원가입 -----------------------------------*/
+
+@import url(/client/public/Fonts/NanumSquareRoundR.ttf);
+
+.insert-c-main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.insert-c-mainDiv {
+    margin-top: 119px;
+    margin-bottom: 20px;
+    width: 440px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.insert-c-title {
+    margin-top: 35px;
+    margin-bottom: 31px;
+    font-family: 나눔스퀘어라운드;
+    font-size: 24px;
+    color: #626262;
+    font-weight: 600;
+}
+
+.insert-c-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 440px;
+    border-bottom: 1px solid rgba(167, 166, 166, 0.322);
+}
+
+.insert-c-formDiv {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-left: 12px;
+}
+
+.insert-c-formSpan {
+    font-family: 나눔스퀘어;
+    font-size: 14px;
+    color: #505050;
+    width: 89px;
+    padding-right: 18px;
+}
+
+.insert-c-form-input {
+    width: 191px;
+    padding-left: 5px;
+    height: 42px;
+    border: solid 1px #eeeeee;
+    background-color: #f5f5f5;
+}
+
+.insert-c-form-auth {
+    width: 72px;
+    height: 46px;
+    border: solid 1px #eeeeee;
+    background-color: #64a3e5;
+    font-family: 나눔스퀘어라운드;
+    font-size: 16px;
+    color: #ffffff;
+    margin-left: 6px;
+}
+
+.insert-c-form-loginBtn {
+    width: 200px;
+    height: 42px;
+    border: solid 1px #eeeeee;
+    background-color: #64a3e5;
+    font-family: 나눔스퀘어라운드;
+    font-size: 16px;
+    color: #ffffff;
+    margin-bottom: 18px;
+    align-self: center;
+}
+
+.insert-c-form-etc {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-bottom: 17px;
+    width: 71%;
+}
+
+.insert-c-etc-chbox {
+    width: 11px;
+    height: 10px;
+    border: solid 1px #eeeeee;
+    background-color: #e0eaf4;
+}
+
+.insert-c-etc-span {
+    font-family: 나눔스퀘어라운드;
+    font-size: 12px;
+    color: #727272;
+}
+
+.insert-c-mainDivBottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 406px;
+    height: 128px;
+}
+
+.insert-c-mainDivBottom-span {
+    font-family: 나눔스퀘어라운드;
+    font-size: 16px;
+    color: #6e6e6e;
+}
+
+.insert-c-mainDivBottom-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 105px;
+    height: 33px;
+}
+
+.insert-c-oauth {
+    width: 30px;
+    height: 30px;
 }

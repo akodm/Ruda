@@ -9,7 +9,7 @@ class Login extends Component {
                 <div className="login-mainDiv">
                     <img src="/Image/login_img.png" alt="LoginIMG"></img>
                     <span className="login-title">로그인</span>
-                    <form className="login-form">
+                    <div className="login-form">
                         <input type="text" className="login-form-input" placeholder="아이디를 입력해주세요."></input>
                         <input type="password" className="login-form-input" placeholder="비밀번호를 입력해주세요."></input>
                         <button className="login-form-loginBtn">로그인</button>
@@ -22,7 +22,7 @@ class Login extends Component {
                                 <Link to="/useridpass" className="login-etc-span">아이디/비밀번호 찾기</Link>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <div className="login-mainDivBottom">
                     <span className="login-mainDivBottom-span">간편하게 로그인하기</span>

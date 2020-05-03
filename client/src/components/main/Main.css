@@ -2,7 +2,7 @@
 
 .main-main {
     width: 100%;
-    height: 928px;
+    height: 820px;
 }
 
 .main-title {
@@ -16,7 +16,7 @@
 .title_text{
     font-size: 25px;
     color: white;
-    font-family: 'HYHeadLine',H2HDRM;
+    font-family: H2HDRM;
 }
 .main_btn {
     display: flex;
@@ -31,7 +31,7 @@
      height: 38px;
      font-size: 1em;
      margin: 15px;
-     font-family: 'HYHeadLine',H2HDRM;
+     font-family: H2HDRM;
      border-radius: 2px;
      color:rgb(160, 160, 160);
 }

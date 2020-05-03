@@ -1,7 +1,7 @@
 @import url(/client/public/Fonts/NanumSquareRoundR.ttf);
 
 .login-main {
-    height: 928px;
+    height: 828px;
     width: 100%;
     display: flex;
     flex-direction: column;
