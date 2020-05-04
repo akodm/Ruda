@@ -17,27 +17,48 @@ class Board extends Component {
                     </div>
                     <div className="board-menu-cate">
                        <ul>
-                           <li>WEB
-                                <input type="checkbox"></input>
-                           </li>
-                           <li>GAME
-                                <input type="checkbox"></input>
-                           </li>
-                           <li>MOBILE
-                                <input type="checkbox"></input>
-                           </li>
-                           <li>VR/AR
-                                <input type="checkbox"></input>
-                           </li>
-                           <li>S/W
-                                <input type="checkbox"></input>    
-                           </li>
-                           <li>H/W
-                                <input type="checkbox"></input>
-                           </li>
-                           <li>DESIGN
-                                <input type="checkbox"></input>   
-                            </li>                           
+                            <label for="web">
+                                <li>
+                                    WEB
+                                    <input type="checkbox" id="web"></input>
+                                </li>
+                           </label>
+                           <label for="game">
+                                <li>
+                                    GAME
+                                    <input type="checkbox" id="game"></input>
+                                </li>
+                            </label>
+                            <label for="mobile">
+                                <li>
+                                    MOBILE
+                                    <input type="checkbox" id="mobile"></input>
+                                </li>
+                           </label>
+                           <label for="vrar">
+                                <li>
+                                    VR/AR
+                                    <input type="checkbox" id="vrar"></input>
+                                </li>
+                           </label>
+                           <label for="sw">
+                               <li>
+                                    S/W
+                                    <input type="checkbox" id="sw"></input>    
+                                </li>
+                           </label>
+                           <label for="hw">
+                                <li>
+                                    H/W
+                                    <input type="checkbox" id="hw"></input>
+                                </li>
+                           </label>
+                           <label for="disign">
+                                <li>
+                                    DISIGN
+                                    <input type="checkbox" id="disign"></input>   
+                                </li> 
+                            </label>                          
                        </ul>
                     </div>
                 </div>

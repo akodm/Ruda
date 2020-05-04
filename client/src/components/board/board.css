@@ -1,8 +1,11 @@
+@import url(/client/public/Fonts/NanumSquareRoundR.ttf);
+
 .board-main{
     display: flex;
     flex-direction: row;
     justify-content: center;
     margin-top: 15px;
+    font-family: 나눔스퀘어라운드;
 }
 .board-title{
     font-size: 25px;
@@ -12,23 +15,23 @@
 
 
 /*메뉴*/
-
 .board-menu-title{
-    width: 236px;
-    height: 20px;
-    background-color:#cccccc;
+    width: 235px;
+    height: 40px;
+    background-color:#66a9f1 ;
     display: flex;
     align-items: center;
-    padding: 5px;
     color: white;
-    margin-top: 15px;
+    margin-top: 20px;
     font-size: 15px;
-    font-weight: 600;
+    padding-left: 10PX;
+    font-weight: bold;
 }
 .board-search{
     display: flex;
     flex-direction: row;
-    margin-top: 15px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 
 }
 .search-img{
@@ -46,21 +49,30 @@
     border: none;
 }
 .board-menu-cate{
-    width: 220px;
     height: 600px;
     justify-content: center;
     margin-top: 20px;
 }
-li{
-    list-style-type: square;
-    margin-top: 10px;
+ul,li {margin:0; padding:0;}
+
+.board-menu-cate ul li{
+    list-style: square;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    color: gray;
+    font-size: 14px;
+    height: 18px;
+    align-items: center;
+    padding: 10px;
+    margin-top: 10PX;
 }
-
+li:hover{
+    background-color:#eeeeee86 ;
+}
 .board-line{
-    border: solid 1px #bfbfbf;
+    border: solid 1px #e0e0e063;
+    margin-top: 20px;
     margin-bottom: 20px;
     width: 780px;
 }
@@ -71,11 +83,16 @@ li{
 .board-content{
     width: 800px;
     height: 100%;
-    margin: 35px;
+    margin: 45px;
 }
 .board-new-title ,.board-introduce-title{
     height: 30px;
     width: 785px;
+    margin-bottom: 10px;
+}
+.board-new-title{
+    display: flex;
+    align-items: center;
 }
 .board-introduce-title{
     display: flex;
@@ -85,11 +102,12 @@ li{
 }
 .board-select{
     width: 70px;
-    border: solid 1px #bfbfbf;
-    border-radius: 3px;
+    border: none;
+
 }
 .board-select-option {
-    height: 35px;
+    height: 30px;
+    border: none;
 }
 .board-new-content{
     display: flex;
