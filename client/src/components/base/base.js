@@ -14,6 +14,7 @@ import Login from '../login/Login';
 import RookieMypage from '../rookie_mypage/RookieMypage';
 import CompanyMypage from '../company_mypage/CompanyMypage';
 import Board from '../board/Board';
+import MyPopup from '../mypopup/MyPopup';
 
 class Base extends Component {
     render() {
@@ -29,6 +30,7 @@ class Base extends Component {
                     <Route path="/board"><Board /></Route>
                     <Route path="/u_mypage"><RookieMypage /></Route>
                     <Route path="/c_mypage"><CompanyMypage /></Route>
+                    <MyPopup />
                     <Footer />
                 </Router>
             </div>
