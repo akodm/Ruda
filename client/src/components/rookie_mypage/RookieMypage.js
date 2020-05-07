@@ -14,6 +14,9 @@ class RookieMypage extends Component {
                             </div>      
                             <div className="profile-content">
                                 <div className="profile-info">
+                                    <div>
+
+                                    </div>
                                     
                                 </div>
                             </div>                     
