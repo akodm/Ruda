@@ -96,8 +96,8 @@
 }
 .updown-up, .updown-down{
     margin: 10px;
-    width: 48px;
-    height: 48px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     box-shadow: 0.5px 1px 0.5px 0.5px rgba(84, 84, 84, 0.26);
 }
