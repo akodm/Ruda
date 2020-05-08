@@ -96,8 +96,20 @@
 }
 .updown-up, .updown-down{
     margin: 10px;
-    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    box-shadow: 0.5px 1px 0.5px 0.5px rgba(84, 84, 84, 0.26);
 }
-.ua{
-    display: scroll;
+.updown-up{
+    background-image: url(/Image/base_up.png);
+}
+.updown-up:hover{
+    background-image: url(/Image/base_up_h.png);
+}
+.updown-down{
+    background-image: url(/Image/base_down.png);
+}
+.updown-down:hover{
+    background-image: url(/Image/base_down_h.png);
 }

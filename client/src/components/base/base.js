@@ -29,8 +29,8 @@ class Base extends Component {
                     <Route path="/insert/company"><InsertCompany /></Route>
                     <Route path="/login"><Login /></Route>
                     <Route path="/board"><Board /></Route>
-                    <Route path="/umypage"><RookieMypage /></Route>
-                    <Route path="/cmypage"><CompanyMypage /></Route>
+                    <Route path="/usermypage"><RookieMypage /></Route>
+                    <Route path="/companymypage"><CompanyMypage /></Route>
                     <MyPopup />
                     <UpandDown/>
                     <Footer />

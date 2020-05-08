@@ -1,129 +1,57 @@
 @import url(/client/public/Fonts/NanumSquareRoundR.ttf);
 
 .rookie-main{
-    background-color:#f2f2f2;
     width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    position:relative;
-}
-
-.rookie-mypage-bg {
-    margin: 30px;
-    width: 1006px;
-    box-shadow: 1px 3px 2px 1px rgba(87, 86, 86, 0.27);
-    background-color: #ffffff;
-    position:relative;
-    z-index: 5;
- }
- 
-.rookie-mypage-profile{
-    margin-left: -10px;
-    width: 1006px;
-    height: 1130px;
-    box-shadow: 0px 2px 1.5px 1px rgba(87, 86, 86, 0.27);
-    background-color: #ffffff;
-    z-index: 10;
-}
-
-.profile-content-title{
-    display: flex;
-    flex-direction: row;
-}
-
-.rookie-mypage-profile-content{
+    background-color: #f2f2f2;
     display: flex;
     flex-direction: column;
-}
-
-.rookie-mypage-profile-content img{
-   margin: 40px;
-   width: 49px;
-   height: 31px;
-}
-
-.profile-title{
-    margin: 50px 40px 0px 0px;
-    width: 788px;
     justify-content: center;
-    height: 60px;
     align-items: center;
-    text-align: left;
-    border-bottom: 1px solid rgba(153, 153, 153, 0.322);
-    font-size: 30px;
-    color: #616161;
+    font-family: 나눔스퀘어라운드;
 }
 
-.pofile-title-span {
-    margin-left: 60px;
+.rookie-main-bg, .rookie-main-bg-in{
+    height: 1000px;
+    width: 1006px;
+    opacity: 0.97;
+    box-shadow: 0px 5px 1.5px 0.5px rgba(87, 86, 86, 0.27);
+    background-color: #ffffff;
 }
 
- .profile-info{
-    height: 60px;
-    width: 788px;
-    margin: 30px 30px 0px 130px;
-    border-bottom: 1px solid rgba(153, 153, 153, 0.322);
+.rookie-main-bg{
+    margin: 50px;
+    z-index: 1;
+    position: relative;
 }
 
-/* ------------------------- 포스트잇 버튼 부분 --------------------------*/
-
-.mypage-post {
+.rookie-main-bg-in{
+    margin: -5px;
+    z-index: 5;
     position: absolute;
-    right: -90px;
-    top: 50px;
 }
 
-.mypage-postBtn1 {
-    width: 198px;
-    height: 48px;
+.profile-btn, .pt-btn{
+    border: none;
+    width: 190px;
+    height: 50px;
+    position: absolute;
+    right: 373px;
     display: flex;
+    justify-content: flex-end;
+    color:gray;
+    font-size: small;
 }
 
-.mypage-postBtn2 {
-    width: 198px;
-    height: 48px;
-    display: flex;
-    margin-top: 23px;
+.profile-btn{
+   background-image: url(/Image/profile.png);
+    z-index: 20;
+    top:115px;
+    z-index: 5;
+    padding-right: 20px;
 }
 
-.frontBg1 {
-    width: 109px;
-    height: 48px;
-    background-color: #f7f7f7;
-}
-
-.backBg1 {
-    width: 89px;
-    height: 48px;
-    box-shadow: 0px 2px 4.6px 1.4px rgba(87, 86, 86, 0.24);
-    background-color: #d3afe0;
-    font-family: NanumSquareR;
-    font-size: 14.5px;
-    color: #686868;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-
-.frontBg2 {
-    width: 109px;
-    height: 48px;
-    background-color: #f7f7f7;
-    opacity: 0;
-}
-
-.backBg2 {
-    width: 89px;
-    height: 48px;
-    box-shadow: 0px 2px 4.6px 1.4px rgba(87, 86, 86, 0.24);
-    background-color: #95c9fa;
-    font-family: NanumSquareR;
-    font-size: 14.5px;
-    color: #686868;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+.pt-btn{
+    background-image: url(/Image/pt.png);
+    z-index: 4;
+    top:180px;
 }

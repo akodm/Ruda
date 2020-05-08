@@ -10,12 +10,8 @@ class UpandDown extends Component {
     render() {
         return (
             <div className="updown">
-                <div className="updown-up" onClick={this.scrollToTop}>
-                    <img src="/Image/base_up.png" alt="RUDA-LOGO"></img>
-                </div>
-                <div className="updown-down" onClick={this.scrollToDown}>
-                    <img src="/Image/base_down.png" alt="RUDA-LOGO"></img>
-                </div>
+                <div className="updown-up" onClick={this.scrollToTop}></div>
+                <div className="updown-down" onClick={this.scrollToDown}></div>
             </div>
         );
     }

@@ -4,6 +4,7 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 let jwt = require('jsonwebtoken');
+let nodemailer = require('nodemailer');
 
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
@@ -69,6 +70,34 @@ app.get('/verify', (req,res)=>{
       res.send("err");
   }
 });
+
+// --------------------------- 노드 메일러 이메일 인증 -------------------
+
+app.get("/nodemailer", (req,res) => {
+  const transport = nodemailer.createTransport({
+    service : 'gmail',
+    auth : {
+      user : 'email',
+      pass : 'pass',
+    }
+  })
+  
+  let mailOption = {
+    from : 'admin email',
+    to : 'user email',
+    subject : "노드 메일러 테스트 메일 전송",
+    html : "<h1>Node Mailer Test Transfer!</h1><p></p><div>click here!</div>",
+  }
+  
+  transport.sendMail(mailOption, (err, info) => {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log(info);
+    }
+  })
+  res.redirect('http://localhost:3000/');
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
