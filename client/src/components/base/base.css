@@ -96,6 +96,7 @@
 }
 .updown-up, .updown-down{
     margin: 10px;
+    cursor: pointer;
 }
 .ua{
     display: scroll;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './CompanyMypage.css';
 
 class CompanyMypage extends Component {
     render() {
