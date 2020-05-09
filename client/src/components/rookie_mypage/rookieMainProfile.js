@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './RookieMypage.css';
+import './RookieMainProfile.css';
 
 class rookieMainProfile extends Component {
     render() {
@@ -15,7 +15,14 @@ class rookieMainProfile extends Component {
                     </div>
                 </div>
                 <div className="rookie-user-mainprofile-right">
-                    그래프 영역
+                    <div className="mainprofile-chart">
+                        그래프영역
+                    </div>
+                    <div className="mainprofile-chartranking">
+                        <span>1.java</span>
+                        <span>2.react</span>
+                        <span>3.node.js</span>
+                    </div>
                 </div>
             </div>
         );

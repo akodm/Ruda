@@ -3,6 +3,7 @@ import './RookieMypage.css';
 import Msg from '../mypopup/Message';
 import RookieMainProfile from '../rookie_mypage/rookieMainProfile';
 
+
 class RookieMypage extends Component {
     constructor(props) {
         super(props);
@@ -25,6 +26,9 @@ class RookieMypage extends Component {
                             <span>홍길동의 프로필</span>
                         </div>
                         <RookieMainProfile/>
+                        <div className="addprofile">
+                            <span>+프로필 정보 추가</span>
+                        </div>
                     </div>
                 </div>
                 <div className="rookie-menu-btn">

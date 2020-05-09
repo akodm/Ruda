@@ -1,0 +1,69 @@
+/*-메인프로필 왼쪽영역-*/
+.rookie-user-mainprofile{
+    width: 800px;
+    margin-left: 100px;
+
+}
+
+.rookie-user-title img{
+    width: 50px;
+    height: 30px;
+    float: left; 
+}
+.rookie-user-title span{
+    margin-left: 40px;
+    font-size: 2rem;
+    font-weight: 300;
+}
+.rookie-user-mainprofile{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+.rookie-user-mainprofile-left, .user-count ,.user-count span{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 10px;
+}    
+.user-name{
+    margin-bottom: 30px;
+}
+.userProfile-img{
+    width: 100px;
+    height: 100px;
+    margin-bottom: 30px;
+}
+/*-메인프로필 오른쪽영역-*/
+.rookie-user-mainprofile-right{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+.mainprofile-chart{
+    width: 250px;
+    height: 250px;
+    background-color: aliceblue;
+    margin: 10px;
+}
+.mainprofile-chartranking{
+    width: 220px;
+    height: 25px;
+    background-color: aliceblue;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+.mainprofile-chartranking span{
+    color:#8a8a8a;
+    font-size: 14px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
