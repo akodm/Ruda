@@ -20,13 +20,10 @@
 
 .rookie-main-bg{
     display: flex;
-    z-index: 100;
-    position: relative;
 }
 
 .rookie-main-bg-in{
     margin: -5px;
-    z-index: 10;
 }
 .btn-cont{
     position: relative;
@@ -34,7 +31,7 @@
     padding-left: 300px;
 }
 /*--프로필--*/
-.rookie-profile-content{
+.rookie-profile-content, .rookie-pt-content{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -48,7 +45,7 @@
     margin-bottom: 0px;
     border-bottom: 1px solid #d3d3d3f1;
 }
-.add-profile{
+.add-profile.add-pt{
     display: flex;
     justify-content:center;
     align-items: center;
@@ -57,7 +54,7 @@
     height: 100px;
 }
 /*프로필정보추가*/
-.addprofile{
+.addprofile,.addpt{
     width: 100%;
     height: 100px;
     display: flex;
@@ -69,9 +66,9 @@
     margin-top:15px;
 
 }
-.addprofile:hover{
-    color: black;
-    background-color:#f8f5f5;
+.addprofile:hover,.addpt:hover{
+    color: rgb(77, 77, 77);
+    background-color: #f3f3f362;
 }
 /*--포트폴리오--*/
 
@@ -81,32 +78,46 @@
 
 
 /*--메뉴 영역--*/
-.profile-btn, .pt-btn{
+.profile-btn, .pth-btn ,.profileh-btn,.pt-btn{
     border: none;
-    width: 190px;
     height: 50px;
     position: absolute;
     right:218px;
     display: flex;
     justify-content: flex-end;
-    color:gray;
+    color:#919191;
     font-size: small;
 }
 
 .profile-btn{
    background-image: url(/Image/profile.png);
-    top:50px;
+    top:30px;
     padding-right: 20px;
-    z-index: 100;
     position: absolute;
+    width: 190px;
 }
 
-.pt-btn{
-    background-image: url(/Image/pt.png);
-    top:120px;
-    z-index: 900;
+.pth-btn{
+    background-image: url(/Image/usermypage_ptbtn.png);
+    top:100px;
     position: absolute;
+    width: 80px;
 }
+.profileh-btn{
+    background-image: url(/Image/usermypage_profilehbtn.png);
+     top:30px;
+     padding-right: 20px;
+     position: absolute;
+     width: 80px;
+ }
+ 
+ .pt-btn{
+     background-image: url(/Image/usermypage_ptbtnf.png);
+     top:100px;
+     z-index: 1;
+     position: absolute;
+     width: 190px;
+ }
 
 
 

@@ -7,7 +7,7 @@
 
 .main-title {
     height: 308px;
-    background-image:url(/Image/main_title_bg2.png) ;
+    background-image:url(/Image/main_title_bg4.png) ;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -36,5 +36,5 @@
 }
 .main_btn_login:hover ,.main_btn_insert:hover{
     color: white;
-    background-color: #64a3e5;
+    background-color: #a3a4e7;
 }

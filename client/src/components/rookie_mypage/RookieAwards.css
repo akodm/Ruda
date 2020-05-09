@@ -1,12 +1,16 @@
+@import url(/client/public/Fonts/NanumSquareRoundR.ttf);
+
+
 .rookieAwards{
     border-bottom: 1px solid #d3d3d3f1;
     margin-left: 50px;
     margin-right: 50px;
     padding:50px;
-    color: #5a5a5a;
+    color: #808080;
     font-size: 1rem;
     display: flex;
     flex-direction: column;
+    font-family: NanumSquareR;
 }
 .rookieAwards-title,.rookieAwards-content{
     display: flex;
@@ -38,6 +42,7 @@
 }
 .rookieAwards-content-title{
     font-weight: 600;
+    background-color: #e9f4ff7a;
 }
 .rookieAwards-content-title span , .rookieAwards-content-info span{
     width: 200px;
