@@ -1,4 +1,4 @@
-.rookieAwards{
+.rookieCertificate{
     border-bottom: 1px solid #d3d3d3f1;
     margin-left: 50px;
     margin-right: 50px;
@@ -8,27 +8,27 @@
     display: flex;
     flex-direction: column;
 }
-.rookieAwards-title,.rookieAwards-content{
+.rookieCertificate-title,.rookieCertificate-content{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-.rookieAwards-title-text,.rookieAwards-relayout{
+.rookieCertificate-title-text,.rookieCertificate-relayout{
     margin-bottom: 30px;
 }
-.rookieAwards-title-text{
+.rookieCertificate-title-text{
     font-size: 24px;
 }
-.rookieAwards-relayout{
+.rookieCertificate-relayout{
     font-size: 12px;
 }
-.rookieAwards-content{
+.rookieCertificate-content{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.rookieAwards-content-title,.rookieAwards-content-info{
+.rookieCertificate-content-title,.rookieCertificate-content-info{
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -36,11 +36,11 @@
     height: 40px;
     font-size: 16px;
 }
-.rookieAwards-content-title{
+.rookieCertificate-content-title{
     font-weight: 600;
 }
-.rookieAwards-content-title span , .rookieAwards-content-info span{
-    width: 200px;
+.rookieCertificate-content-title span , .rookieCertificate-content-info span{
+    width: 250px;
     margin-top: 10px;
     border-bottom: 1px solid #d3d3d3f1;
 }
