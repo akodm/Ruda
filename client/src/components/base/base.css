@@ -50,7 +50,7 @@
 .header-btn {
     width: 96px;
     height: 35px;
-    background-color: #66a9f1;
+    background-color: #6ba5da;
     font-family: H2hdrM;
     font-size: 14px;
     text-align: center;
@@ -96,10 +96,9 @@
 }
 .updown-up, .updown-down{
     margin: 10px;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    box-shadow: 0.5px 1px 0.5px 0.5px rgba(84, 84, 84, 0.26);
+    width: 48px;
+    height: 48px;
+
 }
 .updown-up{
     background-image: url(/Image/base_up.png);

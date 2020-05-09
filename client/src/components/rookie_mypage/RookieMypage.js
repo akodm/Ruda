@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import './RookieMypage.css';
 import Msg from '../mypopup/Message';
-import RookieMainProfile from './RookieMainProfile';
-import RookieInfo from './RookieInfo';
-import RookieAwards from './RookieAwards';
-import RookieCertificate from './RookieCertificate';
+import RookieProflie from './RookieProfile';
+import RookiePt from './RookiePt';
+
 
 
 class RookieMypage extends Component {
@@ -12,36 +11,47 @@ class RookieMypage extends Component {
         super(props);
         this.state = {
             msgDisplay : "none",
-            likeUser:"none"
+            likeUser:"none",
+            ptbtnClick:"pth-btn",
+            profileClick:"profile-btn",
+            changePage:true
         }
     }
+    ProfilechangePage(){
+        this.setState({
+            profileClick : "profile-btn",
+            ptbtnClick : "pth-btn",
+            changePage : true
+        });
+    }
+    PtchangePage(){
+        this.setState({
+            profileClick : "profileh-btn",
+            ptbtnClick : "pt-btn",
+            changePage : false
+        });
+    }
+
     render() {
         const { msgDisplay } = this.state;
         const { likeUser } = this.state;
+        const { ptbtnClick } =this.state;
+        const { profileClick } =this.state;
+        const { changePage } =this.state;
         return (
             <div className="rookie-main">
                 <div className="btn-cont">
                     <Msg display= { msgDisplay } />
                     <div className="rookie-main-bg">
                     <div className="rookie-main-bg-in">
-                        <div className="rookie-profile-content">
-                            <div className="rookie-user-title">
-                                <img src= "/Image/usermypage_hochi.png" alt="IMG"></img>
-                                <span>홍길동의 프로필</span>
-                            </div>
-                            <RookieMainProfile/>
-                            <RookieInfo/>
-                            <RookieAwards/>
-                            <RookieCertificate/>
-                            <div className="addprofile">
-                                <span> + 프로필 정보 추가</span>
-                            </div>
-                        </div>
+                        { changePage?<RookieProflie/>:<RookiePt/> }
                     </div>
                     </div>
                     <div className="rookie-menu-btn">
-                        <button className="profile-btn">프로필</button>
-                        <button className="pt-btn">포트폴리오</button>
+                        <button className={profileClick}
+                         onClick={this.ProfilechangePage.bind(this)}>프로필</button>
+                        <button className={ptbtnClick}
+                        onClick={this.PtchangePage.bind(this)}>포트폴리오</button>
                     </div>
                     <div className="rookie-user-btn">
                         <button className="rookie-message-btn"
