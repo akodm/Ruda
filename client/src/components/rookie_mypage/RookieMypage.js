@@ -23,21 +23,24 @@ class RookieMypage extends Component {
                 <div className="btn-cont">
                     <Msg display= { msgDisplay } />
                     <div className="rookie-main-bg">
-                    <div className="rookie-main-bg-in">
-                        <div className="rookie-profile-content">
-                            <div className="rookie-user-title">
-                                <img src= "/Image/usermypage_hochi.png" alt="IMG"></img>
-                                <span>홍길동의 프로필</span>
-                            </div>
-                            <RookieMainProfile/>
-                            <RookieInfo/>
-                            <RookieAwards/>
-                            <RookieCertificate/>
-                            <div className="addprofile">
-                                <span> + 프로필 정보 추가</span>
+                        <div className="rookie-main-bg-in">
+                            <div className="rookie-profile-content">
+                                <div className="rookie-user-title">
+                                    <img src= "/Image/usermypage_hochi.png" alt="IMG"></img>
+                                    <span>홍길동의 프로필</span>
+                                </div>
+                                <RookieMainProfile/>
+                                <RookieInfo/>
+                                <RookieAwards/>
+                                <RookieCertificate/>
+                                <RookieCertificate/>
+                                <RookieCertificate/>
+                                <RookieCertificate/>
+                                <div className="addprofile">
+                                    <span> + 프로필 정보 추가</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                     <div className="rookie-menu-btn">
                         <button className="profile-btn">프로필</button>

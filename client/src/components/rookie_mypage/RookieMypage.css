@@ -14,19 +14,19 @@
 
 .rookie-main-bg, .rookie-main-bg-in{
     width: 1006px;
-    opacity: 0.97;
     box-shadow: 0px 5px 1.5px 0.5px rgba(87, 86, 86, 0.27);
     background-color: #ffffff;
 }
 
 .rookie-main-bg{
     display: flex;
-    z-index: 0;
+    z-index: 100;
+    position: relative;
 }
 
 .rookie-main-bg-in{
     margin: -5px;
-    z-index: 20;
+    z-index: 10;
 }
 .btn-cont{
     position: relative;
@@ -97,14 +97,14 @@
    background-image: url(/Image/profile.png);
     top:50px;
     padding-right: 20px;
-    z-index: 10;
+    z-index: 100;
     position: absolute;
 }
 
 .pt-btn{
     background-image: url(/Image/pt.png);
     top:120px;
-    z-index: 1;
+    z-index: 900;
     position: absolute;
 }
 

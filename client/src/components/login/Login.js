@@ -19,7 +19,7 @@ class Login extends Component {
                                 <span className="login-etc-span">아이디저장</span>
                             </div>
                             <div className="login-etc-search">
-                                <Link to="/useridpass" className="login-etc-span">아이디/비밀번호 찾기</Link>
+                                <Link to="/search" className="login-etc-span">아이디/비밀번호 찾기</Link>
                             </div>
                         </div>
                     </div>
