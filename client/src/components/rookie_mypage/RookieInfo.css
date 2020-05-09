@@ -1,0 +1,38 @@
+.rookieInfo{
+    border-bottom: 1px solid #d3d3d3f1;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding:50px;
+    color: #5a5a5a;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.rookieInfo-title,.rookieInfo-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.rookieInfo-title-text,.rookieInfo-relayout{
+    margin-bottom: 30px;
+}
+.rookieInfo-title-text{
+    font-size: 24px;
+}
+.rookieInfo-relayout{
+    font-size: 12px;
+}
+.phone,.email,.site,.address,.workdate,.trainingdate,.university{
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+}
+.phone-title,.email-title,.site-title,.address-title,.workdate-title,.trainingdate-title,.university-title{
+    width: 150px;
+    text-align: left;
+}
+.phone-info,.email-info,.site-info,.address-info,.workdate-info,.trainingdate-info,.university-info{
+    width: 250px;
+}

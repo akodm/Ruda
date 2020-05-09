@@ -1,8 +1,9 @@
 /*-메인프로필 왼쪽영역-*/
 .rookie-user-mainprofile{
-    width: 800px;
-    margin-left: 100px;
-
+    border-bottom: 1px solid #d3d3d3f1;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding:20px;
 }
 
 .rookie-user-title img{
@@ -20,7 +21,6 @@
     flex-direction: row;
     justify-content:space-around;
     align-items: center;
-    margin-top: 20px;
 }
 .rookie-user-mainprofile-left, .user-count ,.user-count span{
     display: flex;
@@ -28,6 +28,7 @@
     align-items: center;
     font-size: 14px;
     margin-bottom: 10px;
+    color: #5a5a5a;
 }    
 .user-name{
     margin-bottom: 30px;

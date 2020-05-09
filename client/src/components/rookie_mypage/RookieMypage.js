@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './RookieMypage.css';
 import Msg from '../mypopup/Message';
 import RookieMainProfile from './RookieMainProfile';
+import RookieInfo from './RookieInfo';
+import RookieAwards from './RookieAwards';
 
 
 class RookieMypage extends Component {
@@ -26,8 +28,10 @@ class RookieMypage extends Component {
                             <span>홍길동의 프로필</span>
                         </div>
                         <RookieMainProfile/>
+                        <RookieInfo/>
+                        <RookieAwards/>
                         <div className="addprofile">
-                            <span>+프로필 정보 추가</span>
+                            <span> + 프로필 정보 추가</span>
                         </div>
                     </div>
                 </div>
