@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './RookieMypage.css';
 import Msg from '../mypopup/Message';
-import RookieMainProfile from '../rookie_mypage/rookieMainProfile';
+import RookieMainProfile from './RookieMainProfile';
 
 
 class RookieMypage extends Component {
@@ -22,7 +22,7 @@ class RookieMypage extends Component {
                 <div className="rookie-main-bg-in">
                     <div className="rookie-profile-content">
                         <div className="rookie-user-title">
-                            <img src= "/Image/usermypage_hochi.png"></img>
+                            <img src= "/Image/usermypage_hochi.png" alt="IMG"></img>
                             <span>홍길동의 프로필</span>
                         </div>
                         <RookieMainProfile/>
@@ -38,11 +38,11 @@ class RookieMypage extends Component {
                 <div className="rookie-user-btn">
                     <button className="rookie-message-btn"
                     onClick={() => this.setState({ msgDisplay : msgDisplay === "none" ? "flex" : "none"})}>
-                        <img src="/Image/usermypage_message.png"></img>메세지 보내기
+                        <img src="/Image/usermypage_message.png" alt="IMG"></img>메세지 보내기
                     </button>
                     <button className="rookie-like-btn"
                     onClick={() => this.setState({ likeUser : likeUser === "none" ? console.log("조아여") : "none"})}>
-                        <img src="/Image/usermypage_hart.png"></img>관심있어요
+                        <img src="/Image/usermypage_hart.png" alt="IMG"></img>관심있어요
                     </button>
                 </div>
             </div>

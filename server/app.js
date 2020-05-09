@@ -17,6 +17,13 @@ let userInfoRouter = require('./routes/userInfo');
 const configs = require('./server-configs.js');
 let app = express();
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", configs.app.c_local);
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token");
+  next();
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -35,13 +42,6 @@ app.use('/companyInfos', companyInfoRouter);
 app.use('/hireBoards', hireBoardRouter);
 app.use('/mails', mailRouter);
 app.use('/userInfos', userInfoRouter);
-
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", configs.app.c_local);
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token");
-  next();
-});
 
 // -------------------- 토큰 생성 및 검증 함수 --------------------
 function getToken(data){
@@ -73,30 +73,35 @@ app.get('/verify', (req,res)=>{
 
 // --------------------------- 노드 메일러 이메일 인증 -------------------
 
-app.get("/nodemailer", (req,res) => {
-  const transport = nodemailer.createTransport({
-    service : 'gmail',
-    auth : {
-      user : 'email',
-      pass : 'pass',
+app.get("/nodemailer", async(req,res) => {
+  try {
+    const transport = nodemailer.createTransport({
+      service : configs.app.type,
+      auth : {
+        user : configs.app.emailUser,
+        pass : configs.app.emailPass,
+      }
+    })
+    
+    let mailOption = {
+      from : configs.app.user,
+      to : req.query.userEmail,
+      subject : "노드 메일러 테스트 메일 전송",
+      html : "<h1>Node Mailer Test Transfer!</h1><p></p><div>click here!</div>",
     }
-  })
-  
-  let mailOption = {
-    from : 'admin email',
-    to : 'user email',
-    subject : "노드 메일러 테스트 메일 전송",
-    html : "<h1>Node Mailer Test Transfer!</h1><p></p><div>click here!</div>",
+    
+    transport.sendMail(mailOption, (err, info) => {
+      if(err) {
+        console.log(err);
+      } else {
+        console.log(info);
+      }
+    })
+    res.send(true);
+  } catch(err) {
+    console.log(__filename + "에서 노드 메일러 에러 발생 : " + err);
+    res.send(false);
   }
-  
-  transport.sendMail(mailOption, (err, info) => {
-    if(err) {
-      console.log(err);
-    } else {
-      console.log(info);
-    }
-  })
-  res.redirect('http://localhost:3000/');
 })
 
 // catch 404 and forward to error handler
