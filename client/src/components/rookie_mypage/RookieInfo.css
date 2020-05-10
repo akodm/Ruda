@@ -25,17 +25,17 @@
 .rookieInfo-relayout{
     font-size: 12px;
 }
-.phone,.email,.site,.address,.workdate,.trainingdate,.university{
+.phone,.email,.site,.address,.workdate,.trainingdate,.university,.wontjob{
     height: 50px;
     display: flex;
     flex-direction: row;
     align-items: center;
     text-align: left;
 }
-.phone-title,.email-title,.site-title,.address-title,.workdate-title,.trainingdate-title,.university-title{
+.phone-title,.email-title,.site-title,.address-title,.workdate-title,.trainingdate-title,.university-title,.wontjob-title{
     width: 150px;
     text-align: left;
 }
-.phone-info,.email-info,.site-info,.address-info,.workdate-info,.trainingdate-info,.university-info{
+.phone-info,.email-info,.site-info,.address-info,.workdate-info,.trainingdate-info,.university-info,.wontjob-info{
     width: 250px;
 }
