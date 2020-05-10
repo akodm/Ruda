@@ -1,43 +1,51 @@
+.AddProfile-content
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
 .AddProfile{
     position: fixed;
     display: flex;
     flex-direction: column;
     width: 280px;
-    height: 600px;
+    height: 340px;
     background-color: white;
     box-shadow: 1px 2px 1.9px 1px rgba(84, 84, 84, 0.26);
     z-index: 10;
     left: 0;
     top: 90px;
 }
-.AddProfile-bg{
-    width: 280px;
-    justify-content: center;
-    display: flex;
-    align-content: center;
-    flex-direction: column;
-    margin-left: 25px;
-}
-
 .AddProfile-title{
-    color: gray;
-    border-bottom:1px solid rgba(196, 196, 196, 0.404);
- 
-}
-.AddProfile-title, .AddProfile li{
-    width: 250px;
+    height: 40px;
+    width: 100%;
+    text-align: center;
     justify-content: center;
     align-items: center;
-    padding-top: 20px;
-    height: 30px;
+    margin-top: 20px;
+    border-bottom: 1px solid rgba(148, 148, 148, 0.445);
 }
-.AddProfile-content{
+.AddProfile li{
+    height: 40px;
+    width: 260px;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
+    align-items: center;
+    padding-top: 5px;
 }
-.AddProfile-content ul li{
-    margin:0;
-    padding:0;
+ul li {
+    margin: 0;
     list-style: none;
+}
+.AddProfile-saveBtn{
+    width: 95%;
+    height: 40px;
+    background-color: #6ba5da;
+    text-align: center;
+    justify-content: center;
+    color: white;
+    border: none;
+    margin-top: 10px;
 }
