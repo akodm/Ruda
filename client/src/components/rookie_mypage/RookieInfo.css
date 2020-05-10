@@ -1,28 +1,26 @@
+@import url(/client/public/Fonts/NanumSquareRoundR.ttf);
+
 .rookieInfo{
     border-bottom: 1px solid #d3d3d3f1;
     margin-left: 50px;
     margin-right: 50px;
     padding:50px;
-    color: #808080;
+    color: #5a5a5a;
     font-size: 1rem;
     display: flex;
     flex-direction: column;
+    font-family: NanumSquareR;
 }
 .rookieInfo-title,.rookieInfo-content{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    
-}
-.rookieInfo-title-text{
-    font-weight: 600;
 }
 .rookieInfo-title-text,.rookieInfo-relayout{
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 .rookieInfo-title-text{
     font-size: 24px;
-    font-weight: 600;
 }
 .rookieInfo-relayout{
     font-size: 12px;

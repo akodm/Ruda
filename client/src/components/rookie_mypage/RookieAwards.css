@@ -6,7 +6,7 @@
     margin-left: 50px;
     margin-right: 50px;
     padding:50px;
-    color: #808080;
+    color: #5a5a5a;
     font-size: 1rem;
     display: flex;
     flex-direction: column;
@@ -41,7 +41,6 @@
     font-size: 16px;
 }
 .rookieAwards-content-title{
-    font-weight: 600;
     background-color: #e9f4ff7a;
 }
 .rookieAwards-content-title span , .rookieAwards-content-info span{

@@ -4,8 +4,17 @@
     margin-left: 50px;
     margin-right: 50px;
     padding:20px;
+    font-family: NanumSquareR;
 }
-
+.rookie-user-title{
+    height: 50px;
+    align-items: center;
+    text-align: left;
+    justify-content:center;
+    margin:50px;
+    margin-bottom: 0px;
+    border-bottom: 1px solid #d3d3d3f1;
+}
 .rookie-user-title img{
     width: 50px;
     height: 30px;
@@ -14,7 +23,7 @@
 .rookie-user-title span{
     margin-left: 40px;
     font-size: 2rem;
-    font-weight: 300;
+    color: #5a5a5a;
 }
 .rookie-user-mainprofile{
     display: flex;
@@ -28,7 +37,7 @@
     align-items: center;
     font-size: 14px;
     margin-bottom: 10px;
-    color: #808080;
+    color: #5a5a5a;
 }    
 .user-name{
     margin-bottom: 30px;
@@ -46,24 +55,25 @@
     margin: 10px;
 }
 .mainprofile-chart{
-    width: 250px;
-    height: 250px;
-    background-color: aliceblue;
-    margin: 10px;
+    width: 330px;
+    height: 300px;
+    font-size: 16px;
 }
+
 .mainprofile-chartranking{
     width: 220px;
     height: 25px;
-    background-color: aliceblue;
+    background-color: rgb(200, 229, 255);
     text-align: center;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    padding-bottom: 3px;
 
 }
 .mainprofile-chartranking span{
-    color:#8a8a8a;
+    color: #5a5a5a;
     font-size: 14px;
     margin-left: 10px;
     margin-right: 10px;

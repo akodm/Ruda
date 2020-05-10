@@ -1,7 +1,29 @@
 import React, { Component } from 'react';
 import './RookieMainProfile.css';
+import Chart from "react-apexcharts";
 
 class RookieMainProfile extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            series: [{
+                name: 'Series 1',
+                data: [1,2,3,4,5,6],
+                fontSize:"20px"
+                }],
+                options: {
+                xaxis: {
+                    categories: ['java', 'php', 'javascript', 'c', 'react.js', 'node.js'],
+                    labels: {
+                        style:{
+                            fontSize: '14px',
+                            colors: '#5a5a5a',
+                        }
+                    }
+                },
+            },
+        }
+    }
     render() {
         return (
             <div className="rookie-user-mainprofile">
@@ -16,7 +38,7 @@ class RookieMainProfile extends Component {
                 </div>
                 <div className="rookie-user-mainprofile-right">
                     <div className="mainprofile-chart">
-                        그래프영역
+                    <Chart options={this.state.options} series={this.state.series} type="radar" height={310} />
                     </div>
                     <div className="mainprofile-chartranking">
                         <span>1.java</span>

@@ -5,7 +5,7 @@
     margin-left: 50px;
     margin-right: 50px;
     padding:50px;
-    color: #808080;
+    color: #5a5a5a;
     font-size: 1rem;
     display: flex;
     flex-direction: column;
@@ -45,7 +45,7 @@
     background-color: #e9f4ff7a;
 }
 .rookieCertificate-content-title span , .rookieCertificate-content-info span{
-    width: 250px;
+    width: 265px;
     margin-top: 10px;
     border-bottom: 1px solid #d3d3d3f1;
 }
