@@ -95,6 +95,8 @@
     margin-bottom: 12px;
 }
 
+@import url(/client/public/Fonts/NanumSquareRoundR.ttf);
+
 .msg-leftImg {
     width: 55px;
     height: 54px;

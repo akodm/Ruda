@@ -4,8 +4,6 @@ import Msg from '../mypopup/Message';
 import RookieProflie from './RookieProfile';
 import RookiePt from './RookiePt';
 
-
-
 class RookieMypage extends Component {
     constructor(props) {
         super(props);
@@ -14,7 +12,7 @@ class RookieMypage extends Component {
             likeUser:"none",
             ptbtnClick:"pth-btn",
             profileClick:"profile-btn",
-            changePage:true
+            changePage:true,
         }
     }
     ProfilechangePage(){

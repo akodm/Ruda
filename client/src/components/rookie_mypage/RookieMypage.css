@@ -31,7 +31,7 @@
     padding-left: 300px;
 }
 /*--프로필--*/
-.rookie-profile-content, .rookie-pt-content{
+.rookie-profile-content{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -45,7 +45,7 @@
     margin-bottom: 0px;
     border-bottom: 1px solid #d3d3d3f1;
 }
-.add-profile.add-pt{
+.add-profile{
     display: flex;
     justify-content:center;
     align-items: center;
@@ -54,7 +54,7 @@
     height: 100px;
 }
 /*프로필정보추가*/
-.addprofile,.addpt{
+.addprofile{
     width: 100%;
     height: 100px;
     display: flex;
@@ -64,9 +64,8 @@
     font-size: 20px;
     color:gray;
     margin-top:15px;
-
 }
-.addprofile:hover,.addpt:hover{
+.addprofile:hover{
     color: rgb(77, 77, 77);
     background-color: #f3f3f362;
 }
@@ -85,7 +84,7 @@
     right:218px;
     display: flex;
     justify-content: flex-end;
-    color:#919191;
+    color: #5a5a5a;
     font-size: small;
 }
 
