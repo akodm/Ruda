@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import './Search.css';
-import IdSearch from './IdSearch';
+import EmailSearch from './EmailSearch';
 import PassSearch from './PassSearch';
 
 class Search extends Component {
     render() {
         return (
             <div className="search-main">
-                <IdSearch />
-                <div className="search-center"></div>
-                <PassSearch />
+                <img src="/Image/login_search.png" alt="IMG" className="search-img"></img>
+                <div className="search-div">
+                    <EmailSearch />
+                    <PassSearch />
+                </div>
             </div>
         );
     }

@@ -1,17 +1,23 @@
 @import url(/client/public/Fonts/NanumSquareRoundR.ttf);
 
 .search-main {
-    height: 100%;
+    height: 90%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
-.search-center {
-    width: 70%;
-    background-color: rgba(179, 179, 179, 0.253);
-    height: 2px;
+.search-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.search-img {
+    width: 130px;
+    height: 130px;
+    margin-top: 130px;
+    margin-left: 20px;
 }
 
 /* -------------------------- 아이디 -----------------------------*/
@@ -21,6 +27,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 70px;
 }
 
 .search-title {
@@ -28,6 +35,7 @@
     font-size: 24px;
     color: #626262;
     font-weight: 600;
+    margin-bottom: 50px;
 }
 
 .search-form {
