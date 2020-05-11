@@ -41,6 +41,10 @@ class RookieInfo extends Component {
                                 <span className="university-title">대학교/학과</span>
                                 <span className="university-info">대림대학교/모바일인터넷과</span>
                         </div>
+                        <div className="wontjob">
+                                <span className="wontjob-title">희망직무</span>
+                                <span className="wontjob-info">프론트엔드개발자</span>
+                        </div>
                     </div>
                </div>
             </div>

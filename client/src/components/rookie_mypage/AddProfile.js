@@ -25,7 +25,6 @@ class AddProfile extends Component {
         const { LayerArr } = this.state;
         return (
             <div className ="AddProfile" style={{display:this.props.display}}>
-                <div className ="AddProfile-bg">
                      {/*<div className="addprofile" onClick={this.addComponents.bind(this)}>*/}
                     <div className ="AddProfile-title">
                         <span onClick={this.addComponents.bind(this)}>프로필 추가</span>
@@ -63,9 +62,9 @@ class AddProfile extends Component {
                                 </li>
                            </label>        
                        </ul>
+                       <button className="AddProfile-saveBtn">저장하기</button>
                     </div>
                 </div>               
-            </div>
         );
     }
 }
