@@ -32,7 +32,7 @@
     justify-content: center;
     align-items: center;
 }
-.rookieAwards-content-title,.rookieAwards-content-info{
+.rookieAwards-content-title,.rookieAwards-content-info {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -41,9 +41,41 @@
     font-size: 16px;
 }
 .rookieAwards-content-title{
+    font-weight: 600;
+    background-color: #e9f4ff7a;
+    color: #5a5a5ad3;
+}
+.rookieAwards-content-info-input{
+    border-bottom: 1px solid #d3d3d3f1;
+    width: 100%;
+}
+
+.rookieAwards-content-info-input input{
+    height: 33px;
+    border-radius: 5px;
+    border: 1px solid rgba(128, 128, 128, 0.616);
+    margin: 3px 15px 5px 15px;
+    border:none;
+    padding: 5px;
+    width: 20%;
+    font-size: 16px;
+}
+.rookieAwards-content-info-add{
+    width: 100%;
+    height: 33px;
+    background-color: #ececec7a;
+    border: none;
+    text-align: center;
+    padding-top: 5px;
+    margin-top: 5px;
+}
+.rookieAwards-content-info-add:hover{
+    background-color: #cfcfcf7a;
+}
+.rookieAwards-content-title{
     background-color: #e9f4ff7a;
 }
-.rookieAwards-content-title span , .rookieAwards-content-info span{
+.rookieAwards-content-title span , .rookieAwards-content-info span {
     width: 200px;
     margin-top: 10px;
     border-bottom: 1px solid #d3d3d3f1;

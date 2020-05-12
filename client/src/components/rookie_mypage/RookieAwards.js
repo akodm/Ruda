@@ -1,34 +1,25 @@
 import React, { Component } from 'react';
 import './RookieAwards.css'
+import RookieAwardsForm from './RookieAwardsForm';
+import RookieAwardsView from './RookieAwardsView';
 
 class RookieAwards extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            changeAward: true
+        }
+    }
+    awardschange(bool){
+        this.setState({
+            changeAward : bool
+        });
+    }
     render() {
+        const {changeAward}= this.state;
         return (
             <div className="rookieAwards">
-                <div className="rookieAwards-title">
-                    <span className="rookieAwards-title-text">수상내역</span>
-                    <span className="rookieAwards-relayout">[편집]</span>
-                </div>
-                <div className="rookieAwards-content">
-                    <div className="rookieAwards-content-title">
-                        <span>수상년도</span>
-                        <span>수상내역</span>
-                        <span>수상주최</span>
-                        <span>수상결과</span>  
-                    </div>
-                    <div className="rookieAwards-content-info">
-                        <span>2019</span>
-                        <span>대림대학교</span>
-                        <span>대림테크페어</span>
-                        <span>대상</span>  
-                    </div>
-                    <div className="rookieAwards-content-info">
-                        <span>2020</span>
-                        <span>대림대학교</span>
-                        <span>대림테크페어</span>
-                        <span>대상</span>  
-                    </div>
-               </div>
+                { changeAward ? <RookieAwardsForm awardschanges={this.awardschange.bind(this)}/> : <RookieAwardsView awardschanges={this.awardschange.bind(this)}/> }
             </div>
         );
     }

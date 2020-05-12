@@ -16,16 +16,16 @@ class AddProfile extends Component {
 
     checkboxList(e) {
         console.log(e.target.value)
-        this.setState({
-            
+        this.setState({    
+        
         })
     }
- 
+
     render() {
         const { LayerArr } = this.state;
+
         return (
             <div className ="AddProfile" style={{display:this.props.display}}>
-                     {/*<div className="addprofile" onClick={this.addComponents.bind(this)}>*/}
                     <div className ="AddProfile-title">
                         <span onClick={this.addComponents.bind(this)}>프로필 추가</span>
                     </div>
@@ -62,7 +62,10 @@ class AddProfile extends Component {
                                 </li>
                            </label>        
                        </ul>
-                       <button className="AddProfile-saveBtn">저장하기</button>
+                       <div className="AddProfile-Btns">
+                            <button className="AddProfile-saveBtn">저장</button>
+                            <button className="AddProfile-closeBtn">닫기</button>
+                       </div>
                     </div>
                 </div>               
         );

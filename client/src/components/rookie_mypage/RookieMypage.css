@@ -7,7 +7,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: 나눔스퀘어라운드;
+    font-family: NanumSquareR;
     padding-top:50px;
     padding-bottom: 70px;
 }
@@ -139,7 +139,7 @@
     opacity: 0.99;
     box-shadow: 0px 2px 4.6px 1.4px rgba(87, 86, 86, 0.24);
     background-color: #ffffff;
-    font-family: 나눔스퀘어라운드;
+    font-family: NanumSquareR;
     font-size: 12px;
     color: #504e4e;
     border:none;

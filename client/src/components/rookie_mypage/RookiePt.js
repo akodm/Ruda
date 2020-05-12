@@ -23,10 +23,10 @@ class RookiePt extends Component {
                 </div>
                 <div className="rookiept-Explanation">
                     <span>나의 프로젝트를 정리해보세요</span>
-                    <span>1.포트폴리오 추가 버튼을 누르세요</span>
-                    <span>2.양식에 맞게 작성해주세요</span>
-                    <span>3.나의 능력치를 마음껏 뽐내보세요</span>
-                    <span>지금 바로 포트폴리오 작성하기↓</span>
+                    <span>1. 포트폴리오 추가 버튼을 누르세요</span>
+                    <span>2. 양식에 맞게 작성해주세요</span>
+                    <span>3. 나의 능력치를 마음껏 뽐내보세요</span>
+                    <span>↓ 지금 바로 포트폴리오 작성하기 ↓</span>
                 </div>
                 <div className="rookiept-contents">
                     {Adduserpt}
