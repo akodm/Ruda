@@ -1,32 +1,26 @@
 import React, { Component } from 'react';
 import './RookieCertificate.css'
+import RookieCertificateForm from './RookieCertificateForm';
+import RookieCertificateView from './RookieCertificateView';
 
 class RookieCertificate extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            changeCertificate: true
+        }
+    }
+    certificatechange(bool){
+        this.setState({
+            changeCertificate : bool
+        });
+    }
     render() {
+        const {changeCertificate}= this.state;
         return (
             <div className="rookieCertificate">
-            <div className="rookieCertificate-title">
-                <span className="rookieCertificate-title-text">자격증</span>
-                <span className="rookieCertificate-relayout">[편집]</span>
+                           { changeCertificate ? <RookieCertificateForm certificatechanges={this.certificatechange.bind(this)}/> : <RookieCertificateView certificatechanges={this.certificatechange.bind(this)}/> }
             </div>
-            <div className="rookieCertificate-content">
-                <div className="rookieCertificate-content-title">
-                    <span>취득년도</span>
-                    <span>취득내역</span>
-                    <span>자격증주최</span>
-                </div>
-                <div className="rookieCertificate-content-info">
-                    <span>2019</span>
-                    <span>대림대학교</span>
-                    <span>대림테크페어</span>
-                </div>
-                <div className="rookieCertificate-content-info">
-                    <span>2020</span>
-                    <span>대림대학교</span>
-                    <span>대림테크페어</span> 
-                </div>
-           </div>
-        </div>
         );
     }
 }
