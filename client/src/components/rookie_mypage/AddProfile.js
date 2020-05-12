@@ -34,7 +34,7 @@ class AddProfile extends Component {
                             <label for="UserMain">
                                 <li>
                                     메인페이지
-                                    <input type="checkbox" onChange={this.checkboxList.bind(this)} id="Main"></input>
+                                    <input type="checkbox" onChange={this.checkboxList.bind(this)} id="UserMain"></input>
                                 </li>
                            </label>
                            <label for="UserInfo">
