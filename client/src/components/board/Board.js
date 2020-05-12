@@ -11,7 +11,7 @@ class Board extends Component {
                         <span>업무분야</span>
                     </div>
                     <div className="board-search">
-                        <img src="/Image/board_search.png" alt="search" className="search-img"></img>
+                        <img src="/Image/board_search.png" alt="search" className="board-search-img"></img>
                         <input type="text" className="board-search-input" maxLength="30" placeholder="검색어를 입력해주세요"></input>
                         <button className="board-btn">검색</button>
                     </div>

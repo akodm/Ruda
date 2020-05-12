@@ -5,7 +5,10 @@ let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 let jwt = require('jsonwebtoken');
 let nodemailer = require('nodemailer');
+let crypto = require("crypto");
+let moment = require('moment');
 
+// 각 라우터들
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
 let companyRouter = require('./routes/userInfo');
@@ -14,9 +17,15 @@ let companyInfoRouter = require('./routes/companyInfo');
 let hireBoardRouter = require('./routes/hireBoard');
 let mailRouter = require('./routes/mail');
 let userInfoRouter = require('./routes/userInfo');
+let emailAuth = require('./routes/emailAuth');
 const configs = require('./server-configs.js');
+
+const models = require('./models');
+const EmailAuth = models.emailAuth;
+
 let app = express();
 
+// 앱 설정
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", configs.app.c_local);
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
@@ -34,6 +43,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// 각 라우터들 URL
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/companys', companyRouter);
@@ -42,6 +52,7 @@ app.use('/companyInfos', companyInfoRouter);
 app.use('/hireBoards', hireBoardRouter);
 app.use('/mails', mailRouter);
 app.use('/userInfos', userInfoRouter);
+app.use('/emailAuth', emailAuth);
 
 // -------------------- 토큰 생성 및 검증 함수 --------------------
 function getToken(data){
@@ -75,34 +86,55 @@ app.get('/verify', (req,res)=>{
 
 app.get("/nodemailer", async(req,res) => {
   try {
+    let nowDatePlusMt = moment().add(5, 'minutes').format();
+
     const transport = nodemailer.createTransport({
       service : configs.app.type,
       auth : {
         user : configs.app.emailUser,
         pass : configs.app.emailPass,
       }
-    })
-    
+    });
+
+    let emailAuth = await hashFunc("RUDA"); // 랜덤한 값 생성 필요 
+
     let mailOption = {
       from : configs.app.user,
-      to : req.query.userEmail,
-      subject : "노드 메일러 테스트 메일 전송",
-      html : "<h1>Node Mailer Test Transfer!</h1><p></p><div>click here!</div>",
+      to : "a8456452@naver.com",
+      subject : "RUDA에서 이메일 인증 메일을 발송하였습니다.",
+      html : `<h1>RUDA</h1><span>아래의 해당 URL을 클릭하여 인증을 완료해주세요.</span><p></p>`+
+      `<span><a href='http://localhost:3000/?emailAuth=${emailAuth}'>http://localhost:3000/?emailAuth=${emailAuth}</a></span><p></p>`,
     }
+
+    await EmailAuth.create({
+      token: emailAuth, 
+      expire: nowDatePlusMt, 
+    });
     
-    transport.sendMail(mailOption, (err, info) => {
+    await transport.sendMail(mailOption, (err, info) => {
       if(err) {
         console.log(err);
       } else {
         console.log(info);
       }
-    })
+    });
     res.send(true);
   } catch(err) {
     console.log(__filename + "에서 노드 메일러 에러 발생 : " + err);
     res.send(false);
   }
 })
+
+// 크립토 모듈을 이용한 해싱 암호화 함수
+async function hashFunc(pass) {
+  let hash = null;
+  try {
+      hash = await crypto.createHmac(configs.app.sha, configs.app.salt).update(pass).digest(configs.app.base); 
+  } catch(err) {
+      console.log(__filename + " 에서 크립토 모듈 에러 : " + err);
+  }
+  return hash;
+}
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
