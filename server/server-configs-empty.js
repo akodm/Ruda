@@ -9,5 +9,15 @@ module.exports = {
         host : '',
         pass : '',
         dia : '',
+
+        secretKey : '',
+
+        salt : "",
+        base : "",
+        sha : "",
+
+        type : "",
+        emailUser : "",
+        emailPass : "",
     }
 }

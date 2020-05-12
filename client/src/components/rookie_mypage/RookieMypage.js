@@ -41,25 +41,25 @@ class RookieMypage extends Component {
                 <div className="btn-cont">
                     <Msg display= { msgDisplay } />
                     <div className="rookie-main-bg">
-                    <div className="rookie-main-bg-in">
-                        { changePage?<RookieProflie/>:<RookiePt/> }
-                    </div>
-                    </div>
-                    <div className="rookie-menu-btn">
-                        <button className={profileClick}
-                         onClick={this.ProfilechangePage.bind(this)}>프로필</button>
-                        <button className={ptbtnClick}
-                        onClick={this.PtchangePage.bind(this)}>포트폴리오</button>
-                    </div>
-                    <div className="rookie-user-btn">
-                        <button className="rookie-message-btn"
-                        onClick={() => this.setState({ msgDisplay : msgDisplay === "none" ? "flex" : "none"})}>
-                            <img src="/Image/usermypage_message.png" alt="IMG"></img>메세지 보내기
-                        </button>
-                        <button className="rookie-like-btn"
-                        onClick={() => this.setState({ likeUser : likeUser === "none" ? console.log("조아여") : "none"})}>
-                            <img src="/Image/usermypage_hart.png" alt="IMG"></img>관심있어요
-                        </button>
+                        <div className="rookie-main-bg-in">
+                            { changePage?<RookieProflie/>:<RookiePt/> }
+                        </div>
+                        <div className="rookie-menu-btn">
+                            <button className={profileClick}
+                            onClick={this.ProfilechangePage.bind(this)}>프로필</button>
+                            <button className={ptbtnClick}
+                            onClick={this.PtchangePage.bind(this)}>포트폴리오</button>
+                        </div>
+                        <div className="rookie-user-btn">
+                            <button className="rookie-message-btn"
+                            onClick={() => this.setState({ msgDisplay : msgDisplay === "none" ? "flex" : "none"})}>
+                                <img src="/Image/usermypage_message.png" alt="IMG"></img>메세지 보내기
+                            </button>
+                            <button className="rookie-like-btn"
+                            onClick={() => this.setState({ likeUser : likeUser === "none" ? console.log("조아여") : "none"})}>
+                                <img src="/Image/usermypage_hart.png" alt="IMG"></img>관심있어요
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
