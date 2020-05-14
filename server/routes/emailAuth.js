@@ -74,11 +74,12 @@ router.post("/emailauth", async (req, res) => {
 			where : {
                 token : req.body.token,
 			}
-        });
+		});
+		console.log(result)
         if(result && result.dataValues.expire) {
-            const noeDate = moment().format();
+            const nowDate = moment().format();
             const dbDate = result.dataValues.expire;
-            if(!(moment(noeDate).diff(dbDate, 'minutes') > 0)) {
+            if(moment(nowDate).diff(dbDate, 'minutes') <= 0) {
                 check = true;
             }
         }

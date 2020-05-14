@@ -95,21 +95,16 @@ app.get("/nodemailer", async(req,res) => {
         pass : configs.app.emailPass,
       }
     });
-
-    let emailAuth = await hashFunc("RUDA"); // 랜덤한 값 생성 필요 
+    let ranStr = Math.random().toString(36).substr(5,7);
+    let emailAuth = await hashFunc(ranStr); 
 
     let mailOption = {
       from : configs.app.user,
       to : "a8456452@naver.com",
       subject : "RUDA에서 이메일 인증 메일을 발송하였습니다.",
-      html : `<h1>RUDA</h1><span>아래의 해당 URL을 클릭하여 인증을 완료해주세요.</span><p></p>`+
-      `<span><a href='http://localhost:3000/?emailAuth=${emailAuth}'>http://localhost:3000/?emailAuth=${emailAuth}</a></span><p></p>`,
+      html : `<h1>RUDA</h1><p></p><span>아래의 해당 URL을 클릭하여 인증을 완료해주세요.</span><p></p><br>`+
+      `<span><a href='http://localhost:3000/insert/emailauth?emailAuth=${emailAuth}'>http://localhost:3000/insert/emailauth?emailAuth=${emailAuth}</a></span><p></p><br>`,
     }
-
-    await EmailAuth.create({
-      token: emailAuth, 
-      expire: nowDatePlusMt, 
-    });
     
     await transport.sendMail(mailOption, (err, info) => {
       if(err) {
@@ -118,12 +113,18 @@ app.get("/nodemailer", async(req,res) => {
         console.log(info);
       }
     });
+
+    await EmailAuth.create({
+      token: emailAuth, 
+      expire: nowDatePlusMt, 
+    });
+
     res.send(true);
   } catch(err) {
     console.log(__filename + "에서 노드 메일러 에러 발생 : " + err);
     res.send(false);
   }
-})
+});
 
 // 크립토 모듈을 이용한 해싱 암호화 함수
 async function hashFunc(pass) {

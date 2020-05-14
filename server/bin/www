@@ -30,7 +30,7 @@ let io = socket(server);
 /* ------------------------------- socket.io -------------------------------*/
 
 io.sockets.on('connect', (socket) => {
-  console.log(socket + ' 유저 접속');
+  console.log(' 유저 접속');
 
   socket.on('sned', (data) => {
     console.log("전송한 메시지 : " + data.msg);
