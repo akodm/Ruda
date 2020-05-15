@@ -82,10 +82,18 @@ router.post("/emailauth", async (req, res) => {
             if(moment(nowDate).diff(dbDate, 'minutes') <= 0) {
                 check = true;
             }
-        }
+		}
+		
+		EmailAuth.update({
+            use: "true",
+            }, {
+            where: {
+                token : req.body.token
+            }
+		});
 	} catch (err) {
 		console.log(__filename + " 에서 오스 체크 에러 발생 내용= " + err);
-    }
+	}
     res.send(check);
 });
 

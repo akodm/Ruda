@@ -102,10 +102,24 @@ app.get("/nodemailer", async(req,res) => {
       from : configs.app.user,
       to : "a8456452@naver.com",
       subject : "RUDA에서 이메일 인증 메일을 발송하였습니다.",
-      html : `<h1>RUDA</h1><p></p><span>아래의 해당 URL을 클릭하여 인증을 완료해주세요.</span><p></p><br>`+
-      `<span><a href='http://localhost:3000/insert/emailauth?emailAuth=${emailAuth}'>http://localhost:3000/insert/emailauth?emailAuth=${emailAuth}</a></span><p></p><br>`,
+      html : `<img style="width:'80px'; height:40px;" src='cid:logo@cid'/><br><br>`+ 
+      `<span>신입 구직자, 사회 초년생, 실습생들의 구직 사이트</span><br><br>` +
+      `<span>비경력직간의 경쟁으로 더 자신을 어필해보세요!</span><br><br>` +
+      `<strong><span>아래의 해당 URL을 클릭, 혹은 주소록에 복사하여 인증을 완료해주세요.</span></strong><p></p><br>`+
+      `<span><a href='http://localhost:3000/insert/emailauth?emailAuth=${emailAuth}'>`+
+      `http://localhost:3000/insert/emailauth?emailAuth=${emailAuth}</a></span><p></p><br>`+
+      `<img style="width:'400px'; height:200px;" src='cid:bg@cid'/>`,
+      attachments: [{
+        filename: 'Logo.png',
+        path: __dirname +'/public/images/base_header_logo.png',
+        cid: 'logo@cid'
+      },{
+        filename: 'Bg.png',
+        path: __dirname +'/public/images/main_title_bg4.png',
+        cid: 'bg@cid'
+      }],
     }
-    
+
     await transport.sendMail(mailOption, (err, info) => {
       if(err) {
         console.log(err);
@@ -117,6 +131,7 @@ app.get("/nodemailer", async(req,res) => {
     await EmailAuth.create({
       token: emailAuth, 
       expire: nowDatePlusMt, 
+      use : "false",
     });
 
     res.send(true);
@@ -130,7 +145,7 @@ app.get("/nodemailer", async(req,res) => {
 async function hashFunc(pass) {
   let hash = null;
   try {
-      hash = await crypto.createHmac(configs.app.sha, configs.app.salt).update(pass).digest(configs.app.base); 
+      hash = await crypto.createHash(configs.app.sha).update(pass).digest(configs.app.base1);
   } catch(err) {
       console.log(__filename + " 에서 크립토 모듈 에러 : " + err);
   }

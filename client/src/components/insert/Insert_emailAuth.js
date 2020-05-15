@@ -5,7 +5,6 @@ class Insert_emailAuth extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            emailAuth : null,
             coment : {
                 title : "이메일 인증 메일을 발송하였습니다.",
                 span : "가입시 사용한 이메일로 인증을 완료하여주세요.",

@@ -12,6 +12,9 @@ module.exports = (sequelize, DataTypes) => {
         expire : {
             type: DataTypes.STRING,
         },
+        use : {
+            type: DataTypes.STRING,
+        }
     });
     return EmailAuth;
 };
