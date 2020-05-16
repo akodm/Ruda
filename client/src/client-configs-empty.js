@@ -1,4 +1,4 @@
-ccmodule.exports = {
+module.exports = {
     app : {
         googleId : "",
         googlePass : "",

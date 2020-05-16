@@ -76,21 +76,20 @@ router.post("/emailauth", async (req, res) => {
 			}
 		});
 		console.log(result)
-        if(result && result.dataValues.expire) {
+        if(result && result.dataValues.expire && result.dataValues.use === "false") {
             const nowDate = moment().format();
             const dbDate = result.dataValues.expire;
             if(moment(nowDate).diff(dbDate, 'minutes') <= 0) {
-                check = true;
+				EmailAuth.update({
+					use: "true",
+					}, {
+					where: {
+						token : req.body.token
+					}
+				});
+				check = true;
             }
 		}
-		
-		EmailAuth.update({
-            use: "true",
-            }, {
-            where: {
-                token : req.body.token
-            }
-		});
 	} catch (err) {
 		console.log(__filename + " 에서 오스 체크 에러 발생 내용= " + err);
 	}
