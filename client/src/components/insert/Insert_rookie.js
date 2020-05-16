@@ -12,15 +12,15 @@ class Insert_rookie extends Component {
             pwck : "",
             name : "",
             phonenum : "",
-            checkbox : false,
-            
+            checkbox :false,
+
             //미입력 오류 항목 state
-            emailstyle : "",
-            pwStyle : "",
-            pwckStyle : "",
-            nameStyle :"",
-            phonenumStyle : "",
-            checkboxStyle :"",
+            emailStyle : "none",
+            pwStyle : "none",
+            pwckStyle : "none",
+            nameStyle :"none",
+            phonenumStyle : "none",
+            checkboxStyle :"none",
 
             //email 중복체크
             emailck : false,
@@ -33,11 +33,11 @@ class Insert_rookie extends Component {
         })
     }
     async InsertCheck(){
-        const { email,pw,pwck,name,phonenum,checkbox,emailck}=this.state;
+        const { email,pw,pwck,name,phonenum,emailck,checkbox}=this.state;
         let count = 0;
 
         //email
-        if(!(/([a-z0-9_.-]+)@([a-z.-]+)\.([a-z]{2,6})/.test(email))){
+        if(!(/[a-z0-9]+@[a-z]+.[a-z]{2,8}/.test(email))){
             this.setState({
                 emailStyle : "flex",
             })
@@ -92,6 +92,16 @@ class Insert_rookie extends Component {
                 phonenumStyle : "none",
             })
         }
+        if(!checkbox){
+            this.setState({
+                checkboxStyle : "flex",
+            })
+            count = 1;
+        }else{
+            this.setState({
+                checkboxStyle : "none",
+            }) 
+        }
         //emailck
         if(!emailck){
             alert("이메일 중복 체크를 해주세요.");
@@ -102,7 +112,7 @@ class Insert_rookie extends Component {
             return;
         }
         try {
-            const result = await axios.get(`http://localhost:5000/users/one?useremail=${email}`);
+            const result = await axios.get(`http://localhost:5000/users/one?userEmail=${email}`);
             if(result.data){
                 alert("이미 존재하는 이메일 입니다. 다시 확인해주세요.");
                 this.setState({
@@ -110,28 +120,29 @@ class Insert_rookie extends Component {
                 })
                 return;
             }
-            const userCreate = await axios.post("http://localhost:5000/users/insert", {
-                email : email,    
+            const userCreate = await axios.post("http://localhost:5000/users/create", {
+                userEmail : email,    
                 userPass : pw,
-                userPhone : phonenum,
             })
-            alert("가입되었습니다.");
             if(userCreate.data){
                 console.log("user insert create success : " + email, pw)
+                alert("가입되었습니다.");
             } else {
                 console.log("user insert create fail");
             }
         } catch (err) {
             console.log("user insert create err : " + err);
         }
+     
     }
     async emailckBtn (){
-        const result = await axios.get(`http://localhost:5000/users/one?userId=${this.state.email}`)
+        const result = await axios.get(`http://localhost:5000/users/one?userEmail=${this.state.email}`)
         if(result.data){
             alert("이미 존재하는 이메일 입니다.");
+            console.log(result);
             return;
         }
-        if(!(/([a-z0-9_.-]+)@([a-z.-]+)\.([a-z]{2,6})/.test(this.state.email))) {
+        if(!(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i.test(this.state.email))) {
             this.setState({
                 emailStyle : "flex",
             })
@@ -146,6 +157,11 @@ class Insert_rookie extends Component {
             emailck : true,
         })
     }
+    ckbox(e){
+        this.setState({
+            checkbox : e.target.checked,
+        })
+    }
 
     render() {
         const {emailStyle,pwStyle,pwckStyle,nameStyle,phonenumStyle,checkboxStyle}=this.state;
@@ -157,8 +173,8 @@ class Insert_rookie extends Component {
                     <div className="insert-c-form">
                         <div className="insert-c-formDiv">
                             <div className="insert-c-formSpan">이메일</div>
-                            <input type="text" name="email" className="insert-c-form-input" placeholder="ex)abc@abc.com"></input>
-                            <button className="insert-c-form-auth">중복확인</button>
+                            <input type="text" name="email" onChange={this.ChangeInput.bind(this)} className="insert-c-form-input" placeholder="ex)abc@abc.com"></input>
+                            <button className="insert-c-form-auth" onClick={this.emailckBtn.bind(this)}>중복확인</button>
                         </div>
                         <div className="validationErr-"
                         style={{
@@ -166,32 +182,47 @@ class Insert_rookie extends Component {
                         }}>잘못된 이메일 형식입니다.</div>
                         <div className="insert-c-formDiv">
                             <div className="insert-c-formSpan">비밀번호</div>
-                            <input type="password" name="pw" className="insert-c-form-input" placeholder="비밀번호를 입력해주세요."></input>
+                            <input type="password" name="pw" onChange={this.ChangeInput.bind(this)} className="insert-c-form-input" placeholder="비밀번호를 입력해주세요."></input>
                         </div>
-                        <div className="validationErr-">잘못된 비밀번호 형식입니다.</div>
+                        <div className="validationErr-"
+                         style={{
+                            display :pwStyle
+                        }}>잘못된 비밀번호 형식입니다.</div>
                         <div className="insert-c-formDiv">
                             <div className="insert-c-formSpan">비밀번호 확인</div>
-                            <input type="text" name="pwck" className="insert-c-form-input" placeholder="비밀번호를 확인해주세요."></input>
+                            <input type="password" name="pwck" onChange={this.ChangeInput.bind(this)} className="insert-c-form-input" placeholder="비밀번호를 확인해주세요."></input>
                         </div>
-                        <div className="validationErr-">비밀번호가 다릅니다.</div>
+                        <div className="validationErr-"
+                          style={{
+                            display : pwckStyle
+                        }}>비밀번호가 다릅니다.</div>
                         <div className="insert-c-formDiv">
                             <div className="insert-c-formSpan">이름</div>
-                            <input type="text" name="name" className="insert-c-form-input" placeholder="이름을 입력해주세요."></input>
+                            <input type="text" name="name" onChange={this.ChangeInput.bind(this)} className="insert-c-form-input" placeholder="이름을 입력해주세요."></input>
                         </div>
-                        <div className="validationErr-">잘못된 형식입니다.</div>
+                        <div className="validationErr-"
+                         style={{
+                            display : nameStyle
+                        }}>잘못된 형식입니다.</div>
                         <div className="insert-c-formDiv">
                             <div className="insert-c-formSpan">휴대폰번호</div>
-                            <input type="text" name="phonenum" className="insert-c-form-input" placeholder="01012345678"></input>
+                            <input type="text" name="phonenum" onChange={this.ChangeInput.bind(this)} className="insert-c-form-input" placeholder="01012345678"></input>
                         </div>
-                        <div className="validationErr-">잘못된 입력 형식입니다.</div>
+                        <div className="validationErr-"
+                         style={{
+                            display : phonenumStyle
+                        }}>잘못된 입력 형식입니다.</div>
                         <div className="insert-c-form-etc">
                             <div className="insert-c-etc-save">
-                                <input type="checkbox" name="checkbox" className="insert-c-etc-chbox"></input>
+                                <input type="checkbox" name="checkbox" onChange={this.ckbox.bind(this)} className="insert-c-etc-chbox"></input>
                                 <span className="insert-c-etc-span">개인정보 약관동의</span>
                             </div>
                         </div>
-                        <div className="validationErr-">약관에 동의하여야 합니다.</div>
-                        <button className="insert-c-form-loginBtn" onclick={this.InsertCheck.bind(this)}>가입하기</button>
+                        <div className="validationErr-"
+                         style={{
+                            display : checkboxStyle
+                        }}>>약관에 동의하여야 합니다.</div>
+                        <button className="insert-c-form-loginBtn" onClick={this.InsertCheck.bind(this)}>가입하기</button>
                     </div>
                 </div>
                 <div className="insert-c-mainDivBottom">

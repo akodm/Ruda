@@ -3,38 +3,54 @@ import { Link } from 'react-router-dom';
 import './Login.css';
 
 class Login extends Component {
-    render() {
-        return (
-            <div className="login-main">
-                <div className="login-mainDiv">
-                    <img src="/Image/login_img.png" alt="LoginIMG"></img>
-                    <span className="login-title">로그인</span>
-                    <div className="login-form">
-                        <input type="text" className="login-form-input" placeholder="아이디를 입력해주세요."></input>
-                        <input type="password" className="login-form-input" placeholder="비밀번호를 입력해주세요."></input>
-                        <button className="login-form-loginBtn">로그인</button>
-                        <div className="login-form-etc">
-                            <div className="login-etc-save">
-                                <input type="checkbox" className="login-etc-chbox"></input>
-                                <span className="login-etc-span">아이디저장</span>
-                            </div>
-                            <div className="login-etc-search">
-                                <Link to="/search" className="login-etc-span">아이디/비밀번호 찾기</Link>
+    constructor(props){
+        super(props);
+        this.state = {
+            email : "",
+            pass : "",    
+            }
+        }
+        async loginCheck(){
+            const {email,pass } = this.state;
+        }
+        onChangeInputLogin(e) {
+            this.setState({
+                [e.target.name] : e.target.value,
+            })
+        }
+        render() {
+            return (
+                <div className="login-main">
+                    <div className="login-mainDiv">
+                        <img src="/Image/login_img.png" alt="LoginIMG"></img>
+                        <span className="login-title">로그인</span>
+                        <div className="login-form">
+                            <input type="text" onChange={this.onChangeInputLogin.bind(this)} className="login-form-input" placeholder="아이디를 입력해주세요."></input>
+                            <input type="password" onChange={this.onChangeInputLogin.bind(this)} className="login-form-input" placeholder="비밀번호를 입력해주세요."></input>
+                            <button className="login-form-loginBtn">로그인</button>
+                            <div className="login-form-etc">
+                                <div className="login-etc-save">
+                                    <input type="checkbox" className="login-etc-chbox"></input>
+                                    <span className="login-etc-span">아이디저장</span>
+                                </div>
+                                <div className="login-etc-search">
+                                    <Link to="/search" className="login-etc-span">아이디/비밀번호 찾기</Link>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="login-mainDivBottom">
-                    <span className="login-mainDivBottom-span">간편하게 로그인하기</span>
-                    <div className="login-mainDivBottom-btns">
-                        <img src="/Image/google.png" alt="google" className="login-oauth"></img>
-                        <img src="/Image/facebook.png" alt="facebook" className="login-oauth"></img>
-                        <img src="/Image/git32.png" alt="github" className="login-oauth"></img>
+                    <div className="login-mainDivBottom">
+                        <span className="login-mainDivBottom-span">간편하게 로그인하기</span>
+                        <div className="login-mainDivBottom-btns">
+                            <img src="/Image/google.png" alt="google" className="login-oauth"></img>
+                            <img src="/Image/facebook.png" alt="facebook" className="login-oauth"></img>
+                            <img src="/Image/git32.png" alt="github" className="login-oauth"></img>
+                        </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
+        }
     }
-}
+
 
 export default Login;
