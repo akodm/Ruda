@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './AddProfile.css';
+import RookieAwardsForm from '../RookieAwards/RookieAwardsForm';
 
 class AddProfile extends Component {
     constructor(props) {
@@ -15,10 +16,14 @@ class AddProfile extends Component {
     }
 
     checkboxList(e) {
-        console.log(e.target.value)
+        console.log(e.target.checked)
         this.setState({    
-        
+            
         })
+    }
+    
+    addClose(){
+        this.props.close("none");
     }
 
     render() {
@@ -31,22 +36,26 @@ class AddProfile extends Component {
                     </div>
                     <div className ="AddProfile-content">
                         <ul>
-                            <label for="UserMain">
-                                <li>
+                            <label for="UserMain" className="Main">
+                                <li >
                                     메인페이지
-                                    <input type="checkbox" onChange={this.checkboxList.bind(this)} id="Main"></input>
+                                    <input type="checkbox" id="UserMain" checked></input>
                                 </li>
                            </label>
-                           <label for="UserInfo">
-                                <li>
+                           <label for="UserInfo" className="Info">
+                                <li >
                                     개인정보
-                                    <input type="checkbox" onChange={this.checkboxList.bind(this)} id="UserInfo"></input>
+                                    <input type="checkbox" id="UserInfo" checked></input>
                                 </li>
                             </label>
                             <label for="UserAwards">
                                 <li>
                                     수상경력
-                                    <input type="checkbox" onChange={this.checkboxList.bind(this)} id="UserAwards"></input>
+                                    <input type="checkbox" onChange={(e) => this.setState({
+                                        checkboxList: e.target.checked ? this.state.checkboxList.concat(<RookieAwardsForm/>): this.state.checkboxList.filter((value) => {
+                                            console.log(value);
+                                        })
+                                    })} id="UserAwards"></input>
                                 </li>
                            </label>
                            <label for="UserCertificate">
@@ -64,7 +73,7 @@ class AddProfile extends Component {
                        </ul>
                        <div className="AddProfile-Btns">
                             <button className="AddProfile-saveBtn">저장</button>
-                            <button className="AddProfile-closeBtn">닫기</button>
+                            <button className="AddProfile-closeBtn" onClick={this.addClose.bind(this)}>닫기</button>
                        </div>
                     </div>
                 </div>               

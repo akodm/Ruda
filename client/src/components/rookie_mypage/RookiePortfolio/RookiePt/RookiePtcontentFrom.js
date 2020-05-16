@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './RookiePt.css';
+import '../RookiePt.css';
 class RookiePtcontentFrom extends Component {
     constructor(props) {
         super(props);

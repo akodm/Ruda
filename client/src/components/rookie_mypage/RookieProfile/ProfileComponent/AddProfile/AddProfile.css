@@ -61,3 +61,7 @@ ul li {
 .AddProfile-closeBtn{
     background-color: #bfcad4;
 }
+.Main li , .Info li{
+    color:gray;
+    background-color:#eeeeee86 ;
+}
