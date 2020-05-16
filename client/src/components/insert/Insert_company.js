@@ -25,11 +25,11 @@ class Insert_company extends Component {
             comEmailck : false,
         }
     }
-
     comChangeInput(e) {
         this.setState({
             [e.target.name] : e.target.value, 
         })
+        console.log(e.target.name);
     }
     async comInsertCheck(){
         const { comEmail,comPw,comPwck,comName,comPhonenum,comEmailck,comCheckbox}=this.state;
@@ -137,7 +137,7 @@ class Insert_company extends Component {
     }
     //email 중복 체크
     async comEmailckBtn (){
-        const result = await axios.get(`http://localhost:5000/companys/one?compayEmail=${this.state.comEmail}`)
+        const result = await axios.get(`http://localhost:5000/companys/one?companyEmail=${this.state.comEmail}`)
         if(result.data){
             alert("이미 존재하는 이메일 입니다.");
             console.log(result);
@@ -155,7 +155,7 @@ class Insert_company extends Component {
         }
         alert("사용 가능한 이메일 입니다.");
         this.setState({
-            comeEmailck : true,
+            comEmailck : true,
         })
     }
     //checkbox 체크
@@ -174,7 +174,7 @@ class Insert_company extends Component {
                     <div className="insert-c-form">
                         <div className="insert-c-formDiv">
                             <div className="insert-c-formSpan">이메일</div>
-                            <input type="text" onChange={this.comChangeInput.bind(this)} className="insert-c-form-input" placeholder="ex)abc@abc.com"></input>
+                            <input type="text" name="comEmail" onChange={this.comChangeInput.bind(this)} className="insert-c-form-input" placeholder="ex)abc@abc.com"></input>
                             <button className="insert-c-form-auth" onClick={this.comEmailckBtn.bind(this)}>중복확인</button>
                         </div>
                         <div className="validationErr-"
@@ -183,7 +183,7 @@ class Insert_company extends Component {
                         }}>잘못된 이메일 형식입니다.</div>
                         <div className="insert-c-formDiv">
                             <div className="insert-c-formSpan">비밀번호</div>
-                            <input type="password" onChange={this.comChangeInput.bind(this)} className="insert-c-form-input" placeholder="비밀번호를 입력해주세요."></input>
+                            <input type="password" name="comPw" onChange={this.comChangeInput.bind(this)} className="insert-c-form-input" placeholder="비밀번호를 입력해주세요."></input>
                         </div>
                         <div className="validationErr-"
                          style={{
@@ -191,7 +191,7 @@ class Insert_company extends Component {
                         }}>잘못된 비밀번호 형식입니다.</div>
                         <div className="insert-c-formDiv">
                             <div className="insert-c-formSpan">비밀번호 확인</div>
-                            <input type="text" onChange={this.comChangeInput.bind(this)} className="insert-c-form-input" placeholder="비밀번호를 확인해주세요."></input>
+                            <input type="password" name="comPwck" onChange={this.comChangeInput.bind(this)} className="insert-c-form-input" placeholder="비밀번호를 확인해주세요."></input>
                         </div>
                         <div className="validationErr-"
                          style={{
@@ -199,15 +199,15 @@ class Insert_company extends Component {
                         }}>비밀번호가 다릅니다.</div>
                         <div className="insert-c-formDiv">
                             <div className="insert-c-formSpan">기업이름</div>
-                            <input type="text" onChange={this.comChangeInput.bind(this)} className="insert-c-form-input" placeholder="이름을 입력해주세요."></input>
+                            <input type="text" name="comName" onChange={this.comChangeInput.bind(this)} className="insert-c-form-input" placeholder="이름을 입력해주세요."></input>
                         </div>
                         <div className="validationErr-"
                          style={{
                             display :comNameStyle
                         }}>잘못된 형식입니다.</div>
                         <div className="insert-c-formDiv">
-                            <div className="insert-c-formSpan">휴대폰번호</div>
-                            <input type="text" onChange={this.comChangeInput.bind(this)} className="insert-c-form-input" placeholder="01012345678"></input>
+                            <div className="insert-c-formSpan">기업번호</div>
+                            <input type="text" name="comPhonenum" onChange={this.comChangeInput.bind(this)} className="insert-c-form-input" placeholder="01012345678"></input>
                         </div>
                         <div className="validationErr-"
                          style={{
@@ -215,7 +215,7 @@ class Insert_company extends Component {
                         }}>잘못된 입력 형식입니다.</div>
                         <div className="insert-c-form-etc">
                             <div className="insert-c-etc-save">
-                                <input type="checkbox" className="insert-c-etc-chbox"></input>
+                                <input type="checkbox" className="insert-c-etc-chbox"  onChange={this.ckbox.bind(this)}></input>
                                 <span className="insert-c-etc-span">개인정보 약관동의</span>
                             </div>
                         </div>
@@ -223,7 +223,7 @@ class Insert_company extends Component {
                          style={{
                             display :comCheckboxStyle
                         }}>약관에 동의하여야 합니다.</div>
-                        <button className="insert-c-form-loginBtn"  onClick={this.comInsertCheck.bind(this)}>가입하기</button>
+                        <button className="insert-c-form-loginBtn" name="comCheckbox"  onClick={this.comInsertCheck.bind(this)}>가입하기</button>
                     </div>
                 </div>
                 <div className="insert-c-mainDivBottom">
