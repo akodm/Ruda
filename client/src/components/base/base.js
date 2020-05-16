@@ -22,7 +22,6 @@ import Search from '../searchIdPass/Search';
 import socketio from 'socket.io-client';
 const socket = socketio.connect('http://localhost:5000');
 
-
 class Base extends Component {
     render() {
         return (

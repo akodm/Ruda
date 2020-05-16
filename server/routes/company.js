@@ -162,6 +162,22 @@ router.get("/companypass", async (req, res) => {
     res.send(check);
 });
 
+// 기업 중복 이메일 검색
+router.get("/dup", async (req, res) => {
+    let result = false;
+	try {
+		const data = await Company.findOne({
+			where : {
+				email : req.query.companyEmail,
+			}
+        });
+        if(data) result = true;
+	} catch (err) {
+        console.log(__filename + " 에서 기업 중복 검색 에러 발생 내용= " + err);
+    }
+    res.send(result);
+});
+
 // 크립토 모듈을 이용한 해싱 암호화 함수
 async function hashFunc(pass) {
     let hash = null;
