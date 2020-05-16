@@ -11,7 +11,7 @@ let moment = require('moment');
 // 각 라우터들
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
-let companyRouter = require('./routes/userInfo');
+let companyRouter = require('./routes/company');
 let companyHireRouter = require('./routes/companyHire');
 let companyInfoRouter = require('./routes/companyInfo');
 let hireBoardRouter = require('./routes/hireBoard');
@@ -55,6 +55,7 @@ app.use('/userInfos', userInfoRouter);
 app.use('/emailAuth', emailAuth);
 
 // -------------------- 토큰 생성 및 검증 함수 --------------------
+
 app.get('/tokenpub', async(req,res) => {
   try {
     const token = getToken(req.query.userEmail);
