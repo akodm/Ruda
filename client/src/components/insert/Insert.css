@@ -199,3 +199,14 @@
     justify-content: center;
     align-items: center;
 }
+/* ------------------------------ validation ------------------------------ */
+
+.validationErr- {
+    color: rgba(255, 0, 0, 0.671);
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 120px;
+    margin-bottom: 20px;
+    margin-top: -15px;
+    height: 0px;
+}

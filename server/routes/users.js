@@ -25,7 +25,7 @@ router.get("/one", async (req, res) => {
 	try {
 		const result = await User.findOne({
 			where : {
-				email : req.query.userEmail,      // 유저 아이디를 토대로 검색
+				email : req.query.userEmail,
 			}
 		});
 		res.send(result);
@@ -42,7 +42,7 @@ router.post("/create", async(req, res) => {
     try{
         await User.findOrCreate({
             where : {
-                email : req.body.userEmail,   // 동일한 아이디로는 생성 불가
+                email : req.body.userEmail,
             },
             defaults : {
                 email : req.body.userEmail,
@@ -124,7 +124,7 @@ router.post("/loginuser", async (req, res) => {
 });
 
 // 유저 이메일 찾기
-router.get("/userid", async (req, res) => {
+router.get("/useremail", async (req, res) => {
     let check = false;
 	try {
 		const result = await User.findOne({
@@ -160,6 +160,22 @@ router.get("/userpass", async (req, res) => {
 		console.log(__filename + " 에서 유저 비밀번호 찾기 에러 발생 내용= " + err);
     }
     res.send(check);
+});
+
+// 유저 중복 이메일 검색
+router.get("/dup", async (req, res) => {
+    let result = false;
+	try {
+		const data = await User.findOne({
+			where : {
+				email : req.query.userEmail,
+			}
+        });
+        if(data) result = true;
+	} catch (err) {
+        console.log(__filename + " 에서 유저 중복 검색 에러 발생 내용= " + err);
+    }
+    res.send(result);
 });
 
 // 크립토 모듈을 이용한 해싱 암호화 함수
