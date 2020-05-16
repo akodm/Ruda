@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './RookieMypage.css';
 import Msg from '../mypopup/Message';
-import RookieProflie from './RookieProfile';
-import RookiePt from './RookiePt';
+import RookieProflie from './RookieProfile/RookieProfile';
+import RookiePt from './RookiePortfolio/RookiePt';
 
 class RookieMypage extends Component {
     constructor(props) {
