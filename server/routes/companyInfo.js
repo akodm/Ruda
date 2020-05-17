@@ -4,7 +4,7 @@ let models = require("../models");
 
 // DB Setting --------------------------------------------------------
 const CompanyInfo = models.companyInfo;
-const Company = models.company;
+const User = models.user;
 const Op = models.sequelize.Op;
 
 // DB CRUD -----------------------------------------------------------
@@ -14,7 +14,7 @@ router.get("/all", async (req, res) => {
 	try {
 		const result = await CompanyInfo.findAll({
 			include : [
-				{ model: Company }
+				{ model: User }
 			]
 		});
 		res.send(result);
@@ -29,10 +29,10 @@ router.get("/one", async (req, res) => {
 	try {
 		const result = await CompanyInfo.findOne({
 			include : [
-				{ model: Company }
+				{ model: User }
 			],
 			where : {
-				companyEmail : req.query.companyEmail
+				userEmail : req.query.userEmail,
 			},
 		});
 		res.send(result);
@@ -48,10 +48,10 @@ router.post("/create", async (req, res) => {
 	try {
 		await CompanyInfo.findOrCreate({
 			where : {
-				companyEmail : req.body.companyEmail
+				userEmail : req.body.userEmail
 			},
 			defaults : {
-				companyEmail : req.body.companyEmail
+				userEmail : req.body.userEmail
 			}
 		}).spread((none, created)=>{
 			if(created)
@@ -86,7 +86,7 @@ router.put("/update", async(req, res) => {
             companyState : req.body.companyState,
             }, {
             where: {
-                companyEmail : req.body.companyEmail
+                userEmail : req.body.userEmail
             }
         });
         result = true;
@@ -103,7 +103,7 @@ router.delete("/delete", async(req, res) => {
     try {
         await CompanyInfo.destroy({
             where: {
-                companyEmail: req.query.companyEmail
+                userEmail: req.query.userEmail
             }
 		});
 		result = true;

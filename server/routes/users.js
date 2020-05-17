@@ -71,7 +71,6 @@ router.put("/update", async(req, res) => {
             userName: req.body.userName, 
             userPhone : req.body.userPhone,
             userAdd : req.body.userAdd,
-            userCate : req.body.userCate,
             }, {
             where: {
                 email : req.body.userEmail

@@ -6,14 +6,14 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true
         },
         token : {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING,     // 인증용 값
             allowNull: false
         },
         expire : {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING,     // 만료 기한
         },
         use : {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING,     // 사용 여부
         }
     });
     return EmailAuth;
