@@ -1,17 +1,57 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Login.css';
+import axios from 'axios';
 
 class Login extends Component {
     constructor(props){
         super(props);
         this.state = {
             email : "",
-            pass : "",    
+            pass : "",
+            token : "",
             }
         }
-        async loginCheck(){
-            const {email,pass } = this.state;
+        async LoginChecked(){
+            const {email,pass} = this.state;
+            try{
+                const result = await axios.post(`http://localhost:5000/companys/logincompany`,{
+                    companyEmail : email,
+                    companyPass : pass,
+                })
+                console.log(result);
+                console.log(email,pass);
+                if(result.data){
+                    try{
+                        const tokenresult = await axios.get(`http://localhost:5000/tokenpub?userEmail=${email}`)
+                        this.setState({
+                            token : tokenresult.data,
+                        })
+                        localStorage.setItem("users",this.state.token);
+                        this.usersVerify();
+                        console.log("token들어감꾸");
+                    }catch(err){
+                        console.log("user login token err : " + err);
+                    }
+                }else{
+                    alert("아이디 또는 비밀번호가 틀렸습니다.");
+                }
+                
+            }catch(err){
+                console.log("user login err : " + err);
+            }
+        }
+
+        async usersVerify(){
+            const result = await axios(`http://localhost:5000/verify`,{
+                method : "get",
+                headers : {
+                    'content-type' : 'text/json',
+                    'x-access-token' : localStorage.getItem("users")
+                }
+            
+            });
+            console.log(result.data);
         }
         onChangeInputLogin(e) {
             this.setState({
@@ -25,9 +65,9 @@ class Login extends Component {
                         <img src="/Image/login_img.png" alt="LoginIMG"></img>
                         <span className="login-title">로그인</span>
                         <div className="login-form">
-                            <input type="text" onChange={this.onChangeInputLogin.bind(this)} className="login-form-input" placeholder="아이디를 입력해주세요."></input>
-                            <input type="password" onChange={this.onChangeInputLogin.bind(this)} className="login-form-input" placeholder="비밀번호를 입력해주세요."></input>
-                            <button className="login-form-loginBtn">로그인</button>
+                            <input type="text" name="email" onChange={this.onChangeInputLogin.bind(this)} className="login-form-input" placeholder="아이디를 입력해주세요."></input>
+                            <input type="password" name="pass" onChange={this.onChangeInputLogin.bind(this)} className="login-form-input" placeholder="비밀번호를 입력해주세요."></input>
+                            <button className="login-form-loginBtn" onClick={this.LoginChecked.bind(this)}>로그인</button>
                             <div className="login-form-etc">
                                 <div className="login-etc-save">
                                     <input type="checkbox" className="login-etc-chbox"></input>

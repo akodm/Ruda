@@ -57,8 +57,8 @@ app.use('/emailAuth', emailAuth);
 // -------------------- 토큰 생성 및 검증 함수 --------------------
 
 app.get('/tokenpub', async(req,res) => {
+  let token = getToken(req.query.userEmail);
   try {
-    const token = getToken(req.query.userEmail);
     console.log("토큰 발급" + req.query.userEmail + " => " + token);
   } catch(err) {
     console.log(__filename + " : 토큰 발급 에러 : " + err)
