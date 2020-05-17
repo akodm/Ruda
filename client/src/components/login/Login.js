@@ -30,6 +30,7 @@ class Login extends Component {
                         localStorage.setItem("users",this.state.token);
                         this.usersVerify();
                         console.log("token들어감꾸");
+                        window.location.href="http://localhost:3000/usermypage";
                     }catch(err){
                         console.log("user login token err : " + err);
                     }

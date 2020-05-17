@@ -20,7 +20,9 @@
 .mypopup-menuImg {
     cursor: pointer;
 }
-
+.mypopup-logout{
+    color:white;
+}
 /* ------------------------- 메세지 --------------------------------------*/
 
 .msg-main {
