@@ -55,7 +55,7 @@ module.exports = (sequelize, DataTypes) => {
         },
     });
     CompanyInfo.associate = function(models) {
-        CompanyInfo.belongsTo(models.company);
+        CompanyInfo.belongsTo(models.user);
     }
     return CompanyInfo;
 };

@@ -26,11 +26,8 @@ module.exports = (sequelize, DataTypes) => {
         userKeyword : {
             type: DataTypes.STRING,     // 본인 키워드
         },
-        userTemplete : {
-            type: DataTypes.STRING,     // 템플릿 번호
-        },
-        userGraph : {
-            type: DataTypes.STRING,     // 템플릿에 들어가는 그래프
+        userTags : {
+            type: DataTypes.STRING,     // 본인 잘하는 태그 ( 언어 등 )
         },
         userFile : {
             type: DataTypes.STRING,     // 올린 파일
