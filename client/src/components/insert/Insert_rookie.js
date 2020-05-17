@@ -16,6 +16,7 @@ class Insert_rookie extends Component {
 
             //미입력 오류 항목 state
             emailStyle : "none",
+            emailckStyle :"none",
             pwStyle : "none",
             pwckStyle : "none",
             nameStyle :"none",
@@ -127,6 +128,7 @@ class Insert_rookie extends Component {
             if(userCreate.data){
                 console.log("user insert create success : " + email, pw)
                 alert("가입되었습니다.");
+                window.location.href="http://localhost:3000/usermypage";
             } else {
                 console.log("user insert create fail");
             }
@@ -164,7 +166,7 @@ class Insert_rookie extends Component {
     }
 
     render() {
-        const {emailStyle,pwStyle,pwckStyle,nameStyle,phonenumStyle,checkboxStyle}=this.state;
+        const {emailStyle,pwStyle,pwckStyle,nameStyle,phonenumStyle,checkboxStyle,emailckStyle}=this.state;
         return (
             <div className="insert-c-main">
                 <div className="insert-c-mainDiv">
@@ -180,6 +182,15 @@ class Insert_rookie extends Component {
                         style={{
                             display : emailStyle
                         }}>잘못된 이메일 형식입니다.</div>
+                        <div className="insert-c-formDiv">
+                            <div className="insert-c-formSpan">이메일인증</div>
+                            <input type="text" name="emailck" onChange={this.ChangeInput.bind(this)} className="insert-c-form-input" placeholder="발송된 인증번호를 입력해주세요"></input>
+                            <button className="insert-c-form-auth" onClick={this.emailckBtn.bind(this)}>인증받기</button>
+                        </div>
+                        <div className="validationErr-"
+                         style={{
+                            display : emailckStyle
+                        }}>잘못된 인증번호입니다.</div>
                         <div className="insert-c-formDiv">
                             <div className="insert-c-formSpan">비밀번호</div>
                             <input type="password" name="pw" onChange={this.ChangeInput.bind(this)} className="insert-c-form-input" placeholder="비밀번호를 입력해주세요."></input>
@@ -214,8 +225,10 @@ class Insert_rookie extends Component {
                         }}>잘못된 입력 형식입니다.</div>
                         <div className="insert-c-form-etc">
                             <div className="insert-c-etc-save">
-                                <input type="checkbox" name="checkbox" onChange={this.ckbox.bind(this)} className="insert-c-etc-chbox"></input>
-                                <span className="insert-c-etc-span">개인정보 약관동의</span>
+                                <label>
+                                    <input type="checkbox" name="checkbox" onChange={this.ckbox.bind(this)} className="insert-c-etc-chbox"></input>
+                                    <span className="insert-c-etc-span">개인정보 약관동의</span>
+                                </label>
                             </div>
                         </div>
                         <div className="validationErr-"

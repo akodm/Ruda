@@ -15,6 +15,7 @@ class Insert_company extends Component {
 
             //미입력 오류 항목 state
             comEmailStyle : "none",
+            comEmailckStyle: "none",
             comPwStyle : "none",
             comPwckStyle : "none",
             comNameStyle :"none",
@@ -127,6 +128,7 @@ class Insert_company extends Component {
             if(companyCreate.data){
                 console.log("user insert create success : " + comEmail, comPw)
                 alert("가입되었습니다.");
+                window.location.href="http://localhost:3000/companymypage";
             } else {
                 console.log("user insert create fail");
             }
@@ -165,7 +167,7 @@ class Insert_company extends Component {
         })
     }
     render() {
-        const {comEmailStyle,comPwStyle,comPwckStyle,comNameStyle,comPhonenumStyle,comCheckboxStyle}=this.state;
+        const {comEmailStyle,comPwStyle,comPwckStyle,comNameStyle,comPhonenumStyle,comCheckboxStyle,comEmailckStyle}=this.state;
         return (
             <div className="insert-c-main">
                 <div className="insert-c-mainDiv">
@@ -181,6 +183,15 @@ class Insert_company extends Component {
                          style={{
                             display :comEmailStyle
                         }}>잘못된 이메일 형식입니다.</div>
+                         <div className="insert-c-formDiv">
+                            <div className="insert-c-formSpan">이메일인증</div>
+                            <input type="text" name="comEmailck" onChange={this.comChangeInput.bind(this)} className="insert-c-form-input" placeholder="ex)abc@발송된 인증번호를 입력해주세요"></input>
+                            <button className="insert-c-form-auth">인증받기</button>
+                        </div>
+                        <div className="validationErr-"
+                         style={{
+                            display :comEmailckStyle
+                        }}>잘못된 인증번호입니다.</div>
                         <div className="insert-c-formDiv">
                             <div className="insert-c-formSpan">비밀번호</div>
                             <input type="password" name="comPw" onChange={this.comChangeInput.bind(this)} className="insert-c-form-input" placeholder="비밀번호를 입력해주세요."></input>
@@ -215,8 +226,10 @@ class Insert_company extends Component {
                         }}>잘못된 입력 형식입니다.</div>
                         <div className="insert-c-form-etc">
                             <div className="insert-c-etc-save">
-                                <input type="checkbox" className="insert-c-etc-chbox"  onChange={this.ckbox.bind(this)}></input>
-                                <span className="insert-c-etc-span">개인정보 약관동의</span>
+                                <label>
+                                    <input type="checkbox" className="insert-c-etc-chbox"  onChange={this.ckbox.bind(this)}></input>
+                                    <span className="insert-c-etc-span">개인정보 약관동의</span>
+                                </label>
                             </div>
                         </div>
                         <div className="validationErr-"
