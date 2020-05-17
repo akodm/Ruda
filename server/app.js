@@ -67,7 +67,7 @@ app.get('/tokenpub', async(req,res) => {
 function getToken(data){
   try {
       const getToken = jwt.sign({
-          userId : data,
+          userEmail : data,
       },
           configs.app.secretKey,
       {
@@ -79,7 +79,7 @@ function getToken(data){
   }
 }
 
-app.get('/verify', (req,res)=>{
+app.get("/verify", async(req,res)=>{
   try {
       const token = req.headers['x-access-token'] || req.query.token;
       const getToken = jwt.verify(token, configs.app.secretKey);
@@ -109,14 +109,14 @@ app.get("/nodemailer", async(req,res) => {
 
     let mailOption = {
       from : configs.app.user,
-      to : "a8456452@naver.com",
+      to : req.query.userEmail,
       subject : "RUDA에서 이메일 인증 메일을 발송하였습니다.",
-      html : `<div style="width:100%; display:flex; flex-direction:column; justify-content:center;"><img style="width:'80px'; height:40px;" src='cid:logo@cid'/><br><br>`+ 
+      html : `<img style="width:'80px'; height:40px;" src='cid:logo@cid'/><br><br>`+ 
       `<span>신입 구직자, 사회 초년생, 실습생들의 구직 사이트</span><br><br>` +
       `<span>비경력직간의 경쟁으로 더 자신을 어필해보세요!</span><br><br>` +
       `<strong><span>아래의 해당 코드를 복사 붙여넣기 하여주세요.</span></strong><p></p><br>`+
-      `<span>${ranStr}</span><p></p><br>`+
-      `<img style="width:'400px'; height:200px;" src='cid:bg@cid'/></div>`,
+      `[ <span>${ranStr}</span> ]<p></p><br>`+
+      `<img style="width:'400px'; height:200px;" src='cid:bg@cid'/>`,
       attachments: [{
         filename: 'Logo.png',
         path: __dirname +'/public/images/base_header_logo.png',

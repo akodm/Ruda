@@ -75,7 +75,6 @@ router.post("/emailauth", async (req, res) => {
                 token : req.body.token,
 			}
 		});
-		console.log(result)
         if(result && result.dataValues.expire && result.dataValues.use === "false") {
             const nowDate = moment().format();
             const dbDate = result.dataValues.expire;

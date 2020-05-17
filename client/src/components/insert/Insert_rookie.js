@@ -12,10 +12,12 @@ class Insert_rookie extends Component {
             pwck : "",
             name : "",
             phonenum : "",
+            emailauth : "",
             checkbox :false,
 
             //미입력 오류 항목 state
             emailStyle : "none",
+            emailckStyle :"none",
             pwStyle : "none",
             pwckStyle : "none",
             nameStyle :"none",
@@ -33,41 +35,34 @@ class Insert_rookie extends Component {
         })
     }
     async InsertCheck(){
-        const { email,pw,pwck,name,phonenum,emailck,checkbox}=this.state;
+        const { email,pw,pwck,name,phonenum,emailck,checkbox,emailauth }=this.state;
         let count = 0;
 
         //email
         if(!(/[a-z0-9]+@[a-z]+.[a-z]{2,8}/.test(email))){
-            this.setState({
-                emailStyle : "flex",
-            })
+            this.setState({ emailStyle : "flex", })
             count = 1;
         }else{
-            this.setState({
-                emailStyle : "none",
-            })
+            this.setState({ emailStyle : "none", })
+        }
+        if(emailauth.length < 4) {
+            this.setState({ emailckStyle : "flex" })
+        } else {
+            this.setState({ emailckStyle : "none" })
         }
         //pw
         if(!(/^[a-z0-9A-Z~!@#$%<>^&()\-=+_’]{8,}$/.test(pw))){
-            this.setState({
-                pwStyle : "flex",
-            })
+            this.setState({ pwStyle : "flex", })
             count = 1 ;
         }else{
-            this.setState({
-                pwStyle : "none",
-            })
+            this.setState({ pwStyle : "none", })
         }
         //pwck
         if(!(pw.match(pwck)) || pwck.length < 8) {
-            await this.setState({
-                pwckStyle : "flex",
-            })
+            this.setState({ pwckStyle : "flex", })
             count = 1;
         }else{
-            this.setState({
-                pwckStyle:"none",
-            })
+            this.setState({ pwckStyle:"none", })
         }
         //name
         if(/[~!@#$%<>^&()\-=+_’0-9]/.test(name) ||name.length<2){
@@ -77,30 +72,20 @@ class Insert_rookie extends Component {
             })
             count = 1;
         }else {
-            this.setState({
-                nameStyle : "none",
-            })
+            this.setState({ nameStyle : "none", })
         }
         //phonenum
         if(!(/^[0-9]{9,11}$/.test(phonenum))) {
-            await this.setState({
-                phonenumStyle : "flex",
-            })
+            this.setState({ phonenumStyle : "flex", })
             count = 1;
         } else {
-            this.setState({
-                phonenumStyle : "none",
-            })
+            this.setState({ phonenumStyle : "none", })
         }
         if(!checkbox){
-            this.setState({
-                checkboxStyle : "flex",
-            })
+            this.setState({ checkboxStyle : "flex", })
             count = 1;
         }else{
-            this.setState({
-                checkboxStyle : "none",
-            }) 
+            this.setState({ checkboxStyle : "none", }) 
         }
         //emailck
         if(!emailck){
@@ -112,12 +97,22 @@ class Insert_rookie extends Component {
             return;
         }
         try {
-            const result = await axios.get(`http://localhost:5000/users/one?userEmail=${email}`);
+            let result = await axios.get(`http://localhost:5000/users/one?userEmail=${email}`);
+            let emailAuth = await axios.post("http://localhost:5000/emailAuth/emailauth", {
+                token : emailauth
+            })
+            await Promise.all([result, emailAuth]).then(value => {
+                result = value[0];
+                emailAuth = value[1];
+            });
             if(result.data){
-                alert("이미 존재하는 이메일 입니다. 다시 확인해주세요.");
-                this.setState({
-                    emailck : false,
-                })
+                alert("이미 존재하는 이메일 입니다.");
+                this.setState({ emailck : false, })
+                return;
+            }
+            if(!emailAuth.data) {
+                alert("잘못된 인증코드입니다. 다시 확인해주세요.");
+                this.setState({ emailckStyle : "flex"});
                 return;
             }
             const userCreate = await axios.post("http://localhost:5000/users/create", {
@@ -127,6 +122,7 @@ class Insert_rookie extends Component {
             if(userCreate.data){
                 console.log("user insert create success : " + email, pw)
                 alert("가입되었습니다.");
+                window.location.href="http://localhost:3000/usermypage";
             } else {
                 console.log("user insert create fail");
             }
@@ -143,28 +139,30 @@ class Insert_rookie extends Component {
             return;
         }
         if(!(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i.test(this.state.email))) {
-            this.setState({
-                emailStyle : "flex",
-            })
+            this.setState({ emailStyle : "flex", })
             return;
         } else {
-            this.setState({
-                emailStyle : "none",
-            })
+            this.setState({ emailStyle : "none", })
         }
         alert("사용 가능한 이메일 입니다.");
-        this.setState({
-            emailck : true,
-        })
+        this.setState({ emailck : true, })
     }
     ckbox(e){
-        this.setState({
-            checkbox : e.target.checked,
-        })
+        this.setState({ checkbox : e.target.checked, })
+    }
+
+    async emailAuth() {
+        const { email } = this.state;
+        try {
+            await axios.get(`http://localhost:5000/nodemailer?userEmail=${email}`);
+            alert("이메일 인증을 발송하였습니다.");
+        } catch(err) {
+            console.log("email auth err : " + err)
+        }
     }
 
     render() {
-        const {emailStyle,pwStyle,pwckStyle,nameStyle,phonenumStyle,checkboxStyle}=this.state;
+        const {emailStyle,pwStyle,pwckStyle,nameStyle,phonenumStyle,checkboxStyle,emailckStyle}=this.state;
         return (
             <div className="insert-c-main">
                 <div className="insert-c-mainDiv">
@@ -180,6 +178,15 @@ class Insert_rookie extends Component {
                         style={{
                             display : emailStyle
                         }}>잘못된 이메일 형식입니다.</div>
+                        <div className="insert-c-formDiv">
+                            <div className="insert-c-formSpan">이메일인증</div>
+                            <input type="text" name="emailauth" onChange={this.ChangeInput.bind(this)} className="insert-c-form-input" placeholder="인증번호를 입력해주세요"></input>
+                            <button className="insert-c-form-auth" onClick={this.emailAuth.bind(this)}>인증받기</button>
+                        </div>
+                        <div className="validationErr-"
+                         style={{
+                            display : emailckStyle
+                        }}>잘못된 인증번호입니다.</div>
                         <div className="insert-c-formDiv">
                             <div className="insert-c-formSpan">비밀번호</div>
                             <input type="password" name="pw" onChange={this.ChangeInput.bind(this)} className="insert-c-form-input" placeholder="비밀번호를 입력해주세요."></input>
@@ -214,8 +221,10 @@ class Insert_rookie extends Component {
                         }}>잘못된 입력 형식입니다.</div>
                         <div className="insert-c-form-etc">
                             <div className="insert-c-etc-save">
-                                <input type="checkbox" name="checkbox" onChange={this.ckbox.bind(this)} className="insert-c-etc-chbox"></input>
-                                <span className="insert-c-etc-span">개인정보 약관동의</span>
+                                <label>
+                                    <input type="checkbox" name="checkbox" onChange={this.ckbox.bind(this)} className="insert-c-etc-chbox"></input>
+                                    <span className="insert-c-etc-span">개인정보 약관동의</span>
+                                </label>
                             </div>
                         </div>
                         <div className="validationErr-"

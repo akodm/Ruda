@@ -31,6 +31,32 @@
     padding-left: 300px;
 }
 /*--프로필--*/
+.rookie-user-mainprofile{
+    border-bottom: 1px solid #d3d3d3f1;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding:20px;
+    font-family: NanumSquareR;
+}
+.rookie-user-title{
+    height: 50px;
+    align-items: center;
+    text-align: left;
+    justify-content:center;
+    margin:50px;
+    margin-bottom: 0px;
+    border-bottom: 1px solid #d3d3d3f1;
+}
+.rookie-user-title img{
+    width: 50px;
+    height: 30px;
+    float: left; 
+}
+.rookie-user-title span{
+    margin-left: 40px;
+    font-size: 2rem;
+    color: #5a5a5a;
+}
 .rookie-profile-content{
     display: flex;
     flex-direction: column;

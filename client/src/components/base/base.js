@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import axios from 'axios';
 
 import './base.css';
 
@@ -23,12 +24,38 @@ import socketio from 'socket.io-client';
 const socket = socketio.connect('http://localhost:5000');
 
 class Base extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            userToken : "",
+        }
+    }
+    async componentDidMount() {
+        try {
+            const userToken = await this.usersVerify();
+            this.setState({ userToken : userToken })
+        } catch(err) {
+            console.log("main user Token err : " + err)
+        }
+    }
+    async usersVerify(){
+        try {
+            const result = await axios.get(`http://localhost:5000/verify?token=${localStorage.getItem("users")}`);
+            return result.data.userEmail;
+        } catch(err) {
+            console.log("user token verify err : " + err);
+            localStorage.removeItem("users");
+        }
+    }
     render() {
+        const { userToken } = this.state;
+        let userauth = userToken || "";
+        console.log(userauth);
         return (
             <div className="base-main">
                 <Router>
                     <Header />
-                    <Route exact path="/"><Main /></Route>
+                    <Route exact path="/"><Main user={userauth} /></Route>
                     <Route exact path="/insert"><Insert /></Route>
                     <Route path="/insert/rookie"><InsertRookie /></Route>
                     <Route path="/insert/company"><InsertCompany /></Route>

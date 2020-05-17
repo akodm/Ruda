@@ -12,7 +12,7 @@ export default class Main extends Component {
                     </div>
                     <div className="main_btn">
                         <Link to="/insert"><button className="main_btn_insert">회원가입</button></Link>
-                        <Link to="/login"><button className="main_btn_login">로그인</button></Link>
+                        <Link to="/login"><button className="main_btn_login">{ this.props.user ? "로그아웃" : "로그인"}</button></Link>
                     </div>
                 </div>
             </div>

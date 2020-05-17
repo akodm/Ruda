@@ -36,19 +36,19 @@ class AddProfile extends Component {
                     </div>
                     <div className ="AddProfile-content">
                         <ul>
-                            <label for="UserMain" className="Main">
+                            <label htmlFor="UserMain" className="Main">
                                 <li >
                                     메인페이지
-                                    <input type="checkbox" id="UserMain" checked></input>
+                                    <input type="checkbox" id="UserMain" checked={true} readOnly></input>
                                 </li>
                            </label>
-                           <label for="UserInfo" className="Info">
+                           <label htmlFor="UserInfo" className="Info">
                                 <li >
                                     개인정보
-                                    <input type="checkbox" id="UserInfo" checked></input>
+                                    <input type="checkbox" id="UserInfo" checked={true} readOnly></input>
                                 </li>
                             </label>
-                            <label for="UserAwards">
+                            <label htmlFor="UserAwards">
                                 <li>
                                     수상경력
                                     <input type="checkbox" onChange={(e) => this.setState({
@@ -58,13 +58,13 @@ class AddProfile extends Component {
                                     })} id="UserAwards"></input>
                                 </li>
                            </label>
-                           <label for="UserCertificate">
+                           <label htmlFor="UserCertificate">
                                <li>
                                     자격증
                                     <input type="checkbox" onChange={this.checkboxList.bind(this)} id="UserCertificate"></input>    
                                 </li>
                            </label>
-                           <label for="UserLanguage">
+                           <label htmlFor="UserLanguage">
                                 <li>
                                     언어능력
                                     <input type="checkbox" onChange={this.checkboxList.bind(this)} id="UserLanguage"></input>
