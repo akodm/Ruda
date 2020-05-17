@@ -17,6 +17,9 @@ module.exports = (sequelize, DataTypes) => {
         userAdd : {
             type: DataTypes.STRING,     // 주소
         },
+        userCate : {
+            type: DataTypes.STRING,     // 주소
+        },
     });
     User.associate = function(models) {
         User.hasMany(models.mail);

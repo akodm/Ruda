@@ -113,7 +113,7 @@ class Insert_company extends Component {
             return;
         }
         try {
-            const result = await axios.get(`http://localhost:5000/companys/one?companyEmail=${comEmail}`);
+            const result = await axios.get(`http://localhost:5000/users/one?userEmail=${comEmail}`);
             if(result.data){
                 alert("이미 존재하는 이메일 입니다. 다시 확인해주세요.");
                 this.setState({
@@ -121,9 +121,9 @@ class Insert_company extends Component {
                 })
                 return;
             }
-            const companyCreate = await axios.post("http://localhost:5000/companys/create", {
-                companyEmail : comEmail,    
-                companyPass : comPw,
+            const companyCreate = await axios.post("http://localhost:5000/users/create", {
+                userEmail : comEmail,    
+                userPass : comPw,
             })
             if(companyCreate.data){
                 console.log("user insert create success : " + comEmail, comPw)
@@ -139,7 +139,7 @@ class Insert_company extends Component {
     }
     //email 중복 체크
     async comEmailckBtn (){
-        const result = await axios.get(`http://localhost:5000/companys/one?companyEmail=${this.state.comEmail}`)
+        const result = await axios.get(`http://localhost:5000/users/one?userEmail=${this.state.comEmail}`)
         if(result.data){
             alert("이미 존재하는 이메일 입니다.");
             console.log(result);

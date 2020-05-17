@@ -15,9 +15,9 @@ class Login extends Component {
         async LoginChecked(){
             const {email,pass} = this.state;
             try{
-                const result = await axios.post(`http://localhost:5000/companys/logincompany`,{
-                    companyEmail : email,
-                    companyPass : pass,
+                const result = await axios.post(`http://localhost:5000/users/loginuser`,{
+                    userEmail : email,
+                    userPass : pass,
                 })
                 console.log(result);
                 console.log(email,pass);
