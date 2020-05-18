@@ -122,7 +122,7 @@ class Insert_rookie extends Component {
             if(userCreate.data){
                 console.log("user insert create success : " + email, pw)
                 alert("가입되었습니다.");
-                window.location.href="http://localhost:3000/usermypage";
+                window.location.href="http://localhost:3000/login";
             } else {
                 console.log("user insert create fail");
             }

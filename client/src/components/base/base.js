@@ -55,7 +55,7 @@ class Base extends Component {
             <div className="base-main">
                 <Router>
                     <Header />
-                    <Route exact path="/"><Main user={userauth} /></Route>
+                    <Route exact path="/">{ userauth ?<RookieMypage/> : <Main user={userauth} />}</Route>
                     <Route exact path="/insert"><Insert /></Route>
                     <Route path="/insert/rookie"><InsertRookie /></Route>
                     <Route path="/insert/company"><InsertCompany /></Route>
@@ -65,7 +65,7 @@ class Base extends Component {
                     <Route path="/usermypage"><RookieMypage /></Route>
                     <Route path="/companymypage"><CompanyMypage /></Route>
                     <Route path="/search"><Search /></Route>
-                    <MyPopup />
+                    { userauth ?<MyPopup /> : ""}
                     <UpandDown/>
                     <Footer />
                 </Router>
