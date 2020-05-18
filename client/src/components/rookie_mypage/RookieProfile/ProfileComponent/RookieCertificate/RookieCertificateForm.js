@@ -44,7 +44,7 @@ class RookieCertificateForm extends Component {
                     </div>
                         {adduserCertificate}
                     <div className="rookieCertificate-content-info-add" onClick={this.addCertificate.bind(this)}>
-                        <span>+수상내역 추가</span>
+                        <span>+취득내역 추가</span>
                     </div>
                 </div>
             </div>

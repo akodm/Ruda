@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './AddProfile.css';
 import RookieAwardsForm from '../RookieAwards/RookieAwardsForm';
+import RookieCertificateForm from '../RookieCertificate/RookieCertificateForm';
+import RookieinfoFrom from '../RookieInfo/RookieinfoFrom';
 
 class AddProfile extends Component {
     constructor(props) {
@@ -16,9 +18,31 @@ class AddProfile extends Component {
     }
 
     checkboxList(e) {
-        console.log(e.target.checked)
-        this.setState({    
-            
+        switch(e.target.id) {
+            case "U1" : 
+            e.target.checked ? 
+            this.setState({ checkboxList : this.state.checkboxList.concat({ data : <RookieAwardsForm />, id : 0})}) 
+            :
+            this.setState({ checkboxList : this.state.checkboxList.filter( val => { return val.id !== 0 })}) 
+                break;
+            case "U2" : 
+            e.target.checked ? 
+            this.setState({ checkboxList : this.state.checkboxList.concat({ data : <RookieCertificateForm />, id : 1})}) 
+            :
+            this.setState({ checkboxList : this.state.checkboxList.filter( val => { return val.id !== 1 })}) 
+                break;
+            case "U3" : 
+            e.target.checked ? 
+            this.setState({ checkboxList : this.state.checkboxList.concat({ data : <RookieinfoFrom />, id : 2})}) 
+            :
+            this.setState({ checkboxList : this.state.checkboxList.filter( val => { return val.id !== 2 })}) 
+                break;
+            default : break;
+        }
+        this.setState({
+            LayerArr : this.state.checkboxList.map((data,i)=>{
+                return data.data
+            })
         })
     }
     
@@ -28,7 +52,7 @@ class AddProfile extends Component {
 
     render() {
         const { LayerArr } = this.state;
-
+        console.log(this.state.checkboxList);
         return (
             <div className ="AddProfile" style={{display:this.props.display}}>
                     <div className ="AddProfile-title">
@@ -51,28 +75,24 @@ class AddProfile extends Component {
                             <label htmlFor="UserAwards">
                                 <li>
                                     수상경력
-                                    <input type="checkbox" onChange={(e) => this.setState({
-                                        checkboxList: e.target.checked ? this.state.checkboxList.concat(<RookieAwardsForm/>): this.state.checkboxList.filter((value) => {
-                                            console.log(value);
-                                        })
-                                    })} id="UserAwards"></input>
+                                    <input type="checkbox" onChange={this.checkboxList.bind(this)} id="U1"></input>
                                 </li>
                            </label>
                            <label htmlFor="UserCertificate">
                                <li>
                                     자격증
-                                    <input type="checkbox" onChange={this.checkboxList.bind(this)} id="UserCertificate"></input>    
+                                    <input type="checkbox" onChange={this.checkboxList.bind(this)} id="U2"></input>    
                                 </li>
                            </label>
                            <label htmlFor="UserLanguage">
                                 <li>
                                     언어능력
-                                    <input type="checkbox" onChange={this.checkboxList.bind(this)} id="UserLanguage"></input>
+                                    <input type="checkbox" onChange={this.checkboxList.bind(this)} id="U3"></input>
                                 </li>
                            </label>        
                        </ul>
                        <div className="AddProfile-Btns">
-                            <button className="AddProfile-saveBtn">저장</button>
+                            <button className="AddProfile-saveBtn" onClick={this.addComponents.bind(this)}>저장</button>
                             <button className="AddProfile-closeBtn" onClick={this.addClose.bind(this)}>닫기</button>
                        </div>
                     </div>

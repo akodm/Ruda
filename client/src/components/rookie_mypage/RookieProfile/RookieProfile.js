@@ -37,7 +37,8 @@ class RookieProflie extends Component {
                 </div>
                 <RookieMainProfile/>
                 <RookieInfo/>
-                {LayerArr}
+                <RookieAwards />
+                <RookieCertificate />
                 <div className="addprofile" onClick={() => this.setState({ addComponents : "flex"})}>
                     <span> + 프로필 정보 추가</span>
                 </div>

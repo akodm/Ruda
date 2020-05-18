@@ -32,8 +32,10 @@ class Base extends Component {
     }
     async componentDidMount() {
         try {
-            const userToken = await this.usersVerify();
-            this.setState({ userToken : userToken })
+            if(localStorage.getItem("users")) {
+                const userToken = await this.usersVerify();
+                this.setState({ userToken : userToken });
+            }
         } catch(err) {
             console.log("main user Token err : " + err)
         }
