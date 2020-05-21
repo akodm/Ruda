@@ -55,7 +55,7 @@ app.use('/emailAuth', emailAuth);
 // -------------------- 토큰 생성 및 검증 함수 --------------------
 
 app.get('/tokenpub', async(req,res) => {
-  let token = getToken(req.query.userEmail);
+  let token = getToken(req.query.userEmail, req.query.userCate);
   try {
     console.log("토큰 발급" + req.query.userEmail + " => " + token);
   } catch(err) {
@@ -64,10 +64,11 @@ app.get('/tokenpub', async(req,res) => {
   res.send(token);
 });
 
-function getToken(data){
+function getToken(data, cate){
   try {
       const getToken = jwt.sign({
           userEmail : data,
+          userCate : cate,
       },
           configs.app.secretKey,
       {

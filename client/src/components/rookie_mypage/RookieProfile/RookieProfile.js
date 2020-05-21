@@ -10,24 +10,20 @@ class RookieProflie extends Component {
         super(props)
         this.state = {
             addComponents : "none",  
-            LayerArr : [],     
+            LayerArr : [<RookieMainProfile />, <RookieInfo />],
         }
     }
 
-    add(args) {  
-        this.setState({
-            LayerArr : this.state.LayerArr.concat(args),
-        })
+    add(args) {
+        this.setState({ LayerArr : this.state.LayerArr.concat(args)});
     }
 
     AddProfileDisplay(close){
-        this.setState({
-            addComponents : close
-        });
+        this.setState({ addComponents : close });
     }
 
     render() {
-        const { addComponents, LayerArr} = this.state;
+        const { addComponents, LayerArr } = this.state;
         return (
             <div className="rookie-profile-content">
                 <AddProfile display={addComponents} add={this.add.bind(this)} close={this.AddProfileDisplay.bind(this)}/>
@@ -35,10 +31,13 @@ class RookieProflie extends Component {
                     <img src= "/Image/usermypage_hochi.png" alt="IMG"></img>
                     <span>홍길동의 프로필</span>
                 </div>
-                <RookieMainProfile/>
-                <RookieInfo/>
-                <RookieAwards />
-                <RookieCertificate />
+                {
+                    LayerArr && LayerArr.map((data,i) => {
+                        return (
+                            <div key={i}>{data}</div>
+                        )
+                    })
+                }
                 <div className="addprofile" onClick={() => this.setState({ addComponents : "flex"})}>
                     <span> + 프로필 정보 추가</span>
                 </div>

@@ -1,6 +1,20 @@
 import React, { Component } from 'react';
 
 class RookieinfoView extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+
+        }
+    }
+
+    async componentDidMount() {
+        try {
+
+        } catch(err) {
+            console.log(err);
+        }
+    }
 
     setInfo(){
         this.props.infochanges(true)

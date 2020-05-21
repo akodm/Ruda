@@ -7,7 +7,7 @@ class Insert_main extends Component {
         return (
             <div className="insert-main">
                 <span className="insert-title">회원가입</span>
-                    <div className="insert-imgDiv">
+                <div className="insert-imgDiv">
                     <Link to="/insert/company">
                         <div className="insert-img">
                             <img className="insert-imgSrc" src ="Image/insert_company.png" alt="InsertIMG"></img>

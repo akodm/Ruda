@@ -124,6 +124,7 @@ class Insert_company extends Component {
             const companyCreate = await axios.post("http://localhost:5000/users/create", {
                 userEmail : comEmail,    
                 userPass : comPw,
+                userCate : "company",
             })
             if(companyCreate.data){
                 console.log("user insert create success : " + comEmail, comPw)

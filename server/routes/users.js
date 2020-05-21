@@ -48,7 +48,10 @@ router.post("/create", async(req, res) => {
                 email : req.body.userEmail,
                 userPass: userPass, 
                 userName: req.body.userName, 
-                userAdd: req.body.userAdd, 
+                userPhone : req.body.userPhone,
+                userAdd: req.body.userAdd,
+                userCate : req.body.userCate,
+                authCate : req.body.authCate,
             }
         }).spread(async(none, created)=>{
             if(created){

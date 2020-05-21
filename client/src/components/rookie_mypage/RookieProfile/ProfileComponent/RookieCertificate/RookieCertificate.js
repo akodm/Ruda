@@ -19,7 +19,7 @@ class RookieCertificate extends Component {
         const {changeCertificate}= this.state;
         return (
             <div className="rookieCertificate">
-                           { changeCertificate ? <RookieCertificateForm certificatechanges={this.certificatechange.bind(this)}/> : <RookieCertificateView certificatechanges={this.certificatechange.bind(this)}/> }
+                { changeCertificate ? <RookieCertificateForm certificatechanges={this.certificatechange.bind(this)}/> : <RookieCertificateView certificatechanges={this.certificatechange.bind(this)}/> }
             </div>
         );
     }

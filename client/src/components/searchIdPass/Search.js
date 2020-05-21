@@ -10,6 +10,7 @@ class Search extends Component {
                 <img src="/Image/login_search.png" alt="IMG" className="search-img"></img>
                 <div className="search-div">
                     <EmailSearch />
+                    <div className="search-centerLine"></div>
                     <PassSearch />
                 </div>
             </div>

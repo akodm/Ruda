@@ -22,8 +22,8 @@
 .header-logoDiv {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    width: 280px;
+    justify-content: space-around;
+    width: 200px;
 }
 
 .header-logo {
