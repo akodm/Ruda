@@ -17,10 +17,17 @@
     width: 130px;
     height: 130px;
     margin-top: 130px;
-    margin-left: 20px;
+    margin-left: 00px;
 }
 
-/* -------------------------- 아이디 -----------------------------*/
+.search-centerLine {
+    height: 400px;
+    margin-top: 50px;
+    width: 1px;
+    background-color: rgba(202, 202, 202, 0.541);
+}
+
+/* -------------------------- 아이디 / 비밀번호 -----------------------------*/
 
 .search-mainDiv {
     width: 406px;

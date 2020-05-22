@@ -118,6 +118,9 @@ class Insert_rookie extends Component {
             const userCreate = await axios.post("http://localhost:5000/users/create", {
                 userEmail : email,    
                 userPass : pw,
+                userName : name,
+                userPhone : phonenum,
+                userCate : "user",
             })
             if(userCreate.data){
                 console.log("user insert create success : " + email, pw)

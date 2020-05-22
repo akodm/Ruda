@@ -14,7 +14,12 @@
     align-items: center;
 }
 .title_text{
-    font-size: 25px;
+    font-size: 30px;
+    color: white;
+    font-family: 'HYHeadLine',H2HDRM;
+}
+.title_text2{
+    font-size: 13px;
     color: white;
     font-family: 'HYHeadLine',H2HDRM;
 }

@@ -9,9 +9,19 @@ class Login extends Component {
         this.state = {
             email : "",
             pass : "",
-            token : "",
         }
     }
+
+    async componentDidMount() {
+        if(localStorage.getItem("users")) {
+            const userToken = await this.usersVerify();
+            if(userToken) {
+                const path = userToken.userCate === "user" ? "/usermypage" : "/companymyapge";
+                window.location.href = path;
+            }
+        }
+    }
+
     async LoginChecked(){
         const {email,pass} = this.state;
         try{
@@ -19,20 +29,18 @@ class Login extends Component {
                 userEmail : email,
                 userPass : pass,
             })
-            console.log(result);
-            console.log(email,pass);
+
             if(result.data){
                 try{
-                    const tokenresult = await axios.get(`http://localhost:5000/tokenpub?userEmail=${email}`)
-                    this.setState({
-                        token : tokenresult.data,
-                    })
-                    localStorage.setItem("users", this.state.token);
+                    const resultUser = await axios.get(`http://localhost:5000/users/one?userEmail=${email}`);
+                    console.log(resultUser.data)
+                    const tokenresult = await axios.get(`http://localhost:5000/tokenpub?userEmail=${resultUser.data.email}&userCate=${resultUser.data.userCate}`)
+                    localStorage.setItem("users", tokenresult.data);
 
-                    const userToken = await this.usersVerify();
-                    console.log(userToken)
+                    this.props.userVerify(tokenresult.data);
                     
-                    window.location.href = "/usermypage";
+                    const path = resultUser.data.userCate === "user" ? "/usermypage" : "/companymyapge";
+                    window.location.href = path;
                 }catch(err){
                     console.log("user login token err : " + err);
                     localStorage.removeItem("users");
@@ -51,7 +59,7 @@ class Login extends Component {
     async usersVerify(){
         try {
             const result = await axios.get(`http://localhost:5000/verify?token=${localStorage.getItem("users")}`);
-            return result.data.userEmail;
+            return result.data;
         } catch(err) {
             console.log("user token verify err : " + err);
             localStorage.removeItem("users");

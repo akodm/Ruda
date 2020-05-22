@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './AddProfile.css';
-import RookieAwardsForm from '../RookieAwards/RookieAwardsForm';
-import RookieCertificateForm from '../RookieCertificate/RookieCertificateForm';
-import RookieinfoFrom from '../RookieInfo/RookieinfoFrom';
+import RookieAwards from '../RookieAwards/RookieAwards';
+import RookieCertificate from '../RookieCertificate/RookieCertificate';
+import RookieInfo from '../RookieInfo/RookieInfo';
 
 class AddProfile extends Component {
     constructor(props) {
@@ -13,50 +13,43 @@ class AddProfile extends Component {
         }
     }
 
-    addComponents() {
-        this.props.add(this.state.LayerArr);
-    }
-
-    checkboxList(e) {
+    async checkboxList(e) {
         switch(e.target.id) {
             case "U1" : 
             e.target.checked ? 
-            this.setState({ checkboxList : this.state.checkboxList.concat({ data : <RookieAwardsForm />, id : 0})}) 
+            await this.setState({ checkboxList : this.state.checkboxList.concat(<RookieAwards />)}) 
             :
-            this.setState({ checkboxList : this.state.checkboxList.filter( val => { return val.id !== 0 })}) 
+            await this.setState({ checkboxList : this.state.checkboxList.filter( val => { return val !== <RookieAwards /> })}) 
                 break;
             case "U2" : 
             e.target.checked ? 
-            this.setState({ checkboxList : this.state.checkboxList.concat({ data : <RookieCertificateForm />, id : 1})}) 
+            await this.setState({ checkboxList : this.state.checkboxList.concat(<RookieCertificate />)}) 
             :
-            this.setState({ checkboxList : this.state.checkboxList.filter( val => { return val.id !== 1 })}) 
+            await this.setState({ checkboxList : this.state.checkboxList.filter( val => { return val !== <RookieCertificate /> })}) 
                 break;
             case "U3" : 
             e.target.checked ? 
-            this.setState({ checkboxList : this.state.checkboxList.concat({ data : <RookieinfoFrom />, id : 2})}) 
+            await this.setState({ checkboxList : this.state.checkboxList.concat(<RookieInfo />)}) 
             :
-            this.setState({ checkboxList : this.state.checkboxList.filter( val => { return val.id !== 2 })}) 
+            await this.setState({ checkboxList : this.state.checkboxList.filter( val => { return val !== <RookieInfo /> })}) 
                 break;
             default : break;
         }
-        this.setState({
-            LayerArr : this.state.checkboxList.map((data,i)=>{
-                return data.data
-            })
-        })
     }
     
+    addComponents() {
+        this.props.add(this.state.checkboxList);
+    }
+
     addClose(){
         this.props.close("none");
     }
 
     render() {
-        const { LayerArr } = this.state;
-        console.log(this.state.checkboxList);
         return (
             <div className ="AddProfile" style={{display:this.props.display}}>
                     <div className ="AddProfile-title">
-                        <span onClick={this.addComponents.bind(this)}>프로필 추가</span>
+                        <span>프로필 추가</span>
                     </div>
                     <div className ="AddProfile-content">
                         <ul>

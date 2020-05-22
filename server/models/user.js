@@ -20,6 +20,9 @@ module.exports = (sequelize, DataTypes) => {
         userCate : {
             type: DataTypes.STRING,     // 기업인지 유저인지
         },
+        authCate : {
+            type : DataTypes.STRING,    // 소셜 로그인 구분
+        }
     });
     User.associate = function(models) {
         User.hasMany(models.mail);
