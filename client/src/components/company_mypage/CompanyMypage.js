@@ -12,6 +12,7 @@ class CompanyMypage extends Component {
             likeUser:"none",
             ptbtnClick:"pth-btn",
             profileClick:"profile-btn",
+            hireClick:"hire-btn",
             changePage:true,
         }
     }
@@ -29,13 +30,14 @@ class CompanyMypage extends Component {
             changePage : false
         });
     }
+    HirechangePage(){
+        this.setState({
+
+        });
+    }
 
     render() {
-        const { msgDisplay } = this.state;
-        const { likeUser } = this.state;
-        const { ptbtnClick } =this.state;
-        const { profileClick } =this.state;
-        const { changePage } =this.state;
+        const { msgDisplay,likeUser,ptbtnClick,profileClick,changePage,hireClick } = this.state;
         return (
             <div className="rookie-main">
                 <div className="btn-cont">
@@ -48,7 +50,9 @@ class CompanyMypage extends Component {
                             <button className={profileClick}
                             onClick={this.ProfilechangePage.bind(this)}>프로필</button>
                             <button className={ptbtnClick}
-                            onClick={this.PtchangePage.bind(this)}>포트폴리오</button>
+                            onClick={this.PtchangePage.bind(this)}>프로젝트</button>
+                              <button className={hireClick}
+                            onClick={this.PtchangePage.bind(this)}>채용공고</button>
                         </div>
                         <div className="rookie-user-btn">
                             <button className="rookie-message-btn"

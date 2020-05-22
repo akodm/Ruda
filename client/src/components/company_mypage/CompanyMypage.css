@@ -17,3 +17,18 @@
     font-size: 2rem;
     color: #5a5a5a;
 }
+
+/*버튼영역*/
+.hire-btn{
+    background-image: url(/Image/usermypage_ptbtnf.png);
+    top:150px;
+    z-index: 1;
+    position: absolute;
+    width: 190px;
+}
+.hireh-btn{
+    background-image: url(/Image/usermypage_ptbtn.png);
+    top:150px;
+    position: absolute;
+    width: 80px;
+}
