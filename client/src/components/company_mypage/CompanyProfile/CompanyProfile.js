@@ -11,20 +11,7 @@ class CompanyProfile extends Component {
             LayerArr : [],     
         }
     }
-
-    add(args) {  
-        this.setState({
-            LayerArr : this.state.LayerArr.concat(args),
-        })
-    }
-
-    AddProfileDisplay(close){
-        this.setState({
-            addComponents : close
-        });
-    }
     render() {
-        const {LayerArr} = this.state;
         return (
             <div className="rookie-profile-content">
                 <div className="rookie-user-title">
