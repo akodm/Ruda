@@ -161,6 +161,17 @@ class Insert_company extends Component {
             comEmailck : true,
         })
     }
+
+    async emailAuth() {
+        const { comEmail } = this.state;
+        try {
+            await axios.get(`http://localhost:5000/nodemailer?userEmail=${comEmail}`);
+            alert("이메일 인증을 발송하였습니다.");
+        } catch(err) {
+            console.log("email auth err : " + err)
+        }
+    }
+
     //checkbox 체크
     ckbox(e){
         this.setState({
@@ -187,7 +198,7 @@ class Insert_company extends Component {
                          <div className="insert-c-formDiv">
                             <div className="insert-c-formSpan">이메일인증</div>
                             <input type="text" name="comEmailck" onChange={this.comChangeInput.bind(this)} className="insert-c-form-input" placeholder="ex)abc@발송된 인증번호를 입력해주세요"></input>
-                            <button className="insert-c-form-auth">인증받기</button>
+                            <button className="insert-c-form-auth" onClick={this.emailAuth.bind(this)}>인증받기</button>
                         </div>
                         <div className="validationErr-"
                          style={{

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 class RookieinfoFrom extends Component {
-
     constructor(props) {
         super(props);
         this.state = {

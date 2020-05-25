@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import CompanyMainProfile from './ProfileComponent/CompanyMainProfile/CompanyMainProfile';
+import CompanyInfo from './ProfileComponent/CompanyInfo/CompanyInfo';
+
 
 class CompanyProfile extends Component {
     constructor(props) {
@@ -28,9 +31,8 @@ class CompanyProfile extends Component {
                     <img src= "/Image/usermypage_hochi.png" alt="IMG"></img>
                     <span>루다의 프로필</span>
                 </div>
-                <div className="addprofile" onClick={() => this.setState({ addComponents : "flex"})}>
-                    <span> + 프로필 정보 추가</span>
-                </div>
+                <CompanyMainProfile/>
+                <CompanyInfo/>
             </div>
         );
     }

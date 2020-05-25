@@ -92,8 +92,11 @@ class Base extends Component {
                     <Route path="/companyboard"><Board /></Route>
                     <Route path="/usersboard"><Board /></Route>
                     {/* 마이 페이지 */}
-                    <Route path="/usermypage"><RookieMypage /></Route>
-                    <Route path="/companymypage"><CompanyMypage /></Route>
+                    {
+                        userToken.user ? (userToken.cate === "user" ?
+                        <Route path="/usermypage"><RookieMypage /></Route>:
+                        <Route path="/companymypage"><CompanyMypage /></Route>) : ""
+                    }
                     {/* 아이디 비번 찾기 */}
                     <Route path="/search"><Search /></Route>
                     {/* 팝업창 */}

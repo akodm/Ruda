@@ -79,6 +79,9 @@
     width: 200px;
     height: 100px;
 }
+.rookie-user-content{
+    margin-bottom: 70px;
+}
 /*프로필정보추가*/
 .addprofile{
     width: 100%;
@@ -95,13 +98,6 @@
     color: rgb(77, 77, 77);
     background-color: #f3f3f362;
 }
-/*--포트폴리오--*/
-
-
-
-
-
-
 /*--메뉴 영역--*/
 .profile-btn, .pth-btn ,.profileh-btn,.pt-btn{
     border: none;

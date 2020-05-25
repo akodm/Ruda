@@ -39,27 +39,25 @@ class CompanyMypage extends Component {
     render() {
         const { msgDisplay,likeUser,ptbtnClick,profileClick,changePage,hireClick } = this.state;
         return (
-            <div className="rookie-main">
+            <div className="company-main">
                 <div className="btn-cont">
                     <Msg display= { msgDisplay } />
-                    <div className="rookie-main-bg">
-                        <div className="rookie-main-bg-in">
+                    <div className="company-main-bg">
+                        <div className="company-main-bg-in">
                             { changePage?<CompanyProfile/>:<CompanyProject/> }
                         </div>
-                        <div className="rookie-menu-btn">
+                        <div className="company-menu-btn">
                             <button className={profileClick}
                             onClick={this.ProfilechangePage.bind(this)}>프로필</button>
                             <button className={ptbtnClick}
-                            onClick={this.PtchangePage.bind(this)}>프로젝트</button>
-                              <button className={hireClick}
                             onClick={this.PtchangePage.bind(this)}>채용공고</button>
                         </div>
-                        <div className="rookie-user-btn">
-                            <button className="rookie-message-btn"
+                        <div className="company-user-btn">
+                            <button className="company-message-btn"
                             onClick={() => this.setState({ msgDisplay : msgDisplay === "none" ? "flex" : "none"})}>
                                 <img src="/Image/usermypage_message.png" alt="IMG"></img>메세지 보내기
                             </button>
-                            <button className="rookie-like-btn"
+                            <button className="company-like-btn"
                             onClick={() => this.setState({ likeUser : likeUser === "none" ? console.log("조아여") : "none"})}>
                                 <img src="/Image/usermypage_hart.png" alt="IMG"></img>관심있어요
                             </button>
