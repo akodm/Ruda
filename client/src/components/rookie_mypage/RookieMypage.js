@@ -3,6 +3,7 @@ import './RookieMypage.css';
 import Msg from '../mypopup/Message';
 import RookieProflie from './RookieProfile/RookieProfile';
 import RookiePt from './RookiePortfolio/RookiePt';
+import axios from 'axios';
 
 class RookieMypage extends Component {
     constructor(props) {
@@ -13,8 +14,23 @@ class RookieMypage extends Component {
             ptbtnClick:"pth-btn",
             profileClick:"profile-btn",
             changePage:true,
+
+            url : new URL(window.location),
         }
     }
+
+    async componentDidMount() {
+        await this.setState({ url : this.state.url.pathname.split('/') });
+        if(this.state.url[2]) {
+            try {
+                const result = await axios.get(`http://localhost:5000/users/one?userEmail=${this.state.url[2]}`);
+                console.log(result.data)
+            } catch(err) {
+                console.log(err) 
+            }
+        }
+    }
+
     ProfilechangePage(){
         this.setState({
             profileClick : "profile-btn",
