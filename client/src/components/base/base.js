@@ -32,6 +32,7 @@ class Base extends Component {
             },
         }
     }
+
     // 페이지 로드 시 인증하기
     async componentDidMount() {
         try {
@@ -42,7 +43,7 @@ class Base extends Component {
                 this.setState({ userToken : {
                     user : userToken.userEmail,
                     cate : userCate.data.userCate,
-                } });
+                }});
             }
         } catch(err) {
             console.log("main user Token err : " + err)
@@ -81,7 +82,7 @@ class Base extends Component {
                     {/* 상단 */}
                     <Header user={userToken} />
                     {/* 메인페이지 */}
-                    <Route exact path="/">{ userToken.user ? <RookieMypage/> : <Main user={userToken} />}</Route>
+                    <Route exact path="/"><Main user={userToken} /></Route>
                     {/* 회원가입 페이지들 */}
                     <Route exact path="/insert"><Insert /></Route>
                     <Route path="/insert/rookie"><InsertRookie /></Route>
@@ -94,8 +95,8 @@ class Base extends Component {
                     {/* 마이 페이지 */}
                     {
                         userToken.user ? (userToken.cate === "user" ?
-                        <Route path="/usermypage"><RookieMypage /></Route>:
-                        <Route path="/companymypage"><CompanyMypage /></Route>) : ""
+                        <Route path={`/usermypage/`}><RookieMypage /></Route>:
+                        <Route path={`/companymypage/`}><CompanyMypage /></Route>) : ""
                     }
                     {/* 아이디 비번 찾기 */}
                     <Route path="/search"><Search /></Route>

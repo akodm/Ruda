@@ -39,7 +39,7 @@ class Login extends Component {
 
                     this.props.userVerify(tokenresult.data);
                     
-                    const path = resultUser.data.userCate === "user" ? "/usermypage" : "/companymypage";
+                    const path = resultUser.data.userCate === "user" ? `/usermypage/${resultUser.data.email}` : `/companymypage/${resultUser.data.email}`;
                     window.location.href = path;
                 }catch(err){
                     console.log("user login token err : " + err);

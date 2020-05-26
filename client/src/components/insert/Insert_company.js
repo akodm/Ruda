@@ -30,7 +30,6 @@ class Insert_company extends Component {
         this.setState({
             [e.target.name] : e.target.value, 
         })
-        console.log(e.target.name);
     }
     async comInsertCheck(){
         const { comEmail,comPw,comPwck,comName,comPhonenum,comEmailck,comCheckbox}=this.state;
@@ -129,7 +128,7 @@ class Insert_company extends Component {
             if(companyCreate.data){
                 console.log("user insert create success : " + comEmail, comPw)
                 alert("가입되었습니다.");
-                window.location.href="http://localhost:3000/companymypage";
+                window.location.href="http://localhost:3000/login";
             } else {
                 console.log("user insert create fail");
             }

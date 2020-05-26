@@ -3,6 +3,7 @@ import './CompanyMypage.css';
 import CompanyProject from './CompanyProject/CompanyProject';
 import CompanyProfile from './CompanyProfile/CompanyProfile';
 import Msg from '../mypopup/Message';
+import axios from 'axios';
 
 class CompanyMypage extends Component {
     constructor(props) {
@@ -14,8 +15,23 @@ class CompanyMypage extends Component {
             profileClick:"profile-btn",
             hireClick:"hire-btn",
             changePage:true,
+        
+            url : new URL(window.location),
         }
     }
+
+    async componentDidMount() {
+        await this.setState({ url : this.state.url.pathname.split('/') });
+        if(this.state.url[2]) {
+            try {
+                const result = await axios.get(`http://localhost:5000/users/one?userEmail=${this.state.url[2]}`);
+                console.log(result.data)
+            } catch(err) {
+                console.log(err) 
+            }
+        }
+    }
+
     ProfilechangePage(){
         this.setState({
             profileClick : "profile-btn",
