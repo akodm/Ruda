@@ -1,0 +1,87 @@
+/*Header*/
+
+.Header{    
+    height: 480px;
+    width: 100%;
+    padding-top: 40px;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    color:white;
+    
+}
+.Header-nav{
+    width: 1256px;
+    height: 47px;
+    background-image: url(/Images/nav_bg.png);
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+    text-align: center;
+}
+.Header-nav-menu,.Header-nav-menu span{
+    margin-left: 40px;
+    cursor:pointer;
+    
+}
+.Header-nav-menu-span{
+    color: white;
+    font-weight: 600;
+}
+.Header-nav-recommendbtn,.Header-nav-recommendbtn span{
+    margin-right: 40px;
+    cursor:pointer;
+    font-weight: 600;
+
+}
+/*UpDown*/
+
+.updown{
+    position: fixed;
+    z-index: 1000;
+    right: 0;
+    bottom: 3%;
+}
+.updown-up, .updown-down{
+    margin: 10px;
+    width: 48px;
+    height: 48px;
+
+}
+.updown-up{
+    background-image: url(/Image/base_up.png);
+}
+.updown-up:hover{
+    background-image: url(/Image/base_up_h.png);
+}
+.updown-down{
+    background-image: url(/Image/base_down.png);
+}
+.updown-down:hover{
+    background-image: url(/Image/base_down_h.png);
+}
+/*Footer*/
+.Footer{
+    width: 100%;
+    height: 120px;
+    background-color: #eeeeee;
+    font-family: 나눔스퀘어라운드;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.Footer_notice{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-size: 9pt;
+    color: #c7c7c7;
+    margin-left: 100P;
+}
+.Footer_text{
+    margin: 5px;
+}

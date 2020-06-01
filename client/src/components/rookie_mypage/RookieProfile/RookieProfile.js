@@ -4,6 +4,7 @@ import RookieInfo from './ProfileComponent/RookieInfo/RookieInfo';
 import RookieAwards from './ProfileComponent/RookieAwards/RookieAwards';
 import RookieCertificate from './ProfileComponent/RookieCertificate/RookieCertificate';
 import RookieTag from './ProfileComponent/RookieTag/RookieTag';
+import RookieMain from './ProfileComponent/RookieMain/RookieMain';
 class RookieProflie extends Component {
     render() {
         return (
@@ -13,11 +14,12 @@ class RookieProflie extends Component {
                     <span>홍길동의 프로필</span>
                 </div>
                 <div className="rookie-user-content">
-                <RookieMainProfile/>
+                <RookieMain/>
+                {/*<RookieMainProfile/>*/}
                 <RookieInfo/>
                 <RookieAwards/>
                 <RookieCertificate/>
-                <RookieTag/>
+                {/*<RookieTag/>*/}
                 </div>
             </div>
         );
