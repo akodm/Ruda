@@ -19,6 +19,11 @@
     "mysql2": "^2.1.0",
     "nodemailer": "^6.4.6",
     "nodemon": "^2.0.2",
+    "passport": "^0.4.1",
+    "passport-facebook": "^3.0.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-jwt": "^4.0.0",
+    "passport-naver": "^1.0.6",
     "redis": "^3.0.2",
     "sequelize": "^5.21.5",
     "socket.io": "^2.3.0"

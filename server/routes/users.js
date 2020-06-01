@@ -51,7 +51,7 @@ router.post("/create", async(req, res) => {
                 userPhone : req.body.userPhone,
                 userAdd: req.body.userAdd,
                 userCate : req.body.userCate,
-                authCate : req.body.authCate,
+                authCate : "highrookie",
             }
         }).spread(async(none, created)=>{
             if(created){
@@ -76,7 +76,8 @@ router.put("/update", async(req, res) => {
             userAdd : req.body.userAdd,
             }, {
             where: {
-                email : req.body.userEmail
+                email : req.body.userEmail,
+                authCate : req.body.authCate,
             }
         });
         result = true;
@@ -93,7 +94,8 @@ router.delete("/delete", async(req, res) => {
     try {
         await User.destroy({
             where: {
-                email: req.query.userEmail
+                email: req.query.userEmail,
+                authCate : req.query.authCate,
             }
 		});
 		result = true;
@@ -170,7 +172,8 @@ router.get("/dup", async (req, res) => {
 	try {
 		const data = await User.findOne({
 			where : {
-				email : req.query.userEmail,
+                email : req.query.userEmail,
+                authCate : "highrookie"
 			}
         });
         if(data) result = true;
@@ -179,6 +182,134 @@ router.get("/dup", async (req, res) => {
     }
     res.send(result);
 });
+
+// ------------------------------------------------------------------------------ //
+// Passport Google / Facebook / Naver / JWT (OAuth) //
+// 구글로 로그인 -> 이메일 받아서 유저 생성
+router.get('/google/callback',
+    passport.authenticate('google', { scope: ['email'], session : false, failureRedirect: 'http://localhost:3000/' }),
+    async(req, res) => {
+		let state = false;
+		console.log(req.user._json)
+		try{
+			const result = await User.findOrCreate({
+				where : {
+                    email : req.user._json.email,
+                    authCate: "google",
+				},
+				defaults : {
+					email : req.user._json.email,
+					authCate: "google", 
+				}
+			})
+			if(result[0].dataValues) {
+				state = true;
+			}
+		} catch(err) {
+			console.log(__filename + " 에서 유저 생성 에러 발생 내용= " + err);
+		}
+        res.redirect(`http://localhost:3000?state=${state}&value=${req.user._json.email}&tag=google`);
+	}
+);
+
+// 페이스북으로 로그인 -> 이메일이 없어서 아이디를 받아서 유저 생성
+router.get('/facebook/callback', 
+  	passport.authenticate('facebook', { scope: ['public_profile','email'], session : false, failureRedirect: 'http://localhost:3000/' }),
+  	async(req, res) => {
+		console.log(req.user._json)
+		let state = false;
+		try{
+			const result = await User.findOrCreate({
+				where : {
+					email : req.user._json.id,
+					authCate: "facebook", 
+				},
+				defaults : {
+					email : req.user._json.id,
+					authCate: "facebook", 
+				}
+			})
+			if(result[0].dataValues) {
+				state = true;
+			}
+		} catch(err) {
+			console.log(__filename + " 에서 유저 생성 에러 발생 내용= " + err);
+		}
+        res.redirect(`http://localhost:3000?state=${state}&value=${req.user._json.id}&tag=facebook`);
+	}
+);
+
+// 네이버로 로그인 -> 이메일 받아서 유저 생성
+router.get('/naver/callback', passport.authenticate('naver', { session : false, failureRedirect: 'http://localhost:3000/' }),
+	async(req,res) => {
+		console.log(req.user._json);
+		let state = false;
+		try{
+			const result = await User.findOrCreate({
+				where : {
+					email : req.user._json.email,
+					authCate: "naver", 
+				},
+				defaults : {
+					email : req.user._json.email,
+					authCate: "naver", 
+				}
+			})
+			if(result[0].dataValues) {
+				state = true;
+			}
+		} catch(err) {
+			console.log(__filename + " 에서 유저 생성 에러 발생 내용= " + err);
+		}
+        res.redirect(`http://localhost:3000?state=${state}&value=${req.user._json.email}&tag=naver`);
+    }
+);
+
+// 로컬 스토리지에 있는 태그와 토큰값을 검증해서 되돌려줌
+router.get('/verify', passport.authenticate('jwt', { session: false }), (req, res) => {
+	res.json({
+		tag : req.user.authCate,
+        email: req.user.email,
+    });
+});
+
+// 구글, 페이스북, 네이버
+router.get('/google', passport.authenticate('google', { scope: ['email'], session : false }));
+router.get('/facebook', passport.authenticate('facebook', { scope : ['public_profile'], session : false}));
+router.get('/naver', passport.authenticate('naver', { session : false }));
+
+// oauth로 로그인 시 토큰값을 돌려줌 -> 로컬 스토리지에 저장
+router.get("/oauthlogin" , async(req,res) => {
+	const user = req.query;
+	const payload = {
+		tag : user.tag,
+		email : user.email
+	};
+	const token = await oauthLogin(payload);
+	console.log(token)
+	if(token) {
+		res.send(token);
+	} else {
+		res.send(false);
+	}
+})
+
+// JWT 생성기
+function oauthLogin(payload) {
+	// payload : {
+	//	email : user.email 
+	//} = json type obj (require)
+	let result = null;
+	result = jwt.sign(payload, configs.app.secretKey, { expiresIn: 1 });
+	result = {
+		tag : payload.tag,
+		token : "Bearer " + result
+	}
+	return result;
+}
+
+// ------------------------------------------------------------------------------ //
+// ------------------------------------------------------------------------------ //
 
 // 크립토 모듈을 이용한 해싱 암호화 함수
 async function hashFunc(pass) {
