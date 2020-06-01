@@ -5,6 +5,9 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey : true,
             autoIncrement: true
         },
+        email : {
+            type: DataTypes.STRING,     // 인증용 이메일
+        },
         token : {
             type: DataTypes.STRING,     // 인증용 값
             allowNull: false

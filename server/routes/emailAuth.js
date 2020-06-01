@@ -39,8 +39,9 @@ router.post("/create", async(req, res) => {
     let result = false;
     try{
         await EmailAuth.create({
+				email : req.body.email,
                 token: req.body.token, 
-                expire: req.body.expire, 
+                expire: req.body.expire,
             });
     } catch(err) {
 		console.log(__filename + " 에서 오스 생성 에러 발생 내용= " + err);

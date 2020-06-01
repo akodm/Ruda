@@ -3,6 +3,7 @@ let router = express.Router();
 let models = require("../models");
 let crypto = require("crypto");
 let configs = require("../server-configs");
+let passport = require('passport');
 
 // DB Setting --------------------------------------------------------
 const User = models.user;
@@ -21,11 +22,27 @@ router.get("/all", async (req, res) => {
 });
 
 // 유저 한명 검색
-router.get("/one", async (req, res) => {
+router.get("/oneemail", async (req, res) => {
 	try {
 		const result = await User.findOne({
 			where : {
-				email : req.query.userEmail,
+                email : req.query.userEmail,
+                authCate : req.query.authCate,
+			}
+		});
+		res.send(result);
+	} catch (err) {
+		console.log(__filename + " 에서 유저 한명 검색 에러 발생 내용= " + err);
+		res.send(false);
+	}
+});
+
+// 유저 한명 검색
+router.get("/oneid", async (req, res) => {
+	try {
+		const result = await User.findOne({
+			where : {
+                id : req.query.userId,
 			}
 		});
 		res.send(result);
@@ -43,6 +60,7 @@ router.post("/create", async(req, res) => {
         await User.findOrCreate({
             where : {
                 email : req.body.userEmail,
+                authCate : "highrookie",
             },
             defaults : {
                 email : req.body.userEmail,
@@ -65,7 +83,7 @@ router.post("/create", async(req, res) => {
 });
 
 // 유저 업데이트
-router.put("/update", async(req, res) => {
+router.put("/updateemail", async(req, res) => {
     let result = null;
     let userPass = await hashFunc(req.body.userPass);
     try {
@@ -88,15 +106,39 @@ router.put("/update", async(req, res) => {
     res.send(result);
 });
 
+// 유저 업데이트
+router.put("/updateid", async(req, res) => {
+    let result = null;
+    let userPass = await hashFunc(req.body.userPass);
+    try {
+        await User.update({ 
+            userPass: userPass,
+            userName: req.body.userName, 
+            userPhone : req.body.userPhone,
+            userAdd : req.body.userAdd,
+            }, {
+            where: {
+                id : req.body.userId,
+            }
+        });
+        result = true;
+    } catch(err) {
+        console.log(__filename + " 에서 유저 업데이트 에러 발생 내용= " + err);
+        result = false;
+    }
+    res.send(result);
+});
+
 // 유저 삭제
 router.delete("/delete", async(req, res) => {
-	let result = false;
+    let result = false;
+    let wheres = req.query.id ? 
+    { where: { id: req.query.userId } }
+     : 
+    { where: { email: req.query.userEmail, authCate : req.query.authCate } }
     try {
         await User.destroy({
-            where: {
-                email: req.query.userEmail,
-                authCate : req.query.authCate,
-            }
+            wheres
 		});
 		result = true;
     } catch(err) {
@@ -129,41 +171,35 @@ router.post("/loginuser", async (req, res) => {
 
 // 유저 이메일 찾기
 router.get("/useremail", async (req, res) => {
-    let check = false;
+    let result = null;
 	try {
-		const result = await User.findOne({
+		result = await User.findOne({
 			where : {
                 userName : req.query.userName,
                 userPhone :  req.query.userPhone,
 			}
         });
-        if(result && result.dataValues) {
-            check = true;
-        }
 	} catch (err) {
 		console.log(__filename + " 에서 유저 이메일 찾기 에러 발생 내용= " + err);
     }
-    res.send(check);
+    res.send(result);
 });
 
 // 유저 비밀번호 찾기
 router.get("/userpass", async (req, res) => {
-    let check = false;
+    let result = null;
 	try {
-		const result = await User.findOne({
+		result = await User.findOne({
 			where : {
                 userName : req.query.userName,
                 email :  req.query.userEmail,
                 userPhone :  req.query.userPhone,
 			}
         });
-        if(result && result.dataValues) {
-            check = true;
-        }
 	} catch (err) {
 		console.log(__filename + " 에서 유저 비밀번호 찾기 에러 발생 내용= " + err);
     }
-    res.send(check);
+    res.send(result);
 });
 
 // 유저 중복 이메일 검색
@@ -185,6 +221,16 @@ router.get("/dup", async (req, res) => {
 
 // ------------------------------------------------------------------------------ //
 // Passport Google / Facebook / Naver / JWT (OAuth) //
+/**
+ * 사용방법
+ * 1. 로컬 혹은 소셜 로그인/회원가입
+ * 2. 유저 및 authCate 생성 / highrookie / google / facebook / naver
+ * 3. 소셜 로그인의 경우 해당 콜백 수행 및 리다이렉트
+ * 4. 로컬 및 소셜 둘다 users/oaughlogin api 호출 수행 및 결과 값 반환 ( 토큰 )
+ * 5. 반환받은 결과값 로컬 스토리지에 저장
+ * 6. 로컬 스토리지에 토큰 값 검증 -> /users/verify -> 결과값 { authCate , user}
+ */
+
 // 구글로 로그인 -> 이메일 받아서 유저 생성
 router.get('/google/callback',
     passport.authenticate('google', { scope: ['email'], session : false, failureRedirect: 'http://localhost:3000/' }),

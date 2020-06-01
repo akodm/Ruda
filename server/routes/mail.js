@@ -34,7 +34,7 @@ router.get("/one", async (req, res) => {
 				{ model: User }
 			],
 			where : {
-				userEmail : req.query.userEmail
+				userId : req.query.userId
 			},
 		});
 		res.send(result);
@@ -52,7 +52,7 @@ router.post("/create", async(req, res) => {
 				title : req.body.title,
 				content : req.body.content,
 				files : req.body.files,
-				userEmail : req.body.userEmail,
+				userId : req.body.userId,
 				targetUser : req.body.targetUser,
 			});
     } catch(err) {
@@ -72,7 +72,7 @@ router.put("/update", async(req, res) => {
             }, {
             where: {
 				id : req.body.id,
-				userEmail : req.body.userEmail,
+				userId : req.body.userId,
             }
         });
         result = true;
@@ -90,7 +90,7 @@ router.delete("/delete", async(req, res) => {
         await Mail.destroy({
             where: {
 				id: req.query.id,
-				userEmail : req.query.userEmail,
+				userId : req.query.userId,
             }
 		});
 		result = true;

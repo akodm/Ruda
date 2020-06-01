@@ -15,11 +15,20 @@ import Company from '../Company/Company';
 import Rookie from '../Rookie/Rookie';
 import UpDown from './UpDown';
 
-
 import socketio from 'socket.io-client';
 
-
 class Base extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            url : new URL(window.location),
+        }
+    }
+
+    async componentDidMount() {
+        
+    }
+
     render() {
         return (
             <div className="base-main">

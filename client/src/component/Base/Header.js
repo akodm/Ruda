@@ -16,7 +16,6 @@ class Header extends Component {
                         <span>추천인재</span>
                     </div>
                 </nav>
-
             </div>
         );
     }

@@ -32,7 +32,7 @@ router.get("/one", async (req, res) => {
 				{ model: User }
 			],
 			where : {
-				userEmail : req.query.userEmail,
+				userId : req.query.userId,
 			},
 		});
 		res.send(result);
@@ -48,10 +48,10 @@ router.post("/create", async (req, res) => {
 	try {
 		await CompanyInfo.findOrCreate({
 			where : {
-				userEmail : req.body.userEmail
+				userId : req.body.userId
 			},
 			defaults : {
-				userEmail : req.body.userEmail
+				userId : req.body.userId
 			}
 		}).spread((none, created)=>{
 			if(created)
@@ -86,7 +86,7 @@ router.put("/update", async(req, res) => {
             companyState : req.body.companyState,
             }, {
             where: {
-                userEmail : req.body.userEmail
+                userId : req.body.userId
             }
         });
         result = true;
@@ -103,7 +103,7 @@ router.delete("/delete", async(req, res) => {
     try {
         await CompanyInfo.destroy({
             where: {
-                userEmail: req.query.userEmail
+                userId: req.query.userId
             }
 		});
 		result = true;
