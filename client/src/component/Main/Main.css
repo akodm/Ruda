@@ -1,66 +1,4 @@
-/*MainHeader*/
-.MainHeader{
-    height: 480px;
-    align-items: center;
-    color: white;
-    font-family: NanumSquareR;
-    font-size: 16px;
-    background-image: url(/Images/header_bg.png);
-    flex-direction: column;
 
-}
-.MainHeader-content{
-    display: flex;
-    justify-content: space-between;
-    padding-top: 100px;
-}
-.MainHeader-text{
-    align-items: center;
-    margin-left: 18%;
-}
-h2,h3,h4{
-    margin-top:55px;
-}
-.MainHeader-btns{
-    display: flex;
-    margin-right: 18%;
-    align-items: flex-end;
-
-}
-.MainHeader-btns button{
-    border: none;
-    width: 122px;
-    height: 37px;
-    color: white;
-    opacity: 0.7;
-    font-family: NanumSquareEB;
-    font-size: 14px;
-    margin: 10px;
-}
-.MainHeader-btns-Login{
-    background-color: #809fba;
-}
-.MainHeader-btns-Insert{
-    background-color: #c398ca;
-}
-.MainHeader-btns button:hover{
-    opacity: 0.9;
-}
-.MainHeader-btns-line{
-    border-top: solid 1px white;
-    width: 400px;
-    opacity: 0.7;
-    float: right;
-    margin-right: 18%;
-    text-align: right;
-    padding: 10px;
-}
-.MainHeader-btns-easy{
-    font-family: NanumSquareB;
-    font-size: 14px;
-    color: white;
-    cursor:pointer;
-}
 /*MainNotice*/
 .MainNotice{
     display: flex;
@@ -75,7 +13,7 @@ h2,h3,h4{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 65%;
+    width: 1300px;
     margin-bottom: 50px;
 }
 .MainNotice-contents-box{
@@ -83,16 +21,16 @@ h2,h3,h4{
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    width: 220px;
-    height: 255px;
+    width: 240px;
+    height: 260px;
     border-radius: 10px;
     box-shadow: 0 0 9.8px 0.2px rgba(131, 131, 131, 0.17);
-    margin: 50px;
+    margin: 30px;
     text-align: center;
     color: #818181;
 }
 .MainNotice-contents-box img{
-   width: 100px;
+   width: 80px;
    height: 80px;
 }
 .MainNotice-contents-box-title{
@@ -114,49 +52,55 @@ h2,h3,h4{
      flex-direction: column;
      justify-content: center;
      align-items: center;
-     text-align: center;
+     text-align: left;
+     color: white;
+     height: 700px;
  }
  .MainWith-companys{
+      background-image: url(/Images/with_company.png);
+ }
+ .MainWith-rookies{
+    background-image: url(/Images/with_rookie.png);
+}
+ .MainWith-companys, .MainWith-rookies{
     width: 100%;
-    height: 288px;
-    background-image: url(/Images/with_company.png);
-    margin-bottom:30px;
+    height: 270px;
     flex-direction: column;
+    margin-bottom: 30px;
+    padding-top: 20px;
  }
- .MainWith-companys span{
-     margin-top: 20px;
-     
- }
- .MainWith-companys-box{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    margin-top: 50px;
- }
- .MainWith-companys-company{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+ .MainWith-rookies-title , .MainWith-companys-title {
+    font-weight: 700;
+    font-size: 16px;
+    margin-left: 400px;  
  }
 
- .MainWith-rookies{
-    width: 100%;
-    height: 288px;
-    background-image: url(/Images/with_rookie.png);
-    margin-bottom:30px;
- }
- .MainWith-rookies-box{
+ .MainWith-companys-box, .MainWith-rookies-box{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
     margin-top: 50px;
  }
- .MainWith-rookies-rookie{
+ .MainWith-companys-company,.MainWith-rookies-rookie{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    width: 220px;
  }
+.MainWith-companys-company img ,.MainWith-rookies-rookie img {
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    background-color: white;
+}
+.MainWith-rookies-rookie-title ,.MainWith-companys-company-title{
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+.MainWith-rookies-rookie-text ,.MainWith-companys-company-text{
+    font-size: small;
+    margin-top: 10px;
+}

@@ -1,0 +1,21 @@
+.Rookie{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.Rookie-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 1150px;
+    margin: 20px;
+    color: #696969;
+}
+
+.Rookie-search{
+    width: 1109px;
+    height: 166px;
+    box-shadow: 0 0 9.8px 0.2px rgba(131, 131, 131, 0.13);
+    border: solid 1px #eeeeee;
+}

@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import'./Base.css';
 
-import Header from './Header';
+import MainHeader from './MainHeader';
 import Footer from './Footer';
 
 import Main from '../Main/Main';
@@ -17,14 +17,28 @@ import UpDown from './UpDown';
 
 
 import socketio from 'socket.io-client';
+import OtherHeader from './OtherHeader';
+
 
 
 class Base extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            url :new URL(window.location)
+        }
+    }
+    componentDidMount(){
+        console.log(this.state.url);
+        let pathnames=(this.state.url).pathname;
+        console.log(pathnames);
+    }
     render() {
+        const {pathnames}=this.state;
         return (
             <div className="base-main">
                  <Router>
-                    <Header/>
+                 {/*<MainHeader/>*/}<OtherHeader/>
                     {/*메인 */}
                     <Route exact path="/"><Main/></Route>
                     {/*기업게시판*/ }
