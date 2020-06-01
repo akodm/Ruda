@@ -7,7 +7,8 @@ let jwt = require('jsonwebtoken');
 let nodemailer = require('nodemailer');
 let crypto = require("crypto");
 let moment = require('moment');
-
+let passport = require('passport');
+ 
 // 각 라우터들
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
@@ -28,7 +29,7 @@ let app = express();
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", configs.app.c_local);
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token, Authorization");
   next();
 });
 
@@ -41,6 +42,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
 
 // 각 라우터들 URL
 app.use('/', indexRouter);
@@ -51,6 +53,7 @@ app.use('/hireBoards', hireBoardRouter);
 app.use('/mails', mailRouter);
 app.use('/userInfos', userInfoRouter);
 app.use('/emailAuth', emailAuth);
+require('./passport.js')(passport);
 
 // -------------------- 토큰 생성 및 검증 함수 --------------------
 
