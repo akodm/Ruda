@@ -20,7 +20,7 @@ export default class Header extends Component {
         return (
             <div className="header-main" id="Header">
                 <div className="header-logoDiv">
-                    <Link to="/"><img src="/Image/base_header_logo.png" alt="RUDA-LOGO" className="header-logo"></img></Link>
+                    <Link to="/"><img src="/Image/HIROOKIE.png" alt="RUDA-LOGO" className="header-logo"></img></Link>
                     <Link to="/companyboard"><span className="header-logo-span">기업</span></Link>
                     <Link to="/usersboard"><span className="header-logo-span">인재</span></Link>
                 </div>
