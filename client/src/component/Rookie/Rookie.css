@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-family: NanumSquareEB;
 }
 .Rookie-title{
     display: flex;
@@ -12,10 +13,32 @@
     margin: 20px;
     color: #696969;
 }
-
+.Rookie-title-select{
+    color: #696969;
+    border: none;
+}
 .Rookie-search{
     width: 1109px;
     height: 166px;
     box-shadow: 0 0 9.8px 0.2px rgba(131, 131, 131, 0.13);
     border: solid 1px #eeeeee;
+
+}
+.Rookie-search-title{
+    width: 1060px;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+
+}
+.Rookie-search-title-title{
+    color: #929292;
+    font-size: 16px;
+    font-weight: 600;
+}
+.Rookie-search-title-state{
+    border-radius: 50px;
+    width: 10px;
+    background-color:sky;
 }

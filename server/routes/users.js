@@ -3,6 +3,7 @@ let router = express.Router();
 let models = require("../models");
 let crypto = require("crypto");
 let configs = require("../server-configs");
+let passport = require('passport');
 
 // DB Setting --------------------------------------------------------
 const User = models.user;

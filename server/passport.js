@@ -1,6 +1,5 @@
-let passport = require('passport');
 let models = require('./models');
-let config = require('./server-config');
+let config = require('./server-configs');
 
 const User = models.user;
 
