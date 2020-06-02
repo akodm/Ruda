@@ -25,7 +25,7 @@ router.get("/one", async (req, res) => {
 		const result = await HireBoard.findOne({
 			where : {
 				id : req.query.id,
-                userEmail : req.body.userEmail,
+                userId : req.body.userId,
 			}
 		});
 		res.send(result);
@@ -44,7 +44,7 @@ router.post("/create", async(req, res) => {
             content: req.body.content, 
             files: req.body.files, 
             boardTag: req.body.boardTag,
-            userEmail : req.body.userEmail,
+            userId : req.body.userId,
         });
     } catch(err) {
 		console.log(__filename + " 에서 채용 게시판 생성 에러 발생 내용= " + err);
@@ -64,7 +64,7 @@ router.put("/update", async(req, res) => {
             }, {
             where: {
                 id : req.body.id,
-                userEmail : req.body.userEmail,
+                userId : req.body.userId,
             }
         });
         result = true;
@@ -82,7 +82,7 @@ router.delete("/delete", async(req, res) => {
         await HireBoard.destroy({
             where: {
                 id: req.query.id,
-                userEmail : req.body.userEmail,
+                userId : req.body.userId,
             }
 		});
 		result = true;

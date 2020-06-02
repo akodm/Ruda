@@ -39,7 +39,7 @@ app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
@@ -55,47 +55,15 @@ app.use('/userInfos', userInfoRouter);
 app.use('/emailAuth', emailAuth);
 require('./passport.js')(passport);
 
-// -------------------- 토큰 생성 및 검증 함수 --------------------
-
-app.get('/tokenpub', async(req,res) => {
-  let token = getToken(req.query.userEmail, req.query.userCate);
-  try {
-    console.log("토큰 발급" + req.query.userEmail + " => " + token);
-  } catch(err) {
-    console.log(__filename + " : 토큰 발급 에러 : " + err)
-  }
-  res.send(token);
-});
-
-function getToken(data, cate){
-  try {
-      const getToken = jwt.sign({
-          userEmail : data,
-          userCate : cate,
-      },
-          configs.app.secretKey,
-      {
-          expiresIn : '1200m'
-      });
-      return getToken;
-  } catch(err) {
-      console.log(__filename + " : 토큰 생성 에러 : " + err);
-  }
-}
-
-app.get("/verify", async(req,res)=>{
-  try {
-      const token = req.headers['x-access-token'] || req.query.token;
-      const getToken = jwt.verify(token, configs.app.secretKey);
-      console.log("토큰 인증 완료");
-      res.send(getToken);
-  } catch(err) {
-      console.log(__filename + " : 토큰 검증 에러 : " + err);
-      res.send("err");
-  }
-});
-
 // --------------------------- 노드 메일러 이메일 인증 -------------------
+/**
+ * 사용방법
+ * 1. (로컬 회원가입의 경우만 사용) 사이트 내 이메일 인증 클릭
+ * 2. 노드 메일러 전송 및 해당 인증 코드 디비에 생성 - 이미 해당 이메일 존재 시 코드 업뎃
+ * 3. 인증 코드 및 이메일 작성 후 가입하기 버튼 클릭
+ * 4. 도중 이메일이나 인증 코드를 변경할 시 체크를 위한 디비 조회 -> 이메일, 코드
+ * 5. 조회 결과 이메일과 코드가 사이트 내 인풋 값과 일치할 시 성공 - 아닐 시 실패
+ */
 
 app.get("/nodemailer", async(req,res) => {
   try {
@@ -114,7 +82,7 @@ app.get("/nodemailer", async(req,res) => {
     let mailOption = {
       from : configs.app.user,
       to : req.query.userEmail,
-      subject : "RUDA에서 이메일 인증 메일을 발송하였습니다.",
+      subject : "하이루키에서 이메일 인증 메일을 발송하였습니다.",
       html : `<img style="width:'80px'; height:40px;" src='cid:logo@cid'/><br><br>`+ 
       `<span>신입 구직자, 사회 초년생, 실습생들의 구직 사이트</span><br><br>` +
       `<span>비경력직간의 경쟁으로 더 자신을 어필해보세요!</span><br><br>` +
@@ -136,15 +104,33 @@ app.get("/nodemailer", async(req,res) => {
       if(err) {
         console.log(err);
       } else {
-        console.log("노드 메일러 정보 : " + info);
+        console.log("노드 메일러 정보 --------------------");
+        console.log(info);
       }
     });
 
-    await EmailAuth.create({
-      token: ranStr, 
-      expire: nowDatePlusMt, 
-      use : "false",
-    });
+    const userFind = await EmailAuth.findOne({ where : { email : req.query.userEmail } });
+    console.log(userFind);
+    if(userFind.dataValues) {
+      await EmailAuth.update({
+        token : ranStr,
+        use : "false",
+      }, {
+        where : req.query.userEmail
+      });
+    } else {
+      await EmailAuth.findOrCreate({
+        where : {
+          email : req.query.userEmail
+        }, 
+        defaults : {
+          email : req.query.userEmail,
+          token: ranStr,
+          expire: nowDatePlusMt,
+          use : "false",
+        }
+      });
+    }
 
     res.send(true);
   } catch(err) {

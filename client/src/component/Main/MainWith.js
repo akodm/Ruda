@@ -8,27 +8,27 @@ class MainWith extends Component {
                     <span className="MainWith-companys-title">하이루키와 함께하는 기업</span>   
                     <div className="MainWith-companys-box">
                         <div className="MainWith-companys-company">
-                            <img src="/Images/pt_icon.png"/>
+                            <img src="/Images/pt_icon.png" alt="img"/>
                             <span className="MainWith-companys-company-title">하이루키</span>
                             <span className="MainWith-companys-company-text">안녕하세요 하이루키입니다.</span>
                         </div>
                         <div className="MainWith-companys-company">
-                            <img src="/Images/pt_icon.png"/>
+                            <img src="/Images/pt_icon.png" alt="img"/>
                             <span className="MainWith-companys-company-title">하이루키</span>
                             <span className="MainWith-companys-company-text">안녕하세요 하이루키입니다.</span>
                         </div>  
                         <div className="MainWith-companys-company">
-                            <img src="/Images/pt_icon.png"/>
+                            <img src="/Images/pt_icon.png" alt="img"/>
                             <span className="MainWith-companys-company-title">하이루키</span>
                             <span className="MainWith-companys-company-text">안녕하세요 하이루키입니다.</span>
                         </div>  
                         <div className="MainWith-companys-company">
-                            <img src="/Images/pt_icon.png"/>
+                            <img src="/Images/pt_icon.png" alt="img"/>
                             <span className="MainWith-companys-company-title">하이루키</span>
                             <span className="MainWith-companys-company-text">안녕하세요 하이루키입니다.</span>
                         </div>  
                         <div className="MainWith-companys-company">
-                            <img src="/Images/pt_icon.png"/>
+                            <img src="/Images/pt_icon.png" alt="img"/>
                             <span className="MainWith-companys-company-title">하이루키</span>
                             <span className="MainWith-companys-company-text">안녕하세요 하이루키입니다.</span>
                         </div>                         

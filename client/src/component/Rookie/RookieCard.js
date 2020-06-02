@@ -7,7 +7,7 @@ class RookieCard extends Component {
             <div className="Rookie-Card">
                 <div className="Rookie-Card-header">
                     <div className="Rookie-Card-like">
-                        <img src="/Images/1216649.svg" width="12px"height="12px"/>
+                        <img src="/Images/1216649.svg" width="12px"height="12px" alt="img"/>
                         <span>14</span>
                     </div>
                     <div className="Rookie-Card-state">
@@ -16,8 +16,8 @@ class RookieCard extends Component {
                     </div>
                 </div>
                 <div className="Rookie-Card-Profile">
-                    <div className="Rookie-Card-Profile-img">
-                        <img src="/Images/easy_icon.png"/>
+                    <div className="Rookie-Card-Profile-img" >
+                        <img src="/Images/easy_icon.png" alt="img"/>
                     </div>
                     <div className="Rookie-Card-Profile-info">
                         <span className="Rookie-Card-Profile-info-name">홍길동</span>

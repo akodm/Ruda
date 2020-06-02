@@ -24,7 +24,7 @@ router.get("/one", async (req, res) => {
 	try {
 		const result = await CompanyHire.findOne({
 			where : {
-				userEmail : req.query.userEmail,      // 유저 아이디를 토대로 검색
+				userId : req.query.userId,      // 유저 아이디를 토대로 검색
 			}
 		});
 		res.send(result);
@@ -45,6 +45,7 @@ router.post("/create", async(req, res) => {
             defaults : {
                 companySugeuser: req.body.companySugeuser, 
                 companyHireUser: req.body.companyHireUser, 
+                userId : req.body.userId,
             }
         }).spread(async(none, created)=>{
             if(created){
@@ -66,7 +67,8 @@ router.put("/update", async(req, res) => {
             companyHireUser: req.body.companyHireUser, 
             }, {
             where: {
-                companyHireUser : req.body.companyHireUser
+                companyHireUser : req.body.companyHireUser,
+                userId : req.body.userId,
             }
         });
         result = true;
@@ -83,7 +85,8 @@ router.delete("/delete", async(req, res) => {
     try {
         await CompanyHire.destroy({
             where: {
-                companyHireUser: req.query.companyHireUser
+                companyHireUser: req.query.companyHireUser,
+                userId : req.body.userId,
             }
 		});
 		result = true;
