@@ -1,7 +1,6 @@
 /*Header*/
 
 .Header{    
-    height: 480px;
     width: 100%;
     padding-top: 40px;
     display: flex;
@@ -34,6 +33,76 @@
     cursor:pointer;
     font-weight: 600;
 
+}
+
+/*MainHeader*/
+.MainHeader{
+    height: 480px;
+    align-items: center;
+    color: white;
+    font-family: NanumSquareR;
+    font-size: 16px;
+    background-image: url(/Images/header_bg.png);
+    flex-direction: column;
+    
+}
+.MainHeader-content{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 100px;
+}
+.MainHeader-text{
+    align-items: center;
+    margin-left: 400px;
+}
+h2,h3,h4{
+    margin-top:55px;
+}
+.MainHeader-btns{
+    display: flex;
+    margin-right: 400px;
+    align-items: flex-end;
+
+}
+.MainHeader-btns button{
+    border: none;
+    width: 122px;
+    height: 37px;
+    color: white;
+    opacity: 0.7;
+    font-family: NanumSquareEB;
+    font-size: 14px;
+    margin: 10px;
+}
+.MainHeader-btns-Login{
+    background-color: #809fba;
+}
+.MainHeader-btns-Insert{
+    background-color: #c398ca;
+}
+.MainHeader-btns button:hover{
+    opacity: 0.9;
+}
+.MainHeader-btns-line{
+    border-top: solid 1px white;
+    width: 400px;
+    opacity: 0.7;
+    float: right;
+    margin-right: 400px;
+    text-align: right;
+    padding: 10px;
+}
+.MainHeader-btns-easy{
+    font-family: NanumSquareB;
+    font-size: 14px;
+    color: white;
+    cursor:pointer;
+}
+
+/*OtherHeader*/
+.OtherHeader{
+    height: 140px;
+    background-image: url(/Images/board_header_bg.png);
 }
 /*UpDown*/
 
