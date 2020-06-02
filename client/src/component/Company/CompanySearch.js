@@ -16,7 +16,7 @@ class CompanySearch extends Component {
                     </div>
                 </div>
                 <div className="Company-search-content">
-                
+                <span></span>
                 </div>
             </div>
         );
