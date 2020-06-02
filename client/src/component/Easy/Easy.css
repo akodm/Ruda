@@ -71,3 +71,12 @@
     color: #9f9f9f;
     margin-bottom: 50px;
 }
+
+.easy-easyb > a, .easy-easy > a {
+    color: #9a9a9a;
+}
+
+.easy-easy > a:hover, .easy-easyb > a:hover {
+    color: #608eb4;
+    font-weight: 600;
+}

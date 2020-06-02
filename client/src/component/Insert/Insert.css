@@ -89,3 +89,12 @@
     flex-direction: row;
     margin-left: 95px;
 }
+
+.insert-easy > a {
+    color: #9a9a9a;
+}
+
+.insert-easy > a:hover {
+    color: #608eb4;
+    font-weight: 600;
+}

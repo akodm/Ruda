@@ -43,6 +43,15 @@
     margin-bottom: 43px;
 }
 
+.login-search > a {
+    color: #9a9a9a;
+}
+
+.login-search > a:hover {
+    color: #608eb4;
+    font-weight: 600;
+}
+
 .login-bottom {
     display: flex;
     flex-direction: row;
@@ -72,6 +81,14 @@
     margin-bottom: 50px;
 }
 
+.login-easyb > a, .login-easy > a {
+    color: #9a9a9a;
+}
+
+.login-easyb > a:hover, .login-easy > a:hover {
+    color: #608eb4;
+    font-weight: 600;
+}
 /* ----------------------------------------- */
 /* ----------------------------------------- */
 
