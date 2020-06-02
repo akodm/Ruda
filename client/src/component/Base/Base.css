@@ -1,14 +1,13 @@
 /*Header*/
 
 .Header{    
-    height: 480px;
+    height: 100px;
     width: 100%;
     padding-top: 40px;
     display: flex;
     justify-content: center;
     position: absolute;
-    color:white;
-    
+    color:white;  
 }
 .Header-nav{
     width: 1256px;
@@ -44,6 +43,7 @@
     font-family: NanumSquareR;
     font-size: 16px;
     background-image: url(/Images/header_bg.png);
+    background-size: cover;
     flex-direction: column;
     
 }
@@ -104,6 +104,7 @@ h2,h3,h4{
 .OtherHeader{
     height: 140px;
     background-image: url(/Images/board_header_bg.png);
+    background-size: cover;
 }
 /*UpDown*/
 

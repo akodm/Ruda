@@ -58,9 +58,11 @@
  }
  .MainWith-companys{
       background-image: url(/Images/with_company.png);
+      background-size: cover;
  }
  .MainWith-rookies{
     background-image: url(/Images/with_rookie.png);
+    background-size: cover;
 }
  .MainWith-companys, .MainWith-rookies{
     width: 100%;
