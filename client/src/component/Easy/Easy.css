@@ -1,0 +1,73 @@
+.easy-main {
+    width: 100%;
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.easy-div {
+    width: 800px;
+    box-shadow: 0 0 9.8px 0.2px rgba(118, 157, 191, 0.19);
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.easy-title {
+    font-family: NanumSquareB;
+    font-size: 25.5px;
+    color: #5e5e5e;
+    margin-top: 60px;
+    margin-bottom: 68px;
+}
+
+.easy-btn {
+    width: 255px;
+    height: 44px;
+    border: solid 1px #eeeeee;
+    background-color: #96c0e2;
+    font-family: NanumSquareR;
+    font-size: 15.5px;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.easy-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.easy-line {
+    width: 181px;
+    height: 1px;
+    background-color: #dddddd;
+}
+
+.easy-text {
+    font-family: NanumSquareR;
+    font-size: 13.5px;
+    color: #9a9a9a;
+    margin-left: 9px;
+    margin-right: 9px;
+}
+
+.easy-easy {
+    font-family: NanumSquareR;
+    font-size: 14px;
+    color: #9f9f9f;
+    margin-top: 46px;
+    margin-bottom: 20px;
+}
+
+.easy-easyb {
+    font-family: NanumSquareR;
+    font-size: 14px;
+    color: #9f9f9f;
+    margin-bottom: 50px;
+}
