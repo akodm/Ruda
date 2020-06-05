@@ -94,6 +94,9 @@
     margin: 15px;
     
 }
+.Company-Card:hover{
+    background-color: #ececec63;
+}
 .Company-Card-header{
     display: flex;
     flex-direction: row;

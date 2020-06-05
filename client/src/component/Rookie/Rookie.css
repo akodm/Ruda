@@ -91,7 +91,9 @@
     border: solid 1px #eeeeee;
     padding: 10px;
     margin: 15px;
-    
+}
+.Rookie-Card:hover{
+    background-color: #f1f1f198;
 }
 .Rookie-Card-header{
     display: flex;

@@ -110,13 +110,15 @@ app.get("/nodemailer", async(req,res) => {
     });
 
     const userFind = await EmailAuth.findOne({ where : { email : req.query.userEmail } });
-    console.log(userFind);
-    if(userFind.dataValues) {
+    console.log(userFind && userFind.dataValues);
+    if(userFind && userFind.dataValues) {
       await EmailAuth.update({
         token : ranStr,
         use : "false",
       }, {
-        where : req.query.userEmail
+        where : { 
+          email : req.query.userEmail
+        }
       });
     } else {
       await EmailAuth.findOrCreate({

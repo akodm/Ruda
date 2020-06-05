@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './Company.css';
 import CompanyCard from './CompanyCard';
 import CompanySearch from './CompanySearch';
+import { Link } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import Pagination from '@material-ui/lab/Pagination';
 class Company extends Component {
     render() {
         return (
@@ -15,24 +18,24 @@ class Company extends Component {
             </div>
             <CompanySearch/>
             <div className="Company-CardView">
-                <CompanyCard/>
-                <CompanyCard/>
-                <CompanyCard/>
-                <CompanyCard/>
-                <CompanyCard/>
-                <CompanyCard/>
-                <CompanyCard/>
-                <CompanyCard/>
-                <CompanyCard/>
-                <CompanyCard/>
-                <CompanyCard/>
-                <CompanyCard/>
-                <CompanyCard/>
-                <CompanyCard/>
-                <CompanyCard/>
-                <CompanyCard/>
+                <Link to ="/mypage"><CompanyCard/></Link>
+                <Link to ="/mypage"><CompanyCard/></Link>
+                <Link to ="/mypage"><CompanyCard/></Link>
+                <Link to ="/mypage"><CompanyCard/></Link>
+                <Link to ="/mypage"><CompanyCard/></Link>
+                <Link to ="/mypage"><CompanyCard/></Link>
+                <Link to ="/mypage"><CompanyCard/></Link>
+                <Link to ="/mypage"><CompanyCard/></Link>
+                <Link to ="/mypage"><CompanyCard/></Link>
+                <Link to ="/mypage"><CompanyCard/></Link>
+                <Link to ="/mypage"><CompanyCard/></Link>
+                <Link to ="/mypage"><CompanyCard/></Link>
+                <Link to ="/mypage"><CompanyCard/></Link>
+                <Link to ="/mypage"><CompanyCard/></Link>
+                <Link to ="/mypage"><CompanyCard/></Link>
+                <Link to ="/mypage"><CompanyCard/></Link>
                 <div className="Company-CardView-PagiNation">
-                    페이지네이션자리
+                <Pagination count={10} />
                 </div>
             </div>
         </div>

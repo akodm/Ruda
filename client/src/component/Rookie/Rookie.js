@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import './Rookie.css';
 import RookieSearch from './RookieSearch';
 import RookieCard from './RookieCard';
+import { Link } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import Pagination from '@material-ui/lab/Pagination';
+
 class Rookie extends Component {
     render() {
         return (
@@ -15,24 +19,24 @@ class Rookie extends Component {
                 </div>
                 <RookieSearch/>
                 <div className="Rookie-CardView">
-                    <RookieCard/>
-                    <RookieCard/>
-                    <RookieCard/>
-                    <RookieCard/>
-                    <RookieCard/>
-                    <RookieCard/>
-                    <RookieCard/>
-                    <RookieCard/>
-                    <RookieCard/>
-                    <RookieCard/>
-                    <RookieCard/>
-                    <RookieCard/>
-                    <RookieCard/>
-                    <RookieCard/>
-                    <RookieCard/>
-                    <RookieCard/>
+                    <Link to="/mypage"><RookieCard/></Link>
+                    <Link to="/mypage"><RookieCard/></Link>
+                    <Link to="/mypage"><RookieCard/></Link>
+                    <Link to="/mypage"><RookieCard/></Link>
+                    <Link to="/mypage"><RookieCard/></Link>
+                    <Link to="/mypage"><RookieCard/></Link>
+                    <Link to="/mypage"><RookieCard/></Link>
+                    <Link to="/mypage"><RookieCard/></Link>
+                    <Link to="/mypage"><RookieCard/></Link>
+                    <Link to="/mypage"><RookieCard/></Link>
+                    <Link to="/mypage"><RookieCard/></Link>
+                    <Link to="/mypage"><RookieCard/></Link>
+                    <Link to="/mypage"><RookieCard/></Link>
+                    <Link to="/mypage"><RookieCard/></Link>
+                    <Link to="/mypage"><RookieCard/></Link>
+                    <Link to="/mypage"><RookieCard/></Link>
                     <div className="Rookie-CardView-PagiNation">
-                        페이지네이션자리
+                        <Pagination count={10} />
                     </div>
                 </div>
             </div>

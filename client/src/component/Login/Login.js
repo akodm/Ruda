@@ -3,6 +3,7 @@ import './Login.css'
 
 import { Link } from 'react-router-dom';
 import InputTag from './InputTag';
+import axios from 'axios';
 
 class Login extends Component {
     constructor(props) {
@@ -15,6 +16,11 @@ class Login extends Component {
             // state = 입력 정규식 텍스트 입출력 제어, result = 입력값이 정규식에 올바를 경우
             emailValid : { state : true, result : false },
             passwordValid : { state : true, result : false },
+            
+            user : { 
+                tag :"",
+                email:"",
+            }
         }
     }
     // 로그인 버튼을 누를 경우
@@ -26,7 +32,46 @@ class Login extends Component {
         // 올바른 체크의 경우
         } else {
             console.log("Success !!");
+            this.LoginChecked();
         }
+    }
+    async LoginChecked(){
+        const {email,password}=this.state;
+        try{
+            const result = await axios.post(`http://localhost:5000/users/loginuser`,{
+                userEmail : email,
+                userPass : password,
+            })
+         
+            if(!result.data){
+                alert("이메일 또는 패스워드가 다릅니다.")
+                return;
+            }
+            const authLogin = await axios.get(`http://localhost:5000/users/oauthlogin?tag=highrookie&email=${email}`);
+            let userdata = JSON.stringify(authLogin.data);
+            localStorage.setItem("users",userdata);
+
+            let getUser = JSON.parse(localStorage.getItem("users"));
+            const verify = await axios.get(`http://localhost:5000/users/verify/`,{
+                headers:{
+                    "Authorization":getUser.token, 
+                }
+            })
+            console.log(verify.data);
+            await this.setState({
+                user:{
+                    tag:verify.data.tag,
+                    email:verify.data.email,
+                }
+            })
+            console.log(this.state.user)
+            //window.location.href="/userinfo"; 
+            
+        }catch(err){
+            console.log("user login err : " + err);
+            localStorage.removeItem("users");
+        }
+        
     }
     // props로 넘겨줄 함수, 매개변수로 들어오는 값 세 가지를 셋 스태이트 시킴
     // [name]+Valid 스태이트에 해당 불 값들 대입
