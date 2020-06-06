@@ -60,7 +60,7 @@ class CompanyMypage extends Component {
                     <Msg display= { msgDisplay } />
                     <div className="company-main-bg">
                         <div className="company-main-bg-in">
-                            { changePage?<CompanyProfile/>:<CompanyProject/> }
+                            { changePage?<CompanyProfile/>:<CompanyH/> }
                         </div>
                         <div className="company-menu-btn">
                             <button className={profileClick}

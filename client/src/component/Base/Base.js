@@ -17,26 +17,58 @@ import UpDown from './UpDown';
 
 import socketio from 'socket.io-client';
 import OtherHeader from './OtherHeader';
+import Mypages from '../Mypages/Mypages';
+import MyPopup from '../../components/mypopup/MyPopup';
+import UserInfo from '../UserInfo/UserInfo';
 
 
 class Base extends Component {
     constructor(props){
         super(props);
         this.state={
-            url :new URL(window.location)
+            url :new URL(window.location),
+            pn:"",
+            user:{
+                tag:"",
+                email:"",
+            }
         }
     }
     componentDidMount(){
-        console.log(this.state.url);
-        let pathnames=(this.state.url).pathname;
+        let user = localStorage.getItem("users");
+        if(user){
+            user = JSON.parse(user);
+            this.setState({
+                user:{
+                    tag:user.tag,
+                    email:user.email,
+                }
+            })            
+        }
+        const{url}=this.state;
+        let pathnames = url.pathname;
+        pathnames=pathnames.split("/");
         console.log(pathnames);
+        let result=pathnames.toString();
+        console.log(result);
+            if(result==','){
+            this.setState({
+                pn:"home",
+            })
+        }else{
+            this.setState({
+                pn:"",
+            })
+        }
     }
+
+
     render() {
-        const {pathnames}=this.state;
+        const{pn, user}=this.state;
         return (
             <div className="base-main">
                  <Router>
-                 {/*<MainHeader/>*/}<OtherHeader/>
+                    {pn?<MainHeader/>:<OtherHeader/>}
                     {/*메인 */}
                     <Route exact path="/"><Main/></Route>
                     {/*기업게시판*/ }
@@ -49,8 +81,12 @@ class Base extends Component {
                     <Route path ="/login"><Login/></Route>
                     {/*간편로그인*/ }
                     <Route path ="/easy"><Easy/></Route>
-                    {/*팝업
-                    <MyPopup/> */}
+                    {/*유저 기본정보 */}
+                    <Route path="/userinfo"><UserInfo/></Route>
+                    {/*마이페이지*/}
+                    <Route path ="/mypage"><Mypages user={user}/></Route>
+                    {/*마이메뉴*/}
+                    <MyPopup/>
                     {/*화면업다운버튼*/ }
                     <UpDown/>
                     {/*하단 */}

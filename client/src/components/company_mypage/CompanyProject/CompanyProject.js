@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CompanyHire from './CompanyHire/CompanyHire';
+import CompanyHire from '../CompanyHire/CompanyHire';
 
 class CompanyProject extends Component {
     render() {

@@ -255,7 +255,7 @@ router.get('/google/callback',
 		} catch(err) {
 			console.log(__filename + " 에서 유저 생성 에러 발생 내용= " + err);
 		}
-        res.redirect(`http://localhost:3000?state=${state}&value=${req.user._json.email}&tag=google`);
+        res.redirect(`http://localhost:3000/easy?state=${state}&value=${req.user._json.email}&tag=google`);
 	}
 );
 
@@ -282,7 +282,7 @@ router.get('/facebook/callback',
 		} catch(err) {
 			console.log(__filename + " 에서 유저 생성 에러 발생 내용= " + err);
 		}
-        res.redirect(`http://localhost:3000?state=${state}&value=${req.user._json.id}&tag=facebook`);
+        res.redirect(`http://localhost:3000/easy?state=${state}&value=${req.user._json.id}&tag=facebook`);
 	}
 );
 
@@ -307,8 +307,8 @@ router.get('/naver/callback', passport.authenticate('naver', { session : false, 
 			}
 		} catch(err) {
 			console.log(__filename + " 에서 유저 생성 에러 발생 내용= " + err);
-		}5
-        res.redirect(`http://localhost:3000?state=${state}&value=${req.user._json.email}&tag=naver`);
+		}
+        res.redirect(`http://localhost:3000/easy?state=${state}&value=${req.user._json.email}&tag=naver`);
     }
 );
 

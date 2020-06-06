@@ -1,0 +1,84 @@
+/*TagFrom*/
+.rookieTag-content{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.rookieTag-content span{
+    margin: 3px;
+    font-size: small;
+}
+.rookieTag-content-input,.rookieTag-content-tagView,.rookieTag-content-tagView-tags{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    margin: 10px;
+}
+.rookieTag-content-input input{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 80%;
+    height: 25px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid rgba(185, 185, 185, 0.842);
+}
+.rookieTag-content-input button{
+    width: 50px;
+    background-color: #6ba5da;
+    border: none;
+    margin-left: 10px;
+    color: white;
+}
+.rookieTag-content-tagView-tags{
+    border: 1px solid rgba(185, 185, 185, 0.842);
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.rookieTag-content-tagView{
+    flex-wrap: wrap;
+}
+.RookieTagSample-tags{
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+}
+.RookieTagSample-tags,.RookieTagSample-tags span{
+    margin: 10px 20px 10px 20px;
+}
+.RookieTagSample-tags span{
+    margin: 20px;
+    font-size: small;
+}
+/*TagView*/
+.rookieTag-content-view-tags{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+}
+.rookieTag-content-view-tags span{
+    font-size:15px;
+    margin: 10px; 
+ }
+/*Tagcp*/
+.RookieTagCp,.RookieTagSample{
+    justify-content: center;
+    text-align: center;
+    height: 25px;
+    margin: 10px;
+}

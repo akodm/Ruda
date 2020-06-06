@@ -6,8 +6,7 @@
     display: flex;
     justify-content: center;
     position: absolute;
-    color:white;
-    
+    color:white;  
 }
 .Header-nav{
     width: 1256px;
@@ -43,6 +42,7 @@
     font-family: NanumSquareR;
     font-size: 16px;
     background-image: url(/Images/header_bg.png);
+    background-size: cover;
     flex-direction: column;
     
 }
@@ -54,6 +54,7 @@
 .MainHeader-text{
     align-items: center;
     margin-left: 400px;
+    
 }
 h2,h3,h4{
     margin-top:55px;
@@ -103,6 +104,7 @@ h2,h3,h4{
 .OtherHeader{
     height: 140px;
     background-image: url(/Images/board_header_bg.png);
+    background-size: cover;
 }
 /*UpDown*/
 

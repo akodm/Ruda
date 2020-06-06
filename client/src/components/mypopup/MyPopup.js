@@ -13,6 +13,7 @@ class MyPopup extends Component {
             msgDisplay : "none",
             alrDisplay : "none",
             userData:null,
+            logoutDisplay:"flex",
         }
     }
     async test() {
@@ -24,18 +25,20 @@ class MyPopup extends Component {
         }
     }
     logout(){
+            const {userData}=this.state;
             localStorage.removeItem("users");
             this.setState({
                 userData:null,
+                logoutDisplay:"none",
             })
             alert("로그아웃 되었습니다.");
             window.location.href="http://localhost:3000/";
         }
     
     render() {
-        const { msgDisplay,alrDisplay,popupDisplay } = this.state;
+        const { msgDisplay,alrDisplay,popupDisplay ,logoutDisplay} = this.state;
         return (
-            <div className="mypopup-main">
+            <div className="mypopup-main" style={{display:logoutDisplay}}>
                 <Msg display={msgDisplay} />
                 <Alram display={alrDisplay} />
                 <div className="mypopup-div">
