@@ -4,7 +4,9 @@ import RookieProflie from './RookieProfile/RookieProfile';
 import RookiePt from './RookiePortfolio/RookiePt';
 import axios from 'axios';
 import Msg from '../../MyMenu/Message';
-
+import RookieChart from './RookieChart/RookieChart';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart,faShareAlt,faEnvelope } from '@fortawesome/free-solid-svg-icons'
 class RookieMypage extends Component {
     constructor(props) {
         super(props);
@@ -54,7 +56,8 @@ class RookieMypage extends Component {
         const { changePage } =this.state;
         return (
             <div className="rookie-main">
-                  <Msg display= { msgDisplay } />
+                <RookieChart/>
+                <Msg display= { msgDisplay } />
                 <div className="btn-cont">
                     <div className="rookie-main-bg">
                         <div className="rookie-main-bg-in">
@@ -67,14 +70,18 @@ class RookieMypage extends Component {
                             onClick={this.PtchangePage.bind(this)}>포트폴리오</button>
                         </div>
                         <div className="rookie-user-btn">
-                        <button className="rookie-message-btn"
-                            onClick={() => this.setState({ msgDisplay : msgDisplay === "none" ? "flex" : "none"})}>
-                                <img src="/Image/usermypage_message.png" alt="IMG"></img>메세지 보내기
+                            <button className="rookie-share-btn">
+                                <span className="mypage-icons"><FontAwesomeIcon icon={faShareAlt} size="2x"/></span>
                             </button>
                             <button className="rookie-like-btn"
                             onClick={() => this.setState({ likeUser : likeUser === "none" ? console.log("조아여") : "none"})}>
-                                <img src="/Image/usermypage_hart.png" alt="IMG"></img>관심있어요
+                                <span className="mypage-icons"><FontAwesomeIcon icon={faHeart} size="2x"/></span>
                             </button>
+                            <button className="rookie-message-btn"
+                            onClick={() => this.setState({ msgDisplay : msgDisplay === "none" ? "flex" : "none"})}>
+                                 <span className="mypage-icons"><FontAwesomeIcon icon={faEnvelope} size="2x"/></span>
+                            </button>
+                        
                         </div>
                     </div>
                 </div>

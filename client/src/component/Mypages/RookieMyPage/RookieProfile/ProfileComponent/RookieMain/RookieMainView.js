@@ -8,38 +8,23 @@ class RookieMainView extends Component {
     render() {
         return (
             <div>
-                <div className="rookieInfo-title">
-                    <span className="rookieInfo-title-text">기본정보</span>
-                    <span className="rookieInfo-relayout" onClick={this.setMain.bind(this)}>[편집]</span>
+                <div className="RookieMain-title">
+                    <span className="RookieMain-title-text">저는 이런 사람이에요</span>
+                    <span className="RookieMain-relayout" onClick={this.setMain.bind(this)}>[편집]</span>
                 </div>
-                <div className="rookie-user-mainprofile-left">
-                    <img src="/Image/login_img.png" className="userProfile-img" alt="IMG"></img>
-                    <span className="user-name">안녕하세요 홍길동 입니다.</span>
+                <div className="RookieMain-user">
+                    <img src="/Image/login_img.png" className="RookieMain-user-img" alt="IMG"></img>
+                    <span className="RookieMain-user-name">홍길동</span>
+                    <span>안녕하세요 백엔드 개발자를 꿈꾸는 홍길동입니다!</span>
                 </div>
-                <div  className="rookieTag-content-view">
-                    <div className="rookieTag-content-view-tags">
-                        <span>#Java</span>
-                        <span>#IOS</span>
-                        <span>#Android</span>
-                        <span>#Node.js</span>
-                        <span>#React</span>
-                        <span>#Jsp</span>
-                        <span>#Java</span>
-                        <span>#IOS</span>
-                        <span>#Android</span>
-                        <span>#Node.js</span>
-                        <span>#React</span>
-                        <span>#Jsp</span>
-                        <span>#Java</span>
-                        <span>#IOS</span>
-                        <span>#Android</span>
-                        <span>#Node.js</span>
-                        <span>#React</span>
-                        <span>#Jsp</span>
-                    </div>
+                <div className="line"></div>
+                <div className="RookieMain-user-tag-content">
+                {/*태그컴포넌트여기에 넣어주세용*/}
+                   태그자리
                 </div>
             </div>
         );
+  
     }
 }
 

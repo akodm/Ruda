@@ -29,10 +29,15 @@ class MyPopup extends Component {
             localStorage.removeItem("users");
             this.setState({
                 userData:null,
-                logoutDisplay:"none",
             })
+            if(userData==null)
+            {
+                this.setState({
+                    logoutDisplay:"none",
+                })
+            }
             alert("로그아웃 되었습니다.");
-            window.location.href="http://localhost:3000/";
+            
         }
     
     render() {

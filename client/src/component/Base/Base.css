@@ -50,6 +50,7 @@
     display: flex;
     justify-content: space-between;
     padding-top: 100px;
+    height: 300px;
 }
 .MainHeader-text{
     align-items: center;
@@ -57,12 +58,15 @@
     
 }
 h2,h3,h4{
-    margin-top:55px;
+    margin-top:35px;
+    width: 500px;
 }
+
 .MainHeader-btns{
     display: flex;
     margin-right: 400px;
     align-items: flex-end;
+    margin-top: 100px;
 
 }
 .MainHeader-btns button{
@@ -112,25 +116,23 @@ h2,h3,h4{
     position: fixed;
     z-index: 1000;
     right: 0;
-    bottom: 3%;
+    bottom: 1%;
 }
 .updown-up, .updown-down{
-    margin: 10px;
-    width: 48px;
-    height: 48px;
-
+    width: 47px;
+    height: 47px;
+    border-radius:50%;
+    margin:10px;
+    box-shadow: 0px 2px 3.6px 1.4px rgba(87, 86, 86, 0.24);
+    background-color: #f2f2f2;
 }
-.updown-up{
-    background-image: url(/Image/base_up.png);
+.updown-icons{
+    align-items:center;
+    justify-content:center;
+    color:white;
 }
-.updown-up:hover{
-    background-image: url(/Image/base_up_h.png);
-}
-.updown-down{
-    background-image: url(/Image/base_down.png);
-}
-.updown-down:hover{
-    background-image: url(/Image/base_down_h.png);
+.updown-icons:hover{
+    color: #96c0e2;
 }
 /*Footer*/
 .Footer{

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Base.css';
 import { Link } from 'react-router-dom';
+
 class Header extends Component {
     render() {
         return (
@@ -12,8 +13,8 @@ class Header extends Component {
                         <Link to="/rookie"><span className="Header-nav-menu-span">인재</span></Link>
                     </div>
                     <div className="Header-nav-recommendbtn"> 
-                        <span>추천기업</span>
-                        <span>추천인재</span>
+                        <span >추천기업</span>
+                        <span >추천인재</span>
                     </div>
                 </nav>
             </div>

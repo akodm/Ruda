@@ -12,14 +12,14 @@ class RookieMain extends Component {
     }
     Mainchange(bool){
         this.setState({
-            MainTag : bool
+            ChangeMain : bool
         });
     }
     render() {
         const {ChangeMain}= this.state;
         return (
-            <div className="rookieInfo">
-                 { ChangeMain ? <RookieMainForm Mainchanges={this. Mainchange.bind(this)}/> : <RookieMainView Mainchanges={this. Mainchange.bind(this)}/> }
+            <div className="RookieMain">
+                 { ChangeMain ? <RookieMainForm Mainchanges={this.Mainchange.bind(this)}/> : <RookieMainView Mainchanges={this.Mainchange.bind(this)}/> }
             </div>
         );
     }
