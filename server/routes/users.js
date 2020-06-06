@@ -4,6 +4,7 @@ let models = require("../models");
 let crypto = require("crypto");
 let configs = require("../server-configs");
 let passport = require('passport');
+let jwt = require('jsonwebtoken');
 
 // DB Setting --------------------------------------------------------
 const User = models.user;
@@ -306,7 +307,7 @@ router.get('/naver/callback', passport.authenticate('naver', { session : false, 
 			}
 		} catch(err) {
 			console.log(__filename + " 에서 유저 생성 에러 발생 내용= " + err);
-		}
+		}5
         res.redirect(`http://localhost:3000?state=${state}&value=${req.user._json.email}&tag=naver`);
     }
 );
@@ -324,7 +325,7 @@ router.get('/google', passport.authenticate('google', { scope: ['email'], sessio
 router.get('/facebook', passport.authenticate('facebook', { scope : ['public_profile'], session : false}));
 router.get('/naver', passport.authenticate('naver', { session : false }));
 
-// oauth로 로그인 시 토큰값을 돌려줌 -> 로컬 스토리지에 저장
+// 로그인 시 토큰값을 돌려줌 -> 로컬 스토리지에 저장
 router.get("/oauthlogin" , async(req,res) => {
 	const user = req.query;
 	const payload = {

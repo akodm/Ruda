@@ -27,7 +27,7 @@ class InputTag extends Component {
                 this.props.validation(this.props.name,true, true)
             }
         }
-
+        // 비밀번화 확인 등 두 가지 값의 중복 체크를 위함
         let customIf = this.props.custom;
         if(customIf && customIf.first) {
             if(customIf.first !== customIf.second) {

@@ -7,7 +7,6 @@ let FacebookStrategy = require('passport-facebook').Strategy;
 let GoogleStrategy = require('passport-google-oauth20').Strategy;
 let NaverStrategy = require('passport-naver').Strategy;
 
-// let LocalStrategy = require('passport-local').Strategy;
 let JwtStrategy = require('passport-jwt').Strategy;
 let ExtractJwt = require('passport-jwt').ExtractJwt;
 
