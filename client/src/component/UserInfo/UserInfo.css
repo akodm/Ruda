@@ -26,8 +26,15 @@
 
 /* -------------------------------------------------------------------- */
 
+.userInfo-user {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .userInfo-box {
-    width: 1000px;
+    width: 700px;
     box-shadow: 0 0 9.8px 0.2px rgba(118, 157, 191, 0.19);
     background-color: #ffffff;
     margin-bottom: 100px;
@@ -35,6 +42,20 @@
 
 .userInfo-margin {
     margin: 50px;
+}
+
+.userInfo-comentDiv {
+    display: flex;
+    flex-direction: row;
+    width: 700px;
+    margin: 10px;
+}
+
+.userInfo-coment {
+    align-self: flex-start;
+    color: #6b6b6b;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 /* -------------------------------------------------------------------- */
@@ -54,8 +75,8 @@
 
 .userInfo-img {
     border-radius: 50%;
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
 }
 
 .userInfo-fileDiv label {
@@ -64,7 +85,7 @@
     cursor: pointer;
     color: rgb(25, 0, 255);
     font-size: 12px;
-    padding: 10px;
+    padding: 8px;
 }
 
 .userInfo-fileDiv input[type="file"] { 
@@ -99,8 +120,18 @@
 }
 
 .userInfo-span {
-    width: 80px;
-    text-align: center;
+    width: 100px;
+    text-align: left;
+}
+
+.userInfo-spanCollage1 {
+    width: 110px;
+    text-align: left;
+}
+
+.userInfo-spanCollage2 {
+    width: 50px;
+    text-align: left;
 }
 
 .userInfo-input {
@@ -127,18 +158,22 @@
 }
 
 .userInfo-inputIntro {
-    width: 718px;
+    width: 470px;
     border: none;
     border-bottom: solid 1px #959595;
     height: 25px;
-    margin: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 12px;
 }
-.userInfo-inputDivIntro {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 20px;
-    margin-left: 50px;
+
+.userInfo-inputDate {
+    width: 78px;
+    border: none;
+    border-bottom: solid 1px #959595;
+    height: 25px;
+    margin: 10px;
+    text-align: center;
 }
 
 /* ----------------------------------------------------------- */
@@ -157,4 +192,79 @@
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(43, 6, 207);
     border-radius: 10px;
+}
+
+/* ----------------------------------------------------------- */
+
+.userInfo-selectDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.userInfo-select {
+    width: 80px;
+    height: 30px;
+    border: 1px solid rgb(38, 0, 255);
+    border-radius: 5px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    color: #414141;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+.select-menu {
+    margin-left: 40px;
+    width: 80px;
+    border: 1px solid rgb(38, 0, 255);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    margin-top: 35px;
+    font-weight: 600;
+    color: #414141;
+    font-size: 12px;
+}
+
+.select-item {
+    margin: 5px;
+    width: 95%;
+    height: 15px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+}
+
+.select-item:hover {
+    background-color: rgb(226, 226, 226);
+}
+
+/* --------------------------------------------------------- */
+
+.userInfo-tagInput {
+    width: 100%;
+    height: 35px;
+    border: 1px solid rgba(40, 6, 192, 0.582);
+    border-radius: 5px;
+    margin-bottom: 35px;
+}
+
+.userInfo-tagBox {
+    width: 100%;
+    height: 85px;
+    border: 1px solid rgba(40, 6, 192, 0.534);
+    border-radius: 5px;
 }
