@@ -8,6 +8,7 @@
     align-items: center;
     font-family: NanumSquareB;
     color: #929292;
+    margin-top: 20px;
 }
 .MainNotice-contents{
     display: flex;

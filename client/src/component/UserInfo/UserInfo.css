@@ -1,4 +1,160 @@
-.UserInfo{
+.userInfo {
     width: 100%;
-    height: 600px
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userInfo-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 50px;
+    color: rgba(0, 0, 0, 0.473);
+}
+
+.userInfo-div {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 300px;
+    box-shadow: 0 0 9.8px 0.2px rgba(118, 157, 191, 0.19);
+}
+
+.userInfo-tag {
+    width: 300px;
+}
+
+/* -------------------------------------------------------------------- */
+
+.userInfo-box {
+    width: 1000px;
+    box-shadow: 0 0 9.8px 0.2px rgba(118, 157, 191, 0.19);
+    background-color: #ffffff;
+    margin-bottom: 100px;
+}
+
+.userInfo-margin {
+    margin: 50px;
+}
+
+/* -------------------------------------------------------------------- */
+
+.userInfo-imgDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15px;
+}
+
+.userInfo-fileDiv {
+    margin-top: 30px;
+    display: flex;
+}
+
+.userInfo-img {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+}
+
+.userInfo-fileDiv label {
+    border: 1px solid rgb(0, 17, 255);
+    border-radius: 8px;
+    cursor: pointer;
+    color: rgb(25, 0, 255);
+    font-size: 12px;
+    padding: 10px;
+}
+
+.userInfo-fileDiv input[type="file"] { 
+    position: absolute; 
+    width: 0px; 
+    height: 0px; 
+    padding: 0; 
+    margin: -1px; 
+    overflow: hidden; 
+    clip:rect(0,0,0,0); 
+    border: 0; 
+}
+
+/* -------------------------------------------------------------------- */
+
+.userInfo-profileDiv {
+    display: flex;
+    flex-direction: row;
+    margin-left: 115px;
+}
+
+.userInfo-profileDiv-Div {
+    display: flex;
+    flex-direction: column;
+}
+
+.userInfo-inputDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.userInfo-span {
+    width: 80px;
+    text-align: center;
+}
+
+.userInfo-input {
+    width: 218px;
+    border: none;
+    border-bottom: solid 1px #959595;
+    height: 25px;
+    margin: 15px;
+}
+
+.userInfo-input > ::placeholder {
+    font-family: NanumSquareR;
+    font-size: 12px;
+    color: #5e5e5e;
+}
+
+.userInfo-inputNum {
+    width: 38px;
+    border: none;
+    border-bottom: solid 1px #959595;
+    height: 25px;
+    margin: 15px;
+    text-align: center;
+}
+
+.userInfo-inputIntro {
+    width: 718px;
+    border: none;
+    border-bottom: solid 1px #959595;
+    height: 25px;
+    margin: 15px;
+}
+.userInfo-inputDivIntro {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 50px;
+}
+
+/* ----------------------------------------------------------- */
+
+.userInfo-btnDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.userInfo-startBtn {
+    width: 250px;
+    height: 50px;
+    color: rgb(5, 18, 209);
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(43, 6, 207);
+    border-radius: 10px;
 }

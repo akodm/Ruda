@@ -325,7 +325,7 @@ router.get('/google', passport.authenticate('google', { scope: ['email'], sessio
 router.get('/facebook', passport.authenticate('facebook', { scope : ['public_profile'], session : false}));
 router.get('/naver', passport.authenticate('naver', { session : false }));
 
-// oauth로 로그인 시 토큰값을 돌려줌 -> 로컬 스토리지에 저장
+// 로그인 시 토큰값을 돌려줌 -> 로컬 스토리지에 저장
 router.get("/oauthlogin" , async(req,res) => {
 	const user = req.query;
 	const payload = {

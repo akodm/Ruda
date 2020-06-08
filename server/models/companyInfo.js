@@ -5,6 +5,9 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey : true,
             autoIncrement: true
         },
+        companyImage : {
+            type: DataTypes.STRING,     // 기업 사진
+        },
         companyCEO : {
             type: DataTypes.STRING,     // 기업 대표
         },

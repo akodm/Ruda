@@ -1,24 +1,39 @@
 import React, { Component } from 'react';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+
+import UserInfoBox from './UserInfoBox';
+import CompanyInfoBox from './CompanyInfoBox';
 import './UserInfo.css';
+
 class UserInfo extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            nums : 0,
+        }
+    }
     render() {
+        const { nums } = this.state;
+
         return (
-            <div className="UserInfo">
-                <div className="UserInfo-content">
-                    <div className="UserInfo-purpose">
-                        <span className="UserInfo-title">이용목적</span>
-                        <div className="UserInfo-purpose-btn">
-                            <div>
-                                <span>기업</span>
-                                <span>신입 인재들을 필요로하는 기업</span>
-                            </div>
-                            <div>
-                                <span>신입</span>
-                                <span>대학교 졸업생 또는 사회초년생</span>
-                            </div>
-                        </div>
-                    </div>      
+            <div className="userInfo">
+                <span className="userInfo-title">구직자 또는 기업을 선택하여 프로필 작성을 하여주세요!</span>
+                <div className="userInfo-div">
+                    <BottomNavigation
+                        value={nums}
+                        onChange={(event, newValue) => {
+                            this.setState({ nums : newValue });
+                        }}
+                        showLabels
+                        className="userInfo-tag"
+                        
+                    >
+                    <BottomNavigationAction label="구직자" style={{fontWeight:"bold"}}/>
+                    <BottomNavigationAction label="기업" style={{fontWeight:"bold"}} />
+                    </BottomNavigation> 
                 </div>
+                { nums ? <CompanyInfoBox /> : <UserInfoBox />}
             </div>
         );
     }
