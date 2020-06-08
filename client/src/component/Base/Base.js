@@ -20,6 +20,7 @@ import OtherHeader from './OtherHeader';
 import Mypages from '../Mypages/Mypages';
 import MyPopup from '../../components/mypopup/MyPopup';
 import UserInfo from '../UserInfo/UserInfo';
+import RecoCompany from '../Recommend/RecoCompany/RecoCompany';
 
 
 class Base extends Component {
@@ -87,6 +88,7 @@ class Base extends Component {
                     <Route path ="/mypage"><Mypages user={user}/></Route>
                     {/*마이메뉴*/}
                     <MyPopup/>
+
                     {/*화면업다운버튼*/ }
                     <UpDown/>
                     {/*하단 */}

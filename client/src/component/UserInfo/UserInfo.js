@@ -15,6 +15,7 @@ class UserInfo extends Component {
     }
     render() {
         const { nums } = this.state;
+
         return (
             <div className="userInfo">
                 <span className="userInfo-title">구직자 또는 기업을 선택하여 프로필 작성을 하여주세요!</span>
@@ -26,9 +27,10 @@ class UserInfo extends Component {
                         }}
                         showLabels
                         className="userInfo-tag"
+                        
                     >
-                    <BottomNavigationAction label="구직자" />
-                    <BottomNavigationAction label="기업" />
+                    <BottomNavigationAction label="구직자" style={{fontWeight:"bold"}}/>
+                    <BottomNavigationAction label="기업" style={{fontWeight:"bold"}} />
                     </BottomNavigation> 
                 </div>
                 { nums ? <CompanyInfoBox /> : <UserInfoBox />}

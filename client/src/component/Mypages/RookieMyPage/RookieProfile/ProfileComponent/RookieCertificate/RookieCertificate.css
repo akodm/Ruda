@@ -5,8 +5,8 @@
     margin-left: 50px;
     margin-right: 50px;
     padding:50px;
-    color: #5a5a5a;
-    font-size: 1rem;
+    color: #5a5a5ac2;
+    font-size: 14px;
     display: flex;
     flex-direction: column;
     font-family: NanumSquareR;
@@ -21,7 +21,9 @@
     margin-bottom: 30px;
 }
 .rookieCertificate-title-text{
-    font-size: 24px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #5a5a5ac2;
 }
 .rookieCertificate-relayout{
     font-size: 12px;
@@ -38,7 +40,7 @@
     justify-content: center;
     text-align: center;
     height: 40px;
-    font-size: 16px;
+    font-size: 14px;
     
 }
 .rookieCertificate-content-title{
@@ -64,7 +66,7 @@
     border:none;
     margin: 5px 10px 5px 10px;
     padding: 5px;
-    font-size: 16px;
+    font-size: 14px;
     color: #5a5a5a;
 }
 
@@ -74,7 +76,7 @@
     background-color: #ececec7a;
     border: none;
     text-align: center;
-    padding-top: 5px;
+    padding-top: 10px;
     margin-top: 5px;
 }
 .rookieCertificate-content-info-add:hover{

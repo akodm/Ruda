@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShareAlt,faPhoneAlt,faAt,faGlobe,faMapMarkerAlt,faUserGraduate,faCalendarAlt,faBriefcase } from '@fortawesome/free-solid-svg-icons'
 
 class RookieinfoView extends Component {
     constructor(props) {
@@ -29,39 +31,49 @@ class RookieinfoView extends Component {
                     <div className="rookieInfo-content">
                         <div className="rookieInfo-content-left">
                             <div className="phone">
+                             <span className="info-icons"><FontAwesomeIcon icon={faPhoneAlt} size="1x"/></span>
                                 <span className="phone-title">전화번호</span>
                                 <span className="phone-info">010-1234-1234</span>
                             </div>
                             <div className="email">
+                             <span className="info-icons"><FontAwesomeIcon icon={faAt} size="1x"/></span>
                                 <span className="email-title">이메일</span>
                                 <span className="email-info">abc@ruda.com</span>
                             </div>
                             <div className="site">
+                              <span className="info-icons"><FontAwesomeIcon icon={faGlobe} size="1x"/></span>
                                 <span className="site-title" >사이트</span>
                                 <span className="site-info">www.ruda.com</span>
                             </div>
                             <div className="address">
+                            <span className="info-icons"><FontAwesomeIcon icon={faMapMarkerAlt} size="1x"/></span>
                                 <span className="address-title">거주지</span>
                                 <span className="address-info">경기도 안양시</span>
                             </div>
                         </div>
                         <div className="rookieInfo-content-right">
+                            <div className="wontjob">
+                                <span className="info-icons"><FontAwesomeIcon icon={faBriefcase} size="1x"/></span>
+                                <span className="wontjob-title">희망직무</span>
+                                <span className="wontjob-info">프론트엔드개발자</span>
+                            </div>
+                            <div className="university">
+                             <span className="info-icons"><FontAwesomeIcon icon={faUserGraduate} size="1x"/></span>
+                                <span className="university-title">대학교/학과</span>
+                                <span className="university-info">대림대학교/모바일인터넷과</span>
+                            </div>
+                           
                             <div className="workdate">
+                                <span className="info-icons"><FontAwesomeIcon icon={faCalendarAlt} size="1x"/></span>
                                 <span className="workdate-title">근무날짜</span>
                                 <span className="workdate-info">2020-02-02</span>
                             </div>
                             <div className="trainingdate">
+                                <span className="info-icons"><FontAwesomeIcon icon={faCalendarAlt} size="1x"/></span>
                                 <span className="trainingdate-title">실습날짜</span>
                                 <span className="trainingdate-info">2020-02-02</span>
                             </div>
-                            <div className="university">
-                                <span className="university-title">대학교/학과</span>
-                                <span className="university-info">대림대학교/모바일인터넷과</span>
-                            </div>
-                            <div className="wontjob">
-                                <span className="wontjob-title">희망직무</span>
-                                <span className="wontjob-info">프론트엔드개발자</span>
-                            </div>
+                            
                         </div>
                     </div>
                </div>

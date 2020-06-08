@@ -1,19 +1,75 @@
-.rookie-user-main{
+.RookieMain{
+    border-bottom: 1px solid #d3d3d3f1;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding:50px;
+    color: #5a5a5a;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    font-family: NanumSquareR;
+}
+.RookieMain-user-main{
     display: flex;
     justify-content: center;
     flex-direction: column;
 }
-.rookie-user-mainprofile-left input{
-    height: 25px;
-    border-radius: 5px;
-    border: 1px solid rgba(185, 185, 185, 0.842);
-    padding: 5px;
-    width: 300px;
-    color:gray;
-    font-size: 14px;
+.RookieMain-user{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.RookieMain-user-img{
+    width: 80px;
+    height: 80px;
+    margin: 20px;
+}
+.RookieMain-user-name{
+    font-weight: 600;
+    margin: 5px;
+    font-size: 16px;
 }
 .line{
     height: 20px;
     border-bottom: 1px solid rgba(187, 187, 187, 0.514);
-    margin-bottom: 50px;
+    margin-bottom: 30px;
+}
+.RookieMain-title{
+    justify-content: space-between;
+}
+.RookieMain-user-text input{
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid rgba(185, 185, 185, 0.842);
+    padding: 5px;
+    width: 400px;
+    color:gray;
+    font-size: 14px;
+    margin: 10px;
+}
+.RookieMain-user-text button{
+    height: 35px;
+    width: 100px;
+    background-color: #96c0e2;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    padding: 5px;
+}
+.RookieMain-title,.RookieMain-content{
+    display: flex;
+    flex-direction: row;
+}
+.RookieMain-title-text,.RookieMain-relayout{
+    margin-bottom: 15px;
+}
+.RookieMain-title-text{
+    font-size: 20px;
+    font-weight: 600;
+    color: #5a5a5ac2;
+}
+.RookieMain-relayout{
+    font-size: 12px;
 }

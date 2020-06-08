@@ -17,7 +17,7 @@
 }
 .rookiept-title span{
     margin-left: 40px;
-    font-size: 2rem;
+    font-size: 26px;
     color: #5a5a5a;
 }
 
@@ -28,7 +28,7 @@
     margin-right: 50px;
     padding:50px;
     color: #5a5a5a;
-    font-size: 1rem;
+    font-size: 14px;
     display: flex;
     flex-direction: column;
     font-family: NanumSquareR;
@@ -49,8 +49,8 @@
     width: 300px;
     height: 35px;
     padding: 5px;
-    font-size: 24px;
-    color: #5a5a5a;
+    font-size: 14px;
+    color: #5a5a5ac2;
     margin-bottom: 15px;
     border-radius: 5px;
     border: 1px solid rgba(185, 185, 185, 0.842);
@@ -74,13 +74,15 @@
     align-items: left;
     font-family: NanumSquareR;
     margin-bottom: 10px;
+    font-size: 14px;
 }
 .rookiept-content-info-title,
 .rookiept-content-tag-title,.rookiept-content-createdate-title,.rookiept-content-with-title,
 .rookiept-content-Agency-title,.rookiept-content-site-title,.rookiept-content-img-title{
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 15px;
+    color: #5a5a5ac2;
 }
 .rookiept-content-img-images{
     width: 100%;
