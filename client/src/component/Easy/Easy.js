@@ -54,7 +54,7 @@ class Easy extends Component {
                 <div className="easy-div">
                     <span className="easy-title">간편로그인 / 회원가입</span>
                     <div className="easy-btn"><a href="http://localhost:5000/users/google"><img src="/Images/btn_google_signin_light_normal_web.png"/></a></div>
-                    <div className="easy-btn"><a href="http://localhost:5000/users/facebook">facebook</a></div>
+                    <div className="easy-btn"><a href="http://localhost:5000/users/facebook"><img src="/Images/facelogin.png" width="185px" height="40px"/></a></div>
                     <div className="easy-btn"><a href="http://localhost:5000/users/naver"><img src="/Images/naverlogin.png"/></a></div>
                     <div className="easy-bottom">
                         <div className="easy-line"></div>
