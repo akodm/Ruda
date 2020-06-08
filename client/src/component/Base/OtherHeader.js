@@ -9,7 +9,7 @@ class OtherHeader extends Component {
                 <div className="Header">
                     <nav  className="Header-nav">
                         <div className="Header-nav-menu">
-                            <Link to="/"><img src="/Images/header_logo.png"/></Link>
+                            <Link to="/"><img alt="img"  src="/Images/header_logo.png"/></Link>
                             <Link to="/company"><span className="Header-nav-menu-span">기업</span></Link>
                             <Link to="/rookie"><span className="Header-nav-menu-span">인재</span></Link>
                         </div>

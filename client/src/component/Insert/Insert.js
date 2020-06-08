@@ -13,7 +13,6 @@ class Insert extends Component {
             emailcode : "", // 이메일 인증 코드
             password : "", // 패스워드
             passwordconfirm : "", // 패스워드 확인
-            emailcode:"",
             emailck : false,
 
             emailValid : { state : true, result : false }, // 이메일 밸리데이션
@@ -49,7 +48,7 @@ class Insert extends Component {
     }
 
     async emailCheck(){
-        const {email,emailck}=this.state;
+        const {email}=this.state;
         console.log("뿌야");
         if(!email){
             alert("이메일을 입력해주세요.");

@@ -92,7 +92,8 @@ router.put("/updateemail", async(req, res) => {
             userPass: userPass,
             userName: req.body.userName, 
             userPhone : req.body.userPhone,
-            userAdd : req.body.userAdd,
+			userAdd : req.body.userAdd,
+			userCate : req.body.userCate,
             }, {
             where: {
                 email : req.body.userEmail,
@@ -116,7 +117,8 @@ router.put("/updateid", async(req, res) => {
             userPass: userPass,
             userName: req.body.userName, 
             userPhone : req.body.userPhone,
-            userAdd : req.body.userAdd,
+			userAdd : req.body.userAdd,
+			userCate : req.body.userCate,
             }, {
             where: {
                 id : req.body.userId,

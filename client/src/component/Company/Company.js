@@ -3,8 +3,8 @@ import './Company.css';
 import CompanyCard from './CompanyCard';
 import CompanySearch from './CompanySearch';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
 import Pagination from '@material-ui/lab/Pagination';
+
 class Company extends Component {
     render() {
         return (

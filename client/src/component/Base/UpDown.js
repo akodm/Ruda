@@ -13,10 +13,10 @@ class UpDown extends Component {
         return (
             <div className="updown">
                 <div className="updown-up" onClick={this.scrollToTop}>
-                <span className="updown-icons"><FontAwesomeIcon icon={faChevronCircleUp} size="3x"/></span>
+                    <span className="updown-icons"><FontAwesomeIcon icon={faChevronCircleUp} size="3x"/></span>
                 </div>
                 <div className="updown-down" onClick={this.scrollToDown}>
-                 <span className="updown-icons"><FontAwesomeIcon icon={faChevronCircleDown} size="3x"/></span>
+                    <span className="updown-icons"><FontAwesomeIcon icon={faChevronCircleDown} size="3x"/></span>
                 </div>
             </div>
         );

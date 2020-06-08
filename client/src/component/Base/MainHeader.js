@@ -3,19 +3,27 @@ import './Base.css';
 import { Link } from 'react-router-dom';
 
 class MainHeader extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            user : this.props.user,
+        }
+    }
     render() {
+        const { user } = this.state;
         return (
             <div className="MainHeader">
                 <div className="Header">
                     <nav  className="Header-nav">
                         <div className="Header-nav-menu">
-                            <Link to="/"><img src="/Images/header_logo.png"/></Link>
+                            <Link to="/"><img src="/Images/header_logo.png" alt="img" /></Link>
                             <Link to="/company"><span className="Header-nav-menu-span">기업</span></Link>
                             <Link to="/rookie"><span className="Header-nav-menu-span">인재</span></Link>
                         </div>
-                        <div className="Header-nav-recommendbtn"> 
-                            <span>추천기업</span>
-                            <span>추천인재</span>
+                        <div className="Header-nav-recommendbtn">
+                            { user && user.cate ? ( user.cate === "user" ?
+                            <span>추천기업</span> : 
+                            <span>추천인재</span> ) : ""}
                         </div>
                     </nav>
                 </div>

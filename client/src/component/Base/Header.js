@@ -20,14 +20,13 @@ class Header extends Component {
                 <RecoRookie  display={recoRooDisplay}/>
                 <nav  className="Header-nav">
                     <div className="Header-nav-menu">
-                        <Link to="/"><img src="/Images/header_logo.png"/></Link>
+                        <Link to="/"><img src="/Images/header_logo.png" alt="IMG" /></Link>
                         <Link to="/company"><span className="Header-nav-menu-span">기업</span></Link>
                         <Link to="/rookie"><span className="Header-nav-menu-span">인재</span></Link>
                     </div>
                     <div className="Header-nav-recommendbtn"> 
-                      <span  onClick={() => this.setState({ recoComDisplay : recoComDisplay === "none" ? "flex" : "none"})}>추천기업</span>
+                        <span  onClick={() => this.setState({ recoComDisplay : recoComDisplay === "none" ? "flex" : "none"})}>추천기업</span>
                         <span  onClick={() => this.setState({ recoRooDisplay : recoRooDisplay === "none" ? "flex" : "none"})}>추천인재</span>
-                      
                     </div>
                 </nav>
             </div>

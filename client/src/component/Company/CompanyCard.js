@@ -6,7 +6,7 @@ class CompanyCard extends Component {
             <div className="Company-Card">
             <div className="Company-Card-header">
                 <div className="Company-Card-like">
-                    <img src="/Images/1216649.svg" width="12px"height="12px"/>
+                    <img alt="img"  src="/Images/1216649.svg" width="12px"height="12px"/>
                     <span>14</span>
                 </div>
                 <div className="Company-Card-state">
@@ -16,7 +16,7 @@ class CompanyCard extends Component {
             </div>
             <div className="Company-Card-Profile">
                 <div className="Company-Card-Profile-img">
-                    <img src="/Images/company.png"/>
+                    <img alt="img"  src="/Images/company.png"/>
                 </div>
                 <div className="Company-Card-Profile-info">
                     <span className="Company-Card-Profile-info-name">하이루키</span>

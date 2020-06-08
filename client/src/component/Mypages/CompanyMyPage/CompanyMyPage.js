@@ -4,6 +4,7 @@ import CompanyProfile from './CompanyProfile/CompanyProfile';
 import Msg from '../../MyMenu/Message';
 import axios from 'axios';
 import './CompanyMypage.css';
+
 class CompanyMyPage extends Component {
     constructor(props) {
         super(props);
