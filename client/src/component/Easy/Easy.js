@@ -32,15 +32,13 @@ class Easy extends Component {
                         "Authorization":getUser.token, 
                     }
                 })
-                console.log(verify.data);
                 await this.setState({
                     user:{
                         tag:verify.data.tag,
                         email:verify.data.email,
                     }
                 })
-                console.log(this.state.user);
-                window.location="/";
+                window.location="/userinfo";
             }
         } catch(err) {
             console.log("소셜 로그인 에러" + err);

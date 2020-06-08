@@ -31,11 +31,11 @@ class Login extends Component {
             alert("값이 없거나 잘못된 값이 있습니다. 다시 확인해주세요.");
         // 올바른 체크의 경우
         } else {
-            console.log("Success !!");
+            console.log("login users");
             this.LoginChecked();
         }
     }
-    async LoginChecked(){
+    async LoginChecked(e){
         const {email,password}=this.state;
         try{
             const result = await axios.post(`http://localhost:5000/users/loginuser`,{
@@ -57,21 +57,17 @@ class Login extends Component {
                     "Authorization":getUser.token, 
                 }
             })
-            console.log(verify.data);
             await this.setState({
                 user:{
                     tag:verify.data.tag,
                     email:verify.data.email,
                 }
             })
-            console.log(this.state.user)
-            //window.location.href="/userinfo"; 
-            
-        }catch(err){
+            window.location="/userinfo";
+        } catch(err){
             console.log("user login err : " + err);
             localStorage.removeItem("users");
         }
-        
     }
     // props로 넘겨줄 함수, 매개변수로 들어오는 값 세 가지를 셋 스태이트 시킴
     // [name]+Valid 스태이트에 해당 불 값들 대입

@@ -35,7 +35,7 @@ class Base extends Component {
             }
         }
     }
-    componentDidMount(){
+    async componentDidMount(){
         let user = localStorage.getItem("users");
         if(user){
             user = JSON.parse(user);
@@ -44,48 +44,32 @@ class Base extends Component {
                     tag:user.tag,
                     email:user.email,
                 }
-            })            
-        }
-        const{url}=this.state;
-        let pathnames = url.pathname;
-        pathnames=pathnames.split("/");
-        console.log(pathnames);
-        let result=pathnames.toString();
-        console.log(result);
-            if(result==','){
-            this.setState({
-                pn:"home",
-            })
-        }else{
-            this.setState({
-                pn:"",
-            })
+            });
         }
     }
 
 
     render() {
-        const{pn, user}=this.state;
+        const{ user }=this.state;
         return (
             <div className="base-main">
                  <Router>
-                    {pn?<MainHeader/>:<OtherHeader/>}
                     {/*메인 */}
-                    <Route exact path="/"><Main/></Route>
+                    <Route exact path="/"><MainHeader/><Main/></Route>
                     {/*기업게시판*/ }
-                    <Route path ="/company"><Company/></Route>
+                    <Route path ="/company"><OtherHeader /><Company/></Route>
                     {/*인재게시판*/ }
-                    <Route path ="/rookie"><Rookie/></Route>
+                    <Route path ="/rookie"><OtherHeader /><Rookie/></Route>
                     {/*회원가입*/ }
-                    <Route path ="/insert"><Insert/></Route>
+                    <Route path ="/insert"><OtherHeader /><Insert/></Route>
                     {/*로그인*/ }
-                    <Route path ="/login"><Login/></Route>
+                    <Route path ="/login"><OtherHeader /><Login/></Route>
                     {/*간편로그인*/ }
-                    <Route path ="/easy"><Easy/></Route>
+                    <Route path ="/easy"><OtherHeader /><Easy/></Route>
                     {/*유저 기본정보 */}
-                    <Route path="/userinfo"><UserInfo/></Route>
+                    <Route path="/userinfo"><OtherHeader /><UserInfo/></Route>
                     {/*마이페이지*/}
-                    <Route path ="/mypage"><Mypages user={user}/></Route>
+                    <Route path ="/mypage"><OtherHeader /><Mypages user={user}/></Route>
                     {/*마이메뉴*/}
                     <MyPopup/>
 

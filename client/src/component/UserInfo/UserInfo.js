@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import { Link } from 'react-router-dom';
 
 import UserInfoBox from './UserInfoBox';
 import CompanyInfoBox from './CompanyInfoBox';
@@ -34,6 +35,7 @@ class UserInfo extends Component {
                     </BottomNavigation> 
                 </div>
                 { nums ? <CompanyInfoBox /> : <UserInfoBox />}
+                <Link to="/mypage" className="userInfo-saveBtn">저장하기</Link>
             </div>
         );
     }
