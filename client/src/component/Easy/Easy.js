@@ -7,11 +7,7 @@ class Easy extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            url:new URL(window.location),
-            user:{
-                tag:"",
-                email:""
-            }
+            url : new URL(window.location),
         }
     }
 
@@ -19,29 +15,21 @@ class Easy extends Component {
         try {
             const {url}=this.state;
             let urls = url;
-            const value = urls.searchParams.get("value");
-            const tag = urls.searchParams.get("tag");
+            const value = urls.searchParams.get("value") || null;
+            const tag = urls.searchParams.get("tag") || null;
+            
             if(value && tag) {
                 const authLogin = await axios.get(`http://localhost:5000/users/oauthlogin?tag=${tag}&email=${value}`);
+                
                 let userdata = JSON.stringify(authLogin.data);
                 localStorage.setItem("users",userdata);
-    
-                let getUser = JSON.parse(localStorage.getItem("users"));
-                const verify = await axios.get(`http://localhost:5000/users/verify/`,{
-                    headers:{
-                        "Authorization":getUser.token, 
-                    }
-                })
-                await this.setState({
-                    user:{
-                        tag:verify.data.tag,
-                        email:verify.data.email,
-                    }
-                })
-                window.location="/userinfo";
+                
+                window.location.href = "/";
             }
         } catch(err) {
             console.log("소셜 로그인 에러" + err);
+            alert("서버에러가 발생하였습니다. 다시 시도해주세요.");
+            localStorage.removeItem("users");
         }
     }
 

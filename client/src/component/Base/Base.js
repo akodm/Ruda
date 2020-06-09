@@ -18,20 +18,22 @@ import UpDown from './UpDown';
 // import socketio from 'socket.io-client';
 import OtherHeader from './OtherHeader';
 import Mypages from '../Mypages/Mypages';
-import MyPopup from '../../components/mypopup/MyPopup';
+import MyPopup from '../MyMenu/MyPopup';
 import UserInfo from '../UserInfo/UserInfo';
 
 class Base extends Component {
     constructor(props){
         super(props);
-        this.state={
-            user:{
+        this.state = {
+            user : {
+                id : 0,
                 tag:"",
                 email:"",
                 cate : "",
             },
         }
     }
+
     async componentDidMount() {
         let user = localStorage.getItem("users");
         if(user) {
@@ -39,13 +41,16 @@ class Base extends Component {
                 let getUser = JSON.parse(localStorage.getItem("users"));
                 const verify = await axios.get(`http://localhost:5000/users/verify`, {
                     headers : {
-                        "Authorization":getUser.token, 
+                        "Authorization" : getUser.token, 
                     }
                 })
+                const userId = await axios.get(`http://localhost:5000/users/oneemail?userEmail=${verify.data.email}&authCate=${verify.data.tag}`);
                 this.setState({
                     user : {
+                        id : userId.data.id,
                         tag : verify.data.tag,
                         email : verify.data.email,
+                        cate : userId.data.userCate,
                     }
                 });
             } catch(err) {
@@ -55,30 +60,38 @@ class Base extends Component {
         }
     }
 
+    getUser(user) {
+        this.setState({
+            user : user,
+        })
+    }
 
     render() {
         const { user } = this.state;
+        console.log(user);
         return (
             <div className="base-main">
                  <Router>
                     {/*메인 */}
-                    <Route exact path="/"><MainHeader /><Main user={user} /></Route>
+                    <Route exact path="/">
+                        { user.email ? <OtherHeader /> : <MainHeader /> }
+                        { user.email ? (user.cate ? <Mypages user={user} /> : <UserInfo user={user} />) : <Main /> }</Route>
                     {/*기업게시판*/ }
                     <Route path ="/company"><OtherHeader /><Company /></Route>
                     {/*인재게시판*/ }
                     <Route path ="/rookie"><OtherHeader /><Rookie /></Route>
                     {/*회원가입*/ }
-                    <Route path ="/insert"><OtherHeader /><Insert /></Route>
+                    <Route path ="/insert"><OtherHeader />{ !user.email && <Insert /> }</Route>
                     {/*로그인*/ }
-                    <Route path ="/login"><OtherHeader /><Login /></Route>
+                    <Route path ="/login"><OtherHeader />{ !user.email && <Login setUser={this.getUser.bind(this)} /> }</Route>
                     {/*간편로그인*/ }
-                    <Route path ="/easy"><OtherHeader /><Easy /></Route>
+                    <Route path ="/easy"><OtherHeader />{ !user.email && <Easy setUser={this.getUser.bind(this)} /> }</Route>
                     {/*유저 기본정보 */}
-                    <Route path="/userinfo"><OtherHeader /><UserInfo /></Route>
+                    <Route path="/userinfo"><OtherHeader />{ user.email && !user.cate && <UserInfo />}</Route>
                     {/*마이페이지*/}
                     <Route path ="/mypage"><OtherHeader /><Mypages user={user} /></Route>
                     {/*마이메뉴*/}
-                    { user && user.email && <MyPopup user={user} /> }
+                    { user.email && <MyPopup user={user} /> }
                     {/*화면업다운버튼*/ }
                     <UpDown />
                     {/*하단 */}

@@ -16,13 +16,9 @@ class Login extends Component {
             // state = 입력 정규식 텍스트 입출력 제어, result = 입력값이 정규식에 올바를 경우
             emailValid : { state : true, result : false },
             passwordValid : { state : true, result : false },
-            
-            user : { 
-                tag :"",
-                email:"",
-            }
         }
     }
+
     // 로그인 버튼을 누를 경우
     loginBtn() {
         const { emailValid, passwordValid } = this.state;
@@ -31,7 +27,6 @@ class Login extends Component {
             alert("값이 없거나 잘못된 값이 있습니다. 다시 확인해주세요.");
         // 올바른 체크의 경우
         } else {
-            console.log("login users");
             this.LoginChecked();
         }
     }
@@ -47,25 +42,16 @@ class Login extends Component {
                 alert("이메일 또는 패스워드가 다릅니다.")
                 return;
             }
+
             const authLogin = await axios.get(`http://localhost:5000/users/oauthlogin?tag=highrookie&email=${email}`);
+            
             let userdata = JSON.stringify(authLogin.data);
             localStorage.setItem("users",userdata);
-
-            let getUser = JSON.parse(localStorage.getItem("users"));
-            const verify = await axios.get(`http://localhost:5000/users/verify/`,{
-                headers:{
-                    "Authorization":getUser.token, 
-                }
-            })
-            await this.setState({
-                user:{
-                    tag:verify.data.tag,
-                    email:verify.data.email,
-                }
-            })
-            window.location="/userinfo";
+            
+            window.location.href = "/";
         } catch(err){
             console.log("user login err : " + err);
+            alert("서버에러가 발생하였습니다. 다시 시도해주세요.");
             localStorage.removeItem("users");
         }
     }

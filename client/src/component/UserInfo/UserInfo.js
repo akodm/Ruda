@@ -52,7 +52,6 @@ class UserInfo extends Component {
                         }}
                         showLabels
                         className="userInfo-tag"
-                        
                     >
                     <BottomNavigationAction label="구직자" style={{fontWeight:"bold"}}/>
                     <BottomNavigationAction label="기업" style={{fontWeight:"bold"}} />

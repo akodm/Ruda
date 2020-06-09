@@ -26,21 +26,36 @@ class Insert extends Component {
     async insertBtn() {
         const { emailValid, emailcodeValid, passwordValid, passwordconfirmValid, password, passwordconfirm } = this.state;
         const {email,emailcode}=this.state;
-        let emailAuth = await axios.post("http://localhost:5000/emailAuth/emailauth", {
-            token : emailcode
-        })
-        if(!emailAuth.data || !emailValid.result || !emailcodeValid || !passwordValid.result || !passwordconfirmValid.result ||password !== passwordconfirm) {
-            alert("값이 없거나 잘못된 값이 있습니다. 다시 확인해주세요.");
-            return;
+        try {
+            let emailAuth = axios.post("http://localhost:5000/emailAuth/emailauth", { token : emailcode });
+            let authResult = axios.get(`http://localhost:5000/emailAuth/one?token=${emailcode}&email=${email}`);
+
+            await Promise.all([emailAuth, authResult]).then((data) => {
+                console.log(data);
+                emailAuth = data[0];
+                authResult = data[1];
+            });
+
+            if(!emailAuth.data || !emailValid.result || !emailcodeValid || !passwordValid.result || !passwordconfirmValid.result ||password !== passwordconfirm) {
+                alert("값이 없거나 잘못된 값이 있습니다. 다시 확인해주세요.");
+                return;
+            }
+
+            await axios.post("http://localhost:5000/users/create",{
+                userEmail:email,
+                userPass:password,
+            })
+
+            const authLogin = await axios.get(`http://localhost:5000/users/oauthlogin?tag=highrookie&email=${email}`);
+            let userdata = JSON.stringify(authLogin.data);
+            localStorage.setItem("users",userdata);
+    
+            alert("회원가입이 완료되었습니다.");
+            window.location.href="/";
+        } catch(err) {
+            console.log("insert save or insert to login err : " + err);
+            alert("서버에러로 회원가입에 실패하였습니다.");
         }
-        const userCreate = await axios.post("http://localhost:5000/users/create",{
-            userEmail:email,
-            userPass:password,
-        })
-        alert("회원가입이 완료되었습니다.");
-        window.location.href="/login";
-        console.log("Success !!");
-        console.log(userCreate);
     }
 
     validSet(name, boolstate, boolresult) {
@@ -49,7 +64,6 @@ class Insert extends Component {
 
     async emailCheck(){
         const {email}=this.state;
-        console.log("뿌야");
         if(!email){
             alert("이메일을 입력해주세요.");
             this.setState({ emailck : false });

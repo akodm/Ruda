@@ -322,6 +322,15 @@ router.get('/verify', passport.authenticate('jwt', { session: false }), (req, re
     });
 });
 
+router.get('/logout', (req,res) => {
+	try {
+		req.logout();
+	} catch (err) {
+		console.log(__filename + "에서 에러 : " + err);
+	}
+	res.redirect("http://localhost:3000/");
+});
+
 // 구글, 페이스북, 네이버
 router.get('/google', passport.authenticate('google', { scope: ['email'], session : false }));
 router.get('/facebook', passport.authenticate('facebook', { scope : ['public_profile'], session : false}));
