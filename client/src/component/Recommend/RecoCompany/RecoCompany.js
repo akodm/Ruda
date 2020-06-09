@@ -12,13 +12,11 @@ class RecoCompany extends Component {
         }
     }
     closePop(){
-        this.setState=({
-            RecoDisplay:"none",
-        })
+        this.props.close("none");
     }
     render() {
         return (
-            <div className="RecoCompany" style={{display:this.props.display}}>
+            <div className="RecoCompany" style={{display:this.props.display}} onClick={this.closePop.bind(this)} >
                 <div className="RecoCompany-content">
                     <span className="RecoCompany-content-title">추천기업</span>
                    <RecoCompanyContent/>
