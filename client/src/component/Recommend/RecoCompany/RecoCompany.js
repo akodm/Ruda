@@ -19,12 +19,11 @@ class RecoCompany extends Component {
             <div className="RecoCompany" style={{display:this.props.display}} onClick={this.closePop.bind(this)} >
                 <div className="RecoCompany-content">
                     <span className="RecoCompany-content-title">추천기업</span>
-                   <RecoCompanyContent/>
-                    <div className="RecoCompany-content-btns">
+                    <div className="RecoCompany-content-slide">
                         <span className="RecoCompany-content-btns-arrow"><FontAwesomeIcon icon={faCaretLeft} size="3x"/></span>
-                        <span className="RecoCompany-content-btns-text">보러가기</span>
-                        <span className="RecoCompany-content-btns-arrow"><FontAwesomeIcon icon={faCaretRight} size="3x"/></span>
-                    </div>
+                        <RecoCompanyContent/>
+                        <span className="RecoCompany-content-btns-arrow"><FontAwesomeIcon icon={faCaretRight} size="3x"/></span>    
+                    </div> 
                 </div>
             </div>
         );

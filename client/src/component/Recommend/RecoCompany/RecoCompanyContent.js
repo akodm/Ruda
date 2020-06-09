@@ -11,7 +11,6 @@ class RecoCompanyContent extends Component {
                     <span>5개의 포트폴리오가 있습니다.</span>
                     <span>5개의 포트폴리오가 있습니다.</span>
                 </div>
-                
             </div>
         );
     }

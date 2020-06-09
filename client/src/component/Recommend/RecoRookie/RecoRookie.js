@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './RecoRookie.css';
 import { Card } from '@material-ui/core';
-import RecoCompanyContent from '../RecoCompany/RecoCompanyContent';
+import RecoRookieContent from '../RecoRookie/RecoRookieContent';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretLeft,faCaretRight} from '@fortawesome/free-solid-svg-icons'
 class RecoRookie extends Component {
@@ -19,14 +19,12 @@ class RecoRookie extends Component {
         return (
             <div className="RecoRookie" style={{display:this.props.display}} onClick={this.closePop.bind(this)} >
                 <div className="RecoRookie-content">
-                    <span>추천인재</span>
-                    <Card/>
-                    <RecoCompanyContent/>
-                </div>
-                <div className="RecoCompany-content-btns">
-                    <span className="RecoCompany-content-btns-arrow"><FontAwesomeIcon icon={faCaretLeft} size="3x"/></span>
-                    <span className="RecoCompany-content-btns-text">보러가기</span>
-                    <span className="RecoCompany-content-btns-arrow"><FontAwesomeIcon icon={faCaretRight} size="3x"/></span>
+                    <span className="RecoRookie-content-title">추천기업</span>
+                    <div className="RecoRookie-content-slide">
+                        <span className="RecoRookie-content-btns-arrow"><FontAwesomeIcon icon={faCaretLeft} size="3x"/></span>
+                        <RecoRookieContent/>
+                        <span className="RecoRookie-content-btns-arrow"><FontAwesomeIcon icon={faCaretRight} size="3x"/></span>    
+                    </div> 
                 </div>
             </div>
         );

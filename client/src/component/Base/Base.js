@@ -18,7 +18,7 @@ import UpDown from './UpDown';
 // import socketio from 'socket.io-client';
 import OtherHeader from './OtherHeader';
 import Mypages from '../Mypages/Mypages';
-import MyPopup from '../../components/mypopup/MyPopup';
+import MyPopup from '../../component/MyMenu/MyPopup';
 import UserInfo from '../UserInfo/UserInfo';
 
 class Base extends Component {

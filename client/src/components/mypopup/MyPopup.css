@@ -25,7 +25,10 @@
     cursor: pointer;
     font-weight: 700;
     font-family: 나눔스퀘어;
-    color: white;
+    color: #5b7d9e;
+    padding: 10px;
+    background-color: white;
+    height: 20px;
    
 }
 .mypopup-div img, .mypopup-logout{
