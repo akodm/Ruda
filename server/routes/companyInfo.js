@@ -51,7 +51,18 @@ router.post("/create", async (req, res) => {
 				userId : req.body.userId
 			},
 			defaults : {
-				userId : req.body.userId
+				userId : req.body.userId,
+				companyImage: req.body.companyImage,
+				companyCEO: req.body.companyCEO,
+				companyQuestion: req.body.companyQuestion,
+				companyRule: req.body.companyRule,
+				companyOccupation : req.body.companyOccupation,
+				companyIntro : req.body.companyIntro,
+				companyAgeAvg : req.body.companyAgeAvg,
+				companyRequest : req.body.companyRequest,
+				companySince : req.body.companySince,
+				companyWorkDate : req.body.companyWorkDate,
+				companyWelfare : req.body.companyWelfare,
 			}
 		}).spread((none, created)=>{
 			if(created)
@@ -68,7 +79,8 @@ router.put("/update", async(req, res) => {
     let result = null;
     try {
         await CompanyInfo.update({ 
-            companyCEO: req.body.companyCEO,
+			companyImage: req.body.companyImage,
+			companyCEO: req.body.companyCEO,
             companyQuestion: req.body.companyQuestion,
             companyRule: req.body.companyRule,
             companyAwards: req.body.companyAwards, 

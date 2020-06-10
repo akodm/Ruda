@@ -8,18 +8,25 @@ class Mypages extends Component {
         super(props);
         this.scrollToTop();
         this.state = {
+            url : new URL(window.location),
             user : this.props.user || null,
             load : "",
         }
     }
 
     componentDidMount() {
-        if(!this.state.user.cate) {
-            alert("기본 정보 등록을 먼저 입력하여 주시기 바랍니다.");
-            window.location.href = "/userinfo";
+        const { url } = this.state;
+        let urls = url.pathname;
+        urls = urls.split("/");
+        if(urls[2]) {
+
         } else {
-            this.setState({ load : "load" });
+            if(!this.state.user.cate) {
+                alert("기본 정보 등록을 먼저 입력하여 주시기 바랍니다.");
+                window.location.href = "/userinfo";
+            }
         }
+        this.setState({ load : "load" });
     }
     
     scrollToTop = () =>{
