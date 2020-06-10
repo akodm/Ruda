@@ -9,8 +9,7 @@ class Mypages extends Component {
         this.scrollToTop();
         this.state = {
             url : new URL(window.location),
-            user : this.props.user || null,
-            load : "",
+            load : false,
         }
     }
 
@@ -18,15 +17,14 @@ class Mypages extends Component {
         const { url } = this.state;
         let urls = url.pathname;
         urls = urls.split("/");
+        // id가 있을 경우
         if(urls[2]) {
 
+        // url이 없거나 mypage인 경우
         } else {
-            if(!this.state.user.cate) {
-                alert("기본 정보 등록을 먼저 입력하여 주시기 바랍니다.");
-                window.location.href = "/userinfo";
-            }
+
         }
-        this.setState({ load : "load" });
+        this.setState({ load : true });
     }
     
     scrollToTop = () =>{
@@ -34,10 +32,11 @@ class Mypages extends Component {
     }
 
     render() {
-        const { user,load } = this.state;
+        const { load } = this.state;
+        let user = this.props.user;
         return load && (
             <div className="Mypages">
-                {user.cate !== "user" ? <CompanyMypage/>:<RookieMypage/>}
+                { user.cate !== "user" ? <CompanyMypage/>:<RookieMypage/>}
             </div>
         );
     }

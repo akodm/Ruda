@@ -26,7 +26,7 @@ class Base extends Component {
         super(props);
         this.state = {
             user : {
-                id : 0,
+                id : 1,
                 tag:"",
                 email:"",
                 cate : "",
