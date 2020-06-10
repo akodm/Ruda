@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class CompanyInfoBox extends Component {
     constructor(props) {
@@ -24,13 +25,29 @@ class CompanyInfoBox extends Component {
             keywords : [],
         }
     }
+
     // 이미지 업로드 할 시
     onChangeImageValue() {
 
     }
-    // 시작하기 버튼 누를 시
-    startBtnClick() {
 
+    // 시작하기 버튼 누를 시
+    async saveUserInfoBtn() {
+        const { nums,user } = this.props;
+        const {  } = this.state;
+        try {
+            // 구직자 시
+            if(!nums) {
+                const result = await axios.post("http://localhost:5000/companyInfos/create", {
+                    userId : user.id,
+                })
+            // 기업 시
+            } else {
+
+            }
+        } catch(err) {
+            console.log("user info save err : " + err);
+        }
     }
     // 스태이트 변경하게 하는 함수
     onChangeValue(e) {
@@ -105,7 +122,9 @@ class CompanyInfoBox extends Component {
                         <div className="userInfo-tagBox"></div>
                     </div>
                 </div>
+                <button className="userInfo-saveBtn" onClick={this.saveUserInfoBtn.bind(this)}>저장하기</button>
             </div>
+            
         );
     }
 }

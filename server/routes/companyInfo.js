@@ -79,6 +79,9 @@ router.put("/update", async(req, res) => {
     let result = null;
     try {
         await CompanyInfo.update({ 
+			companyName: req.body.companyName,
+			companyPhone: req.body.companyPhone,
+			companyAdd: req.body.companyAdd,
 			companyImage: req.body.companyImage,
 			companyCEO: req.body.companyCEO,
             companyQuestion: req.body.companyQuestion,
