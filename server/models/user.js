@@ -16,15 +16,6 @@ module.exports = (sequelize, DataTypes) => {
         userPass : {
             type: DataTypes.STRING,     // 로그인 비밀번호
         },
-        userName : {
-            type: DataTypes.STRING,     // 유저 이름
-        },
-        userPhone : {
-            type: DataTypes.STRING,     // 유저 번호
-        },
-        userAdd : {
-            type: DataTypes.STRING,     // 주소
-        },
         userCate : {
             type: DataTypes.STRING,     // 기업인지 유저인지
         },

@@ -5,6 +5,15 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey : true,
             autoIncrement: true
         },
+        userName : {
+            type: DataTypes.STRING,     // 유저 이름
+        },
+        userPhone : {
+            type: DataTypes.STRING,     // 유저 번호
+        },
+        userAdd : {
+            type: DataTypes.STRING,     // 주소
+        },
         userIamge : {
             type: DataTypes.STRING,     // 본인 사진
         },
