@@ -27,6 +27,7 @@
 .userInfo-saveBtn {
     width: 250px;
     height: 50px;
+    border: none;
     background-color: #759dc4c5;
     font-size: 12px;
     border-radius: 10px;
