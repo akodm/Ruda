@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         userAdd : {
             type: DataTypes.STRING,     // 주소
         },
-        userIamge : {
+        userImage : {
             type: DataTypes.STRING,     // 본인 사진
         },
         userTraning : {

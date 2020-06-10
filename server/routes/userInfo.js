@@ -52,7 +52,10 @@ router.post("/create", async (req, res) => {
 			},
 			defaults : {
 				userId : req.body.userId,
-				userIamge : req.body.userIamge,
+				userName: req.body.userName,
+				userPhone: req.body.userPhone,
+				userAdd: req.body.userAdd,
+				userImage : req.body.userImage,
 				userTraning: req.body.userTraning,
 				userUnvcity: req.body.userUnvcity, 
 				userSubject : req.body.userSubject,

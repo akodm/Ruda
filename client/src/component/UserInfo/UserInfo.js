@@ -25,9 +25,19 @@ class UserInfo extends Component {
         try {
             if(!nums){
                 const result = await axios.post(`http://localhost:5000/userInfos/create`,{
-                    userId:user.id,
-                    userUnvcity:user.unvcity,
-                    user
+                    userId : user.id,
+                    userName: userInfo.name,
+                    userPhone: userInfo.phone,
+                    userAdd: userInfo.add,
+                    userImage : userInfo.image,
+                    userTraning: userInfo.traning,
+                    userUnvcity: userInfo.unvcity, 
+                    userSubject : userInfo.subject,
+                    userIntro : userInfo.intro,
+                    userTags : userInfo.tags,
+                    userSpecialty : userInfo.specialty,
+                    userWorkDate : userInfo.workDate,
+                    userKeyword : userInfo.keyword,
                 }) 
                 
             }else{
