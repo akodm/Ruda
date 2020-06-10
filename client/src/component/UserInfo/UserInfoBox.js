@@ -126,7 +126,11 @@ class UserInfoBox extends Component {
                         <div className="userInfo-comentDiv">
                             <span className="userInfo-coment">나의 태그</span>
                         </div>
-                        <div className="userInfo-tagBox"></div>
+                        <div className="userInfo-tagBox">
+                            <div className="userInfo-tagMargin">
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

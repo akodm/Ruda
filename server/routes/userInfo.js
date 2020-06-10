@@ -51,7 +51,16 @@ router.post("/create", async (req, res) => {
 				userId : req.body.userId
 			},
 			defaults : {
-				userId : req.body.userId
+				userId : req.body.userId,
+				userIamge : req.body.userIamge,
+				userTraning: req.body.userTraning,
+				userUnvcity: req.body.userUnvcity, 
+				userSubject : req.body.userSubject,
+				userIntro : req.body.userIntro,
+				userTags : req.body.userTags,
+				userSpecialty : req.body.userSpecialty,
+				userWorkDate : req.body.userWorkDate,
+				userKeyword : req.body.userKeyword,
 			}
 		}).spread((none, created)=>{
 			if(created)
@@ -68,14 +77,15 @@ router.put("/update", async(req, res) => {
     let result = null;
     try {
         await UserInfo.update({ 
-            userTraning: req.body.userTraning,
+			userIamge : req.body.userIamge,
+			userTraning: req.body.userTraning,
             userUnvcity: req.body.userUnvcity, 
             userSubject : req.body.userSubject,
             userAwards : req.body.userAwards,
 			userCertification : req.body.userCertification,
 			userIntro : req.body.userIntro,
             userKeyword : req.body.userKeyword,
-            userTags : req.body.userGraph,
+            userTags : req.body.userTags,
             userFile : req.body.userFile,
             userPortfolio : req.body.userPortfolio,
             userLike : req.body.userLike,
