@@ -24,10 +24,15 @@ class UserInfo extends Component {
         const { nums,user,userInfo } = this.state;
         try {
             if(!nums){
-                const result = await axios.post(`http://localhost:5000/userInfos/create`) 
-
+                const result = await axios.post(`http://localhost:5000/userInfos/create`,{
+                    userId:user.id,
+                    userUnvcity:user.unvcity,
+                    user
+                }) 
+                
             }else{
                 const result = await axios.post(`http://localhost:5000/userInfos/create`) 
+                
             }
         } catch (err) {
             console.log(err);
