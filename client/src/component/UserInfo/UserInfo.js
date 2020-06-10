@@ -14,21 +14,20 @@ class UserInfo extends Component {
         this.state = {
             nums : 0,
             user : this.props.user,
-            userInfo : {},
+            userInfo : {
+
+            },
         }
     }
 
     async saveUserInfoBtn() {
-        const { nums,user } = this.state;
+        const { nums,user,userInfo } = this.state;
         try {
-            const result = await axios.post("http://localhost:5000/users/updateemail", {
-                userEmail : user.email,
-                authCate : user.tag,
-            });
-            
-            if(!result) {
-                alert("업데이트에 실패했습니다. 다시 시도해주세요.");
-                return;
+            if(!nums){
+                const result = await axios.post(`http://localhost:5000/userInfos/create`) 
+
+            }else{
+                const result = await axios.post(`http://localhost:5000/userInfos/create`) 
             }
         } catch (err) {
             console.log(err);

@@ -74,22 +74,22 @@ class Base extends Component {
                  <Router>
                     {/*메인 */}
                     <Route exact path="/">
-                        { user.email ? <OtherHeader /> : <MainHeader /> }
+                        { user.email ? <OtherHeader user={user} /> : <MainHeader user={user} /> }
                         { user.email ? (user.cate ? <Mypages user={user} /> : <UserInfo user={user} />) : <Main /> }</Route>
                     {/*기업게시판*/ }
-                    <Route path ="/company"><OtherHeader /><Company /></Route>
+                    <Route path ="/company"><OtherHeader user={user} /><Company /></Route>
                     {/*인재게시판*/ }
-                    <Route path ="/rookie"><OtherHeader /><Rookie /></Route>
+                    <Route path ="/rookie"><OtherHeader user={user} /><Rookie /></Route>
                     {/*회원가입*/ }
-                    <Route path ="/insert"><OtherHeader />{ !user.email && <Insert /> }</Route>
+                    <Route path ="/insert"><OtherHeader user={user} />{ !user.email && <Insert /> }</Route>
                     {/*로그인*/ }
-                    <Route path ="/login"><OtherHeader />{ !user.email && <Login setUser={this.getUser.bind(this)} /> }</Route>
+                    <Route path ="/login"><OtherHeader user={user} />{ !user.email && <Login setUser={this.getUser.bind(this)} /> }</Route>
                     {/*간편로그인*/ }
-                    <Route path ="/easy"><OtherHeader />{ !user.email && <Easy setUser={this.getUser.bind(this)} /> }</Route>
+                    <Route path ="/easy"><OtherHeader user={user} />{ !user.email && <Easy setUser={this.getUser.bind(this)} /> }</Route>
                     {/*유저 기본정보 */}
-                    <Route path="/userinfo"><OtherHeader />{ user.email && !user.cate && <UserInfo />}</Route>
+                    <Route path="/userinfo"><OtherHeader user={user} />{ user.email && !user.cate && <UserInfo />}</Route>
                     {/*마이페이지*/}
-                    <Route path ="/mypage"><OtherHeader /><Mypages user={user} /></Route>
+                    <Route path ="/mypage"><OtherHeader user={user} /><Mypages user={user} /></Route>
                     {/*마이메뉴*/}
                     { user.email && <MyPopup user={user} /> }
                     {/*화면업다운버튼*/ }

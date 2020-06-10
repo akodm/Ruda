@@ -4,17 +4,11 @@ import { Link } from 'react-router-dom';
 import Header from './Header';
 
 class MainHeader extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-  
-        }
-    }
     render() {
-        
+        const user = this.props.user;
         return (
             <div className="MainHeader">
-                  <Header/>
+                  <Header user={user} />
                 <div className="MainHeader-content">
                     <div className="MainHeader-text">
                         <h2>당신의 첫 시작을 하이루키와 함께 하세요</h2>

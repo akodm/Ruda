@@ -5,9 +5,10 @@ import Header from './Header';
 
 class OtherHeader extends Component {
     render() {
+        const user = this.props.user;
         return (
             <div className="OtherHeader">
-               <Header/>
+                <Header user={user} />
             </div>
         );
     }

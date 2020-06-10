@@ -13,29 +13,29 @@ class Header extends Component {
             user : this.props.user,
         }
     }
-    searchUser() {
-        const user = this.props.user;
-        if(!user.user)
-            return alert("로그인 후 사용 가능합니다.");
-        // 현재 사용자가 유저인 경우
-        if(user.cate === "user") {
-
-        // 현재 사용자가 기업인 경우
-        } else {
-
-        }
-    }
 
     closePop(e){
         this.setState({
             recoComDisplay : e,
             recoRooDisplay : e,
         });
-    
     }
+
+    openPop(num) {
+        const { user,recoComDisplay, recoRooDisplay } = this.state;
+        console.log(user);
+        if(!user||!user.email)
+            return alert("로그인 후 이용 가능합니다.");
+   
+        if(num) {
+            this.setState({ recoComDisplay : recoComDisplay === "none" ? "flex" : "none"})
+        } else {
+            this.setState({ recoRooDisplay : recoRooDisplay === "none" ? "flex" : "none"})
+        }
+    }
+
     render() {
         const {  user,recoComDisplay, recoRooDisplay}=this.state;
-      
         return (
             <div className="Header">
                 <RecoCompany display={recoComDisplay} close={this.closePop.bind(this)} />
@@ -47,12 +47,8 @@ class Header extends Component {
                         <Link to="/rookie"><span className="Header-nav-menu-span">인재</span></Link>
                     </div>
                     <div className="Header-nav-recommendbtn">
-                        {/* user && user.cate ? ( user.cate === "user" ?
-                        <span>추천기업</span> : 
-                        <span>추천인재</span> ) : ""*/}    
-                        
-                        <span onClick={() => this.setState({ recoComDisplay : recoComDisplay === "none" ? "flex" : "none"})}>추천기업</span> 
-                        <span onClick={() => this.setState({ recoRooDisplay : recoRooDisplay === "none" ? "flex" : "none"})}>추천인재</span>  
+                        <span onClick={this.openPop.bind(this,1)}>추천기업</span> 
+                        <span onClick={this.openPop.bind(this,0)}>추천인재</span>  
                     </div>
                 </nav>
             </div>
