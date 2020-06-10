@@ -13,11 +13,25 @@ class Header extends Component {
             user : this.props.user,
         }
     }
+    searchUser() {
+        const user = this.props.user;
+        if(!user.user)
+            return alert("로그인 후 사용 가능합니다.");
+        // 현재 사용자가 유저인 경우
+        if(user.cate === "user") {
+
+        // 현재 사용자가 기업인 경우
+        } else {
+
+        }
+    }
+
     closePop(e){
         this.setState({
             recoComDisplay : e,
             recoRooDisplay : e,
-        })
+        });
+    
     }
     render() {
         const {  user,recoComDisplay, recoRooDisplay}=this.state;

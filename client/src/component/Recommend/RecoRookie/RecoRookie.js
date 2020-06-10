@@ -19,7 +19,7 @@ class RecoRookie extends Component {
         return (
             <div className="RecoRookie" style={{display:this.props.display}} onClick={this.closePop.bind(this)} >
                 <div className="RecoRookie-content">
-                    <span className="RecoRookie-content-title">추천기업</span>
+                    <span className="RecoRookie-content-title">추천인재</span>
                     <div className="RecoRookie-content-slide">
                         <span className="RecoRookie-content-btns-arrow"><FontAwesomeIcon icon={faCaretLeft} size="3x"/></span>
                         <RecoRookieContent/>

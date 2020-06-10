@@ -19,7 +19,7 @@ class MyPopup extends Component {
     logout(){
         localStorage.removeItem("users");
         alert("로그아웃 되었습니다.");
-        window.location.href="http://localhost:3000/";
+        window.location.href = "/";
     }
     
     render() {

@@ -25,6 +25,7 @@ router.get("/one", async (req, res) => {
 		const result = await EmailAuth.findOne({
 			where : {
 				token : req.query.token,
+				email : req.query.email,
 			}
 		});
 		res.send(result);
