@@ -84,16 +84,31 @@ router.post("/create", async(req, res) => {
 });
 
 // 유저 업데이트
+router.put("/updatecate", async(req, res) => {
+    let result = null;
+    try {
+        await User.update({ 
+            userCate: req.body.userCate,
+            }, {
+            where: {
+                id : req.body.id,
+            }
+        });
+        result = true;
+    } catch(err) {
+        console.log(__filename + " 에서 유저 업데이트 에러 발생 내용= " + err);
+        result = false;
+    }
+    res.send(result);
+});
+
+// 유저 업데이트
 router.put("/updateemail", async(req, res) => {
     let result = null;
     let userPass = await hashFunc(req.body.userPass);
     try {
         await User.update({ 
             userPass: userPass,
-            userName: req.body.userName, 
-            userPhone : req.body.userPhone,
-			userAdd : req.body.userAdd,
-			userCate : req.body.userCate,
             }, {
             where: {
                 email : req.body.userEmail,
@@ -115,10 +130,6 @@ router.put("/updateid", async(req, res) => {
     try {
         await User.update({ 
             userPass: userPass,
-            userName: req.body.userName, 
-            userPhone : req.body.userPhone,
-			userAdd : req.body.userAdd,
-			userCate : req.body.userCate,
             }, {
             where: {
                 id : req.body.userId,
