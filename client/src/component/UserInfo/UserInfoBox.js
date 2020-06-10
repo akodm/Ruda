@@ -33,7 +33,7 @@ class UserInfoBox extends Component {
 
     // 시작하기 버튼 누를 시
     async saveUserInfoBtn() {
-        const { nums,user } = this.props;
+        const user = this.props.user;
         const { profileImg,name,
             phone1,phone2,phone3,
             intro,address1,address2,
@@ -41,12 +41,18 @@ class UserInfoBox extends Component {
             tags,keywords } = this.state;
         try {
             // 구직자 시
-            if(!nums) {
-                const result = await axios.post("http://localhost:5000/userInfos/create", {
+                let userCateUpdat = axios.put("http://localhost:5000/users/updatecate", {
+                    userCate : "user",
+                    id : user.id
+                })
+
+                let phone = phone1+phone2+phone3;
+                let address = address1 + address2;
+                let result = axios.post("http://localhost:5000/userInfos/create", {
                     userId : user.id,
                     userName: name,
-                    userPhone: phone1+phone2+phone3,
-                    userAdd:address1+address2,
+                    userPhone: phone,
+                    userAdd: address,
                     userImage : "",
                     userTraning: "",
                     userUnvcity: collage,
@@ -57,14 +63,18 @@ class UserInfoBox extends Component {
                     userWorkDate : "",
                     userKeyword : "",
                 })
-                if(result){
-                    alert("기본입력이 완료되었습니다.");
-                    window.herf="/mypage";
-                }
-            // 기업 시
-            } else {
 
-            }
+                await Promise.all([userCateUpdat,result]).then(data => {
+                    userCateUpdat = data[0];
+                    result = data[1];
+                })
+
+                console.log(userCateUpdat.data, result.data);
+                if(result.data){
+                    alert("기본입력이 완료되었습니다.");
+                } else {
+                    alert("다시 시도해주세요.")
+                }
         } catch(err) {
             console.log("user info save err : " + err);
         }
