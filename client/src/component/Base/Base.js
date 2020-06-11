@@ -55,7 +55,6 @@ class Base extends Component {
                 });
             } catch(err) {
                 console.log("verify err : " + err);
-                localStorage.removeItem("users");
             }
         }
     }
@@ -68,7 +67,6 @@ class Base extends Component {
 
     render() {
         const { user } = this.state;
-        console.log(user);
         return (
             <div className="base-main">
                  <Router>
@@ -89,7 +87,7 @@ class Base extends Component {
                     {/*유저 기본정보 */}
                     <Route path="/userinfo"><OtherHeader user={user} />{ user.email && !user.cate && <UserInfo />}</Route>
                     {/*마이페이지*/}
-                    <Route path ="/mypage"><OtherHeader user={user} /><Mypages user={user} /></Route>
+                    <Route path="/mypage"><OtherHeader user={user} /><Mypages user={user} /></Route>
                     {/*마이메뉴*/}
                     { user.email && <MyPopup user={user} /> }
                     {/*화면업다운버튼*/ }

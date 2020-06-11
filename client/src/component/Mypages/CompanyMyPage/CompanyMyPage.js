@@ -15,11 +15,16 @@ class CompanyMyPage extends Component {
             profileClick:"profile-btn",
             hireClick:"hire-btn",
             changePage:true,
+            user : this.props.user,
+        
+            load : false,
         }
     }
 
     async componentDidMount() {
-
+        const {user} = this.state;
+        console.log(this.props);
+        this.setState({ load : true });
     }
 
     ProfilechangePage(){
@@ -43,8 +48,9 @@ class CompanyMyPage extends Component {
     }
 
     render() {
+        const { load } = this.state;
         const { msgDisplay,likeUser,ptbtnClick,profileClick,changePage,hireClick } = this.state;
-        return (
+        return load ? (
             <div className="company-main">
                 <div className="btn-cont">
                     <Msg display= { msgDisplay } />
@@ -71,7 +77,7 @@ class CompanyMyPage extends Component {
                     </div>
                 </div>
             </div>
-        );
+        ) : (<div style={{width:"100%", height:"800px",display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>로드 마스크</div>);
     }
 }
 

@@ -16,11 +16,16 @@ class RookieMypage extends Component {
             ptbtnClick:"pth-btn",
             profileClick:"profile-btn",
             changePage:true,
+            user : this.props.user,
+
+            load : false,
         }
     }
 
     async componentDidMount() {
-
+        const {user} = this.state;
+        console.log(this.props);
+        this.setState({ load : true });
     }
 
     ProfilechangePage(){
@@ -39,12 +44,13 @@ class RookieMypage extends Component {
     }
 
     render() {
+        const { load } = this.state;
         const { msgDisplay } = this.state;
         const { likeUser } = this.state;
         const { ptbtnClick } =this.state;
         const { profileClick } =this.state;
         const { changePage } =this.state;
-        return (
+        return load ? (
             <div className="rookie-main">
                 <RookieChart/>
                 <Msg display= { msgDisplay } />
@@ -71,12 +77,11 @@ class RookieMypage extends Component {
                             onClick={() => this.setState({ msgDisplay : msgDisplay === "none" ? "flex" : "none"})}>
                                  <span className="mypage-icons"><FontAwesomeIcon icon={faEnvelope} size="2x"/></span>
                             </button>
-                        
                         </div>
                     </div>
                 </div>
             </div>
-        );
+        ) : (<div style={{width:"100%", height:"800px",display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>로드 마스크</div>);
     }
 }
 

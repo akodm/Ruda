@@ -9,34 +9,21 @@ class Mypages extends Component {
         this.scrollToTop();
         this.state = {
             url : new URL(window.location),
-            load : false,
         }
     }
+    
+    scrollToTop = () =>{ window.scrollTo({top:0}); }
 
-    componentDidMount() {
+    render() {
+        let user = this.props.user;
+
         const { url } = this.state;
         let urls = url.pathname;
         urls = urls.split("/");
-        // id가 있을 경우
-        if(urls[2]) {
-
-        // url이 없거나 mypage인 경우
-        } else {
-
-        }
-        this.setState({ load : true });
-    }
-    
-    scrollToTop = () =>{
-        window.scrollTo({top:0});
-    }
-
-    render() {
-        const { load } = this.state;
-        let user = this.props.user;
-        return load && (
+        let urlProps = urls[2] || "";
+        return (
             <div className="Mypages">
-                { user.cate !== "user" ? <CompanyMypage/>:<RookieMypage/>}
+                { user.cate !== "user" ? <CompanyMypage user={user} url={urlProps} /> : <RookieMypage user={user} url={urlProps} /> }
             </div>
         );
     }
