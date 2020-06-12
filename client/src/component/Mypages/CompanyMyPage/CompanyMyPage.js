@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 import CompanyProject from './CompanyProject/CompanyProject';
 import CompanyProfile from './CompanyProfile/CompanyProfile';
 import Msg from '../../MyMenu/Message';
-import axios from 'axios';
 import './CompanyMypage.css';
 
 class CompanyMyPage extends Component {
@@ -16,14 +17,19 @@ class CompanyMyPage extends Component {
             hireClick:"hire-btn",
             changePage:true,
             user : this.props.user,
-        
+
             load : false,
         }
     }
 
     async componentDidMount() {
-        const {user} = this.state;
-        console.log(this.props);
+        const { user } = this.state;
+        console.log(user);
+        try {
+
+        } catch(err) {
+            console.log("rookie mypage err : " + err);
+        }
         this.setState({ load : true });
     }
 
@@ -48,9 +54,8 @@ class CompanyMyPage extends Component {
     }
 
     render() {
-        const { load } = this.state;
-        const { msgDisplay,likeUser,ptbtnClick,profileClick,changePage,hireClick } = this.state;
-        return load ? (
+        const { load,msgDisplay,likeUser,ptbtnClick,profileClick,changePage,hireClick } = this.state;
+        return load && (
             <div className="company-main">
                 <div className="btn-cont">
                     <Msg display= { msgDisplay } />
@@ -77,7 +82,7 @@ class CompanyMyPage extends Component {
                     </div>
                 </div>
             </div>
-        ) : (<div style={{width:"100%", height:"800px",display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>로드 마스크</div>);
+        );
     }
 }
 

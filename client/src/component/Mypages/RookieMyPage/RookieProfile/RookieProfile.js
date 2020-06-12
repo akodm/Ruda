@@ -5,17 +5,18 @@ import RookieCertificate from './ProfileComponent/RookieCertificate/RookieCertif
 import RookieMain from './ProfileComponent/RookieMain/RookieMain';
 class RookieProflie extends Component {
     render() {
+        const { user } = this.props;
         return (
             <div className="rookie-profile-content">
                 <div className="rookie-user-title">
                     <img src= "/Image/usermypage_hochi.png" alt="IMG"></img>
-                    <span>홍길동의 프로필</span>
+                    <span>{user.userName}의 프로필</span>
                 </div>
                 <div className="rookie-user-content">
-                <RookieMain/>
-                <RookieInfo/>
-                <RookieAwards/>
-                <RookieCertificate/>
+                <RookieMain />
+                <RookieInfo />
+                <RookieAwards />
+                <RookieCertificate />
                 </div>
             </div>
         );
