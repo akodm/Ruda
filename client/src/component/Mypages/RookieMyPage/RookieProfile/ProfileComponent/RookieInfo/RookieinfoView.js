@@ -19,9 +19,10 @@ class RookieinfoView extends Component {
     }
 
     setInfo(){
-        this.props.infochanges(true)
+        this.props.infochanges(false)
     }
     render() {
+        const {user} = this.props;
         return (
                <div>
                     <div className="rookieInfo-title">
@@ -33,12 +34,12 @@ class RookieinfoView extends Component {
                             <div className="phone">
                              <span className="info-icons"><FontAwesomeIcon icon={faPhoneAlt} size="1x"/></span>
                                 <span className="phone-title">전화번호</span>
-                                <span className="phone-info">010-1234-1234</span>
+                                <span className="phone-info">{user.userPhone}</span>
                             </div>
                             <div className="email">
                              <span className="info-icons"><FontAwesomeIcon icon={faAt} size="1x"/></span>
                                 <span className="email-title">이메일</span>
-                                <span className="email-info">abc@ruda.com</span>
+                                <span className="email-info">{user.user.email}</span>
                             </div>
                             <div className="site">
                               <span className="info-icons"><FontAwesomeIcon icon={faGlobe} size="1x"/></span>
@@ -48,7 +49,7 @@ class RookieinfoView extends Component {
                             <div className="address">
                             <span className="info-icons"><FontAwesomeIcon icon={faMapMarkerAlt} size="1x"/></span>
                                 <span className="address-title">거주지</span>
-                                <span className="address-info">경기도 안양시</span>
+                                <span className="address-info">{user.userAdd}</span>
                             </div>
                         </div>
                         <div className="rookieInfo-content-right">
@@ -60,7 +61,7 @@ class RookieinfoView extends Component {
                             <div className="university">
                              <span className="info-icons"><FontAwesomeIcon icon={faUserGraduate} size="1x"/></span>
                                 <span className="university-title">대학교/학과</span>
-                                <span className="university-info">대림대학교/모바일인터넷과</span>
+                                <span className="university-info">{user.userUnvcity}/{user.userSubject}</span>
                             </div>
                            
                             <div className="workdate">

@@ -16,23 +16,23 @@ class RookieMypage extends Component {
             ptbtnClick:"pth-btn",
             profileClick:"profile-btn",
             changePage:true,
+            user : this.props.user,
 
-            url : new URL(window.location),
+            load : false,
+           
         }
     }
 
-    async componentDidMount() {
-        await this.setState({ url : this.state.url.pathname.split('/') });
-        if(this.state.url[2]) {
-            try {
-                const result = await axios.get(`http://localhost:5000/users/one?userEmail=${this.state.url[2]}`);
-                console.log(result.data)
-            } catch(err) {
-                console.log(err) 
-            }
+    async componentDidMount() {    
+        const {user} = this.state;
+        console.log(user);
+        try{
+        
+        }catch(err){
+            console.log("rookie mypage err: "+err);
         }
+        this.setState({load:true});
     }
-
     ProfilechangePage(){
         this.setState({
             profileClick : "profile-btn",
@@ -49,19 +49,15 @@ class RookieMypage extends Component {
     }
 
     render() {
-        const { msgDisplay } = this.state;
-        const { likeUser } = this.state;
-        const { ptbtnClick } =this.state;
-        const { profileClick } =this.state;
-        const { changePage } =this.state;
-        return (
+        const { load ,msgDisplay,likeUser,ptbtnClick,profileClick,changePage,user  } = this.state;
+        return load ? (
             <div className="rookie-main">
                 <RookieChart/>
                 <Msg display= { msgDisplay } />
                 <div className="btn-cont">
                     <div className="rookie-main-bg">
                         <div className="rookie-main-bg-in">
-                            { changePage?<RookieProflie/>:<RookiePt/> }
+                            { changePage?<RookieProflie user={user}/>:<RookiePt/> }
                         </div>
                         <div className="rookie-menu-btn">
                             <button className={profileClick}
@@ -81,12 +77,11 @@ class RookieMypage extends Component {
                             onClick={() => this.setState({ msgDisplay : msgDisplay === "none" ? "flex" : "none"})}>
                                  <span className="mypage-icons"><FontAwesomeIcon icon={faEnvelope} size="2x"/></span>
                             </button>
-                        
                         </div>
                     </div>
                 </div>
             </div>
-        );
+        ) : (<div style={{width:"100%", height:"800px",display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>로드 마스크</div>);
     }
 }
 

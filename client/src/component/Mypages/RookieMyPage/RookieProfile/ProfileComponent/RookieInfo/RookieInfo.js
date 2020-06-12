@@ -17,9 +17,10 @@ class RookieInfo extends Component {
     }
     render() {
         const {changeInfo}= this.state;
+        const user =this. props.user;
         return (
             <div className="rookieInfo">
-                 { changeInfo ? <RookieinfoFrom infochanges={this.infochange.bind(this)}/> : <RookieinfoView infochanges={this.infochange.bind(this)}/> }
+                 { changeInfo ? <RookieinfoView  user={user} infochanges={this.infochange.bind(this)}/>:<RookieinfoFrom infochanges={this.infochange.bind(this)}/> }
             </div>
         );
     }

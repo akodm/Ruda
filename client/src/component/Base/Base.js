@@ -26,7 +26,7 @@ class Base extends Component {
         super(props);
         this.state = {
             user : {
-                id : 0,
+                id : 1,
                 tag:"",
                 email:"",
                 cate : "",
@@ -56,7 +56,6 @@ class Base extends Component {
                 });
             } catch(err) {
                 console.log("verify err : " + err);
-                localStorage.removeItem("users");
             }
         }
         this.setState({
@@ -71,15 +70,14 @@ class Base extends Component {
     }
 
     render() {
-        const { user,load } = this.state;
-        console.log(user);
+        const { user } = this.state;
         return (
             <div className="base-main">
                  <Router>
                     {/*메인 */}
                     <Route exact path="/">
                         { user.email ? <OtherHeader user={user} /> : <MainHeader user={user} /> }
-                        { user.email ? (user.cate ? <Mypages user={user} load={load} /> : <UserInfo user={user} />) : <Main /> }</Route>
+                        { user.email ? (user.cate ? <Mypages user={user} /> : <UserInfo user={user} />) : <Main /> }</Route>
                     {/*기업게시판*/ }
                     <Route path ="/company"><OtherHeader user={user} /><Company /></Route>
                     {/*인재게시판*/ }
@@ -93,7 +91,7 @@ class Base extends Component {
                     {/*유저 기본정보 */}
                     <Route path="/userinfo"><OtherHeader user={user} />{ user.email && !user.cate && <UserInfo />}</Route>
                     {/*마이페이지*/}
-                    <Route path ="/mypage"><OtherHeader user={user} /><Mypages user={user}  load={load}/></Route>
+                    <Route path="/mypage"><OtherHeader user={user} /><Mypages user={user} /></Route>
                     {/*마이메뉴*/}
                     { user.email && <MyPopup user={user} /> }
                     {/*화면업다운버튼*/ }

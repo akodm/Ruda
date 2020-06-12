@@ -15,21 +15,21 @@ class CompanyMyPage extends Component {
             profileClick:"profile-btn",
             hireClick:"hire-btn",
             changePage:true,
+            user : this.props.user,
         
-            url : new URL(window.location),
+            load : false,
         }
     }
 
-    async componentDidMount() {
-        await this.setState({ url : this.state.url.pathname.split('/') });
-        if(this.state.url[2]) {
-            try {
-                const result = await axios.get(`http://localhost:5000/users/one?userEmail=${this.state.url[2]}`);
-                console.log(result.data)
-            } catch(err) {
-                console.log(err) 
-            }
+    async componentDidMount() {    
+        const {user}= this.state;
+        console.log(user);
+        try{
+        
+        }catch(err){
+            console.log("rookie mypage err: "+err);
         }
+        this.setState({load:true});
     }
 
     ProfilechangePage(){
@@ -53,8 +53,8 @@ class CompanyMyPage extends Component {
     }
 
     render() {
-        const { msgDisplay,likeUser,ptbtnClick,profileClick,changePage,hireClick } = this.state;
-        return (
+        const { load, msgDisplay,likeUser,ptbtnClick,profileClick,changePage,hireClick } = this.state;
+        return load ? (
             <div className="company-main">
                 <div className="btn-cont">
                     <Msg display= { msgDisplay } />
@@ -81,7 +81,7 @@ class CompanyMyPage extends Component {
                     </div>
                 </div>
             </div>
-        );
+        ) : (<div style={{width:"100%", height:"800px",display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>로드 마스크</div>);
     }
 }
 
