@@ -3,9 +3,10 @@ import React, { Component } from 'react';
 class RookieMainView extends Component {
 
     setMain(){
-        this.props.Mainchanges(true)
+        this.props.Mainchanges(false)
     }
     render() {
+        const {user} = this.props;
         return (
             <div>
                 <div className="RookieMain-title">
@@ -14,8 +15,8 @@ class RookieMainView extends Component {
                 </div>
                 <div className="RookieMain-user">
                     <img src="/Image/login_img.png" className="RookieMain-user-img" alt="IMG"></img>
-                    <span className="RookieMain-user-name">홍길동</span>
-                    <span>안녕하세요 백엔드 개발자를 꿈꾸는 홍길동입니다!</span>
+                    <span className="RookieMain-user-name">{user.userName}</span>
+                    <span>{user.userIntro}</span>
                 </div>
                 <div className="line"></div>
                 <div className="RookieMain-user-tag-content">

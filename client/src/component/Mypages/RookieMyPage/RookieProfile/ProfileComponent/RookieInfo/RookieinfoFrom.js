@@ -9,7 +9,7 @@ class RookieinfoFrom extends Component {
         }
     }
     infoSave(){
-        this.props.infochanges(false)
+        this.props.infochanges(true)
     }
     render() {
         return (

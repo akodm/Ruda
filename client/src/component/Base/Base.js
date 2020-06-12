@@ -31,6 +31,7 @@ class Base extends Component {
                 email:"",
                 cate : "",
             },
+            load:false,
         }
     }
 
@@ -57,6 +58,9 @@ class Base extends Component {
                 console.log("verify err : " + err);
             }
         }
+        this.setState({
+            load:true,
+        })
     }
 
     getUser(user) {

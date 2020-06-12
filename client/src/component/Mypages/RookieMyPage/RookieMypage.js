@@ -24,16 +24,16 @@ class RookieMypage extends Component {
         }
     }
 
-    async componentDidMount() {
-        const { user } = this.state;
-        try {
-
-        } catch(err) {
-            console.log("rookie mypage err : " + err);
+    async componentDidMount() {    
+        const {user} = this.state;
+        console.log(user);
+        try{
+        
+        }catch(err){
+            console.log("rookie mypage err: "+err);
         }
-        this.setState({ load : true });
+        this.setState({load:true});
     }
-
     ProfilechangePage(){
         this.setState({
             profileClick : "profile-btn",
@@ -50,16 +50,15 @@ class RookieMypage extends Component {
     }
 
     render() {
-        const { load } = this.state;
-        const { msgDisplay,likeUser,ptbtnClick,profileClick,changePage,user } = this.state;
-        return load && (
+        const { load ,msgDisplay,likeUser,ptbtnClick,profileClick,changePage,user  } = this.state;
+        return load ? (
             <div className="rookie-main">
                 <RookieChart/>
                 <Msg display= { msgDisplay } />
                 <div className="btn-cont">
                     <div className="rookie-main-bg">
                         <div className="rookie-main-bg-in">
-                            { changePage ? <RookieProflie user={user} />:<RookiePt/> }
+                            { changePage?<RookieProflie user={user}/>:<RookiePt/> }
                         </div>
                         <div className="rookie-menu-btn">
                             <button className={profileClick}
@@ -83,7 +82,7 @@ class RookieMypage extends Component {
                     </div>
                 </div>
             </div>
-        )
+        ) : <div></div>
     }
 }
 

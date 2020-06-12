@@ -17,9 +17,10 @@ class RookieMain extends Component {
     }
     render() {
         const {ChangeMain}= this.state;
+        const {user} = this.props;
         return (
             <div className="RookieMain">
-                 { ChangeMain ? <RookieMainForm Mainchanges={this.Mainchange.bind(this)}/> : <RookieMainView Mainchanges={this.Mainchange.bind(this)}/> }
+                 { ChangeMain ?  <RookieMainView user={user} Mainchanges={this.Mainchange.bind(this)}/>: <RookieMainForm user={user} Mainchanges={this.Mainchange.bind(this)}/> }
             </div>
         );
     }

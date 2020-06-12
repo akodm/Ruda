@@ -21,9 +21,10 @@ class RookieMainForm extends Component {
         })
     }
     MainSave(){
-        this.props.Mainchanges(false)
+        this.props.Mainchanges(true)
     }
     render() {
+        const {user} = this.props;
         return (
             <div>
                 <div className="RookieMain-title">

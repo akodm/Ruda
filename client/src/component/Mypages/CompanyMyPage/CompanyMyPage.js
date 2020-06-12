@@ -22,15 +22,15 @@ class CompanyMyPage extends Component {
         }
     }
 
-    async componentDidMount() {
-        const { user } = this.state;
+    async componentDidMount() {    
+        const {user}= this.state;
         console.log(user);
-        try {
-
-        } catch(err) {
-            console.log("rookie mypage err : " + err);
+        try{
+        
+        }catch(err){
+            console.log("rookie mypage err: "+err);
         }
-        this.setState({ load : true });
+        this.setState({load:true});
     }
 
     ProfilechangePage(){
@@ -54,8 +54,8 @@ class CompanyMyPage extends Component {
     }
 
     render() {
-        const { load,msgDisplay,likeUser,ptbtnClick,profileClick,changePage,hireClick } = this.state;
-        return load && (
+        const { load, msgDisplay,likeUser,ptbtnClick,profileClick,changePage,hireClick } = this.state;
+        return load ? (
             <div className="company-main">
                 <div className="btn-cont">
                     <Msg display= { msgDisplay } />
@@ -82,7 +82,7 @@ class CompanyMyPage extends Component {
                     </div>
                 </div>
             </div>
-        );
+        ) : <div></div>
     }
 }
 
