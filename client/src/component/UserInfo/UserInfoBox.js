@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Chip from './TagChip';
+import TagChip from './TagChip';
 
 class UserInfoBox extends Component {
     constructor(props) {
@@ -21,6 +23,7 @@ class UserInfoBox extends Component {
             attendTag : "",
             menupopupControl : false,
 
+            tag : "",
             tags : [],
             keywords : [],
         }
@@ -41,40 +44,40 @@ class UserInfoBox extends Component {
             tags,keywords } = this.state;
         try {
             // 구직자 시
-                let userCateUpdat = axios.put("http://localhost:5000/users/updatecate", {
-                    userCate : "user",
-                    id : user.id
-                })
+            let userCateUpdat = axios.put("http://localhost:5000/users/updatecate", {
+                userCate : "user",
+                id : user.id
+            })
+            let phone = phone1+"-"+phone2+"-"+phone3;
+            let address = address1+"-"+address2;
+            let result = axios.post("http://localhost:5000/userInfos/create", {
+                userId : user.id,
+                userName: name,
+                userPhone: phone,
+                userAdd: address,
+                userImage : "",
+                userTraning: "",
+                userUnvcity: collage,
+                userSubject : subject,
+                userIntro : intro,
+                userTags : tags,
+                userSpecialty :"", 
+                userWorkDate : "",
+                userKeyword : "",
+            })
 
-                let phone = phone1+phone2+phone3;
-                let address = address1 + address2;
-                let result = axios.post("http://localhost:5000/userInfos/create", {
-                    userId : user.id,
-                    userName: name,
-                    userPhone: phone,
-                    userAdd: address,
-                    userImage : "",
-                    userTraning: "",
-                    userUnvcity: collage,
-                    userSubject : subject,
-                    userIntro : intro,
-                    userTags : "",
-                    userSpecialty :"", 
-                    userWorkDate : "",
-                    userKeyword : "",
-                })
+            await Promise.all([userCateUpdat,result]).then(data => {
+                userCateUpdat = data[0];
+                result = data[1];
+            })
 
-                await Promise.all([userCateUpdat,result]).then(data => {
-                    userCateUpdat = data[0];
-                    result = data[1];
-                })
-
-                console.log(userCateUpdat.data, result.data);
-                if(result.data){
-                    alert("기본입력이 완료되었습니다.");
-                } else {
-                    alert("다시 시도해주세요.")
-                }
+            console.log(userCateUpdat.data, result.data);
+            if(result.data){
+                alert("기본입력이 완료되었습니다.");
+                window.location.href = "/";
+            } else {
+                alert("다시 시도해주세요.")
+            }
         } catch(err) {
             console.log("user info save err : " + err);
         }
@@ -87,8 +90,36 @@ class UserInfoBox extends Component {
         })
     }
 
+    // 번호의 경우 숫자 외 입력 시 초기화
+    onChangeValuePhone(e) {
+        if(/\D+/g.test(e.target.value)) {
+            this.setState({ [e.target.name] : "" })
+            return;
+        }
+        this.setState({
+            [e.target.name] : e.target.value
+        })
+    }
+
+    // 칩 추가를 위해 엔터 클릭 시
+    onEnterTags(e) {
+        if(e.key === "Enter") {
+            if(this.state.tags.length > 9) {
+                alert("태크는 최대 10개 까지만 가능합니다.");
+                return;
+            }
+            const { tag } = this.state;
+            this.setState({ tags : this.state.tags.concat(tag), tag : "" })
+        }
+    }
+
+    // 칩 삭제 할 시
+    onTagsDelete(e) {
+        this.setState({ tags : this.state.tags.filter(data => { return e != data}) })
+    }
+
     render() {
-        const { profileImg,name,phone1,phone2,phone3,collage,subject,intro,address1,address2,attending1,attending2,attendTag,tags,keywords,menupopupControl } = this.state;
+        const { profileImg,name,phone1,phone2,phone3,collage,subject,intro,address1,address2,attending1,attending2,attendTag,tags,keywords,menupopupControl,tag } = this.state;
         return (
             <div className="userInfo-user">
                 {/* 프로필 사진, 이름, 번호, 주소 등의 개인정보 */}
@@ -110,9 +141,9 @@ class UserInfoBox extends Component {
                         </div>
                         <div className="userInfo-inputDiv">
                             <div className="userInfo-span">전화번호</div>
-                            <input value={phone1} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="phone1" placeholder="010" type="text" className="userInfo-inputNum"></input>-
-                            <input value={phone2} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="phone2" placeholder="0000" type="text" className="userInfo-inputNum"></input>-
-                            <input value={phone3} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="phone3" placeholder="0000" type="text" className="userInfo-inputNum"></input>
+                            <input value={phone1} onChange={this.onChangeValuePhone.bind(this)} onPaste={this.onChangeValue.bind(this)} name="phone1" placeholder="010" type="text" className="userInfo-inputNum"></input>-
+                            <input value={phone2} onChange={this.onChangeValuePhone.bind(this)} onPaste={this.onChangeValue.bind(this)} name="phone2" placeholder="0000" type="text" className="userInfo-inputNum"></input>-
+                            <input value={phone3} onChange={this.onChangeValuePhone.bind(this)} onPaste={this.onChangeValue.bind(this)} name="phone3" placeholder="0000" type="text" className="userInfo-inputNum"></input>
                         </div>
                         <div className="userInfo-inputDiv">
                             <div className="userInfo-span">주소</div>
@@ -162,15 +193,15 @@ class UserInfoBox extends Component {
                         <div className="userInfo-comentDiv">
                             <span className="userInfo-coment">태그 검색</span>
                         </div>
-                        <div className="userInfo-tagInput">
-                            
-                        </div>
+                        <input type="text" value={tag} name="tag" onKeyPress={this.onEnterTags.bind(this)} onChange={this.onChangeValue.bind(this)} className="userInfo-tagInput"></input>
                         <div className="userInfo-comentDiv">
                             <span className="userInfo-coment">나의 태그</span>
                         </div>
                         <div className="userInfo-tagBox">
                             <div className="userInfo-tagMargin">
-
+                                { tags && tags.map((data,i) => {
+                                    return <TagChip key={i} name={data} func={this.onTagsDelete.bind(this)} />
+                                })}
                             </div>
                         </div>
                     </div>
