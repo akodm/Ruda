@@ -133,7 +133,7 @@ class Mypages extends Component {
         const {user,load}=this.state;
         return load && (
             <div className="Mypages">
-                { user.cate !== "user" ? <CompanyMypage user={user} /> : <RookieMypage user={user.data}/> }
+                { user.cate !== "user" ? <CompanyMypage user={user.data} /> : <RookieMypage user={user.data}/> }
             </div>
         );
     }

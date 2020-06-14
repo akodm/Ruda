@@ -10,6 +10,7 @@ class UserInfoBox extends Component {
         super(props);
         this.state = {
             profileImg : null,
+            priviewURL:"",
             name : "",
             phone1 : "",
             phone2 : "",
@@ -39,12 +40,24 @@ class UserInfoBox extends Component {
             // ---------------------------//
 
             keywords : [],
+            
+            
         }
     }
 
     // 이미지 업로드 할 시
-    onChangeImageValue() {
-
+    onChangeImageValue = (event)=> {
+        event.preventDefault();
+        let reader = new FileReader();
+        let file = event.target.files[0];
+       
+        reader.onloadend = () => {
+            this.setState({
+                file : file,
+                previewURL : reader.result,    
+            })
+        }
+        reader.readAsDataURL(file);
     }
 
     // 시작하기 버튼 누를 시
@@ -68,22 +81,23 @@ class UserInfoBox extends Component {
                 userName: name,
                 userPhone: phone,
                 userAdd: address,
-                userImage : "",
-                userTraning: "",
+                userImage : profileImg,
+                userTraning: traning,
                 userUnvcity: collage,
                 userSubject : subject,
                 userIntro : intro,
                 userTags : tags,
                 userSpecialty :"", 
-                userWorkDate : "",
+                userWorkDate : workdate,
                 userKeyword : "",
+                userField:field,
             })
 
             await Promise.all([userCateUpdat,result]).then(data => {
                 userCateUpdat = data[0];
                 result = data[1];
             })
-
+            console.log(profileImg);
             console.log(userCateUpdat.data, result.data);
             if(result.data){
                 alert("기본입력이 완료되었습니다.");
@@ -168,6 +182,12 @@ class UserInfoBox extends Component {
 
     render() {
         const { profileImg,name,phone1,phone2,phone3,collage,subject,intro,address1,address2,fieldState,fields,fieldList,field,workdate,attending1,attending2,attendTag,tags,keywords,tag,traning,tagList,tagListState } = this.state;
+
+        let profile_preview = <img src ='/Image/insert_rookie.png'className="userInfo-img" alt="profileIMG"/>
+        if(this.state.profileImg !== ''){
+          profile_preview = <img src={this.state.previewURL} className="userInfo-img" alt="profileIMG"></img>
+        } 
+        console.log(profileImg);
         return (
             <div className="userInfo-user">
                 {/* 프로필 사진, 이름, 번호, 주소 등의 개인정보 */}
@@ -177,7 +197,7 @@ class UserInfoBox extends Component {
                 <div className="userInfo-box">
                     <div className="userInfo-margin">
                         <div className="userInfo-imgDiv">
-                            <img src={profileImg ? profileImg : "/Images/new_icon.png"} className="userInfo-img" alt="profileIMG"></img>
+                            {profile_preview}
                             <div className="userInfo-fileDiv">
                                 <label htmlFor="avatafile">사진 업로드</label>
                                 <input accept="image/*" name="profileImg" value={profileImg ? profileImg : ""} onChange={this.onChangeImageValue.bind(this)} type="file" id="avatafile"></input>

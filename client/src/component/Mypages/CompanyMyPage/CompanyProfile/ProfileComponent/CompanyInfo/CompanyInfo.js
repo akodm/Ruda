@@ -17,9 +17,10 @@ class CompanyInfo extends Component {
     }
     render() {
         const {changeInfo}= this.state;
+        const {user} =this.props;
         return (
             <div className="rookieInfo">
-                 { changeInfo ? <CompanyInfoForm infochanges={this.infochange.bind(this)}/> : <CompanyInfoView infochanges={this.infochange.bind(this)}/> }
+                 { changeInfo ? <CompanyInfoView user={user} infochanges={this.infochange.bind(this)}/> :<CompanyInfoForm user={user} infochanges={this.infochange.bind(this)}/> }
             </div>
         );
     }
