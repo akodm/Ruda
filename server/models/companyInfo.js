@@ -23,6 +23,9 @@ module.exports = (sequelize, DataTypes) => {
         companyCEO : {
             type: DataTypes.STRING,     // 기업 대표
         },
+        companyTags : {
+            type: DataTypes.STRING,     // 기업 태그
+        },
         companyQuestion : {
             type: DataTypes.STRING,     // 기업이 준비한 질문     
         },
