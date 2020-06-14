@@ -15,6 +15,7 @@ module.exports = {
         salt : "",
         base : "",
         sha : "",
+        base1 : "",
 
         type : "",
         emailUser : "",

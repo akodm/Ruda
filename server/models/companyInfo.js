@@ -5,8 +5,26 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey : true,
             autoIncrement: true
         },
+        companyName : {
+            type: DataTypes.STRING,     // 기업 이름
+        },
+        companyPhone : {
+            type: DataTypes.STRING,     // 기업 번호
+        },
+        companyAdd : {
+            type: DataTypes.STRING,     // 주소
+        },
+        companyField : {
+            type: DataTypes.STRING,     // 기업 분야
+        },
+        companyImage : {
+            type: DataTypes.STRING,     // 기업 사진
+        },
         companyCEO : {
             type: DataTypes.STRING,     // 기업 대표
+        },
+        companyTags : {
+            type: DataTypes.STRING,     // 기업 태그
         },
         companyQuestion : {
             type: DataTypes.STRING,     // 기업이 준비한 질문     
@@ -55,7 +73,7 @@ module.exports = (sequelize, DataTypes) => {
         },
     });
     CompanyInfo.associate = function(models) {
-        CompanyInfo.belongsTo(models.company);
+        CompanyInfo.belongsTo(models.user);
     }
     return CompanyInfo;
 };

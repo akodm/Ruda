@@ -25,6 +25,7 @@ router.get("/one", async (req, res) => {
 		const result = await EmailAuth.findOne({
 			where : {
 				token : req.query.token,
+				email : req.query.email,
 			}
 		});
 		res.send(result);
@@ -39,8 +40,9 @@ router.post("/create", async(req, res) => {
     let result = false;
     try{
         await EmailAuth.create({
+				email : req.body.email,
                 token: req.body.token, 
-                expire: req.body.expire, 
+                expire: req.body.expire,
             });
     } catch(err) {
 		console.log(__filename + " 에서 오스 생성 에러 발생 내용= " + err);
@@ -74,17 +76,24 @@ router.post("/emailauth", async (req, res) => {
 			where : {
                 token : req.body.token,
 			}
-        });
-        if(result && result.dataValues.expire) {
-            const noeDate = moment().format();
+		});
+        if(result && result.dataValues.expire && result.dataValues.use === "false") {
+            const nowDate = moment().format();
             const dbDate = result.dataValues.expire;
-            if(!(moment(noeDate).diff(dbDate, 'minutes') > 0)) {
-                check = true;
+            if(moment(nowDate).diff(dbDate, 'minutes') <= 0) {
+				EmailAuth.update({
+					use: "true",
+					}, {
+					where: {
+						token : req.body.token
+					}
+				});
+				check = true;
             }
-        }
+		}
 	} catch (err) {
 		console.log(__filename + " 에서 오스 체크 에러 발생 내용= " + err);
-    }
+	}
     res.send(check);
 });
 

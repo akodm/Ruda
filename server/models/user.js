@@ -1,28 +1,28 @@
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define("user", {
-        email : {
-            type: DataTypes.STRING,
+        id : {
+            type: DataTypes.INTEGER,     // 이메일
             primaryKey : true,
+            autoIncrement: true
+        },
+        email : {
+            type: DataTypes.STRING,     // 이메일
+            allowNull: false
+        },
+        authCate : {
+            type : DataTypes.STRING,    // 소셜 로그인 구분
             allowNull: false
         },
         userPass : {
-            type: DataTypes.STRING,
-        },
-        userName : {
-            type: DataTypes.STRING,
-        },
-        userPhone : {
-            type: DataTypes.STRING,
-        },
-        userAdd : {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING,     // 로그인 비밀번호
         },
         userCate : {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING,     // 기업인지 유저인지
         },
     });
     User.associate = function(models) {
         User.hasMany(models.mail);
+        User.hasMany(models.hireBoard);
     }
     return User;
 };

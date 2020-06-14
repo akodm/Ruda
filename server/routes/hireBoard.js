@@ -3,10 +3,7 @@ var router = express.Router();
 let models = require("../models");
 
 // DB Setting --------------------------------------------------------
-const CompanyInfo = models.companyInfo;
-const CompanyHire = models.companyHire;
-const HireBoard = models.hireboard;
-const Company = models.company;
+const HireBoard = models.hireBoard;
 const Op = models.sequelize.Op;
 
 // DB CRUD -----------------------------------------------------------
@@ -28,6 +25,7 @@ router.get("/one", async (req, res) => {
 		const result = await HireBoard.findOne({
 			where : {
 				id : req.query.id,
+                userId : req.body.userId,
 			}
 		});
 		res.send(result);
@@ -39,22 +37,14 @@ router.get("/one", async (req, res) => {
 
 // 채용 게시판 생성
 router.post("/create", async(req, res) => {
-    let result = false;
+    let result = null;
     try{
-        await HireBoard.findOrCreate({
-            where : {
-                id : req.body.id,
-            },
-            defaults : {
-                title : req.body.title,
-                content: req.body.content, 
-                files: req.body.files, 
-                boardTag: req.body.boardTag, 
-            }
-        }).spread(async(none, created)=>{
-            if(created){
-                result = true;
-            }
+        result = await HireBoard.create({
+            title : req.body.title,
+            content: req.body.content, 
+            files: req.body.files, 
+            boardTag: req.body.boardTag,
+            userId : req.body.userId,
         });
     } catch(err) {
 		console.log(__filename + " 에서 채용 게시판 생성 에러 발생 내용= " + err);
@@ -73,7 +63,8 @@ router.put("/update", async(req, res) => {
             boardTag : req.body.boardTag,
             }, {
             where: {
-                id : req.body.id
+                id : req.body.id,
+                userId : req.body.userId,
             }
         });
         result = true;
@@ -90,7 +81,8 @@ router.delete("/delete", async(req, res) => {
     try {
         await HireBoard.destroy({
             where: {
-                id: req.query.id
+                id: req.query.id,
+                userId : req.body.userId,
             }
 		});
 		result = true;

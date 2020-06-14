@@ -32,7 +32,7 @@ router.get("/one", async (req, res) => {
 				{ model: User }
 			],
 			where : {
-				userEmail : req.query.userEmail
+				userId : req.query.userId
 			},
 		});
 		res.send(result);
@@ -48,10 +48,27 @@ router.post("/create", async (req, res) => {
 	try {
 		await UserInfo.findOrCreate({
 			where : {
-				userEmail : req.body.userEmail
+				userId : req.body.userId
 			},
 			defaults : {
-				userEmail : req.body.userEmail
+				userId : req.body.userId,
+				userName: req.body.userName,
+				userPhone: req.body.userPhone,
+				userAdd: req.body.userAdd,
+				userField: req.body.userField,
+				userImage : req.body.userImage,
+				userTraning: req.body.userTraning,
+				userUnvcity: req.body.userUnvcity, 
+				userAttend: req.body.userAttend, 
+				userSubject : req.body.userSubject,
+				userIntro : req.body.userIntro,
+				userTags : req.body.userTags,
+				userSpecialty : req.body.userSpecialty,
+				userWorkDate : req.body.userWorkDate,
+				userKeyword : req.body.userKeyword,
+				userLike : 0,
+				userSuggestion : "",
+				userClick : 0,
 			}
 		}).spread((none, created)=>{
 			if(created)
@@ -68,14 +85,17 @@ router.put("/update", async(req, res) => {
     let result = null;
     try {
         await UserInfo.update({ 
-            userTraning: req.body.userTraning,
+			userIamge : req.body.userIamge,
+			userTraning: req.body.userTraning,
             userUnvcity: req.body.userUnvcity, 
             userSubject : req.body.userSubject,
             userAwards : req.body.userAwards,
-            userCertification : req.body.userCertification,
+			userCertification : req.body.userCertification,
+			userField: req.body.userField,
+			userIntro : req.body.userIntro,
             userKeyword : req.body.userKeyword,
-            userTemplete : req.body.userTemplete,
-            userGraph : req.body.userGraph,
+			userAttend: req.body.userAttend, 
+			userTags : req.body.userTags,
             userFile : req.body.userFile,
             userPortfolio : req.body.userPortfolio,
             userLike : req.body.userLike,
@@ -87,7 +107,7 @@ router.put("/update", async(req, res) => {
             userState : req.body.userState,
             }, {
             where: {
-                userEmail : req.body.userEmail
+                userId : req.body.userId
             }
         });
         result = true;
@@ -104,7 +124,7 @@ router.delete("/delete", async(req, res) => {
     try {
         await UserInfo.destroy({
             where: {
-                userEmail: req.query.userEmail
+                userId: req.query.userId
             }
 		});
 		result = true;

@@ -1,0 +1,162 @@
+/*Header*/
+
+.Header{    
+    width: 100%;
+    padding-top: 40px;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    color:white;  
+}
+.Header-nav{
+    width: 1256px;
+    height: 47px;
+    background-image: url(/Images/nav_bg.png);
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+    text-align: center;
+}
+.Header-nav-menu,.Header-nav-menu span{
+    margin-left: 40px;
+    cursor:pointer;
+}
+.Header-nav-menu-span{
+    color: white;
+    font-weight: 600;
+}
+.Header-nav-recommendbtn,.Header-nav-recommendbtn span{
+    margin-right: 20px;
+    cursor:pointer;
+    font-weight: 600;
+}
+
+/*MainHeader*/
+.MainHeader{
+    width: 100%;
+    height: 480px;
+    align-items: center;
+    color: white;
+    font-family: NanumSquareR;
+    font-size: 16px;
+    background-image: url(/Images/header_bg.png);
+    background-size: cover;
+    flex-direction: column;
+    display: flex;
+}
+.MainHeader-content{
+    display: flex;
+    justify-content: space-between;
+    width: 1200px;
+    padding-top: 100px;
+    height: 70%;
+}
+.MainHeader-text{
+    margin-top: 30px;
+}
+h2,h3,h4{
+    line-height: 30px;
+}
+h3 {
+    margin-top: 25px;
+}
+h4 {
+    font-weight: 400;
+    margin-top: 30px;
+}
+
+.MainHeader-btns{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.MainHeader-btns button{
+    border: none;
+    width: 122px;
+    height: 37px;
+    color: white;
+    opacity: 0.7;
+    font-family: NanumSquareEB;
+    font-size: 14px;
+    margin: 10px;
+    
+}
+.MainHeader-btns-Login{
+    background-color: #809fba;
+}
+.MainHeader-btns-Insert{
+    background-color: #c398ca;
+}
+.MainHeader-btns button:hover{
+    opacity: 0.9;
+}
+.MainHeader-btns-line{
+    border-top: solid 1px white;
+    width: 400px;
+    opacity: 0.7;
+    text-align: right;
+    padding: 10px;
+}
+.MainHeader-btns-easy{
+    font-family: NanumSquareB;
+    font-size: 14px;
+    color: white;
+    cursor:pointer;
+}
+
+/*OtherHeader*/
+.OtherHeader{
+    height: 140px;
+    background-image: url(/Images/board_header_bg.png);
+    background-size: cover;
+}
+/*UpDown*/
+
+.updown{
+    position: fixed;
+    z-index: 1000;
+    right: 0;
+    bottom: 1%;
+}
+.updown-up, .updown-down{
+    width: 47px;
+    height: 47px;
+    border-radius:50%;
+    margin:10px;
+    box-shadow: 0px 2px 3.6px 1.4px rgba(87, 86, 86, 0.24);
+    background-color: #f2f2f2;
+}
+.updown-icons{
+    align-items:center;
+    justify-content:center;
+    color:white;
+}
+.updown-icons:hover{
+    color: #96c0e2;
+}
+/*Footer*/
+.Footer{
+    width: 100%;
+    height: 120px;
+    background-color: #eeeeee;
+    font-family: 나눔스퀘어라운드;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.Footer_notice{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-size: 9pt;
+    color: #c7c7c7;
+    margin-left: 100P;
+}
+.Footer_text{
+    margin: 5px;
+}

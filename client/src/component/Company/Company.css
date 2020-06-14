@@ -1,0 +1,191 @@
+
+/*CompanyTitle*/
+.Company{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: NanumSquareEB;
+}
+.Company-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 1150px;
+    margin: 20px;
+    color: #929292;
+    
+}
+.Company-title span{
+    font-weight: 600;
+    font-size: 14pt;
+}
+.Company-title-select{
+    color: #686868;
+    border: none;
+}
+
+/*CompanySerch*/
+.Company-search{
+    width: 1109px;
+    height: 166px;
+    box-shadow: 0 0 8px 0.2px rgba(131, 131, 131, 0.13);
+    border: solid 1px #eeeeee;
+    border-radius: 7px;
+    margin-bottom: 15px;
+
+}
+.Company-search-title{
+    width: 1100px;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+
+}
+.Company-search-title-title{
+    color: #929292;
+    font-size: 15px;
+    font-weight: 600;
+}
+.Company-search-title-states{
+    display: flex;
+    width: 150px;
+    justify-content: center;
+    flex-direction: row;
+    margin-right: 20px;
+}
+.Company-search-title-state{
+    justify-content: center;
+    flex-direction: row;
+    display: flex;
+    width: 100px;
+    height: 15px;
+    align-items: center;
+    font-size: 12px;
+}
+.Company-search-title-state span{
+    margin: 10px;
+}
+.Company-search-title-state-training{
+    width: 8px;
+    height: 8px;
+    background-color:#a5ccf5;
+    border-radius: 50%;
+
+}
+.Company-search-title-state-hire{
+    width: 8px;
+    height: 8px;
+    background-color:#f799f5;
+    border-radius: 50%;
+}
+
+/*CompanySerch*/
+.Company-Card{
+    display: flex;
+    flex-direction: column;
+    width: 230px;
+    height: 310px;
+    border-radius: 7px;
+    box-shadow: 0 0 8px 0.2px rgba(131, 131, 131, 0.13);
+    border: solid 1px #eeeeee;
+    padding: 10px;
+    margin: 15px;
+    
+}
+.Company-Card:hover{
+    background-color: #ececec63;
+}
+.Company-Card-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.Company-Card-like span{
+    font-size: 14px;
+    align-items: center;
+    margin: 5px;
+    
+}
+.Company-Card-state{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 10px;
+    height: 30px;
+}
+.Company-Card-Profile-img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+.Company-Card-Profile-img img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #f1f1f1;
+}
+.Company-Card-Profile-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: NanumSquareEB;
+    width: 220px;
+    text-align: center;
+    margin: 5px;
+    color: #4b4b4b;
+}
+.Company-Card-Profile-info-name{
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: 600;
+}
+.Company-Card-Profile-info-text{
+    font-size: 12px;
+    margin-top: 10px;
+    width: 200px;
+    line-height: 20px;
+}
+.Company-Card-Profile-info-position{
+    margin-top: 10px;
+    font-size: 14px;
+    color: #3274b6;
+}
+.Company-Card-Profile-info-pt{
+    margin-top: 10px;
+    font-size: 14px;
+    color: #f14c7e;
+}
+.Company-Card-Profile-info-tags{
+    margin-top: 10px;
+    font-size: 13px;
+
+}
+.Company-Card-Profile-info-tags-tag{
+    margin: 5px;
+    color: #8b8b8b;
+}
+.Company-Card-addLook{
+    width:230px ;
+    height: 40px;
+    border: none;
+    background-color: #89b1d9;
+    color: white;
+    font-size: 14px;
+    margin-top: 5px;
+}
+/*Company-CardView*/
+.Company-CardView{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    width: 1160px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+.Company-CardView-PagiNation{
+    margin: 40px;
+}

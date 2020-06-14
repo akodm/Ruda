@@ -1,0 +1,110 @@
+
+/*MainNotice*/
+.MainNotice{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    font-family: NanumSquareB;
+    color: #929292;
+    margin-top:50px;
+}
+.MainNotice-contents{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 1300px;
+    margin: 30px;
+}
+.MainNotice-contents-box{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 230px;
+    height: 280px;
+    border-radius: 10px;
+    box-shadow: 0 0 9.8px 0.2px rgba(131, 131, 131, 0.17);
+    margin: 30px;
+    text-align: center;
+    color: #818181;
+}
+.MainNotice-contents-box img{
+   width: 80px;
+   height: 80px;
+}
+.MainNotice-contents-box-title{
+    font-weight:600;
+    font-family: NanumSquareEB;
+    font-size: 1rem;
+    margin:5px;
+ }
+ .MainNotice-contents-box-span{
+    font-family: NanumSquareB;
+    font-size: 13px;
+    padding: 20px;
+ }
+
+ /*MainWith*/
+ .MainWith{
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     text-align: left;
+     color: white;
+     height: 700px;
+ }
+ .MainWith-companys{
+      background-image: url(/Images/with_company.png);
+      background-size: cover;
+ }
+ .MainWith-rookies{
+    background-image: url(/Images/with_rookie.png);
+    background-size: cover;
+}
+ .MainWith-companys, .MainWith-rookies{
+    width: 100%;
+    height: 260px;
+    flex-direction: column;
+    margin-bottom: 20px;
+    padding-top: 30px;
+ }
+ .MainWith-rookies-title , .MainWith-companys-title {
+    font-weight: 700;
+    font-size: 16px;
+    margin-left: 400px;  
+ }
+
+ .MainWith-companys-box, .MainWith-rookies-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 40px;
+ }
+ .MainWith-companys-company,.MainWith-rookies-rookie{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 220px;
+ }
+.MainWith-companys-company img ,.MainWith-rookies-rookie img {
+    width: 60px;
+    height: 60px;
+    border-radius: 35px;
+    background-color: white;
+}
+.MainWith-rookies-rookie-title ,.MainWith-companys-company-title{
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+.MainWith-rookies-rookie-text ,.MainWith-companys-company-text{
+    font-size: 12px;
+    margin-top: 10px;
+    width: 160px;
+}

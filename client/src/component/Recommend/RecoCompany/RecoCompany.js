@@ -1,0 +1,33 @@
+import React, { Component } from 'react';
+import './RecoCompany.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretLeft,faCaretRight} from '@fortawesome/free-solid-svg-icons'
+import RecoCompanyContent from './RecoCompanyContent';
+
+class RecoCompany extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            RecoDisplay:"none",
+        }
+    }
+    closePop(){
+        this.props.close("none");
+    }
+    render() {
+        return (
+            <div className="RecoCompany" style={{display:this.props.display}} onClick={this.closePop.bind(this)} >
+                <div className="RecoCompany-content">
+                    <span className="RecoCompany-content-title">추천기업</span>
+                    <div className="RecoCompany-content-slide">
+                        <span className="RecoCompany-content-btns-arrow"><FontAwesomeIcon icon={faCaretLeft} size="3x"/></span>
+                        <RecoCompanyContent/>
+                        <span className="RecoCompany-content-btns-arrow"><FontAwesomeIcon icon={faCaretRight} size="3x"/></span>    
+                    </div> 
+                </div>
+            </div>
+        );
+    }
+}
+
+export default RecoCompany;

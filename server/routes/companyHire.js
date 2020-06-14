@@ -3,9 +3,7 @@ var router = express.Router();
 let models = require("../models");
 
 // DB Setting --------------------------------------------------------
-const CompanyInfo = models.companyInfo;
 const CompanyHire = models.companyHire;
-const Company = models.company;
 const Op = models.sequelize.Op;
 
 // DB CRUD -----------------------------------------------------------
@@ -26,7 +24,7 @@ router.get("/one", async (req, res) => {
 	try {
 		const result = await CompanyHire.findOne({
 			where : {
-				email : req.query.userEmail,      // 유저 아이디를 토대로 검색
+				userId : req.query.userId,      // 유저 아이디를 토대로 검색
 			}
 		});
 		res.send(result);
@@ -42,12 +40,12 @@ router.post("/create", async(req, res) => {
     try{
         await CompanyHire.findOrCreate({
             where : {
-                companyQuestUser : req.body.companyQuestUser,
+                companyHireUser : req.body.companyHireUser,
             },
             defaults : {
-                companyQuestUser : req.body.companyQuestUser,
                 companySugeuser: req.body.companySugeuser, 
                 companyHireUser: req.body.companyHireUser, 
+                userId : req.body.userId,
             }
         }).spread(async(none, created)=>{
             if(created){
@@ -69,7 +67,8 @@ router.put("/update", async(req, res) => {
             companyHireUser: req.body.companyHireUser, 
             }, {
             where: {
-                companyQuestUser : req.body.companyQuestUser
+                companyHireUser : req.body.companyHireUser,
+                userId : req.body.userId,
             }
         });
         result = true;
@@ -86,7 +85,8 @@ router.delete("/delete", async(req, res) => {
     try {
         await CompanyHire.destroy({
             where: {
-                companyQuestUser: req.query.companyQuestUser
+                companyHireUser: req.query.companyHireUser,
+                userId : req.body.userId,
             }
 		});
 		result = true;

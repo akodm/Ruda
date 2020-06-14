@@ -5,6 +5,18 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey : true,
             autoIncrement: true
         },
+        userName : {
+            type: DataTypes.STRING,     // 유저 이름
+        },
+        userPhone : {
+            type: DataTypes.STRING,     // 유저 번호
+        },
+        userAdd : {
+            type: DataTypes.STRING,     // 주소
+        },
+        userImage : {
+            type: DataTypes.STRING,     // 본인 사진
+        },
         userTraning : {
             type: DataTypes.STRING,     // 실습생 여부
         },
@@ -13,6 +25,12 @@ module.exports = (sequelize, DataTypes) => {
         },
         userSubject : {
             type: DataTypes.STRING,     // 과
+        },
+        userAttend : {
+            type: DataTypes.STRING,     // 대학 다니는 구분 휴학 등..
+        },
+        userField : {
+            type: DataTypes.STRING,     // 희망 직무
         },
         userAwards : {
             type: DataTypes.STRING,     // 수상 이력
@@ -26,11 +44,8 @@ module.exports = (sequelize, DataTypes) => {
         userKeyword : {
             type: DataTypes.STRING,     // 본인 키워드
         },
-        userTemplete : {
-            type: DataTypes.STRING,     // 템플릿 번호
-        },
-        userGraph : {
-            type: DataTypes.STRING,     // 템플릿에 들어가는 그래프
+        userTags : {
+            type: DataTypes.JSON,     // 본인 잘하는 태그 ( 언어 등 )
         },
         userFile : {
             type: DataTypes.STRING,     // 올린 파일

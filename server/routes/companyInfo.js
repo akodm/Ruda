@@ -4,7 +4,7 @@ let models = require("../models");
 
 // DB Setting --------------------------------------------------------
 const CompanyInfo = models.companyInfo;
-const Company = models.company;
+const User = models.user;
 const Op = models.sequelize.Op;
 
 // DB CRUD -----------------------------------------------------------
@@ -14,7 +14,7 @@ router.get("/all", async (req, res) => {
 	try {
 		const result = await CompanyInfo.findAll({
 			include : [
-				{ model: Company }
+				{ model: User }
 			]
 		});
 		res.send(result);
@@ -29,10 +29,10 @@ router.get("/one", async (req, res) => {
 	try {
 		const result = await CompanyInfo.findOne({
 			include : [
-				{ model: Company }
+				{ model: User }
 			],
 			where : {
-				companyEmail : req.query.companyEmail
+				userId : req.query.userId,
 			},
 		});
 		res.send(result);
@@ -48,10 +48,33 @@ router.post("/create", async (req, res) => {
 	try {
 		await CompanyInfo.findOrCreate({
 			where : {
-				companyEmail : req.body.companyEmail
+				userId : req.body.userId
 			},
 			defaults : {
-				companyEmail : req.body.companyEmail
+				userId : req.body.userId,
+				companyName: req.body.companyName,
+				companyPhone: req.body.companyPhone,
+				companyAdd: req.body.companyAdd,
+<<<<<<< HEAD
+				companyField: req.body.companyField,
+=======
+				companyFiled: req.body.companyFiled,
+				companyTags: req.body.companyTags,
+>>>>>>> 8ee0c46f3b7987cfc54efabf593fbe99275c8ab4
+				companyAwards: req.body.companyAwards,
+				companyImage: req.body.companyImage,
+				companyCEO: req.body.companyCEO,
+				companyQuestion: req.body.companyQuestion,
+				companyRule: req.body.companyRule,
+				companyOccupation : req.body.companyOccupation,
+				companyIntro : req.body.companyIntro,
+				companyAgeAvg : req.body.companyAgeAvg,
+				companyRequest : req.body.companyRequest,
+				companySince : req.body.companySince,
+				companyWorkDate : req.body.companyWorkDate,
+				companyWelfare : req.body.companyWelfare,
+				companyLike : 0,
+				companyClick : 0,
 			}
 		}).spread((none, created)=>{
 			if(created)
@@ -68,9 +91,15 @@ router.put("/update", async(req, res) => {
     let result = null;
     try {
         await CompanyInfo.update({ 
-            companyCEO: req.body.companyCEO,
+			companyName: req.body.companyName,
+			companyPhone: req.body.companyPhone,
+			companyAdd: req.body.companyAdd,
+			companyImage: req.body.companyImage,
+			companyFiled: req.body.companyFiled,
+			companyCEO: req.body.companyCEO,
             companyQuestion: req.body.companyQuestion,
-            companyRule: req.body.companyRule,
+			companyTags: req.body.companyTags,
+			companyRule: req.body.companyRule,
             companyAwards: req.body.companyAwards, 
             companyOccupation : req.body.companyOccupation,
             companyIntro : req.body.companyIntro,
@@ -86,7 +115,7 @@ router.put("/update", async(req, res) => {
             companyState : req.body.companyState,
             }, {
             where: {
-                companyEmail : req.body.companyEmail
+                userId : req.body.userId
             }
         });
         result = true;
@@ -103,7 +132,7 @@ router.delete("/delete", async(req, res) => {
     try {
         await CompanyInfo.destroy({
             where: {
-                companyEmail: req.query.companyEmail
+                userId: req.query.userId
             }
 		});
 		result = true;
