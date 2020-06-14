@@ -52,8 +52,10 @@ router.post("/create", async (req, res) => {
 			},
 			defaults : {
 				userId : req.body.userId,
+				companyName:req.body.companyName,
 				companyImage: req.body.companyImage,
 				companyCEO: req.body.companyCEO,
+				companyField:req.body.companyField,
 				companyQuestion: req.body.companyQuestion,
 				companyRule: req.body.companyRule,
 				companyOccupation : req.body.companyOccupation,
