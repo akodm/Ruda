@@ -56,6 +56,7 @@ class Base extends Component {
                 });
             } catch(err) {
                 console.log("verify err : " + err);
+                localStorage.removeItem("users");
             }
         }
         this.setState({

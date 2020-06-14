@@ -24,9 +24,6 @@ class Mypages extends Component {
         let urls = url.pathname;
         urls = urls.split("/");
         try{
-            // http://localhost:3000/mypage/3;
-            // 3000  / -> [0] , mypage/ -> [1], 3/ -> [2]
-            // 아이디가 있을경우===나 || 다른사람마페
             if(urls[2]){
                 const user = await axios.get(`http://localhost:5000/users/oneid?userId=${urls[2]}`);
                 let userData = user.data;
@@ -60,7 +57,6 @@ class Mypages extends Component {
                 //상위 컴포넌트로부터 props를 전달받았을 경우
                 if(this.props.user.email){
                     let propsUser = this.props.user;
-                    console.log(propsUser);
                     //유저일경우
                     if(propsUser.cate === "user"){
                         const result = await axios.get(`http://localhost:5000/userInfos/one?userId=${propsUser.id}`);
@@ -122,15 +118,20 @@ class Mypages extends Component {
             console.log("user mypage err:"+err);
             alert("마이페이지 로드에 실패하였습니다.");
         }
-        this.setState({
-            load:true,
-        });
+        if(!this.state.user.cate) {
+            alert("기본 정보를 먼저 등록해주세요.");
+            window.location.href = "/";
+        } else {
+            this.setState({
+                load:true,
+            });
+        }
     }
 
     render() {
         const {url,user,load}=this.state;
         console.log(user);
-         return load && (
+        return load && (
             <div className="Mypages">
                 { user.cate !== "user" ? <CompanyMypage user={user.data} /> : <RookieMypage user={user.data}/> }
             </div>

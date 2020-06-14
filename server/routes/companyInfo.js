@@ -69,6 +69,8 @@ router.post("/create", async (req, res) => {
 				companySince : req.body.companySince,
 				companyWorkDate : req.body.companyWorkDate,
 				companyWelfare : req.body.companyWelfare,
+				companyLike : 0,
+				companyClick : 0,
 			}
 		}).spread((none, created)=>{
 			if(created)

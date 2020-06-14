@@ -26,6 +26,12 @@ module.exports = (sequelize, DataTypes) => {
         userSubject : {
             type: DataTypes.STRING,     // 과
         },
+        userAttend : {
+            type: DataTypes.STRING,     // 대학 다니는 구분 휴학 등..
+        },
+        userField : {
+            type: DataTypes.STRING,     // 희망 직무
+        },
         userAwards : {
             type: DataTypes.STRING,     // 수상 이력
         },
@@ -39,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,     // 본인 키워드
         },
         userTags : {
-            type: DataTypes.STRING,     // 본인 잘하는 태그 ( 언어 등 )
+            type: DataTypes.JSON,     // 본인 잘하는 태그 ( 언어 등 )
         },
         userFile : {
             type: DataTypes.STRING,     // 올린 파일
