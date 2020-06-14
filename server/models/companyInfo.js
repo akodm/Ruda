@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
         companyAdd : {
             type: DataTypes.STRING,     // 주소
         },
+        companyField : {
+            type: DataTypes.STRING,     // 기업 분야
+        },
         companyImage : {
             type: DataTypes.STRING,     // 기업 사진
         },

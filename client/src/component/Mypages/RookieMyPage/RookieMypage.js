@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 import './RookieMypage.css';
 import RookieProflie from './RookieProfile/RookieProfile';
 import RookiePt from './RookiePortfolio/RookiePt';
-import axios from 'axios';
 import Msg from '../../MyMenu/Message';
 import RookieChart from './RookieChart/RookieChart';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart,faShareAlt,faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { faHeart,faShareAlt,faEnvelope } from '@fortawesome/free-solid-svg-icons';
+
 class RookieMypage extends Component {
     constructor(props) {
         super(props);
@@ -19,7 +21,6 @@ class RookieMypage extends Component {
             user : this.props.user,
 
             load : false,
-           
         }
     }
 
@@ -75,13 +76,13 @@ class RookieMypage extends Component {
                             </button>
                             <button className="rookie-message-btn"
                             onClick={() => this.setState({ msgDisplay : msgDisplay === "none" ? "flex" : "none"})}>
-                                 <span className="mypage-icons"><FontAwesomeIcon icon={faEnvelope} size="2x"/></span>
+                                <span className="mypage-icons"><FontAwesomeIcon icon={faEnvelope} size="2x"/></span>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-        ) : (<div style={{width:"100%", height:"800px",display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>로드 마스크</div>);
+        ) : <div></div>
     }
 }
 

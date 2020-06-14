@@ -33,6 +33,7 @@ class CompanyInfoBox extends Component {
     // 시작하기 버튼 누를 시
     async saveUserInfoBtn() {
         const { user } = this.props;
+        console.log(user);
         const { profileImg,companyname,ceo,phone1,phone2,phone3,intro,address1,address2,field,since} = this.state;
         try {
             // 기업 시
@@ -41,35 +42,35 @@ class CompanyInfoBox extends Component {
                     id : user.id
                 })
 
-                let phone = phone1+phone2+phone3;
-                let address = address1 + address2;
-                let result = axios.post("http://localhost:5000/companyInfos/create", {
-                    companyId : user.id,
-                    companyName: companyname,
-                    comPhone: phone,
-                    companyAdd: address,
-                    companyImage : "",
-                    companyCEO: ceo,
-                    companyField: field,
-                    companySince : since,
-                    companyIntro : intro,
-                    companyTags : "",
-                    companySpecialty :"", 
-                    companyWorkDate : "",
-                    companyKeyword : "",
-                })
+            let phone = phone1+phone2+phone3;
+            let address = address1 + address2;
+            let result = axios.post("http://localhost:5000/companyInfos/create", {
+                userId : user.id,
+                companyName: companyname,
+                comPhone: phone,
+                companyAdd: address,
+                companyImage : "",
+                companyCEO: ceo,
+                companyField: field,
+                companySince : since,
+                companyIntro : intro,
+                companyTags : "",
+                companySpecialty :"", 
+                companyWorkDate : "",
+                companyKeyword : "",
+            })
 
-                await Promise.all([userCateUpdat,result]).then(data => {
-                    userCateUpdat = data[0];
-                    result = data[1];
-                })
+            await Promise.all([userCateUpdat,result]).then(data => {
+                userCateUpdat = data[0];
+                result = data[1];
+            })
 
-                console.log(userCateUpdat.data, result.data);
-                if(result.data){
-                    alert("기본입력이 완료되었습니다.");
-                } else {
-                    alert("다시 시도해주세요.")
-                }
+            console.log(userCateUpdat.data, result.data);
+            if(result.data){
+                alert("기본입력이 완료되었습니다.");
+            } else {
+                alert("다시 시도해주세요.")
+            }
         } catch(err) {
             console.log("user info save err : " + err);
         }
@@ -82,7 +83,7 @@ class CompanyInfoBox extends Component {
     }
 
     render() {
-        const { profileImg,ceo,companyname,phone1,phone2,phone3,address1,address2,intro,field,startdate,attendTag,tags,keywords,menupopupControl } = this.state;
+        const { profileImg,ceo,companyname,phone1,phone2,phone3,address1,address2,intro,field,since,attendTag,tags,keywords,menupopupControl } = this.state;
         return (
             <div className="userInfo-user">
                 {/* 프로필 사진, 이름, 번호, 주소 등의 기업정보 */}
@@ -124,7 +125,7 @@ class CompanyInfoBox extends Component {
                             <div className="userInfo-spanCollage1">사업분야</div>
                             <input value={field} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="field" placeholder="사업분야를 입력하세요." type="text" className="userInfo-input"></input>
                             <div className="userInfo-spanCollage2">설립일</div>
-                            <input value={startdate} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="startdate" placeholder="설립일을 입력하세요" type="text" className="userInfo-input"></input>
+                            <input value={since} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="since" placeholder="설립일을 입력하세요" type="text" className="userInfo-input"></input>
                         </div>
                        
                     </div>

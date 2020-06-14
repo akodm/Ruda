@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import RookieMypage from './RookieMyPage/RookieMypage';
 import CompanyMypage from './CompanyMyPage/CompanyMyPage';
 import axios from 'axios';
+import CompanyInfo from './CompanyMyPage/CompanyProfile/ProfileComponent/CompanyInfo/CompanyInfo';
 class Mypages extends Component {
     constructor(props){
         super(props);
@@ -132,7 +133,7 @@ class Mypages extends Component {
         console.log(user);
          return load && (
             <div className="Mypages">
-                { user.cate !== "user" ? <CompanyMypage user={user.data} /> : <RookieMypage user={user.data}/> }
+                { user.cate !== "user" ? <CompanyMypage user={user} /> : <RookieMypage user={user.data}/> }
             </div>
         );
     }
