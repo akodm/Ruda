@@ -28,7 +28,7 @@
 }
 .RookieMain-user-name{
     font-weight: 600;
-    margin: 5px;
+    margin-bottom: 30px;
     font-size: 16px;
 }
 .line{
@@ -72,4 +72,31 @@
 }
 .RookieMain-relayout{
     font-size: 12px;
+}
+.RookieMain-user-tag-content{
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+}
+
+.RookieMain-fileDiv {
+    justify-content: center;
+    margin: 30px;
+}
+.RookieMain-fileDiv label {
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    font-size: 12px;
+    padding: 8px;
+    background-color: #759dc4c5;
+}
+.RookieMain-fileDiv input[type="file"] { 
+    position: absolute; 
+    width: 0px; 
+    height: 0px; 
+    padding: 0; 
+    overflow: hidden; 
+    clip:rect(0,0,0,0); 
+    border: 0; 
 }

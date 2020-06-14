@@ -130,8 +130,7 @@ class Mypages extends Component {
     }
 
     render() {
-        const {url,user,load}=this.state;
-        console.log(user);
+        const {user,load}=this.state;
         return load && (
             <div className="Mypages">
                 { user.cate !== "user" ? <CompanyMypage user={user.data} /> : <RookieMypage user={user.data}/> }

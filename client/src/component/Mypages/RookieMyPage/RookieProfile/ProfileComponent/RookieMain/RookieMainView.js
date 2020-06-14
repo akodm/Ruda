@@ -1,12 +1,31 @@
 import React, { Component } from 'react';
+import Chip from '@material-ui/core/Chip';
 
 class RookieMainView extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            profileImg:"",
+            profile_preview:"",
+        }
 
+    }
+    
     setMain(){
         this.props.Mainchanges(false)
     }
+    
+    
     render() {
+       
         const {user} = this.props;
+        const tags = user.userTags;
+        console.log(tags);
+        const tag = tags.map(function(str){
+            return   <div className="chip-margin">
+                        <Chip label={"#"+str} size="small" color="primary" variant="outlined" />
+                    </div>;
+        });
         return (
             <div>
                 <div className="RookieMain-title">
@@ -20,8 +39,7 @@ class RookieMainView extends Component {
                 </div>
                 <div className="line"></div>
                 <div className="RookieMain-user-tag-content">
-                {/*태그컴포넌트여기에 넣어주세용*/}
-                   태그자리
+                      {tag}
                 </div>
             </div>
         );

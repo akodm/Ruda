@@ -3,7 +3,7 @@ import RookieInfo from './ProfileComponent/RookieInfo/RookieInfo';
 import RookieAwards from './ProfileComponent/RookieAwards/RookieAwards';
 import RookieCertificate from './ProfileComponent/RookieCertificate/RookieCertificate';
 import RookieMain from './ProfileComponent/RookieMain/RookieMain';
-import Axios from 'axios';
+
 class RookieProflie extends Component {
     constructor(props){
         super(props);

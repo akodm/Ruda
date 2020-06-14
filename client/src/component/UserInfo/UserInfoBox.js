@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Chip from './TagChip';
 import TagChip from './TagChip';
+import configs from '../../client-configs';
+
+import moment from 'moment';
 
 class UserInfoBox extends Component {
     constructor(props) {
@@ -17,15 +19,24 @@ class UserInfoBox extends Component {
             address1 : "",
             address2 : "",
 
+            fieldState : false,
+            fieldList : [],
+            fields : [],
+            field : "",
+            workdate : "",
+
             collage : "",
             subject : "",
             attending1 : "",
             attending2 : "",
             attendTag : "",
-            menupopupControl : false,
+            traning : "",
 
             tag : "",
             tags : [],
+            tagListState : false,
+            tagList : [],
+
             keywords : [],
             
             
@@ -52,9 +63,9 @@ class UserInfoBox extends Component {
         const user = this.props.user;
         const { profileImg,name,
             phone1,phone2,phone3,
-            intro,address1,address2,
+            intro,address1,address2,field,workdate,
             collage,subject,attendTag,attending1,attending2,
-            tags,keywords} = this.state;
+            tags,keywords,traning } = this.state;
         try {
             // 구직자 시
             let userCateUpdat = axios.put("http://localhost:5000/users/updatecate", {
@@ -69,14 +80,15 @@ class UserInfoBox extends Component {
                 userPhone: phone,
                 userAdd: address,
                 userImage : profileImg,
-                userTraning: "",
+                userTraning: traning,
                 userUnvcity: collage,
                 userSubject : subject,
                 userIntro : intro,
                 userTags : tags,
                 userSpecialty :"", 
-                userWorkDate : "",
+                userWorkDate : workdate,
                 userKeyword : "",
+                userField:field,
             })
 
             await Promise.all([userCateUpdat,result]).then(data => {
@@ -126,13 +138,49 @@ class UserInfoBox extends Component {
         }
     }
 
+    //  태그 인풋 스태이트 변경하게 하는 함수
+    async onChangeValueTag(e) {
+        await this.setState({
+            [e.target.name] : e.target.value
+        });
+        let searchResult = configs.app.tagList.filter(data => {
+            return data.toLowerCase().match(this.state.tag.toLowerCase()) && this.state.tag && data;
+        })
+        // 값이 하나라도 있다면
+        if(searchResult[0]) {
+            this.handleClick();
+            this.setState({ tagList : searchResult, tagListState : true });
+        } else {
+            this.setState({ tagListState : false });
+        }
+    }
+
+    // 함수 호출 시 현재 팝업 상태 확인 후 띄워져 있다면, 이벤트 리스너를 지우고 팝업 내리기.
+    handleClick = () => {
+        if (!this.state.tagListState) {
+            document.addEventListener('click', this.handleOutsideClick, false);
+        } else {
+            document.removeEventListener('click', this.handleOutsideClick, false);
+            this.setState({ tagListState : false });
+        }
+    }
+
+    // ref 확인 후 클릭 한 곳이 ref 를 포함한 엘리먼트인 경우 리턴, 아닌 경우 함수 호출
+    handleOutsideClick = (e) => {
+        if (this.tagNode && this.tagNode.contains(e.target)) {
+            return;
+        }
+        this.handleClick();
+    }
+
     // 칩 삭제 할 시
     onTagsDelete(e) {
-        this.setState({ tags : this.state.tags.filter(data => { return e != data}) })
+        this.setState({ tags : this.state.tags.filter(data => { return e !== data}) })
     }
 
     render() {
-        const { profileImg,name,phone1,phone2,phone3,collage,subject,intro,address1,address2,attending1,attending2,attendTag,tags,keywords,menupopupControl,tag } = this.state;
+        const { profileImg,name,phone1,phone2,phone3,collage,subject,intro,address1,address2,fieldState,fields,fieldList,field,workdate,attending1,attending2,attendTag,tags,keywords,tag,traning,tagList,tagListState } = this.state;
+
         let profile_preview = <img src ='/Image/insert_rookie.png'className="userInfo-img" alt="profileIMG"/>
         if(this.state.profileImg !== ''){
           profile_preview = <img src={this.state.previewURL} className="userInfo-img" alt="profileIMG"></img>
@@ -148,7 +196,6 @@ class UserInfoBox extends Component {
                     <div className="userInfo-margin">
                         <div className="userInfo-imgDiv">
                             {profile_preview}
-                            
                             <div className="userInfo-fileDiv">
                                 <label htmlFor="avatafile">사진 업로드</label>
                                 <input accept="image/*" name="profileImg" value={profileImg ? profileImg : ""} onChange={this.onChangeImageValue.bind(this)} type="file" id="avatafile"></input>
@@ -173,6 +220,14 @@ class UserInfoBox extends Component {
                             <div className="userInfo-span">자기소개</div>
                             <input value={intro} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="intro" maxLength={30} placeholder="간단한 자기 소개를 30자 내로 해주세요." type="text" className="userInfo-inputIntro"></input>
                         </div>
+                        <div className="userInfo-inputDiv">
+                            <div className="userInfo-span">희망 분야</div>
+                            <input value={field} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="field" placeholder="희망 문야를 입력하세요." type="text" className="userInfo-input"></input>
+                        </div>
+                        <div className="userInfo-inputDiv">
+                            <div className="userInfo-spanDate">근무 가능 날짜</div>
+                            <input maxLength={10} value={workdate} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="workdate" placeholder={moment().format("YYYY/MM/DD")} type="text" className="userInfo-inputDate"></input>
+                        </div>
                     </div>
                 </div>
                 {/* 대학, 전공 등의 학력정보 */}
@@ -191,15 +246,19 @@ class UserInfoBox extends Component {
                             <div className="userInfo-span">재학기간</div>
                             <input value={attending1} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="attending1" placeholder="입학년도" type="text" className="userInfo-inputDate"></input>
                             ~<input value={attending2} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="attending2" placeholder="졸업년도" type="text" className="userInfo-inputDate"></input>
-                            <div className="userInfo-selectDiv">
-                                <div className="userInfo-select" style={{display : menupopupControl && "none"}} onClick={() => { this.setState({ menupopupControl : true }) }}>{ !menupopupControl && attendTag ? attendTag : "구분"}</div>
-                                { menupopupControl && <div className="select-menu">
-                                    <div className="select-item" onClick={() => this.setState({ attendTag : "재학", menupopupControl : false })}>재학</div>
-                                    <div className="select-item" onClick={() => this.setState({ attendTag : "졸업", menupopupControl : false })}>졸업</div>
-                                    <div className="select-item" onClick={() => this.setState({ attendTag : "휴학", menupopupControl : false })}>휴학</div>
-                                    <div className="select-item" onClick={() => this.setState({ attendTag : "중퇴", menupopupControl : false })}>중퇴</div>
-                                </div>}
-                            </div>
+                            <select className="userinfo-selectTraning" value={attendTag} onChange={(e) => this.setState({ attendTag : e.target.value})}>
+                                <option value={"재학"}>재학</option>
+                                <option value={"졸업"}>졸업</option>
+                                <option value={"휴학"}>휴학</option>
+                                <option value={"중퇴"}>중퇴</option>
+                            </select>
+                        </div>
+                        <div className="userInfo-inputDiv">
+                            <div className="userInfo-spanCollage1">실습 여부</div>
+                            <select className="userinfo-selectTraning" value={traning} onChange={(e) => this.setState({ traning : e.target.value})}>
+                                <option value={0}>아니요</option>
+                                <option value={1}>예</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -212,9 +271,18 @@ class UserInfoBox extends Component {
                         <div className="userInfo-comentDiv">
                             <span className="userInfo-coment">태그 검색</span>
                         </div>
-                        <input type="text" value={tag} name="tag" onKeyPress={this.onEnterTags.bind(this)} onChange={this.onChangeValue.bind(this)} className="userInfo-tagInput"></input>
+                        <input placeholder="검색 또는 리스트에서 선택하여 주세요. 최대 10개까지 가능합니다." type="text" value={tag} name="tag" onKeyPress={this.onEnterTags.bind(this)} onChange={this.onChangeValueTag.bind(this)} className="userInfo-tagInput"></input>
+                        { tagListState && <div className="userInfo-tagList" ref={tagNode => { this.tagNode = tagNode }}>
+                            {
+                                tagList && tagList.map((data,i) => {
+                                    return <div key={i} className="tag-list-div" onClick={() => this.setState({ tags : this.state.tags.concat(data), tagListState : false, tag : "" })}>
+                                        {data}
+                                    </div>
+                                })
+                            }
+                        </div>}
                         <div className="userInfo-comentDiv">
-                            <span className="userInfo-coment">나의 태그</span>
+                            <span className="userInfo-coment">선택한 태그</span>
                         </div>
                         <div className="userInfo-tagBox">
                             <div className="userInfo-tagMargin">

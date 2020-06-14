@@ -1,11 +1,11 @@
 module.exports = {
     app : {
-        googleId : "",
-        googlePass : "",
-        
-        facebookId : "",
+        tagList : [
+           
+        ],
 
-        githubId : "",
-        githubPass : "",
+        fieldList : [
+            
+        ]
     }
 }
