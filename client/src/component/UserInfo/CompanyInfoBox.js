@@ -6,7 +6,8 @@ class CompanyInfoBox extends Component {
         super(props);
         this.state = {
             profileImg : null,
-            name : "",
+            companyname : "",
+            ceo:"",
             phone1 : "",
             phone2 : "",
             phone3 : "",
@@ -14,10 +15,8 @@ class CompanyInfoBox extends Component {
             address1 : "",
             address2 : "",
 
-            collage : "",
-            subject : "",
-            attending1 : "",
-            attending2 : "",
+            since:"",
+            field:"",
             attendTag : "",
             menupopupControl : false,
 
@@ -33,17 +32,44 @@ class CompanyInfoBox extends Component {
 
     // 시작하기 버튼 누를 시
     async saveUserInfoBtn() {
-        const { nums,user } = this.props;
-        const {  } = this.state;
+        const { user } = this.props;
+        console.log(user);
+        const { profileImg,companyname,ceo,phone1,phone2,phone3,intro,address1,address2,field,since} = this.state;
         try {
-            // 구직자 시
-            if(!nums) {
-                const result = await axios.post("http://localhost:5000/companyInfos/create", {
-                    userId : user.id,
-                })
             // 기업 시
-            } else {
+            let userCateUpdat = axios.put("http://localhost:5000/users/updatecate", {
+                    userCate : "company",
+                    id : user.id
+                })
 
+            let phone = phone1+phone2+phone3;
+            let address = address1 + address2;
+            let result = axios.post("http://localhost:5000/companyInfos/create", {
+                userId : user.id,
+                companyName: companyname,
+                comPhone: phone,
+                companyAdd: address,
+                companyImage : "",
+                companyCEO: ceo,
+                companyField: field,
+                companySince : since,
+                companyIntro : intro,
+                companyTags : "",
+                companySpecialty :"", 
+                companyWorkDate : "",
+                companyKeyword : "",
+            })
+
+            await Promise.all([userCateUpdat,result]).then(data => {
+                userCateUpdat = data[0];
+                result = data[1];
+            })
+
+            console.log(userCateUpdat.data, result.data);
+            if(result.data){
+                alert("기본입력이 완료되었습니다.");
+            } else {
+                alert("다시 시도해주세요.")
             }
         } catch(err) {
             console.log("user info save err : " + err);
@@ -57,7 +83,7 @@ class CompanyInfoBox extends Component {
     }
 
     render() {
-        const { profileImg,name,phone1,phone2,phone3,collage,subject,intro,address1,address2,attending1,attending2,attendTag,tags,keywords,menupopupControl } = this.state;
+        const { profileImg,ceo,companyname,phone1,phone2,phone3,address1,address2,intro,field,since,attendTag,tags,keywords,menupopupControl } = this.state;
         return (
             <div className="userInfo-user">
                 {/* 프로필 사진, 이름, 번호, 주소 등의 기업정보 */}
@@ -75,9 +101,9 @@ class CompanyInfoBox extends Component {
                         </div>
                         <div className="userInfo-inputDiv">
                             <div className="userInfo-spanCollage1">기업명</div>
-                            <input value={collage} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="collage" placeholder="기업명을 입력하세요." type="text" className="userInfo-input"></input>
+                            <input value={companyname} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="companyname" placeholder="기업명을 입력하세요." type="text" className="userInfo-input"></input>
                             <div className="userInfo-spanCollage2">기업대표</div>
-                            <input value={subject} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="subject" placeholder="전공을 선택하세요." type="text" className="userInfo-input"></input>
+                            <input value={ceo} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="ceo" placeholder="전공을 선택하세요." type="text" className="userInfo-input"></input>
                         </div>
                         <div className="userInfo-inputDiv">
                             <div className="userInfo-span">전화번호</div>
@@ -97,9 +123,9 @@ class CompanyInfoBox extends Component {
 
                         <div className="userInfo-inputDiv">
                             <div className="userInfo-spanCollage1">사업분야</div>
-                            <input value={collage} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="collage" placeholder="대학교를 입력하세요." type="text" className="userInfo-input"></input>
+                            <input value={field} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="field" placeholder="사업분야를 입력하세요." type="text" className="userInfo-input"></input>
                             <div className="userInfo-spanCollage2">설립일</div>
-                            <input value={subject} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="subject" placeholder="전공을 선택하세요." type="text" className="userInfo-input"></input>
+                            <input value={since} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="since" placeholder="설립일을 입력하세요" type="text" className="userInfo-input"></input>
                         </div>
                        
                     </div>

@@ -7,6 +7,7 @@ import Pagination from '@material-ui/lab/Pagination';
 
 class Rookie extends Component {
     render() {
+        const user =this.props
         return (
             <div className="Rookie">
                 <div className="Rookie-title">

@@ -17,7 +17,7 @@ class CompanyMyPage extends Component {
             hireClick:"hire-btn",
             changePage:true,
             user : this.props.user,
-
+            
             load : false,
         }
     }
@@ -54,6 +54,7 @@ class CompanyMyPage extends Component {
     }
 
     render() {
+        const user =this.props
         const { load, msgDisplay,likeUser,ptbtnClick,profileClick,changePage,hireClick } = this.state;
         return load ? (
             <div className="company-main">
@@ -61,7 +62,7 @@ class CompanyMyPage extends Component {
                     <Msg display= { msgDisplay } />
                     <div className="company-main-bg">
                         <div className="company-main-bg-in">
-                            { changePage?<CompanyProfile/>:<CompanyProject/> }
+                            { changePage?<CompanyProfile user={user}/>:<CompanyProject  user={user}/> }
                         </div>
                         <div className="company-menu-btn">
                             <button className={profileClick}
