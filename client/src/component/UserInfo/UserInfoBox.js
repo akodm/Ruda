@@ -31,10 +31,12 @@ class UserInfoBox extends Component {
             attendTag : "",
             traning : "",
 
+            // 태그 기능을 위한 스태이트--//
             tag : "",
             tags : [],
             tagListState : false,
             tagList : [],
+            // ---------------------------//
 
             keywords : [],
         }
@@ -112,6 +114,8 @@ class UserInfoBox extends Component {
         })
     }
 
+    // -----------------------------태그 기능을 위한 함수 영역-------------------------- //
+    // -------------------------------------------------------------------------------- //
     // 칩 추가를 위해 엔터 클릭 시
     onEnterTags(e) {
         if(e.key === "Enter") {
@@ -123,7 +127,6 @@ class UserInfoBox extends Component {
             this.setState({ tags : this.state.tags.concat(tag), tag : "" })
         }
     }
-
     //  태그 인풋 스태이트 변경하게 하는 함수
     async onChangeValueTag(e) {
         await this.setState({
@@ -140,7 +143,6 @@ class UserInfoBox extends Component {
             this.setState({ tagListState : false });
         }
     }
-
     // 함수 호출 시 현재 팝업 상태 확인 후 띄워져 있다면, 이벤트 리스너를 지우고 팝업 내리기.
     handleClick = () => {
         if (!this.state.tagListState) {
@@ -150,7 +152,6 @@ class UserInfoBox extends Component {
             this.setState({ tagListState : false });
         }
     }
-
     // ref 확인 후 클릭 한 곳이 ref 를 포함한 엘리먼트인 경우 리턴, 아닌 경우 함수 호출
     handleOutsideClick = (e) => {
         if (this.tagNode && this.tagNode.contains(e.target)) {
@@ -158,11 +159,12 @@ class UserInfoBox extends Component {
         }
         this.handleClick();
     }
-
     // 칩 삭제 할 시
     onTagsDelete(e) {
         this.setState({ tags : this.state.tags.filter(data => { return e !== data}) })
     }
+    // -------------------------------------------------------------------------------- //
+    // -------------------------------------------------------------------------------- //
 
     render() {
         const { profileImg,name,phone1,phone2,phone3,collage,subject,intro,address1,address2,fieldState,fields,fieldList,field,workdate,attending1,attending2,attendTag,tags,keywords,tag,traning,tagList,tagListState } = this.state;
@@ -202,7 +204,7 @@ class UserInfoBox extends Component {
                         </div>
                         <div className="userInfo-inputDiv">
                             <div className="userInfo-span">희망 분야</div>
-                            <input value={field} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="field" placeholder="희망 문야를 입력하세요." type="text" className="userInfo-input"></input>
+                            <input value={field} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="field" placeholder="희망 분야를 입력하세요." type="text" className="userInfo-input"></input>
                         </div>
                         <div className="userInfo-inputDiv">
                             <div className="userInfo-spanDate">근무 가능 날짜</div>
