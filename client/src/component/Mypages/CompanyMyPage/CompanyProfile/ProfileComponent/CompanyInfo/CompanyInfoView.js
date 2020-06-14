@@ -17,9 +17,10 @@ class CompanyInfoView extends Component {
     }
 
     setInfo(){
-        this.props.infochanges(true)
+        this.props.infochanges(false)
     }
     render() {
+        const {user} =this.props
         return (
                <div>
                     <div className="companyInfo-title">
@@ -30,33 +31,33 @@ class CompanyInfoView extends Component {
                         <div className="companyInfo-content-left">
                             <div className="phone">
                                 <span className="phone-title">전화번호</span>
-                                <span className="phone-info">02-123-1234</span>
+                                <span className="phone-info">{user.companyPhone}</span>
                             </div>
                             <div className="email">
                                 <span className="email-title">이메일</span>
-                                <span className="email-info">abc@ruda.com</span>
+                                <span className="email-info">{user.user.email}</span>
                             </div>
                             <div className="site">
                                 <span className="site-title" >사이트</span>
-                                <span className="site-info">www.ruda.com</span>
+                                <span className="site-info"></span>
                             </div>
                             <div className="address">
                                 <span className="address-title">주소</span>
-                                <span className="address-info">경기도 안양시 만안구 비산동</span>
+                                <span className="address-info">{user.companyAdd}</span>
                             </div>
                         </div>
                         <div className="companyInfo-content-right">
                             <div className="workdate">
                                 <span className="workdate-title">기업설립일</span>
-                                <span className="workdate-info">2020-02-02</span>
+                                <span className="workdate-info">{user.companySince}</span>
                             </div>
                             <div className="trainingdate">
                                 <span className="trainingdate-title">사업자번호</span>
-                                <span className="trainingdate-info">0123456789</span>
+                                <span className="trainingdate-info">{user.companyPhone}</span>
                             </div>
                             <div className="university">
                                 <span className="university-title">기업대표</span>
-                                <span className="university-info">조준명</span>
+                                <span className="university-info">{user.companyCEO}</span>
                             </div>
                             <div className="wontjob">
                                 <span className="wontjob-title">채용여부</span>

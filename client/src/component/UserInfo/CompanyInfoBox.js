@@ -68,6 +68,7 @@ class CompanyInfoBox extends Component {
             console.log(userCateUpdat.data, result.data);
             if(result.data){
                 alert("기본입력이 완료되었습니다.");
+                window.location="/";
             } else {
                 alert("다시 시도해주세요.")
             }
@@ -103,7 +104,7 @@ class CompanyInfoBox extends Component {
                             <div className="userInfo-spanCollage1">기업명</div>
                             <input value={companyname} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="companyname" placeholder="기업명을 입력하세요." type="text" className="userInfo-input"></input>
                             <div className="userInfo-spanCollage2">기업대표</div>
-                            <input value={ceo} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="ceo" placeholder="전공을 선택하세요." type="text" className="userInfo-input"></input>
+                            <input value={ceo} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="ceo" placeholder="기업대표를 입력해주세요" type="text" className="userInfo-input"></input>
                         </div>
                         <div className="userInfo-inputDiv">
                             <div className="userInfo-span">전화번호</div>
@@ -113,12 +114,12 @@ class CompanyInfoBox extends Component {
                         </div>
                         <div className="userInfo-inputDiv">
                             <div className="userInfo-span">주소</div>
-                            <input value={address1} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="address1" placeholder="거주지를 입력하세요." type="text" className="userInfo-input"></input>-
+                            <input value={address1} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="address1" placeholder="기업주소를 입력하세요." type="text" className="userInfo-input"></input>-
                             <input value={address2} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="address2" placeholder="상세주소" type="text" className="userInfo-input"></input>
                         </div>
                         <div className="userInfo-inputDiv">
                             <div className="userInfo-span">기업소개</div>
-                            <input value={intro} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="intro" maxLength={30} placeholder="간단한 자기 소개를 30자 내로 해주세요." type="text" className="userInfo-inputIntro"></input>
+                            <input value={intro} onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} name="intro" maxLength={50} placeholder="간단한 기업 소개를 30자 내로 해주세요." type="text" className="userInfo-inputIntro"></input>
                         </div>
 
                         <div className="userInfo-inputDiv">

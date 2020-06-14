@@ -54,8 +54,9 @@ class CompanyMyPage extends Component {
     }
 
     render() {
-        const user =this.props
-        const { load, msgDisplay,likeUser,ptbtnClick,profileClick,changePage,hireClick } = this.state;
+     
+
+        const { load, msgDisplay,likeUser,ptbtnClick,profileClick,changePage,hireClick,user } = this.state;
         return load ? (
             <div className="company-main">
                 <div className="btn-cont">

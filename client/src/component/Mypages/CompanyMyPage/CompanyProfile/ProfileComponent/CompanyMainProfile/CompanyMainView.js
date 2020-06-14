@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 
-class RookieMainView extends Component {
-
+class CompanyMainView extends Component {
     setMain(){
         this.props.Mainchanges(false)
     }
     render() {
-        const {user} = this.props;
+        const {user} =this.props;
+        console.log(user);
         return (
             <div>
                 <div className="RookieMain-title">
-                    <span className="RookieMain-title-text">저는 이런 사람이에요</span>
+                    <span className="RookieMain-title-text">저희 이런 기업이에요</span>
                     <span className="RookieMain-relayout" onClick={this.setMain.bind(this)}>[편집]</span>
                 </div>
                 <div className="RookieMain-user">
-                    <img src={user.userImage} alt="IMG"></img>
-                    <span className="RookieMain-user-name">{user.userName}</span>
-                    <span>{user.userIntro}</span>
+                    <img src=""alt="IMG"></img>
+                    <span className="RookieMain-user-name">{user.companyName}</span>
+                    <span>{user.companyIntro}</span>
                 </div>
                 <div className="line"></div>
                 <div className="RookieMain-user-tag-content">
@@ -25,8 +25,7 @@ class RookieMainView extends Component {
                 </div>
             </div>
         );
-  
     }
 }
 
-export default RookieMainView;
+export default CompanyMainView;

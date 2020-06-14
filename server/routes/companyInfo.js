@@ -55,12 +55,8 @@ router.post("/create", async (req, res) => {
 				companyName: req.body.companyName,
 				companyPhone: req.body.companyPhone,
 				companyAdd: req.body.companyAdd,
-<<<<<<< HEAD
-				companyField: req.body.companyField,
-=======
 				companyFiled: req.body.companyFiled,
 				companyTags: req.body.companyTags,
->>>>>>> 8ee0c46f3b7987cfc54efabf593fbe99275c8ab4
 				companyAwards: req.body.companyAwards,
 				companyImage: req.body.companyImage,
 				companyCEO: req.body.companyCEO,
