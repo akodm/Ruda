@@ -1,6 +1,28 @@
 var express = require("express");
 var router = express.Router();
 let models = require("../models");
+let multer = require('multer');
+
+// multer setting ----------------------------------------------------
+
+const upload = multer({
+	storage: multer.diskStorage({
+	  destination: function (req, file, cb) {
+		cb(null, 'public/upload/');
+	  },
+	  filename: function (req, file, cb) {
+		cb(null, new Date().valueOf() + path.extname(file.originalname));
+	  }
+	}),
+  });
+router.post("/upload", upload.single("img"), async(req,res) => {
+	try {
+		console.log(req.file);
+		console.log(req.body);
+	} catch(err) {
+		console.log(err);
+	}
+});
 
 // DB Setting --------------------------------------------------------
 const UserInfo = models.userInfo;
@@ -82,7 +104,8 @@ router.post("/create", async (req, res) => {
 
 // 유저 정보 수정
 router.put("/update", async(req, res) => {
-    let result = null;
+	let result = null;
+	console.log(req.body);
     try {
         await UserInfo.update({ 
 			userName: req.body.userName,
