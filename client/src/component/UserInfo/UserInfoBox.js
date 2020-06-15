@@ -10,7 +10,7 @@ class UserInfoBox extends Component {
         super(props);
         this.state = {
             profileImg : null,
-            priviewURL:"",
+            imageUrl : null,
             name : "",
             phone1 : "",
             phone2 : "",
@@ -46,18 +46,14 @@ class UserInfoBox extends Component {
     }
 
     // 이미지 업로드 할 시
-    onChangeImageValue = (event)=> {
-        event.preventDefault();
-        let reader = new FileReader();
-        let file = event.target.files[0];
-       
-        reader.onloadend = () => {
-            this.setState({
-                file : file,
-                previewURL : reader.result,    
-            })
+    onChangeImageValue = async(event)=> {
+        if(event.target.files[0]) {
+            await this.setState({
+                profileImg : event.target.files[0],
+                imageUrl : URL.createObjectURL(event.target.files[0]),
+            });
+            this.addFile();
         }
-        reader.readAsDataURL(file);
     }
 
     // 시작하기 버튼 누를 시
@@ -97,7 +93,6 @@ class UserInfoBox extends Component {
                 userCateUpdat = data[0];
                 result = data[1];
             })
-            console.log(profileImg);
             console.log(userCateUpdat.data, result.data);
             if(result.data){
                 alert("기본입력이 완료되었습니다.");
@@ -180,14 +175,21 @@ class UserInfoBox extends Component {
     // -------------------------------------------------------------------------------- //
     // -------------------------------------------------------------------------------- //
 
-    render() {
-        const { profileImg,name,phone1,phone2,phone3,collage,subject,intro,address1,address2,fieldState,fields,fieldList,field,workdate,attending1,attending2,attendTag,tags,keywords,tag,traning,tagList,tagListState } = this.state;
+    addFile = async() => {
+        const data = new FormData();
+        data.append("img", this.state.profileImg);
+        try {
+            const result = await axios.post("http://localhost:5000/userInfos/upload", {
+                data,
+                userId : "asd",
+            });
+        } catch(err) {  
+            console.log("user file upload err :  " + err);
+        }
+    }
 
-        let profile_preview = <img src ='/Image/insert_rookie.png'className="userInfo-img" alt="profileIMG"/>
-        if(this.state.profileImg !== ''){
-          profile_preview = <img src={this.state.previewURL} className="userInfo-img" alt="profileIMG"></img>
-        } 
-        console.log(profileImg);
+    render() {
+        const { profileImg,imageUrl,name,phone1,phone2,phone3,collage,subject,intro,address1,address2,fieldState,fields,fieldList,field,workdate,attending1,attending2,attendTag,tags,keywords,tag,traning,tagList,tagListState } = this.state;
         return (
             <div className="userInfo-user">
                 {/* 프로필 사진, 이름, 번호, 주소 등의 개인정보 */}
@@ -197,10 +199,10 @@ class UserInfoBox extends Component {
                 <div className="userInfo-box">
                     <div className="userInfo-margin">
                         <div className="userInfo-imgDiv">
-                            {profile_preview}
+                            <img src={imageUrl} className="userInfo-img" alt="profileIMG"/>
                             <div className="userInfo-fileDiv">
                                 <label htmlFor="avatafile">사진 업로드</label>
-                                <input accept="image/*" name="profileImg" value={profileImg ? profileImg : ""} onChange={this.onChangeImageValue.bind(this)} type="file" id="avatafile"></input>
+                                <input accept="image/*" name="profileImg" onChange={this.onChangeImageValue.bind(this)} type="file" id="avatafile"></input>
                             </div>
                         </div>
                         <div className="userInfo-inputDiv">
