@@ -56,7 +56,7 @@ class RookieinfoView extends Component {
                             <div className="wontjob">
                                 <span className="info-icons"><FontAwesomeIcon icon={faBriefcase} size="1x"/></span>
                                 <span className="wontjob-title">희망직무</span>
-                                <span className="wontjob-info">{user.userFieldP}</span>
+                                <span className="wontjob-info">{user.userField}</span>
                             </div>
                             <div className="university">
                              <span className="info-icons"><FontAwesomeIcon icon={faUserGraduate} size="1x"/></span>
@@ -72,7 +72,7 @@ class RookieinfoView extends Component {
                             <div className="trainingdate">
                                 <span className="info-icons"><FontAwesomeIcon icon={faCalendarAlt} size="1x"/></span>
                                 <span className="trainingdate-title">실습날짜</span>
-                                <span className="trainingdate-info"></span>
+                                <span className="trainingdate-info">{user.userTraningDate}</span>
                             </div>
                             
                         </div>

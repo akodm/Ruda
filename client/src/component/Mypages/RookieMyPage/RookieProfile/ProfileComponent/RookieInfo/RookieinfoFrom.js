@@ -61,7 +61,7 @@ class RookieinfoFrom extends Component {
                         <div className="trainingdate">
                                 <span className="info-icons"><FontAwesomeIcon icon={faCalendarAlt} size="1x"/></span>
                                 <span className="trainingdate-title">실습날짜</span>
-                                <input type ="text" className="" ></input>
+                                <input type ="text" className=""value={user.userTraningDate} ></input>
                         </div>
                     </div>
                 </div>

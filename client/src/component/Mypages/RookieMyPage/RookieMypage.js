@@ -48,9 +48,13 @@ class RookieMypage extends Component {
             changePage : false
         });
     }
-
+    likeUser(){
+        const {user} =this.props;
+        console.log(user.userLike);
+    }
     render() {
         const { load ,msgDisplay,likeUser,ptbtnClick,profileClick,changePage,user  } = this.state;
+
         return load ? (
             <div className="rookie-main">
                 <RookieChart/>
@@ -71,7 +75,8 @@ class RookieMypage extends Component {
                                 <span className="mypage-icons"><FontAwesomeIcon icon={faShareAlt} size="2x"/></span>
                             </button>
                             <button className="rookie-like-btn"
-                            onClick={() => this.setState({ likeUser : likeUser === "none" ? console.log("조아여") : "none"})}>
+                            onClick={() => this.setState({ likeUser : likeUser === user ?this.likeUser.bind(this) : "none"})}>
+                                
                                 <span className="mypage-icons"><FontAwesomeIcon icon={faHeart} size="2x"/></span>
                             </button>
                             <button className="rookie-message-btn"
