@@ -51,7 +51,7 @@ class RookieinfoFrom extends Component {
                         <div className="university">
                                  <span className="info-icons"><FontAwesomeIcon icon={faUserGraduate} size="1x"/></span>
                                 <span className="university-title">대학교/학과</span>
-                                <input type ="text" className="" value="{user.userUnvcity}/{user.userUnvcity}"></input>
+                                <input type ="text" className="" value={user.userUnvcity+"/"+user.userUnvcity}></input>
                         </div>
                         <div className="workdate">
                                  <span className="info-icons"><FontAwesomeIcon icon={faCalendarAlt} size="1x"/></span>
