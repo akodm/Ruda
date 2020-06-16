@@ -85,8 +85,9 @@ class UserInfoBox extends Component {
     }
 
     async shouldComponentUpdate(nextProps, nextState) {
-        if(nextState.progress >= 100 && nextState.imageUrl) {
-            await this.setState({ progress : 0 })
+        let doubleN = null;
+        if(!doubleN && nextState.progress >= 100 && nextState.imageUrl) {
+            doubleN = "start";
             const { user } = nextProps;
             const { name,imageUrl,phone1,phone2,phone3,
                 intro,address1,address2,field,workdate,
@@ -131,15 +132,16 @@ class UserInfoBox extends Component {
                     alert("기본입력이 완료되었습니다.");
                     window.location.href = "/";
                 } else {
-                    alert("잘못된 값이 있습니다. 다시 시도해주세요.")
-                    return true;
+                    alert("잘못된 값이 있습니다. 다시 시도해주세요.");
+                    window.location.href = "/";
                 }
+                this.setState({ progress : 0 })
             } catch(err) {
                 console.log("user info save err : " + err);
             }
-        } else {
-            return true;
         }
+        doubleN = null;
+        return true;
     }
 
     // 스태이트 변경하게 하는 함수

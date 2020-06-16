@@ -27,11 +27,11 @@ class Base extends Component {
         this.state = {
             user : {
                 id : 1,
-                tag:"",
-                email:"",
+                tag : "",
+                email : "",
                 cate : "",
             },
-            load:false,
+            load : false,
         }
     }
 
@@ -45,7 +45,6 @@ class Base extends Component {
                         "Authorization" : getUser.token, 
                     }
                 })
-                console.log(verify.data)
                 const userId = await axios.get(`http://localhost:5000/users/oneemail?userEmail=${verify.data.email}&authCate=${verify.data.tag}`);
                 this.setState({
                     user : {
@@ -60,20 +59,15 @@ class Base extends Component {
                 localStorage.removeItem("users");
             }
         }
-        this.setState({
-            load:true,
-        })
+        this.setState({ load:true })
     }
 
     getUser(user) {
-        this.setState({
-            user : user,
-        })
+        this.setState({ user : user })
     }
 
     render() {
         const { user } = this.state;
-        console.log(user)
         return (
             <div className="base-main">
                  <Router>
@@ -84,7 +78,7 @@ class Base extends Component {
                     {/*기업게시판*/ }
                     <Route path ="/company"><OtherHeader user={user} /><Company /></Route>
                     {/*인재게시판*/ }
-                    <Route path ="/rookie"><OtherHeader user={user} /><Rookie user={user} /></Route>
+                    <Route path ="/rookie"><OtherHeader user={user} /><Rookie /></Route>
                     {/*회원가입*/ }
                     <Route path ="/insert"><OtherHeader user={user} />{ !user.email && <Insert /> }</Route>
                     {/*로그인*/ }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-
 import './RookieMypage.css';
+import axios from 'axios';
 import RookieProflie from './RookieProfile/RookieProfile';
 import RookiePt from './RookiePortfolio/RookiePt';
 import Msg from '../../MyMenu/Message';
@@ -19,12 +18,10 @@ class RookieMypage extends Component {
             ptbtnClick:"pth-btn",
             profileClick:"profile-btn",
             changePage:true,
+
             user : this.props.user,
 
             load : false,
-
-            link : window.location.href,
-           
         }
     }
 
@@ -38,6 +35,7 @@ class RookieMypage extends Component {
         }
         this.setState({load:true});
     }
+
     ProfilechangePage(){
         this.setState({
             profileClick : "profile-btn",
@@ -45,6 +43,7 @@ class RookieMypage extends Component {
             changePage : true
         });
     }
+
     PtchangePage(){
         this.setState({
             profileClick : "profileh-btn",
@@ -52,18 +51,14 @@ class RookieMypage extends Component {
             changePage : false
         });
     }
-    copy(){
-        const {link,clip} =this.state;
-      
-        }
 
     likeUser(){
         const {user} =this.props;
         console.log(user.userLike);
     }
-    render() {
-        const { load ,msgDisplay,likeUser,ptbtnClick,profileClick,changePage,user,clip,link  } = this.state;
 
+    render() {
+        const { load ,msgDisplay,likeUser,ptbtnClick,profileClick,changePage,user,clip } = this.state;
         return load ? (
             <div className="rookie-main">
                 <div className="rookie-main-left">
@@ -89,7 +84,7 @@ class RookieMypage extends Component {
                                     <span className="mypage-icons"><FontAwesomeIcon icon={faShareAlt} size="2x"/></span>
                                 </button>
                                 <button className="rookie-like-btn"
-                                onClick={() => this.setState({ likeUser : likeUser === user ?this.likeUser.bind(this) : "none"})}>
+                                onClick={() => this.setState({ likeUser : likeUser === user ? this.likeUser.bind(this) : "none"})}>
                                     
                                     <span className="mypage-icons"><FontAwesomeIcon icon={faHeart} size="2x"/></span>
                                 </button>
