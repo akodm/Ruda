@@ -4,10 +4,31 @@ import RookieSearch from './RookieSearch';
 import RookieCard from './RookieCard';
 import { Link } from 'react-router-dom';
 import Pagination from '@material-ui/lab/Pagination';
-
+import axios from 'axios';
 class Rookie extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            userList:[],
+        }
+    }
+    async componentDidMount(){
+        const {userList}=this.state;
+        try{
+            const result = await axios.get(`http://localhost:5000/userInfos/all`)
+            if(result.data){
+                this.setState({
+                   userList:result.data,
+                })
+            }
+            
+            
+        }catch(err){
+            console.log(err);
+        }
+    }
     render() {
-        const user =this.props
+        const {userList} =this.state;
         return (
             <div className="Rookie">
                 <div className="Rookie-title">
@@ -19,25 +40,12 @@ class Rookie extends Component {
                 </div>
                 <RookieSearch/>
                 <div className="Rookie-CardView">
-                    <Link to="/mypage"><RookieCard/></Link>
-                    <Link to="/mypage"><RookieCard/></Link>
-                    <Link to="/mypage"><RookieCard/></Link>
-                    <Link to="/mypage"><RookieCard/></Link>
-                    <Link to="/mypage"><RookieCard/></Link>
-                    <Link to="/mypage"><RookieCard/></Link>
-                    <Link to="/mypage"><RookieCard/></Link>
-                    <Link to="/mypage"><RookieCard/></Link>
-                    <Link to="/mypage"><RookieCard/></Link>
-                    <Link to="/mypage"><RookieCard/></Link>
-                    <Link to="/mypage"><RookieCard/></Link>
-                    <Link to="/mypage"><RookieCard/></Link>
-                    <Link to="/mypage"><RookieCard/></Link>
-                    <Link to="/mypage"><RookieCard/></Link>
-                    <Link to="/mypage"><RookieCard/></Link>
-                    <Link to="/mypage"><RookieCard/></Link>
-                    <div className="Rookie-CardView-PagiNation">
+                    { userList.map(function(str,i){
+                        return <Link to={`/mypage/${str.id}`} key={i}><RookieCard userList={userList[i]}/></Link>;
+                    }) }
+                </div>
+                <div className="Rookie-CardView-PagiNation">
                         <Pagination count={10} />
-                    </div>
                 </div>
             </div>
         );

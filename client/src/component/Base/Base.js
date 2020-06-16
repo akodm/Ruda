@@ -45,6 +45,7 @@ class Base extends Component {
                         "Authorization" : getUser.token, 
                     }
                 })
+                console.log(verify.data)
                 const userId = await axios.get(`http://localhost:5000/users/oneemail?userEmail=${verify.data.email}&authCate=${verify.data.tag}`);
                 this.setState({
                     user : {
@@ -72,6 +73,7 @@ class Base extends Component {
 
     render() {
         const { user } = this.state;
+        console.log(user)
         return (
             <div className="base-main">
                  <Router>
@@ -82,7 +84,7 @@ class Base extends Component {
                     {/*기업게시판*/ }
                     <Route path ="/company"><OtherHeader user={user} /><Company /></Route>
                     {/*인재게시판*/ }
-                    <Route path ="/rookie"><OtherHeader user={user} /><Rookie /></Route>
+                    <Route path ="/rookie"><OtherHeader user={user} /><Rookie user={user} /></Route>
                     {/*회원가입*/ }
                     <Route path ="/insert"><OtherHeader user={user} />{ !user.email && <Insert /> }</Route>
                     {/*로그인*/ }

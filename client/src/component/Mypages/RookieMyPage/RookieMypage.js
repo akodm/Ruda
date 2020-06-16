@@ -8,6 +8,7 @@ import Msg from '../../MyMenu/Message';
 import RookieChart from './RookieChart/RookieChart';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart,faShareAlt,faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import UserState from '../../UserState/UserState';
 
 class RookieMypage extends Component {
     constructor(props) {
@@ -21,6 +22,9 @@ class RookieMypage extends Component {
             user : this.props.user,
 
             load : false,
+
+            link : window.location.href,
+           
         }
     }
 
@@ -48,16 +52,24 @@ class RookieMypage extends Component {
             changePage : false
         });
     }
+    copy(){
+        const {link,clip} =this.state;
+      
+        }
+
     likeUser(){
         const {user} =this.props;
         console.log(user.userLike);
     }
     render() {
-        const { load ,msgDisplay,likeUser,ptbtnClick,profileClick,changePage,user  } = this.state;
+        const { load ,msgDisplay,likeUser,ptbtnClick,profileClick,changePage,user,clip,link  } = this.state;
 
         return load ? (
             <div className="rookie-main">
-                <RookieChart/>
+                <div className="rookie-main-left">
+                    <RookieChart/>
+                    <UserState user={user}/>
+                </div>
                 <Msg display= { msgDisplay } />
                 <div className="btn-cont">
                     <div className="rookie-main-bg">
@@ -70,20 +82,24 @@ class RookieMypage extends Component {
                             <button className={ptbtnClick}
                             onClick={this.PtchangePage.bind(this)}>포트폴리오</button>
                         </div>
-                        <div className="rookie-user-btn">
-                            <button className="rookie-share-btn">
-                                <span className="mypage-icons"><FontAwesomeIcon icon={faShareAlt} size="2x"/></span>
-                            </button>
-                            <button className="rookie-like-btn"
-                            onClick={() => this.setState({ likeUser : likeUser === user ?this.likeUser.bind(this) : "none"})}>
-                                
-                                <span className="mypage-icons"><FontAwesomeIcon icon={faHeart} size="2x"/></span>
-                            </button>
-                            <button className="rookie-message-btn"
-                            onClick={() => this.setState({ msgDisplay : msgDisplay === "none" ? "flex" : "none"})}>
-                                <span className="mypage-icons"><FontAwesomeIcon icon={faEnvelope} size="2x"/></span>
-                            </button>
+
+                        <div className="rookie-user-pop">
+                            <div className="rookie-user-btn">
+                                <button className="rookie-share-btn" >
+                                    <span className="mypage-icons"><FontAwesomeIcon icon={faShareAlt} size="2x"/></span>
+                                </button>
+                                <button className="rookie-like-btn"
+                                onClick={() => this.setState({ likeUser : likeUser === user ?this.likeUser.bind(this) : "none"})}>
+                                    
+                                    <span className="mypage-icons"><FontAwesomeIcon icon={faHeart} size="2x"/></span>
+                                </button>
+                                <button className="rookie-message-btn"
+                                onClick={() => this.setState({ msgDisplay : msgDisplay === "none" ? "flex" : "none"})}>
+                                    <span className="mypage-icons"><FontAwesomeIcon icon={faEnvelope} size="2x"/></span>
+                                </button>
+                            </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>

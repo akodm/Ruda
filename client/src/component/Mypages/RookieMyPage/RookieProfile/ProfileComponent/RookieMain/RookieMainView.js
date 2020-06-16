@@ -8,24 +8,21 @@ class RookieMainView extends Component {
             profileImg:"",
             profile_preview:"",
         }
-
     }
     
     setMain(){
         this.props.Mainchanges(false)
     }
     
-    
     render() {
-       
         const {user} = this.props;
         const tags = user.userTags;
-        console.log(tags);
-        const tag = tags.map(function(str){
-            return   <div className="chip-margin">
-                        <Chip label={"#"+str} size="small" color="primary" variant="outlined" />
-                    </div>;
+        const tag = tags.map(function(str,i){
+            return  <div key={i} className="chip-margin">
+                <Chip label={"#"+str} size="small" color="primary" variant="outlined" />
+            </div>;
         });
+        console.log(user.userImage);
         return (
             <div>
                 <div className="RookieMain-title">

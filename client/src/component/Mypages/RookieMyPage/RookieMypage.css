@@ -140,9 +140,20 @@
      position: absolute;
      width: 190px;
  }
+.clip-box{
+    width: 270px;
+    height: 70px;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+}
 
-
-
+.rookie-main-left{
+    position: absolute;
+    left: 100px;
+    top:185px;
+    
+}
 
 
 /*--메세지/좋아요 버튼 영역--*/
@@ -152,6 +163,14 @@
     right: 200px;
     display:flex;
     flex-direction: row;
+    z-index: 100;
+}
+.rookie-user-pop{
+    position: fixed;
+    bottom:80px;
+    right: 120px;
+    display:flex;
+    flex-direction: column;
     z-index: 100;
 }
 .rookie-message-btn,.rookie-like-btn,.rookie-share-btn{

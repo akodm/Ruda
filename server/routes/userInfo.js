@@ -7,21 +7,17 @@ let path = require('path');
 
 const upload = multer({
 	storage: multer.diskStorage({
-	  destination: function (req, file, cb) {
-		cb(null, 'public/upload/');
-	  },
-	  filename: function (req, file, cb) {
-		cb(null, new Date().valueOf() + path.extname(file.originalname));
-	  }
+	  	destination: function (req, file, cb) {
+			cb(null, 'public/upload/');
+	  	},
+	  	filename: function (req, file, cb) {
+			cb(null, new Date().valueOf() + path.extname(file.originalname));
+	  	}
 	}),
-  });
-router.post("/upload", upload.single("img"), async(req,res) => {
-	try {
-		console.log(req.file);
-		console.log(req.body);
-	} catch(err) {
-		console.log(err);
-	}
+});
+router.post("/upload", upload.single("profile"), async(req,res) => {
+	console.log(req.body.userId);
+	console.log(req.file.filename)
 });
 
 // DB Setting --------------------------------------------------------
@@ -65,8 +61,11 @@ router.get("/one", async (req, res) => {
 });
 
 // 유저 정보 생성
-router.post("/create", async (req, res) => {
+router.post("/create", upload.single("profile"), async(req, res) => {
+	let tags = req.body.userTags;
+	tags = tags.split(",");
 	let result = false;
+	console.log(req.file);
 	try {
 		await UserInfo.findOrCreate({
 			where : {
@@ -77,15 +76,16 @@ router.post("/create", async (req, res) => {
 				userName: req.body.userName,
 				userPhone: req.body.userPhone,
 				userAdd: req.body.userAdd,
-				userImage : req.body.userImage,
+				userImage : req.file,
 				userTraning: req.body.userTraning,
 				userUnvcity: req.body.userUnvcity, 
 				userSubject : req.body.userSubject,
+				userAttendDate: req.body.userAttendDate, 
 				userAttend: req.body.userAttend, 
 				userField: req.body.userField,
 				userIntro : req.body.userIntro,
 				userKeyword : req.body.userKeyword,
-				userTags : req.body.userTags,
+				userTags : tags,
 				userSpecialty : req.body.userSpecialty,
 				userWorkDate : req.body.userWorkDate,
 				userTraningDate : req.body.userTraningDate,
@@ -115,6 +115,7 @@ router.put("/update", async(req, res) => {
 			userTraning: req.body.userTraning,
             userUnvcity: req.body.userUnvcity, 
 			userSubject : req.body.userSubject,
+			userAttendDate: req.body.userAttendDate, 
 			userAttend: req.body.userAttend, 
 			userField: req.body.userField,
 			userAwards : req.body.userAwards,

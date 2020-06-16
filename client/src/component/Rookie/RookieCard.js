@@ -3,7 +3,10 @@ import './Rookie.css';
 
 class RookieCard extends Component {
     render() {
-        return (
+        const { userList } = this.props;
+        console.log(userList && userList.userName);
+        let state = userList && userList.id;
+        return state && (
             <div className="Rookie-Card">
                 <div className="Rookie-Card-header">
                     <div className="Rookie-Card-like">
@@ -20,9 +23,9 @@ class RookieCard extends Component {
                         <img src="/Images/easy_icon.png" alt="img"/>
                     </div>
                     <div className="Rookie-Card-Profile-info">
-                        <span className="Rookie-Card-Profile-info-name">홍길동</span>
-                        <span className="Rookie-Card-Profile-info-text">안녕하세요 백엔드 개발자를 꿈꾸는 홍길동입니당</span>
-                        <span className="Rookie-Card-Profile-info-position">백엔드</span>
+                        <span className="Rookie-Card-Profile-info-name">{userList.userName}</span>
+                        <span className="Rookie-Card-Profile-info-text">{userList.userIntro}</span>
+                        <span className="Rookie-Card-Profile-info-position">{}</span>
                         <span className="Rookie-Card-Profile-info-pt">포트폴리오 14개</span>
                         <div className="Rookie-Card-Profile-info-tags">
                             <span className="Rookie-Card-Profile-info-tags-tag">#JAVA</span>
