@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
         userAdd : {
             type: DataTypes.STRING(50),     // 주소
         },
-        userImage : {
-            type: DataTypes.BLOB('long'),     // 본인 사진
+        userImageUrl : {
+            type: DataTypes.STRING,     // 본인 사진 - firebase 이미지 경로
         },
         userTraning : {
             type: DataTypes.STRING(2),     // 실습생 여부

@@ -22,7 +22,6 @@ class RookieMainView extends Component {
                 <Chip label={"#"+str} size="small" color="primary" variant="outlined" />
             </div>;
         });
-        console.log(user.userImage);
         return (
             <div>
                 <div className="RookieMain-title">
@@ -30,7 +29,9 @@ class RookieMainView extends Component {
                     <span className="RookieMain-relayout" onClick={this.setMain.bind(this)}>[편집]</span>
                 </div>
                 <div className="RookieMain-user">
-                    <img src={user.userImage} alt="IMG"></img>
+                    <div className="userInfo-imgSizeDiv">
+                        <img width="100" className="userInfo-img" src={user.userImageUrl} alt="IMG"></img>
+                    </div>
                     <span className="RookieMain-user-name">{user.userName}</span>
                     <span>{user.userIntro}</span>
                 </div>

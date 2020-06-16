@@ -1,24 +1,25 @@
 var express = require("express");
 var router = express.Router();
 let models = require("../models");
-let multer = require('multer');
-let path = require('path');
+// let multer = require('multer');
+// let path = require('path');
+
 // multer setting ----------------------------------------------------
 
-const upload = multer({
-	storage: multer.diskStorage({
-	  	destination: function (req, file, cb) {
-			cb(null, 'public/upload/');
-	  	},
-	  	filename: function (req, file, cb) {
-			cb(null, new Date().valueOf() + path.extname(file.originalname));
-	  	}
-	}),
-});
-router.post("/upload", upload.single("profile"), async(req,res) => {
-	console.log(req.body.userId);
-	console.log(req.file.filename)
-});
+// const upload = multer({
+// 	storage: multer.diskStorage({
+// 	  	destination: function (req, file, cb) {
+// 			cb(null, 'public/upload/');
+// 	  	},
+// 	  	filename: function (req, file, cb) {
+// 			cb(null, new Date().valueOf() + path.extname(file.originalname));
+// 	  	}
+// 	}),
+// });
+// router.post("/upload", upload.single("profile"), async(req,res) => {
+// 	console.log(req.body.userId);
+// 	console.log(req.file.filename)
+// });
 
 // DB Setting --------------------------------------------------------
 const UserInfo = models.userInfo;
@@ -61,11 +62,8 @@ router.get("/one", async (req, res) => {
 });
 
 // 유저 정보 생성
-router.post("/create", upload.single("profile"), async(req, res) => {
-	let tags = req.body.userTags;
-	tags = tags.split(",");
+router.post("/create", async(req, res) => {
 	let result = false;
-	console.log(req.file);
 	try {
 		await UserInfo.findOrCreate({
 			where : {
@@ -76,7 +74,7 @@ router.post("/create", upload.single("profile"), async(req, res) => {
 				userName: req.body.userName,
 				userPhone: req.body.userPhone,
 				userAdd: req.body.userAdd,
-				userImage : req.file,
+				userImageUrl : req.body.userImageUrl,
 				userTraning: req.body.userTraning,
 				userUnvcity: req.body.userUnvcity, 
 				userSubject : req.body.userSubject,
@@ -85,7 +83,7 @@ router.post("/create", upload.single("profile"), async(req, res) => {
 				userField: req.body.userField,
 				userIntro : req.body.userIntro,
 				userKeyword : req.body.userKeyword,
-				userTags : tags,
+				userTags : req.body.userTags,
 				userSpecialty : req.body.userSpecialty,
 				userWorkDate : req.body.userWorkDate,
 				userTraningDate : req.body.userTraningDate,
@@ -111,7 +109,7 @@ router.put("/update", async(req, res) => {
 			userName: req.body.userName,
 			userPhone: req.body.userPhone,
 			userAdd: req.body.userAdd,
-			userIamge : req.body.userIamge,
+			userImageUrl : req.body.userImageUrl,
 			userTraning: req.body.userTraning,
             userUnvcity: req.body.userUnvcity, 
 			userSubject : req.body.userSubject,

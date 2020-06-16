@@ -7,6 +7,7 @@
 /src/client-configs.js
 /package-lock.json
 /client-configs.js
+/src/firebase.js
 # testing
 /coverage
 
