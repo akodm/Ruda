@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 let models = require("../models");
 let multer = require('multer');
-
+let path = require('path');
 // multer setting ----------------------------------------------------
 
 const upload = multer({

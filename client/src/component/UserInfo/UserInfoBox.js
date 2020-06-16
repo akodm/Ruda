@@ -11,6 +11,7 @@ class UserInfoBox extends Component {
         this.state = {
             profileImg : null,
             imageUrl : null,
+            imgBase64:"",
             name : "",
             phone1 : "",
             phone2 : "",
@@ -175,21 +176,23 @@ class UserInfoBox extends Component {
     // -------------------------------------------------------------------------------- //
     // -------------------------------------------------------------------------------- //
 
-    addFile = async() => {
-        const data = new FormData();
-        data.append("img", this.state.profileImg);
-        try {
-            const result = await axios.post("http://localhost:5000/userInfos/upload", {
-                data,
-                userId : "asd",
-            });
-        } catch(err) {  
-            console.log("user file upload err :  " + err);
-        }
-    }
-
+    // addFile = async() => {
+    //     const data = new FormData();
+    //     const img = new FileReader();
+    //     let imgsrc = FileReader.value;
+    //     console.log(imgsrc);
+    //     const {user} = this.props;
+    //     data.append("img", this.state.profileImg);
+    //     try {
+    //         const result = await axios.post("http://localhost:5000/userInfos/upload",data);
+            
+    //     } catch(err) {  
+    //         console.log("user file upload err :  " + err);
+    //     }
+    // }
     render() {
         const { profileImg,imageUrl,name,phone1,phone2,phone3,collage,subject,intro,address1,address2,fieldState,fields,fieldList,field,workdate,attending1,attending2,attendTag,tags,keywords,tag,traning,tagList,tagListState } = this.state;
+        
         return (
             <div className="userInfo-user">
                 {/* 프로필 사진, 이름, 번호, 주소 등의 개인정보 */}
