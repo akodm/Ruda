@@ -26,6 +26,9 @@ module.exports = (sequelize, DataTypes) => {
         userSubject : {
             type: DataTypes.STRING(20),     // 과
         },
+        userAttendDate : {
+            type: DataTypes.STRING(10),     // 대학 재학 기간 및 졸업일
+        },
         userAttend : {
             type: DataTypes.STRING(10),     // 대학 다니는 구분 휴학 등..
         },

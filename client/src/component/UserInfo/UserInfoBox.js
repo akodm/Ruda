@@ -19,9 +19,6 @@ class UserInfoBox extends Component {
             address1 : "",
             address2 : "",
 
-            fieldState : false,
-            fieldList : [],
-            fields : [],
             field : "",
             workdate : "",
 
@@ -40,8 +37,6 @@ class UserInfoBox extends Component {
             // ---------------------------//
 
             keywords : [],
-            
-            
         }
     }
 
@@ -52,7 +47,6 @@ class UserInfoBox extends Component {
                 profileImg : event.target.files[0],
                 imageUrl : URL.createObjectURL(event.target.files[0]),
             });
-            this.addFile();
         }
     }
 
@@ -72,22 +66,22 @@ class UserInfoBox extends Component {
             })
             let phone = phone1+"-"+phone2+"-"+phone3;
             let address = address1+"-"+address2;
-            let result = axios.post("http://localhost:5000/userInfos/create", {
-                userId : user.id,
-                userName: name,
-                userPhone: phone,
-                userAdd: address,
-                userImage : profileImg,
-                userTraning: traning,
-                userUnvcity: collage,
-                userSubject : subject,
-                userIntro : intro,
-                userTags : tags,
-                userSpecialty :"", 
-                userWorkDate : workdate,
-                userKeyword : "",
-                userField:field,
-            })
+            const data = new FormData();
+            data.append("userId", user.id);
+            data.append("userName", name);
+            data.append("userPhone", phone);
+            data.append("userAdd", address);
+            data.append("userTraning", traning);
+            data.append("userUnvcity", collage);
+            data.append("userSubject", subject);
+            data.append("userIntro", intro);
+            data.append("userTags", tags);
+            data.append("userSpecialty", "");
+            data.append("userWorkDate", workdate);
+            data.append("userKeyword", "");
+            data.append("userField", field);
+            data.append("profile", profileImg);
+            let result = axios.post("http://localhost:5000/userInfos/create", data)
 
             await Promise.all([userCateUpdat,result]).then(data => {
                 userCateUpdat = data[0];
@@ -175,21 +169,8 @@ class UserInfoBox extends Component {
     // -------------------------------------------------------------------------------- //
     // -------------------------------------------------------------------------------- //
 
-    addFile = async() => {
-        const data = new FormData();
-        data.append("img", this.state.profileImg);
-        try {
-            const result = await axios.post("http://localhost:5000/userInfos/upload", {
-                data,
-                userId : "asd",
-            });
-        } catch(err) {  
-            console.log("user file upload err :  " + err);
-        }
-    }
-
     render() {
-        const { profileImg,imageUrl,name,phone1,phone2,phone3,collage,subject,intro,address1,address2,fieldState,fields,fieldList,field,workdate,attending1,attending2,attendTag,tags,keywords,tag,traning,tagList,tagListState } = this.state;
+        const { profileImg,imageUrl,name,phone1,phone2,phone3,collage,subject,intro,address1,address2,field,workdate,attending1,attending2,attendTag,tags,keywords,tag,traning,tagList,tagListState } = this.state;
         return (
             <div className="userInfo-user">
                 {/* 프로필 사진, 이름, 번호, 주소 등의 개인정보 */}
@@ -199,7 +180,9 @@ class UserInfoBox extends Component {
                 <div className="userInfo-box">
                     <div className="userInfo-margin">
                         <div className="userInfo-imgDiv">
-                            <img src={imageUrl} className="userInfo-img" alt="profileIMG"/>
+                            <div className="userInfo-imgSizeDiv">
+                                <img width="100" src={imageUrl || "/Images/footer_logo.png"} className="userInfo-img" alt="profileIMG"/>
+                            </div>
                             <div className="userInfo-fileDiv">
                                 <label htmlFor="avatafile">사진 업로드</label>
                                 <input accept="image/*" name="profileImg" onChange={this.onChangeImageValue.bind(this)} type="file" id="avatafile"></input>
