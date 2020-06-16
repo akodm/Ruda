@@ -12,7 +12,7 @@ class UserState extends Component {
     async componentDidMount(){
         try{
             const{userStates}=this.state;
-            const result = await axios.get(`http://localhost:5000/userInfos/update`);
+            const result = await axios.put(`http://localhost:5000/userInfos/update`);
             //result.data-> userInfo DB
             this.setState({
                 user:{

@@ -17,8 +17,8 @@ class RookieMainView extends Component {
     
     render() {
         const {user} = this.props;
-        const tags = user.userTags;
-        const tag = tag.map(function(str,i){
+        let tags = user.userTags;
+        let tag = tags.map(function(str,i){
             return  <div key={i} className="chip-margin">
                 <Chip label={"#"+str} size="small" color="primary" variant="outlined" />
             </div>;
