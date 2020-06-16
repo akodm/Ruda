@@ -1,12 +1,28 @@
 import React, { Component } from 'react';
 import './UserState.css';
+import axios from 'axios';
 class UserState extends Component {
     constructor(props){
         super(props);
         this.state={
             userStates : "",
-            changeState:"userState",
             bc:"white",
+        }
+    }
+    async componentDidMount(){
+        try{
+            const{userStates}=this.state;
+            const result = await axios.get(`http://localhost:5000/userInfos/update`);
+            //result.data-> userInfo DB
+            this.setState({
+                user:{
+                    userState:userStates,                 
+                }
+            });
+            console.log(userStates);
+
+        }catch(err){
+            console.log(err);
         }
     }
     async select(e){

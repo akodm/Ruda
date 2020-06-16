@@ -7,6 +7,7 @@ class RookieMainView extends Component {
         this.state={
             profileImg:"",
             profile_preview:"",
+            
         }
     }
     
@@ -17,7 +18,7 @@ class RookieMainView extends Component {
     render() {
         const {user} = this.props;
         const tags = user.userTags;
-        const tag = tags.map(function(str,i){
+        const tag = tag.map(function(str,i){
             return  <div key={i} className="chip-margin">
                 <Chip label={"#"+str} size="small" color="primary" variant="outlined" />
             </div>;
