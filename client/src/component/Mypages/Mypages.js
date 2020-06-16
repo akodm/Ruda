@@ -120,7 +120,7 @@ class Mypages extends Component {
             alert("마이페이지 로드에 실패하였습니다.");
         }
         if(!this.state.user.cate) {
-            alert("기본 정보를 먼저 등록해주세요.");
+            alert("잘못된 접근입니다.");
             window.location.href = "/";
         } else {
             this.setState({
