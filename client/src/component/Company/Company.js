@@ -12,7 +12,7 @@ class Company extends Component {
             <div className="Company-title">
                 <span>기업</span>
                 <select className="Company-title-select">
-                    <option selected value="최신순">최신순</option>
+                    <option value="최신순">최신순</option>
                     <option value="인기순">인기순</option>
                 </select>
             </div>

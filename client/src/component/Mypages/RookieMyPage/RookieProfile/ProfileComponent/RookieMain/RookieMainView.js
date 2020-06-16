@@ -17,7 +17,7 @@ class RookieMainView extends Component {
     render() {
         const {user} = this.props;
         const tags = user.userTags;
-        const tag = tags.map(function(str,i){
+        const tag = tags && tags.map(function(str,i){
             return  <div key={i} className="chip-margin">
                 <Chip label={"#"+str} size="small" color="primary" variant="outlined" />
             </div>;
@@ -37,7 +37,7 @@ class RookieMainView extends Component {
                 </div>
                 <div className="line"></div>
                 <div className="RookieMain-user-tag-content">
-                      {tag}
+                      {tag && tag}
                 </div>
             </div>
         );

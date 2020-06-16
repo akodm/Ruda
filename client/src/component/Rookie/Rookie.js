@@ -48,7 +48,7 @@ class Rookie extends Component {
                 <RookieSearch/>
                 <div className="Rookie-CardView">
                     { userList && userList.map(function(str,i){
-                        return <Link to={`/mypage/${str.id}`} key={i}><RookieCard userList={userList[i]}/></Link>;
+                        return <Link to={`/mypage/${str.userId}`} key={i}><RookieCard userList={userList[i]}/></Link>;
                     }) }
                 </div>
                 <div className="Rookie-CardView-PagiNation">

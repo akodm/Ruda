@@ -26,6 +26,7 @@ class RookieCard extends Component {
                         <span className="Rookie-Card-Profile-info-pt">포트폴리오 14개</span>
                         <div className="Rookie-Card-Profile-info-tags">
                             { userList.userTags.map((data,i) => {
+                                if(i > 3) return null;
                                 return <span key={i} className="Rookie-Card-Profile-info-tags-tag">{data}</span>
                             })}
                         </div>
