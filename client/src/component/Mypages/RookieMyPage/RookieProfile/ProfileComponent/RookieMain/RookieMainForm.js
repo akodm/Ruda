@@ -15,6 +15,7 @@ class RookieMainForm extends Component {
             tagListState : false,
             tagList : [],
 
+            data : this.props.user,
         }
     }
 
@@ -99,19 +100,13 @@ class RookieMainForm extends Component {
     }
     render() {
         const {profileImg,tags,keywords,tag,traning,tagList,tagListState}=this.setState;
-        let profile_preview = <img src ='/Image/insert_rookie.png'className="userInfo-img" alt="profileIMG"/>
-        if(this.state.profileImg !== ''){
-          profile_preview = <img src={this.state.previewURL} className="userInfo-img" alt="profileIMG"></img>
-        } 
-        console.log(profileImg);
+
         const {user} = this.props;
         const usertags = user.userTags;
-        console.log(usertags);
-        
-        const usertag = usertags.map(function(str){
-            return   <div className="chip-margin">
-                        <Chip label={"#"+str} size="small" color="primary" variant="outlined" />
-                    </div>;
+        const usertag = usertags.map(function(str,i){
+            return <div className="chip-margin" key={i}>
+                <Chip label={"#"+str} size="small" color="primary" variant="outlined" />
+            </div>;
         });
         
         return (
@@ -121,7 +116,9 @@ class RookieMainForm extends Component {
                     <span className="RookieMain-relayout" onClick={this.MainSave.bind(this)}>[저장]</span>
                 </div>
                 <div className="RookieMain-user">
-                        {profile_preview}
+                        <div className="userInfo-imgSizeDiv">
+                            <img width="100" className="userInfo-img" src={user.userImageUrl} alt="IMG"></img>
+                        </div>
                         <div className="RookieMain-fileDiv">
                             <label htmlFor="avatafile">사진 업로드</label>
                             <input accept="image/*" name="profileImg" value={profileImg ? profileImg : ""} onChange={this.onChangeImageValue.bind(this)} type="file" id="avatafile"></input>
@@ -129,7 +126,7 @@ class RookieMainForm extends Component {
                     <span className="RookieMain-user-name">{user.userName}</span>
                     <span>나를 소개해보세요!</span>
                     <div className="RookieMain-user-text">
-                        <input type="text" value={user.userIntro}></input><button>등록</button>
+                        <input onChange={(e) => console.log(e.target.value)} type="text" value={user.userIntro}></input><button>등록</button>
                     </div>
                     
                 </div>

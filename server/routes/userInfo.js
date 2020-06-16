@@ -43,6 +43,24 @@ router.get("/all", async (req, res) => {
 	}
 });
 
+// 유저 구직 및 실습 중 정보 전체 조회
+router.get("/yall", async (req, res) => {
+	try {
+		const result = await UserInfo.findAll({
+			include : [
+				{ model: User }
+			],
+			where : {
+				userState : "yes",
+			}
+		});
+		res.send(result);
+	} catch (err) {
+		console.log(__filename + " 에서 유저 정보 전체 검색 에러 발생 내용= " + err);
+		res.send(false);
+	}
+});
+
 // 유저 정보 한명 조회
 router.get("/one", async (req, res) => {
 	try {

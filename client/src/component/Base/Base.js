@@ -27,11 +27,11 @@ class Base extends Component {
         this.state = {
             user : {
                 id : 1,
-                tag:"",
-                email:"",
+                tag : "",
+                email : "",
                 cate : "",
             },
-            load:false,
+            load : false,
         }
     }
 
@@ -59,15 +59,11 @@ class Base extends Component {
                 localStorage.removeItem("users");
             }
         }
-        this.setState({
-            load:true,
-        })
+        this.setState({ load:true })
     }
 
     getUser(user) {
-        this.setState({
-            user : user,
-        })
+        this.setState({ user : user })
     }
 
     render() {

@@ -56,7 +56,7 @@ class Mypages extends Component {
                 //http://locahost:3000/ => props success
                 //http://locahost:3000/mypage => props fail
                 //상위 컴포넌트로부터 props를 전달받았을 경우
-                if(this.props.user.email){
+                if(this.props.user && this.props.user.email){
                     let propsUser = this.props.user;
                     //유저일경우
                     if(propsUser.cate === "user"){
