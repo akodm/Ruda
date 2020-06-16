@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
         companyField : {
             type: DataTypes.STRING(50),     // 기업 분야
         },
-        companyImage : {
-            type: DataTypes.BLOB('long'),     // 기업 사진
+        companyImageUrl : {
+            type: DataTypes.STRING,     // 기업 사진 - firebase 이미지 경로
         },
         companyCEO : {
             type: DataTypes.STRING(11),     // 기업 대표

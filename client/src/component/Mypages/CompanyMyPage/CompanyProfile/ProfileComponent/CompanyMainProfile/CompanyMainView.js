@@ -6,7 +6,6 @@ class CompanyMainView extends Component {
     }
     render() {
         const {user} =this.props;
-        console.log(user);
         return (
             <div>
                 <div className="RookieMain-title">
@@ -14,7 +13,7 @@ class CompanyMainView extends Component {
                     <span className="RookieMain-relayout" onClick={this.setMain.bind(this)}>[편집]</span>
                 </div>
                 <div className="RookieMain-user">
-                    <img src=""alt="IMG"></img>
+                    <img width="100" className="userInfo-img" src={user.companyImageUrl} alt="IMG"></img>
                     <span className="RookieMain-user-name">{user.companyName}</span>
                     <span>{user.companyIntro}</span>
                 </div>

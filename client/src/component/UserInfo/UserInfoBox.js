@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import TagChip from './TagChip';
 import configs from '../../client-configs';
+import { storage } from "../../firebase";
 
 import moment from 'moment';
 
@@ -9,8 +10,11 @@ class UserInfoBox extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            profileImg : null,
             imageUrl : null,
+            progress : null,
+            profileImg : null,
+            imagePreview : null,
+            
             name : "",
             phone1 : "",
             phone2 : "",
@@ -45,66 +49,101 @@ class UserInfoBox extends Component {
         if(event.target.files[0]) {
             await this.setState({
                 profileImg : event.target.files[0],
-                imageUrl : URL.createObjectURL(event.target.files[0]),
+                imagePreview : URL.createObjectURL(event.target.files[0]),
             });
         }
+    }
+    
+    // firebase에 이미지 업로드
+    addFile() {
+        const { profileImg } = this.state;
+        const uploadTask = storage.ref(`/images/${profileImg.name}`).put(profileImg);
+        uploadTask.on(
+            "state_changed",
+            snapshot => {
+              const progress = Math.round(
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100 );
+              this.setState({ progress });
+            },
+            error => {
+              console.log(error);
+            }, () => {
+              storage
+                .ref("images")
+                .child(profileImg.name)
+                .getDownloadURL()
+                .then(url => {
+                  this.setState({ imageUrl : url });
+                });
+            }
+        );
     }
 
     // 시작하기 버튼 누를 시
     async saveUserInfoBtn() {
-        const user = this.props.user;
-        const { profileImg,name,
-            phone1,phone2,phone3,
-            intro,address1,address2,field,workdate,
-            collage,subject,attendTag,attending1,attending2,
-            tags,keywords,traning } = this.state;
-        try {
-            // 구직자 시
-            let userCateUpdat = axios.put("http://localhost:5000/users/updatecate", {
-                userCate : "user",
-                id : user.id
-            })
-            let phone = phone1+"-"+phone2+"-"+phone3;
-            let address = address1+"-"+address2;
-            const data = new FormData();
-            data.append("userId", user.id);
-            data.append("userName", name);
-            data.append("userPhone", phone);
-            data.append("userAdd", address);
-            data.append("userTraning", traning);
-            data.append("userUnvcity", collage);
-            data.append("userSubject", subject);
-            data.append("userIntro", intro);
-            data.append("userTags", tags);
-            data.append("userSpecialty", "");
-            data.append("userWorkDate", workdate);
-            data.append("userKeyword", "");
-            data.append("userField", field);
-            data.append("profile", profileImg);
-            let result = axios.post("http://localhost:5000/userInfos/create", data)
+        await this.addFile();
+    }
 
-            await Promise.all([userCateUpdat,result]).then(data => {
-                userCateUpdat = data[0];
-                result = data[1];
-            })
-            console.log(userCateUpdat.data, result.data);
-            if(result.data){
-                alert("기본입력이 완료되었습니다.");
-                window.location.href = "/";
-            } else {
-                alert("다시 시도해주세요.")
+    async shouldComponentUpdate(nextProps, nextState) {
+        if(nextState.progress >= 100 && nextState.imageUrl) {
+            await this.setState({ progress : 0 })
+            const { user } = nextProps;
+            const { name,imageUrl,phone1,phone2,phone3,
+                intro,address1,address2,field,workdate,
+                collage,subject,attendTag,attending1,attending2,
+                tags,keywords,traning } = nextState;
+            try {
+                // 구직자 시
+                let userCateUpdat = axios.put("http://localhost:5000/users/updatecate", {
+                    userCate : "user",
+                    id : user.id
+                })
+
+                let phone = phone1+"-"+phone2+"-"+phone3;
+                let address = address1+"-"+address2;
+                let attendings = attending1+"-"+ attending2;
+
+                let result = axios.post("http://localhost:5000/userInfos/create", {
+                    userId : user.id,
+                    userName : name,
+                    userPhone : phone , 
+                    userAdd : address , 
+                    userTraning : traning , 
+                    userUnvcity : collage , 
+                    userSubject : subject , 
+                    userAttendDate : attendings,
+                    userAttend : attendTag,
+                    userIntro : intro , 
+                    userTags : tags , 
+                    userSpecialty : "" , 
+                    userWorkDate : workdate , 
+                    userKeyword : "" , 
+                    userField : field , 
+                    userImageUrl : imageUrl,
+                })
+
+                await Promise.all([userCateUpdat,result]).then(data => {
+                    userCateUpdat = data[0];
+                    result = data[1];
+                })
+                console.log(userCateUpdat.data, result.data);
+                if(result.data){
+                    alert("기본입력이 완료되었습니다.");
+                    window.location.href = "/";
+                } else {
+                    alert("잘못된 값이 있습니다. 다시 시도해주세요.")
+                    return true;
+                }
+            } catch(err) {
+                console.log("user info save err : " + err);
             }
-        } catch(err) {
-            console.log("user info save err : " + err);
+        } else {
+            return true;
         }
     }
 
     // 스태이트 변경하게 하는 함수
-    onChangeValue(e) {
-        this.setState({
-            [e.target.name] : e.target.value
-        })
-    }
+    onChangeValue(e) { this.setState({ [e.target.name] : e.target.value }) }
 
     // 번호의 경우 숫자 외 입력 시 초기화
     onChangeValuePhone(e) {
@@ -112,11 +151,8 @@ class UserInfoBox extends Component {
             this.setState({ [e.target.name] : "" })
             return;
         }
-        this.setState({
-            [e.target.name] : e.target.value
-        })
+        this.setState({ [e.target.name] : e.target.value })
     }
-
     // -----------------------------태그 기능을 위한 함수 영역-------------------------- //
     // -------------------------------------------------------------------------------- //
     // 칩 추가를 위해 엔터 클릭 시
@@ -170,7 +206,7 @@ class UserInfoBox extends Component {
     // -------------------------------------------------------------------------------- //
 
     render() {
-        const { profileImg,imageUrl,name,phone1,phone2,phone3,collage,subject,intro,address1,address2,field,workdate,attending1,attending2,attendTag,tags,keywords,tag,traning,tagList,tagListState } = this.state;
+        const { imagePreview,name,phone1,phone2,phone3,collage,subject,intro,address1,address2,field,workdate,attending1,attending2,attendTag,tags,keywords,tag,traning,tagList,tagListState } = this.state;
         return (
             <div className="userInfo-user">
                 {/* 프로필 사진, 이름, 번호, 주소 등의 개인정보 */}
@@ -181,7 +217,7 @@ class UserInfoBox extends Component {
                     <div className="userInfo-margin">
                         <div className="userInfo-imgDiv">
                             <div className="userInfo-imgSizeDiv">
-                                <img width="100" src={imageUrl || "/Images/footer_logo.png"} className="userInfo-img" alt="profileIMG"/>
+                                <img width="100" src={imagePreview || "/Images/footer_logo.png"} className="userInfo-img" alt="profileIMG"/>
                             </div>
                             <div className="userInfo-fileDiv">
                                 <label htmlFor="avatafile">사진 업로드</label>

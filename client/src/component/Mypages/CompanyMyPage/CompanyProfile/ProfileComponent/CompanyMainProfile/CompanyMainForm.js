@@ -31,7 +31,7 @@ class CompanyMainProfileForm extends Component {
                     <span className="RookieMain-relayout" onClick={this.MainSave.bind(this)}>[저장]</span>
                 </div>
                 <div className="RookieMain-user">
-                    <img src="/Image/login_img.png" className="RookieMain-user-img" alt="IMG"></img>
+                    <img width="100" className="userInfo-img" src={user.companyImageUrl} className="RookieMain-user-img" alt="IMG"></img>
                     <span className="RookieMain-user-name">{user.companyName}</span>
                     <span>기업을 소개해보세요!</span>
                     <div className="RookieMain-user-text">
