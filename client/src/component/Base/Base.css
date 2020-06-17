@@ -5,7 +5,7 @@
     height: 75px;
     display: flex;
     justify-content: center;
-    color:rgb(0, 0, 0);  
+    color:rgba(85, 85, 85, 0.822);   
     border-bottom: 1px solid rgba(189, 187, 187, 0.301);
 }
 .Header-nav{
@@ -21,7 +21,7 @@
     cursor:pointer;
 }
 .Header-nav-menu-span{
-    color: rgb(0, 0, 0);
+    color:rgba(85, 85, 85, 0.822);  
     font-weight: 600;
 }
 .Header-nav-recommendbtn,.Header-nav-recommendbtn span{

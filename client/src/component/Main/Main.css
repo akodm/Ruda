@@ -90,7 +90,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 220px;
+    width: 250px;
  }
 .MainWith-companys-company img ,.MainWith-rookies-rookie img {
     width: 60px;
@@ -106,7 +106,7 @@
 .MainWith-rookies-rookie-text ,.MainWith-companys-company-text{
     font-size: 12px;
     margin-top: 10px;
-    width: 160px;
+    width: 150px;
 }
 
 /* ----------------------------------------------------- */
@@ -163,7 +163,7 @@
     height: 38px;
     opacity: 0.7;
     background-color: #ffffff;
-    border: 1px solid rgba(121, 121, 121, 0.377);
+    border: 1px solid #9781d0;
     font-family: NanumSquareEB;
     font-size: 14px;
     color: #9781d0;
@@ -176,7 +176,7 @@
     height: 38px;
     opacity: 0.7;
     background-color: #ffffff;
-    border: 1px solid rgba(121, 121, 121, 0.377);
+    border: 1px solid #9781d0;
     font-family: NanumSquareEB;
     font-size: 14px;
     color: #9781d0;
