@@ -1,11 +1,28 @@
 import React, { Component } from 'react';
 import './UserState.css';
+import axios from 'axios';
 class CompanyState extends Component {
     constructor(props){
         super(props);
         this.state={
             userStates : "",
             bc:"white",
+        }
+    }
+    async componentDidMount(){
+        try{
+            const{userStates}=this.state;
+            const result = await axios.put(`http://localhost:5000/userInfos/update`);
+            //result.data-> userInfo DB
+            this.setState({
+                user:{
+                    userState:userStates,                 
+                }
+            });
+            console.log(userStates);
+
+        }catch(err){
+            console.log(err);
         }
     }
     async select(e){
@@ -25,9 +42,9 @@ class CompanyState extends Component {
         const {user}=this.props;
         return (
                <select style={{backgroundColor:bc}} value={userStates} className="userState" onChange={this.select.bind(this)}>
-                   <option select={true} >상태를 선택해주세요</option>
-                   <option value= "yes"> 신입/실습 채용</option>
-                   <option value="no">미채용</option>
+                   <option >상태를 선택해주세요</option>
+                   <option value= "yes">구직/실습</option>
+                   <option value="no">휴식</option>
                </select>
         );
     }
