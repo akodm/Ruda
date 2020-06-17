@@ -38,7 +38,7 @@ class RookieMainView extends Component {
                 </div>
                 <div className="line"></div>
                 <div className="RookieMain-user-tag-content">
-                      {tag}
+                      {tag && tag}
                 </div>
             </div>
         );

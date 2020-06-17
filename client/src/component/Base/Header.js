@@ -23,7 +23,6 @@ class Header extends Component {
 
     openPop(num) {
         const { user,recoComDisplay, recoRooDisplay } = this.state;
-        console.log(user);
         if(!user||!user.email)
             return alert("로그인 후 이용 가능합니다.");
    
@@ -35,14 +34,14 @@ class Header extends Component {
     }
 
     render() {
-        const {  user,recoComDisplay, recoRooDisplay}=this.state;
+        const { user,recoComDisplay, recoRooDisplay}=this.state;
         return (
             <div className="Header">
                 <RecoCompany display={recoComDisplay} close={this.closePop.bind(this)} />
                 <RecoRookie  display={recoRooDisplay} close={this.closePop.bind(this)}/>
                 <nav  className="Header-nav">
                     <div className="Header-nav-menu">
-                        <Link to="/"><img src="/Images/header_logo.png" alt="IMG" /></Link>
+                        <Link to="/"><img src="/Images/RUDALogore.png" alt="IMG" /></Link>
                         <Link to="/company"><span className="Header-nav-menu-span">기업</span></Link>
                         <Link to="/rookie"><span className="Header-nav-menu-span">인재</span></Link>
                     </div>

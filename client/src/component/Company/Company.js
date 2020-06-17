@@ -40,9 +40,9 @@ class Company extends Component {
             <div className="Company">
             <div className="Company-title">
                 <span>기업</span>
-                <select onChange={this.selectChange.bind(this)} value={selectValue} className="Rookie-title-select">
-                    <option selected value="new">최신순</option>
-                    <option value="hot">인기순</option>
+                <select className="Company-title-select">
+                    <option value="최신순">최신순</option>
+                    <option value="인기순">인기순</option>
                 </select>
             </div>
             <CompanySearch/>

@@ -137,7 +137,9 @@ class CompanyInfoBox extends Component {
                 <div className="userInfo-box">
                     <div className="userInfo-margin">
                         <div className="userInfo-imgDiv">
-                            <img width="100" src={imagePreview || "/Images/footer_logo.png"} className="userInfo-img" alt="profileIMG"/>
+                        <div className="userInfo-imgSizeDiv">
+                                <img width="100" src={imagePreview || "/Images/footer_logo.png"} className="userInfo-img" alt="profileIMG"/>
+                            </div>
                             <div className="userInfo-fileDiv">
                                 <label htmlFor="avatafile">사진 업로드</label>
                                 <input accept="image/*" name="profileImg" onChange={this.onChangeImageValue.bind(this)} type="file" id="avatafile"></input>
