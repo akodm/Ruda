@@ -5,7 +5,6 @@ import axios from 'axios';
 import'./Base.css';
 
 import Header from './Header';
-import MainHeader from './MainHeader';
 import Footer from './Footer';
 
 import Main from '../Main/Main';
@@ -17,7 +16,6 @@ import Rookie from '../Rookie/Rookie';
 import UpDown from './UpDown';
 
 // import socketio from 'socket.io-client';
-import OtherHeader from './OtherHeader';
 import Mypages from '../Mypages/Mypages';
 import MyPopup from '../MyMenu/MyPopup';
 import UserInfo from '../UserInfo/UserInfo';
@@ -32,7 +30,6 @@ class Base extends Component {
                 email : "",
                 cate : "",
             },
-            load : false,
         }
     }
 
@@ -60,7 +57,6 @@ class Base extends Component {
                 localStorage.removeItem("users");
             }
         }
-        this.setState({ load:true })
     }
 
     getUser(user) {
