@@ -8,7 +8,7 @@ class MainHeader extends Component {
         const user = this.props.user;
         return (
             <div className="MainHeader">
-                  <Header user={user} />
+                <Header user={user} />
                 <div className="MainHeader-content">
                     <div className="MainHeader-text">
                         <h2>당신의 첫 시작을 하이루키와 함께 하세요</h2>

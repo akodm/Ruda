@@ -41,6 +41,7 @@ class UserInfoBox extends Component {
             // ---------------------------//
 
             keywords : [],
+            load : false,
         }
     }
 
@@ -72,8 +73,9 @@ class UserInfoBox extends Component {
                 .ref("images")
                 .child(profileImg.name)
                 .getDownloadURL()
-                .then(url => {
-                  this.setState({ imageUrl : url });
+                .then(async url => {
+                  await this.setState({ imageUrl : url });
+                  this.saveDB();
                 });
             }
         );
@@ -81,67 +83,65 @@ class UserInfoBox extends Component {
 
     // 시작하기 버튼 누를 시
     async saveUserInfoBtn() {
-        await this.addFile();
+        this.setState({ load : false });
+        this.addFile();
     }
 
-    async shouldComponentUpdate(nextProps, nextState) {
-        let doubleN = null;
-        if(!doubleN && nextState.progress >= 100 && nextState.imageUrl) {
-            doubleN = "start";
-            const { user } = nextProps;
-            const { name,imageUrl,phone1,phone2,phone3,
-                intro,address1,address2,field,workdate,
-                collage,subject,attendTag,attending1,attending2,
-                tags,keywords,traning } = nextState;
-            try {
-                // 구직자 시
-                let userCateUpdat = axios.put("http://localhost:5000/users/updatecate", {
-                    userCate : "user",
-                    id : user.id
-                })
+    async saveDB() {
+        const { user } = this.props;
+        const { name,imageUrl,phone1,phone2,phone3,
+            intro,address1,address2,field,workdate,
+            collage,subject,attendTag,attending1,attending2,
+            tags,keywords,traning } = this.state;
+        try {
+            // 구직자 시
+            let userCateUpdat = axios.put("http://localhost:5000/users/updatecate", {
+                userCate : "user",
+                id : user.id
+            })
 
-                let phone = phone1+"-"+phone2+"-"+phone3;
-                let address = address1+"-"+address2;
-                let attendings = attending1+"-"+ attending2;
+            let phone = phone1+"-"+phone2+"-"+phone3;
+            let address = address1+"-"+address2;
+            let attendings = attending1+"-"+ attending2;
 
-                let result = axios.post("http://localhost:5000/userInfos/create", {
-                    userId : user.id,
-                    userName : name,
-                    userPhone : phone , 
-                    userAdd : address , 
-                    userTraning : traning , 
-                    userUnvcity : collage , 
-                    userSubject : subject , 
-                    userAttendDate : attendings,
-                    userAttend : attendTag,
-                    userIntro : intro , 
-                    userTags : tags , 
-                    userSpecialty : "" , 
-                    userWorkDate : workdate , 
-                    userKeyword : "" , 
-                    userField : field , 
-                    userImageUrl : imageUrl,
-                })
+            let result = axios.post("http://localhost:5000/userInfos/create", {
+                userId : user.id,
+                userName : name,
+                userPhone : phone , 
+                userAdd : address , 
+                userTraning : traning , 
+                userUnvcity : collage , 
+                userSubject : subject , 
+                userAttendDate : attendings,
+                userAttend : attendTag,
+                userIntro : intro , 
+                userTags : tags , 
+                userSpecialty : "" , 
+                userWorkDate : workdate , 
+                userKeyword : "" , 
+                userField : field , 
+                userImageUrl : imageUrl,
+            })
 
-                await Promise.all([userCateUpdat,result]).then(data => {
-                    userCateUpdat = data[0];
-                    result = data[1];
-                })
-                console.log(userCateUpdat.data, result.data);
-                if(result.data){
-                    alert("기본입력이 완료되었습니다.");
-                    window.location.href = "/";
-                } else {
-                    alert("잘못된 값이 있습니다. 다시 시도해주세요.");
-                    window.location.href = "/";
-                }
-                this.setState({ progress : 0 })
-            } catch(err) {
-                console.log("user info save err : " + err);
+            await Promise.all([userCateUpdat,result]).then(data => {
+                userCateUpdat = data[0];
+                result = data[1];
+            })
+            console.log(userCateUpdat.data, result.data);
+            this.setState({ load : true });
+            if(result.data){
+                alert("기본입력이 완료되었습니다.");
+                window.location.href = "/";
+            } else {
+                alert("잘못된 값이 있습니다. 다시 시도해주세요.");
             }
+        } catch(err) {
+            console.log("user info save err : " + err);
         }
-        doubleN = null;
-        return true;
+    }
+
+    componentDidMount() {
+        this.setState({ load : true });
     }
 
     // 스태이트 변경하게 하는 함수
@@ -208,9 +208,15 @@ class UserInfoBox extends Component {
     // -------------------------------------------------------------------------------- //
 
     render() {
-        const { imagePreview,name,phone1,phone2,phone3,collage,subject,intro,address1,address2,field,workdate,attending1,attending2,attendTag,tags,keywords,tag,traning,tagList,tagListState } = this.state;
+        const { load,imagePreview,name,phone1,phone2,phone3,collage,subject,intro,address1,address2,field,workdate,attending1,attending2,attendTag,tags,keywords,tag,traning,tagList,tagListState } = this.state;
         return (
             <div className="userInfo-user">
+                {
+                    !load && 
+                    <div className="load-mask">
+                        <img src="images/load.gif" alt="GIF" className="load-mask-gif"></img>
+                    </div>
+                }
                 {/* 프로필 사진, 이름, 번호, 주소 등의 개인정보 */}
                 <div className="userInfo-comentDiv">
                     <span className="userInfo-coment">* 개인정보</span>

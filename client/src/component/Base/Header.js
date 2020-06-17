@@ -23,7 +23,6 @@ class Header extends Component {
 
     openPop(num) {
         const { user,recoComDisplay, recoRooDisplay } = this.state;
-        console.log(user);
         if(!user||!user.email)
             return alert("로그인 후 이용 가능합니다.");
    
@@ -35,7 +34,7 @@ class Header extends Component {
     }
 
     render() {
-        const {  user,recoComDisplay, recoRooDisplay}=this.state;
+        const { user,recoComDisplay, recoRooDisplay}=this.state;
         return (
             <div className="Header">
                 <RecoCompany display={recoComDisplay} close={this.closePop.bind(this)} />
