@@ -56,7 +56,7 @@ class Mypages extends Component {
                 //http://locahost:3000/ => props success
                 //http://locahost:3000/mypage => props fail
                 //상위 컴포넌트로부터 props를 전달받았을 경우
-                if(this.props.user.email){
+                if(this.props.user && this.props.user.email){
                     let propsUser = this.props.user;
                     //유저일경우
                     if(propsUser.cate === "user"){
@@ -120,7 +120,7 @@ class Mypages extends Component {
             alert("마이페이지 로드에 실패하였습니다.");
         }
         if(!this.state.user.cate) {
-            alert("기본 정보를 먼저 등록해주세요.");
+            alert("잘못된 접근입니다.");
             window.location.href = "/";
         } else {
             this.setState({
@@ -130,11 +130,10 @@ class Mypages extends Component {
     }
 
     render() {
-        const {url,user,load}=this.state;
-        console.log(user);
+        const {user,load}=this.state;
         return load && (
             <div className="Mypages">
-                { user.cate !== "user" ? <CompanyMypage user={user} /> : <RookieMypage user={user.data}/> }
+                { user.cate !== "user" ? <CompanyMypage user={user.data} /> : <RookieMypage user={user.data}/> }
             </div>
         );
     }

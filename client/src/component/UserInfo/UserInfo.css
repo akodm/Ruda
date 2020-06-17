@@ -59,6 +59,7 @@
 
 .userInfo-margin {
     margin: 50px;
+    position: relative;
 }
 
 .userInfo-comentDiv {
@@ -77,6 +78,17 @@
 
 /* -------------------------------------------------------------------- */
 
+.userInfo-imgSizeDiv {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 1px solid rgba(206, 206, 206, 0.418);
+}
+
 .userInfo-imgDiv {
     display: flex;
     flex-direction: column;
@@ -91,9 +103,8 @@
 }
 
 .userInfo-img {
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    max-width: 100px;
+    max-height: 100px;
 }
 
 .userInfo-fileDiv label {
@@ -138,6 +149,11 @@
 
 .userInfo-span {
     width: 100px;
+    text-align: left;
+}
+
+.userInfo-spanDate {
+    width: 130px;
     text-align: left;
 }
 
@@ -211,72 +227,15 @@
     border-radius: 10px;
 }
 
-/* ----------------------------------------------------------- */
-
-.userInfo-selectDiv {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.userInfo-select {
-    width: 80px;
-    height: 30px;
-    border: 1px solid rgb(38, 0, 255);
-    border-radius: 5px;
-    font-size: 12px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-weight: 600;
-    color: #414141;
-    cursor: pointer;
-    position: relative;
-    z-index: 1;
-}
-
-.select-menu {
-    margin-left: 40px;
-    width: 80px;
-    border: 1px solid rgb(38, 0, 255);
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    margin-top: 35px;
-    font-weight: 600;
-    color: #414141;
-    font-size: 12px;
-}
-
-.select-item {
-    margin: 5px;
-    width: 95%;
-    height: 15px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 5;
-}
-
-.select-item:hover {
-    background-color: rgb(226, 226, 226);
-}
-
 /* --------------------------------------------------------- */
 
 .userInfo-tagInput {
-    width: 100%;
+    width: 98%;
     height: 35px;
     border: 1px solid rgba(95, 95, 95, 0.411);
     border-radius: 5px;
     margin-bottom: 35px;
+    padding-left: 10px;
 }
 
 .userInfo-tagBox {
@@ -293,6 +252,77 @@
     flex-wrap: wrap;
 }
 
+.userInfo-tagList {
+    top: 70px;
+    width: 100%;
+    position: absolute;
+    max-height: 200px;
+    border: 1px solid rgba(192, 192, 192, 0.575);
+    box-shadow: 0px 1px 1px 0px rgb(168, 168, 168);
+    border-radius: 8px;
+    z-index : 100;
+    background-color: white;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+}
+
+.tag-list-div {
+    padding: 10px;
+    border: 1px solid rgba(134, 134, 134, 0.205);
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.tag-list-div:hover {
+    background-color: #e2e2e25b;
+}
+
 .chip-margin {
     margin: 5px;
+}
+
+/* ----------------------------------------------------------- */
+
+.userinfo-selectTraning {
+    border: 1px solid rgb(134, 134, 134);
+    border-radius: 5px;
+    width: 95px;
+    height: 40px;
+    padding-left: 10px;
+}
+
+/* ----------------------------------------------------------- */
+
+.userInfo-FieldList {
+    top: 70px;
+    width: 50%;
+    position: absolute;
+    max-height: 200px;
+    border: 1px solid rgba(192, 192, 192, 0.575);
+    box-shadow: 0px 1px 1px 0px rgb(168, 168, 168);
+    border-radius: 8px;
+    z-index : 100;
+    background-color: white;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+}
+
+.load-mask {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    opacity: 0.7;
+    z-index: 1500;
+}
+
+.load-mask-gif {
+    opacity: 0.7;
 }

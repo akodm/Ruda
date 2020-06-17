@@ -160,7 +160,10 @@
 .Rookie-Card-Profile-info-tags{
     margin-top: 10px;
     font-size: 13px;
-
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 .Rookie-Card-Profile-info-tags-tag{
     margin: 5px;

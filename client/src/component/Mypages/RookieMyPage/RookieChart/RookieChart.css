@@ -1,10 +1,7 @@
 /*RookieCount*/
 .RookieChart{
-    height: 500px;
+    height: 400px;
     width: 300px;
-    position: absolute;
-    left: 100px;
-    top:185px;
     display: flex;
     padding-top: 20px;
     background-color: white;

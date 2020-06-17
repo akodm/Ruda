@@ -55,14 +55,10 @@ router.post("/create", async (req, res) => {
 				companyName: req.body.companyName,
 				companyPhone: req.body.companyPhone,
 				companyAdd: req.body.companyAdd,
-<<<<<<< HEAD
 				companyField: req.body.companyField,
-=======
-				companyFiled: req.body.companyFiled,
 				companyTags: req.body.companyTags,
->>>>>>> 8ee0c46f3b7987cfc54efabf593fbe99275c8ab4
 				companyAwards: req.body.companyAwards,
-				companyImage: req.body.companyImage,
+				companyImageUrl: req.body.companyImageUrl,
 				companyCEO: req.body.companyCEO,
 				companyQuestion: req.body.companyQuestion,
 				companyRule: req.body.companyRule,
@@ -94,8 +90,8 @@ router.put("/update", async(req, res) => {
 			companyName: req.body.companyName,
 			companyPhone: req.body.companyPhone,
 			companyAdd: req.body.companyAdd,
-			companyImage: req.body.companyImage,
-			companyFiled: req.body.companyFiled,
+			companyImageUrl: req.body.companyImageUrl,
+			companyField: req.body.companyField,
 			companyCEO: req.body.companyCEO,
             companyQuestion: req.body.companyQuestion,
 			companyTags: req.body.companyTags,

@@ -1,6 +1,25 @@
 var express = require("express");
 var router = express.Router();
 let models = require("../models");
+// let multer = require('multer');
+// let path = require('path');
+
+// multer setting ----------------------------------------------------
+
+// const upload = multer({
+// 	storage: multer.diskStorage({
+// 	  	destination: function (req, file, cb) {
+// 			cb(null, 'public/upload/');
+// 	  	},
+// 	  	filename: function (req, file, cb) {
+// 			cb(null, new Date().valueOf() + path.extname(file.originalname));
+// 	  	}
+// 	}),
+// });
+// router.post("/upload", upload.single("profile"), async(req,res) => {
+// 	console.log(req.body.userId);
+// 	console.log(req.file.filename)
+// });
 
 // DB Setting --------------------------------------------------------
 const UserInfo = models.userInfo;
@@ -16,6 +35,24 @@ router.get("/all", async (req, res) => {
 			include : [
 				{ model: User }
 			]
+		});
+		res.send(result);
+	} catch (err) {
+		console.log(__filename + " 에서 유저 정보 전체 검색 에러 발생 내용= " + err);
+		res.send(false);
+	}
+});
+
+// 유저 구직 및 실습 중 정보 전체 조회
+router.get("/yall", async (req, res) => {
+	try {
+		const result = await UserInfo.findAll({
+			include : [
+				{ model: User }
+			],
+			where : {
+				userState : "yes",
+			}
 		});
 		res.send(result);
 	} catch (err) {
@@ -43,7 +80,7 @@ router.get("/one", async (req, res) => {
 });
 
 // 유저 정보 생성
-router.post("/create", async (req, res) => {
+router.post("/create", async(req, res) => {
 	let result = false;
 	try {
 		await UserInfo.findOrCreate({
@@ -55,19 +92,20 @@ router.post("/create", async (req, res) => {
 				userName: req.body.userName,
 				userPhone: req.body.userPhone,
 				userAdd: req.body.userAdd,
-				userField: req.body.userField,
-				userImage : req.body.userImage,
+				userImageUrl : req.body.userImageUrl,
 				userTraning: req.body.userTraning,
 				userUnvcity: req.body.userUnvcity, 
-				userAttend: req.body.userAttend, 
 				userSubject : req.body.userSubject,
+				userAttendDate: req.body.userAttendDate, 
+				userAttend: req.body.userAttend, 
+				userField: req.body.userField,
 				userIntro : req.body.userIntro,
+				userKeyword : req.body.userKeyword,
 				userTags : req.body.userTags,
 				userSpecialty : req.body.userSpecialty,
 				userWorkDate : req.body.userWorkDate,
-				userKeyword : req.body.userKeyword,
+				userTraningDate : req.body.userTraningDate,
 				userLike : 0,
-				userSuggestion : "",
 				userClick : 0,
 			}
 		}).spread((none, created)=>{
@@ -82,26 +120,30 @@ router.post("/create", async (req, res) => {
 
 // 유저 정보 수정
 router.put("/update", async(req, res) => {
-    let result = null;
+	let result = null;
+	console.log(req.body);
     try {
         await UserInfo.update({ 
-			userIamge : req.body.userIamge,
+			userName: req.body.userName,
+			userPhone: req.body.userPhone,
+			userAdd: req.body.userAdd,
+			userImageUrl : req.body.userImageUrl,
 			userTraning: req.body.userTraning,
             userUnvcity: req.body.userUnvcity, 
-            userSubject : req.body.userSubject,
-            userAwards : req.body.userAwards,
-			userCertification : req.body.userCertification,
+			userSubject : req.body.userSubject,
+			userAttendDate: req.body.userAttendDate, 
+			userAttend: req.body.userAttend, 
 			userField: req.body.userField,
+			userAwards : req.body.userAwards,
+			userCertification : req.body.userCertification,
 			userIntro : req.body.userIntro,
             userKeyword : req.body.userKeyword,
-			userAttend: req.body.userAttend, 
 			userTags : req.body.userTags,
-            userFile : req.body.userFile,
-            userPortfolio : req.body.userPortfolio,
             userLike : req.body.userLike,
             userSuggestion : req.body.userSuggestion,
             userClick : req.body.userClick,
             userSpecialty : req.body.userSpecialty,
+            userTraningDate : req.body.userTraningDate,
             userWorkDate : req.body.userWorkDate,
             userHireBool : req.body.userHireBool,
             userState : req.body.userState,

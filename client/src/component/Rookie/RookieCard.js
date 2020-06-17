@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import './Rookie.css';
 
 class RookieCard extends Component {
     render() {
-        return (
+        const userList = this.props.userList;
+        return userList ? (
             <div className="Rookie-Card">
                 <div className="Rookie-Card-header">
                     <div className="Rookie-Card-like">
                         <img src="/Images/1216649.svg" width="12px"height="12px" alt="img"/>
-                        <span>14</span>
+                        <span>{userList.userLike}</span>
                     </div>
                     <div className="Rookie-Card-state">
                         <div className="Rookie-search-title-state-training"></div>
@@ -17,22 +17,23 @@ class RookieCard extends Component {
                 </div>
                 <div className="Rookie-Card-Profile">
                     <div className="Rookie-Card-Profile-img" >
-                        <img src="/Images/easy_icon.png" alt="img"/>
+                        <img src={userList.userImageUrl || "Images/footer_logo.png"} alt="img"/>
                     </div>
                     <div className="Rookie-Card-Profile-info">
-                        <span className="Rookie-Card-Profile-info-name">홍길동</span>
-                        <span className="Rookie-Card-Profile-info-text">안녕하세요 백엔드 개발자를 꿈꾸는 홍길동입니당</span>
-                        <span className="Rookie-Card-Profile-info-position">백엔드</span>
+                        <span className="Rookie-Card-Profile-info-name">{userList.userName}</span>
+                        <span className="Rookie-Card-Profile-info-text">{userList.userIntro}</span>
+                        <span className="Rookie-Card-Profile-info-position">{userList.userField || "미정"}</span>
                         <span className="Rookie-Card-Profile-info-pt">포트폴리오 14개</span>
                         <div className="Rookie-Card-Profile-info-tags">
-                            <span className="Rookie-Card-Profile-info-tags-tag">#JAVA</span>
-                            <span className="Rookie-Card-Profile-info-tags-tag">#PHP</span>
-                            <span className="Rookie-Card-Profile-info-tags-tag">#Node.js</span>
+                            { userList.userTags.map((data,i) => {
+                                if(i > 3) return null;
+                                return <span key={i} className="Rookie-Card-Profile-info-tags-tag">{data}</span>
+                            })}
                         </div>
                     </div>
                 </div>
             </div>
-        );
+        ) : <div></div>
     }
 }
 

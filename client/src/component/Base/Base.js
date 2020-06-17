@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import'./Base.css';
 
-import MainHeader from './MainHeader';
+import Header from './Header';
 import Footer from './Footer';
 
 import Main from '../Main/Main';
@@ -16,7 +16,6 @@ import Rookie from '../Rookie/Rookie';
 import UpDown from './UpDown';
 
 // import socketio from 'socket.io-client';
-import OtherHeader from './OtherHeader';
 import Mypages from '../Mypages/Mypages';
 import MyPopup from '../MyMenu/MyPopup';
 import UserInfo from '../UserInfo/UserInfo';
@@ -27,11 +26,10 @@ class Base extends Component {
         this.state = {
             user : {
                 id : 1,
-                tag:"",
-                email:"",
+                tag : "",
+                email : "",
                 cate : "",
             },
-            load:false,
         }
     }
 
@@ -59,15 +57,10 @@ class Base extends Component {
                 localStorage.removeItem("users");
             }
         }
-        this.setState({
-            load:true,
-        })
     }
 
     getUser(user) {
-        this.setState({
-            user : user,
-        })
+        this.setState({ user : user })
     }
 
     render() {
@@ -75,24 +68,24 @@ class Base extends Component {
         return (
             <div className="base-main">
                  <Router>
+                    <Header />
                     {/*메인 */}
                     <Route exact path="/">
-                        { user.email ? <OtherHeader user={user} /> : <MainHeader user={user} /> }
                         { user.email ? (user.cate ? <Mypages user={user} /> : <UserInfo user={user} />) : <Main /> }</Route>
                     {/*기업게시판*/ }
-                    <Route path ="/company"><OtherHeader user={user} /><Company /></Route>
+                    <Route path ="/company"><Company /></Route>
                     {/*인재게시판*/ }
-                    <Route path ="/rookie"><OtherHeader user={user} /><Rookie /></Route>
+                    <Route path ="/rookie"><Rookie /></Route>
                     {/*회원가입*/ }
-                    <Route path ="/insert"><OtherHeader user={user} />{ !user.email && <Insert /> }</Route>
+                    <Route path ="/insert">{ !user.email && <Insert /> }</Route>
                     {/*로그인*/ }
-                    <Route path ="/login"><OtherHeader user={user} />{ !user.email && <Login setUser={this.getUser.bind(this)} /> }</Route>
+                    <Route path ="/login">{ !user.email && <Login setUser={this.getUser.bind(this)} /> }</Route>
                     {/*간편로그인*/ }
-                    <Route path ="/easy"><OtherHeader user={user} />{ !user.email && <Easy setUser={this.getUser.bind(this)} /> }</Route>
+                    <Route path ="/easy">{ !user.email && <Easy setUser={this.getUser.bind(this)} /> }</Route>
                     {/*유저 기본정보 */}
-                    <Route path="/userinfo"><OtherHeader user={user} />{ user.email && !user.cate && <UserInfo />}</Route>
+                    <Route path="/userinfo">{ user.email && !user.cate && <UserInfo />}</Route>
                     {/*마이페이지*/}
-                    <Route path="/mypage"><OtherHeader user={user} /><Mypages user={user} /></Route>
+                    <Route path="/mypage"><Mypages user={user} /></Route>
                     {/*마이메뉴*/}
                     { user.email && <MyPopup user={user} /> }
                     {/*화면업다운버튼*/ }

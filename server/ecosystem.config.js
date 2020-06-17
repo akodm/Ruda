@@ -4,7 +4,7 @@ module.exports = {
     script: './bin/www',
     instances: 1,
     watch: true,
-    ignore_watch : ['node_modules'],
+    ignore_watch : ['node_modules','public'],
     exec_mode : 'cluster',
     env: {
       NODE_ENV: 'development'

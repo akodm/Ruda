@@ -5,6 +5,7 @@ import CompanyProject from './CompanyProject/CompanyProject';
 import CompanyProfile from './CompanyProfile/CompanyProfile';
 import Msg from '../../MyMenu/Message';
 import './CompanyMypage.css';
+import CompanyState from '../../UserState/CompanyState';
 
 class CompanyMyPage extends Component {
     constructor(props) {
@@ -54,12 +55,14 @@ class CompanyMyPage extends Component {
     }
 
     render() {
-        const user =this.props
-        const { load, msgDisplay,likeUser,ptbtnClick,profileClick,changePage,hireClick } = this.state;
+     
+
+        const { load, msgDisplay,likeUser,ptbtnClick,profileClick,changePage,hireClick,user } = this.state;
         return load ? (
             <div className="company-main">
                 <div className="btn-cont">
                     <Msg display= { msgDisplay } />
+                    <CompanyState/>
                     <div className="company-main-bg">
                         <div className="company-main-bg-in">
                             { changePage?<CompanyProfile user={user}/>:<CompanyProject  user={user}/> }
