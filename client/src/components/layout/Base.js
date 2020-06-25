@@ -16,6 +16,8 @@ import Login from '../page/login/Login';    // login
 import Easy from '../page/login/Easy';  // easy login
 import Insert from '../page/insert/Insert'; // insert
 import Info from '../page/info/Info';   // info
+import Cboard from '../page/board/Cboard';
+import Rboard from '../page/board/Rboard';
 
 class Base extends Component {
     constructor(props){
@@ -72,6 +74,8 @@ class Base extends Component {
                             <Route path="/login"><Login/></Route>
                             <Route path="/insert"><Insert/></Route>
                             <Route path="/info"><Info/></Route>
+                            <Route path="/company"><Cboard/></Route>
+                            <Route path="/rookie"><Rboard/></Route>
                             {/*화면업다운버튼*/ }
                             <UpDown />
                             {/*하단 */}

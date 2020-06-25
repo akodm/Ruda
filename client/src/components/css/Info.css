@@ -36,6 +36,9 @@
     width: 100%;
     align-items: center;
 }
+.Info-main-title{
+    color:#646464; 
+}
 
 .Info-rookie-title {
     width: 700px;

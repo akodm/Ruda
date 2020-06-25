@@ -19,19 +19,19 @@ class Main extends Component {
             ],
             // 기업 아이템
             parnterCount : [
-                <Partner src="/Images/Kakao.png" title="안녕하세요." span="카카오입니다. 경력없는 신입을 채용하고자 하이루키를 찾았습니다." />,
-                <Partner src="/Images/naver.png" title="안녕하세요." span="앞으로의 IT 선두주자가 될 네이버입니다. 신입 채용을 희망합니다." />,
-                <Partner src="/Images/nexon.jpg" title="안녕하세요." span="게임계열 넥슨입니다. 앱 및 게임 개발자를 채용합니다." />,
-                <Partner src="/Images/opengraph.png" title="안녕하세요." span="쿠키런 게임사의 데브시스터즈입니다. devops 개발자 채용합니다." />,
-                <Partner src="Images/samsung.png" title="안녕하세요." span="한국의 1등 기업 삼성입니다. 1년간 연수 교육을 받을 신입을 찾습니다." />,
+                <Partner src="/Images/Kakao.png" title="카카오" span="카카오입니다. 경력없는 신입을 채용하고자 하이루키를 찾았습니다." />,
+                <Partner src="/Images/naver.png" title="네이버" span="앞으로의 IT 선두주자가 될 네이버입니다. 신입 채용을 희망합니다." />,
+                <Partner src="/Images/nexon.jpg" title="넥슨" span="게임계열 넥슨입니다. 앱 및 게임 개발자를 채용합니다." />,
+                <Partner src="/Images/opengraph.png" title="데브시스터즈" span="쿠키런 게임사의 데브시스터즈입니다. devops 개발자 채용합니다." />,
+                <Partner src="Images/samsung.png" title="삼성" span="한국의 1등 기업 삼성입니다. 1년간 연수 교육을 받을 신입을 찾습니다." />,
             ],
             // 유저 아이템
             userCount : [
-                <Partner src="/Images/jm.png" title="안녕하세요." span="풀스택 개발자가 되기 위해 노력하고 있는 (진)주니어 개발자입니다." />,
-                <Partner src="/Images/hm.jpg" title="안녕하세요." span="프론트엔드 및 퍼블리셔를 희망하는 이헤민입니다." />,
-                <Partner src="/Images/tj.jpg" title="안녕하세요." span="안녕하세요. 스마트 소프트웨어 2학년이고, 추후 개발자 예정인 이태정입니다." />,
-                <Partner src="/Images/yr.jpg" title="안녕하세요." span="안녕하세요. 프론트엔드 개발자가 되고자 현재 React로 프로젝트를 개발중인 고유리입니다." />,
-                <Partner src="Images/minji.jpg" title="안녕하세요." span="앱/AR/VR을 전공으로 하는 황민지입니다. VR/AR의 포트폴리오가 있습니다." />,
+                <Partner src="/Images/jm.png" title="조준명" span="풀스택 개발자가 되기 위해 노력하고 있는 (진)주니어 개발자입니다." />,
+                <Partner src="/Images/hm.jpg" title="이혜민" span="프론트엔드 및 퍼블리셔를 희망하는 이헤민입니다." />,
+                <Partner src="/Images/tj.jpg" title="이태정" span="안녕하세요. 스마트 소프트웨어 2학년이고, 추후 개발자 예정인 이태정입니다." />,
+                <Partner src="/Images/yr.jpg" title="고유리" span="안녕하세요. 프론트엔드 개발자가 되고자 현재 React로 프로젝트를 개발중인 고유리입니다." />,
+                <Partner src="Images/minji.jpg" title="황민지" span="앱/AR/VR을 전공으로 하는 황민지입니다. VR/AR의 포트폴리오가 있습니다." />,
             ],
             // 스크롤 div 표시 효과를 위한 값
             withDisplay : false,

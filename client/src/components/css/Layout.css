@@ -5,7 +5,7 @@
     height: 75px;
     display: flex;
     justify-content: center;
-    color: #000000;
+    color:#646464; 
     border-bottom: 1px solid rgba(189, 187, 187, 0.301);
     position: fixed;
     background-color: white;
@@ -47,11 +47,12 @@
 
 .Header-nav-menu div {
     width: 50px;
+    color:#646464;
 }
 
 .Header-nav-menu div:hover { 
-    color:#008fbb; 
-    background-color: #e8f8ff73;
+    color:#494949; 
+    
 }
 
 .Header-nav-menu-div{

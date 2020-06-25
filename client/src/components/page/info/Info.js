@@ -21,6 +21,7 @@ class Info extends Component {
                 <Typical
                     steps={['구직자 또는 기업으로 선택하여 기본 정보를 등록하세요!']}
                     wrapper="h2"
+                    className="Info-main-title"
                 />
                 <div className="Info-select">
                     <Button onClick={() => this.setState({ selectUser : 0 })} variant={!selectUser ? "contained" : "outlined"} color="primary">구직자</Button>
