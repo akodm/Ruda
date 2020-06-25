@@ -41,7 +41,7 @@ class Header extends Component {
                 <RecoRookie  display={recoRooDisplay} close={this.closePop.bind(this)}/>
                 <nav  className="Header-nav">
                     <div className="Header-nav-menu">
-                        <Link to="/"><img src="/Images/RUDALogore.png" alt="IMG" /></Link>
+                        <Link to="/"><img src="/Images/RUDALogore.png" alt="IMG" className="headerlogo-img" /></Link>
                         <Link to="/company"><span className="Header-nav-menu-span">기업</span></Link>
                         <Link to="/rookie"><span className="Header-nav-menu-span">인재</span></Link>
                     </div>

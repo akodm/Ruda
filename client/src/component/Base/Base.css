@@ -7,6 +7,7 @@
     justify-content: center;
     color:rgba(85, 85, 85, 0.822);   
     border-bottom: 1px solid rgba(189, 187, 187, 0.301);
+    align-items: center;
 }
 .Header-nav{
     width: 67%;
@@ -30,6 +31,9 @@
     font-weight: 600;
 }
 
+.headerlogo-img{
+    margin-bottom: -4px;
+}
 /*UpDown*/
 .updown{
     position: fixed;

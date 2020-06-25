@@ -25,6 +25,7 @@ class UserInfoBox extends Component {
 
             field : "",
             workdate : "",
+            trainingdate: "",
 
             collage : "",
             subject : "",
@@ -42,6 +43,9 @@ class UserInfoBox extends Component {
 
             keywords : [],
             load : false,
+
+            traningDisplay:"none",
+            
         }
     }
 
@@ -92,7 +96,7 @@ class UserInfoBox extends Component {
         const { name,imageUrl,phone1,phone2,phone3,
             intro,address1,address2,field,workdate,
             collage,subject,attendTag,attending1,attending2,
-            tags,keywords,traning } = this.state;
+            tags,keywords,traning,trainingdate } = this.state;
         try {
             // 구직자 시
             let userCateUpdat = axios.put("http://localhost:5000/users/updatecate", {
@@ -121,6 +125,8 @@ class UserInfoBox extends Component {
                 userKeyword : "" , 
                 userField : field , 
                 userImageUrl : imageUrl,
+                userTraningDate : trainingdate,
+                
             })
 
             await Promise.all([userCateUpdat,result]).then(data => {
@@ -145,7 +151,7 @@ class UserInfoBox extends Component {
     }
 
     // 스태이트 변경하게 하는 함수
-    onChangeValue(e) { this.setState({ [e.target.name] : e.target.value }) }
+    onChangeValue(e) { this.setState({ [e.target.name] : e.target.value })}
 
     // 번호의 경우 숫자 외 입력 시 초기화
     onChangeValuePhone(e) {
@@ -208,7 +214,7 @@ class UserInfoBox extends Component {
     // -------------------------------------------------------------------------------- //
 
     render() {
-        const { load,imagePreview,name,phone1,phone2,phone3,collage,subject,intro,address1,address2,field,workdate,attending1,attending2,attendTag,tags,keywords,tag,traning,tagList,tagListState } = this.state;
+        const { load,imagePreview,name,phone1,phone2,phone3,collage,subject,intro,address1,address2,field,workdate,attending1,attending2,attendTag,tags,keywords,tag,traning,tagList,tagListState,trainingdate,traningDisplay } = this.state;
         return (
             <div className="userInfo-user">
                 {
@@ -285,13 +291,25 @@ class UserInfoBox extends Component {
                             </select>
                         </div>
                         <div className="userInfo-inputDiv">
-                            <div className="userInfo-spanCollage1">실습 여부</div>
+                            <div className="userInfo-spanCollage1" >실습 여부</div>
                             <select className="userinfo-selectTraning" value={traning} onChange={(e) => this.setState({ traning : e.target.value})}>
                                 <option value={0}>아니요</option>
                                 <option value={1}>예</option>
                             </select>
                         </div>
-                    </div>
+                        <div  style={{display:traningDisplay}}>
+                            <div className="userInfo-spanCollage1" >실습 날짜</div>
+                                <input maxLength={10} value={trainingdate}
+                                onChange={this.onChangeValue.bind(this)}
+                                onPaste={this.onChangeValue.bind(this)} 
+                                name="trainingdate"
+                                placeholder={moment().format("YYYY/MM/DD")}
+                                type="text"
+                                className="userInfo-inputDate"
+                                onChange={this.select.bind(this)}></input>
+                            </div>
+                        </div>
+                       
                 </div>
                 <div className="userInfo-comentDiv">
                     <span className="userInfo-coment">* 부가정보</span>
