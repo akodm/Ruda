@@ -89,20 +89,28 @@ router.post("/create", async(req, res) => {
 			},
 			defaults : {
 				userId : req.body.userId,
+				userImageUrl : req.body.userImageUrl,
+
 				userName: req.body.userName,
 				userPhone: req.body.userPhone,
 				userAdd: req.body.userAdd,
-				userImageUrl : req.body.userImageUrl,
-				userTraning: req.body.userTraning,
+				
+				userUnivercityCate : req.body.userUnivercityCate,
 				userUnvcity: req.body.userUnvcity, 
 				userSubject : req.body.userSubject,
-				userAttendDate: req.body.userAttendDate, 
+				userAttendStartDate: req.body.userAttendStartDate, 
+				userAttendEndDate: req.body.userAttendEndDate, 
 				userAttend: req.body.userAttend, 
-				userField: req.body.userField,
-				userIntro : req.body.userIntro,
+				userTraning: req.body.userTraning,
+
 				userKeyword : req.body.userKeyword,
 				userTags : req.body.userTags,
+				userIntro : req.body.userIntro,
 				userSpecialty : req.body.userSpecialty,
+
+				userField: req.body.userField,
+				userTraningDateState : req.body.userTraningDateState,
+				userWorkDateState : req.body.userWorkDateState,
 				userWorkDate : req.body.userWorkDate,
 				userTraningDate : req.body.userTraningDate,
 				userLike : 0,
@@ -121,7 +129,6 @@ router.post("/create", async(req, res) => {
 // 유저 정보 수정
 router.put("/update", async(req, res) => {
 	let result = null;
-	console.log(req.body);
     try {
         await UserInfo.update({ 
 			userName: req.body.userName,

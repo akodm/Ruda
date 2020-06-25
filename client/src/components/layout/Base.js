@@ -71,7 +71,7 @@ class Base extends Component {
                             <Route path="/easy"><Easy/></Route>
                             <Route path="/login"><Login/></Route>
                             <Route path="/insert"><Insert/></Route>
-                            <Route path="/info"><Info/></Route>
+                            <Route path="/info"><Info user={user} /></Route>
                             {/*화면업다운버튼*/ }
                             <UpDown />
                             {/*하단 */}
