@@ -8,6 +8,7 @@
 /package-lock.json
 /client-configs.js
 /src/firebase.js
+/src/data-list.js
 # testing
 /coverage
 

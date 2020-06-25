@@ -25,7 +25,7 @@ class MainWith extends Component {
                         <div className="MainWith-companys-company">
                             <img src="/Images/opengraph.png" alt="img"/>
                             <span className="MainWith-companys-company-title">데브시스터즈</span>
-                            <span className="MainWith-companys-company-text">안녕하세요 데브시스터즈입니다.</span>
+                            <span className="MainWith-companys-company-text">안녕하세요 데브시스터즈</span>
                         </div>  
                         <div className="MainWith-companys-company">
                             <img src="/Images/samsung.png" alt="img"/>

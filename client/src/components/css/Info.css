@@ -1,0 +1,109 @@
+/* ------------------------ Info Main ------------------------*/
+.Info-main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(230, 230, 230, 0.247);
+}
+
+.Info-main > h2 {
+    margin-top: 100px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.Info-select {
+    width: 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.Info-body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ------------------------ Rookie ------------------------*/
+/* 개인정보 */
+.Info-rookie-main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.Info-rookie-title {
+    width: 700px;
+    margin: 10px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.Info-rookie-body {
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid rgba(175, 175, 175, 0.281);
+    margin-bottom: 10px;
+    padding: 50px;
+}
+
+.Info-rookie-imgLayout {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+}
+
+/* 최근 학력 */
+
+.Info-rookie-selectBox {
+    width: 100px;
+    height: 55px;
+    border: 1px solid rgba(78, 78, 78, 0.466);
+    border-radius: 5px;
+    padding-left: 30px;
+    text-align: center;
+    margin-left: 5px;
+    margin-right: 25px;
+    margin-top: 1px;
+    appearance: none;
+}
+
+.Info-rookie-selectBox:hover {
+    background-color: #e0e0e05d;
+}
+
+.Info-rookie-dateLayout {
+    display: flex;
+    flex-direction: row;
+    margin-top: -20px;
+}
+
+/* 본인 어필 */
+
+.Info-tag-box {
+    width: 700px;
+    min-height: 100px;
+    overflow-y: auto;
+    border: 1px solid rgba(102, 102, 102, 0.363);
+    border-radius: 5px;
+    margin-top: 25px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+/* ------------------------ Company ------------------------*/
+
+
+
+
+
+
