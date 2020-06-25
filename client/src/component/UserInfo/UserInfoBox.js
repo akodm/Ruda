@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import TagChip from './TagChip';
 import configs from '../../client-configs';
+import dataList from '../../data-list';
 import { storage } from "../../firebase";
 
 import moment from 'moment';
@@ -173,7 +174,7 @@ class UserInfoBox extends Component {
         await this.setState({
             [e.target.name] : e.target.value
         });
-        let searchResult = configs.app.tagList.filter(data => {
+        let searchResult = dataList.app.tagList.filter(data => {
             return data.toLowerCase().match(this.state.tag.toLowerCase()) && this.state.tag && data;
         })
         // 값이 하나라도 있다면

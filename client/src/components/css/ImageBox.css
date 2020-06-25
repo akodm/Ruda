@@ -1,0 +1,43 @@
+.ImageBox-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 25px;
+}
+
+.ImageBox-imgSizeDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+    height: 200px;
+    overflow-y: hidden;
+    margin-bottom: -80px;
+}
+
+.ImageBox-fileDiv label {
+    border: 1px solid rgba(165, 165, 165, 0.808);
+    border-radius: 5px;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.623);
+    font-size: 12px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.ImageBox-fileDiv label:hover {
+    background-color: #e0e0e05d;
+}
+
+.ImageBox-fileDiv input[type="file"] { 
+    position: absolute; 
+    width: 0px; 
+    height: 0px; 
+    padding: 0; 
+    margin: -1px; 
+    overflow: hidden; 
+    clip:rect(0,0,0,0); 
+    border: 0; 
+}

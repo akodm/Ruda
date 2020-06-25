@@ -50,7 +50,6 @@ class Company extends Component {
                 { userList && userList.map(function(str,i){
                         return <Link to={`/mypage/${str.id}`} key={i}><CompanyCard userList={userList[i]}/></Link>;
                     }) }
-                
             </div>
             <div className="Company-CardView-PagiNation">
                 <Pagination count={10} />

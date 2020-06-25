@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,     // 본인 사진 - firebase 이미지 경로
         },
         userTraning : {
-            type: DataTypes.STRING(2),     // 실습생 여부
+            type: DataTypes.STRING(10),     // 실습생 여부
         },
         userUnvcity : {
             type: DataTypes.STRING(11),     // 대학
@@ -60,7 +60,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER(11),    // 클릭된 수
         },
         userSpecialty : {
-            type: DataTypes.JSON,     // 잘하는 특기
+            type: DataTypes.STRING(50),     // 잘하는 특기
         },
         userTraningDate : {
             type: DataTypes.STRING(20),     // 실습 할 수 있는 날짜

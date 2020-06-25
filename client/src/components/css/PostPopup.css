@@ -1,0 +1,12 @@
+.postPopup-main {
+    position: fixed;
+    z-index: 2000;
+    width: 100%;
+    height: 109%;
+    top: 0;
+    left: 0;
+    background-color: rgba(134, 133, 133, 0.226);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
