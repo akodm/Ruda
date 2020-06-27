@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Typical from 'react-typical'
-
 import Button from '@material-ui/core/Button';
 
 import '../../css/Info.css';
@@ -16,6 +15,7 @@ class Info extends Component {
     }
     render() {
         const { selectUser } = this.state;
+        const { user } = this.props;
         return (
             <div className="Info-main">
                 <Typical
@@ -30,7 +30,7 @@ class Info extends Component {
                 <div className="Info-body">
                     {
                         !selectUser ?
-                        <Rookie /> : <Company />
+                        <Rookie user={user} /> : <Company user={user} />
                     }
                 </div>
             </div>

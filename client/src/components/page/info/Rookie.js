@@ -1,20 +1,28 @@
 import React, { Component } from 'react';
+import { storage } from "../../../firebase";
+import config from '../../../client-configs';
+import axios from 'axios';
 
+import Load from '../../component/Load';
 import dataList from '../../../data-list';
 import ImageBox from '../../component/ImageBox';
-import InputBox from '../../component/InfoInput';
 import PostCode from '../../component/PostPopup';
 import AutoCreateBox from '../../component/AutoCreatable';
 import TagChip from '../../component/TagChip';
+import SelectBox from '../../component/SelectBox';
 
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 import moment from 'moment';
 
 class Rookie extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            progress : null,
             // 개인정보
             imgData : null,
+            imgUrl : null,
             imgPreview : null,
             name : "",
             phone : "",
@@ -27,7 +35,9 @@ class Rookie extends Component {
             univercity  : "",   // 대학 혹은 고등학교 이름
             subject : "",   // 전공 이름 혹은 고등학교 인문 이름
             univercityStart : "",
+            startErr : false,
             univercityEnd : "",
+            endErr : false,
             univercityState : "재학",   // 대학 상태 여부
             trainingState : "일반구직",  // 실습 여부
 
@@ -35,21 +45,27 @@ class Rookie extends Component {
             tags : [],  // 태그
             keywords : [],  // 성격 키워드
             specialty : "", // 특기
+            specialtyErr : false,
             introduce : "", // 자기 소개 간단
+            introduceErr : false,
 
             // 구직 관련
             field : "", // 희망 취업 분야
-            workDateState : 0,  // 일할 수 있는 날짜 선택 박스 -> 비선택 / 상시 / 졸업 후 / 정해진 날짜
-            workDate : new Date(),  // 일할 수 있는 날짜
-            trainingDateState : 0,   // 실습 할 수 있는 날짜 선택 박스 -> 비선택 / 상시 / 졸업 후 / 정해진 날짜
-            trainingDate : new Date(),  // 실습 여부 시 실습 가능 날짜
+            workDateState : "상시",  // 일할 수 있는 날짜 선택 박스 -> 비선택 / 상시 / 졸업 후 / 정해진 날짜
+            workDate : "",  // 일할 수 있는 날짜
+            trainingDateState : "실습 강의 시",   // 실습 할 수 있는 날짜 선택 박스 -> 비선택 / 상시 / 졸업 후 / 정해진 날짜
+            trainingDate : "",  // 실습 여부 시 실습 가능 날짜
+
+            load : false,
         }
     }
+
+    componentDidMount() { this.setState({ load : true }); }
 
     // 이미지 업로드 함수 - props
     imgUpload(e) { this.setState({ imgData : e.data, imgPreview : e.pre }) }
 
-    // 스태이트 변경 함수
+    // 기본 스태이트 변경 함수
     onChangeValue(e) {
         if(e.target.name === "phone" || e.target.name === "univercityStart" || e.target.name === "univercityEnd") {
             if(/\D+/g.test(e.target.value)) {
@@ -58,6 +74,49 @@ class Rookie extends Component {
             }
         }
         this.setState({ [e.target.name] : e.target.value })
+    }
+
+    // 날짜 값 변경 함수
+    onChangeValueDate(e) {
+        if(/\D+/g.test(e.target.value)) {
+            this.setState({ [e.target.name] : "" })
+            return;
+        }
+
+        let value = e.target.value;
+        if(value.length > 4) {
+            if(e.target.name === "univercityStart") {
+                this.setState({ startErr : true })
+            } else {
+                this.setState({ endErr : true })
+            }
+        } else {
+            if(e.target.name === "univercityStart") {
+                this.setState({ startErr : false })
+            } else {
+                this.setState({ endErr : false })
+            }
+        }
+        this.setState({ [e.target.name] : e.target.value }) 
+    }
+
+    // 제한 있는 문자열 값 변경 함수
+    onChangeValueLimit(e) {
+        let value = e.target.value;
+        if(value.length > 50) {
+            if(e.target.name === "introduce") {
+                this.setState({ introduceErr : true })
+            } else {
+                this.setState({ specialtyErr : true })
+            }
+        } else {
+            if(e.target.name === "introduce") {
+                this.setState({ introduceErr : false })
+            } else {
+                this.setState({ specialtyErr : false })
+            }
+        }
+        this.setState({ [e.target.name] : e.target.value }) 
     }
 
     // 키워드 추가 함수
@@ -92,14 +151,112 @@ class Rookie extends Component {
         })})
     }
 
+    async saveStartBtn() {
+        const { user } = this.props;
+        const { imgUrl,
+            name,phone,address1,address2,
+            univercityCate,univercity,subject,univercityState,univercityStart,univercityEnd,trainingState,
+            tags,keywords,specialty,introduce,
+            field,workDateState,trainingDateState,workDate,trainingDate
+        } = this.state;
+
+        try {
+            let userCateUpdat = axios.put(`${config.app.s_url}/users/updatecate`, {
+                userCate : "user",
+                id : user.id
+            })
+
+            let address = address1 + "-" + address2;
+            let result = axios.post(`${config.app.s_url}/userInfos/create`, {
+                userId : user.id,
+                userImageUrl : imgUrl, 
+
+                userName : name, userPhone : phone, userAdd : address, 
+                userUnivercityCate : univercityCate,
+                userUnvcity : univercity, userSubject : subject,
+                userAttendStartDate : univercityStart,
+                userAttendEndDate : univercityEnd,
+                userAttend : univercityState,
+                userTraning : trainingState,
+
+                userTags : tags,
+                userKeyword : keywords,
+                userSpecialty : specialty,
+                userIntro : introduce,
+
+                userField : field,
+                userTraningDateState : trainingDateState,
+                userWorkDateState : workDateState,
+                userWorkDate : workDate,
+                userTraningDate : trainingDate,
+            })
+
+            await Promise.all([userCateUpdat,result]).then(data => {
+                userCateUpdat = data[0];
+                result = data[1];
+            })
+
+            console.log(userCateUpdat.data, result.data);
+            if(result.data){
+                alert("기본입력이 완료되었습니다.");
+            } else {
+                alert("잘못된 값이 있습니다. 다시 시도해주세요.");
+            }
+        } catch(err) {
+            console.log("user info save err : " + err);
+        }
+        this.setState({ load : true });
+    }
+
+    // firebase에 이미지 업로드
+    addFile() {
+        const { imgData,
+            name,phone,address1,univercity,subject,
+            startErr,endErr,specialtyErr,introduceErr } = this.state;
+        if(startErr || endErr || specialtyErr || introduceErr) {
+            alert("잘못된 값이 있습니다. 다시 확인해주세요.");
+            return;
+        }
+        if(!name || !phone || !address1 || !univercity || !subject) {
+            alert("필수 입력 사항을 입력해주세요.");
+            return;
+        }
+        this.setState({ load : false });
+
+        const uploadTask = storage.ref(`/images/${imgData.name}`).put(imgData);
+        uploadTask.on(
+            "state_changed",
+            snapshot => {
+                const progress = Math.round(
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100 );
+                this.setState({ progress });
+            },
+            error => {
+                console.log(error);
+            }, () => {
+                storage
+                .ref("images")
+                .child(imgData.name)
+                .getDownloadURL()
+                .then(async url => {
+                    await this.setState({ imgUrl : url });
+                    this.saveStartBtn();
+                });
+            }
+        );
+    }
+
     render() {
         const { imgPreview,
             name,phone,address1,address2,addressState,
-            univercityCate,univercityState,univercityStart,univercityEnd,trainingState,
-            tags,keywords,specialty,introduce
+            univercityCate,univercityState,univercityStart,univercityEnd,trainingState,startErr,endErr,
+            tags,keywords,specialty,introduce,specialtyErr,introduceErr,
+            workDateState,trainingDateState,workDate,trainingDate,
+            load
         } = this.state;
         return (
             <div className="Info-rookie-main">
+                { !load &&  <Load /> }
 
                 {/* 개인정보 박스 */}
                 <div className="Info-rookie-title">*개인정보</div>
@@ -113,23 +270,21 @@ class Rookie extends Component {
                         />
                         {/* 신상 정보 */}
                         <div className="Info-rookie-inputLayoutDiv">
-                            <InputBox 
-                                text="이름" value={name} onChange={this.onChangeValue.bind(this)}
-                                placeholder="성 이름" type="text" name="name"
-                            />
-                            <InputBox 
-                                text="전화번호" value={phone} onChange={this.onChangeValue.bind(this)}
-                                placeholder="-빼고 입력해주세요." type="text" name="phone" maxLength={12}
-                            />
+                            <TextField helperText="성 이름" required label="이름" variant="outlined" value={name} name="name" onChange={this.onChangeValue.bind(this)} />
+                            <TextField helperText="-빼고 입력해주세요" required label="전화번호" variant="outlined" value={phone} name="phone" onChange={this.onChangeValue.bind(this)} />
                         </div>
                     </div>
                     {/* 클릭시 주소지 검색 창 열기 */}
-                    <InputBox 
-                        text="주소지" value={address1} readOnly type="text" style={{width:"400px"}}
-                        placeholder="주소를 검색하여주세요. 시/도/구" onClick={() => this.setState({ addressState : true })}
-                        add name2="address2" type2="text" value2={address2} placeholder2="나머지 주소를 입력해주세요."
-                        style2={{width:"200px",marginLeft:"20px"}} onChange={this.onChangeValue.bind(this)}
-                    />
+                    <div className="Info-rookie-imgLayout">
+                        <TextField
+                            id="outlined-read-only-input" label="주소를 검색하여 주세요. 시/도/구"
+                            value={address1} required
+                            onClick={() => this.setState({ addressState : true })}
+                            style={{width:"450px",marginRight:"25px"}}
+                            InputProps={{ readOnly: true }} variant="outlined"
+                        />
+                        <TextField helperText="상세주소를 입력해주세요" style={{width:"200px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="address2" value={address2} id="outlined-required" label="나머지 주소" />
+                    </div>
                     {/* 주소지 검색 API */}
                     <PostCode open={addressState} close={() => this.setState({ addressState : false })} func={(data) => this.setState({ address1 : data })} />
                 </div>
@@ -139,40 +294,31 @@ class Rookie extends Component {
                 <div className="Info-rookie-body">
                     {/* 첫번째 라인 */}
                     <div className="Info-rookie-imgLayout">
-                        <select className="Info-rookie-selectBox" value={univercityCate} onChange={(e) => this.setState({ univercityCate : e.target.value})}>
-                            <option value={"고졸"}>고졸</option>
-                            <option value={"대학"}>대학</option>
-                        </select>
-                        <AutoCreateBox blur={true} width={200} text={univercityCate === "대학" ? "대학교 이름" : "고등학교 이름"} list={univercityCate === "대학" ? dataList.app.univercityList : dataList.app.highschoolList} clear={false} onChange={(e) => this.setState({ univercity : e })} />
+                        <SelectBox 
+                            value={univercityCate} func={(e) => this.setState({ univercityCate : e })}
+                            label={"학력"} option={["대학","고졸"]} text={"학력"} style={{marginRight:"20px"}}
+                        />
+                        <AutoCreateBox blur={true} width={200} text={univercityCate === "대학" ? "대학교 이름 *" : "고등학교 이름 *"} list={univercityCate === "대학" ? dataList.app.univercityList : dataList.app.highschoolList} clear={false} onChange={(e) => this.setState({ univercity : e })} />
                         <div style={{marginLeft:"25px"}}>
-                            <AutoCreateBox blur={true} width={200} text="전공" list={univercityCate === "대학" ? dataList.app.subjectList : []} clear={false} onChange={(e) => this.setState({ subject : e })} />
+                            <AutoCreateBox blur={true} width={200} text="전공 *" list={univercityCate === "대학" ? dataList.app.subjectList : []} clear={false} onChange={(e) => this.setState({ subject : e })} />
                         </div>
                     </div>
                     <div className="Info-rookie-dateLayout">
-                        <InputBox 
-                            text="입학년도" value={univercityStart} onChange={this.onChangeValue.bind(this)} style={{height:30, width:100}}
-                            placeholder={moment(new Date()).format("YYYYMMDD")} type="text" name="univercityStart" maxLength={8}
+                        <TextField error={startErr} helperText={"2014"} style={{width:"150px", marginRight:"25px",marginLeft:"18px"}} variant="outlined" onChange={this.onChangeValueDate.bind(this)} name="univercityStart" value={univercityStart} label="입학년도" />
+                        <TextField error={endErr} helperText={moment(new Date()).format("YYYY")} style={{width:"150px", marginRight:"10px"}} variant="outlined" onChange={this.onChangeValueDate.bind(this)} name="univercityEnd" value={univercityEnd} label="졸업년도" />
+                        <SelectBox 
+                            value={univercityState} func={(e) => this.setState({ univercityState : e })}
+                            label={"재학구분"} option={["재학","졸업","휴학","중퇴"]} text={"재학구분"} style={{marginRight:"20px",marginLeft:"15px"}}
                         />
-                        <InputBox 
-                            text="졸업년도" value={univercityEnd} onChange={this.onChangeValue.bind(this)} style={{height:30, width:100}}
-                            placeholder={moment(new Date()).format("YYYYMMDD")} type="text" name="univercityEnd" maxLength={8}
+                        <SelectBox 
+                            value={trainingState} func={(e) => this.setState({ trainingState : e })}
+                            label={"취업구분"} option={["일반구직","실습생","구직/실습"]} text={"취업구분"} style={{marginRight:"20px"}}
                         />
-                        <select style={{marginLeft:"10px", marginTop:"42px"}} className="Info-rookie-selectBox" value={univercityState} onChange={(e) => this.setState({ univercityState : e.target.value })}>
-                            <option value={"재학"}>재학</option>
-                            <option value={"졸업"}>졸업</option>
-                            <option value={"휴학"}>휴학</option>
-                            <option value={"중퇴"}>중퇴</option>
-                        </select>
-                        <select style={{marginLeft:"10px", marginTop:"42px", paddingLeft:"15px"}} className="Info-rookie-selectBox" value={trainingState} onChange={(e) => this.setState({ trainingState : e.target.value })}>
-                            <option value={"일반구직"}>일반구직</option>
-                            <option value={"실습생"}>실습생</option>
-                            <option value={"구직/실습"}>구직/실습</option>
-                        </select>
                     </div>
                 </div>
 
                 {/* 본인 어필 박스 */}
-                <div className="Info-rookie-title">본인 어필</div>
+                <div className="Info-rookie-title">자기 소개</div>
                 <div className="Info-rookie-body">
                     <AutoCreateBox blur={false} width={700} text={"자신있는 기술에 대한 태그를 검색하여 최대한 골고루, 최대 6개까지 추가하세요!"} list={dataList.app.tagList} clear={true} onChange={this.addChipsTag.bind(this)} />
                     <div className="Info-tag-box">
@@ -190,20 +336,35 @@ class Rookie extends Component {
                             })
                         }
                     </div>
-                    <InputBox 
-                        text="관심사나 잘하는 특기 등 자유롭게 적으세요! 50자 내외" value={specialty} onChange={this.onChangeValue.bind(this)} style={{height:30, width:700,margin:"-15px",marginTop:"10px"}}
-                        placeholder={"나의 최근 관심사 혹은 잘하는 스포츠 등 특기"} type="text" name="specialty" maxLength={50}
-                    />
-                    <InputBox 
-                        text="간단한 자기 소개 50자 내외" value={introduce} onChange={this.onChangeValue.bind(this)} style={{height:30, width:700,margin:"-15px",marginTop:"10px"}}
-                        placeholder={"간단한 자기 소개를 입력해주세요!"} type="text" name="introduce" maxLength={50}
-                    />
+                    <TextField error={specialtyErr} helperText="관심사나 잘하는 특기 등 자유롭게 적으세요! 50자 내외" variant="outlined" onChange={this.onChangeValueLimit.bind(this)} name="specialty" value={specialty} label="관심사 혹은 특기" />
+                    <TextField error={introduceErr} helperText="간단한 자기 소개 50자 내외" style={{marginTop:"15px"}} variant="outlined" onChange={this.onChangeValueLimit.bind(this)} name="introduce" value={introduce} label="자기 소개" />
                 </div>
 
                 {/* 구직정보 박스 */}
                 <div className="Info-rookie-title">구직정보</div>
                 <div className="Info-rookie-body">
-                    
+                    <AutoCreateBox blur={true} width={400} text={"희망하는 분야를 입력하세요."} list={dataList.app.fieldList} clear={false} onChange={(e) => this.setState({ field : e })} />
+                    <div className="Info-rookie-dateLayout">
+                        <SelectBox 
+                            value={workDateState} func={(e) => this.setState({ workDateState : e })}
+                            label={"근무가능 날짜"} option={["상시","졸업 후","직접입력"]} text={"근무가능 날짜"} style={{marginRight:"20px"}}
+                        />
+                        {
+                            workDateState === "직접입력" &&
+                            <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginRight:"10px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="workDate" value={workDate} label="근무가능 날짜" />
+                        }
+                        <SelectBox 
+                            value={trainingDateState} func={(e) => this.setState({ trainingDateState : e })}
+                            label={"실습가능 날짜"} option={["상시","졸업 후","실습 강의 시","직접입력"]} text={"실습가능 날짜"} style={{marginRight:"20px"}}
+                        />
+                        {
+                            trainingDateState === "직접입력" &&
+                            <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginRight:"10px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="trainingDate" value={trainingDate} label="실습가능 날짜" />
+                        }
+                    </div>
+                </div>
+                <div style={{margin:"50px"}}>
+                    <Button onClick={this.addFile.bind(this)} size="large" variant="outlined" color="primary">하이루키 시작하기</Button>
                 </div>
             </div>
         );
