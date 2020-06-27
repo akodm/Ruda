@@ -10,7 +10,7 @@ class CheckBox extends Component {
                     control={
                     <Checkbox
                         checked={this.props.check}
-                        onChange={(e) => this.props.func(e.target.value)}
+                        onChange={(e) => this.props.func(e.target.checked)}
                         name={this.props.name}
                         color={this.props.color}
                     />

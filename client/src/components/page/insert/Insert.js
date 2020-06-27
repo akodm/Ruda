@@ -33,12 +33,17 @@ class Insert extends Component {
             let authResult = axios.get(`${config.app.s_url}/emailAuth/one?token=${emailcode}&email=${email}`);
 
             await Promise.all([emailAuth, authResult]).then((data) => {
-                console.log(data);
+                console.log(data)
                 emailAuth = data[0];
                 authResult = data[1];
             });
 
-            if(!emailAuth.data || !emailValid.result || !emailcodeValid || !passwordValid.result || !passwordconfirmValid.result ||password !== passwordconfirm) {
+            if(!authResult.data || !emailAuth.data) {
+                alert("이메일 인증에 실패했습니다. 다시 인증코드를 발급 받아주세요.");
+                return;
+            }
+
+            if(!emailValid.result || !emailcodeValid || !passwordValid.result || !passwordconfirmValid.result ||password !== passwordconfirm) {
                 alert("값이 없거나 잘못된 값이 있습니다. 다시 확인해주세요.");
                 return;
             }
@@ -53,7 +58,7 @@ class Insert extends Component {
             localStorage.setItem("users",userdata);
     
             alert("회원가입이 완료되었습니다.");
-            window.location.href="/";
+            this.props.history.push("/login");
         } catch(err) {
             console.log("insert save or insert to login err : " + err);
             alert("서버에러로 회원가입에 실패하였습니다.");

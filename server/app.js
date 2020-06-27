@@ -111,10 +111,13 @@ app.get("/nodemailer", async(req,res) => {
 
     const userFind = await EmailAuth.findOne({ where : { email : req.query.userEmail } });
     console.log(userFind && userFind.dataValues);
+    
     if(userFind && userFind.dataValues) {
+      let updatDate = moment().add(5, 'minutes').format();
       await EmailAuth.update({
         token : ranStr,
         use : "false",
+        expire : updatDate,
       }, {
         where : { 
           email : req.query.userEmail

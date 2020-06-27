@@ -10,6 +10,7 @@ import PostCode from '../../component/PostPopup';
 import AutoCreateBox from '../../component/AutoCreatable';
 import TagChip from '../../component/TagChip';
 import SelectBox from '../../component/SelectBox';
+import CheckBox from '../../component/CheckBox';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -44,7 +45,7 @@ class Rookie extends Component {
             // 어필 항목
             tags : [],  // 태그
             keywords : [],  // 성격 키워드
-            specialty : "", // 특기
+            specialty : [], // 특기
             specialtyErr : false,
             introduce : "", // 자기 소개 간단
             introduceErr : false,
@@ -56,6 +57,7 @@ class Rookie extends Component {
             trainingDateState : "실습 강의 시",   // 실습 할 수 있는 날짜 선택 박스 -> 비선택 / 상시 / 졸업 후 / 정해진 날짜
             trainingDate : "",  // 실습 여부 시 실습 가능 날짜
 
+            agreeCheck : false,
             load : false,
         }
     }
@@ -136,6 +138,15 @@ class Rookie extends Component {
         }
         this.setState({ tags : this.state.tags.concat(e) })
     }
+    
+    // 취미 특기 추가 함수 
+    addChipsSpecialty(e) {
+        if(this.state.specialty.length > 4) {
+            alert("특기,취미는 최대 5개까지만 선택가능합니다.");
+            return;
+        }
+        this.setState({ specialty : this.state.specialty.concat(e) })
+    }
 
     // 키워드 삭제 함수
     keyDelete(e) {
@@ -147,6 +158,13 @@ class Rookie extends Component {
     // 태그 삭제 함수
     tagDelete(e) {
         this.setState({ tags : this.state.tags.filter(data => {
+            return data !== e
+        })})
+    }
+
+     // 취미 특기 삭제 함수
+    specialtyDelete(e) {
+        this.setState({ specialty : this.state.specialty.filter(data => {
             return data !== e
         })})
     }
@@ -195,7 +213,6 @@ class Rookie extends Component {
                 userCateUpdat = data[0];
                 result = data[1];
             })
-
             console.log(userCateUpdat.data, result.data);
             if(result.data){
                 alert("기본입력이 완료되었습니다.");
@@ -212,7 +229,12 @@ class Rookie extends Component {
     addFile() {
         const { imgData,
             name,phone,address1,univercity,subject,
-            startErr,endErr,specialtyErr,introduceErr } = this.state;
+            startErr,endErr,specialtyErr,introduceErr,
+            agreeCheck } = this.state;
+        if(!agreeCheck) {
+            alert("이용수칙에 동의해주세요.");
+            return;
+        }
         if(startErr || endErr || specialtyErr || introduceErr) {
             alert("잘못된 값이 있습니다. 다시 확인해주세요.");
             return;
@@ -223,27 +245,31 @@ class Rookie extends Component {
         }
         this.setState({ load : false });
 
-        const uploadTask = storage.ref(`/images/${imgData.name}`).put(imgData);
-        uploadTask.on(
-            "state_changed",
-            snapshot => {
-                const progress = Math.round(
-                (snapshot.bytesTransferred / snapshot.totalBytes) * 100 );
-                this.setState({ progress });
-            },
-            error => {
-                console.log(error);
-            }, () => {
-                storage
-                .ref("images")
-                .child(imgData.name)
-                .getDownloadURL()
-                .then(async url => {
-                    await this.setState({ imgUrl : url });
-                    this.saveStartBtn();
-                });
-            }
-        );
+        if(imgData) {
+            const uploadTask = storage.ref(`/images/${imgData.name}`).put(imgData);
+            uploadTask.on(
+                "state_changed",
+                snapshot => {
+                    const progress = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100 );
+                    this.setState({ progress });
+                },
+                error => {
+                    console.log(error);
+                }, () => {
+                    storage
+                    .ref("images")
+                    .child(imgData.name)
+                    .getDownloadURL()
+                    .then(async url => {
+                        await this.setState({ imgUrl : url });
+                        this.saveStartBtn();
+                    });
+                }
+            );
+        } else {
+            this.saveStartBtn();
+        }
     }
 
     render() {
@@ -252,7 +278,7 @@ class Rookie extends Component {
             univercityCate,univercityState,univercityStart,univercityEnd,trainingState,startErr,endErr,
             tags,keywords,specialty,introduce,specialtyErr,introduceErr,
             workDateState,trainingDateState,workDate,trainingDate,
-            load
+            agreeCheck,load
         } = this.state;
         return (
             <div className="Info-rookie-main">
@@ -310,10 +336,6 @@ class Rookie extends Component {
                             value={univercityState} func={(e) => this.setState({ univercityState : e })}
                             label={"재학구분"} option={["재학","졸업","휴학","중퇴"]} text={"재학구분"} style={{marginRight:"20px",marginLeft:"15px"}}
                         />
-                        <SelectBox 
-                            value={trainingState} func={(e) => this.setState({ trainingState : e })}
-                            label={"취업구분"} option={["일반구직","실습생","구직/실습"]} text={"취업구분"} style={{marginRight:"20px"}}
-                        />
                     </div>
                 </div>
 
@@ -336,7 +358,14 @@ class Rookie extends Component {
                             })
                         }
                     </div>
-                    <TextField error={specialtyErr} helperText="관심사나 잘하는 특기 등 자유롭게 적으세요! 50자 내외" variant="outlined" onChange={this.onChangeValueLimit.bind(this)} name="specialty" value={specialty} label="관심사 혹은 특기" />
+                    <AutoCreateBox blur={false} width={700} text={"자신의 특기 또는 취미 키워드를 최대 5개까지 등록하세요!"} list={dataList.app.specialtyList} clear={true} onChange={this.addChipsSpecialty.bind(this)} />
+                    <div className="Info-tag-box">
+                        {
+                            specialty.map((data,i) => {
+                                return <TagChip func={this.specialtyDelete.bind(this)} name={data} key={i} />
+                            })
+                        }
+                    </div>
                     <TextField error={introduceErr} helperText="간단한 자기 소개 50자 내외" style={{marginTop:"15px"}} variant="outlined" onChange={this.onChangeValueLimit.bind(this)} name="introduce" value={introduce} label="자기 소개" />
                 </div>
 
@@ -347,7 +376,7 @@ class Rookie extends Component {
                     <div className="Info-rookie-dateLayout">
                         <SelectBox 
                             value={workDateState} func={(e) => this.setState({ workDateState : e })}
-                            label={"근무가능 날짜"} option={["상시","졸업 후","직접입력"]} text={"근무가능 날짜"} style={{marginRight:"20px"}}
+                            label={"근무가능 날짜"} option={["상시","졸업 후","직접입력","미정"]} text={"근무가능 날짜"} style={{marginRight:"20px"}}
                         />
                         {
                             workDateState === "직접입력" &&
@@ -355,13 +384,17 @@ class Rookie extends Component {
                         }
                         <SelectBox 
                             value={trainingDateState} func={(e) => this.setState({ trainingDateState : e })}
-                            label={"실습가능 날짜"} option={["상시","졸업 후","실습 강의 시","직접입력"]} text={"실습가능 날짜"} style={{marginRight:"20px"}}
+                            label={"실습가능 날짜"} option={["상시","졸업 후","실습 강의 시","직접입력","미정"]} text={"실습가능 날짜"} style={{marginRight:"20px"}}
                         />
                         {
                             trainingDateState === "직접입력" &&
                             <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginRight:"10px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="trainingDate" value={trainingDate} label="실습가능 날짜" />
                         }
                     </div>
+                </div>
+                <div className="Info-rookie-agree">
+                    <CheckBox check={agreeCheck} func={(e) => this.setState({ agreeCheck : e })} name="agree" color="primary" />
+                    <span>하이루키는 신입 구직자만을 위한 서비스입니다. <span style={{color:"red"}}>신입 구직자</span>로서 이용하심에 동의하십니까?</span>
                 </div>
                 <div style={{margin:"50px"}}>
                     <Button onClick={this.addFile.bind(this)} size="large" variant="outlined" color="primary">하이루키 시작하기</Button>

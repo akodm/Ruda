@@ -24,7 +24,7 @@ class Base extends Component {
         super(props);
         this.state = {
             user : {
-                id : 1,
+                id : 0,
                 tag : "",
                 email : "",
                 cate : "",
@@ -60,29 +60,29 @@ class Base extends Component {
 
     render() {
         const { user } = this.state;
+        console.log(user);
         return (
             <div className="base-main">
                  <Router>
+                    <div style={{height:"75px",width:"100%"}}></div>
+                    {/*상단 */}
+                    <Header />
                      <Switch>
-                        <React.Fragment>
-                            <div style={{height:"75px",width:"100%"}}></div>
-                            {/*상단 */}
-                            <Header />
-                            {/*메인 */}
-                            <Route exact path="/" component={user.email ? "" : Main}></Route>
-                            <Route path="/easy"><Easy/></Route>
-                            <Route path="/login"><Login/></Route>
-                            <Route path="/insert"><Insert/></Route>
-                            <Route path="/info"><Info/></Route>
-                            <Route path="/company"><Cboard/></Route>
-                            <Route path="/rookie"><Rboard/></Route>
-                            <Route path="/info"><Info user={user} /></Route>
-                            {/*화면업다운버튼*/ }
-                            <UpDown />
-                            {/*하단 */}
-                            <Footer />
-                        </React.Fragment>
+                        {/*메인 */}
+                        <Route exact path="/" render={props => user.email ? (user.cate ? "" : <Info user={user} {...props} /> )  : <Main /> } ></Route>
+                        <Route path="/easy" component={Easy} ></Route>
+                        <Route path="/login" component={Login} ></Route>
+                        <Route path="/insert" component={Insert} ></Route>
+                        <Route path="/info" render={props => user.cate ? <Main /> : <Info user={user} {...props} /> } ></Route>
+                        <Route path="/company" component={Cboard} ></Route>
+                        <Route path="/rookie" component={Rboard} ></Route>
+                        {/* Not Found Page 주소에 일치하는 패스가 없을 경우 */}
+                        <Route component={Main} ></Route>
                     </Switch>
+                    {/*화면업다운버튼*/ }
+                    <UpDown />
+                    {/*하단 */}
+                    <Footer />
                 </Router>
             </div>
         );

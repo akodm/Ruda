@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 let models = require("../models");
+
 // let multer = require('multer');
 // let path = require('path');
 
@@ -51,7 +52,9 @@ router.get("/yall", async (req, res) => {
 				{ model: User }
 			],
 			where : {
-				userState : "yes",
+				userState : {
+					[Op.or] : ["구직","구직/실습","실습"]
+				},
 			}
 		});
 		res.send(result);
@@ -131,27 +134,35 @@ router.put("/update", async(req, res) => {
 	let result = null;
     try {
         await UserInfo.update({ 
+			userImageUrl : req.body.userImageUrl,
+
 			userName: req.body.userName,
 			userPhone: req.body.userPhone,
 			userAdd: req.body.userAdd,
-			userImageUrl : req.body.userImageUrl,
-			userTraning: req.body.userTraning,
-            userUnvcity: req.body.userUnvcity, 
+			
+			userUnivercityCate : req.body.userUnivercityCate,
+			userUnvcity: req.body.userUnvcity, 
 			userSubject : req.body.userSubject,
-			userAttendDate: req.body.userAttendDate, 
+			userAttendStartDate: req.body.userAttendStartDate, 
+			userAttendEndDate: req.body.userAttendEndDate, 
 			userAttend: req.body.userAttend, 
-			userField: req.body.userField,
-			userAwards : req.body.userAwards,
-			userCertification : req.body.userCertification,
-			userIntro : req.body.userIntro,
-            userKeyword : req.body.userKeyword,
+			userTraning: req.body.userTraning,
+
+			userKeyword : req.body.userKeyword,
 			userTags : req.body.userTags,
-            userLike : req.body.userLike,
-            userSuggestion : req.body.userSuggestion,
-            userClick : req.body.userClick,
-            userSpecialty : req.body.userSpecialty,
-            userTraningDate : req.body.userTraningDate,
-            userWorkDate : req.body.userWorkDate,
+			userIntro : req.body.userIntro,
+			userSpecialty : req.body.userSpecialty,
+
+			userField: req.body.userField,
+			userTraningDateState : req.body.userTraningDateState,
+			userWorkDateState : req.body.userWorkDateState,
+			userWorkDate : req.body.userWorkDate,
+			userTraningDate : req.body.userTraningDate,
+
+			userClick : req.body.userClick,
+			userLike : req.body.userLike,
+
+			userSuggestion : req.body.userSuggestion,
             userHireBool : req.body.userHireBool,
             userState : req.body.userState,
             }, {

@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,     // 본인 사진 - firebase 이미지 경로
         },
         userTraning : {
-            type: DataTypes.STRING(10),     // 실습생 여부
+            type: DataTypes.STRING(10),     // 구직 구분 -> 일반 / 실습 / 둘다
         },
         userUnivercityCate : {
             type: DataTypes.STRING(11),     // 고졸인지 대학인지
@@ -54,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.JSON,     // 본인 잘하는 태그 ( 언어 등 )
         },
         userSpecialty : {
-            type: DataTypes.STRING(50),     // 잘하는 특기
+            type: DataTypes.JSON,     // 잘하는 특기
         },
         userField : {
             type: DataTypes.STRING(10),     // 희망 직무
