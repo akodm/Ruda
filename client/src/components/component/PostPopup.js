@@ -30,7 +30,7 @@ class PostPopup extends Component {
                     animation
                     style={{
                         border:"1px solid rgba(161, 161, 161, 0.226)",
-                        boxShadow:"0px 0px 2px 1px black"
+                        boxShadow:"0px 0px 2px 1px black",
                     }}
                     errorMessage={<p>현재 우편번호 서비스를 이용할 수 없습니다. 잠시 후 다시 시도해주세요.</p>}
                 />

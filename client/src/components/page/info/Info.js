@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Typical from 'react-typical'
 import Button from '@material-ui/core/Button';
 
@@ -13,6 +14,16 @@ class Info extends Component {
             selectUser : 0,
         }
     }
+
+    async componentDidMount() {
+        try {
+
+        } catch(err) {
+            console.log("user info page err : " + err);
+            this.props.history.goBack();
+        }
+    }
+
     render() {
         const { selectUser } = this.state;
         const { user } = this.props;
@@ -29,7 +40,7 @@ class Info extends Component {
                 <div className="Info-body">
                     {
                         !selectUser ?
-                        <Rookie user={user} /> : <Company user={user} />
+                        <Rookie user={user} {...this.props} /> : <Company user={user} {...this.props} />
                     }
                 </div>
             </div>

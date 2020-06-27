@@ -21,7 +21,7 @@ class Easy extends Component {
             const tag = urls.searchParams.get("tag") || null;
             
             if(value && tag) {
-                const authLogin = await axios.get(`http://localhost:5000/users/oauthlogin?tag=${tag}&email=${value}`);
+                const authLogin = await axios.get(`${config.app.s_url}/users/oauthlogin?tag=${tag}&email=${value}`);
                 
                 let userdata = JSON.stringify(authLogin.data);
                 localStorage.setItem("users",userdata);

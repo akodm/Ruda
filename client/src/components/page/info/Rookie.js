@@ -10,6 +10,7 @@ import PostCode from '../../component/PostPopup';
 import AutoCreateBox from '../../component/AutoCreatable';
 import TagChip from '../../component/TagChip';
 import SelectBox from '../../component/SelectBox';
+import CheckBox from '../../component/CheckBox';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -56,6 +57,7 @@ class Rookie extends Component {
             trainingDateState : "실습 강의 시",   // 실습 할 수 있는 날짜 선택 박스 -> 비선택 / 상시 / 졸업 후 / 정해진 날짜
             trainingDate : "",  // 실습 여부 시 실습 가능 날짜
 
+            agreeCheck : false,
             load : false,
         }
     }
@@ -195,7 +197,6 @@ class Rookie extends Component {
                 userCateUpdat = data[0];
                 result = data[1];
             })
-
             console.log(userCateUpdat.data, result.data);
             if(result.data){
                 alert("기본입력이 완료되었습니다.");
@@ -212,7 +213,12 @@ class Rookie extends Component {
     addFile() {
         const { imgData,
             name,phone,address1,univercity,subject,
-            startErr,endErr,specialtyErr,introduceErr } = this.state;
+            startErr,endErr,specialtyErr,introduceErr,
+            agreeCheck } = this.state;
+        if(!agreeCheck) {
+            alert("이용수칙에 동의해주세요.");
+            return;
+        }
         if(startErr || endErr || specialtyErr || introduceErr) {
             alert("잘못된 값이 있습니다. 다시 확인해주세요.");
             return;
@@ -223,27 +229,31 @@ class Rookie extends Component {
         }
         this.setState({ load : false });
 
-        const uploadTask = storage.ref(`/images/${imgData.name}`).put(imgData);
-        uploadTask.on(
-            "state_changed",
-            snapshot => {
-                const progress = Math.round(
-                (snapshot.bytesTransferred / snapshot.totalBytes) * 100 );
-                this.setState({ progress });
-            },
-            error => {
-                console.log(error);
-            }, () => {
-                storage
-                .ref("images")
-                .child(imgData.name)
-                .getDownloadURL()
-                .then(async url => {
-                    await this.setState({ imgUrl : url });
-                    this.saveStartBtn();
-                });
-            }
-        );
+        if(imgData) {
+            const uploadTask = storage.ref(`/images/${imgData.name}`).put(imgData);
+            uploadTask.on(
+                "state_changed",
+                snapshot => {
+                    const progress = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100 );
+                    this.setState({ progress });
+                },
+                error => {
+                    console.log(error);
+                }, () => {
+                    storage
+                    .ref("images")
+                    .child(imgData.name)
+                    .getDownloadURL()
+                    .then(async url => {
+                        await this.setState({ imgUrl : url });
+                        this.saveStartBtn();
+                    });
+                }
+            );
+        } else {
+            this.saveStartBtn();
+        }
     }
 
     render() {
@@ -252,7 +262,7 @@ class Rookie extends Component {
             univercityCate,univercityState,univercityStart,univercityEnd,trainingState,startErr,endErr,
             tags,keywords,specialty,introduce,specialtyErr,introduceErr,
             workDateState,trainingDateState,workDate,trainingDate,
-            load
+            agreeCheck,load
         } = this.state;
         return (
             <div className="Info-rookie-main">
@@ -362,6 +372,10 @@ class Rookie extends Component {
                             <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginRight:"10px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="trainingDate" value={trainingDate} label="실습가능 날짜" />
                         }
                     </div>
+                </div>
+                <div className="Info-rookie-agree">
+                    <CheckBox check={agreeCheck} func={(e) => this.setState({ agreeCheck : e })} name="agree" color="primary" />
+                    <span>하이루키는 신입 구직자만을 위한 서비스입니다. <span style={{color:"red"}}>신입 구직자</span>로서 이용하심에 동의하십니까?</span>
                 </div>
                 <div style={{margin:"50px"}}>
                     <Button onClick={this.addFile.bind(this)} size="large" variant="outlined" color="primary">하이루키 시작하기</Button>
