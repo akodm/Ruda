@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import Select from '@material-ui/core/Select';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import { makeStyles } from '@material-ui/core/styles';
+
 class Csearch extends Component {
     constructor(props){
         super(props);
@@ -10,12 +7,8 @@ class Csearch extends Component {
             
         }
     }
-    handleChange = (event) => {
-    
-    }
+
     render() {
-       
-       
         return (
             <div className="Company-search">
             <div className="Company-search-title">

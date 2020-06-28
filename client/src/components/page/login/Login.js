@@ -47,12 +47,24 @@ class Login extends Component {
                 return;
             }
 
-            const authLogin = await axios.get(`${config.app.s_url}/users/oauthlogin?tag=highrookie&email=${email}`);
+            let authLogin = axios.get(`${config.app.s_url}/users/oauthlogin?tag=highrookie&email=${email}`);
+            let userId = axios.get(`${config.app.s_url}/users/oneemail?userEmail=${email}&authCate=${"highrookie"}`);
             
+            await Promise.all([authLogin, userId]).then(data => {
+                authLogin = data[0];
+                userId = data[1];
+            })
+
             let userdata = JSON.stringify(authLogin.data);
             localStorage.setItem("users",userdata);
             
-            window.location.href = "/";
+            this.props.set({
+                id : userId.data.id,
+                tag : userId.data.authCate,
+                email : userId.data.email,
+                cate : userId.data.userCate
+            });
+            this.props.history.push("/");
         } catch(err){
             console.log("user login err : " + err);
             alert("서버에러가 발생하였습니다. 다시 시도해주세요.");

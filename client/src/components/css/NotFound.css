@@ -1,0 +1,19 @@
+.Not-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 100px;
+}
+
+.Not-link {
+    text-decoration: none;
+    color: rgb(54, 54, 54);
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 50px;
+}
+
+.Not-link:hover {
+    color: blue;
+}

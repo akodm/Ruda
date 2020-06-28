@@ -52,23 +52,29 @@ router.post("/create", async (req, res) => {
 			},
 			defaults : {
 				userId : req.body.userId,
+
+				companyImageUrl: req.body.companyImageUrl,
+
 				companyName: req.body.companyName,
+				companyCEO: req.body.companyCEO,
 				companyPhone: req.body.companyPhone,
 				companyAdd: req.body.companyAdd,
+
 				companyField: req.body.companyField,
 				companyTags: req.body.companyTags,
-				companyAwards: req.body.companyAwards,
-				companyImageUrl: req.body.companyImageUrl,
-				companyCEO: req.body.companyCEO,
-				companyQuestion: req.body.companyQuestion,
-				companyRule: req.body.companyRule,
-				companyOccupation : req.body.companyOccupation,
-				companyIntro : req.body.companyIntro,
-				companyAgeAvg : req.body.companyAgeAvg,
-				companyRequest : req.body.companyRequest,
 				companySince : req.body.companySince,
-				companyWorkDate : req.body.companyWorkDate,
+				companyRule: req.body.companyRule,
+				companyAgeAvg : req.body.companyAgeAvg,
+				companyIntro : req.body.companyIntro,
 				companyWelfare : req.body.companyWelfare,
+
+				companyRequest : req.body.companyRequest,
+				companyOccupation : req.body.companyOccupation,
+				companyWorkDate : req.body.companyWorkDate,
+				companyWorkDateState : req.body.companyWorkDateState,
+
+				companyQuestion: req.body.companyQuestion,
+
 				companyLike : 0,
 				companyClick : 0,
 			}
@@ -87,29 +93,33 @@ router.put("/update", async(req, res) => {
     let result = null;
     try {
         await CompanyInfo.update({ 
+			companyImageUrl: req.body.companyImageUrl,
+
 			companyName: req.body.companyName,
+			companyCEO: req.body.companyCEO,
 			companyPhone: req.body.companyPhone,
 			companyAdd: req.body.companyAdd,
-			companyImageUrl: req.body.companyImageUrl,
+
 			companyField: req.body.companyField,
-			companyCEO: req.body.companyCEO,
-            companyQuestion: req.body.companyQuestion,
 			companyTags: req.body.companyTags,
 			companyRule: req.body.companyRule,
             companyAwards: req.body.companyAwards, 
-            companyOccupation : req.body.companyOccupation,
-            companyIntro : req.body.companyIntro,
-            companyAgeAvg : req.body.companyAgeAvg,
-            companyRequest : req.body.companyRequest,
             companySince : req.body.companySince,
-            companyFile : req.body.companyFile,
-            companyPortfolio : req.body.companyPortfolio,
-            companyLike : req.body.companyLike,
-            companyClick : req.body.companyClick,
+            companyIntro : req.body.companyIntro,
+			companyAgeAvg : req.body.companyAgeAvg,
+			
+            companyOccupation : req.body.companyOccupation,
+            companyRequest : req.body.companyRequest,
             companyWorkDate : req.body.companyWorkDate,
-            companyWelfare : req.body.companyWelfare,
+			companyWelfare : req.body.companyWelfare,
+			
+			companyQuestion: req.body.companyQuestion,
+			
+            companyLike : req.body.companyLike,
+			companyClick : req.body.companyClick,
+			
             companyState : req.body.companyState,
-            }, {
+		}, {
             where: {
                 userId : req.body.userId
             }

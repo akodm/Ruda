@@ -6,7 +6,6 @@
     top: 0;
     left: 0;
     background-color: rgba(134, 133, 133, 0.226);
-    display: flex;
     justify-content: center;
     align-items: center;
 }

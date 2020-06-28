@@ -25,6 +25,7 @@ class Rookie extends Component {
             imgData : null,
             imgUrl : null,
             imgPreview : null,
+
             name : "",
             phone : "",
             address1 : "",
@@ -40,7 +41,6 @@ class Rookie extends Component {
             univercityEnd : "",
             endErr : false,
             univercityState : "재학",   // 대학 상태 여부
-            trainingState : "일반구직",  // 실습 여부
 
             // 어필 항목
             tags : [],  // 태그
@@ -106,74 +106,62 @@ class Rookie extends Component {
     onChangeValueLimit(e) {
         let value = e.target.value;
         if(value.length > 50) {
-            if(e.target.name === "introduce") {
-                this.setState({ introduceErr : true })
-            } else {
-                this.setState({ specialtyErr : true })
-            }
+            this.setState({ introduceErr : true })
         } else {
-            if(e.target.name === "introduce") {
-                this.setState({ introduceErr : false })
-            } else {
-                this.setState({ specialtyErr : false })
-            }
+            this.setState({ introduceErr : false })
         }
         this.setState({ [e.target.name] : e.target.value }) 
     }
 
-    // 키워드 추가 함수
-    addChipsKey(e) {
-        if(this.state.keywords.length > 2) {
-            alert("키워드는 최대 3개까지만 선택가능합니다.");
-            return;
+    // 태그, 키워드, 취미 및 특기 추가 함수
+    addChips(cate, e) {
+        switch(cate) {
+            case "tag" : 
+                if(this.state.tags.length > 5) {
+                    alert("태그는 최대 6개까지만 선택가능합니다.");
+                    return;
+                }
+                this.setState({ tags : this.state.tags.concat(e) })
+                break;
+            case "key" : 
+                if(this.state.keywords.length > 2) {
+                    alert("키워드는 최대 3개까지만 선택가능합니다.");
+                    return;
+                }
+                this.setState({ keywords : this.state.keywords.concat(e) })
+                break;
+            case "spc" : 
+                if(this.state.specialty.length > 4) {
+                    alert("특기,취미는 최대 5개까지만 선택가능합니다.");
+                    return;
+                }
+                this.setState({ specialty : this.state.specialty.concat(e) })
+                break;
+            default : break;
         }
-        this.setState({ keywords : this.state.keywords.concat(e) })
-    }
-
-    // 태그 추가 함수
-    addChipsTag(e) {
-        if(this.state.tags.length > 5) {
-            alert("태그는 최대 6개까지만 선택가능합니다.");
-            return;
-        }
-        this.setState({ tags : this.state.tags.concat(e) })
-    }
-    
-    // 취미 특기 추가 함수 
-    addChipsSpecialty(e) {
-        if(this.state.specialty.length > 4) {
-            alert("특기,취미는 최대 5개까지만 선택가능합니다.");
-            return;
-        }
-        this.setState({ specialty : this.state.specialty.concat(e) })
     }
 
     // 키워드 삭제 함수
     keyDelete(e) {
-        this.setState({ keywords : this.state.keywords.filter(data => {
-            return data !== e
-        })})
+        this.setState({ keywords : this.state.keywords.filter(data => { return data !== e })})
     }
 
     // 태그 삭제 함수
     tagDelete(e) {
-        this.setState({ tags : this.state.tags.filter(data => {
-            return data !== e
-        })})
+        this.setState({ tags : this.state.tags.filter(data => { return data !== e })})
     }
 
      // 취미 특기 삭제 함수
     specialtyDelete(e) {
-        this.setState({ specialty : this.state.specialty.filter(data => {
-            return data !== e
-        })})
+        this.setState({ specialty : this.state.specialty.filter(data => { return data !== e })})
     }
 
+    // 저장 함수 -> 데이터베이스에 유저 인포 디비 저장
     async saveStartBtn() {
         const { user } = this.props;
         const { imgUrl,
             name,phone,address1,address2,
-            univercityCate,univercity,subject,univercityState,univercityStart,univercityEnd,trainingState,
+            univercityCate,univercity,subject,univercityState,univercityStart,univercityEnd,
             tags,keywords,specialty,introduce,
             field,workDateState,trainingDateState,workDate,trainingDate
         } = this.state;
@@ -195,7 +183,6 @@ class Rookie extends Component {
                 userAttendStartDate : univercityStart,
                 userAttendEndDate : univercityEnd,
                 userAttend : univercityState,
-                userTraning : trainingState,
 
                 userTags : tags,
                 userKeyword : keywords,
@@ -213,9 +200,11 @@ class Rookie extends Component {
                 userCateUpdat = data[0];
                 result = data[1];
             })
+
             console.log(userCateUpdat.data, result.data);
             if(result.data){
                 alert("기본입력이 완료되었습니다.");
+                window.location.href = "/mypage";
             } else {
                 alert("잘못된 값이 있습니다. 다시 시도해주세요.");
             }
@@ -225,7 +214,7 @@ class Rookie extends Component {
         this.setState({ load : true });
     }
 
-    // firebase에 이미지 업로드
+    // firebase에 이미지 업로드 및 저장 함수 실행
     addFile() {
         const { imgData,
             name,phone,address1,univercity,subject,
@@ -275,8 +264,8 @@ class Rookie extends Component {
     render() {
         const { imgPreview,
             name,phone,address1,address2,addressState,
-            univercityCate,univercityState,univercityStart,univercityEnd,trainingState,startErr,endErr,
-            tags,keywords,specialty,introduce,specialtyErr,introduceErr,
+            univercityCate,univercityState,univercityStart,univercityEnd,startErr,endErr,
+            tags,keywords,specialty,introduce,introduceErr,
             workDateState,trainingDateState,workDate,trainingDate,
             agreeCheck,load
         } = this.state;
@@ -342,7 +331,7 @@ class Rookie extends Component {
                 {/* 본인 어필 박스 */}
                 <div className="Info-rookie-title">자기 소개</div>
                 <div className="Info-rookie-body">
-                    <AutoCreateBox blur={false} width={700} text={"자신있는 기술에 대한 태그를 검색하여 최대한 골고루, 최대 6개까지 추가하세요!"} list={dataList.app.tagList} clear={true} onChange={this.addChipsTag.bind(this)} />
+                    <AutoCreateBox blur={false} width={700} text={"자신있는 기술에 대한 태그를 검색하여 최대한 골고루, 최대 6개까지 추가하세요!"} list={dataList.app.tagList} clear={true} onChange={this.addChips.bind(this,"tag")} />
                     <div className="Info-tag-box">
                         {
                             tags.map((data,i) => {
@@ -350,7 +339,7 @@ class Rookie extends Component {
                             })
                         }
                     </div>
-                    <AutoCreateBox blur={false} width={700} text={"자신의 성격에 대한 주관적인 키워드를 최대 3개까지 등록하세요!"} list={dataList.app.keywordList} clear={true} onChange={this.addChipsKey.bind(this)} />
+                    <AutoCreateBox blur={false} width={700} text={"자신의 성격에 대한 주관적인 키워드를 최대 3개까지 등록하세요!"} list={dataList.app.keywordList} clear={true} onChange={this.addChips.bind(this,"key")} />
                     <div className="Info-tag-box">
                         {
                             keywords.map((data,i) => {
@@ -358,7 +347,7 @@ class Rookie extends Component {
                             })
                         }
                     </div>
-                    <AutoCreateBox blur={false} width={700} text={"자신의 특기 또는 취미 키워드를 최대 5개까지 등록하세요!"} list={dataList.app.specialtyList} clear={true} onChange={this.addChipsSpecialty.bind(this)} />
+                    <AutoCreateBox blur={false} width={700} text={"자신의 특기 또는 취미 키워드를 최대 5개까지 등록하세요!"} list={dataList.app.specialtyList} clear={true} onChange={this.addChips.bind(this,"spc")} />
                     <div className="Info-tag-box">
                         {
                             specialty.map((data,i) => {

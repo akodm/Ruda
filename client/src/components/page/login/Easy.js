@@ -21,12 +21,24 @@ class Easy extends Component {
             const tag = urls.searchParams.get("tag") || null;
             
             if(value && tag) {
-                const authLogin = await axios.get(`${config.app.s_url}/users/oauthlogin?tag=${tag}&email=${value}`);
+                let authLogin = axios.get(`${config.app.s_url}/users/oauthlogin?tag=${tag}&email=${value}`);
+                let userId = axios.get(`${config.app.s_url}/users/oneemail?userEmail=${value}&authCate=${tag}`);
                 
+                await Promise.all([authLogin, userId]).then(data => {
+                    authLogin = data[0];
+                    userId = data[1];
+                })
+
                 let userdata = JSON.stringify(authLogin.data);
                 localStorage.setItem("users",userdata);
                 
-                window.location.href = "/";
+                this.props.set({
+                    id : userId.data.id,
+                    tag : userId.data.authCate,
+                    email : userId.data.email,
+                    cate : userId.data.userCate
+                });
+                this.props.history.push("/");
             }
         } catch(err) {
             console.log("소셜 로그인 에러" + err);

@@ -25,12 +25,12 @@ class PostPopup extends Component {
             <div className="postPopup-main" onClick={() => this.props.close()} style={{display: this.props.open ? "flex" : "none"}}>
                 <DaumPostcode
                     onComplete={this.handleComplete.bind(this)}
-                    height="500"
-                    width="400"
+                    height="600"
+                    width="700"
                     animation
                     style={{
-                        border:"1px solid rgba(161, 161, 161, 0.226)",
-                        boxShadow:"0px 0px 2px 1px black",
+                        border:"1px solid rgba(161, 161, 161, 0.1)",
+                        boxShadow:"0px 0px 1px 1px black",
                     }}
                     errorMessage={<p>현재 우편번호 서비스를 이용할 수 없습니다. 잠시 후 다시 시도해주세요.</p>}
                 />

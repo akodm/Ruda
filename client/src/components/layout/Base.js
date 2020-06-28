@@ -10,14 +10,16 @@ import Header from './Header';
 import Footer from './Footer';
 import UpDown from '../component/UpDown';
 
+import NotFound from './NotFound';
+
 // page components
 import Main from '../page/main/Main';   // main
 import Login from '../page/login/Login';    // login
 import Easy from '../page/login/Easy';  // easy login
 import Insert from '../page/insert/Insert'; // insert
 import Info from '../page/info/Info';   // info
-import Cboard from '../page/board/Cboard';
-import Rboard from '../page/board/Rboard';
+import Cboard from '../page/board/Cboard';  // rookie board
+import Rboard from '../page/board/Rboard';  // company board
 
 class Base extends Component {
     constructor(props){
@@ -32,6 +34,7 @@ class Base extends Component {
         }
     }
 
+    // 첫 메인 페이지 접속 시 확인
     async componentDidMount() {
         let user = localStorage.getItem("users");
         if(user) {
@@ -58,6 +61,18 @@ class Base extends Component {
         }
     }
 
+    // 로그인 시의 스태이트 변경
+    setUser(data) {
+        this.setState({
+            user : {
+                id : data.id,
+                tag : data.tag,
+                email : data.email,
+                cate : data.cate,
+            }
+        })
+    }
+
     render() {
         const { user } = this.state;
         console.log(user);
@@ -70,14 +85,13 @@ class Base extends Component {
                      <Switch>
                         {/*메인 */}
                         <Route exact path="/" render={props => user.email ? (user.cate ? "" : <Info user={user} {...props} /> )  : <Main /> } ></Route>
-                        <Route path="/easy" component={Easy} ></Route>
-                        <Route path="/login" component={Login} ></Route>
-                        <Route path="/insert" component={Insert} ></Route>
-                        <Route path="/info" render={props => user.cate ? <Main /> : <Info user={user} {...props} /> } ></Route>
+                        <Route path="/easy" render={props => user.email ? <Main/> : <Easy set={this.setUser.bind(this)} {...props} />} ></Route>
+                        <Route path="/login" render={props => user.email ? <Main/> :  <Login set={this.setUser.bind(this)} {...props} />} ></Route>
+                        <Route path="/insert" render={props => user.email ? <Main/> : <Insert {...props} /> }></Route>
                         <Route path="/company" component={Cboard} ></Route>
                         <Route path="/rookie" component={Rboard} ></Route>
                         {/* Not Found Page 주소에 일치하는 패스가 없을 경우 */}
-                        <Route component={Main} ></Route>
+                        <Route component={NotFound} ></Route>
                     </Switch>
                     {/*화면업다운버튼*/ }
                     <UpDown />

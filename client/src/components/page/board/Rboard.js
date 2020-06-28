@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Pagination from '@material-ui/lab/Pagination';
 import axios from 'axios';
+
 import '../../css/board.css';
 import Rsearch from './Rsearch';
 import RookieCard from '../../component/RookieCard';
+
+import config from '../../../client-configs';
 
 class Rboard extends Component {
     constructor(props){
@@ -16,16 +19,11 @@ class Rboard extends Component {
         }
     }
 
-    selectChange(e) { this.setState({ selectValue : e.target.value }) };
-
     async componentDidMount(){
-        const {userList}=this.state;
         try{
-            const result = await axios.get(`http://localhost:5000/userInfos/yall`);
+            const result = await axios.get(`${config.app.s_url}/userInfos/yall`);
             if(result.data){
                 this.setState({ userList : result.data });
-            } else {
-                this.setState({ userList : null });
             }
         }catch(err){
             console.log("rookie card list err : " + err);
@@ -39,7 +37,7 @@ class Rboard extends Component {
             <div className="Rookie">
                 <div className="Rookie-title">
                     <span>인재</span>
-                    <select onChange={this.selectChange.bind(this)} value={selectValue} className="Rookie-title-select">
+                    <select onChange={(e) => this.setState({ selectValue : e.target.value })} value={selectValue} className="Rookie-title-select">
                         <option value="new">최신순</option>
                         <option value="hot">인기순</option>
                     </select>

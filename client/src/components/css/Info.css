@@ -13,6 +13,33 @@
     text-align: center;
 }
 
+.Info-seltText1 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.Info-seltText2 {
+    text-align: center;
+    font-size: 14px;
+    margin: 10px;
+    line-height: 30px;
+}
+
+.Info-companySelt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 600px;
+    height: 300px;
+    background-color: rgba(255, 255, 255, 0.932);
+    border-radius: 10px;
+    border: 1px solid rgba(148, 148, 148, 0.562);
+    box-shadow: 0px 3px 50px 10px rgba(143, 143, 143, 0.432);
+}
+
 .Info-select {
     width: 200px;
     display: flex;
@@ -102,7 +129,22 @@
 
 /* ------------------------ Company ------------------------*/
 
+.Info-company-Layout {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
+.Info-company-ruleChip {
+    border: 1px solid rgba(68, 0, 255, 0.534);
+    margin: 10px;
+    border-radius: 7px;
+    padding: 5px;
+    cursor: pointer;
+    color: #646464;
+    font-size: 14px;
+    font-weight: 500;
+}
 
 
 

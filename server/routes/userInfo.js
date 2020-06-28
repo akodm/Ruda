@@ -104,7 +104,6 @@ router.post("/create", async(req, res) => {
 				userAttendStartDate: req.body.userAttendStartDate, 
 				userAttendEndDate: req.body.userAttendEndDate, 
 				userAttend: req.body.userAttend, 
-				userTraning: req.body.userTraning,
 
 				userKeyword : req.body.userKeyword,
 				userTags : req.body.userTags,
@@ -146,7 +145,6 @@ router.put("/update", async(req, res) => {
 			userAttendStartDate: req.body.userAttendStartDate, 
 			userAttendEndDate: req.body.userAttendEndDate, 
 			userAttend: req.body.userAttend, 
-			userTraning: req.body.userTraning,
 
 			userKeyword : req.body.userKeyword,
 			userTags : req.body.userTags,

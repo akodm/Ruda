@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Pagination from '@material-ui/lab/Pagination';
-import axios from 'axios';
+
 import Csearch from './Csearch';
 import '../../css/board.css';
 import CompanyCard from '../../component/CompanyCard';
+
+// import config from '../../../client-configs';
+
 class Cboard extends Component {
     constructor(props){
         super(props);
@@ -15,19 +18,11 @@ class Cboard extends Component {
         }
     }
 
-    selectChange(e) { this.setState({ selectValue : e.target.value }) };
-
     async componentDidMount(){
-        const {userList}=this.state;
         try{
-            const result = await axios.get(`http://localhost:5000/userInfos/yall`);
-            if(result.data){
-                this.setState({ userList : result.data });
-            } else {
-                this.setState({ userList : null });
-            }
+
         }catch(err){
-            console.log("rookie card list err : " + err);
+            console.log("company card list err : " + err);
             alert("데이터 로드 중 에러 발생");
         }
     }
@@ -38,9 +33,9 @@ class Cboard extends Component {
             <div className="Company">
                 <div className="Company-title">
                     <span>기업</span>
-                    <select className="Company-title-select">
-                        <option value="최신순">최신순</option>
-                        <option value="인기순">인기순</option>
+                    <select onChange={(e) => this.setState({ selectValue : e.target.value })} value={selectValue} className="Company-title-select">
+                        <option value="new">최신순</option>
+                        <option value="hot">인기순</option>
                     </select>
                 </div>
                 <Csearch/>
