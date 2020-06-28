@@ -18,7 +18,7 @@ import Insert from '../page/insert/Insert'; // insert
 import Info from '../page/info/Info';   // info
 import Cboard from '../page/board/Cboard';
 import Rboard from '../page/board/Rboard';
-
+import Mypage from '../page/mypage/Mypage';
 class Base extends Component {
     constructor(props){
         super(props);
@@ -76,6 +76,7 @@ class Base extends Component {
                         <Route path="/info" render={props => user.cate ? <Main /> : <Info user={user} {...props} /> } ></Route>
                         <Route path="/company" component={Cboard} ></Route>
                         <Route path="/rookie" component={Rboard} ></Route>
+                        <Route path="/mypage" component={Mypage} ></Route>
                         {/* Not Found Page 주소에 일치하는 패스가 없을 경우 */}
                         <Route component={Main} ></Route>
                     </Switch>

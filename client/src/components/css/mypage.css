@@ -1,0 +1,159 @@
+.Mypage{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(230, 230, 230, 0.247);
+    font-family: NanumSquareB;
+    color:#646464;
+    flex-direction: column;
+    
+}
+.Mypage-frame{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  
+}
+/*-마이페이지 -*/
+
+.Mypage-pages{
+    width: 1000px;
+    background-color: white;
+    border: 1px solid rgba(228, 228, 228, 0.692);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 35px;
+    
+}
+/*-마이페이지 타이틀-*/
+.Mypage-pages-title-frame{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid rgba(170, 170, 170, 0.637);
+    margin-bottom:30px;
+}
+.Mypage-pages-title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 20px;
+    justify-content: space-between;
+    margin-left: 10px;
+    width: 100%;
+    
+}
+.hochi{
+    margin: 20px;
+} 
+.Mypage-pages-title-icons{
+    display: flex;
+    flex-direction: row;
+  
+}
+.Mypage-pages-title-icons-icon{
+    margin: 10px;
+    color: rgb(184, 184, 184);
+}
+.Mypage-pages-title-icons-icon:hover{
+    color: #11addd;
+}
+.Mypage-input{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/*-마이페이지 프로필-*/
+.Mypage-profile{
+    display: flex;
+    flex-direction: column;
+    margin-left:50px;
+    margin-right: 50px;
+}
+.Mypage-profile-title{
+    font-size: 18px;
+    color:#838383;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.Mypage-profile-title-icons{
+    color: rgb(184, 184, 184);
+    margin-left:10px; 
+}
+.Mypage-profile-title-icons:hover{
+    color: rgb(126, 126, 126);
+   
+}
+.Mypage-profile-Maininfo,.Mypage-profile-Userinfo,.Mypage-profile-Award,.Mypage-profile-Certificate{
+    margin-bottom: 20px;
+    
+}
+.Mypage-profile-Maininfo{
+
+}
+.Mypage-profile-Userinfo{
+
+}
+.Mypage-profile-Award{
+
+}
+.Mypage-profile-Certificate{
+
+}
+/*--메뉴버튼--*/
+.Mypage-btns{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+.Mypage-menu-click {
+    width: 85px;
+    height: 45px;
+    border: none;
+    margin-bottom: 10px;
+    font-size: 14px;
+    background-color: #11addd;
+    color:white;
+}
+.Mypage-menu-none {
+    width: 85px;
+    height: 45px;
+    border: none;
+    margin-bottom: 10px;
+    font-size: 14px;
+    background-color: #ffffff;
+    border: 1px solid rgba(209, 209, 209, 0.692);
+}
+.Mypage-menu-none:hover {
+    background-color:#8cd1ff38;
+}
+
+@media print {
+    body * {
+      visibility: hidden;
+    }
+    .Mypage-pages, .Mypage-pages *{
+      visibility: visible;
+      margin: 0.8cm;
+    } 
+    .Mypage-pages {
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+    .Mypage-pages-title-icons,.hochi{
+        display: none;
+    }
+  }
+  @page{
+    size: A4;
+    margin: 0;  
+}
+ 
