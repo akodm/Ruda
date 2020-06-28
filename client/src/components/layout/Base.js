@@ -20,7 +20,7 @@ import Insert from '../page/insert/Insert'; // insert
 import Info from '../page/info/Info';   // info
 import Cboard from '../page/board/Cboard';  // rookie board
 import Rboard from '../page/board/Rboard';  // company board
-
+import Mypage from '../page/mypage/MypageRoute';    // mypage
 class Base extends Component {
     constructor(props){
         super(props);
@@ -82,17 +82,24 @@ class Base extends Component {
                     <div style={{height:"75px",width:"100%"}}></div>
                     {/*상단 */}
                     <Header />
+
                      <Switch>
                         {/*메인 */}
-                        <Route exact path="/" render={props => user.email ? (user.cate ? "" : <Info user={user} {...props} /> )  : <Main /> } ></Route>
-                        <Route path="/easy" render={props => user.email ? <Main/> : <Easy set={this.setUser.bind(this)} {...props} />} ></Route>
-                        <Route path="/login" render={props => user.email ? <Main/> :  <Login set={this.setUser.bind(this)} {...props} />} ></Route>
-                        <Route path="/insert" render={props => user.email ? <Main/> : <Insert {...props} /> }></Route>
+                        <Route exact path="/" render={props => user.email ? (user.cate ? <Mypage user={user} {...props} /> : <Info user={user} {...props} /> )  : <Main /> } ></Route>
+                        
+                        <Route path="/easy" render={props => user.email ? <NotFound/> : <Easy set={this.setUser.bind(this)} {...props} />} ></Route>
+                        <Route path="/login" render={props => user.email ? <NotFound/> :  <Login set={this.setUser.bind(this)} {...props} />} ></Route>
+                        <Route path="/insert" render={props => user.email ? <NotFound/> : <Insert {...props} /> }></Route>
+                        
                         <Route path="/company" component={Cboard} ></Route>
                         <Route path="/rookie" component={Rboard} ></Route>
+                        
+                        <Route path="/mypage/:id" render={props => <Mypage user={user} {...props} /> }></Route>
+                        
                         {/* Not Found Page 주소에 일치하는 패스가 없을 경우 */}
                         <Route component={NotFound} ></Route>
                     </Switch>
+
                     {/*화면업다운버튼*/ }
                     <UpDown />
                     {/*하단 */}

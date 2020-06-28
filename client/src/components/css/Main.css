@@ -68,7 +68,7 @@
     margin-right: 15px;
     font-weight: 600;
 }
-.Main-new-insert:hover { background-color: #f7f4ff; }
+.Main-new-insert:hover { background-color: #f7f4ff;color: #4e3692}
 
 .Main-new-login {
     width: 122px;
@@ -81,7 +81,7 @@
     color:#646464; 
     font-weight: 600;
 }
-.Main-new-login:hover  { background-color: #f7f4ff; }
+.Main-new-login:hover  { background-color: #f7f4ff;color: #4e3692 }
 
 .Main-new-line {
     width: 283px;
@@ -160,7 +160,7 @@
     color:#646464; 
     font-weight: 600;
     margin-top: 20px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
 .Main-new-itemSpan {
@@ -168,7 +168,7 @@
     font-size: 14px;
     color:#646464; 
     font-weight: 500;
-    margin: 5px;
+    margin: 3px;
     width: 220px;
     text-align: center;
 }
