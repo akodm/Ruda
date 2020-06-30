@@ -31,6 +31,8 @@ class Base extends Component {
                 email : "",
                 cate : "",
             },
+
+            load : false,
         }
     }
 
@@ -59,6 +61,7 @@ class Base extends Component {
                 localStorage.removeItem("users");
             }
         }
+        this.setState({ load : true });
     }
 
     // 로그인 시의 스태이트 변경
@@ -74,7 +77,7 @@ class Base extends Component {
     }
 
     render() {
-        const { user } = this.state;
+        const { user,load } = this.state;
         console.log(user);
         return (
             <div className="base-main">
@@ -85,7 +88,7 @@ class Base extends Component {
 
                      <Switch>
                         {/*메인 */}
-                        <Route exact path="/" render={props => user.email ? (user.cate ? <Mypage user={user} {...props} /> : <Info user={user} {...props} /> )  : <Main /> } ></Route>
+                        <Route exact path="/" render={props => user.email ? (user.cate ? <Mypage user={user} {...props} /> : <Info user={user} {...props} /> )  : ( load ? <Main /> : "" ) } ></Route>
                         
                         <Route path="/easy" render={props => user.email ? <NotFound/> : <Easy set={this.setUser.bind(this)} {...props} />} ></Route>
                         <Route path="/login" render={props => user.email ? <NotFound/> :  <Login set={this.setUser.bind(this)} {...props} />} ></Route>

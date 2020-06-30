@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(20),     // 유저 번호
         },
         userAdd : {
-            type: DataTypes.STRING(50),     // 주소
+            type: DataTypes.STRING(100),     // 주소
         },
         userImageUrl : {
             type: DataTypes.STRING,     // 본인 사진 - firebase 이미지 경로
@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.JSON,     // 자격증
         },
         userIntro : {
-            type: DataTypes.STRING(50),     // 자기 소개
+            type: DataTypes.STRING,     // 자기 소개
         },
         userKeyword : {
             type: DataTypes.JSON,     // 본인 키워드
@@ -54,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.JSON,     // 잘하는 특기
         },
         userField : {
-            type: DataTypes.STRING(10),     // 희망 직무
+            type: DataTypes.STRING(20),     // 희망 직무
         },
         userTraningDateState : {
             type: DataTypes.STRING(10),     // 실습 날짜 선택 여부

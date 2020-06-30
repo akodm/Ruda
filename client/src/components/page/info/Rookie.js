@@ -204,7 +204,7 @@ class Rookie extends Component {
             console.log(userCateUpdat.data, result.data);
             if(result.data){
                 alert("기본입력이 완료되었습니다.");
-                window.location.href = "/mypage";
+                window.location.href = "/";
             } else {
                 alert("잘못된 값이 있습니다. 다시 시도해주세요.");
             }

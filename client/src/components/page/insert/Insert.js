@@ -29,6 +29,11 @@ class Insert extends Component {
         const { emailValid, emailcodeValid, passwordValid, passwordconfirmValid, password, passwordconfirm } = this.state;
         const {email,emailcode}=this.state;
         try {
+            if(!emailValid.result || !emailcodeValid || !passwordValid.result || !passwordconfirmValid.result ||password !== passwordconfirm) {
+                alert("값이 없거나 잘못된 값이 있습니다. 다시 확인해주세요.");
+                return;
+            }
+
             let emailAuth = axios.post(`${config.app.s_url}/emailAuth/emailauth`, { token : emailcode });
             let authResult = axios.get(`${config.app.s_url}/emailAuth/one?token=${emailcode}&email=${email}`);
 
@@ -40,11 +45,6 @@ class Insert extends Component {
 
             if(!authResult.data || !emailAuth.data) {
                 alert("이메일 인증에 실패했습니다. 다시 인증코드를 발급 받아주세요.");
-                return;
-            }
-
-            if(!emailValid.result || !emailcodeValid || !passwordValid.result || !passwordconfirmValid.result ||password !== passwordconfirm) {
-                alert("값이 없거나 잘못된 값이 있습니다. 다시 확인해주세요.");
                 return;
             }
 

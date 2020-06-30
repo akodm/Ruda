@@ -64,6 +64,26 @@ router.get("/yall", async (req, res) => {
 	}
 });
 
+// 유저 검색 필터에 해당하는 유저 조회
+router.get("/searchAll", async (req, res) => {
+	try {
+		const result = await UserInfo.findAll({
+			include : [
+				{ model: User }
+			],
+			where : {
+				userState : {
+					[Op.or] : ["구직","구직/실습","실습"]
+				},
+			}
+		});
+		res.send(result);
+	} catch (err) {
+		console.log(__filename + " 에서 유저 정보 필터 검색 에러 발생 내용= " + err);
+		res.send(false);
+	}
+});
+
 // 유저 정보 한명 조회
 router.get("/one", async (req, res) => {
 	try {

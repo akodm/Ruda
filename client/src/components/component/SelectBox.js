@@ -7,7 +7,7 @@ class SelectBox extends Component {
     render() {
         return (
             <div style={this.props.style || {}}>
-                <FormControl variant="outlined">
+                <FormControl variant="outlined" disabled={this.props.disabled || false}>
                     <InputLabel htmlFor="outlined-age-native-simple">{this.props.text}</InputLabel>
                     <Select
                     native

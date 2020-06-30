@@ -10,14 +10,14 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         authCate : {
-            type : DataTypes.STRING,    // 소셜 로그인 구분
+            type : DataTypes.STRING(10),    // 소셜 로그인 구분
             allowNull: false
         },
         userPass : {
             type: DataTypes.STRING,     // 로그인 비밀번호
         },
         userCate : {
-            type: DataTypes.STRING,     // 기업인지 유저인지
+            type: DataTypes.STRING(10),     // 기업인지 유저인지
         },
     });
     User.associate = function(models) {

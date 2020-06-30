@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,         // 올린 파일 이미지 등
         },
         boardTag : {
-            type: DataTypes.STRING,         // 게시판 내의 달린 태그
+            type: DataTypes.JSON,         // 게시판 내의 달린 태그
         },
     });
     HireBoard.associate = function(models) {
