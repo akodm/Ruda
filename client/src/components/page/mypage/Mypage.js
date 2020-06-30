@@ -8,6 +8,7 @@ import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import Profile from './Profile';
 import Portfolio from './Portfolio';
 import Setting from './Setting';
+import MuiAlert from '@material-ui/lab/Alert';
 
 class mypage extends Component {
     constructor(props) {
@@ -15,6 +16,9 @@ class mypage extends Component {
         this.state={
             btnNum:0,
             likeBtn:"none",
+            shareAlert:"none",
+            url :new URL(window.location.href),
+            success:"none",
         }
     }
     MenuClick(num){
@@ -38,14 +42,47 @@ class mypage extends Component {
     savepdf(){
         document.title = '이름님의 이력서';
         window.print();
-        
+    }
+    copyCodeToClipboard = () => {
+        var dummy = document.createElement("textarea");
+        document.body.appendChild(dummy);
+        dummy.value = window.location.href;
+        dummy.select();
+        console.log(dummy);
+        document.execCommand("copy");
+        document.body.removeChild(dummy);
+        this.setState({
+            success:"flex",
+        })
+    }
+    shareLink(){
+        this.setState({
+            shareAlert:"flex",
+        })
+    }
+    close(){
+        this.setState({
+            shareAlert:"none",
+        })
     }
     render() {
-        const {btnNum,likeBtn}=this.state;
+        const {btnNum,likeBtn,shareAlert,success}=this.state;
         return (
             <div className="Mypage">
                 <div className="Mypage-frame">
+                    
                     <div className="Mypage-pages">
+                        <div className="shareAlert" style={{display:shareAlert}}>
+                            <span className="close-shareAlert" onClick={this.close.bind(this)}>X</span>
+                            <p>더 많은 사람이 볼 수 있도록 공유해보세요!</p>
+                            <div style={{width:"80%"}}>
+                                <div className="shareAlert-input">
+                                    <input className="shareAlert-input-box" value={window.location.href} ></input>
+                                    <button className="shareAlert-btn" onClick={() => this.copyCodeToClipboard()}>링크복사</button>    
+                                </div>
+                                <p style={{display:success,fontSize:"14px",color:"#11addd"}}>복사가완료되었습니다.</p> 
+                            </div>
+                        </div>
                         <div className="Mypage-pages-title-frame">
                             <img src = "/Image/hochi.png" className="hochi" alt="img"></img>
                             <div className="Mypage-pages-title">
@@ -57,13 +94,13 @@ class mypage extends Component {
                                         <PrintIcon onClick={this.savepdf.bind(this)}/>
                                     </div>
                                     <div className="Mypage-pages-title-icons-icon">
-                                    <ShareIcon/>
+                                        <ShareIcon onClick={this.shareLink.bind(this)}/>
                                     </div>
                                     <div className="Mypage-pages-title-icons-icon" onClick={this.likeClick.bind(this)}>
                                         {likeBtn==="none"?<FavoriteBorderIcon/>:<FavoriteIcon style={{ color : "#11addd"}}/>}
                                     </div>
                                     <div className="Mypage-pages-title-icons-icon">
-                                    <MailOutlineIcon/>
+                                        <MailOutlineIcon/>
                                     </div>
                                 </div>
                             </div>
