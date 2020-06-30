@@ -8,6 +8,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
+
 import Profile from './Profile';
 import Portfolio from './Portfolio';
 import Setting from './Setting';
@@ -16,9 +17,13 @@ class mypage extends Component {
     constructor(props) {
         super(props);
         this.state={
-            btnNum:1,
-            likeBtn: false,
+            btnNum:0,
+            likeBtn:"none",
+            shareAlert:"none",
+            url :new URL(window.location.href),
+            success:"none",
 
+            
             portfolioData : [],
 
             load : false,
@@ -37,20 +42,70 @@ class mypage extends Component {
 
     MenuClick(num){ this.setState({ btnNum:num }) }
 
+    likeClick(){
+        const {likeBtn} = this.state;
+        if(likeBtn==="none"){
+            this.setState({
+                likeBtn:"click", 
+            })
+        }
+        else{
+            this.setState({
+                likeBtn:"none", 
+            })
+        }
+    }
+
     savepdf(){
         document.title = '이름님의 이력서';
         window.print();
     }
 
+    copyCodeToClipboard = () => {
+        var dummy = document.createElement("textarea");
+        document.body.appendChild(dummy);
+        dummy.value = window.location.href;
+        dummy.select();
+        console.log(dummy);
+        document.execCommand("copy");
+        document.body.removeChild(dummy);
+        this.setState({
+            success:"flex",
+        })
+    }
+
+    shareLink(){
+        this.setState({
+            shareAlert:"flex",
+        })
+    }
+    
+    close(){
+        this.setState({
+            shareAlert:"none",
+        })
+    }
+
     portfolioConcat(data) { this.setState(current => ({ portfolioData : current.portfolioData.concat(data) })) }
 
     render() {
-        const { btnNum, likeBtn, portfolioData, load }=this.state;
+        const {btnNum,likeBtn,shareAlert,success,portfolioData,load}=this.state;
         const { userInfo, user } = this.props;
         return (
             <div className="Mypage">
                 <div className="Mypage-frame">
                     <div className="Mypage-pages">
+                        <div className="shareAlert" style={{display:shareAlert}}>
+                            <span className="close-shareAlert" onClick={this.close.bind(this)}>X</span>
+                            <p>더 많은 사람이 볼 수 있도록 공유해보세요!</p>
+                            <div style={{width:"80%"}}>
+                                <div className="shareAlert-input">
+                                    <input className="shareAlert-input-box" readOnly value={window.location.href} ></input>
+                                    <button className="shareAlert-btn" onClick={() => this.copyCodeToClipboard()}>링크복사</button>    
+                                </div>
+                                <p style={{display:success,fontSize:"14px",color:"#11addd"}}>복사가 완료되었습니다.</p> 
+                            </div>
+                        </div>
                         <div className="Mypage-pages-title-frame">
                             <img src = "/Image/hochi.png" className="hochi" alt="img"></img>
                             <div className="Mypage-pages-title">
@@ -62,10 +117,10 @@ class mypage extends Component {
                                         <PrintIcon onClick={this.savepdf.bind(this)}/>
                                     </div>
                                     <div className="Mypage-pages-title-icons-icon">
-                                        <ShareIcon />
+                                        <ShareIcon onClick={this.shareLink.bind(this)}/>
                                     </div>
-                                    <div className="Mypage-pages-title-icons-icon" onClick={() => this.setState({ likeBtn : likeBtn ? false : true })}>
-                                        {!likeBtn ? <FavoriteBorderIcon/>:<FavoriteIcon style={{ color : "#11addd"}}/>}
+                                    <div className="Mypage-pages-title-icons-icon" onClick={this.likeClick.bind(this)}>
+                                        {likeBtn==="none"?<FavoriteBorderIcon/>:<FavoriteIcon style={{ color : "#11addd"}}/>}
                                     </div>
                                     <div className="Mypage-pages-title-icons-icon">
                                         <MailOutlineIcon/>
@@ -79,7 +134,7 @@ class mypage extends Component {
                             2 => 마이페이지 수정 ( 개인화면 ) */}
                             {
                                 btnNum === 0 ?
-                                <Profile /> :
+                                <Profile userInfo={userInfo} /> :
                                 btnNum === 1 ?
                                 load && <Portfolio load={load} userEmail={user.email} userId={userInfo.userId} userName={userInfo.userName} portfolio={portfolioData} addPortfolio={this.portfolioConcat.bind(this)} />
                                 :
@@ -88,11 +143,11 @@ class mypage extends Component {
                         </div>
                     </div>
                     <div className="Mypage-btns">
-                        <button className={btnNum === 0 ? "Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,0)}>프로필</button>
-                        <button className={btnNum === 1 ? "Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,1)}>포트폴리오</button>
+                        <button className={btnNum === 0?"Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,0)}>프로필</button>
+                        <button className={btnNum === 1?"Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,1)}>포트폴리오</button>
                         {
                             user.email &&
-                            <button className={btnNum === 2 ? "Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,2)}>프로필수정</button>
+                            <button className={btnNum === 2?"Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,2)}>마이페이지</button>
                         }
                     </div>
                 </div>
