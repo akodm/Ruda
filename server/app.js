@@ -3,9 +3,7 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
-let jwt = require('jsonwebtoken');
 let nodemailer = require('nodemailer');
-let crypto = require("crypto");
 let moment = require('moment');
 let passport = require('passport');
  
@@ -18,6 +16,7 @@ let hireBoardRouter = require('./routes/hireBoard');
 let mailRouter = require('./routes/mail');
 let userInfoRouter = require('./routes/userInfo');
 let emailAuth = require('./routes/emailAuth');
+let portfolio = require('./routes/portfolio');
 const configs = require('./server-configs.js');
 
 const models = require('./models');
@@ -53,6 +52,7 @@ app.use('/hireBoards', hireBoardRouter);
 app.use('/mails', mailRouter);
 app.use('/userInfos', userInfoRouter);
 app.use('/emailAuth', emailAuth);
+app.use('/portfolios', portfolio);
 require('./passport.js')(passport);
 
 // --------------------------- 노드 메일러 이메일 인증 -------------------
@@ -88,14 +88,14 @@ app.get("/nodemailer", async(req,res) => {
       `<span>비경력직간의 경쟁으로 더 자신을 어필해보세요!</span><br><br>` +
       `<strong><span>아래의 해당 코드를 복사 붙여넣기 하여주세요.</span></strong><p></p><br>`+
       `[ <span>${ranStr}</span> ]<p></p><br>`+
-      `<img style="width:'400px'; height:200px;" src='cid:bg@cid'/>`,
+      `<img style="width:'400px'; height:400px;" src='cid:bg@cid'/>`,
       attachments: [{
         filename: 'Logo.png',
-        path: __dirname +'/public/images/base_header_logo.png',
+        path: __dirname +'/public/images/RUDALogore.png',
         cid: 'logo@cid'
       },{
         filename: 'Bg.png',
-        path: __dirname +'/public/images/main_title_bg4.png',
+        path: __dirname +'/public/images/mainimg.png',
         cid: 'bg@cid'
       }],
     }

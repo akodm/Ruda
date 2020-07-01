@@ -204,7 +204,7 @@ class Rookie extends Component {
             console.log(userCateUpdat.data, result.data);
             if(result.data){
                 alert("기본입력이 완료되었습니다.");
-                window.location.href = "/mypage";
+                window.location.href = "/";
             } else {
                 alert("잘못된 값이 있습니다. 다시 시도해주세요.");
             }
@@ -383,7 +383,7 @@ class Rookie extends Component {
                 </div>
                 <div className="Info-rookie-agree">
                     <CheckBox check={agreeCheck} func={(e) => this.setState({ agreeCheck : e })} name="agree" color="primary" />
-                    <span>하이루키는 신입 구직자만을 위한 서비스입니다. <span style={{color:"red"}}>신입 구직자</span>로서 이용하심에 동의하십니까?</span>
+                    <span>하이루키는 신입 채용 서비스입니다. <span style={{color:"red"}}>신입 구직자</span>로서 이용하심에 동의하십니까?</span>
                 </div>
                 <div style={{margin:"50px"}}>
                     <Button onClick={this.addFile.bind(this)} size="large" variant="outlined" color="primary">하이루키 시작하기</Button>

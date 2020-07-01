@@ -3,14 +3,16 @@ import axios from 'axios';
 
 import config from '../../../client-configs';
 
-import Rookie from './Mypage';  // rookie mypage
+import Rookie from './rookie/Mypage';  // rookie mypage
+
+import Company from './company/Mypage'; // company mypage
 
 import NotFound from '../../layout/NotFound';
 
 class MypageRoute extends Component {
     constructor(props) {
         super(props);
-        let id = this.props.match.params.id || null;
+        let id = parseInt(this.props.match.params.id) || null;
         this.state = {
             id : id,
             rookie : null,
@@ -22,6 +24,7 @@ class MypageRoute extends Component {
 
     async componentDidMount() {
         try {
+            // 주소에 id가 있을경우
             if(this.state.id) {
                 let rookie = axios.get(`${config.app.s_url}/userInfos/one?userId=${this.state.id}`);
                 let company = axios.get(`${config.app.s_url}/companyInfos/one?userId=${this.state.id}`);
@@ -35,6 +38,7 @@ class MypageRoute extends Component {
                     rookie : (await rookie),
                     company : (await company),
                 })
+            // 로그인 후 기본 주소로 들어온 경우
             } else {
                 const { user } = this.props;
                 let rookie = axios.get(`${config.app.s_url}/userInfos/one?userId=${user.id}`);
@@ -62,7 +66,11 @@ class MypageRoute extends Component {
         return (
             <div style={{width:"100%"}}>
                 {
-                    user ? (user.user.userCate === "user" ? <Rookie /> : "" ) : load ? <NotFound /> : ""
+                    user ? 
+                    (user.user.userCate === "user" ? <Rookie userInfo={user} {...this.props} /> 
+                    : <Company companyInfo={user} {...this.props} /> 
+                    ) 
+                    : load ? <NotFound /> : ""
                 }
             </div>
         );
