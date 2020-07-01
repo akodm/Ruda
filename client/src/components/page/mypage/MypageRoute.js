@@ -5,6 +5,8 @@ import config from '../../../client-configs';
 
 import Rookie from './rookie/Mypage';  // rookie mypage
 
+import Company from './company/Mypage'; // company mypage
+
 import NotFound from '../../layout/NotFound';
 
 class MypageRoute extends Component {
@@ -66,7 +68,7 @@ class MypageRoute extends Component {
                 {
                     user ? 
                     (user.user.userCate === "user" ? <Rookie userInfo={user} {...this.props} /> 
-                    : "" 
+                    : <Company companyInfo={user} {...this.props} /> 
                     ) 
                     : load ? <NotFound /> : ""
                 }

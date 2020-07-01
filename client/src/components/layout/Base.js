@@ -98,7 +98,6 @@ class Base extends Component {
                         <Route path="/rookie" component={Rboard} ></Route>
                         
                         <Route path="/mypage/:id" render={props => <Mypage user={user} {...props} /> }></Route>
-                        
                         {/* Not Found Page 주소에 일치하는 패스가 없을 경우 */}
                         <Route component={NotFound} ></Route>
                     </Switch>

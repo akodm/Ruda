@@ -45,16 +45,16 @@
     height: 25px;
     margin: 15px;
 } 
-.Mypage-pages-title-icons{
+.Mypage-pages-title-icon{
     display: flex;
     flex-direction: row;
 }
-.Mypage-pages-title-icons-icon{
+.Mypage-pages-title-icon-icon{
     margin: 5px;
     color: rgb(184, 184, 184);
 }
-.Mypage-pages-title-icons-icon:hover{
-    color: #11addd;
+.Mypage-pages-title-icon-icon:hover{
+    color: #9781d0;
     cursor: pointer;
 }
 .Mypage-input{
@@ -117,10 +117,6 @@
     width: 100%;
 
 }
-.Mypage-profile-content-userinfo-graph{
-    display: flex;
-    flex-direction: row;  
-}
 .Mypage-profile-content-userinfo-data{
     display: flex;
     flex-direction: column; 
@@ -130,8 +126,6 @@
 .Mypage-profile-content-userinfo-info{
     display: flex;
     flex-direction: column; 
-    
-  
 }
 .Mypage-profile-content-userinfo-profile{
     height: 100%;
@@ -179,25 +173,10 @@
     margin: 5px;
     font-size: 14px;
 }
-.profile-chart{
-    margin-top: 30px;
-}
-.profile-chart-info{
-    height: 280px;
-    width: 400px;
-    margin-left: 0px;
-    justify-content: center;
-    align-items: center;
-}
-
-.profile-chart-info-title,.profile-keyword-title,.profile-skill-title,.profile-inschool-title,.profile-outschool-title,.profile-chart-info-title{
+.profile-chart-info-title,.profile-keyword-title,.profile-skill-title,.profile-inschool-title,.profile-outschool-title{
     font-size: 18px;
     font-weight: 600;
     margin: 15px;
-}
-.profile-chart-info-text{
-    font-size: 14px;
-    margin-left: 30px;
 }
 .profile-keyword-text{
     margin-left: 30px;
@@ -221,16 +200,9 @@
 .profile-inschool-text,.profile-outschool-text{
     font-size: 14px;
     margin-left: 30px;
-    width: 300px;
-    height: 35px;
-    align-items: center;
 }
 .profile-inschool-text>p ,.profile-outschool-text > p {
     margin-left: 30px;
-}
-.Mypage-profile-content-storyprofile{
-    display: flex;
-    flex-direction: row;
 }
 /*-프로필수정-*/
 .profile-edit{
@@ -253,13 +225,13 @@
     margin-top: 30px;
 
 }
-.Mypage-menu-click {
+.Mypage-menu-clicks {
     width: 85px;
     height: 45px;
     border: none;
     margin-bottom: 10px;
     font-size: 14px;
-    background-color: #11addd;
+    background-color: #9781d0;
     color:white;
 }
 .Mypage-menu-none {
@@ -313,7 +285,7 @@
 }
 .shareAlert-btn{
     border: none;
-    background-color: #11addd;
+    background-color: #f7f4ff;
     width: 100px;
     height: 35px;
     color: white;

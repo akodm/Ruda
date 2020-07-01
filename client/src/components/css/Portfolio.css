@@ -34,7 +34,7 @@
 }
 
 .portfolio-content:hover {
-    color: blue;
+    color:#5590c0;
 }
 
 .portfolio-guide {
@@ -76,7 +76,7 @@
     display: flex;
     justify-content: center;
     margin: 25px;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
 }
 
