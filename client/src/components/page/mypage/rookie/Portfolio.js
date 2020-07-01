@@ -23,6 +23,7 @@ import AutoCreateBox from '../../../component/AutoCreatable';
 import TagChip from '../../../component/TagChip';
 import CheckBox from '../../../component/CheckBox';
 import SelectBox from '../../../component/SelectBox';
+// import Popup from './PortfolioPopup';
 
 class Portfolio extends Component {
     constructor(props) {
@@ -182,7 +183,7 @@ class Portfolio extends Component {
                     {
                         userEmail && <div className="portfolio-content" onClick={() => this.setState({ addView : true })}><span style={{marginRight:"5px"}}>포트폴리오 추가</span><LibraryAddOutlinedIcon /></div>
                     }
-                    <div>{userName}님의 포트폴리오 개수는 {portfolioList.length}개 입니다.</div>
+                    <div>{userName}님의 포트폴리오 개수는 <span style={{color:"red"}}>{portfolioList.length}</span>개 입니다.</div>
                 </div>
 
                 {/* 포트폴리오 추가 팝업 창 */}

@@ -14,11 +14,17 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         files : {
-            type: DataTypes.STRING,         // 올린 파일 이미지 등
+            type: DataTypes.JSON,         // 올린 파일 이미지 등
         },
         boardTag : {
             type: DataTypes.JSON,         // 게시판 내의 달린 태그
         },
+        startDate : {
+            type: DataTypes.STRING(10),         // 시작일
+        },
+        endDate : {
+            type: DataTypes.STRING(10),         // 종료일
+        }
     });
     HireBoard.associate = function(models) {
         HireBoard.belongsTo(models.user);

@@ -31,6 +31,7 @@ class Rookie extends Component {
             address1 : "",
             address2 : "",
             addressState : false,
+            military : "군필",
 
             // 학력
             univercityCate : "대학", // 고졸인지 대학인지 여부
@@ -49,6 +50,7 @@ class Rookie extends Component {
             specialtyErr : false,
             introduce : "", // 자기 소개 간단
             introduceErr : false,
+            privateUrl : "",
 
             // 구직 관련
             field : "", // 희망 취업 분야
@@ -160,9 +162,9 @@ class Rookie extends Component {
     async saveStartBtn() {
         const { user } = this.props;
         const { imgUrl,
-            name,phone,address1,address2,
+            name,phone,address1,address2,military,
             univercityCate,univercity,subject,univercityState,univercityStart,univercityEnd,
-            tags,keywords,specialty,introduce,
+            tags,keywords,specialty,introduce,privateUrl,
             field,workDateState,trainingDateState,workDate,trainingDate
         } = this.state;
 
@@ -177,7 +179,7 @@ class Rookie extends Component {
                 userId : user.id,
                 userImageUrl : imgUrl, 
 
-                userName : name, userPhone : phone, userAdd : address, 
+                userName : name, userPhone : phone, userAdd : address, userMilitary : military,
                 userUnivercityCate : univercityCate,
                 userUnvcity : univercity, userSubject : subject,
                 userAttendStartDate : univercityStart,
@@ -188,6 +190,7 @@ class Rookie extends Component {
                 userKeyword : keywords,
                 userSpecialty : specialty,
                 userIntro : introduce,
+                userUrl : privateUrl,
 
                 userField : field,
                 userTraningDateState : trainingDateState,
@@ -263,9 +266,9 @@ class Rookie extends Component {
 
     render() {
         const { imgPreview,
-            name,phone,address1,address2,addressState,
+            name,phone,address1,address2,addressState,military,
             univercityCate,univercityState,univercityStart,univercityEnd,startErr,endErr,
-            tags,keywords,specialty,introduce,introduceErr,
+            tags,keywords,specialty,introduce,introduceErr,privateUrl,
             workDateState,trainingDateState,workDate,trainingDate,
             agreeCheck,load
         } = this.state;
@@ -286,7 +289,13 @@ class Rookie extends Component {
                         {/* 신상 정보 */}
                         <div className="Info-rookie-inputLayoutDiv">
                             <TextField helperText="성 이름" required label="이름" variant="outlined" value={name} name="name" onChange={this.onChangeValue.bind(this)} />
-                            <TextField helperText="-빼고 입력해주세요" required label="전화번호" variant="outlined" value={phone} name="phone" onChange={this.onChangeValue.bind(this)} />
+                            <div className="Info-company-Layout">
+                                <TextField helperText="-빼고 입력해주세요" required label="전화번호" variant="outlined" value={phone} name="phone" onChange={this.onChangeValue.bind(this)} />
+                                <SelectBox 
+                                    value={military} func={(e) => this.setState({ military : e })}
+                                    label={"병역여부"} option={["군필","미필","면제"]} text={"병역여부"} style={{marginLeft:"15px"}}
+                                />
+                            </div>
                         </div>
                     </div>
                     {/* 클릭시 주소지 검색 창 열기 */}
@@ -305,7 +314,7 @@ class Rookie extends Component {
                 </div>
 
                 {/* 학력 박스 */}
-                <div className="Info-rookie-title">*최근 학력</div>
+                <div className="Info-rookie-title">*최근학력</div>
                 <div className="Info-rookie-body">
                     {/* 첫번째 라인 */}
                     <div className="Info-rookie-imgLayout">
@@ -329,7 +338,7 @@ class Rookie extends Component {
                 </div>
 
                 {/* 본인 어필 박스 */}
-                <div className="Info-rookie-title">자기 소개</div>
+                <div className="Info-rookie-title">자기소개</div>
                 <div className="Info-rookie-body">
                     <AutoCreateBox blur={false} width={700} text={"자신있는 기술에 대한 태그를 검색하여 최대한 골고루, 최대 6개까지 추가하세요!"} list={dataList.app.tagList} clear={true} onChange={this.addChips.bind(this,"tag")} />
                     <div className="Info-tag-box">
@@ -356,6 +365,7 @@ class Rookie extends Component {
                         }
                     </div>
                     <TextField error={introduceErr} helperText="간단한 자기 소개 50자 내외" style={{marginTop:"15px"}} variant="outlined" onChange={this.onChangeValueLimit.bind(this)} name="introduce" value={introduce} label="자기 소개" />
+                    <TextField helperText="개인 블로그나 웹 사이트 등 주소를 입력해주세요." style={{marginTop:"15px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="privateUrl" value={privateUrl} label="개인 사이트 URL " />
                 </div>
 
                 {/* 구직정보 박스 */}

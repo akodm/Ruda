@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true
         },
         companyName : {
-            type: DataTypes.STRING(11),     // 기업 이름
+            type: DataTypes.STRING(20),     // 기업 이름
         },
         companyPhone : {
             type: DataTypes.STRING(11),     // 기업 번호
@@ -51,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(10),     // 일할 수 있는 상태
         },
         companyWorkDate : {
-            type: DataTypes.STRING(20),     // 기업에서 일할 수 있는 날짜
+            type: DataTypes.STRING(30),     // 기업에서 일할 수 있는 날짜
         },
         companyQuestion : {
             type: DataTypes.JSON,     // 기업이 준비한 질문     

@@ -35,6 +35,9 @@ module.exports = (sequelize, DataTypes) => {
         userAttend : {
             type: DataTypes.STRING(10),     // 대학 다니는 구분 휴학 등..
         },
+        userMilitary : {
+            type: DataTypes.STRING(10),     // 군필 여부
+        },
         userAwards : {
             type: DataTypes.JSON,     // 수상 이력
         },
@@ -52,6 +55,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         userSpecialty : {
             type: DataTypes.JSON,     // 잘하는 특기
+        },
+        userUrl : {
+            type: DataTypes.STRING,     // 개인 사이트 주소
         },
         userField : {
             type: DataTypes.STRING(20),     // 희망 직무

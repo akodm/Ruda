@@ -123,12 +123,14 @@ router.post("/create", async(req, res) => {
 				userSubject : req.body.userSubject,
 				userAttendStartDate: req.body.userAttendStartDate, 
 				userAttendEndDate: req.body.userAttendEndDate, 
-				userAttend: req.body.userAttend, 
+				userAttend: req.body.userAttend,
+				userMilitary : req.body.userMilitary,
 
 				userKeyword : req.body.userKeyword,
 				userTags : req.body.userTags,
 				userIntro : req.body.userIntro,
 				userSpecialty : req.body.userSpecialty,
+				userUrl : req.body.userUrl,
 
 				userField: req.body.userField,
 				userTraningDateState : req.body.userTraningDateState,
@@ -165,11 +167,13 @@ router.put("/update", async(req, res) => {
 			userAttendStartDate: req.body.userAttendStartDate, 
 			userAttendEndDate: req.body.userAttendEndDate, 
 			userAttend: req.body.userAttend, 
+			userMilitary : req.body.userMilitary,
 
 			userKeyword : req.body.userKeyword,
 			userTags : req.body.userTags,
 			userIntro : req.body.userIntro,
 			userSpecialty : req.body.userSpecialty,
+			userUrl : req.body.userUrl,
 
 			userField: req.body.userField,
 			userTraningDateState : req.body.userTraningDateState,

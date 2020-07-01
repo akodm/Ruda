@@ -6,7 +6,6 @@
     align-items: center;
     background-color: rgba(230, 230, 230, 0.247);
     font-family: NanumSquareB;
-   
 }
 
 .Info-main > h2 {
@@ -57,6 +56,10 @@
     align-items: center;
 }
 
+.Info-main-title{
+    color:#646464; 
+}
+
 /* ------------------------ Rookie ------------------------*/
 /* 개인정보 */
 .Info-rookie-main {
@@ -64,9 +67,6 @@
     flex-direction: column;
     width: 100%;
     align-items: center;
-}
-.Info-main-title{
-    color:#646464; 
 }
 
 .Info-rookie-title {

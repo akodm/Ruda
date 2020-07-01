@@ -53,7 +53,7 @@
     align-items: flex-end;
     top: 2%;
     left: 0;
-    z-index: 5000;
+    z-index: 1000;
 }
 
 .portfolio-add-div {
