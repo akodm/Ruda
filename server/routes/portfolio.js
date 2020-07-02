@@ -73,7 +73,7 @@ router.post("/create", async(req, res) => {
 router.put("/update", async(req, res) => {
     let result = null;
     try {
-        await Portfolio.update({ 
+        result = await Portfolio.update({ 
 			title : req.body.title,
 			content : req.body.content,
 			tag : req.body.tag,
@@ -86,12 +86,11 @@ router.put("/update", async(req, res) => {
             }, {
             where: {
 				userId : req.body.userId,
+				id : req.body.id,
             }
         });
-        result = true;
     } catch(err) {
         console.log(__filename + " 에서 유저 포트폴리오 업데이트 에러 발생 내용= " + err);
-        result = false;
     }
     res.send(result);
 });

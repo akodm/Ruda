@@ -83,6 +83,9 @@ module.exports = (sequelize, DataTypes) => {
         userLike : {
             type: DataTypes.INTEGER(11),    // 받은 관심있어요 수
         },
+        userLikeList : {
+            type: DataTypes.JSON,    // 관심있어요를 준 사람
+        },
         userSuggestion : {
             type: DataTypes.JSON,     // 받은 제안
         },

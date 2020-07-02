@@ -136,7 +136,13 @@ class mypage extends Component {
                                 btnNum === 0 ?
                                 <Profile userInfo={userInfo} /> :
                                 btnNum === 1 ?
-                                load && <Portfolio load={load} userEmail={user.email} userId={userInfo.userId} userName={userInfo.userName} portfolio={portfolioData} addPortfolio={this.portfolioConcat.bind(this)} />
+                                load && <Portfolio 
+                                    load={load} 
+                                    userEmail={user.email} 
+                                    userId={userInfo.userId} 
+                                    userName={userInfo.userName} 
+                                    portfolio={portfolioData} 
+                                    addPortfolio={this.portfolioConcat.bind(this)} />
                                 :
                                 user.email && <Setting />
                             }
