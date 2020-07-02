@@ -59,35 +59,34 @@ class PortfolioPopup extends Component {
             projectUrl, projectCate, projectCateInput, 
             partner, partnerList, tag, tagList, content,
             imagesUrl, imageLoad, textBtn,
-            portfolioList, addView,
         } = this.props;
         return (
             <div className="portfolio-popup">
                 <div className="portfolio-add-div">
                     <div className="portfolio-add-title">{textTitle}</div>
-                    <TextField helperText="프로젝트명을 간단하게 입력하세요." name="title" onChange={this.onChangeValue.bind(this)} value={title} label="프로젝트명 *" type="search" variant="outlined" />
+                    <TextField onPaste={this.onChangeValue.bind(this)} helperText="프로젝트명을 간단하게 입력하세요." name="title" onChange={this.onChangeValue.bind(this)} value={title} label="프로젝트명 *" type="search" variant="outlined" />
                     <div className="rowLayout">
-                        <TextField helperText={moment(new Date()).subtract(2, "year").format("YYYY")} name="startDate" onChange={this.onChangeValue.bind(this)} value={startDate} style={{width:"108px"}} label="시작년도 *" type="search" variant="outlined" />
+                        <TextField helperText={moment(new Date()).subtract(2, "year").format("YYYY")} name="startDate" onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} value={startDate} style={{width:"108px"}} label="시작년도 *" type="search" variant="outlined" />
                         <SelectBox 
                             value={startMonth} func={this.onChangeDate.bind(this, "startMonth")} style={{marginBottom:"22px",marginLeft:"20px",marginRight:"20px"}}
                             label={"월 *"} option={["1","2","3","4","5","6","7","8","9","10","11","12"]} text={"월 *"}
                         />
-                        <TextField disabled={ingDate && true} helperText={moment(new Date()).format("YYYY")} name="endDate" onChange={this.onChangeValue.bind(this)} value={endDate} style={{width:"108px",margin:"12px"}} label="종료년도" type="search" variant="outlined" />
+                        <TextField disabled={ingDate && true} helperText={moment(new Date()).format("YYYY")} name="endDate" onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} value={endDate} style={{width:"108px",margin:"12px"}} label="종료년도" type="search" variant="outlined" />
                         <SelectBox 
                             disabled={ingDate && true} value={endMonth} func={this.onChangeDate.bind(this, "endMonth")} style={{marginBottom:"22px",marginLeft:"10px"}}
                             label={"월"} option={["1","2","3","4","5","6","7","8","9","10","11","12"]} text={"월"}
                         />
-                        <CheckBox label="진행 중" style={{marginBottom:"15px",marginLeft:"15px"}} check={ingDate} func={this.onChangeDate.bind(this, "ingDate")} name="ingDate" color="primary" />
+                        <CheckBox label="진행 중" style={{marginBottom:"15px",marginLeft:"15px"}} check={ingDate} func={this.onChangeDate.bind(this, "ingDate")} name={"ingDate"} color="primary" />
                     </div>
                     <div className="rowLayout" style={{alignItems:"center",marginTop:"-10px",marginBottom:"25px"}}>
-                        <TextField helperText="프로젝트를 보여줄 주소나 경로를 알려주세요." name="projectUrl" onChange={this.onChangeValue.bind(this)} value={projectUrl} style={{width:"600px",marginTop:"22px",marginRight:"10px"}} label="프로젝트 URL" type="search" variant="outlined" />
+                        <TextField helperText="프로젝트를 보여줄 주소나 경로를 알려주세요." name="projectUrl" onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} value={projectUrl} style={{width:"600px",marginTop:"22px",marginRight:"10px"}} label="프로젝트 URL" type="search" variant="outlined" />
                         <SelectBox 
                             value={projectCate} func={this.onChangeDate.bind(this, "projectCate")}
                             label={"구분"} option={["교내","교외","산업체","직접입력"]} text={"구분"}
                         />
                         {
                             projectCate === "직접입력" && 
-                            <TextField name="projectCateInput" onChange={this.onChangeValue.bind(this)} value={projectCateInput} style={{width:"140px",margin:"12px"}} label="내용" type="search" variant="outlined" />
+                            <TextField name="projectCateInput" onPaste={this.onChangeValue.bind(this)} onChange={this.onChangeValue.bind(this)} value={projectCateInput} style={{width:"140px",margin:"12px"}} label="내용" type="search" variant="outlined" />
                         }
                     </div>
                     <AutoCreateBox blur={false} style={{width:"100px"}} text={"같이 작업한 구성원을 추가해주세요."} list={partnerList || []} clear={true} onChange={this.addChips.bind(this,"partner")} />
@@ -108,7 +107,7 @@ class PortfolioPopup extends Component {
                             })
                         }
                     </div>
-                    <textarea value={content} onChange={this.onChangeValue.bind(this)} name="content" placeholder="프로젝트에 대한 간단한 설명을 해주세요." className="portfolio-textarea"></textarea>
+                    <textarea value={content} onPaste={this.onChangeValue.bind(this)} onChange={this.onChangeValue.bind(this)} name="content" placeholder="프로젝트에 대한 간단한 설명을 해주세요." className="portfolio-textarea"></textarea>
                     <div>
                         <input
                             accept="image/*" style={{display:"none"}}
@@ -124,9 +123,9 @@ class PortfolioPopup extends Component {
                             : 
                             imagesUrl.map((tile,i) => (
                                 <GridListTile key={i}>
-                                    <img src={tile.preview} alt="img" />
+                                    <img src={tile.data} alt="img" />
                                     <GridListTileBar
-                                        title=""
+                                        title={tile.name}
                                         actionIcon={
                                             <IconButton onClick={this.deleteImage.bind(this,tile.preview)}>
                                                 <HighlightOffIcon style={{color:"#ffffff"}} />

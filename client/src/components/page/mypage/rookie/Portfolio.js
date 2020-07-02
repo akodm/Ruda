@@ -92,7 +92,10 @@ class Portfolio extends Component {
     // 포트폴리오 수정 하는 호출
     async updatePortfolio() {
         try {
-            const { title, content, tag, startDate, startMonth, endDate, endMonth, ingDate, partner, projectCate, projectCateInput, projectUrl, imagesUrl, addView, portfolioList } = this.state;
+            const { title, content, 
+                tag, startDate, startMonth, endDate, endMonth, ingDate, 
+                partner, projectCate, projectCateInput, projectUrl, imagesUrl,
+                addView, portfolioList } = this.state;
             const { userId } = this.props;
 
             if(!title || !startDate || !startMonth) {
@@ -103,11 +106,9 @@ class Portfolio extends Component {
             let start = startDate + "-" + startMonth;
             let end = ingDate ? "" : (endDate + "-" + endMonth);
             let cate = projectCateInput ? projectCateInput : projectCate;
-            let urlArr = imagesUrl.map(data => {
-                return data.data;
-            })
 
-            const result = await axios.post(`${config.app.s_url}/portfolios/update`, {
+            let portfolioListArray = portfolioList;
+            portfolioListArray[addView.idx] = {
                 title : title,
                 content : content,
                 tag : tag,
@@ -116,16 +117,27 @@ class Portfolio extends Component {
                 partner : partner,
                 projectCate : cate,
                 projectUrl : projectUrl,
-                imagesUrl : urlArr,
+                imagesUrl : imagesUrl,
+                userId : userId,
+                id : addView.id,
+            }
+
+            const result = await axios.put(`${config.app.s_url}/portfolios/update`, {
+                title : title,
+                content : content,
+                tag : tag,
+                startDate : start,
+                endDate : end,
+                partner : partner,
+                projectCate : cate,
+                projectUrl : projectUrl,
+                imagesUrl : imagesUrl,
                 userId : userId,
                 id : addView.id,
             });
             if(result.data) {
-                this.setState(current => ({
-                    portfolioList : current.portfolioList.concat(result.data)
-                }))
+                this.setState({ portfolioList : portfolioListArray, addView : { view : false, create : false  }})
                 this.onChangeNull.bind(this);
-                this.setState({ addView : { view : false, create : false }})
                 alert("포트폴리오를 수정하였습니다.");
             } else {
                 alert("잘못된 값이 있습니다. 다시 시도해주세요.");
@@ -156,6 +168,7 @@ class Portfolio extends Component {
                             this.state.imagesUrl.concat({
                                 data : url,
                                 preview : URL.createObjectURL(image),
+                                name : image.name,
                             }) 
                         }, () => this.setState({ imageLoad : false }));
                     })
@@ -218,7 +231,36 @@ class Portfolio extends Component {
             addView : { view : false, create : false },
         })
     }
-        
+
+    // 수정 시 데이터 변경
+    onChangeUpdate(data, i) {
+        const { portfolioList } = this.state;
+        let start = portfolioList[i].startDate.split("-");
+        let end = portfolioList[i].endDate.split("-");
+        let cateInput = /교내|교외|산업체/.test(portfolioList[i].projectCate);
+        this.setState({
+            title : portfolioList[i].title,
+            startDate : start[0] || "",
+            startMonth : start[1] || "1",
+            endDate : end[0] || "",
+            endMonth : end[1] || "1",
+            ingDate : !portfolioList[i].endDate ? true : false,
+            projectUrl : portfolioList[i].projectUrl,
+            projectCate : cateInput ? portfolioList[i].projectCate : "직적입력",
+            projectCateInput : cateInput ? "" : portfolioList[i].projectCate,
+            partner : portfolioList[i].partner,
+            tag : portfolioList[i].tag,
+            content : portfolioList[i].content,
+            imagesUrl : portfolioList[i].imagesUrl,
+            addView : { view : true, create : false, id : data.id, idx : i }
+        })
+    }
+
+    async portfolioadd() {
+        await this.onChangeNull();
+        this.setState({ addView : { view : true, create : true }});
+    }
+
     render() {
         const { userName, userEmail, load } = this.props;
         const { portfolioList, addView, ingDate,
@@ -240,7 +282,7 @@ class Portfolio extends Component {
                 {/* 초기 타이틀 라인 */}
                 <div className="portfolio-title">
                     {
-                        userEmail && <div className="portfolio-content" onClick={() => this.setState({ addView : { view : true, create : true } })}><span style={{marginRight:"5px"}}>포트폴리오 추가</span><LibraryAddOutlinedIcon /></div>
+                        userEmail && <div className="portfolio-content" onClick={this.portfolioadd.bind(this)}><span style={{marginRight:"5px"}}>포트폴리오 추가</span><LibraryAddOutlinedIcon /></div>
                     }
                     <div>{userName}님의 포트폴리오 개수는 <span style={{color:"red"}}>{portfolioList.length}</span>개 입니다.</div>
                 </div>
@@ -267,7 +309,6 @@ class Portfolio extends Component {
                         imagesUrl={imagesUrl}
                         textBtn={addView.create ? "포트폴리오 추가" : "포트폴리오 수정"}
                         addView={addView}
-                        portfolioList={!addView.create && portfolioList}
 
                         onChangeValue={this.onChangeValue.bind(this)}
                         onChangeDate={this.onChangeDate.bind(this)}
@@ -286,7 +327,7 @@ class Portfolio extends Component {
                     portfolioList && portfolioList[0] ?
                     portfolioList.map((data,i) => {
                         return <div className="portfolio-list-div" key={i}>
-                            <div className="portfolio-idx-title">{data.title}{userEmail && <EditOutlinedIcon style={{cursor:"pointer"}} onClick={() => this.setState({ addView : { view : true, create : false, id : data.id, idx : i }})} />}</div>
+                            <div className="portfolio-idx-title">{data.title}{userEmail && <EditOutlinedIcon style={{cursor:"pointer"}} onClick={this.onChangeUpdate.bind(this, data, i)} />}</div>
                             <div className="portfolio-idx-date"><span>{data.startDate}~{data.endDate || "진행 중"}</span><span>구분: {data.projectCate}</span></div>
                             <textarea className="portfolio-idx-contentBox" value={data.content} readOnly></textarea>
                             <div className="portfolio-idx-partnerTitle">함께한 구성원</div>
@@ -306,7 +347,7 @@ class Portfolio extends Component {
                                 <div className="portfolio-idx-imageArr" style={{marginTop:"-50px"}}>
                                     {
                                         data.imagesUrl.map((data,i) => {
-                                            return <Avatar onClick={() => this.setState({ imageView : true, preview : data.preview })} variant="rounded" key={i} alt="Remy Sharp" src={data.preview} 
+                                            return <Avatar onClick={() => this.setState({ imageView : true, preview : data.data })} variant="rounded" key={i} alt="Remy Sharp" src={data.data} 
                                                 style={{
                                                     border:"1px solid rgba(156, 156, 156, 0.664)",
                                                     margin:"5px",height:"70px",width:"70px",cursor:"pointer"
