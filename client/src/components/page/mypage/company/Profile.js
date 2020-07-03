@@ -57,7 +57,11 @@ class Profile extends Component {
                                     </div>
                                     <div className="profile-text">
                                         <LanguageIcon style={{fontSize:"medium",margin:"10px"}}/>
+<<<<<<< HEAD
                                         <p><a href="">{companyInfo.companyUrl}</a></p>
+=======
+                                        <p><a href="/">www.highrookie.com</a></p>
+>>>>>>> origin/junmyeong
                                     </div>
                                     <div className="profile-text">
                                         <PhoneIcon style={{fontSize:"medium",margin:"10px"}}/>

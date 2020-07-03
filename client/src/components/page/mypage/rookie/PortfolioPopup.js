@@ -19,31 +19,34 @@ import SelectBox from '../../../component/SelectBox';
 class PortfolioPopup extends Component {
 
     onChangeValue(e) {
-        this.props.onChangeValue(e.target.value);
+        this.props.onChangeValue(e);
     }
 
-    onChangeDate(e) {
-        this.props.onChangeDate(e);
+    onChangeDate(cate, e) {
+        this.props.onChangeDate(cate, e);
     }
 
     addChips(cate,e) {
         this.props.addChips(cate,e);
     }
 
-    deleteChips(e) {
-        this.props.deleteChips(e);
+    deleteChips(cate,e) {
+        this.props.deleteChips(cate,e);
     }
 
     addImage(e) {
         this.props.addImage(e);
     }
 
-    deleteImage(data,e) {
-        this.props.deleteImage(data,e);
+    deleteImage(data) {
+        this.props.deleteImage(data);
     }
 
     savePortfolio() {
-        this.props.savePortfolio();
+        if(this.props.addView.create)
+            this.props.savePortfolio();
+        else
+            this.props.updatePortfolio();
     }
 
     closeBtn() {
@@ -51,54 +54,60 @@ class PortfolioPopup extends Component {
     }
 
     render() {
+        const { textTitle, title,
+            startDate, startMonth, endDate, endMonth, ingDate,
+            projectUrl, projectCate, projectCateInput, 
+            partner, partnerList, tag, tagList, content,
+            imagesUrl, imageLoad, textBtn,
+        } = this.props;
         return (
             <div className="portfolio-popup">
                 <div className="portfolio-add-div">
-                    <div className="portfolio-add-title">{this.props.textTitle}</div>
-                    <TextField helperText="프로젝트명을 간단하게 입력하세요." name="title" onChange={this.onChangeValue.bind(this)} value={this.props.title} label="프로젝트명 *" type="search" variant="outlined" />
+                    <div className="portfolio-add-title">{textTitle}</div>
+                    <TextField onPaste={this.onChangeValue.bind(this)} helperText="프로젝트명을 간단하게 입력하세요." name="title" onChange={this.onChangeValue.bind(this)} value={title} label="프로젝트명 *" type="search" variant="outlined" />
                     <div className="rowLayout">
-                        <TextField helperText={moment(new Date()).subtract(2, "year").format("YYYY")} name="startDate" onChange={this.onChangeValue.bind(this)} value={this.props.startDate} style={{width:"108px"}} label="시작년도 *" type="search" variant="outlined" />
+                        <TextField helperText={moment(new Date()).subtract(2, "year").format("YYYY")} name="startDate" onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} value={startDate} style={{width:"108px"}} label="시작년도 *" type="search" variant="outlined" />
                         <SelectBox 
-                            value={this.props.startMonth} func={this.onChangeDate.bind(this)} style={{marginBottom:"22px",marginLeft:"20px",marginRight:"20px"}}
+                            value={startMonth} func={this.onChangeDate.bind(this, "startMonth")} style={{marginBottom:"22px",marginLeft:"20px",marginRight:"20px"}}
                             label={"월 *"} option={["1","2","3","4","5","6","7","8","9","10","11","12"]} text={"월 *"}
                         />
-                        <TextField disabled={ this.props.ingDate && true} helperText={moment(new Date()).format("YYYY")} name="endDate" onChange={this.onChangeValue.bind(this)} value={this.props.endDate} style={{width:"108px",margin:"12px"}} label="종료년도" type="search" variant="outlined" />
+                        <TextField disabled={ingDate && true} helperText={moment(new Date()).format("YYYY")} name="endDate" onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} value={endDate} style={{width:"108px",margin:"12px"}} label="종료년도" type="search" variant="outlined" />
                         <SelectBox 
-                            disabled={ this.props.ingDate && true} value={this.props.endMonth} func={this.onChangeDate.bind(this)} style={{marginBottom:"22px",marginLeft:"10px"}}
+                            disabled={ingDate && true} value={endMonth} func={this.onChangeDate.bind(this, "endMonth")} style={{marginBottom:"22px",marginLeft:"10px"}}
                             label={"월"} option={["1","2","3","4","5","6","7","8","9","10","11","12"]} text={"월"}
                         />
-                        <CheckBox label="진행 중" style={{marginBottom:"15px",marginLeft:"15px"}} check={this.props.ingDate} func={this.onChangeDate.bind(this)} name="ingDate" color="primary" />
+                        <CheckBox label="진행 중" style={{marginBottom:"15px",marginLeft:"15px"}} check={ingDate} func={this.onChangeDate.bind(this, "ingDate")} name={"ingDate"} color="primary" />
                     </div>
                     <div className="rowLayout" style={{alignItems:"center",marginTop:"-10px",marginBottom:"25px"}}>
-                        <TextField helperText="프로젝트를 보여줄 주소나 경로를 알려주세요." name="projectUrl" onChange={this.onChangeValue.bind(this)} value={this.props.projectUrl} style={{width:"600px",marginTop:"22px",marginRight:"10px"}} label="프로젝트 URL" type="search" variant="outlined" />
+                        <TextField helperText="프로젝트를 보여줄 주소나 경로를 알려주세요." name="projectUrl" onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} value={projectUrl} style={{width:"600px",marginTop:"22px",marginRight:"10px"}} label="프로젝트 URL" type="search" variant="outlined" />
                         <SelectBox 
-                            value={this.props.projectCate} func={this.onChangeDate.bind(this)}
+                            value={projectCate} func={this.onChangeDate.bind(this, "projectCate")}
                             label={"구분"} option={["교내","교외","산업체","직접입력"]} text={"구분"}
                         />
                         {
-                            this.props.projectCate === "직접입력" && 
-                            <TextField name="projectCateInput" onChange={this.onChangeValue.bind(this)} value={this.props.projectCateInput} style={{width:"140px",margin:"12px"}} label="내용" type="search" variant="outlined" />
+                            projectCate === "직접입력" && 
+                            <TextField name="projectCateInput" onPaste={this.onChangeValue.bind(this)} onChange={this.onChangeValue.bind(this)} value={projectCateInput} style={{width:"140px",margin:"12px"}} label="내용" type="search" variant="outlined" />
                         }
                     </div>
-                    <AutoCreateBox blur={false} style={{width:"100px"}} text={"같이 작업한 구성원을 추가해주세요."} list={this.props.partnerList || []} clear={true} onChange={this.addChips.bind(this,"partner")} />
+                    <AutoCreateBox blur={false} style={{width:"100px"}} text={"같이 작업한 구성원을 추가해주세요."} list={partnerList || []} clear={true} onChange={this.addChips.bind(this,"partner")} />
                     <div className="portfolio-partner-div">
                         {
-                            this.props.partner.map((data,i) => {
-                                return <TagChip func={this.deleteChips.bind(this)} name={data} key={i} />
+                            partner.map((data,i) => {
+                                return <TagChip func={this.deleteChips.bind(this, "partner")} name={data} key={i} />
                             })
                         }
                     </div>
                     <div style={{marginTop:"10px"}}>
-                        <AutoCreateBox blur={false} style={{width:"100px"}} text={"프로젝트에 사용한 기술스택을 추가하세요."} list={this.props.tagList || []} clear={true} onChange={this.addChips.bind(this,"tag")} />
+                        <AutoCreateBox blur={false} style={{width:"100px"}} text={"프로젝트에 사용한 기술스택을 추가하세요."} list={tagList || []} clear={true} onChange={this.addChips.bind(this,"tag")} />
                     </div>
                     <div className="portfolio-partner-div" style={{marginBottom:"25px"}}>
                         {
-                            this.props.tag.map((data,i) => {
-                                return <TagChip func={this.deleteChips.bind(this)} name={data} key={i} />
+                            tag.map((data,i) => {
+                                return <TagChip func={this.deleteChips.bind(this, "tag")} name={data} key={i} />
                             })
                         }
                     </div>
-                    <textarea value={this.props.content} onChange={this.onChangeValue.bind(this)} name="content" placeholder="프로젝트에 대한 간단한 설명을 해주세요." className="portfolio-textarea"></textarea>
+                    <textarea value={content} onPaste={this.onChangeValue.bind(this)} onChange={this.onChangeValue.bind(this)} name="content" placeholder="프로젝트에 대한 간단한 설명을 해주세요." className="portfolio-textarea"></textarea>
                     <div>
                         <input
                             accept="image/*" style={{display:"none"}}
@@ -110,13 +119,13 @@ class PortfolioPopup extends Component {
                     </div>
                     <div className="portfolio-img-div">
                         <GridList cellHeight={180} style={{width:"100%",height:"200px",margin:"10px"}}>
-                            { this.props.imageLoad ? <div style={{width:"100px",height:"100px"}}><CircularProgress/></div> 
+                            { imageLoad ? <div style={{width:"100px",height:"100px"}}><CircularProgress/></div> 
                             : 
-                            this.props.imagesUrl.map((tile,i) => (
+                            imagesUrl.map((tile,i) => (
                                 <GridListTile key={i}>
-                                    <img src={tile.preview} alt={tile.image.name} />
+                                    <img src={tile.data} alt="img" />
                                     <GridListTileBar
-                                        title={tile.image.name}
+                                        title={tile.name}
                                         actionIcon={
                                             <IconButton onClick={this.deleteImage.bind(this,tile.preview)}>
                                                 <HighlightOffIcon style={{color:"#ffffff"}} />
@@ -132,7 +141,7 @@ class PortfolioPopup extends Component {
                             onClick={this.savePortfolio.bind(this)}
                             variant="contained" color="primary" size="small"
                             >
-                            포트폴리오 추가하기
+                            { textBtn }
                         </Button>
                         <Button
                             onClick={this.closeBtn.bind(this)}

@@ -5,25 +5,14 @@ import config from '../../../../client-configs';
 import dataList from '../../../../data-list';
 import { storage } from "../../../../firebase";
 import axios from 'axios';
-import moment from 'moment';
 
 import LibraryAddOutlinedIcon from '@material-ui/icons/LibraryAddOutlined';
 import AssignmentLateOutlinedIcon from '@material-ui/icons/AssignmentLateOutlined';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import IconButton from '@material-ui/core/IconButton';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Avatar from '@material-ui/core/Avatar';
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 
-import AutoCreateBox from '../../../component/AutoCreatable';
 import TagChip from '../../../component/TagChip';
-import CheckBox from '../../../component/CheckBox';
-import SelectBox from '../../../component/SelectBox';
-// import Popup from './PortfolioPopup';
+import Popup from './PortfolioPopup';
 
 class Portfolio extends Component {
     constructor(props) {
@@ -70,9 +59,6 @@ class Portfolio extends Component {
             let start = startDate + "-" + startMonth;
             let end = ingDate ? "" : (endDate + "-" + endMonth);
             let cate = projectCateInput ? projectCateInput : projectCate;
-            let urlArr = imagesUrl.map(data => {
-                return data.data;
-            })
 
             const result = await axios.post(`${config.app.s_url}/portfolios/create`, {
                 title : title,
@@ -83,7 +69,7 @@ class Portfolio extends Component {
                 partner : partner,
                 projectCate : cate,
                 projectUrl : projectUrl,
-                imagesUrl : urlArr,
+                imagesUrl : imagesUrl,
                 userId : userId,
             });
             if(result.data) {
@@ -91,8 +77,68 @@ class Portfolio extends Component {
                 this.setState(current => ({
                     portfolioList : current.portfolioList.concat(result.data)
                 }))
-                this.setState({ addView : false });
+                this.onChangeNull.bind(this);
+                this.setState({ addView : { view : false, create : false }})
                 alert("포트폴리오를 추가하였습니다.");
+            } else {
+                alert("잘못된 값이 있습니다. 다시 시도해주세요.");
+            }
+        } catch(err) {
+            console.log("portfolio save err : " + err);
+        }
+        this.setState({ loaded : true });
+    }
+
+    // 포트폴리오 수정 하는 호출
+    async updatePortfolio() {
+        try {
+            const { title, content, 
+                tag, startDate, startMonth, endDate, endMonth, ingDate, 
+                partner, projectCate, projectCateInput, projectUrl, imagesUrl,
+                addView, portfolioList } = this.state;
+            const { userId } = this.props;
+
+            if(!title || !startDate || !startMonth) {
+                alert("필수 입력 사항을 입력해주세요.");
+                return;
+            }
+
+            let start = startDate + "-" + startMonth;
+            let end = ingDate ? "" : (endDate + "-" + endMonth);
+            let cate = projectCateInput ? projectCateInput : projectCate;
+
+            let portfolioListArray = portfolioList;
+            portfolioListArray[addView.idx] = {
+                title : title,
+                content : content,
+                tag : tag,
+                startDate : start,
+                endDate : end,
+                partner : partner,
+                projectCate : cate,
+                projectUrl : projectUrl,
+                imagesUrl : imagesUrl,
+                userId : userId,
+                id : addView.id,
+            }
+
+            const result = await axios.put(`${config.app.s_url}/portfolios/update`, {
+                title : title,
+                content : content,
+                tag : tag,
+                startDate : start,
+                endDate : end,
+                partner : partner,
+                projectCate : cate,
+                projectUrl : projectUrl,
+                imagesUrl : imagesUrl,
+                userId : userId,
+                id : addView.id,
+            });
+            if(result.data) {
+                this.setState({ portfolioList : portfolioListArray, addView : { view : false, create : false  }})
+                this.onChangeNull.bind(this);
+                alert("포트폴리오를 수정하였습니다.");
             } else {
                 alert("잘못된 값이 있습니다. 다시 시도해주세요.");
             }
@@ -122,7 +168,7 @@ class Portfolio extends Component {
                             this.state.imagesUrl.concat({
                                 data : url,
                                 preview : URL.createObjectURL(image),
-                                image : image,
+                                name : image.name,
                             }) 
                         }, () => this.setState({ imageLoad : false }));
                     })
@@ -154,12 +200,67 @@ class Portfolio extends Component {
     }
 
     // 파트너와 태그를 삭제하는 함수
-    partnerDelete(e) { this.setState(current => ({ partner : current.partner.filter(data => { return data !== e })})) }
-    tagDelete(e) { this.setState(current => ({ tag : current.tag.filter(data => { return data !== e })})) }
+    deleteChips(cate,e) {
+        if(cate === "tag") {
+            this.setState(current => ({ tag : current.tag.filter(data => { return data !== e })}))
+        } else {
+            this.setState(current => ({ partner : current.partner.filter(data => { return data !== e })}))
+        }
+    }
 
     // 기본 인풋 데이터 변경 함수
     onChangeValue(e) { this.setState({ [e.target.name] : e.target.value }) }
-        
+    onChangeDate(cate, e) { this.setState({ [cate] : e}) }
+    onChangeNull() {
+        this.setState({
+            title : "",
+            content : "",
+            tag : [],
+            partner : [],
+            startDate : "",
+            startMonth : "1",
+            endDate : "",
+            endMonth : "1",
+            ingDate : false,
+            projectCate : "교내",
+            projectCateInput : "",
+            projectUrl : "",
+            imagesUrl : [],
+            imageLoad : false,
+            imageView : false,
+            addView : { view : false, create : false },
+        })
+    }
+
+    // 수정 시 데이터 변경
+    onChangeUpdate(data, i) {
+        const { portfolioList } = this.state;
+        let start = portfolioList[i].startDate.split("-");
+        let end = portfolioList[i].endDate.split("-");
+        let cateInput = /교내|교외|산업체/.test(portfolioList[i].projectCate);
+        this.setState({
+            title : portfolioList[i].title,
+            startDate : start[0] || "",
+            startMonth : start[1] || "1",
+            endDate : end[0] || "",
+            endMonth : end[1] || "1",
+            ingDate : !portfolioList[i].endDate ? true : false,
+            projectUrl : portfolioList[i].projectUrl,
+            projectCate : cateInput ? portfolioList[i].projectCate : "직적입력",
+            projectCateInput : cateInput ? "" : portfolioList[i].projectCate,
+            partner : portfolioList[i].partner,
+            tag : portfolioList[i].tag,
+            content : portfolioList[i].content,
+            imagesUrl : portfolioList[i].imagesUrl,
+            addView : { view : true, create : false, id : data.id, idx : i }
+        })
+    }
+
+    async portfolioadd() {
+        await this.onChangeNull();
+        this.setState({ addView : { view : true, create : true }});
+    }
+
     render() {
         const { userName, userEmail, load } = this.props;
         const { portfolioList, addView, ingDate,
@@ -181,105 +282,44 @@ class Portfolio extends Component {
                 {/* 초기 타이틀 라인 */}
                 <div className="portfolio-title">
                     {
-                        userEmail && <div className="portfolio-content" onClick={() => this.setState({ addView : true })}><span style={{marginRight:"5px"}}>포트폴리오 추가</span><LibraryAddOutlinedIcon /></div>
+                        userEmail && <div className="portfolio-content" onClick={this.portfolioadd.bind(this)}><span style={{marginRight:"5px"}}>포트폴리오 추가</span><LibraryAddOutlinedIcon /></div>
                     }
                     <div>{userName}님의 포트폴리오 개수는 <span style={{color:"red"}}>{portfolioList.length}</span>개 입니다.</div>
                 </div>
 
                 {/* 포트폴리오 추가 팝업 창 */}
                 {
-                    addView &&
-                    <div className="portfolio-popup">
-                        <div className="portfolio-add-div">
-                            <div className="portfolio-add-title">포트폴리오 추가를 위해 값을 입력해주세요!</div>
-                            <TextField helperText="프로젝트명을 간단하게 입력하세요." name="title" onChange={this.onChangeValue.bind(this)} value={title} label="프로젝트명 *" type="search" variant="outlined" />
-                            <div className="rowLayout">
-                                <TextField helperText={moment(new Date()).subtract(2, "year").format("YYYY")} name="startDate" onChange={this.onChangeValue.bind(this)} value={startDate} style={{width:"108px"}} label="시작년도 *" type="search" variant="outlined" />
-                                <SelectBox 
-                                    value={startMonth} func={(e) => this.setState({ startMonth : e })} style={{marginBottom:"22px",marginLeft:"20px",marginRight:"20px"}}
-                                    label={"월 *"} option={["1","2","3","4","5","6","7","8","9","10","11","12"]} text={"월 *"}
-                                />
-                                <TextField disabled={ ingDate && true} helperText={moment(new Date()).format("YYYY")} name="endDate" onChange={this.onChangeValue.bind(this)} value={endDate} style={{width:"108px",margin:"12px"}} label="종료년도" type="search" variant="outlined" />
-                                <SelectBox 
-                                    disabled={ ingDate && true} value={endMonth} func={(e) => this.setState({ endMonth : e })} style={{marginBottom:"22px",marginLeft:"10px"}}
-                                    label={"월"} option={["1","2","3","4","5","6","7","8","9","10","11","12"]} text={"월"}
-                                />
-                                <CheckBox label="진행 중" style={{marginBottom:"15px",marginLeft:"15px"}} check={ingDate} func={(e) => this.setState({ ingDate : e })} name="ingDate" color="primary" />
-                            </div>
-                            <div className="rowLayout" style={{alignItems:"center",marginTop:"-10px",marginBottom:"25px"}}>
-                                <TextField helperText="프로젝트를 보여줄 주소나 경로를 알려주세요." name="projectUrl" onChange={this.onChangeValue.bind(this)} value={projectUrl} style={{width:"600px",marginTop:"22px",marginRight:"10px"}} label="프로젝트 URL" type="search" variant="outlined" />
-                                <SelectBox 
-                                    value={projectCate} func={(e) => this.setState({ projectCate : e })}
-                                    label={"구분"} option={["교내","교외","산업체","직접입력"]} text={"구분"}
-                                />
-                                {
-                                    projectCate === "직접입력" && 
-                                    <TextField name="projectCateInput" onChange={this.onChangeValue.bind(this)} value={projectCateInput} style={{width:"140px",margin:"12px"}} label="내용" type="search" variant="outlined" />
-                                }
-                            </div>
-                            <AutoCreateBox blur={false} style={{width:"100px"}} text={"같이 작업한 구성원을 추가해주세요."} list={[]} clear={true} onChange={this.addChips.bind(this,"partner")} />
-                            <div className="portfolio-partner-div">
-                                {
-                                    partner.map((data,i) => {
-                                        return <TagChip func={this.partnerDelete.bind(this)} name={data} key={i} />
-                                    })
-                                }
-                            </div>
-                            <div style={{marginTop:"10px"}}>
-                                <AutoCreateBox blur={false} style={{width:"100px"}} text={"프로젝트에 사용한 기술스택을 추가하세요."} list={dataList.app.tagList} clear={true} onChange={this.addChips.bind(this,"tag")} />
-                            </div>
-                            <div className="portfolio-partner-div" style={{marginBottom:"25px"}}>
-                                {
-                                    tag.map((data,i) => {
-                                        return <TagChip func={this.tagDelete.bind(this)} name={data} key={i} />
-                                    })
-                                }
-                            </div>
-                            <textarea value={content} onChange={this.onChangeValue.bind(this)} name="content" placeholder="프로젝트에 대한 간단한 설명을 해주세요." className="portfolio-textarea"></textarea>
-                            <div>
-                                <input
-                                    accept="image/*" style={{display:"none"}}
-                                    id="contained-button-file" multiple type="file"
-                                    onChange={this.addImage.bind(this)} />
-                                <label htmlFor="contained-button-file">
-                                    <Button variant="contained" color="primary" component="span">이미지 추가</Button>
-                                </label>
-                            </div>
-                            <div className="portfolio-img-div">
-                                <GridList cellHeight={180} style={{width:"100%",height:"200px",margin:"10px"}}>
-                                    { imageLoad ? <div style={{width:"100px",height:"100px"}}><CircularProgress/></div> 
-                                    : 
-                                    imagesUrl.map((tile,i) => (
-                                        <GridListTile key={i}>
-                                            <img src={tile.preview} alt={tile.image.name} />
-                                            <GridListTileBar
-                                                title={tile.image.name}
-                                                actionIcon={
-                                                    <IconButton onClick={this.deleteImage.bind(this,tile.preview)}>
-                                                        <HighlightOffIcon style={{color:"#ffffff"}} />
-                                                    </IconButton>
-                                                }
-                                            />
-                                        </GridListTile>
-                                    )) }
-                                </GridList>
-                            </div>
-                            <div className="portfolio-close">
-                                <Button
-                                    onClick={this.savePortfolio.bind(this)}
-                                    variant="contained" color="primary" size="small"
-                                    >
-                                    포트폴리오 추가하기
-                                </Button>
-                                <Button
-                                    onClick={() => this.setState({ addView : false })}
-                                    variant="contained" color="default" size="small"
-                                    >
-                                    창 닫기
-                                </Button>
-                            </div>
-                        </div>
-                    </div>
+                    addView.view && 
+                    <Popup 
+                        textTitle={addView.create ? "포트폴리오 추가를 위해 값을 입력해주세요!" : "포트폴리오 수정을 위해 값을 변경해주세요!"}
+                        title={title}
+                        startDate={startDate}
+                        startMonth={startMonth}
+                        endDate={endDate}
+                        endMonth={endMonth}
+                        ingDate={ingDate}
+                        projectUrl={projectUrl}
+                        projectCate={projectCate}
+                        projectCateInput={projectCateInput}
+                        partner={partner}
+                        tag={tag}
+                        tagList={dataList.app.tagList}
+                        content={content}
+                        imageLoad={imageLoad}
+                        imagesUrl={imagesUrl}
+                        textBtn={addView.create ? "포트폴리오 추가" : "포트폴리오 수정"}
+                        addView={addView}
+
+                        onChangeValue={this.onChangeValue.bind(this)}
+                        onChangeDate={this.onChangeDate.bind(this)}
+                        addChips={this.addChips.bind(this)}
+                        deleteChips={this.deleteChips.bind(this)}
+                        addImage={this.addImage.bind(this)}
+                        deleteImage={this.deleteImage.bind(this)}
+                        savePortfolio={this.savePortfolio.bind(this)}
+                        updatePortfolio={this.updatePortfolio.bind(this)}
+                        closeBtn={this.onChangeNull.bind(this)}
+                    />
                 }
 
                 {/* 포트폴리오를 표시하거나 초기 가이드 텍스트 표시 */}
@@ -287,7 +327,7 @@ class Portfolio extends Component {
                     portfolioList && portfolioList[0] ?
                     portfolioList.map((data,i) => {
                         return <div className="portfolio-list-div" key={i}>
-                            <div className="portfolio-idx-title">{data.title}</div>
+                            <div className="portfolio-idx-title">{data.title}{userEmail && <EditOutlinedIcon style={{cursor:"pointer"}} onClick={this.onChangeUpdate.bind(this, data, i)} />}</div>
                             <div className="portfolio-idx-date"><span>{data.startDate}~{data.endDate || "진행 중"}</span><span>구분: {data.projectCate}</span></div>
                             <textarea className="portfolio-idx-contentBox" value={data.content} readOnly></textarea>
                             <div className="portfolio-idx-partnerTitle">함께한 구성원</div>
@@ -307,7 +347,7 @@ class Portfolio extends Component {
                                 <div className="portfolio-idx-imageArr" style={{marginTop:"-50px"}}>
                                     {
                                         data.imagesUrl.map((data,i) => {
-                                            return <Avatar onClick={() => this.setState({ imageView : true, preview : data })} variant="rounded" key={i} alt="Remy Sharp" src={data} 
+                                            return <Avatar onClick={() => this.setState({ imageView : true, preview : data.data })} variant="rounded" key={i} alt="Remy Sharp" src={data.data} 
                                                 style={{
                                                     border:"1px solid rgba(156, 156, 156, 0.664)",
                                                     margin:"5px",height:"70px",width:"70px",cursor:"pointer"
