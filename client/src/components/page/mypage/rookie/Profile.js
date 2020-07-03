@@ -15,7 +15,6 @@ import WorkIcon from '@material-ui/icons/Work';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import LocalPlayIcon from '@material-ui/icons/LocalPlay';
-
 class Profile extends Component {
     constructor(props){
         super(props);
@@ -23,14 +22,17 @@ class Profile extends Component {
             imgPreview:"",
         }
     }
-
+    moveLink(link){
+        console.log(link);
+        window.location.href = link; 
+    }
     render() {
         //const{imgPreview}=this.state;
         const { userInfo } = this.props;
         const Tag = userInfo.userTags;
         const Keyword = userInfo.userKeyword;
         const Specialty = userInfo.userSpecialty;
-
+        const editDis = this.state;
         return userInfo ? (
             <div className="Mypage-profile">
                 <div className="Mypage-profile-Maininfo">
@@ -56,7 +58,7 @@ class Profile extends Component {
                                     </div>
                                     <div className="profile-text">
                                         <LanguageIcon style={{fontSize:"medium",margin:"10px"}}/>
-                                        <p><a href="">www.highrookie.com</a></p>
+                                        <p onClick={this.moveLink.bind(this,userInfo.userUrl)}>{userInfo.userUrl}</p>
                                     </div>
                                     <div className="profile-text">
                                         <PhoneIcon style={{fontSize:"medium",margin:"10px"}}/>
@@ -70,10 +72,12 @@ class Profile extends Component {
                                         <SchoolIcon style={{fontSize:"medium",margin:"10px"}}/>
                                         <p>{userInfo.userUnvcity}/{userInfo.userAttend}</p>
                                     </div>
+                                    {userInfo.userMilitary=="해당없음"?"":
                                     <div className="profile-text">
                                         <LocalPlayIcon  style={{fontSize:"medium",margin:"10px"}}/>
-                                        <p>군필/공군</p>
+                                        <p>{userInfo.userMilitary}</p>
                                     </div>
+                                    }
                                 </div>
                                 {/* 포지션 */}
                                 <div className="profile-intro"><hr></hr>
@@ -82,28 +86,37 @@ class Profile extends Component {
                                         <WorkIcon style={{fontSize:"medium",margin:"10px"}}/>
                                         <p>{userInfo.userField} </p>
                                     </div>
+                                    {userInfo.userTraningDateState=="미정"?"":
                                     <div className="profile-text">
                                         <AssignmentIndIcon style={{fontSize:"medium",margin:"10px"}}/>
-                                        <p>{userInfo.userTraningDateState}/{userInfo.userWorkDateState}</p>
-                                    </div>
+                                        <p>현장실습:{userInfo.userTraningDateState}</p>
+                                    </div>}
+                                    {userInfo.userWorkDateState=="미정"?"":
                                     <div className="profile-text">
+                                        <AssignmentIndIcon style={{fontSize:"medium",margin:"10px"}}/>
+                                        <p>근무:{userInfo.userWorkDateState}</p>
+                                    </div>}           
+                                    {userInfo.userTraningDateState=="직접입력"? <div className="profile-text">
                                         <CalendarTodayIcon style={{fontSize:"medium",margin:"10px"}}/>
-                                        <p>{userInfo.userTrainingDate}/{userInfo.userWorkDate}</p>
-                                    </div>
-                                    
+                                        <p>실습가능날짜:{userInfo.userWorkDate}</p>
+                                    </div>:""}
+                                    {userInfo.userWorkDateState=="직접입력"?<div className="profile-text">
+                                        <CalendarTodayIcon style={{fontSize:"medium",margin:"10px"}}/>
+                                        <p>근무가능날짜:{userInfo.userTrainingDate}</p>
+                                    </div>:""}
                                 </div>
                                 <div className="profile-intro"><hr></hr>
                                     <p className="profile-intro-title" >COUNT</p><hr></hr>
                                     <div className="profile-text">
                                         <FavoriteIcon style={{fontSize:"medium",margin:"10px"}}/>
-                                        <p>{userInfo.userLike}150명이 좋아합니다. </p>
+                                        <p>{userInfo.userLike}명이 좋아합니다. </p>
                                     </div>
-                                    <div className="profile-text">
+                                    {/*<div className="profile-text">
                                         <PeopleIcon style={{fontSize:"medium",margin:"10px"}}/>
                                         <p>{userInfo.userClick}명이 방문하였습니다. </p>
-                                    </div>
+                                    </div>*/}
                                 </div>
-                                <button className="profile-edit" ><EditIcon style={{fontSize:"medium",margin:"5px"}}/>프로필수정</button>
+                                <button className="profile-edit"><EditIcon style={{fontSize:"medium",margin:"5px"}}/>프로필수정</button>
                             </div>
                             <div className="Mypage-profile-content-userinfo-data">
                                 <div className="Mypage-profile-content-userinfo-graph">
@@ -148,7 +161,7 @@ class Profile extends Component {
                                             <div className="keyword">
                                                 {
                                                     Specialty.map(function(str,i){
-                                                    return <div className="chip-margin" key={i}>
+                                                    return <div className="chip-maurgin" key={i}>
                                                         <TagChip name={str} size="small" color="primary" variant="outlined" />
                                                     </div>;
                                                     })

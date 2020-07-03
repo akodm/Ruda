@@ -59,6 +59,7 @@ router.post("/create", async (req, res) => {
 				companyCEO: req.body.companyCEO,
 				companyPhone: req.body.companyPhone,
 				companyAdd: req.body.companyAdd,
+				companyUrl: req.body.companyUrl,
 
 				companyField: req.body.companyField,
 				companyTags: req.body.companyTags,
@@ -99,6 +100,7 @@ router.put("/update", async(req, res) => {
 			companyCEO: req.body.companyCEO,
 			companyPhone: req.body.companyPhone,
 			companyAdd: req.body.companyAdd,
+			companyUrl: req.body.companyUrl,
 
 			companyField: req.body.companyField,
 			companyTags: req.body.companyTags,

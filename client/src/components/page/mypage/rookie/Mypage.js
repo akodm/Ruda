@@ -12,7 +12,7 @@ import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import Profile from './Profile';
 import Portfolio from './Portfolio';
 import Setting from './Setting';
-
+import EditProfile from './EditProfile';
 class mypage extends Component {
     constructor(props) {
         super(props);
@@ -23,7 +23,8 @@ class mypage extends Component {
             url :new URL(window.location.href),
             success:"none",
 
-            
+            likeCount:"",
+            likeList:[],
             portfolioData : [],
 
             load : false,
@@ -42,19 +43,14 @@ class mypage extends Component {
 
     MenuClick(num){ this.setState({ btnNum:num }) }
 
-    likeClick(){
-        const {likeBtn} = this.state;
-        if(likeBtn==="none"){
-            this.setState({
-                likeBtn:"click", 
-            })
+    /*async likeClick(){
+        try{
+            let result = await axios.get(`${config.app.s_url}/users/oneemail?userEmail=${email}&authCate=highrookie`);
+            
+        }catch(err){
+
         }
-        else{
-            this.setState({
-                likeBtn:"none", 
-            })
-        }
-    }
+    }*/
 
     savepdf(){
         document.title = '이름님의 이력서';
@@ -101,7 +97,7 @@ class mypage extends Component {
                             <div style={{width:"80%"}}>
                                 <div className="shareAlert-input">
                                     <input className="shareAlert-input-box" readOnly value={window.location.href} ></input>
-                                    <button className="shareAlert-btn" onClick={() => this.copyCodeToClipboard()}>링크복사</button>    
+                                    <button className="shareAlert-btns" onClick={() => this.copyCodeToClipboard()}>링크복사</button>    
                                 </div>
                                 <p style={{display:success,fontSize:"14px",color:"#11addd"}}>복사가 완료되었습니다.</p> 
                             </div>
@@ -119,8 +115,8 @@ class mypage extends Component {
                                     <div className="Mypage-pages-title-icons-icon">
                                         <ShareIcon onClick={this.shareLink.bind(this)}/>
                                     </div>
-                                    <div className="Mypage-pages-title-icons-icon" onClick={this.likeClick.bind(this)}>
-                                        {likeBtn==="none"?<FavoriteBorderIcon/>:<FavoriteIcon style={{ color : "#11addd"}}/>}
+                                    <div className="Mypage-pages-title-icons-icon" >
+                                        {likeBtn==="none"?<FavoriteBorderIcon />:<FavoriteIcon style={{ color : "#11addd"}}/>}
                                     </div>
                                     <div className="Mypage-pages-title-icons-icon">
                                         <MailOutlineIcon/>
@@ -138,7 +134,7 @@ class mypage extends Component {
                                 btnNum === 1 ?
                                 load && <Portfolio load={load} userEmail={user.email} userId={userInfo.userId} userName={userInfo.userName} portfolio={portfolioData} addPortfolio={this.portfolioConcat.bind(this)} />
                                 :
-                                user.email && <Setting />
+                                user.email && <EditProfile userInfo={userInfo}/>
                             }
                         </div>
                     </div>

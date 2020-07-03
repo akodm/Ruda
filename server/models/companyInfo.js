@@ -65,6 +65,9 @@ module.exports = (sequelize, DataTypes) => {
         companyClick : {
             type: DataTypes.INTEGER(11),    // 클릭된 수
         },
+        companyUrl : {
+            type: DataTypes.STRING,     // 기업 사이트 주소
+        },
         companyState : {
             type: DataTypes.STRING(10),     // 기업의 현재 채용 상태
         },

@@ -57,7 +57,7 @@ class Profile extends Component {
                                     </div>
                                     <div className="profile-text">
                                         <LanguageIcon style={{fontSize:"medium",margin:"10px"}}/>
-                                        <p><a href="">www.highrookie.com</a></p>
+                                        <p><a href="">{companyInfo.companyUrl}</a></p>
                                     </div>
                                     <div className="profile-text">
                                         <PhoneIcon style={{fontSize:"medium",margin:"10px"}}/>
@@ -73,7 +73,7 @@ class Profile extends Component {
                                     </div>
                                     <div className="profile-text">
                                         <LocalPlayIcon  style={{fontSize:"medium",margin:"10px"}}/>
-                                        <p>군필/공군</p>
+                                        <p>군대체복무가능</p>
                                     </div>
                                 </div>
                                 {/* 포지션 */}
@@ -150,7 +150,6 @@ class Profile extends Component {
                                                     })
                                                 }
                                             </div>
-                                        
                                             <div>
                                                 <p className="profile-skill-title">수상이력</p>
                                                 <div className="profile-skill-info-Awards">

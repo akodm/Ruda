@@ -24,6 +24,7 @@ class Mypage extends Component {
             success:"none",
 
             
+            likeCount:"",            
             portfolioData : [],
 
             load : false,
@@ -42,19 +43,9 @@ class Mypage extends Component {
 
     MenuClick(num){ this.setState({ btnNum:num }) }
 
-    likeClick(){
-        const {likeBtn} = this.state;
-        if(likeBtn==="none"){
-            this.setState({
-                likeBtn:"click", 
-            })
-        }
-        else{
-            this.setState({
-                likeBtn:"none", 
-            })
-        }
-    }
+    /*likeClick(){
+      
+    }*/
 
     savepdf(){
         document.title = '이름님의 이력서';
@@ -85,8 +76,6 @@ class Mypage extends Component {
             shareAlert:"none",
         })
     }
-
-
 
     render() {
         const {btnNum,likeBtn,shareAlert,success,portfolioData,load}=this.state;
@@ -119,8 +108,8 @@ class Mypage extends Component {
                                     <div className="Mypage-pages-title-icon-icon">
                                         <ShareIcon onClick={this.shareLink.bind(this)}/>
                                     </div>
-                                    <div className="Mypage-pages-title-icon-icon" onClick={this.likeClick.bind(this)}>
-                                        {likeBtn==="none"?<FavoriteBorderIcon/>:<FavoriteIcon style={{ color : "#11addd"}}/>}
+                                    <div className="Mypage-pages-title-icon-icon">
+                                        {likeBtn==="none"?<FavoriteBorderIcon />:<FavoriteIcon style={{ color : "#11addd"}}/>}
                                     </div>
                                     <div className="Mypage-pages-title-icon-icon">
                                         <MailOutlineIcon/>

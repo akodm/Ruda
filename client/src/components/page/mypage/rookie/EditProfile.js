@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
-import { storage } from "../../../firebase";
-import config from '../../../client-configs';
+import { storage } from "../../../../firebase";
+import config from '../../../../client-configs';
 import axios from 'axios';
 
-import Load from '../../component/Load';
-import dataList from '../../../data-list';
-import ImageBox from '../../component/ImageBox';
-import PostCode from '../../component/PostPopup';
-import AutoCreateBox from '../../component/AutoCreatable';
-import TagChip from '../../component/TagChip';
-import SelectBox from '../../component/SelectBox';
-import CheckBox from '../../component/CheckBox';
+import Load from '../../../component/Load';
+import dataList from '../../../../data-list';
+import ImageBox from '../../../component/ImageBox';
+import PostCode from '../../../component/PostPopup';
+import AutoCreateBox from '../../../component/AutoCreatable';
+import TagChip from '../../../component/TagChip';
+import SelectBox from '../../../component/SelectBox';
+import CheckBox from '../../../component/CheckBox';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import moment from 'moment';
 
-class Rookie extends Component {
+import SaveIcon from '@material-ui/icons/Save';
+import AddIcon from '@material-ui/icons/Add';
+class EditProfile extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -24,7 +26,7 @@ class Rookie extends Component {
             // 개인정보
             imgData : null,
             imgUrl : null,
-            imgPreview : null,
+            imgPreview :this.props.userInfo.userImageUrl,
 
             name : "",
             phone : "",
@@ -58,8 +60,11 @@ class Rookie extends Component {
             workDate : "",  // 일할 수 있는 날짜
             trainingDateState : "실습 강의 시",   // 실습 할 수 있는 날짜 선택 박스 -> 비선택 / 상시 / 졸업 후 / 정해진 날짜
             trainingDate : "",  // 실습 여부 시 실습 가능 날짜
-
-            agreeCheck : false,
+            
+            award:"",
+            awardDate:"",
+            addawd:[],
+           
             load : false,
         }
     }
@@ -165,7 +170,7 @@ class Rookie extends Component {
             name,phone,address1,address2,military,
             univercityCate,univercity,subject,univercityState,univercityStart,univercityEnd,
             tags,keywords,specialty,introduce,privateUrl,
-            field,workDateState,trainingDateState,workDate,trainingDate
+            field,workDateState,trainingDateState,workDate,trainingDate,award,awardDate
         } = this.state;
 
         try {
@@ -263,15 +268,38 @@ class Rookie extends Component {
             this.saveStartBtn();
         }
     }
-
+    addAward(){
+        const awd= this.awdForm();
+        this.setState({
+            Addawd : this.state.Addawd.concat(awd)},
+        )
+    }
+    awdForm(){
+        const {userInfo}=this.props;
+        const {award ,awardDate}=this.state;
+        return <div className="Info-rookie-dateLayout">
+        <SelectBox 
+            value={award} 
+            label={"수여"} option={["교내","교외"]} text={"수여"} style={{marginRight:"20px"}}
+        />
+        <TextField variant="outlined" onChange={this.onChangeValue.bind(this)} name="privateUrl" value={award} label="수상명 " />
+        <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="trainingDate" value={awardDate} label="수상 날짜" />
+        <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addAward.bind(this)}>+</span>
+    </div>
+    }
     render() {
         const { imgPreview,
             name,phone,address1,address2,addressState,military,
             univercityCate,univercityState,univercityStart,univercityEnd,startErr,endErr,
             tags,keywords,specialty,introduce,introduceErr,privateUrl,
             workDateState,trainingDateState,workDate,trainingDate,
-            agreeCheck,load
-        } = this.state;
+            agreeCheck,load,award,awardDate,
+            Addawd,} = this.state;
+  
+        const {userInfo}=this.props;
+        const Usertags = userInfo.userTags;
+        const userkeyword =  userInfo.userKeyword;
+        const userspecialty = userInfo.userSpecialty;
         return (
             <div className="Info-rookie-main">
                 { !load &&  <Load /> }
@@ -288,11 +316,11 @@ class Rookie extends Component {
                         />
                         {/* 신상 정보 */}
                         <div className="Info-rookie-inputLayoutDiv">
-                            <TextField helperText="성 이름" required label="이름" variant="outlined" value={name} name="name" onChange={this.onChangeValue.bind(this)} />
+                            <TextField helperText="성 이름" required label="이름" variant="outlined" value={userInfo.userName} name="name" onChange={this.onChangeValue.bind(this)} />
                             <div className="Info-company-Layout">
-                                <TextField helperText="-빼고 입력해주세요" required label="전화번호" variant="outlined" value={phone} name="phone" onChange={this.onChangeValue.bind(this)} />
+                                <TextField helperText="-빼고 입력해주세요" required label="전화번호" variant="outlined" value={userInfo.userPhone} name="phone" onChange={this.onChangeValue.bind(this)} />
                                 <SelectBox 
-                                    value={military} func={(e) => this.setState({ military : e })}
+                                    value={userInfo.userMilitary} func={(e) => this.setState({ military : e })}
                                     label={"병역여부"} option={["군필","미필","면제","해당없음"]} text={"병역여부"} style={{marginLeft:"15px"}}
                                 />
                             </div>
@@ -302,12 +330,12 @@ class Rookie extends Component {
                     <div className="Info-rookie-imgLayout">
                         <TextField
                             id="outlined-read-only-input" label="주소를 검색하여 주세요. 시/도/구"
-                            value={address1} required
+                            value={userInfo.userAdd} required
                             onClick={() => this.setState({ addressState : true })}
                             style={{width:"450px",marginRight:"25px"}}
                             InputProps={{ readOnly: true }} variant="outlined"
                         />
-                        <TextField helperText="상세주소를 입력해주세요" style={{width:"200px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="address2" value={address2} id="outlined-required" label="나머지 주소" />
+                        <TextField helperText="상세주소를 입력해주세요" style={{width:"200px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="address2" value={userInfo.userAdd} id="outlined-required" label="나머지 주소" />
                     </div>
                     {/* 주소지 검색 API */}
                     <PostCode open={addressState} close={() => this.setState({ addressState : false })} func={(data) => this.setState({ address1 : data })} />
@@ -319,7 +347,7 @@ class Rookie extends Component {
                     {/* 첫번째 라인 */}
                     <div className="Info-rookie-imgLayout">
                         <SelectBox 
-                            value={univercityCate} func={(e) => this.setState({ univercityCate : e })}
+                            value={userInfo.userUnivercityCate} func={(e) => this.setState({ univercityCate : e })}
                             label={"학력"} option={["대학","고졸"]} text={"학력"} style={{marginRight:"20px"}}
                         />
                         <AutoCreateBox blur={true} width={200} text={univercityCate === "대학" ? "대학교 이름 *" : "고등학교 이름 *"} list={univercityCate === "대학" ? dataList.app.univercityList : dataList.app.highschoolList} clear={false} onChange={(e) => this.setState({ univercity : e })} />
@@ -328,10 +356,10 @@ class Rookie extends Component {
                         </div>
                     </div>
                     <div className="Info-rookie-dateLayout">
-                        <TextField error={startErr} helperText={"2014"} style={{width:"150px", marginRight:"25px",marginLeft:"18px"}} variant="outlined" onChange={this.onChangeValueDate.bind(this)} name="univercityStart" value={univercityStart} label="입학년도" />
-                        <TextField error={endErr} helperText={moment(new Date()).format("YYYY")} style={{width:"150px", marginRight:"10px"}} variant="outlined" onChange={this.onChangeValueDate.bind(this)} name="univercityEnd" value={univercityEnd} label="졸업년도" />
+                        <TextField error={startErr} helperText={"2014"} style={{width:"150px", marginRight:"25px",marginLeft:"18px"}} variant="outlined" onChange={this.onChangeValueDate.bind(this)} name="univercityStart" value={userInfo.userAttendStartDate} label="입학년도" />
+                        <TextField error={endErr} helperText={moment(new Date()).format("YYYY")} style={{width:"150px", marginRight:"10px"}} variant="outlined" onChange={this.onChangeValueDate.bind(this)} name="univercityEnd" value={userInfo.userAttendEndDate} label="졸업년도" />
                         <SelectBox 
-                            value={univercityState} func={(e) => this.setState({ univercityState : e })}
+                            value={userInfo.userAttend} func={(e) => this.setState({ univercityState : e })}
                             label={"재학구분"} option={["재학","졸업","휴학","중퇴"]} text={"재학구분"} style={{marginRight:"20px",marginLeft:"15px"}}
                         />
                     </div>
@@ -343,13 +371,28 @@ class Rookie extends Component {
                     <AutoCreateBox blur={false} width={700} text={"자신있는 기술에 대한 태그를 검색하여 최대한 골고루, 최대 6개까지 추가하세요!"} list={dataList.app.tagList} clear={true} onChange={this.addChips.bind(this,"tag")} />
                     <div className="Info-tag-box">
                         {
+                            Usertags.map((data,i) => {
+                                return <div className="chip-margin" key={i}>
+                                <TagChip name={data} size="small" color="primary" variant="outlined" func={this.keyDelete.bind(this)}/>
+                            </div>;
+                            })
+                        }
+                        {
                             tags.map((data,i) => {
-                                return <TagChip func={this.tagDelete.bind(this)} name={data} key={i} />
+                                return <TagChip func={this.keyDelete.bind(this)} name={data} key={i} />
                             })
                         }
                     </div>
                     <AutoCreateBox blur={false} width={700} text={"자신의 성격에 대한 주관적인 키워드를 최대 3개까지 등록하세요!"} list={dataList.app.keywordList} clear={true} onChange={this.addChips.bind(this,"key")} />
                     <div className="Info-tag-box">
+                        {
+                            userkeyword.map((data,i) => {
+                                return <div className="chip-margin" key={i}>
+                                <TagChip name={data} size="small" color="primary" variant="outlined" func={this.keyDelete.bind(this)}/>
+                            </div>;
+                            })
+                        }
+                        
                         {
                             keywords.map((data,i) => {
                                 return <TagChip func={this.keyDelete.bind(this)} name={data} key={i} />
@@ -359,13 +402,18 @@ class Rookie extends Component {
                     <AutoCreateBox blur={false} width={700} text={"자신의 특기 또는 취미 키워드를 최대 5개까지 등록하세요!"} list={dataList.app.specialtyList} clear={true} onChange={this.addChips.bind(this,"spc")} />
                     <div className="Info-tag-box">
                         {
+                            userspecialty.map((data,i) => {
+                                return <TagChip func={this.specialtyDelete.bind(this)} name={data} key={i} />
+                            })
+                        }
+                        {
                             specialty.map((data,i) => {
                                 return <TagChip func={this.specialtyDelete.bind(this)} name={data} key={i} />
                             })
                         }
                     </div>
-                    <TextField error={introduceErr} helperText="간단한 자기 소개 50자 내외" style={{marginTop:"15px"}} variant="outlined" onChange={this.onChangeValueLimit.bind(this)} name="introduce" value={introduce} label="자기 소개" />
-                    <TextField helperText="개인 블로그나 웹 사이트 등 주소를 입력해주세요." style={{marginTop:"15px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="privateUrl" value={privateUrl} label="개인 사이트 URL " />
+                    <TextField error={introduceErr} helperText="간단한 자기 소개 50자 내외" style={{marginTop:"15px"}} variant="outlined" onChange={this.onChangeValueLimit.bind(this)} name="introduce" value={userInfo.userUnivercityCate} label="자기 소개" />
+                    <TextField helperText="개인 블로그나 웹 사이트 등 주소를 입력해주세요." style={{marginTop:"15px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="privateUrl" value={userInfo.userUrl} label="개인 사이트 URL " />
                 </div>
 
                 {/* 구직정보 박스 */}
@@ -374,33 +422,44 @@ class Rookie extends Component {
                     <AutoCreateBox blur={true} width={400} text={"희망하는 분야를 입력하세요."} list={dataList.app.fieldList} clear={false} onChange={(e) => this.setState({ field : e })} />
                     <div className="Info-rookie-dateLayout">
                         <SelectBox 
-                            value={workDateState} func={(e) => this.setState({ workDateState : e })}
+                            value={userInfo.userWorkDateState} func={(e) => this.setState({ workDateState : e })}
                             label={"근무가능 날짜"} option={["상시","졸업 후","직접입력","미정"]} text={"근무가능 날짜"} style={{marginRight:"20px"}}
                         />
                         {
                             workDateState === "직접입력" &&
-                            <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginRight:"10px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="workDate" value={workDate} label="근무가능 날짜" />
+                            <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginRight:"10px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="workDate" value={userInfo.userWorkDate} label="근무가능 날짜" />
                         }
                         <SelectBox 
-                            value={trainingDateState} func={(e) => this.setState({ trainingDateState : e })}
+                            value={userInfo.userTraningDateState} func={(e) => this.setState({ trainingDateState : e })}
                             label={"실습가능 날짜"} option={["상시","졸업 후","실습 강의 시","직접입력","미정"]} text={"실습가능 날짜"} style={{marginRight:"20px"}}
                         />
                         {
                             trainingDateState === "직접입력" &&
-                            <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginRight:"10px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="trainingDate" value={trainingDate} label="실습가능 날짜" />
+                            <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginRight:"10px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="trainingDate" value={userInfo.userTraningDate} label="실습가능 날짜" />
                         }
                     </div>
                 </div>
-                <div className="Info-rookie-agree">
-                    <CheckBox check={agreeCheck} func={(e) => this.setState({ agreeCheck : e })} name="agree" color="primary" />
-                    <span>하이루키는 신입 채용 서비스입니다. <span style={{color:"red"}}>신입 구직자</span>로서 이용하심에 동의하십니까?</span>
+                {/*수상경력 박스*/}
+                <div className="Info-rookie-title">수상이력</div>
+                <div className="Info-rookie-body">
+                    <div className="Info-rookie-dateLayout">
+                        <SelectBox 
+                            value={userInfo.userWorkDateState} func={(e) => this.setState({ workDateState : e })}
+                            label={"수여"} option={["교내","교외"]} text={"수여"} style={{marginRight:"20px"}}
+                        />
+                        <TextField variant="outlined" onChange={this.onChangeValue.bind(this)} name="privateUrl" value={award} label="수상명 " />
+                        <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="trainingDate" value={awardDate} label="수상 날짜" />
+                        <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addAward.bind(this)}>+</span>
+                    </div>
+                    {Addawd}
                 </div>
+                {/*저장버튼*/}
                 <div style={{margin:"50px"}}>
-                    <Button onClick={this.addFile.bind(this)} size="large" variant="outlined" color="primary">하이루키 시작하기</Button>
+                    <button className="profile-edit"><SaveIcon style={{fontSize:"large",margin:"5px"}}/>프로필수정</button>
                 </div>
             </div>
         );
     }
 }
 
-export default Rookie;
+export default EditProfile;
