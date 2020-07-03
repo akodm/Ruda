@@ -101,7 +101,7 @@ router.delete("/delete", async(req, res) => {
     try {
         await Portfolio.destroy({
             where: {
-				userId : req.query.userId,
+				id : req.query.id,
             }
 		});
 		result = true;

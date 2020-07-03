@@ -1,0 +1,93 @@
+1. 기본 핸들링 ======================================================================================================================
+
+# 기본 인풋 + 체크박스 + 라디오박스 + 셀렉트박스
+onChange(e) { this.setState({ [e.target.name] : e.target.value }); }
+onChange(e) { this.setState({ [e.target.name] : e.target.checked }); }
+onChange(cate, e) { this.setState({ [cate] : e.target.value }); }
+
+# 파일 첨부 + 파일 미리보기
+onChange(e) { this.setState({ image : e.target.files[0] }); }
+onChange(e) { this.setState({ preview : URL.createObjectURL(e.target.fils[0]) }); }
+
+
+2. 배열 핸들링 ======================================================================================================================
+
+# 배열 + 배열추가 
+onChange(array) { this.setState({ arr : this.state.arr.concat(array) }); }
+onChange(array) { this.setState(current => ({ arr : current.arr.concat(array) })); }
+
+# 배열 필터 ( 인덱스 삭제 ) ( data : 배열의 값, i : 매개변수로 넘어온 배열 값 => 값이 일치하지 않는 것만 필터해서 새롭게 배열 생성 )
+onChange(i) { this.setState({ arr : this.state.arr.filter(data => { return data !== i }) }); }
+
+# 배열 인덱스의 값 변경 후 스태이트에 적용
+onChange(i) {
+    const { array } = this.state;
+    let _arr = array;
+    _arr[i] = { ... }
+    this.setState({ array : _arr });
+}
+
+
+3. 반복문 ======================================================================================================================
+
+# 리턴하여 배열에 변경 값 적용
+array.map((data,i) => {
+    return <div key={i}>
+        {data}
+    </div>
+});
+
+# 리턴없이 단순 반복
+array.forEach((data,i) => {
+    console.log(data);
+    console.log(i);
+});
+
+
+4. 조건문 ======================================================================================================================
+
+# 기본 조건문
+if(...) { ...}
+
+# 삼항 연산자
+const value = idx === 0 ? true : false
+
+ 
+5. 대기시키기 ======================================================================================================================
+
+# 어싱크 패턴 - 어웨이트에서 대기
+async functionname() { try { await ... } catch(err) { console.log(err) } }
+
+# 프로미스 패턴 - 프로미스 올 => 전체가 끝날때까지 대기
+async functionname() {
+    let _1 axios.get(...);
+    let _2 axios.post(...);
+
+    await Promise.all([_1, _2]).then((data, err) => {
+        if(data) {
+            _1 = data[0].data;
+            _2 = data[1].data;
+        } else if(err) {
+            console.log(err);
+        }
+    });
+}
+
+
+6. 데이터 불러오기 ======================================================================================================================
+
+# 불러온 데이터 스태이트에 적용
+async functionname() {
+    try {
+        const result = await axios.get(...);
+        this.setState({ data : result.data });
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+
+7. 리액트 라이프 사이클 중요 함수 ======================================================================================================================
+
+*** 라이프 사이클 순서 ***
+constuctor(props) { ... } -> render() -> componentDidMount() {...} -> (스태이트 변경있을 시) render() ...
