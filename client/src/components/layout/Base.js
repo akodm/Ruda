@@ -21,6 +21,7 @@ import Info from '../page/info/Info';   // info
 import Cboard from '../page/board/Cboard';  // rookie board
 import Rboard from '../page/board/Rboard';  // company board
 import Mypage from '../page/mypage/MypageRoute';    // mypage
+
 class Base extends Component {
     constructor(props){
         super(props);

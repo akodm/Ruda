@@ -71,7 +71,7 @@
     width: 100%;
 }
 
-/*-마이페이지 프로필-*/
+/*-마이페이지 프로필 타이틀 및 틀-*/
 .Mypage-profile{
     display: flex;
     flex-direction: column;
@@ -96,7 +96,7 @@
     color: rgb(126, 126, 126);
    
 }
-
+/*--프로필 왼쪽영역-*/
 .Mypage-profile-content-mainprofile{
     display: flex;
     flex-direction: column;
@@ -179,6 +179,8 @@
     margin: 5px;
     font-size: 14px;
 }
+
+/*--프로필 오른쪽영역-*/
 .profile-chart{
     margin-top: 30px;
 }
@@ -232,7 +234,7 @@
     display: flex;
     flex-direction: row;
 }
-/*-프로필수정-*/
+/*-프로필수정버튼-*/
 .profile-edit{
     border: none;
     width: 100%;
@@ -246,6 +248,9 @@
 .profile-edit:hover{
     background-color: rgb(212, 212, 212);
 }
+
+/*프로필수정창*/
+
 /*--메뉴버튼--*/
 .Mypage-btns{
     display: flex;
@@ -311,7 +316,7 @@
     margin: 5px;
     width: 300px;
 }
-.shareAlert-btn{
+.shareAlert-btns{
     border: none;
     background-color: #11addd;
     width: 100px;
