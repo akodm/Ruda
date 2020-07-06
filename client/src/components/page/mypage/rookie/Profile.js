@@ -10,11 +10,11 @@ import HouseIcon from '@material-ui/icons/House';
 import PhoneIcon from '@material-ui/icons/Phone';
 import SchoolIcon from '@material-ui/icons/School';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import PeopleIcon from '@material-ui/icons/People';
 import WorkIcon from '@material-ui/icons/Work';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import LocalPlayIcon from '@material-ui/icons/LocalPlay';
+
 class Profile extends Component {
     constructor(props){
         super(props);
@@ -58,11 +58,7 @@ class Profile extends Component {
                                     </div>
                                     <div className="profile-text">
                                         <LanguageIcon style={{fontSize:"medium",margin:"10px"}}/>
-<<<<<<< HEAD
                                         <p onClick={this.moveLink.bind(this,userInfo.userUrl)}>{userInfo.userUrl}</p>
-=======
-                                        <p><a href="/">www.highrookie.com</a></p>
->>>>>>> origin/junmyeong
                                     </div>
                                     <div className="profile-text">
                                         <PhoneIcon style={{fontSize:"medium",margin:"10px"}}/>

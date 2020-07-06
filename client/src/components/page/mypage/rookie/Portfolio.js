@@ -36,6 +36,7 @@ class Portfolio extends Component {
             projectCate : "교내",
             projectCateInput : "",
             projectUrl : "",
+            position : "",
 
             imagesUrl : [],
             imageLoad : false,
@@ -51,7 +52,7 @@ class Portfolio extends Component {
     // 포트폴리오 추가 하는 호출
     async savePortfolio() {
         try {
-            const { title, content, tag, startDate, startMonth, endDate, endMonth, ingDate, partner, projectCate, projectCateInput, projectUrl, imagesUrl } = this.state;
+            const { title, content, tag, startDate, startMonth, endDate, endMonth, ingDate, partner, projectCate, projectCateInput, projectUrl, position, imagesUrl } = this.state;
             const { userId } = this.props;
 
             if(!title || !startDate || !startMonth) {
@@ -72,6 +73,7 @@ class Portfolio extends Component {
                 partner : partner,
                 projectCate : cate,
                 projectUrl : projectUrl,
+                position : position,
                 imagesUrl : imagesUrl,
                 userId : userId,
             });
@@ -97,7 +99,8 @@ class Portfolio extends Component {
         try {
             const { title, content, 
                 tag, startDate, startMonth, endDate, endMonth, ingDate, 
-                partner, projectCate, projectCateInput, projectUrl, imagesUrl,
+                partner, projectCate, projectCateInput, projectUrl, position,
+                imagesUrl,
                 addView, portfolioList } = this.state;
             const { userId } = this.props;
 
@@ -120,6 +123,7 @@ class Portfolio extends Component {
                 partner : partner,
                 projectCate : cate,
                 projectUrl : projectUrl,
+                position : position,
                 imagesUrl : imagesUrl,
                 userId : userId,
                 id : addView.id,
@@ -249,6 +253,7 @@ class Portfolio extends Component {
             projectCate : "교내",
             projectCateInput : "",
             projectUrl : "",
+            position : "",
             imagesUrl : [],
             imageLoad : false,
             imageView : false,
@@ -274,6 +279,7 @@ class Portfolio extends Component {
             projectUrl : portfolioList[i].projectUrl,
             projectCate : cateInput ? portfolioList[i].projectCate : "직적입력",
             projectCateInput : cateInput ? "" : portfolioList[i].projectCate,
+            position : portfolioList[i].position,
             partner : portfolioList[i].partner,
             tag : portfolioList[i].tag,
             content : portfolioList[i].content,
@@ -300,7 +306,7 @@ class Portfolio extends Component {
     render() {
         const { userName, userEmail, load } = this.props;
         const { portfolioList, addView, ingDate,
-            title, content, startDate, startMonth, endDate, endMonth, tag, partner, projectUrl, projectCate, projectCateInput,
+            title, content, startDate, startMonth, endDate, endMonth, tag, partner, projectUrl, projectCate, projectCateInput, position,
             imagesUrl, imageLoad , imageView, preview
         } = this.state;
         return load ? (
@@ -337,6 +343,7 @@ class Portfolio extends Component {
                         projectUrl={projectUrl}
                         projectCate={projectCate}
                         projectCateInput={projectCateInput}
+                        position={position}
                         partner={partner}
                         tag={tag}
                         tagList={dataList.app.tagList}
@@ -365,35 +372,42 @@ class Portfolio extends Component {
                         return <div className="portfolio-list-div" key={i}>
                             <div className="portfolio-idx-title">{data.title}<div>{userEmail && <EditOutlinedIcon style={{cursor:"pointer"}} onClick={this.onChangeUpdate.bind(this, data, i)} />}{ userEmail && <DeleteForeverOutlinedIcon style={{cursor:"pointer"}} onClick={this.portfolioDelete.bind(this, data.id)} />}</div></div>
                             <div className="portfolio-idx-date"><span>{data.startDate}~{data.endDate || "진행 중"}</span><span>구분: {data.projectCate}</span></div>
-                            <textarea className="portfolio-idx-contentBox" value={data.content} readOnly></textarea>
-                            <div className="portfolio-idx-partnerTitle">함께한 구성원</div>
-                            <div className="portfolio-idx-partnerBox">
-                                { data.partner.map((data,i) => {
-                                    return <TagChip name={data} key={i} />
-                                }) }
-                            </div>
-                            <div className="portfolio-idx-partnerTitle">태그 항목</div>
-                            <div className="portfolio-idx-partnerBox">
-                                { data.tag.map((data,i) => {
-                                    return <TagChip name={data} key={i} />
-                                }) }
-                            </div>
-                            <div className="portfolio-idx-partnerTitle" style={{display:"flex",justifyContent:"space-between"}}>
-                                <span>프로젝트 주소</span>
-                                <div className="portfolio-idx-imageArr" style={{marginTop:"-50px"}}>
-                                    {
-                                        data.imagesUrl.map((data,i) => {
-                                            return <Avatar onClick={() => this.setState({ imageView : true, preview : data.data })} variant="rounded" key={i} alt="Remy Sharp" src={data.data} 
-                                                style={{
-                                                    border:"1px solid rgba(156, 156, 156, 0.664)",
-                                                    margin:"5px",height:"70px",width:"70px",cursor:"pointer"
-                                                }} 
-                                            />
-                                        })
-                                    }
+                            <div className="portfolio-idx-contentBox"><span>{data.content}</span></div>
+                            <div className="portfolio-idx-layout">
+                                <div className="portfolio-idx-left">
+                                    <div className="portfolio-idx-partnerTitle" style={{marginBottom:"15px"}}>나의 역할 : {data.position}</div>
+                                    <div className="portfolio-idx-partnerTitle">함께한 구성원</div>
+                                    <div className="portfolio-idx-partnerBox">
+                                        { data.partner.map((data,i) => {
+                                            return <TagChip name={data} key={i} />
+                                        }) }
+                                    </div>
+                                    <div className="portfolio-idx-partnerTitle">태그 항목</div>
+                                    <div className="portfolio-idx-partnerBox">
+                                        { data.tag.map((data,i) => {
+                                            return <TagChip name={data} key={i} />
+                                        }) }
+                                    </div>
+                                    <div className="portfolio-idx-partnerTitle" style={{display:"flex",justifyContent:"space-between"}}>
+                                        <span>프로젝트 주소</span>
+                                    </div>
+                                    <div className="portfolio-idx-partnerTitle" style={{marginBottom:"10px"}} ><a href={data.projectUrl} >{data.projectUrl}</a></div>
+                                </div>
+                                <div className="portfolio-idx-right">
+                                    <div className="portfolio-idx-imageArr">
+                                        {
+                                            data.imagesUrl.map((data,i) => {
+                                                return <Avatar onClick={() => this.setState({ imageView : true, preview : data.data })} variant="rounded" key={i} alt="Remy Sharp" src={data.data} 
+                                                    style={{
+                                                        border:"1px solid rgba(156, 156, 156, 0.664)",
+                                                        margin:"5px",height:"70px",width:"70px",cursor:"pointer"
+                                                    }} 
+                                                />
+                                            })
+                                        }
+                                    </div>
                                 </div>
                             </div>
-                            <div className="portfolio-idx-partnerTitle" style={{marginBottom:"10px"}} ><a href={data.projectUrl} >{data.projectUrl}</a></div>
                         </div>
                     })
                     :

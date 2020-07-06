@@ -60,6 +60,7 @@ router.post("/create", async(req, res) => {
 			partner : req.body.partner,
 			projectCate : req.body.projectCate,
 			projectUrl : req.body.projectUrl,
+			position : req.body.position,
 			imagesUrl : req.body.imagesUrl,
 			userId : req.body.userId,
 		});
@@ -82,6 +83,7 @@ router.put("/update", async(req, res) => {
 			partner : req.body.partner,
 			projectCate : req.body.projectCate,
 			projectUrl : req.body.projectUrl,
+			position : req.body.position,
 			imagesUrl : req.body.imagesUrl,
             }, {
             where: {

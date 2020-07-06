@@ -18,30 +18,37 @@ import SelectBox from '../../../component/SelectBox';
 
 class PortfolioPopup extends Component {
 
+    // 기본 밸류 변경
     onChangeValue(e) {
         this.props.onChangeValue(e);
     }
 
+    // 카테에 해당하는 이름의 밸류 변경
     onChangeDate(cate, e) {
         this.props.onChangeDate(cate, e);
     }
 
+    // 칩 추가
     addChips(cate,e) {
         this.props.addChips(cate,e);
     }
 
+    // 칩 삭제
     deleteChips(cate,e) {
         this.props.deleteChips(cate,e);
     }
 
+    // 이미지 추가
     addImage(e) {
         this.props.addImage(e);
     }
 
+    // 이미지 삭제
     deleteImage(data) {
         this.props.deleteImage(data);
     }
 
+    // 포트폴리오 저장 혹은 수정 버튼
     savePortfolio() {
         if(this.props.addView.create)
             this.props.savePortfolio();
@@ -49,6 +56,7 @@ class PortfolioPopup extends Component {
             this.props.updatePortfolio();
     }
 
+    // 닫기 버튼
     closeBtn() {
         this.props.closeBtn();
     }
@@ -56,7 +64,7 @@ class PortfolioPopup extends Component {
     render() {
         const { textTitle, title,
             startDate, startMonth, endDate, endMonth, ingDate,
-            projectUrl, projectCate, projectCateInput, 
+            projectUrl, projectCate, projectCateInput, position,
             partner, partnerList, tag, tagList, content,
             imagesUrl, imageLoad, textBtn,
         } = this.props;
@@ -64,7 +72,10 @@ class PortfolioPopup extends Component {
             <div className="portfolio-popup">
                 <div className="portfolio-add-div">
                     <div className="portfolio-add-title">{textTitle}</div>
+                    {/* 프로젝트명 */}
                     <TextField onPaste={this.onChangeValue.bind(this)} helperText="프로젝트명을 간단하게 입력하세요." name="title" onChange={this.onChangeValue.bind(this)} value={title} label="프로젝트명 *" type="search" variant="outlined" />
+                    
+                    {/* 날짜 입력 */}
                     <div className="rowLayout">
                         <TextField helperText={moment(new Date()).subtract(2, "year").format("YYYY")} name="startDate" onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} value={startDate} style={{width:"108px"}} label="시작년도 *" type="search" variant="outlined" />
                         <SelectBox 
@@ -78,7 +89,9 @@ class PortfolioPopup extends Component {
                         />
                         <CheckBox label="진행 중" style={{marginBottom:"15px",marginLeft:"15px"}} check={ingDate} func={this.onChangeDate.bind(this, "ingDate")} name={"ingDate"} color="primary" />
                     </div>
-                    <div className="rowLayout" style={{alignItems:"center",marginTop:"-10px",marginBottom:"25px"}}>
+
+                    {/* 프로젝트 주소와 구분 */}
+                    <div className="rowLayout" style={{alignItems:"center",marginTop:"-10px",marginBottom:"10px"}}>
                         <TextField helperText="프로젝트를 보여줄 주소나 경로를 알려주세요." name="projectUrl" onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} value={projectUrl} style={{width:"600px",marginTop:"22px",marginRight:"10px"}} label="프로젝트 URL" type="search" variant="outlined" />
                         <SelectBox 
                             value={projectCate} func={this.onChangeDate.bind(this, "projectCate")}
@@ -89,6 +102,11 @@ class PortfolioPopup extends Component {
                             <TextField name="projectCateInput" onPaste={this.onChangeValue.bind(this)} onChange={this.onChangeValue.bind(this)} value={projectCateInput} style={{width:"140px",margin:"12px"}} label="내용" type="search" variant="outlined" />
                         }
                     </div>
+
+                    {/* 프로젝트 역할 */}
+                    <TextField helperText="프로젝트에서 자신의 역할을 입력하세요." name="position" onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} value={position} style={{marginBottom:"15px"}} label="프로젝트 역할" type="search" variant="outlined" />
+
+                    {/* 구성원 */}
                     <AutoCreateBox blur={false} style={{width:"100px"}} text={"같이 작업한 구성원을 추가해주세요."} list={partnerList || []} clear={true} onChange={this.addChips.bind(this,"partner")} />
                     <div className="portfolio-partner-div">
                         {
@@ -97,6 +115,8 @@ class PortfolioPopup extends Component {
                             })
                         }
                     </div>
+
+                    {/* 기술스택 */}
                     <div style={{marginTop:"10px"}}>
                         <AutoCreateBox blur={false} style={{width:"100px"}} text={"프로젝트에 사용한 기술스택을 추가하세요."} list={tagList || []} clear={true} onChange={this.addChips.bind(this,"tag")} />
                     </div>
@@ -107,7 +127,11 @@ class PortfolioPopup extends Component {
                             })
                         }
                     </div>
+
+                    {/* 내용 */}
                     <textarea value={content} onPaste={this.onChangeValue.bind(this)} onChange={this.onChangeValue.bind(this)} name="content" placeholder="프로젝트에 대한 간단한 설명을 해주세요." className="portfolio-textarea"></textarea>
+                    
+                    {/* 이미지 추가 */}
                     <div>
                         <input
                             accept="image/*" style={{display:"none"}}
@@ -117,6 +141,8 @@ class PortfolioPopup extends Component {
                             <Button variant="contained" color="primary" component="span">이미지 추가</Button>
                         </label>
                     </div>
+
+                    {/* 추가한 이미지 보여주기 */}
                     <div className="portfolio-img-div">
                         <GridList cellHeight={180} style={{width:"100%",height:"200px",margin:"10px"}}>
                             { imageLoad ? <div style={{width:"100px",height:"100px"}}><CircularProgress/></div> 
@@ -136,6 +162,8 @@ class PortfolioPopup extends Component {
                             )) }
                         </GridList>
                     </div>
+
+                    {/* 버튼들 */}
                     <div className="portfolio-close">
                         <Button
                             onClick={this.savePortfolio.bind(this)}
