@@ -10,6 +10,7 @@ import LibraryAddOutlinedIcon from '@material-ui/icons/LibraryAddOutlined';
 import AssignmentLateOutlinedIcon from '@material-ui/icons/AssignmentLateOutlined';
 import Avatar from '@material-ui/core/Avatar';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
 
 import TagChip from '../../../component/TagChip';
 import Popup from './PortfolioPopup';
@@ -35,6 +36,7 @@ class Portfolio extends Component {
             projectCate : "교내",
             projectCateInput : "",
             projectUrl : "",
+            position : "",
 
             imagesUrl : [],
             imageLoad : false,
@@ -45,10 +47,12 @@ class Portfolio extends Component {
         }
     }
 
+    // ---------------------------------------=== axios 호출로 추가/수정/삭제 호출 === //
+
     // 포트폴리오 추가 하는 호출
     async savePortfolio() {
         try {
-            const { title, content, tag, startDate, startMonth, endDate, endMonth, ingDate, partner, projectCate, projectCateInput, projectUrl, imagesUrl } = this.state;
+            const { title, content, tag, startDate, startMonth, endDate, endMonth, ingDate, partner, projectCate, projectCateInput, projectUrl, position, imagesUrl } = this.state;
             const { userId } = this.props;
 
             if(!title || !startDate || !startMonth) {
@@ -69,6 +73,7 @@ class Portfolio extends Component {
                 partner : partner,
                 projectCate : cate,
                 projectUrl : projectUrl,
+                position : position,
                 imagesUrl : imagesUrl,
                 userId : userId,
             });
@@ -94,7 +99,8 @@ class Portfolio extends Component {
         try {
             const { title, content, 
                 tag, startDate, startMonth, endDate, endMonth, ingDate, 
-                partner, projectCate, projectCateInput, projectUrl, imagesUrl,
+                partner, projectCate, projectCateInput, projectUrl, position,
+                imagesUrl,
                 addView, portfolioList } = this.state;
             const { userId } = this.props;
 
@@ -117,6 +123,7 @@ class Portfolio extends Component {
                 partner : partner,
                 projectCate : cate,
                 projectUrl : projectUrl,
+                position : position,
                 imagesUrl : imagesUrl,
                 userId : userId,
                 id : addView.id,
@@ -147,6 +154,27 @@ class Portfolio extends Component {
         }
         this.setState({ loaded : true });
     }
+
+    // 포트폴리오 삭제 하는 호출
+    async deletePortfolio(id) {
+        try {
+            const { portfolioList } = this.state;
+
+            const result = await axios.delete(`${config.app.s_url}/portfolios/delete?id=${id}`);
+            if(result.data) {
+                this.setState({ portfolioList : portfolioList.filter(data => {
+                    return data.id !== id
+                })});
+                alert("포트폴리오가 삭제되었습니다.");
+            } else {
+                alert("포트폴리오 삭제가 정상적으로 처리되지 않았습니다.");
+            }
+        } catch(err) {
+            console.log("portfolio delete err : ", err);
+        }
+    }
+
+    // -----------------------------------------------=== 스태이트 값 변경 함수들 === //
 
     // 이미지 추가하기 -> 배열로 제이슨 형식으로 추가 -> 필요한 값은 데이터
     addImage(event) {
@@ -210,7 +238,7 @@ class Portfolio extends Component {
 
     // 기본 인풋 데이터 변경 함수
     onChangeValue(e) { this.setState({ [e.target.name] : e.target.value }) }
-    onChangeDate(cate, e) { this.setState({ [cate] : e}) }
+    onChangeDate(cate, e) { this.setState({ [cate] : e }) }
     onChangeNull() {
         this.setState({
             title : "",
@@ -225,6 +253,7 @@ class Portfolio extends Component {
             projectCate : "교내",
             projectCateInput : "",
             projectUrl : "",
+            position : "",
             imagesUrl : [],
             imageLoad : false,
             imageView : false,
@@ -232,7 +261,9 @@ class Portfolio extends Component {
         })
     }
 
-    // 수정 시 데이터 변경
+    /* -------------------------------------------------=== 추가/수정/삭제 버튼 누를 시 === */
+
+    // 포트폴리오 수정 버튼 누를 시
     onChangeUpdate(data, i) {
         const { portfolioList } = this.state;
         let start = portfolioList[i].startDate.split("-");
@@ -248,6 +279,7 @@ class Portfolio extends Component {
             projectUrl : portfolioList[i].projectUrl,
             projectCate : cateInput ? portfolioList[i].projectCate : "직적입력",
             projectCateInput : cateInput ? "" : portfolioList[i].projectCate,
+            position : portfolioList[i].position,
             partner : portfolioList[i].partner,
             tag : portfolioList[i].tag,
             content : portfolioList[i].content,
@@ -256,21 +288,31 @@ class Portfolio extends Component {
         })
     }
 
+    // 포트폴리오 추가 버튼 누를 시
     async portfolioadd() {
         await this.onChangeNull();
         this.setState({ addView : { view : true, create : true }});
     }
 
+    // 포트폴리오 삭제 버튼 누를 시
+    portfolioDelete(id) {
+        if(window.confirm("포트폴리오를 삭제하시겠습니까?")) {
+            this.deletePortfolio(id);
+        }
+        return;
+    }
+
+    // ----------------------------------------------------------=== 렌더링 === //
     render() {
         const { userName, userEmail, load } = this.props;
         const { portfolioList, addView, ingDate,
-            title, content, startDate, startMonth, endDate, endMonth, tag, partner, projectUrl, projectCate, projectCateInput,
+            title, content, startDate, startMonth, endDate, endMonth, tag, partner, projectUrl, projectCate, projectCateInput, position,
             imagesUrl, imageLoad , imageView, preview
         } = this.state;
         return load ? (
             <div className="Mypage-content-main">
 
-                {/* 포트폴리오 내 이미지 클릭하여 보기 */}
+                {/* 포트폴리오 이미지 클릭하여 크게 보기 */}
                 {
                     imageView && <div className="load-mask" onClick={() => this.setState({ imageView : false })}>
                         <div className="portfolio-imageviewDiv">
@@ -279,7 +321,7 @@ class Portfolio extends Component {
                     </div>
                 }
 
-                {/* 초기 타이틀 라인 */}
+                {/* 초기 타이틀 라인 추가와 갯수 표시 */}
                 <div className="portfolio-title">
                     {
                         userEmail && <div className="portfolio-content" onClick={this.portfolioadd.bind(this)}><span style={{marginRight:"5px"}}>포트폴리오 추가</span><LibraryAddOutlinedIcon /></div>
@@ -301,6 +343,7 @@ class Portfolio extends Component {
                         projectUrl={projectUrl}
                         projectCate={projectCate}
                         projectCateInput={projectCateInput}
+                        position={position}
                         partner={partner}
                         tag={tag}
                         tagList={dataList.app.tagList}
@@ -322,46 +365,55 @@ class Portfolio extends Component {
                     />
                 }
 
-                {/* 포트폴리오를 표시하거나 초기 가이드 텍스트 표시 */}
+                {/* 포트폴리오를 표시 */}
                 {
                     portfolioList && portfolioList[0] ?
                     portfolioList.map((data,i) => {
                         return <div className="portfolio-list-div" key={i}>
-                            <div className="portfolio-idx-title">{data.title}{userEmail && <EditOutlinedIcon style={{cursor:"pointer"}} onClick={this.onChangeUpdate.bind(this, data, i)} />}</div>
+                            <div className="portfolio-idx-title">{data.title}<div>{userEmail && <EditOutlinedIcon style={{cursor:"pointer"}} onClick={this.onChangeUpdate.bind(this, data, i)} />}{ userEmail && <DeleteForeverOutlinedIcon style={{cursor:"pointer"}} onClick={this.portfolioDelete.bind(this, data.id)} />}</div></div>
                             <div className="portfolio-idx-date"><span>{data.startDate}~{data.endDate || "진행 중"}</span><span>구분: {data.projectCate}</span></div>
-                            <textarea className="portfolio-idx-contentBox" value={data.content} readOnly></textarea>
-                            <div className="portfolio-idx-partnerTitle">함께한 구성원</div>
-                            <div className="portfolio-idx-partnerBox">
-                                { data.partner.map((data,i) => {
-                                    return <TagChip name={data} key={i} />
-                                }) }
-                            </div>
-                            <div className="portfolio-idx-partnerTitle">태그 항목</div>
-                            <div className="portfolio-idx-partnerBox">
-                                { data.tag.map((data,i) => {
-                                    return <TagChip name={data} key={i} />
-                                }) }
-                            </div>
-                            <div className="portfolio-idx-partnerTitle" style={{display:"flex",justifyContent:"space-between"}}>
-                                <span>프로젝트 주소</span>
-                                <div className="portfolio-idx-imageArr" style={{marginTop:"-50px"}}>
-                                    {
-                                        data.imagesUrl.map((data,i) => {
-                                            return <Avatar onClick={() => this.setState({ imageView : true, preview : data.data })} variant="rounded" key={i} alt="Remy Sharp" src={data.data} 
-                                                style={{
-                                                    border:"1px solid rgba(156, 156, 156, 0.664)",
-                                                    margin:"5px",height:"70px",width:"70px",cursor:"pointer"
-                                                }} 
-                                            />
-                                        })
-                                    }
+                            <div className="portfolio-idx-contentBox"><span>{data.content}</span></div>
+                            <div className="portfolio-idx-layout">
+                                <div className="portfolio-idx-left">
+                                    <div className="portfolio-idx-partnerTitle" style={{marginBottom:"15px"}}>나의 역할 : {data.position}</div>
+                                    <div className="portfolio-idx-partnerTitle">함께한 구성원</div>
+                                    <div className="portfolio-idx-partnerBox">
+                                        { data.partner.map((data,i) => {
+                                            return <TagChip name={data} key={i} />
+                                        }) }
+                                    </div>
+                                    <div className="portfolio-idx-partnerTitle">태그 항목</div>
+                                    <div className="portfolio-idx-partnerBox">
+                                        { data.tag.map((data,i) => {
+                                            return <TagChip name={data} key={i} />
+                                        }) }
+                                    </div>
+                                    <div className="portfolio-idx-partnerTitle" style={{display:"flex",justifyContent:"space-between"}}>
+                                        <span>프로젝트 주소</span>
+                                    </div>
+                                    <div className="portfolio-idx-partnerTitle" style={{marginBottom:"10px"}} ><a href={data.projectUrl} >{data.projectUrl}</a></div>
+                                </div>
+                                <div className="portfolio-idx-right">
+                                    <div className="portfolio-idx-imageArr">
+                                        {
+                                            data.imagesUrl.map((data,i) => {
+                                                return <Avatar onClick={() => this.setState({ imageView : true, preview : data.data })} variant="rounded" key={i} alt="Remy Sharp" src={data.data} 
+                                                    style={{
+                                                        border:"1px solid rgba(156, 156, 156, 0.664)",
+                                                        margin:"5px",height:"70px",width:"70px",cursor:"pointer"
+                                                    }} 
+                                                />
+                                            })
+                                        }
+                                    </div>
                                 </div>
                             </div>
-                            <div className="portfolio-idx-partnerTitle" style={{marginBottom:"10px"}} ><a href={data.projectUrl} >{data.projectUrl}</a></div>
                         </div>
                     })
                     :
                     <div>
+
+                        {/* 포트폴리오 가이드 텍스트 */}
                         {
                             <div className="portfolio-first">
                                 {

@@ -60,6 +60,7 @@ router.post("/create", async(req, res) => {
 			partner : req.body.partner,
 			projectCate : req.body.projectCate,
 			projectUrl : req.body.projectUrl,
+			position : req.body.position,
 			imagesUrl : req.body.imagesUrl,
 			userId : req.body.userId,
 		});
@@ -82,6 +83,7 @@ router.put("/update", async(req, res) => {
 			partner : req.body.partner,
 			projectCate : req.body.projectCate,
 			projectUrl : req.body.projectUrl,
+			position : req.body.position,
 			imagesUrl : req.body.imagesUrl,
             }, {
             where: {
@@ -101,7 +103,7 @@ router.delete("/delete", async(req, res) => {
     try {
         await Portfolio.destroy({
             where: {
-				userId : req.query.userId,
+				id : req.query.id,
             }
 		});
 		result = true;

@@ -21,7 +21,7 @@ import AddIcon from '@material-ui/icons/Add';
 class EditProfile extends Component {
     constructor(props) {
         super(props);
-        const {userInfo}=this.props;
+        const {userInfo,awardData, certificateData}=this.props;
         this.state = {
             progress : null,
             // 개인정보
@@ -60,10 +60,19 @@ class EditProfile extends Component {
             trainingDateState : userInfo.userTraningDateState,   // 실습 할 수 있는 날짜 선택 박스 -> 비선택 / 상시 / 졸업 후 / 정해진 날짜
             trainingDate : userInfo.userTraningDate,  // 실습 여부 시 실습 가능 날짜
             
-            award:"",
-            awardDate:"",
-            addawd:[],
-            awardat:"",
+           
+            awardname:"",
+            awarddate:"",
+            awardcate:"교내",
+            awards:awardData||[],
+         
+
+            certificatename:"",
+            certificatecate:"",
+            certificatedate:"",
+            certificates:certificateData||[],
+
+
             load : false,
         }
     }
@@ -199,32 +208,50 @@ class EditProfile extends Component {
             this.SaveProfile();
         }
     }
-    addAward(){
-        const awd= this.awdForm();
-        console.log(awd);
-        this.setState({
-            Addawd : this.state.Addawd.concat(awd)},
-        )
+    
+    async addAward(){
+        const {userInfo}=this.props;
+        const {awardname,awardcate,awarddate,awardList} =this.state;
+
+        try{
+            const result= await axios.post(`${config.app.s_url}/awards/create`,{
+                id:userInfo,
+                awardName:awardname,
+                awardDate :awarddate,
+                awardCate:awardcate,
+            })
+            console.log(result);
+        }
+        catch(err){
+            console.log("user award add create err : "+err);
+        }
     }
-    awdForm(){
-        const {award ,awardDate}=this.state;
-        return <div className="Info-rookie-dateLayout">
-        <SelectBox 
-            value={award} 
-            label={"수여"} option={["교내","교외"]} text={"수여"} style={{marginRight:"20px"}}
-        />
-        <TextField variant="outlined" onChange={this.onChangeValue.bind(this)} name="privateUrl" value={award} label="수상명 " />
-        <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="trainingDate" value={awardDate} label="수상 날짜" />
-        <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addAward.bind(this)}>+</span>
-    </div>
+    
+    async addCertificate(){
+        const {userInfo}=this.props;
+        const {certificatename,certificatecate,certificatedate} =this.state;
+
+        try{
+            const result= await axios.post(`${config.app.s_url}/cerfiticates/create`,{
+                id:userInfo,
+                certificateName:certificatename,
+                certificateCate :certificatecate,
+                certificateDate:certificatedate,
+            })
+            console.log(result);
+        }
+        catch(err){
+            console.log("user certificate add create err : "+err);
+        }
     }
+
     async SaveProfile() {
         const { userInfo } = this.props;
         const { imgUrl,
             name,phone,address1,military,
             univercityCate,univercity,subject,univercityState,univercityStart,univercityEnd,
             tags,keywords,specialty,introduce,privateUrl,
-            field,workDateState,trainingDateState,workDate,trainingDate,award,awardDate,awardat
+            field,workDateState,trainingDateState,workDate,trainingDate
         } = this.state;
  
         const result = await axios.put(`${config.app.s_url}/userInfos/update`,{
@@ -249,7 +276,7 @@ class EditProfile extends Component {
             userWorkDate : workDate,
             userTraningDate : trainingDate,
         });
-        
+
         console.log( result.data+"프로필수정");
         if(result.data){
             alert("수정이 완료되었습니다.");
@@ -261,12 +288,13 @@ class EditProfile extends Component {
 
     render() {
         const { imgPreview, imgUrl,
-            name,phone,address1,addressState,
+            name,phone,address1,addressState,military,
             univercityCate,univercityState,univercityStart,univercityEnd,startErr,endErr,subject,
             tags,keywords,specialty,introduce,introduceErr,privateUrl,
             workDateState,trainingDateState,workDate,trainingDate,
-            load,award,awardDate,field,awardat,
-            Addawd, univercity} = this.state;
+            load,fieldList,univercity,field,
+            awardname,awarddate,awardcate,awards,
+            certificatedate,certificatename,certificatecate,certificates} = this.state;
         const {userInfo}=this.props;
         console.log(imgUrl)
         return (
@@ -289,7 +317,7 @@ class EditProfile extends Component {
                             <div className="Info-company-Layout">
                                 <TextField helperText="-빼고 입력해주세요" required label="전화번호" variant="outlined" value={phone} name="phone" onChange={this.onChangeValue.bind(this)} />
                                 <SelectBox 
-                                    value={userInfo.userMilitary} func={(e) => this.setState({ military : e })}
+                                    value={military} func={(e) => this.setState({ military : e })}
                                     label={"병역여부"} option={["군필","미필","면제","해당없음"]} text={"병역여부"} style={{marginLeft:"15px"}}
                                 />
                             </div>
@@ -392,26 +420,46 @@ class EditProfile extends Component {
                 <div className="Info-rookie-body">
                     <div className="Info-rookie-dateLayout">
                         <SelectBox 
-                            value={awardat} func={(e) => this.setState({ workDateState : e })}
+                            value={awardcate} func={(e) => this.setState({ awardcate : e })}
                             label={"수여"} option={["교내","교외"]} text={"수여"} style={{marginRight:"20px"}}
                         />
-                        <TextField variant="outlined" onChange={this.onChangeValue.bind(this)} name="privateUrl" value={award} label="수상명 " />
-                        <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="trainingDate" value={awardDate} label="수상 날짜" />
+                        <TextField variant="outlined" onChange={this.onChangeValue.bind(this)} name="awardname" value={awardname} label="수상명 " />
+                        <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="awarddate" value={awarddate} label="수상 날짜" />
                         <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addAward.bind(this)}>+</span>
                     </div>
-                    {
-                            tags.map((data,i) => {
+                            {
+                            awards.map((data,i) => {
                                 return <div className="Info-rookie-dateLayout" name={data} key={i}>
                                 <SelectBox 
-                                    value={awardat} func={(e) => this.setState({ workDateState : e })}
+                                    value={awardcate} func={(e) => this.setState({ awardcate : e })}
                                     label={"수여"} option={["교내","교외"]} text={"수여"} style={{marginRight:"20px"}}
                                 />
-                                <TextField variant="outlined" onChange={this.onChangeValue.bind(this)} name="privateUrl" value={award} label="수상명 " />
-                                <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="trainingDate" value={awardDate} label="수상 날짜" />
-                                <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addAward.bind(this)}>x</span>
+                                <TextField variant="outlined" onChange={this.onChangeValue.bind(this)} name="awardname" value={awardname} label="수상명 " />
+                                <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="awarddate" value={awarddate} label="수상 날짜" />
+                                <span style={{fontSize:"30px",marginLeft:"20px"}} >x</span>
                             </div>
                             })
-                    }
+                        }
+                </div>
+                {/*자격증*/}
+                <div className="Info-rookie-title">자격증</div>
+                <div className="Info-rookie-body">
+                    <div className="Info-rookie-dateLayout">
+                        <TextField variant="outlined" style={{marginRight:"20px"}} onChange={this.onChangeValue.bind(this)} name="certificatecate" value={certificatecate} label="발급기관" />
+                        <TextField variant="outlined" onChange={this.onChangeValue.bind(this)} name="certificatename" value={certificatename} label="자격증이름 " />
+                        <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="certificatedate" value={certificatedate} label="발급 날짜" />
+                        <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addCertificate.bind(this)}>+</span>
+                    </div>
+                            {
+                            certificates.map((data,i) => {
+                                return  <div className="Info-rookie-dateLayout" key={i} name={data}>
+                                <TextField variant="outlined" style={{marginRight:"20px"}} onChange={this.onChangeValue.bind(this)} name="certificatecate" value={certificatecate} label="발급기관" />
+                                <TextField variant="outlined" onChange={this.onChangeValue.bind(this)} name="certificatename" value={certificatename} label="자격증이름 " />
+                                <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="certificatedate" value={certificatedate} label="발급 날짜" />
+                                <span style={{fontSize:"30px",marginLeft:"20px"}} >x</span>
+                            </div>
+                            })
+                        }
                 </div>
                 {/*저장버튼*/}
                 <div style={{margin:"50px"}}>

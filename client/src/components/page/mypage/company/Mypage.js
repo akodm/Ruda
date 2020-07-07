@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../../css/companypage.css';
+//import '../../../css/companypage.css';
 import config from '../../../../client-configs';
 
 import axios from 'axios';

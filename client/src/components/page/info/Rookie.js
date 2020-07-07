@@ -29,7 +29,6 @@ class Rookie extends Component {
             name : "",
             phone : "",
             address1 : "",
-            address2 : "",
             addressState : false,
             military : "군필",
 
@@ -162,7 +161,7 @@ class Rookie extends Component {
     async saveStartBtn() {
         const { user } = this.props;
         const { imgUrl,
-            name,phone,address1,address2,military,
+            name,phone,address1,military,
             univercityCate,univercity,subject,univercityState,univercityStart,univercityEnd,
             tags,keywords,specialty,introduce,privateUrl,
             field,workDateState,trainingDateState,workDate,trainingDate
@@ -174,12 +173,11 @@ class Rookie extends Component {
                 id : user.id
             })
 
-            let address = address1 + "-" + address2;
             let result = axios.post(`${config.app.s_url}/userInfos/create`, {
                 userId : user.id,
                 userImageUrl : imgUrl, 
 
-                userName : name, userPhone : phone, userAdd : address, userMilitary : military,
+                userName : name, userPhone : phone, userAdd : address1, userMilitary : military,
                 userUnivercityCate : univercityCate,
                 userUnvcity : univercity, userSubject : subject,
                 userAttendStartDate : univercityStart,
@@ -266,7 +264,7 @@ class Rookie extends Component {
 
     render() {
         const { imgPreview,
-            name,phone,address1,address2,addressState,military,
+            name,phone,address1,addressState,military,
             univercityCate,univercityState,univercityStart,univercityEnd,startErr,endErr,
             tags,keywords,specialty,introduce,introduceErr,privateUrl,
             workDateState,trainingDateState,workDate,trainingDate,
@@ -304,10 +302,9 @@ class Rookie extends Component {
                             id="outlined-read-only-input" label="주소를 검색하여 주세요. 시/도/구"
                             value={address1} required
                             onClick={() => this.setState({ addressState : true })}
-                            style={{width:"450px",marginRight:"25px"}}
+                            style={{width:"100%",marginRight:"25px"}}
                             InputProps={{ readOnly: true }} variant="outlined"
                         />
-                        <TextField helperText="상세주소를 입력해주세요" style={{width:"200px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="address2" value={address2} id="outlined-required" label="나머지 주소" />
                     </div>
                     {/* 주소지 검색 API */}
                     <PostCode open={addressState} close={() => this.setState({ addressState : false })} func={(data) => this.setState({ address1 : data })} />

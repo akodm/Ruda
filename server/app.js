@@ -16,7 +16,9 @@ let hireBoardRouter = require('./routes/hireBoard');
 let mailRouter = require('./routes/mail');
 let userInfoRouter = require('./routes/userInfo');
 let emailAuth = require('./routes/emailAuth');
-let portfolio = require('./routes/portfolio');
+let portfolioRouter = require('./routes/portfolio');
+let awardRouter = require('./routes/award');
+let certificateRouter = require('./routes/certificate');
 const configs = require('./server-configs.js');
 
 const models = require('./models');
@@ -52,7 +54,9 @@ app.use('/hireBoards', hireBoardRouter);
 app.use('/mails', mailRouter);
 app.use('/userInfos', userInfoRouter);
 app.use('/emailAuth', emailAuth);
-app.use('/portfolios', portfolio);
+app.use('/portfolios', portfolioRouter);
+app.use('/awards', awardRouter);
+app.use('/cerfiticates', certificateRouter);
 require('./passport.js')(passport);
 
 // --------------------------- 노드 메일러 이메일 인증 -------------------

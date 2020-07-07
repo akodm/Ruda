@@ -32,7 +32,7 @@ class ViewProfile extends Component {
     }
     render() {
         //const{imgPreview}=this.state;
-        const { userInfo } = this.props;
+        const { userInfo,awardData,certificateData } = this.props;
         const Tag = userInfo.userTags;
         const Keyword = userInfo.userKeyword;
         const Specialty = userInfo.userSpecialty;

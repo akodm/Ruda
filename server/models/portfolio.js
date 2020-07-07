@@ -9,7 +9,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,         // 제목
         },
         content : {
-            type: DataTypes.STRING(255),         // 내용
+            type: DataTypes.STRING,         // 내용
+        },
+        position : {
+            type: DataTypes.STRING,         // 프로젝트의 자신의 역할
         },
         tag : {
             type: DataTypes.JSON,         // 태그 목록

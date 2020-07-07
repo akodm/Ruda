@@ -11,7 +11,6 @@ router.get('/test', function(req, res, next) {
 });
 
 router.get('/socketTest', function(req, res, next) {
-  
   res.send(true);
 });
 

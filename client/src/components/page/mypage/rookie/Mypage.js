@@ -27,6 +27,8 @@ class mypage extends Component {
             likeList:[],
             portfolioData : [],
 
+            awardData:[],
+            certificateData:[],
             load : false,
         }
     }
@@ -35,6 +37,10 @@ class mypage extends Component {
         try {
             const result = await axios.get(`${config.app.s_url}/portfolios/all?userId=${this.props.userInfo.userId}`);
             this.setState({ portfolioData : result.data });
+            const award = await axios.get(`${config.app.s_url}/awards/all?userId=${this.props.userInfo.userId}`);
+            this.setState({ awardData : award.data });
+            const certificate = await axios.get(`${config.app.s_url}/awards/all?userId=${this.props.userInfo.userId}`);
+            this.setState({ certificateData : certificate.data });
         } catch(err) {
             console.log("rookie mypage data load err : " + err);
         }
@@ -84,17 +90,21 @@ class mypage extends Component {
 
     portfolioConcat(data) { this.setState(current => ({ portfolioData : current.portfolioData.concat(data) })) }
 
-    
+    awardConcat(data) { this.setState(current => ({ portfolioData : current.awardData.concat(data) })) }
+
+    certificateConcat(data) { this.setState(current => ({ portfolioData : current.certificateData.concat(data) })) }
 
     render() {
-        const {btnNum,likeBtn,shareAlert,success,portfolioData,load}=this.state;
+        const {btnNum,likeBtn,shareAlert,success,portfolioData,load,awardData,certificateData}=this.state;
         const { userInfo, user } = this.props;
         return (
             <div className="Mypage">
                 <div className="Mypage-frame">
                     <div className="Mypage-pages">
+
+                        {/* 공유하기 팝업 */}
                         <div className="shareAlert" style={{display:shareAlert}}>
-                            <span className="close-shareAlert" onClick={this.close.bind(this)}>X</span>
+                            <span className="close-shareAlert" style={{cursor:"pointer"}} onClick={this.close.bind(this)}>X</span>
                             <p>더 많은 사람이 볼 수 있도록 공유해보세요!</p>
                             <div style={{width:"80%"}}>
                                 <div className="shareAlert-input">
@@ -104,35 +114,18 @@ class mypage extends Component {
                                 <p style={{display:success,fontSize:"14px",color:"#11addd"}}>복사가 완료되었습니다.</p> 
                             </div>
                         </div>
-                        <div className="Mypage-pages-title-frame">
-                            <img src = "/Image/hochi.png" className="hochi" alt="img"></img>
-                            <div className="Mypage-pages-title">
-                                <p>{userInfo.userName}님의 {btnNum === 0 ?"프로필 입니다." : "" || 
-                                              btnNum === 1 ?"포트폴리오 입니다." : "" ||
-                                              btnNum === 2 ?"마이페이지 입니다." : "" } </p>
-                                <div className="Mypage-pages-title-icons">
-                                    <div className="Mypage-pages-title-icons-icon">
-                                        <PrintIcon onClick={this.savepdf.bind(this)}/>
-                                    </div>
-                                    <div className="Mypage-pages-title-icons-icon">
-                                        <ShareIcon onClick={this.shareLink.bind(this)}/>
-                                    </div>
-                                    <div className="Mypage-pages-title-icons-icon" >
-                                        {likeBtn==="none"?<FavoriteBorderIcon />:<FavoriteIcon style={{ color : "#11addd"}}/>}
-                                    </div>
-                                    <div className="Mypage-pages-title-icons-icon">
-                                        <MailOutlineIcon/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div className="Mypage-content">
                             {/* 0 => 기본 정보 프로필
                             1 => 포트폴리오
                             2 => 마이페이지 수정 ( 개인화면 ) */}
                             {
                                 btnNum === 0 ?
-                                <Profile userInfo={userInfo} /> :
+                                <Profile
+                                userId={userInfo.userId}
+                                userInfo={userInfo}
+                                awardData={awardData}
+                                certificateData={certificateData}
+                                addAward={this.awardConcat.bind(this)} /> :
                                 btnNum === 1 ?
                                 load && <Portfolio 
                                     load={load} 
