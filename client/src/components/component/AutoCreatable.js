@@ -9,7 +9,7 @@ export default function AutoCreatable(props) {
 
   return (
     <Autocomplete
-        value={value}
+        value={props.value || value}
         onChange={(event, newValue) => {
             if(newValue !== null) {
                 let values = newValue.toLowerCase();

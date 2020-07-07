@@ -91,8 +91,10 @@ class mypage extends Component {
             <div className="Mypage">
                 <div className="Mypage-frame">
                     <div className="Mypage-pages">
+
+                        {/* 공유하기 팝업 */}
                         <div className="shareAlert" style={{display:shareAlert}}>
-                            <span className="close-shareAlert" onClick={this.close.bind(this)}>X</span>
+                            <span className="close-shareAlert" style={{cursor:"pointer"}} onClick={this.close.bind(this)}>X</span>
                             <p>더 많은 사람이 볼 수 있도록 공유해보세요!</p>
                             <div style={{width:"80%"}}>
                                 <div className="shareAlert-input">
@@ -100,28 +102,6 @@ class mypage extends Component {
                                     <button className="shareAlert-btns" onClick={() => this.copyCodeToClipboard()}>링크복사</button>    
                                 </div>
                                 <p style={{display:success,fontSize:"14px",color:"#11addd"}}>복사가 완료되었습니다.</p> 
-                            </div>
-                        </div>
-                        <div className="Mypage-pages-title-frame">
-                            <img src = "/Image/hochi.png" className="hochi" alt="img"></img>
-                            <div className="Mypage-pages-title">
-                                <p>{userInfo.userName}님의 {btnNum === 0 ?"프로필 입니다." : "" || 
-                                              btnNum === 1 ?"포트폴리오 입니다." : "" ||
-                                              btnNum === 2 ?"마이페이지 입니다." : "" } </p>
-                                <div className="Mypage-pages-title-icons">
-                                    <div className="Mypage-pages-title-icons-icon">
-                                        <PrintIcon onClick={this.savepdf.bind(this)}/>
-                                    </div>
-                                    <div className="Mypage-pages-title-icons-icon">
-                                        <ShareIcon onClick={this.shareLink.bind(this)}/>
-                                    </div>
-                                    <div className="Mypage-pages-title-icons-icon" >
-                                        {likeBtn==="none"?<FavoriteBorderIcon />:<FavoriteIcon style={{ color : "#11addd"}}/>}
-                                    </div>
-                                    <div className="Mypage-pages-title-icons-icon">
-                                        <MailOutlineIcon/>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div className="Mypage-content">

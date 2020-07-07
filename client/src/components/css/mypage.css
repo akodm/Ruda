@@ -1,7 +1,6 @@
 .Mypage{
     width: 100%;
     display: flex;
-    justify-content: center;
     background-color: rgba(230, 230, 230, 0.247);
     font-family: NanumSquareB;
     color:#646464;
@@ -13,7 +12,6 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-  
 }
 /*-마이페이지 -*/
 
@@ -24,7 +22,6 @@
     display: flex;
     flex-direction: column;
     padding: 40px;
-    
 }
 /*-마이페이지 타이틀-*/
 .Mypage-pages-title-frame{
@@ -90,11 +87,9 @@
 .Mypage-profile-title-icons{
     color: rgb(184, 184, 184);
     margin-left:10px; 
-
 }
 .Mypage-profile-title-icons:hover{
     color: rgb(126, 126, 126);
-   
 }
 /*--프로필 왼쪽영역-*/
 .Mypage-profile-content-mainprofile{
@@ -103,7 +98,6 @@
     justify-content: center; 
     align-items: center;
     width: 100%;
-    border-bottom: 1px solid rgb(192, 192, 192);
 }
 .profileimg{
     border-radius: 50%;
@@ -115,23 +109,21 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-
 }
 .Mypage-profile-content-userinfo-graph{
     display: flex;
     flex-direction: row;  
+    border: 1px solid rgba(134, 134, 134, 0.438);
 }
 .Mypage-profile-content-userinfo-data{
     display: flex;
     flex-direction: column; 
     width: 100%;
-    padding: 20px;
+    margin-left: 15px;
 }
 .Mypage-profile-content-userinfo-info{
     display: flex;
     flex-direction: column; 
-    
-  
 }
 .Mypage-profile-content-userinfo-profile{
     height: 100%;
@@ -141,7 +133,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
+    border: 1px solid rgba(134, 134, 134, 0.438);
 }
 .profile-intro,.profile-userinfo{
     font-size: 14px;
@@ -166,7 +158,6 @@
     align-items: center;
     margin-bottom:3px;
     font-size: 14px;
-    
 }
 .profile-profile > p{
     text-align:left;
@@ -192,6 +183,11 @@
     align-items: center;
 }
 
+.profile-keyword-info {
+    border: 1px solid rgba(134, 134, 134, 0.438);
+    margin-top: 15px;
+}
+
 .profile-chart-info-title,.profile-keyword-title,.profile-skill-title,.profile-inschool-title,.profile-outschool-title,.profile-chart-info-title{
     font-size: 18px;
     font-weight: 600;
@@ -213,19 +209,27 @@
     margin-left: 30px;
 }
 
+.profile-skill-info {
+    border: 1px solid rgba(134, 134, 134, 0.438);
+    margin-top: 15px;
+}
+
+.profile-outschool {
+    width: 50%;
+}
+
 .profile-skill-info-certificate-text,.profile-skill-info-Awards-text{
     display: flex;
     flex-direction: row;
     font-size: 14px;
     justify-content: space-around;
-    margin-left: 30px;
+    border-bottom: 1px solid rgba(122, 122, 122, 0.493);
 }
 .profile-inschool-text,.profile-outschool-text{
     font-size: 14px;
-    margin-left: 30px;
-    width: 300px;
     height: 35px;
     align-items: center;
+    border-bottom: 1px solid rgba(122, 122, 122, 0.493);
 }
 .profile-inschool-text>p ,.profile-outschool-text > p {
     margin-left: 30px;
@@ -256,7 +260,6 @@
     display: flex;
     flex-direction: column;
     margin-top: 30px;
-
 }
 .Mypage-menu-click {
     width: 85px;

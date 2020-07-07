@@ -174,17 +174,17 @@ class Profile extends Component {
                                                 <div className="profile-skill-info-certificate">
                                                     <div className="profile-skill-info-certificate-text">
                                                         <p>대한상공회</p>
-                                                        <p>정보처리산업기사1급</p>
+                                                        <p>정보처리 산업기사 1급</p>
                                                         <p>2020/02/02</p>
                                                     </div>
                                                     <div className="profile-skill-info-certificate-text">
                                                         <p>대한상공회</p>
-                                                        <p>정보처리산업기사1급</p>
-                                                        <p>2020/02/02</p>
+                                                        <p>Q/A 자격증</p>
+                                                        <p>2020/02/08</p>
                                                     </div>
                                                     <div className="profile-skill-info-certificate-text">
-                                                        <p>대한상공회</p>
-                                                        <p>정보처리산업기사1급</p>
+                                                        <p>한자진흥원</p>
+                                                        <p>한문 2급</p>
                                                         <p>2020/02/02</p>
                                                     </div>
                                                 </div>
@@ -195,40 +195,45 @@ class Profile extends Component {
                                                     <div className="profile-skill-info-Awards-text">
                                                         <p>교내</p>
                                                         <p>대림대학교</p>
-                                                        <p>캡스톤디자인</p>
+                                                        <p>캡스톤 디자인</p>
                                                         <p>2020/02/02</p>
                                                     </div>
                                                     <div className="profile-skill-info-Awards-text">
                                                         <p>교내</p>
                                                         <p>대림대학교</p>
-                                                        <p>캡스톤디자인</p>
+                                                        <p>사이버축제</p>
                                                         <p>2020/02/02</p>
                                                     </div>
                                                     <div className="profile-skill-info-Awards-text">
                                                         <p>교내</p>
                                                         <p>대림대학교</p>
-                                                        <p>캡스톤디자인</p>
+                                                        <p>졸업작품 전시회</p>
                                                         <p>2020/02/02</p>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="Mypage-profile-content-storyprofile">
-                                                <div className="profile-inschool">
-                                                    <p className="profile-inschool-title">교내활동</p>
-                                                    <div>
-                                                        <p className="profile-inschool-text">대림테크페어 참여</p>
-                                                        <p className="profile-inschool-text">동아리회장</p>
-                                                        <p className="profile-inschool-text">학생회활동</p>
+                                            <div>
+                                                <p className="profile-skill-title">교외활동</p>
+                                                <div className="profile-skill-info-Awards">
+                                                    <div className="profile-skill-info-Awards-text">
+                                                        <p>활동구분</p>
+                                                        <p>활동명</p>
+                                                        <p>시작일</p>
+                                                        <p>종료일</p>
+                                                    </div>
+                                                    <div className="profile-skill-info-Awards-text">
+                                                        <p>남부 여성 발전 센터</p>
+                                                        <p>앱 및 웹 작품전 시회</p>
+                                                        <p>2020/01/01</p>
+                                                        <p>2020/02/02</p>
+                                                    </div>
+                                                    <div className="profile-skill-info-Awards-text">
+                                                        <p>국가 프로젝트</p>
+                                                        <p>소프트웨어 마에스트로</p>
+                                                        <p>2020/01/01</p>
+                                                        <p>2020/08/30</p>
                                                     </div>
                                                 </div>
-                                                <div className="profile-outschool">
-                                                    <p className="profile-outschool-title">교외활동</p>
-                                                    <div>
-                                                        <p className="profile-outschool-text">안양시공모전참여</p>
-                                                        <p className="profile-outschool-text">동아리회장</p>
-                                                        <p className="profile-outschool-text">학생회활동</p>
-                                                    </div>
-                                                </div>   
                                             </div>
                                         </div>
                                     </div>
