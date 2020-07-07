@@ -84,6 +84,8 @@ class mypage extends Component {
 
     portfolioConcat(data) { this.setState(current => ({ portfolioData : current.portfolioData.concat(data) })) }
 
+    
+
     render() {
         const {btnNum,likeBtn,shareAlert,success,portfolioData,load}=this.state;
         const { userInfo, user } = this.props;
@@ -140,7 +142,7 @@ class mypage extends Component {
                                     portfolio={portfolioData} 
                                     addPortfolio={this.portfolioConcat.bind(this)} />
                                 :
-                                user.email && <EditProfile userInfo={userInfo}/>
+                                user.email && <Setting userInfo={userInfo}/>
                             }
                         </div>
                     </div>
