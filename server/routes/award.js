@@ -54,7 +54,7 @@ router.post("/create", async(req, res) => {
         result = await Award.create({
 			awardCate : req.body.awardCate,
 			awardName : req.body.awardName,
-			awarDate : req.body.awarDate,
+			awardDate : req.body.awardDate,
 			userId : req.body.userId,
 		});
     } catch(err) {
