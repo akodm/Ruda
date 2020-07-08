@@ -79,7 +79,6 @@ class Base extends Component {
 
     render() {
         const { user,load } = this.state;
-        console.log(user);
         return (
             <div className="base-main">
                  <Router>

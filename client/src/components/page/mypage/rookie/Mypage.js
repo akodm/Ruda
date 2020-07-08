@@ -86,7 +86,7 @@ class mypage extends Component {
 
     render() {
         const {btnNum,likeBtn,shareAlert,success,portfolioData,load}=this.state;
-        const { userInfo, user } = this.props;
+        const { userInfo, user, loginState } = this.props;
         return (
             <div className="Mypage">
                 <div className="Mypage-frame">
@@ -114,6 +114,7 @@ class mypage extends Component {
                                 btnNum === 1 ?
                                 load && <Portfolio 
                                     load={load} 
+                                    loginState={loginState}
                                     userEmail={user.email} 
                                     userId={userInfo.userId} 
                                     userName={userInfo.userName} 

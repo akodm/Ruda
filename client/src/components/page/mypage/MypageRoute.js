@@ -62,13 +62,16 @@ class MypageRoute extends Component {
 
     render() {
         const { rookie, company, load } = this.state;
-        let user = rookie || company || null;
+        const { user } = this.props;
+        let userInfo = rookie || company || null;
+        let loginState = false;
+        if(userInfo && userInfo.userId) { loginState = (user.id === userInfo.userId); }
         return (
             <div style={{width:"100%"}}>
                 {
-                    user ? 
-                    (user.user.userCate === "user" ? <Rookie userInfo={user} {...this.props} /> 
-                    : <Company companyInfo={user} {...this.props} /> 
+                    userInfo ? 
+                    (userInfo.user.userCate === "user" ? <Rookie userInfo={userInfo} {...this.props} loginState={loginState} /> 
+                    : <Company companyInfo={userInfo} {...this.props} loginState={loginState} /> 
                     ) 
                     : load ? <NotFound /> : ""
                 }
