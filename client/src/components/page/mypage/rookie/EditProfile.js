@@ -296,7 +296,6 @@ class EditProfile extends Component {
             awardname,awarddate,awardcate,awards,
             certificatedate,certificatename,certificatecate,certificates} = this.state;
         const {userInfo}=this.props;
-        console.log(imgUrl)
         return (
             <div className="Info-rookie-main">
                 { !load &&  <Load /> }

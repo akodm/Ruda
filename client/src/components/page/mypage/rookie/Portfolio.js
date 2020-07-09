@@ -304,7 +304,7 @@ class Portfolio extends Component {
 
     // ----------------------------------------------------------=== 렌더링 === //
     render() {
-        const { userName, userEmail, load } = this.props;
+        const { userName, load, loginState } = this.props;
         const { portfolioList, addView, ingDate,
             title, content, startDate, startMonth, endDate, endMonth, tag, partner, projectUrl, projectCate, projectCateInput, position,
             imagesUrl, imageLoad , imageView, preview
@@ -324,7 +324,7 @@ class Portfolio extends Component {
                 {/* 초기 타이틀 라인 추가와 갯수 표시 */}
                 <div className="portfolio-title">
                     {
-                        userEmail && <div className="portfolio-content" onClick={this.portfolioadd.bind(this)}><span style={{marginRight:"5px"}}>포트폴리오 추가</span><LibraryAddOutlinedIcon /></div>
+                        loginState && <div className="portfolio-content" onClick={this.portfolioadd.bind(this)}><span style={{marginRight:"5px"}}>포트폴리오 추가</span><LibraryAddOutlinedIcon /></div>
                     }
                     <div>{userName}님의 포트폴리오 개수는 <span style={{color:"red"}}>{portfolioList.length}</span>개 입니다.</div>
                 </div>
@@ -370,7 +370,7 @@ class Portfolio extends Component {
                     portfolioList && portfolioList[0] ?
                     portfolioList.map((data,i) => {
                         return <div className="portfolio-list-div" key={i}>
-                            <div className="portfolio-idx-title">{data.title}<div>{userEmail && <EditOutlinedIcon style={{cursor:"pointer"}} onClick={this.onChangeUpdate.bind(this, data, i)} />}{ userEmail && <DeleteForeverOutlinedIcon style={{cursor:"pointer"}} onClick={this.portfolioDelete.bind(this, data.id)} />}</div></div>
+                            <div className="portfolio-idx-title">{data.title}<div>{loginState && <EditOutlinedIcon style={{cursor:"pointer"}} onClick={this.onChangeUpdate.bind(this, data, i)} />}{ loginState && <DeleteForeverOutlinedIcon style={{cursor:"pointer"}} onClick={this.portfolioDelete.bind(this, data.id)} />}</div></div>
                             <div className="portfolio-idx-date"><span>{data.startDate}~{data.endDate || "진행 중"}</span><span>구분: {data.projectCate}</span></div>
                             <div className="portfolio-idx-contentBox"><span>{data.content}</span></div>
                             <div className="portfolio-idx-layout">
@@ -417,7 +417,7 @@ class Portfolio extends Component {
                         {
                             <div className="portfolio-first">
                                 {
-                                    userEmail ?
+                                    loginState ?
                                     <div className="portfolio-guideDiv">
                                         <h3 style={{display:"flex",alignItems:"center"}}><AssignmentLateOutlinedIcon/><span style={{marginLeft:"10px"}}>포트폴리오가 없습니다.</span></h3>
                                         <span className="portfolio-guide">

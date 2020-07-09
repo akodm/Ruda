@@ -17,7 +17,6 @@ class Profile extends Component {
     render() {
         const {userInfo,awardData,certificateData} =this.props;
         const {ChangeProfile} = this.state;
-        console.log(userInfo+"프로필");
         return (
             <div className="Profile">
                  { ChangeProfile ? <ViewProfile awardData={awardData} certificateData={certificateData} userInfo={userInfo} change={this.ChangeProfiles.bind(this)}/>:<EditProfile awardData={awardData} certificateData={certificateData} userInfo={userInfo} change={this.ChangeProfiles.bind(this)}/> }

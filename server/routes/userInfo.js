@@ -25,7 +25,7 @@ let models = require("../models");
 // DB Setting --------------------------------------------------------
 const UserInfo = models.userInfo;
 const User = models.user;
-const Op = models.sequelize.Op;
+const Op = models.Sequelize.Op;
 
 // DB CRUD -----------------------------------------------------------
 

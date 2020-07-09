@@ -94,9 +94,11 @@ class mypage extends Component {
 
     certificateConcat(data) { this.setState(current => ({ portfolioData : current.certificateData.concat(data) })) }
 
+
+    
     render() {
         const {btnNum,likeBtn,shareAlert,success,portfolioData,load,awardData,certificateData}=this.state;
-        const { userInfo, user } = this.props;
+        const { userInfo, user, loginState } = this.props;
         return (
             <div className="Mypage">
                 <div className="Mypage-frame">
@@ -114,6 +116,30 @@ class mypage extends Component {
                                 <p style={{display:success,fontSize:"14px",color:"#11addd"}}>복사가 완료되었습니다.</p> 
                             </div>
                         </div>
+
+                        <div className="Mypage-pages-title-frame">
+                            <img src = "/Image/hochi.png" className="hochi" alt="img"></img>
+                            <div className="Mypage-pages-title">
+                                <p>{userInfo.userName}님의 {btnNum === 0 ?"프로필 입니다." : "" || 
+                                              btnNum === 1 ?"포트폴리오 입니다." : "" ||
+                                              btnNum === 2 ?"마이페이지 입니다." : "" } </p>
+                                <div className="Mypage-pages-title-icons">
+                                    <div className="Mypage-pages-title-icons-icon">
+                                        <PrintIcon onClick={this.savepdf.bind(this)}/>
+                                    </div>
+                                    <div className="Mypage-pages-title-icons-icon">
+                                        <ShareIcon onClick={this.shareLink.bind(this)}/>
+                                    </div>
+                                    <div className="Mypage-pages-title-icons-icon" >
+                                        {likeBtn==="none"?<FavoriteBorderIcon />:<FavoriteIcon style={{ color : "#11addd"}}/>}
+                                    </div>
+                                    <div className="Mypage-pages-title-icons-icon">
+                                        <MailOutlineIcon/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div className="Mypage-content">
                             {/* 0 => 기본 정보 프로필
                             1 => 포트폴리오
@@ -129,23 +155,24 @@ class mypage extends Component {
                                 btnNum === 1 ?
                                 load && <Portfolio 
                                     load={load} 
+                                    loginState={loginState}
                                     userEmail={user.email} 
                                     userId={userInfo.userId} 
                                     userName={userInfo.userName} 
                                     portfolio={portfolioData} 
                                     addPortfolio={this.portfolioConcat.bind(this)} />
                                 :
-                                user.email && <Setting userInfo={userInfo}/>
+                                loginState && <Setting userInfo={userInfo}/>
                             }
                         </div>
-                    </div>
-                    <div className="Mypage-btns">
-                        <button className={btnNum === 0?"Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,0)}>프로필</button>
-                        <button className={btnNum === 1?"Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,1)}>포트폴리오</button>
-                        {
-                            user.email &&
-                            <button className={btnNum === 2?"Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,2)}>마이페이지</button>
-                        }
+                        <div className="Mypage-btns">
+                            <button className={btnNum === 0?"Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,0)}>프로필</button>
+                            <button className={btnNum === 1?"Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,1)}>포트폴리오</button>
+                            {
+                                loginState &&
+                                <button className={btnNum === 2?"Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,2)}>마이페이지</button>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
