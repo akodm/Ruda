@@ -95,8 +95,8 @@ class Base extends Component {
                         <Route path="/login" render={props => user.email ? <NotFound/> :  <Login set={this.setUser.bind(this)} {...props} />} ></Route>
                         <Route path="/insert" render={props => user.email ? <NotFound/> : <Insert {...props} /> }></Route>
                         
-                        <Route path="/company" component={Cboard} ></Route>
-                        <Route path="/rookie" component={Rboard} ></Route>
+                        <Route path="/company" render={props => <Cboard user={user} {...props} /> }></Route>
+                        <Route path="/rookie" render={props => <Rboard user={user} {...props}/>}></Route>
                         
                         <Route path="/mypage/:id" render={props => <Mypage user={user} {...props} /> }></Route>
                         {/* Not Found Page 주소에 일치하는 패스가 없을 경우 */}

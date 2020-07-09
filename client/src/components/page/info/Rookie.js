@@ -372,15 +372,11 @@ class Rookie extends Component {
                     <div className="Info-rookie-dateLayout">
                         <SelectBox 
                             value={workDateState} func={(e) => this.setState({ workDateState : e })}
-                            label={"근무가능 날짜"} option={["상시","졸업 후","직접입력","미정"]} text={"근무가능 날짜"} style={{marginRight:"20px"}}
+                            label={"취업유무"} option={["취업희망","실습희망","실습후 취업희망","미정"]} text={"취업유무"} style={{marginRight:"20px"}}
                         />
-                        {
-                            workDateState === "직접입력" &&
-                            <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginRight:"10px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="workDate" value={workDate} label="근무가능 날짜" />
-                        }
                         <SelectBox 
                             value={trainingDateState} func={(e) => this.setState({ trainingDateState : e })}
-                            label={"실습가능 날짜"} option={["상시","졸업 후","실습 강의 시","직접입력","미정"]} text={"실습가능 날짜"} style={{marginRight:"20px"}}
+                            label={"근무실습가능 날짜"} option={["상시","졸업 후","실습 강의 시","직접입력","미정"]} text={"근무/실습 날짜"} style={{marginRight:"20px"}}
                         />
                         {
                             trainingDateState === "직접입력" &&
