@@ -1,37 +1,32 @@
 import React, { Component } from 'react';
-import '../../../css/mypage.css';
+import '../../../css/mypage.css';   
 import config from '../../../../client-configs';
 
 import axios from 'axios';
-import PrintIcon from '@material-ui/icons/Print';
-import ShareIcon from '@material-ui/icons/Share';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
 
 import Profile from './Profile';
 import Portfolio from './Portfolio';
 import Setting from './Setting';
 import EditProfile from './EditProfile';
+
+
 class mypage extends Component {
     constructor(props) {
         super(props);
         this.state={
             btnNum:0,
-            likeBtn:"none",
-            shareAlert:"none",
-            url :new URL(window.location.href),
-            success:"none",
-
-            likeCount:"",
-            likeList:[],
             portfolioData : [],
-
             awardData:[],
             certificateData:[],
             load : false,
+
+            
         }
     }
+
+  
+  
+   
 
     async componentDidMount() {
         try {
@@ -39,7 +34,8 @@ class mypage extends Component {
             this.setState({ portfolioData : result.data });
             const award = await axios.get(`${config.app.s_url}/awards/all?userId=${this.props.userInfo.userId}`);
             this.setState({ awardData : award.data });
-            const certificate = await axios.get(`${config.app.s_url}/awards/all?userId=${this.props.userInfo.userId}`);
+            console.log("어워드데이타"+award)
+            const certificate = await axios.get(`${config.app.s_url}/certificates/all?userId=${this.props.userInfo.userId}`);
             this.setState({ certificateData : certificate.data });
         } catch(err) {
             console.log("rookie mypage data load err : " + err);
@@ -48,45 +44,6 @@ class mypage extends Component {
     }
 
     MenuClick(num){ this.setState({ btnNum:num }) }
-
-    /*async likeClick(){
-        try{
-            let result = await axios.get(`${config.app.s_url}/users/oneemail?userEmail=${email}&authCate=highrookie`);
-            
-        }catch(err){
-
-        }
-    }*/
-
-    savepdf(){
-        document.title = '이름님의 이력서';
-        window.print();
-    }
-
-    copyCodeToClipboard = () => {
-        var dummy = document.createElement("textarea");
-        document.body.appendChild(dummy);
-        dummy.value = window.location.href;
-        dummy.select();
-        console.log(dummy);
-        document.execCommand("copy");
-        document.body.removeChild(dummy);
-        this.setState({
-            success:"flex",
-        })
-    }
-
-    shareLink(){
-        this.setState({
-            shareAlert:"flex",
-        })
-    }
-    
-    close(){
-        this.setState({
-            shareAlert:"none",
-        })
-    }
 
     portfolioConcat(data) { this.setState(current => ({ portfolioData : current.portfolioData.concat(data) })) }
 
@@ -97,49 +54,13 @@ class mypage extends Component {
 
     
     render() {
-        const {btnNum,likeBtn,shareAlert,success,portfolioData,load,awardData,certificateData}=this.state;
+        const {btnNum,portfolioData,load,awardData,certificateData}=this.state;
         const { userInfo, user, loginState } = this.props;
         return (
             <div className="Mypage">
+               
                 <div className="Mypage-frame">
                     <div className="Mypage-pages">
-
-                        {/* 공유하기 팝업 */}
-                        <div className="shareAlert" style={{display:shareAlert}}>
-                            <span className="close-shareAlert" style={{cursor:"pointer"}} onClick={this.close.bind(this)}>X</span>
-                            <p>더 많은 사람이 볼 수 있도록 공유해보세요!</p>
-                            <div style={{width:"80%"}}>
-                                <div className="shareAlert-input">
-                                    <input className="shareAlert-input-box" readOnly value={window.location.href} ></input>
-                                    <button className="shareAlert-btns" onClick={() => this.copyCodeToClipboard()}>링크복사</button>    
-                                </div>
-                                <p style={{display:success,fontSize:"14px",color:"#11addd"}}>복사가 완료되었습니다.</p> 
-                            </div>
-                        </div>
-
-                        <div className="Mypage-pages-title-frame">
-                            <img src = "/Image/hochi.png" className="hochi" alt="img"></img>
-                            <div className="Mypage-pages-title">
-                                <p>{userInfo.userName}님의 {btnNum === 0 ?"프로필 입니다." : "" || 
-                                              btnNum === 1 ?"포트폴리오 입니다." : "" ||
-                                              btnNum === 2 ?"마이페이지 입니다." : "" } </p>
-                                <div className="Mypage-pages-title-icons">
-                                    <div className="Mypage-pages-title-icons-icon">
-                                        <PrintIcon onClick={this.savepdf.bind(this)}/>
-                                    </div>
-                                    <div className="Mypage-pages-title-icons-icon">
-                                        <ShareIcon onClick={this.shareLink.bind(this)}/>
-                                    </div>
-                                    <div className="Mypage-pages-title-icons-icon" >
-                                        {likeBtn==="none"?<FavoriteBorderIcon />:<FavoriteIcon style={{ color : "#11addd"}}/>}
-                                    </div>
-                                    <div className="Mypage-pages-title-icons-icon">
-                                        <MailOutlineIcon/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <div className="Mypage-content">
                             {/* 0 => 기본 정보 프로필
                             1 => 포트폴리오
@@ -165,6 +86,7 @@ class mypage extends Component {
                                 loginState && <Setting userInfo={userInfo}/>
                             }
                         </div>
+                        
                         <div className="Mypage-btns">
                             <button className={btnNum === 0?"Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,0)}>프로필</button>
                             <button className={btnNum === 1?"Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,1)}>포트폴리오</button>

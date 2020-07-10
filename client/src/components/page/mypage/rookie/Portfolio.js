@@ -310,7 +310,7 @@ class Portfolio extends Component {
             imagesUrl, imageLoad , imageView, preview
         } = this.state;
         return load ? (
-            <div className="Mypage-content-main">
+            <div className="portfolio">
 
                 {/* 포트폴리오 이미지 클릭하여 크게 보기 */}
                 {

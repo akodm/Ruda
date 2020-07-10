@@ -221,6 +221,7 @@ class EditProfile extends Component {
                 awardCate:awardcate,
             })
             console.log(result);
+        
         }
         catch(err){
             console.log("user award add create err : "+err);
@@ -291,11 +292,13 @@ class EditProfile extends Component {
             name,phone,address1,addressState,military,
             univercityCate,univercityState,univercityStart,univercityEnd,startErr,endErr,subject,
             tags,keywords,specialty,introduce,introduceErr,privateUrl,
-            workDateState,trainingDateState,workDate,trainingDate,
+            workDateState,workDate,trainingDateState,trainingDate,
             load,fieldList,univercity,field,
             awardname,awarddate,awardcate,awards,
             certificatedate,certificatename,certificatecate,certificates} = this.state;
-        const {userInfo}=this.props;
+        const {userInfo,awardData}=this.props;
+        console.log(awardData);
+        
         return (
             <div className="Info-rookie-main">
                 { !load &&  <Load /> }
@@ -326,7 +329,7 @@ class EditProfile extends Component {
                     <div className="Info-rookie-imgLayout">
                         <TextField
                             id="outlined-read-only-input" label="주소를 검색하여 주세요. 시/도/구"
-                            value={address1} required
+                            value={address1}
                             onClick={() => this.setState({ addressState : true })}
                             style={{width:"100%",marginRight:"25px"}}
                             InputProps={{ readOnly: true }} variant="outlined"
@@ -398,15 +401,11 @@ class EditProfile extends Component {
                     <div className="Info-rookie-dateLayout">
                         <SelectBox 
                             value={workDateState} func={(e) => this.setState({ workDateState : e })}
-                            label={"근무가능 날짜"} option={["상시","졸업 후","직접입력","미정"]} text={"근무가능 날짜"} style={{marginRight:"20px"}}
+                            label={"취업유무"} option={["취업희망","실습희망","실습후 취업희망","미정"]} text={"취업유무"} style={{marginRight:"20px"}}
                         />
-                        {
-                            workDateState === "직접입력" &&
-                            <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginRight:"10px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="workDate" value={workDate} label="근무가능 날짜" />
-                        }
                         <SelectBox 
                             value={trainingDateState} func={(e) => this.setState({ trainingDateState : e })}
-                            label={"실습가능 날짜"} option={["상시","졸업 후","실습 강의 시","직접입력","미정"]} text={"실습가능 날짜"} style={{marginRight:"20px"}}
+                            label={"근무실습가능 날짜"} option={["상시","졸업 후","실습 강의 시","직접입력","미정"]} text={"근무/실습 날짜"} style={{marginRight:"20px"}}
                         />
                         {
                             trainingDateState === "직접입력" &&
@@ -427,15 +426,15 @@ class EditProfile extends Component {
                         <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addAward.bind(this)}>+</span>
                     </div>
                             {
-                            awards.map((data,i) => {
-                                return <div className="Info-rookie-dateLayout" name={data} key={i}>
+                            awardData.map((data,i) => {
+                                return  <div className="Info-rookie-dateLayout" name={data} key={i}>
                                 <SelectBox 
                                     value={awardcate} func={(e) => this.setState({ awardcate : e })}
                                     label={"수여"} option={["교내","교외"]} text={"수여"} style={{marginRight:"20px"}}
                                 />
                                 <TextField variant="outlined" onChange={this.onChangeValue.bind(this)} name="awardname" value={awardname} label="수상명 " />
                                 <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="awarddate" value={awarddate} label="수상 날짜" />
-                                <span style={{fontSize:"30px",marginLeft:"20px"}} >x</span>
+                                <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addAward.bind(this)}>+</span>
                             </div>
                             })
                         }
