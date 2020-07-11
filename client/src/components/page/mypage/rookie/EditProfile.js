@@ -210,7 +210,7 @@ class EditProfile extends Component {
     }
     
     async addAward(){
-        const {userInfo}=this.props;
+        const {userInfo,awardConcat}=this.props;
         const {awardname,awardcate,awarddate,awardList} =this.state;
 
         try{
@@ -220,6 +220,7 @@ class EditProfile extends Component {
                 awardDate :awarddate,
                 awardCate:awardcate,
             })
+            this.props.awardConcat(result.data);
             console.log(result);
         
         }
