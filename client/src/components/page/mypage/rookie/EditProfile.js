@@ -18,6 +18,7 @@ import moment from 'moment';
 
 import SaveIcon from '@material-ui/icons/Save';
 import AddIcon from '@material-ui/icons/Add';
+import ClearIcon from '@material-ui/icons/Clear';
 class EditProfile extends Component {
     constructor(props) {
         super(props);
@@ -215,7 +216,7 @@ class EditProfile extends Component {
 
         try{
             const result= await axios.post(`${config.app.s_url}/awards/create`,{
-                id:userInfo,
+                userId:userInfo.userId,
                 awardName:awardname,
                 awardDate :awarddate,
                 awardCate:awardcate,
@@ -234,7 +235,7 @@ class EditProfile extends Component {
 
         try{
             const result= await axios.post(`${config.app.s_url}/cerfiticates/create`,{
-                id:userInfo,
+                userId:userInfo.userId,
                 certificateName:certificatename,
                 certificateCate :certificatecate,
                 certificateDate:certificatedate,
@@ -246,6 +247,24 @@ class EditProfile extends Component {
         }
     }
 
+    async deleteAward(id){
+        try{
+            const result= await axios.delete(`${config.app.s_url}/awards/delete?id=${id}`);
+            console.log(result);
+        }
+        catch(err){
+            console.log("user award delete err : "+err);
+        }
+    }
+    async deleteCertificate(id){
+        try{
+            const result= await axios.delete(`${config.app.s_url}/cerfiticates/delete?id=${id}`);
+            console.log(result);
+        }
+        catch(err){
+            console.log("user certificate delete err : "+err);
+        }
+    }
     async SaveProfile() {
         const { userInfo } = this.props;
         const { imgUrl,
@@ -286,7 +305,7 @@ class EditProfile extends Component {
         }
         this.setState({ load : true });
     }
-
+   
     render() {
         const { imgPreview, imgUrl,
             name,phone,address1,addressState,military,
@@ -297,10 +316,8 @@ class EditProfile extends Component {
             awardname,awarddate,awardcate,awards,
             certificatedate,certificatename,certificatecate,certificates} = this.state;
         const {userInfo,awardData}=this.props;
-        console.log(awardData);
-        
         return (
-            <div className="Info-rookie-main">
+            <div className="EditProfile">
                 { !load &&  <Load /> }
 
                 {/* 개인정보 박스 */}
@@ -423,18 +440,22 @@ class EditProfile extends Component {
                         />
                         <TextField variant="outlined" onChange={this.onChangeValue.bind(this)} name="awardname" value={awardname} label="수상명 " />
                         <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="awarddate" value={awarddate} label="수상 날짜" />
-                        <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addAward.bind(this)}>+</span>
+                        <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addAward.bind(this)}>
+                            <AddIcon style={{ color : "#646464",fontSize:"large"}}/> 
+                        </span>
                     </div>
                             {
-                            awardData.map((data,i) => {
-                                return  <div className="Info-rookie-dateLayout" name={data} key={i}>
+                            awards.map((data,i) => {
+                                return  <div className="Info-rookie-dateLayout" key={i}>
                                 <SelectBox 
-                                    value={awardcate} func={(e) => this.setState({ awardcate : e })}
+                                    value={data.awardCate} InputProps={{ readOnly: true}}
                                     label={"수여"} option={["교내","교외"]} text={"수여"} style={{marginRight:"20px"}}
                                 />
-                                <TextField variant="outlined" onChange={this.onChangeValue.bind(this)} name="awardname" value={awardname} label="수상명 " />
-                                <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="awarddate" value={awarddate} label="수상 날짜" />
-                                <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addAward.bind(this)}>+</span>
+                                <TextField variant="outlined" InputProps={{ readOnly: true}} name="awardname" value={data.awardName} label="수상명 " />
+                                <TextField InputProps={{ readOnly: true}} style={{width:"130px", marginLeft:"20px"}} variant="outlined" name="awarddate" value={data.awardDate} label="수상 날짜" />
+                                <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.deleteAward.bind(this,data.id)}>
+                                    <ClearIcon style={{ color : "rgb(223, 86, 86)",fontSize:"small"}}/>
+                                </span>
                             </div>
                             })
                         }
@@ -446,15 +467,19 @@ class EditProfile extends Component {
                         <TextField variant="outlined" style={{marginRight:"20px"}} onChange={this.onChangeValue.bind(this)} name="certificatecate" value={certificatecate} label="발급기관" />
                         <TextField variant="outlined" onChange={this.onChangeValue.bind(this)} name="certificatename" value={certificatename} label="자격증이름 " />
                         <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="certificatedate" value={certificatedate} label="발급 날짜" />
-                        <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addCertificate.bind(this)}>+</span>
+                        <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addCertificate.bind(this)}>
+                        <AddIcon style={{ color : "#646464",fontSize:"large"}}/> 
+                        </span>
                     </div>
                             {
                             certificates.map((data,i) => {
-                                return  <div className="Info-rookie-dateLayout" key={i} name={data}>
-                                <TextField variant="outlined" style={{marginRight:"20px"}} onChange={this.onChangeValue.bind(this)} name="certificatecate" value={certificatecate} label="발급기관" />
-                                <TextField variant="outlined" onChange={this.onChangeValue.bind(this)} name="certificatename" value={certificatename} label="자격증이름 " />
-                                <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="certificatedate" value={certificatedate} label="발급 날짜" />
-                                <span style={{fontSize:"30px",marginLeft:"20px"}} >x</span>
+                                return  <div className="Info-rookie-dateLayout" key={i}>
+                                <TextField variant="outlined" style={{marginRight:"20px"}} InputProps={{ readOnly: true}} name="certificatecate" value={data.certificateCate} label="발급기관" />
+                                <TextField variant="outlined" InputProps={{ readOnly: true}} name="certificatename" value={data.certificateName} label="자격증이름 " />
+                                <TextField InputProps={{ readOnly: true}} style={{width:"130px", marginLeft:"20px"}} variant="outlined" name="certificatedate" value={data.certificateDate} label="발급 날짜" />
+                                <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.deleteCertificate.bind(this,data.id)}>
+                                    <ClearIcon style={{ color : "rgb(223, 86, 86)",fontSize:"small"}}/>
+                                </span>
                             </div>
                             })
                         }

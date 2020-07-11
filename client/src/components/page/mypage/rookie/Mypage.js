@@ -32,11 +32,14 @@ class mypage extends Component {
         try {
             const result = await axios.get(`${config.app.s_url}/portfolios/all?userId=${this.props.userInfo.userId}`);
             this.setState({ portfolioData : result.data });
+
             const award = await axios.get(`${config.app.s_url}/awards/all?userId=${this.props.userInfo.userId}`);
             this.setState({ awardData : award.data });
-            console.log("어워드데이타"+award)
-            const certificate = await axios.get(`${config.app.s_url}/certificates/all?userId=${this.props.userInfo.userId}`);
+            console.log(award.data);
+            
+            const certificate = await axios.get(`${config.app.s_url}/cerfiticates/all?userId=${this.props.userInfo.userId}`);
             this.setState({ certificateData : certificate.data });
+            console.log(certificate.data);
         } catch(err) {
             console.log("rookie mypage data load err : " + err);
         }

@@ -321,6 +321,18 @@
     background-color:#8cd1ff38;
 }
 
+/*수정페이지*/
+.EditProfile{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color:  #ffffff;
+    font-family: NanumSquareB;
+    padding:40px;
+    border-radius: 20px;
+}
+
 /*-공유 알림창-*/
 .shareAlert{
     position: fixed;

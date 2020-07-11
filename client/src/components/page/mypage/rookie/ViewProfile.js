@@ -191,7 +191,7 @@ class ViewProfile extends Component {
                                 </div>
                             </div>
                             <div className="Mypage-profile-content-userinfo-data">
-                                <p className="profile-chart-info-title">차트<div></div></p>
+                                <p className="profile-chart-info-title">차트</p>
                                 <div className="Mypage-profile-content-userinfo-graph">
                                     <div className="profile-chart-info">
                                
