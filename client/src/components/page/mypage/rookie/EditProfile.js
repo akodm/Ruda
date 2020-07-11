@@ -31,7 +31,7 @@ class EditProfile extends Component {
             imgPreview :userInfo.userImageUrl,
             name:userInfo.userName,
             phone : userInfo.userPhone,
-            address1 : "",
+            address1 : userInfo.userAddress,
             addressState : "",
             military : userInfo.userMilitary,
 
@@ -60,19 +60,18 @@ class EditProfile extends Component {
             workDate :  userInfo.userWorkDate,  // 일할 수 있는 날짜
             trainingDateState : userInfo.userTraningDateState,   // 실습 할 수 있는 날짜 선택 박스 -> 비선택 / 상시 / 졸업 후 / 정해진 날짜
             trainingDate : userInfo.userTraningDate,  // 실습 여부 시 실습 가능 날짜
-            
-           
+
+            // 수상이력 관련
             awardname:"",
             awarddate:"",
             awardcate:"교내",
             awards:awardData||[],
-         
 
+            // 자격증 관련
             certificatename:"",
             certificatecate:"",
             certificatedate:"",
             certificates:certificateData||[],
-
 
             load : false,
         }
@@ -312,10 +311,9 @@ class EditProfile extends Component {
             univercityCate,univercityState,univercityStart,univercityEnd,startErr,endErr,subject,
             tags,keywords,specialty,introduce,introduceErr,privateUrl,
             workDateState,workDate,trainingDateState,trainingDate,
-            load,fieldList,univercity,field,
+            load,univercity,field,
             awardname,awarddate,awardcate,awards,
             certificatedate,certificatename,certificatecate,certificates} = this.state;
-        const {userInfo,awardData}=this.props;
         return (
             <div className="EditProfile">
                 { !load &&  <Load /> }
@@ -324,12 +322,14 @@ class EditProfile extends Component {
                 <div className="Info-rookie-title">*개인정보</div>
                 <div className="Info-rookie-body">
                     <div className="Info-rookie-imgLayout">
+
                         {/* 이미지 박스 */}
                         <ImageBox
                             text="업로드"
                             preview={imgPreview}
                             func={this.imgUpload.bind(this)}
                         />
+
                         {/* 신상 정보 */}
                         <div className="Info-rookie-inputLayoutDiv">
                             <TextField helperText="성 이름" required label="이름" variant="outlined" value={name} name="name" onChange={this.onChangeValue.bind(this)} />
@@ -342,6 +342,7 @@ class EditProfile extends Component {
                             </div>
                         </div>
                     </div>
+
                     {/* 클릭시 주소지 검색 창 열기 */}
                     <div className="Info-rookie-imgLayout">
                         <TextField
@@ -352,6 +353,7 @@ class EditProfile extends Component {
                             InputProps={{ readOnly: true }} variant="outlined"
                         />
                     </div>
+
                     {/* 주소지 검색 API */}
                     <PostCode open={addressState} close={() => this.setState({ addressState : false })} func={(data) => this.setState({ address1 : data })} />
                 </div>
@@ -359,6 +361,7 @@ class EditProfile extends Component {
                 {/* 학력 박스 */}
                 <div className="Info-rookie-title">*최근학력</div>
                 <div className="Info-rookie-body">
+
                     {/* 첫번째 라인 */}
                     <div className="Info-rookie-imgLayout">
                         <SelectBox 
@@ -430,6 +433,7 @@ class EditProfile extends Component {
                         }
                     </div>
                 </div>
+
                 {/*수상경력 박스*/}
                 <div className="Info-rookie-title">수상이력</div>
                 <div className="Info-rookie-body">
@@ -460,6 +464,7 @@ class EditProfile extends Component {
                             })
                         }
                 </div>
+
                 {/*자격증*/}
                 <div className="Info-rookie-title">자격증</div>
                 <div className="Info-rookie-body">
@@ -471,7 +476,7 @@ class EditProfile extends Component {
                         <AddIcon style={{ color : "#646464",fontSize:"large"}}/> 
                         </span>
                     </div>
-                            {
+                        {
                             certificates.map((data,i) => {
                                 return  <div className="Info-rookie-dateLayout" key={i}>
                                 <TextField variant="outlined" style={{marginRight:"20px"}} InputProps={{ readOnly: true}} name="certificatecate" value={data.certificateCate} label="발급기관" />
@@ -484,6 +489,7 @@ class EditProfile extends Component {
                             })
                         }
                 </div>
+
                 {/*저장버튼*/}
                 <div style={{margin:"50px"}}>
                     <button className="profile-edit" onClick={this.addFile.bind(this)}><SaveIcon style={{fontSize:"large",margin:"5px"}}/>프로필저장</button>

@@ -56,7 +56,7 @@ app.use('/userInfos', userInfoRouter);
 app.use('/emailAuth', emailAuth);
 app.use('/portfolios', portfolioRouter);
 app.use('/awards', awardRouter);
-app.use('/cerfiticates', certificateRouter);
+app.use('/certificates', certificateRouter);
 require('./passport.js')(passport);
 
 // --------------------------- 노드 메일러 이메일 인증 -------------------

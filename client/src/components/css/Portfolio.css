@@ -58,10 +58,21 @@
     top: 2%;
     left: 0;
     z-index: 1000;
+    overflow: hidden;
 }
+
+@keyframes portfolio {
+    0% {
+        opacity: 0;
+        margin-top: 20%;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 .portfolio-popup > ::-webkit-scrollbar,::-webkit-scrollbar-thumb{width: 5px;background-color: rgb(189, 189, 189);border-radius: 3px;}
 .portfolio-popup > ::-webkit-scrollbar-track{background-color: white;border-radius: 10x;}
-
 
 .portfolio-add-div {
     width: 600px;
@@ -77,6 +88,8 @@
     box-shadow: 0px 3px 10px 0px rgb(180, 180, 180);
     overflow-y: auto;
     opacity: 1;
+    animation-name: portfolio;
+    animation-duration: 0.5s;
 }
 
 .portfolio-add-title {

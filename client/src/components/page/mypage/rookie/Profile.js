@@ -9,17 +9,36 @@ class Profile extends Component {
             ChangeProfile:true,
         }
     }
+
     ChangeProfiles(bool){
         this.setState({
             ChangeProfile:bool,
         })
     }
+
     render() {
-        const {userInfo,awardData,certificateData} =this.props;
-        const {ChangeProfile} = this.state;
+        const { userInfo, awardData, certificateData, addAward, addCertifi} = this.props;
+        const { ChangeProfile } = this.state;
         return (
             <div className="Profile">
-                 { ChangeProfile ? <ViewProfile awardData={awardData} certificateData={certificateData} userInfo={userInfo} change={this.ChangeProfiles.bind(this)}/>:<EditProfile awardData={awardData} certificateData={certificateData} userInfo={userInfo} change={this.ChangeProfiles.bind(this)}/> }
+                 {  
+                    ChangeProfile ? 
+                    <ViewProfile 
+                        awardData={awardData} 
+                        certificateData={certificateData} 
+                        userInfo={userInfo} 
+                        change={this.ChangeProfiles.bind(this)}
+                    />
+                    :
+                    <EditProfile 
+                        awardData={awardData} 
+                        certificateData={certificateData} 
+                        userInfo={userInfo} 
+                        change={this.ChangeProfiles.bind(this)}
+                        addAward={(data) => addAward(data)}
+                        addCertifi={(data) => addCertifi(data)}
+                    /> 
+                }
             </div>
         );
     }
