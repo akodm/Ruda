@@ -62,14 +62,14 @@ class PortfolioPopup extends Component {
     }
 
     render() {
-        const { textTitle, title,
+        const { textTitle, title, addView,
             startDate, startMonth, endDate, endMonth, ingDate,
             projectUrl, projectCate, projectCateInput, position,
             partner, partnerList, tag, tagList, content,
             imagesUrl, imageLoad, textBtn,
         } = this.props;
         return (
-            <div className="portfolio-popup">
+            <div className="portfolio-popup" style={{display: addView.view ? "flex" : "none"}}>
                 <div className="portfolio-add-div">
                     <div className="portfolio-add-title">{textTitle}</div>
                     {/* 프로젝트명 */}

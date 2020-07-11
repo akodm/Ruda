@@ -7,36 +7,43 @@ import axios from 'axios';
 import Profile from './Profile';
 import Portfolio from './Portfolio';
 import Setting from './Setting';
-import EditProfile from './EditProfile';
-
 
 class mypage extends Component {
     constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             btnNum:0,
+
             portfolioData : [],
             awardData:[],
             certificateData:[],
-            load : false,
 
-            
+            load : false,
         }
     }
 
-  
-  
-   
-
     async componentDidMount() {
         try {
-            const result = await axios.get(`${config.app.s_url}/portfolios/all?userId=${this.props.userInfo.userId}`);
-            this.setState({ portfolioData : result.data });
-            const award = await axios.get(`${config.app.s_url}/awards/all?userId=${this.props.userInfo.userId}`);
-            this.setState({ awardData : award.data });
-            console.log("어워드데이타"+award)
-            const certificate = await axios.get(`${config.app.s_url}/certificates/all?userId=${this.props.userInfo.userId}`);
-            this.setState({ certificateData : certificate.data });
+            // 서로 관련이 없는 경우 아래와 같은 방식으로 전부 다 한번에 처리 가능.
+            let result = axios.get(`${config.app.s_url}/portfolios/all?userId=${this.props.userInfo.userId}`);
+            let award = axios.get(`${config.app.s_url}/awards/all?userId=${this.props.userInfo.userId}`);
+            let certificate = axios.get(`${config.app.s_url}/certificates/all?userId=${this.props.userInfo.userId}`);
+
+            // 배열에 위의 실행할 값들을 넣음.
+            // 해당 배열들이 모두 실행되면 콜백으로 결과값을 받고, 배열 순서대로 전달해줌.
+            await Promise.all([result, award, certificate]).then(data => {
+                result = data[0].data;
+                award = data[1].data;
+                certificate = data[2].data;
+            });
+
+            // 실행 결과 값들을 스태이트에 반영.
+            this.setState({ 
+                portfolioData : result, 
+                awardData : award, 
+                certificateData : certificate 
+            });
+
         } catch(err) {
             console.log("rookie mypage data load err : " + err);
         }
@@ -46,19 +53,14 @@ class mypage extends Component {
     MenuClick(num){ this.setState({ btnNum:num }) }
 
     portfolioConcat(data) { this.setState(current => ({ portfolioData : current.portfolioData.concat(data) })) }
-
     awardConcat(data) { this.setState(current => ({ portfolioData : current.awardData.concat(data) })) }
-
     certificateConcat(data) { this.setState(current => ({ portfolioData : current.certificateData.concat(data) })) }
-
-
     
     render() {
-        const {btnNum,portfolioData,load,awardData,certificateData}=this.state;
+        const { btnNum, portfolioData, load, awardData, certificateData }=this.state;
         const { userInfo, user, loginState } = this.props;
         return (
             <div className="Mypage">
-               
                 <div className="Mypage-frame">
                     <div className="Mypage-pages">
                         <div className="Mypage-content">
@@ -67,12 +69,14 @@ class mypage extends Component {
                             2 => 마이페이지 수정 ( 개인화면 ) */}
                             {
                                 btnNum === 0 ?
-                                <Profile
-                                userId={userInfo.userId}
+                                load && <Profile
                                 userInfo={userInfo}
                                 awardData={awardData}
                                 certificateData={certificateData}
-                                addAward={this.awardConcat.bind(this)} /> :
+                                addAward={this.awardConcat.bind(this)} 
+                                addCertifi={this.certificateConcat.bind(this)}
+                                /> 
+                                :
                                 btnNum === 1 ?
                                 load && <Portfolio 
                                     load={load} 

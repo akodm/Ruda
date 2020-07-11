@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Chart from '../../../component/Chart';
 import TagChip from '../../../component/TagChip';
 
+import Avatar from '@material-ui/core/Avatar';
 import EditIcon from '@material-ui/icons/Edit';
 //import SaveIcon from '@material-ui/icons/Save';
 import EmailIcon from '@material-ui/icons/Email';
@@ -96,24 +97,23 @@ class ViewProfile extends Component {
                     <div className="Mypage-profile-content-mainprofile">
                        <div className="Mypage-profile-content-userinfo">
                             <div className="Mypage-profile-content-userinfo-profile">
-                                
-                               <div className="profile-profile">
+                                <div className="profile-profile">
                                     <p>프로필</p>
                                     <div className="profile-user-state">
                                         <div className="profile-user-state-training"style={{marginRight:"5px"}}></div><p style={{fontSize:"small", marginRight:"10px"}}>실습</p>
                                         <div className="profile-user-state-hire" style={{marginRight:"5px"}}></div><p style={{fontSize:"small",marginLeft:"10px"}}>구직</p>
                                     </div>
-                               </div>
-                                <img width="100" className="profileimg"src={userInfo.userImageUrl || "/Image/login_img.png"} alt="IMG"></img>
+                                </div>
+                                <Avatar alt="img" src={userInfo.userImageUrl || "/Image/login_img.png"} style={{width:"100px", height:"100px"}} />
                                 <p className="profile-username">{userInfo.userName}</p>
                                 <div className="profile-intro"><hr></hr>
-                                    <p className="profile-intro-title" >INTRO</p><hr></hr>
-                                    <p>{userInfo.userIntro}</p><hr></hr>
+                                    <p className="profile-intro-title" >INTRO</p>
+                                    <p>{userInfo.userIntro}</p>
                                 </div>
 
                                 {/* 인포 */}
-                                <div  className="profile-userinfo">
-                                    <p className="profile-userinfo-title" >INFO</p><hr></hr>
+                                <div  className="profile-userinfo"><hr></hr>
+                                    <p className="profile-intro-title" >INFO</p>
                                     <div className="profile-text">
                                         <EmailIcon style={{fontSize:"medium",margin:"10px"}}/>
                                         <p>{userInfo.user.email}</p>
@@ -143,7 +143,7 @@ class ViewProfile extends Component {
                                 </div>
                                 {/* 포지션 */}
                                 <div className="profile-intro"><hr></hr>
-                                    <p className="profile-intro-title" >POSITION</p><hr></hr>
+                                    <p className="profile-intro-title" >POSITION</p>
                                     <div className="profile-text">
                                         <WorkIcon style={{fontSize:"medium",margin:"10px"}}/>
                                         <p>{userInfo.userField} </p>
@@ -159,21 +159,14 @@ class ViewProfile extends Component {
                                     </div>:""}
                                 </div>
                                 <div className="profile-intro"><hr></hr>
-                                    <p className="profile-intro-title" >COUNT</p><hr></hr>
+                                    <p className="profile-intro-title" >COUNT</p>
                                     <div className="profile-text">
                                         <FavoriteIcon style={{fontSize:"medium",margin:"10px"}}/>
                                         <p>{userInfo.userLike}명이 좋아합니다. </p>
                                     </div>
-                                    {/*<div className="profile-text">
-                                        <PeopleIcon style={{fontSize:"medium",margin:"10px"}}/>
-                                        <p>{userInfo.userClick}명이 방문하였습니다. </p>
-                                    </div>*/}
                                 </div>
                                 <button className="profile-edit" onClick={this.EditProfile.bind(this)}><EditIcon style={{fontSize:"medium",height:"40px"}}/>프로필수정</button>
                                 <div className="Mypage-pages-title">
-                                    {/*<p>{userInfo.userName}님의 {btnNum === 0 ?"프로필 입니다." : "" || 
-                                        btnNum === 1 ?"포트폴리오 입니다." : "" ||
-                                        btnNum === 2 ?"마이페이지 입니다." : "" } </p>*/}
                                     <div className="Mypage-pages-title-icons">    
                                         <div className="Mypage-pages-title-icons-icon">
                                             <PrintIcon onClick={this.savepdf.bind(this)}/>
@@ -191,7 +184,10 @@ class ViewProfile extends Component {
                                 </div>
                             </div>
                             <div className="Mypage-profile-content-userinfo-data">
-                                <p className="profile-chart-info-title">차트<div></div></p>
+                                <div className="profile-chart-info-title">
+                                    <div className="profile-title-text">그래프</div>
+                                    <div className="profile-title-line"></div>
+                                </div>
                                 <div className="Mypage-profile-content-userinfo-graph">
                                     <div className="profile-chart-info">
                                
@@ -209,7 +205,10 @@ class ViewProfile extends Component {
                                 <div className="Mypage-profile-content-userinfo-info">
                                     <div className="Mypage-profile-content-userinfo-info">
                                         <div className="profile-keyword-info">
-                                            <p className="profile-keyword-title">기술능력<div></div></p>
+                                            <div className="profile-chart-info-title">
+                                                <div className="profile-title-text">기술스택</div>
+                                                <div className="profile-title-line"></div>
+                                            </div>
                                             <div className="stack">
                                                 {
                                                     Tag.map(function(str,i){
@@ -219,7 +218,10 @@ class ViewProfile extends Component {
                                                     })
                                                 }
                                             </div>
-                                            <p className="profile-keyword-title">키워드</p>
+                                            <div className="profile-chart-info-title">
+                                                <div className="profile-title-text">키워드</div>
+                                                <div className="profile-title-line"></div>
+                                            </div>
                                             <p className="profile-keyword-text">성격</p>
                                             <div className="keyword">
                                                 {
@@ -243,24 +245,19 @@ class ViewProfile extends Component {
                                         </div>
                                         <div className="profile-skill-info">
                                             <div>
-                                                <p className="profile-skill-title">자격증</p>
+                                                <div className="profile-chart-info-title">
+                                                    <div className="profile-title-text">자격증</div>
+                                                    <div className="profile-title-line"></div>
+                                                </div>
                                                 <div className="profile-skill-info-certificate">
                                                     <div className="profile-skill-info-certificate-text">
-
-                                                    {
-                                                    Specialty.map(function(str,i){
-                                                    return <div className="chip-maurgin" key={i}>
-                                                        <TagChip name={str} size="small" color="primary" variant="outlined" />
-                                                    </div>;
-                                                    })
-                                                }
-                                                        <p>대한상공회</p>
+                                                        <p>대한상공회asda</p>
                                                         <p>정보처리산업기사1급</p>
                                                         <p>2020/02/02</p>
                                                     </div>
                                                     <div className="profile-skill-info-certificate-text">
                                                         <p>대한상공회</p>
-                                                        <p>정보처리산업기사1급</p>
+                                                        <p>정보처리산업기사1급asda</p>
                                                         <p>2020/02/02</p>
                                                     </div>
                                                     <div className="profile-skill-info-certificate-text">
@@ -271,7 +268,10 @@ class ViewProfile extends Component {
                                                 </div>
                                             </div>
                                             <div>
-                                                <p className="profile-skill-title">수상이력</p>
+                                                <div className="profile-chart-info-title">
+                                                    <div className="profile-title-text">수상경력</div>
+                                                    <div className="profile-title-line"></div>
+                                                </div>
                                                 <div className="profile-skill-info-Awards">
                                                     <div className="profile-skill-info-Awards-text">
                                                         <p>교내</p>
@@ -295,7 +295,10 @@ class ViewProfile extends Component {
                                             </div>
                                             <div className="Mypage-profile-content-storyprofile">
                                                 <div className="profile-inschool">
-                                                    <p className="profile-inschool-title">교내활동</p>
+                                                    <div className="profile-chart-info-title">
+                                                        <div className="profile-title-text">교내활동</div>
+                                                        <div className="profile-title-line"></div>
+                                                    </div>
                                                     <div>
                                                         <p className="profile-inschool-text">대림테크페어 참여</p>
                                                         <p className="profile-inschool-text">동아리회장</p>
@@ -303,7 +306,10 @@ class ViewProfile extends Component {
                                                     </div>
                                                 </div>
                                                 <div className="profile-outschool">
-                                                    <p className="profile-outschool-title">교외활동</p>
+                                                    <div className="profile-chart-info-title">
+                                                        <div className="profile-title-text">교외활동</div>
+                                                        <div className="profile-title-line"></div>
+                                                    </div>
                                                     <div>
                                                         <p className="profile-outschool-text">안양시공모전참여</p>
                                                         <p className="profile-outschool-text">동아리회장</p>
