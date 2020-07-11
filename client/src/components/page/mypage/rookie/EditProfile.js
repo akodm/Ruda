@@ -10,9 +10,7 @@ import PostCode from '../../../component/PostPopup';
 import AutoCreateBox from '../../../component/AutoCreatable';
 import TagChip from '../../../component/TagChip';
 import SelectBox from '../../../component/SelectBox';
-import CheckBox from '../../../component/CheckBox';
 
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import moment from 'moment';
 
@@ -22,7 +20,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 class EditProfile extends Component {
     constructor(props) {
         super(props);
-        const {userInfo,awardData, certificateData}=this.props;
+        const {userInfo, awardData, certificateData}=this.props;
         this.state = {
             progress : null,
             // 개인정보
@@ -31,8 +29,8 @@ class EditProfile extends Component {
             imgPreview :userInfo.userImageUrl,
             name:userInfo.userName,
             phone : userInfo.userPhone,
-            address1 : userInfo.userAddress,
-            addressState : "",
+            address1 : userInfo.userAdd,
+            addressState : false,
             military : userInfo.userMilitary,
 
             // 학력
@@ -65,13 +63,13 @@ class EditProfile extends Component {
             awardname:"",
             awarddate:"",
             awardcate:"교내",
-            awards:awardData||[],
+            awards:awardData || [],
 
             // 자격증 관련
             certificatename:"",
             certificatecate:"",
             certificatedate:"",
-            certificates:certificateData||[],
+            certificates:certificateData || [],
 
             load : false,
         }
@@ -210,8 +208,8 @@ class EditProfile extends Component {
     }
     
     async addAward(){
-        const {userInfo}=this.props;
-        const {awardname,awardcate,awarddate,awardList} =this.state;
+        const { userInfo }=this.props;
+        const {awardname,awardcate,awarddate,awards} =this.state;
 
         try{
             const result= await axios.post(`${config.app.s_url}/awards/create`,{
@@ -220,8 +218,12 @@ class EditProfile extends Component {
                 awardDate :awarddate,
                 awardCate:awardcate,
             })
-            console.log(result);
-        
+            this.setState({ 
+                awards : awards.concat(result.data),
+                awardname:"",
+                awarddate:"",
+                awardcate:"교내",
+            });
         }
         catch(err){
             console.log("user award add create err : "+err);
@@ -230,16 +232,21 @@ class EditProfile extends Component {
     
     async addCertificate(){
         const {userInfo}=this.props;
-        const {certificatename,certificatecate,certificatedate} =this.state;
+        const {certificatename,certificatecate,certificatedate, certificates} =this.state;
 
         try{
-            const result= await axios.post(`${config.app.s_url}/cerfiticates/create`,{
+            const result= await axios.post(`${config.app.s_url}/certificates/create`,{
                 userId:userInfo.userId,
                 certificateName:certificatename,
                 certificateCate :certificatecate,
                 certificateDate:certificatedate,
             })
-            console.log(result);
+            this.setState({ 
+                certificates : certificates.concat(result.data),
+                certificatename:"",
+                certificatecate:"",
+                certificatedate:"",
+            });
         }
         catch(err){
             console.log("user certificate add create err : "+err);
@@ -249,7 +256,7 @@ class EditProfile extends Component {
     async deleteAward(id){
         try{
             const result= await axios.delete(`${config.app.s_url}/awards/delete?id=${id}`);
-            console.log(result);
+            this.setState({ awards : this.state.awards.filter(data => { return id !== data.id }) });
         }
         catch(err){
             console.log("user award delete err : "+err);
@@ -257,8 +264,8 @@ class EditProfile extends Component {
     }
     async deleteCertificate(id){
         try{
-            const result= await axios.delete(`${config.app.s_url}/cerfiticates/delete?id=${id}`);
-            console.log(result);
+            const result= await axios.delete(`${config.app.s_url}/certificates/delete?id=${id}`);
+            this.setState({ certificates : this.state.certificates.filter(data => { return id !== data.id }) });
         }
         catch(err){
             console.log("user certificate delete err : "+err);
@@ -299,6 +306,7 @@ class EditProfile extends Component {
         console.log( result.data+"프로필수정");
         if(result.data){
             alert("수정이 완료되었습니다.");
+            window.location.href = "/";
         } else {
             alert("잘못된 값이 있습니다. 다시 시도해주세요.");
         }

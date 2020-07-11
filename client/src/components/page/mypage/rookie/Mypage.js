@@ -53,8 +53,6 @@ class mypage extends Component {
     MenuClick(num){ this.setState({ btnNum:num }) }
 
     portfolioConcat(data) { this.setState(current => ({ portfolioData : current.portfolioData.concat(data) })) }
-    awardConcat(data) { this.setState(current => ({ portfolioData : current.awardData.concat(data) })) }
-    certificateConcat(data) { this.setState(current => ({ portfolioData : current.certificateData.concat(data) })) }
     
     render() {
         const { btnNum, portfolioData, load, awardData, certificateData }=this.state;
@@ -73,8 +71,6 @@ class mypage extends Component {
                                 userInfo={userInfo}
                                 awardData={awardData}
                                 certificateData={certificateData}
-                                addAward={this.awardConcat.bind(this)} 
-                                addCertifi={this.certificateConcat.bind(this)}
                                 /> 
                                 :
                                 btnNum === 1 ?

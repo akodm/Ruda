@@ -17,7 +17,7 @@ class Profile extends Component {
     }
 
     render() {
-        const { userInfo, awardData, certificateData, addAward, addCertifi} = this.props;
+        const { userInfo, awardData, certificateData } = this.props;
         const { ChangeProfile } = this.state;
         return (
             <div className="Profile">
@@ -35,8 +35,6 @@ class Profile extends Component {
                         certificateData={certificateData} 
                         userInfo={userInfo} 
                         change={this.ChangeProfiles.bind(this)}
-                        addAward={(data) => addAward(data)}
-                        addCertifi={(data) => addCertifi(data)}
                     /> 
                 }
             </div>
