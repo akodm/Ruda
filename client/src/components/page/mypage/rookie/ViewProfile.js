@@ -188,46 +188,63 @@ class ViewProfile extends Component {
                                     </div>
                                 </div>
                                 <div className="Mypage-profile-content-userinfo-info">
-                                    <div className="Mypage-profile-content-userinfo-info">
                                         <div className="profile-keyword-info">
-                                            <div className="profile-chart-info-title">
-                                                <div className="profile-title-text">기술스택</div>
-                                                <div className="profile-title-line"></div>
+                                            {Tag[0] &&
+                                            <div>
+                                                <div className="profile-chart-info-title"> 
+                                                    <div className="profile-title-text">기술스택</div>
+                                                    <div className="profile-title-line"></div>
+                                                </div>
+                                                <div className="stack">
+                                                    {
+                                                        Tag.map(function(str,i){
+                                                        return <div className="chip-margin" key={i}>
+                                                            <TagChip name={str} size="small" color="primary" variant="outlined" />
+                                                        </div>;
+                                                        })
+                                                    }
+                                                </div>
                                             </div>
-                                            <div className="stack">
-                                                {
-                                                    Tag.map(function(str,i){
-                                                    return <div className="chip-margin" key={i}>
-                                                        <TagChip name={str} size="small" color="primary" variant="outlined" />
-                                                    </div>;
-                                                    })
+                                            }
+                                            {(Keyword[0] || Specialty[0]) &&
+                                            <div>
+                                            <div>
+                                                <div className="profile-chart-info-title">
+                                                    <div className="profile-title-text">키워드</div>
+                                                    <div className="profile-title-line"></div>
+                                                </div>
+                                            </div>
+ 
+                                                {Keyword[0] &&
+                                                <div>
+                                                    <p className="profile-keyword-text">성격</p>
+                                                    <div className="keyword">
+                                                        {
+                                                            Keyword.map(function(str,i){
+                                                            return <div className="chip-margin" key={i}>
+                                                                <TagChip name={str} size="small" color="primary" variant="outlined" />
+                                                            </div>;
+                                                            })
+                                                        }
+                                                    </div>
+                                                </div>
                                                 }
-                                            </div>
-                                            <div className="profile-chart-info-title">
-                                                <div className="profile-title-text">키워드</div>
-                                                <div className="profile-title-line"></div>
-                                            </div>
-                                            <p className="profile-keyword-text">성격</p>
-                                            <div className="keyword">
-                                                {
-                                                    Keyword.map(function(str,i){
-                                                    return <div className="chip-margin" key={i}>
-                                                        <TagChip name={str} size="small" color="primary" variant="outlined" />
-                                                    </div>;
-                                                    })
-                                                }
-                                            </div>
-                                            <p className="profile-keyword-text">취미/특기</p>
-                                            <div className="keyword">
-                                                {
-                                                    Specialty.map(function(str,i){
-                                                    return <div className="chip-maurgin" key={i}>
-                                                        <TagChip name={str} size="small" color="primary" variant="outlined" />
-                                                    </div>;
-                                                    })
-                                                }
-                                            </div>
-                                        </div>
+                                                {Specialty[0] &&
+                                                <div>
+                                                    <p className="profile-keyword-text">취미/특기</p>
+                                                    <div className="keyword">
+                                                        {
+                                                            Specialty.map(function(str,i){
+                                                            return <div className="chip-maurgin" key={i}>
+                                                                <TagChip name={str} size="small" color="primary" variant="outlined" />
+                                                            </div>;
+                                                            })
+                                                        }
+                                                    </div>
+                                                </div>
+                                             }
+                                             </div>
+                                        }       
                                         <div className="profile-skill-info">
                                             {certificateData[0] &&
                                             <div>

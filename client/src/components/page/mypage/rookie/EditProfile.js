@@ -72,6 +72,16 @@ class EditProfile extends Component {
             certificatedate:"",
             certificates:certificateData || [],
 
+            //교내활동
+            inSchools:[],
+            inSchoolname:"",
+            inSchooldate:"",
+
+            //교외활동
+            outSchool:[],
+            inSchoolname:"",
+            outSchooldate:"",
+
             load : false,
         }
     }
@@ -253,7 +263,30 @@ class EditProfile extends Component {
             console.log("user certificate add create err : "+err);
         }
     }
+    async addInSchool(){
+        const {userInfo}=this.props;
+        const {inschools,inSchoolname,inSchooldate} =this.state;
 
+        try{
+            
+        }
+        catch(err){
+           
+        }
+    }
+    
+    async addOutSchool(){
+        const {userInfo}=this.props;
+        const {outschools,outSchoolname,outSchooldate} =this.state;
+
+        try{
+            
+        }
+        catch(err){
+           
+        }
+    }
+    
     async deleteAward(id){
         try{
             const result= await axios.delete(`${config.app.s_url}/awards/delete?id=${id}`);
@@ -270,6 +303,20 @@ class EditProfile extends Component {
         }
         catch(err){
             console.log("user certificate delete err : "+err);
+        }
+    }
+    async deleteInSchool(id){
+        try{
+           
+        }
+        catch(err){
+        }
+    }
+    async deleteOutSchool(id){
+        try{
+           
+        }
+        catch(err){
         }
     }
     async SaveProfile() {
@@ -323,7 +370,8 @@ class EditProfile extends Component {
             workDateState,workDate,trainingDateState,trainingDate,
             load,univercity,field,
             awardname,awarddate,awardcate,awards,
-            certificatedate,certificatename,certificatecate,certificates} = this.state;
+            certificatedate,certificatename,certificatecate,certificates,
+            inschools,inSchoolname,inSchooldate,outSchools,outSchoolname,outSchooldate,} = this.state;
         return (
             <div className="EditProfile">
                 { !load &&  <Load /> }
@@ -499,7 +547,48 @@ class EditProfile extends Component {
                             })
                         }
                 </div>
-
+                <div className="Info-rookie-title">교내활동</div>
+                <div className="Info-rookie-body">
+                    <div className="Info-rookie-dateLayout">
+                        <TextField variant="outlined" style={{marginRight:"20px"}} onChange={this.onChangeValue.bind(this)} name="inSchoolname" value={inSchoolname} label="활동명" />
+                        <TextField helperText={moment(new Date()).format("YYYY/MM")} style={{width:"130px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="inSchooldate" value={inSchooldate} label="활동 날짜" />
+                        <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addInSchool.bind(this)}>
+                        <AddIcon style={{ color : "#646464",fontSize:"large"}}/> 
+                        </span>
+                    </div>
+                        {/*
+                            inschools.map((data,i) => {
+                                return  <div className="Info-rookie-dateLayout" key={i}>
+                                    <TextField variant="outlined" InputProps={{ readOnly: true}}  style={{marginRight:"20px"}} onChange={this.onChangeValue.bind(this)} name="inSchoolname" value={data.inSchoolname} label="활동명" />
+                                    <TextField helperText={moment(new Date()).format("YYYY/MM")} InputProps={{ readOnly: true}} style={{width:"130px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="inSchooldate" value={data.inSchooldate} label="활동 날짜" />
+                                    <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.deleteInSchool.bind(this,data.id)}>
+                                        <ClearIcon style={{ color : "rgb(223, 86, 86)",fontSize:"small"}}/>
+                                    </span>
+                            </div>
+                            })
+                        */}
+                </div>
+                <div className="Info-rookie-title">교외활동</div>
+                <div className="Info-rookie-body">
+                    <div className="Info-rookie-dateLayout">
+                    <TextField variant="outlined" style={{marginRight:"20px"}} onChange={this.onChangeValue.bind(this)} name="outSchoolname" value={outSchoolname} label="활동명" />
+                        <TextField helperText={moment(new Date()).format("YYYY/MM")} style={{width:"130px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="outSchooldate" value={outSchooldate} label="활동 날짜" />
+                        <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addOutSchool.bind(this)}>
+                        <AddIcon style={{ color : "#646464",fontSize:"large"}}/> 
+                        </span>
+                    </div>
+                        {/*
+                           outschools.map((data,i) => {
+                            return  <div className="Info-rookie-dateLayout" key={i}>
+                                <TextField variant="outlined" style={{marginRight:"20px"}} InputProps={{ readOnly: true}}  onChange={this.onChangeValue.bind(this)} name="outSchoolname" value={outSchoolname} label="활동명" />
+                                <TextField helperText={moment(new Date()).format("YYYY/MM")} InputProps={{ readOnly: true}}  style={{width:"130px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="outSchooldate" value={outSchooldate} label="활동 날짜" />
+                                <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.deleteOutSchool.bind(this,data.id)}>
+                                    <ClearIcon style={{ color : "rgb(223, 86, 86)",fontSize:"small"}}/>
+                                </span>
+                            </div> 
+                           })
+                        */}
+                </div>
                 {/*저장버튼*/}
                 <div style={{margin:"50px"}}>
                     <button className="profile-edit" onClick={this.addFile.bind(this)}><SaveIcon style={{fontSize:"large",margin:"5px"}}/>프로필저장</button>
