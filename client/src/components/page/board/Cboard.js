@@ -6,24 +6,13 @@ import Csearch from './Csearch';
 import '../../css/board.css';
 import CompanyCard from '../../component/CompanyCard';
 
-// import config from '../../../client-configs';
-
 class Cboard extends Component {
     constructor(props){
         super(props);
         this.state={
-            userList:[],
+            userList: this.props.data,
             
             selectValue : "new",
-        }
-    }
-
-    async componentDidMount(){
-        try{
-
-        }catch(err){
-            console.log("company card list err : " + err);
-            alert("데이터 로드 중 에러 발생");
         }
     }
 

@@ -1,11 +1,12 @@
 var express = require("express");
 var router = express.Router();
 let models = require("../models");
+const { add } = require("lodash");
 
 // DB Setting --------------------------------------------------------
 const CompanyInfo = models.companyInfo;
 const User = models.user;
-const Op = models.sequelize.Op;
+const Op = models.Sequelize.Op;
 
 // DB CRUD -----------------------------------------------------------
 
@@ -25,6 +26,26 @@ router.get("/all", async (req, res) => {
 });
 
 // 기업 정보 한명 조회
+router.get("/yall", async (req, res) => {
+	try {
+		const result = await CompanyInfo.findAll({
+			include : [
+				{ model: User }
+			],
+			where : {
+				companyState : {
+					[Op.or] : ["채용"]
+				}
+			},
+		});
+		res.send(result);
+	} catch (err) {
+		console.log(__filename + " 에서 기업 게시판 가져오기 에러 발생 내용= " + err);
+		res.send(false);
+	}
+});
+
+// 기업 정보 한명 조회
 router.get("/one", async (req, res) => {
 	try {
 		const result = await CompanyInfo.findOne({
@@ -38,6 +59,55 @@ router.get("/one", async (req, res) => {
 		res.send(result);
 	} catch (err) {
 		console.log(__filename + " 에서 기업 정보 한명 검색 에러 발생 내용= " + err);
+		res.send(false);
+	}
+});
+
+// 기업 정보 필터 검색
+/**
+ *  필터 검색 기준
+ *  기업 주소지의 구 기준 => 구로구, 안양시, 등
+ *  기업이 찾는 희망 직종 또는 기업의 분야
+ *  기업이 가지고 있는 태그 중 일치하는 문자열
+ */
+router.post("/popup", async (req, res) => {
+	let address = (req.body.add).split(" ");
+	let tagQuery = "";
+	let addQuery = "";
+
+	if(address[1]) {
+		address.forEach((data,i) => {
+			if(i >= 2) return;
+			else if(i !== 0) {
+				addQuery += `companyAdd like '%${data}%'`;
+			}
+		});
+	}
+
+	if(req.body.tag && req.body.tag[0]) {
+		req.body.tag.forEach((data,i) => {
+			if(i + 1 === req.body.tag.length) {
+				tagQuery += "companyTags like '%" + data + "%'";
+			} else {
+				tagQuery += "companyTags like '%" + data + "%' or ";
+			}
+		});
+	}
+
+	try {
+		const result = await CompanyInfo.findAll({
+			where : {
+				[Op.or] : {
+					companyTags : models.Sequelize.literal(tagQuery),
+					companyAdd : models.Sequelize.literal(addQuery),
+					companyField : { [Op.like] : "%" + req.body.add + "%" },
+					companyOccupation : { [Op.like] : "%" + req.body.add + "%" },
+				}
+			}
+		});
+		res.send(result);
+	} catch (err) {
+		console.log(__filename + " 에서 기업 정보 필터 검색 에러 발생 내용= " + err);
 		res.send(false);
 	}
 });
