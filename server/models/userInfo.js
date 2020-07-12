@@ -89,6 +89,18 @@ module.exports = (sequelize, DataTypes) => {
         userSuggestion : {
             type: DataTypes.JSON,     // 받은 제안
         },
+        userCA: {                       //교내활동
+            type: DataTypes.STRING,    
+        },
+        userCADate: {                   //교내활동기간
+            type: DataTypes.STRING,    
+        },
+        userOut: {                        //교외활동
+            type: DataTypes.STRING,    
+        },
+       userOutDate: {                   //교외활동기간
+            type: DataTypes.STRING,    
+        },
         userClick : {
             type: DataTypes.INTEGER(11),    // 클릭된 수
         },

@@ -1,58 +1,63 @@
 import React, { Component } from 'react';
-import { storage } from "../../../firebase";
-import config from '../../../client-configs';
+import { storage } from "../../../../firebase";
+import config from '../../../../client-configs';
 import axios from 'axios';
 
-import Load from '../../component/Load';
-import dataList from '../../../data-list';
-import ImageBox from '../../component/ImageBox';
-import PostCode from '../../component/PostPopup';
-import AutoCreateBox from '../../component/AutoCreatable';
-import TagChip from '../../component/TagChip';
-import SelectBox from '../../component/SelectBox';
-import CheckBox from '../../component/CheckBox';
+import Load from '../../../component/Load';
+import dataList from '../../../../data-list';
+import ImageBox from '../../../component/ImageBox';
+import PostCode from '../../../component/PostPopup';
+import AutoCreateBox from '../../../component/AutoCreatable';
+import TagChip from '../../../component/TagChip';
+import SelectBox from '../../../component/SelectBox';
+import CheckBox from '../../../component/CheckBox';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import moment from 'moment';
 
-class Company extends Component {
+import SaveIcon from '@material-ui/icons/Save';
+import AddIcon from '@material-ui/icons/Add';
+import ClearIcon from '@material-ui/icons/Clear';
+
+class EditProfile extends Component {
     constructor(props) {
         super(props);
+        const {companyInfo}=this.props;
         this.state = {
             progress : null,
             // 기본 정보
             imgData : null,
-            imgUrl : null,
-            imgPreview : null,
+            imgUrl : companyInfo.companyImageUrl,
+            imgPreview : companyInfo.companyImageUrl,
 
-            name : "",
-            ceo : "",
-            phone : "",
-            address1 : "",
+            name : companyInfo.companyName,
+            ceo : companyInfo.companyCEO,
+            phone : companyInfo.companyPhone,
+            address1 :"",
             address2 : "",
-            addressState : false,
+            addressState : "",
 
             // 기업 분야
-            field : "",
-            tags : [],
-            since : "",
-            ageAvg : "",
-            rule : [],
-            intro : "",
-            welfare : [],
+            companyurl : companyInfo.companyUrl,
+            field : companyInfo.companyField,
+            tags : companyInfo.companyTags,
+            since : companyInfo.companySince,
+            ageAvg : companyInfo.companyAgeAvg,
+            rule : companyInfo.companyRule,
+            intro : companyInfo.companyIntro,
+            welfare : companyInfo.companyWelfare,
 
             // 채용 조건
-            request : [],
-            workCate: "",
-            workDateState : "상시",
-            workDate : "",
-            occupation : "",
+            request : companyInfo.companyRequest,
+            workCate: companyInfo.companyWorkCate,
+            workDateState : companyInfo.companyWorkDateState,
+            workDate :  companyInfo.companyWorkDate,
+            occupation : companyInfo.companyOccupation,
 
             // 준비한 질문
-            question : [],
+            question : companyInfo.companyQuestion,
 
-            agreeCheck : false,
             load : false,
         }
     }
@@ -66,12 +71,7 @@ class Company extends Component {
     addFile() {
         const { imgData,
             name,phone,address1,field,
-            agreeCheck
         } = this.state;
-        if(!agreeCheck) {
-            alert("이용수칙에 동의해주세요.");
-            return;
-        }
         if(!name || !phone || !address1 || !field) {
             alert("필수 입력 사항을 입력해주세요.");
             return;
@@ -95,75 +95,13 @@ class Company extends Component {
                     .getDownloadURL()
                     .then(async url => {
                         await this.setState({ imgUrl : url });
-                        this.saveStartBtn();
+                        this.SaveProfile();
                     });
                 }
             );
-        } else { this.saveStartBtn(); }
+        } else { this.SaveProfile(); }
     }
 
-    // 저장 함수 -> 데이터베이스에 유저 인포 디비 저장
-    async saveStartBtn() {
-        const { user } = this.props;
-        const { imgUrl,
-            name,ceo,phone,address1,address2,
-            field,tags,since,ageAvg,rule,intro,welfare,
-            request,workCate,workDateState,workDate,occupation,
-            question 
-        } = this.state;
-        try {
-            let userCateUpdat = axios.put(`${config.app.s_url}/users/updatecate`, {
-                userCate : "company",
-                id : user.id
-            });
-
-            let address = address1 + "-" + address2;
-            let result = axios.post(`${config.app.s_url}/companyInfos/create`, {
-                userId : user.id,
-
-                companyImageUrl: imgUrl,
-                
-                companyName: name,
-				companyCEO: ceo,
-				companyPhone: phone,
-                companyAdd: address,
-                
-				companyField: field,
-				companyTags: tags,
-				companySince : since,
-				companyAgeAvg : ageAvg,
-				companyRule: rule,
-				companyIntro : intro,
-                companyWelfare : welfare,
-                
-				companyRequest : request,
-                companyOccupation : occupation,
-                companyWorkCate :  workCate,
-                companyWorkDate : workDate,
-                companyworkDateState : workDateState,
-                
-				companyQuestion: question,
-            });
-
-            await Promise.all([userCateUpdat,result]).then(data => {
-                userCateUpdat = data[0];
-                result = data[1];
-            })
-
-            console.log(userCateUpdat.data, result.data);
-            if(result.data){
-                alert("기본입력이 완료되었습니다.");
-                window.location.href = "/";
-            } else {
-                alert("잘못된 값이 있습니다. 다시 시도해주세요.");
-            }
-        } catch(err) {
-            console.log("user info save err : " + err);
-        }
-        this.setState({ load : true });
-    }
-
-    // 기본 스태이트 변경 함수
     onChangeValue(e) {
         if(e.target.name === "phone" || e.target.name === "ageAvg" || e.target.name === "since") {
             if(/\D+/g.test(e.target.value)) {
@@ -221,14 +159,60 @@ class Company extends Component {
     // 최소조건 삭제 함수
     requestDelete(e) { this.setState({ request : this.state.request.filter(data => { return data !== e })}) }
 
+    async SaveProfile() {
+        const { companyInfo } = this.props;
+        const { imgUrl,
+            name,ceo,phone,address1,address2,companyurl,
+            field,tags,since,ageAvg,rule,intro,welfare,
+            request,workCate,workDateState,workDate,occupation,
+            question 
+        } = this.state;
+
+        let address = address1 + "-" + address2;
+        const result = await axios.put(`${config.app.s_url}/companyInfos/update`,{
+            userId : companyInfo.id,
+            companyImageUrl: imgUrl,
+
+            companyName: name,
+            companyCEO: ceo,
+            companyPhone: phone,
+            companyAdd: address,
+            
+            companyUrl:companyurl,
+            companyField: field,
+            companyTags: tags,
+            companySince : since,
+            companyAgeAvg : ageAvg,
+            companyRule: rule,
+            companyIntro : intro,
+            companyWelfare : welfare,
+            
+            companyRequest : request,
+            companyOccupation : occupation,
+            companyWorkCate :  workCate,
+            companyWorkDate : workDate,
+            companyworkDateState : workDateState,
+            
+            companyQuestion: question,
+        });
+
+        console.log( result.data+"프로필수정");
+        if(result.data){
+            alert("수정이 완료되었습니다.");
+            window.location.href='/';
+        } else {
+            alert("잘못된 값이 있습니다. 다시 시도해주세요.");
+        }
+        this.setState({ load : true });
+    }
+
     render() {
         const { load,
             imgPreview,
-            name,ceo,phone,address1,address2,addressState,
+            name,ceo,phone,address1,address2,addressState,companyurl,
             field,tags,since,ageAvg,rule,intro,welfare,
-            request,workCate,workDateState,workDate,
+            request,workCate,workDateState,workDate,occupation,
             question,
-            agreeCheck,
         } = this.state;
         return (
             <div className="Info-rookie-main">
@@ -268,7 +252,10 @@ class Company extends Component {
                 </div>
                 <div className="Info-rookie-title">기업소개</div>
                 <div className="Info-rookie-body">
-                    <TextField style={{marginBottom:"10px"}} helperText="구직자에게 소개할 기업의 분야가 무엇인지 알려주세요" required label="기업 분야" variant="outlined" value={field} name="field" onChange={this.onChangeValue.bind(this)} />
+                    <div style={{display:"flex",flexDirection:"row",marginBottom:"20px"}}>
+                        <TextField style={{width:"340px",marginRight:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="companyurl" value={companyurl} id="outlined-required" label="기업사이트 주소" />
+                        <AutoCreateBox value={field} width={340} blur={true} text={"기업의 분야를 입력해주세요."} list={dataList.app.comfieldList} clear={false} onChange={(e) => this.setState({ field : e })}  />
+                    </div>
                     <AutoCreateBox blur={false} width={700} text={"기업에서 다루는 기술에 대한 태그를 검색하여 최대 6개까지 추가하세요!"} list={dataList.app.tagList} clear={true} onChange={this.addChips.bind(this,"tag")} />
                     <div className="Info-tag-box">
                         {
@@ -309,9 +296,9 @@ class Company extends Component {
                             })
                         }
                     </div>
-                    <AutoCreateBox blur={true} width={400} text={"희망하는 채용 분야를 입력하세요."} list={dataList.app.fieldList} clear={false} onChange={(e) => this.setState({ occupation : e })} />
+                    <AutoCreateBox value={occupation}blur={true} width={400} text={"희망하는 채용 분야를 입력하세요."} list={dataList.app.fieldList} clear={false} onChange={(e) => this.setState({ occupation : e })} />
                     <div className="Info-rookie-dateLayout">
-                    <SelectBox 
+                        <SelectBox 
                             value={workCate} func={(e) => this.setState({ workCate : e })}
                             label={"채용구분"} option={["채용","실습생채용","실습 후 채용","미정"]} text={"채용구분"} style={{marginRight:"20px"}}
                         />
@@ -328,16 +315,13 @@ class Company extends Component {
                         }
                     </div>
                 </div>
-                <div className="Info-rookie-agree">
-                    <CheckBox check={agreeCheck} func={(e) => this.setState({ agreeCheck : e })} name="agree" color="primary" />
-                    <span>하이루키는 신입 채용 서비스입니다. <span style={{color:"red"}}>기업</span>으로서 이용하심에 동의하십니까?</span>
-                </div>
-                <div style={{margin:"50px"}}>
-                    <Button onClick={this.addFile.bind(this)} size="large" variant="outlined" color="primary">하이루키 시작하기</Button>
+                 {/*저장버튼*/}
+                 <div style={{margin:"50px"}}>
+                    <button className="profile-edit" onClick={this.addFile.bind(this)}><SaveIcon style={{fontSize:"large",margin:"5px"}}/>프로필저장</button>
                 </div>
             </div>
         );
     }
 }
 
-export default Company;
+export default EditProfile;

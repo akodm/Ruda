@@ -112,8 +112,8 @@ hr {
     display: flex;
     flex-direction: row; 
     align-items: center; 
+    justify-content: center;
     width: 100%;
-    height: 100%;
 }
 .Mypage-profile-content-userinfo-data{
     display: flex;
@@ -166,15 +166,11 @@ hr {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     width: 100%;
-}
-
-.profile-profile > p{
-    text-align:left;
-    width: 220px;
     font-size: 18px;
     font-weight: 600;
+    margin: 10px;
 }
 
 .profile-text > p{
@@ -185,15 +181,11 @@ hr {
 /*--프로필 오른쪽영역-*/
 
 .profile-chart-info{
-    height: 280px;
-    width: 400px;
+    width: 300px;
+    height:280px;
     margin-left: 0px;
     justify-content: center;
-    align-items: center;
-}
 
-.profile-keyword-info {
-    margin-top: 15px;
 }
 
 .profile-title-text {
@@ -237,9 +229,6 @@ hr {
     margin-left: 30px;
 }
 
-.profile-skill-info {
-    margin-top: 15px;
-}
 
 .profile-outschool {
     display: flex;
@@ -277,8 +266,8 @@ hr {
     flex-direction: row;
     justify-content: left;
     align-items: center;
-    width: 200px;
     height: 30px;
+    font-weight: 500;
 }
 .profile-user-state-training{
     width: 8px;
@@ -298,7 +287,8 @@ hr {
     border: none;
     width: 100%;
     height: 40px;
-    margin-top: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     align-items: center;
     display: flex;
     flex-direction:row;
@@ -342,7 +332,6 @@ hr {
 
 /*수정페이지*/
 .EditProfile{
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
