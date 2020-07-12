@@ -60,7 +60,7 @@ class ViewProfile extends Component {
     EditProfile(){this.props.change(false)}
      
     render() {
-        const { userInfo,awardData} = this.props;
+        const { userInfo,awardData,certificateData} = this.props;
         const Tag = userInfo.userTags;
         const Keyword = userInfo.userKeyword;
         const Specialty = userInfo.userSpecialty;
@@ -229,45 +229,39 @@ class ViewProfile extends Component {
                                             </div>
                                         </div>
                                         <div className="profile-skill-info">
+                                            {certificateData[0] &&
                                             <div>
                                                 <div className="profile-chart-info-title">
                                                     <div className="profile-title-text">자격증</div>
                                                     <div className="profile-title-line"></div>
                                                 </div>
                                                 <div className="profile-skill-info-certificate">
-                                                    <div className="profile-skill-info-certificate-text">
-                                                        <p>대한상공회asda</p>
-                                                        <p>정보처리산업기사1급</p>
-                                                        <p>2020/02/02</p>
+                                                    {certificateData.map(function(data,i){
+                                                        return <div className="profile-skill-info-certificate-text">
+                                                        <p>{data.certificateCate}</p>
+                                                        <p>{data.certificateName}</p>
+                                                        <p>{data.certificateDate}</p>
                                                     </div>
-                                                    <div className="profile-skill-info-certificate-text">
-                                                        <p>대한상공회</p>
-                                                        <p>정보처리산업기사1급asda</p>
-                                                        <p>2020/02/02</p>
-                                                    </div>
-                                                    <div className="profile-skill-info-certificate-text">
-                                                        <p>대한상공회</p>
-                                                        <p>정보처리산업기사1급</p>
-                                                        <p>2020/02/02</p>
-                                                    </div>
+                                                })}
                                                 </div>
                                             </div>
-                                          {!awardData[0] &&
+                                            }
+                                          {awardData[0] &&
                                             <div>
                                                 <div className="profile-chart-info-title">
                                                     <div className="profile-title-text">수상경력</div>
                                                     <div className="profile-title-line"></div>
                                                 </div>
                                                 <div className="profile-skill-info-Awards">
-                                                    <div className="profile-skill-info-Awards-text">
-                                                        <p>{awardData.awardCate}</p>
-                                                        <p>{awardData.awardName}</p>
-                                                        <p>{awardData.awardDate}</p>
-                                                    </div>
+                                                        {awardData.map(function(data,i){
+                                                            return   <div className="profile-skill-info-Awards-text" key={i}>
+                                                            <p>{data.awardCate}</p>
+                                                            <p>{data.awardName}</p>
+                                                            <p>{data.awardDate}</p>
+                                                        </div>
+                                                    })}
                                                 </div>
                                             </div>
-                                          
-                                          
                                           }
                                             
                                             <div className="Mypage-profile-content-storyprofile">

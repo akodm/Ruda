@@ -137,6 +137,11 @@ router.post("/create", async(req, res) => {
 				userWorkDateState : req.body.userWorkDateState,
 				userWorkDate : req.body.userWorkDate,
 				userTraningDate : req.body.userTraningDate,
+
+				userCA:req.body.userCA,
+				userCADate:req.body.userCADate,
+				userOut:req.body.userOut,
+				userOutDate:req.body.userOutDate,
 				userLike : 0,
 				userClick : 0,
 			}
@@ -180,6 +185,12 @@ router.put("/update", async(req, res) => {
 			userWorkDateState : req.body.userWorkDateState,
 			userWorkDate : req.body.userWorkDate,
 			userTraningDate : req.body.userTraningDate,
+
+			userCA:req.body.userCA,
+			userCADate:req.body.userCADate,
+			userOut:req.body.userOut,
+			userOutDate:req.body.userOutDate,
+			
 
 			userSuggestion : req.body.userSuggestion,
             userHireBool : req.body.userHireBool,
