@@ -71,6 +71,8 @@ router.post("/create", async (req, res) => {
 
 				companyRequest : req.body.companyRequest,
 				companyOccupation : req.body.companyOccupation,
+				
+				companyWorkCate : req.body.companyWorkCate,
 				companyWorkDate : req.body.companyWorkDate,
 				companyWorkDateState : req.body.companyWorkDateState,
 
@@ -111,7 +113,9 @@ router.put("/update", async(req, res) => {
 			companyAgeAvg : req.body.companyAgeAvg,
 			
             companyOccupation : req.body.companyOccupation,
-            companyRequest : req.body.companyRequest,
+			companyRequest : req.body.companyRequest,
+
+			companyWorkCate : req.body.companyWorkCate,
             companyWorkDate : req.body.companyWorkDate,
 			companyWelfare : req.body.companyWelfare,
 			

@@ -47,6 +47,9 @@ module.exports = (sequelize, DataTypes) => {
         companyRequest : {
             type: DataTypes.JSON,     // 기업에서 필요로 하는 최소 조건
         },
+        companyWorkCate : {
+            type: DataTypes.STRING(10),
+        },
         companyWorkDateState : {
             type: DataTypes.STRING(10),     // 일할 수 있는 상태
         },

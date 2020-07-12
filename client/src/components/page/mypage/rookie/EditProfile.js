@@ -19,6 +19,7 @@ import moment from 'moment';
 import SaveIcon from '@material-ui/icons/Save';
 import AddIcon from '@material-ui/icons/Add';
 import ClearIcon from '@material-ui/icons/Clear';
+
 class EditProfile extends Component {
     constructor(props) {
         super(props);
@@ -277,6 +278,7 @@ class EditProfile extends Component {
         const result = await axios.put(`${config.app.s_url}/userInfos/update`,{
             userId :userInfo.id,
             userImageUrl : imgUrl, 
+
             userName : name, userPhone : phone, userAdd : address1, userMilitary : military,
             userUnivercityCate : univercityCate,
             userUnvcity : univercity, userSubject : subject,
@@ -300,6 +302,7 @@ class EditProfile extends Component {
         console.log( result.data+"프로필수정");
         if(result.data){
             alert("수정이 완료되었습니다.");
+            window.location.href='/';
         } else {
             alert("잘못된 값이 있습니다. 다시 시도해주세요.");
         }

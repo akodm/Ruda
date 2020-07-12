@@ -29,7 +29,6 @@ class ViewProfile extends Component {
         super(props);
         this.state={
             imgPreview:"",
-            btnNum:0,
             likeBtn:"none",
             shareAlert:"none",
             url :new URL(window.location.href),
@@ -54,31 +53,19 @@ class ViewProfile extends Component {
         })
     }
 
-    shareLink(){
-        this.setState({
-            shareAlert:"flex",
-        })
-    }
+    shareLink(){this.setState({shareAlert:"flex",})}
     
-    close(){
-        this.setState({
-            shareAlert:"none",
-        })
-    }
-    moveLink(link){
-        console.log(link);
-        window.location.href = link; 
-    }
-      EditProfile(){
-        this.props.change(false)
-    }
+    close(){this.setState({shareAlert:"none",})}
+
+    EditProfile(){this.props.change(false)}
+     
     render() {
-        const { userInfo} = this.props;
+        const { userInfo,awardData} = this.props;
         const Tag = userInfo.userTags;
         const Keyword = userInfo.userKeyword;
         const Specialty = userInfo.userSpecialty;
-        const editDis = this.state;
         const {likeBtn,shareAlert,success}=this.state;
+
         return userInfo ? (
             <div className="Mypage-profile">
                 {/* 공유하기 팝업 */}
@@ -138,8 +125,7 @@ class ViewProfile extends Component {
                                     <div className="profile-text">
                                         <LocalPlayIcon  style={{fontSize:"medium",margin:"10px"}}/>
                                         <p>{userInfo.userMilitary}</p>
-                                    </div>
-                                    }
+                                    </div>}
                                 </div>
                                 {/* 포지션 */}
                                 <div className="profile-intro"><hr></hr>
@@ -148,12 +134,12 @@ class ViewProfile extends Component {
                                         <WorkIcon style={{fontSize:"medium",margin:"10px"}}/>
                                         <p>{userInfo.userField} </p>
                                     </div>
-                                    {userInfo.userWorkDateState=="미정"?"":
+                                    {userInfo.userWorkDateState==="미정"?"":
                                     <div className="profile-text">
                                         <AssignmentIndIcon style={{fontSize:"medium",margin:"10px"}}/>
                                         <p>근무:{userInfo.userWorkDateState}</p>
                                     </div>}           
-                                    {userInfo.userWorkDateState=="직접입력"?<div className="profile-text">
+                                    {userInfo.userWorkDateState==="직접입력"?<div className="profile-text">
                                         <CalendarTodayIcon style={{fontSize:"medium",margin:"10px"}}/>
                                         <p>근무가능날짜:{userInfo.userTrainingDate}</p>
                                     </div>:""}
@@ -165,7 +151,7 @@ class ViewProfile extends Component {
                                         <p>{userInfo.userLike}명이 좋아합니다. </p>
                                     </div>
                                 </div>
-                                <button className="profile-edit" onClick={this.EditProfile.bind(this)}><EditIcon style={{fontSize:"medium",height:"40px"}}/>프로필수정</button>
+                                <button className="profile-edit" onClick={this.EditProfile.bind(this)}> <EditIcon style={{fontSize:"medium",height:"40px"}}/>프로필수정</button>
                                 <div className="Mypage-pages-title">
                                     <div className="Mypage-pages-title-icons">    
                                         <div className="Mypage-pages-title-icons-icon">
@@ -190,7 +176,6 @@ class ViewProfile extends Component {
                                 </div>
                                 <div className="Mypage-profile-content-userinfo-graph">
                                     <div className="profile-chart-info">
-                               
                                        <p className="profile-chart-info-text">6개의 자격증을 보유하고 있습니다.</p>
                                        <p className="profile-chart-info-text">5번의 수상이력이 있습니다.</p>
                                        <p className="profile-chart-info-text">4번의 교외활동을 했습니다.</p>
@@ -267,6 +252,7 @@ class ViewProfile extends Component {
                                                     </div>
                                                 </div>
                                             </div>
+                                          {!awardData[0] &&
                                             <div>
                                                 <div className="profile-chart-info-title">
                                                     <div className="profile-title-text">수상경력</div>
@@ -274,25 +260,16 @@ class ViewProfile extends Component {
                                                 </div>
                                                 <div className="profile-skill-info-Awards">
                                                     <div className="profile-skill-info-Awards-text">
-                                                        <p>교내</p>
-                                                        <p>대림대학교</p>
-                                                        <p>캡스톤디자인</p>
-                                                        <p>2020/02/02</p>
-                                                    </div>
-                                                    <div className="profile-skill-info-Awards-text">
-                                                        <p>교내</p>
-                                                        <p>대림대학교</p>
-                                                        <p>캡스톤디자인</p>
-                                                        <p>2020/02/02</p>
-                                                    </div>
-                                                    <div className="profile-skill-info-Awards-text">
-                                                        <p>교내</p>
-                                                        <p>대림대학교</p>
-                                                        <p>캡스톤디자인</p>
-                                                        <p>2020/02/02</p>
+                                                        <p>{awardData.awardCate}</p>
+                                                        <p>{awardData.awardName}</p>
+                                                        <p>{awardData.awardDate}</p>
                                                     </div>
                                                 </div>
                                             </div>
+                                          
+                                          
+                                          }
+                                            
                                             <div className="Mypage-profile-content-storyprofile">
                                                 <div className="profile-inschool">
                                                     <div className="profile-chart-info-title">

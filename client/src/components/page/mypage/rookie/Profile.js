@@ -8,7 +8,6 @@ class Profile extends Component {
         const {awardData,certificateData}=this.props;
         this.state={
             ChangeProfile:true,
-
             awardData,
             certificateData,
         }

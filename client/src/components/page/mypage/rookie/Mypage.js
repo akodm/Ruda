@@ -86,7 +86,6 @@ class mypage extends Component {
                                 loginState && <Setting userInfo={userInfo}/>
                             }
                         </div>
-                        
                         <div className="Mypage-btns">
                             <button className={btnNum === 0?"Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,0)}>프로필</button>
                             <button className={btnNum === 1?"Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,1)}>포트폴리오</button>
