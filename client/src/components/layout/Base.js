@@ -97,9 +97,13 @@ class Base extends Component {
         })
     }
 
+    // 추천 팝업 창 열고 닫기
     openClose(bool, cate) { 
         this.setState({ open : { view : bool, cate } }); 
     }
+
+    // 로드 세팅
+    loadSet(bool) { this.setState({ load : bool }); }
 
     render() {
         const { user, userBoardData, companyBoardData, load, open } = this.state;
@@ -108,7 +112,7 @@ class Base extends Component {
                  <Router>
                     <div style={{height:"75px",width:"100%"}}></div>
                     {/*상단 */}
-                    <Header user={user} openClose={this.openClose.bind(this)} />
+                    <Header loadSet={this.loadSet.bind(this)} user={user} openClose={this.openClose.bind(this)} />
 
                     { open.view && <Popup user={user} open={open} openClose={this.openClose.bind(this)} boardData={ open.cate === "company" ? userBoardData : companyBoardData } /> }
                      <Switch>

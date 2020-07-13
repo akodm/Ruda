@@ -29,7 +29,7 @@
 /*CompanySerch*/
 .Company-search{
     width: 1109px;
-    height: 166px;
+    height: 306px;
     box-shadow: 0 0 8px 0.2px rgba(131, 131, 131, 0.13);
     border: solid 1px #eeeeee;
     border-radius: 7px;
@@ -80,6 +80,22 @@
     height: 8px;
     background-color:#f799f5;
     border-radius: 50%;
+}
+
+.Company-search-content {
+    display: flex;
+    justify-content: center;
+}
+
+.Company-search-div {
+    width: 90%;
+}
+
+.Company-search-search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 
 /*CompanyS Card*/

@@ -34,7 +34,6 @@ class Popup extends Component {
             const cate = rookie ? "rookie" : "company";
             await this.setState({ [cate] : cate === "rookie" ? rookie : company });
 
-            console.log(this.state.company);
             let filter = null;
             if(cate === "rookie") {
                 filter = await axios.post(`${config.app.s_url}/companyInfos/popup`, {

@@ -147,9 +147,9 @@ router.post("/create", async (req, res) => {
 				companyWorkDateState : req.body.companyWorkDateState,
 
 				companyQuestion: req.body.companyQuestion,
+				companyHistory : req.body.companyHistory,
 
 				companyLike : 0,
-				companyClick : 0,
 			}
 		}).spread((none, created)=>{
 			if(created)
@@ -190,9 +190,9 @@ router.put("/update", async(req, res) => {
 			companyWelfare : req.body.companyWelfare,
 			
 			companyQuestion: req.body.companyQuestion,
+			companyHistory : req.body.companyHistory,
 			
             companyLike : req.body.companyLike,
-			companyClick : req.body.companyClick,
 			
             companyState : req.body.companyState,
 		}, {
@@ -203,6 +203,36 @@ router.put("/update", async(req, res) => {
         result = true;
     } catch(err) {
         console.log(__filename + " 에서 기업 정보 업데이트 에러 발생 내용= " + err);
+        result = false;
+    }
+    res.send(result);
+});
+
+// 좋아요 수 1씩 감소시키기
+router.get("/decrement", async(req, res) => {
+	let result = null;
+    try {
+		await CompanyInfo.decrement('companyLike', { where : {
+			userId : req.query.userId
+		}})
+        result = true;
+    } catch(err) {
+        console.log(__filename + " 에서 좋아요 감소 에러 발생 내용= " + err);
+        result = false;
+    }
+    res.send(result);
+});
+
+// 좋아요 수 1씩 증가시키기
+router.get("/increment", async(req, res) => {
+	let result = null;
+    try {
+		await CompanyInfo.increment('companyLike', { where : {
+			userId : req.query.userId
+		}})
+        result = true;
+    } catch(err) {
+        console.log(__filename + " 에서 좋아요 증가 에러 발생 내용= " + err);
         result = false;
     }
     res.send(result);

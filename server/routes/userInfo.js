@@ -158,12 +158,7 @@ router.post("/create", async(req, res) => {
 				userWorkDate : req.body.userWorkDate,
 				userTraningDate : req.body.userTraningDate,
 
-				userCA:req.body.userCA,
-				userCADate:req.body.userCADate,
-				userOut:req.body.userOut,
-				userOutDate:req.body.userOutDate,
 				userLike : 0,
-				userClick : 0,
 			}
 		}).spread((none, created)=>{
 			if(created)
@@ -206,12 +201,6 @@ router.put("/update", async(req, res) => {
 			userWorkDate : req.body.userWorkDate,
 			userTraningDate : req.body.userTraningDate,
 
-			userCA:req.body.userCA,
-			userCADate:req.body.userCADate,
-			userOut:req.body.userOut,
-			userOutDate:req.body.userOutDate,
-			
-
 			userSuggestion : req.body.userSuggestion,
             userHireBool : req.body.userHireBool,
             userState : req.body.userState,
@@ -228,53 +217,31 @@ router.put("/update", async(req, res) => {
     res.send(result);
 });
 
-// 유저 좋아요 1씩 증가 혹은 감소
-router.put("/countupdate", async(req, res) => {
+// 좋아요 수 1씩 감소시키기
+router.get("/decrement", async(req, res) => {
 	let result = null;
-	let likeClick = req.body.likeClick;
     try {
-		let like = null;
-		if(likeClick) {
-			// 좋아요 1 증가
-			like = UserInfo.increment('userlike', { where : {
-				userId : req.body.userId
-			}})
-		} else {
-			// 좋아요 1 감소
-			like = UserInfo.decrement('userlike', { where : {
-				userId : req.body.userId
-			}})
-		}
-		// 좋아요를 누른 사람 리스트 변경 ( 중복 방지 )
-		const list = UserInfo.update({
-			userLikeList : rqe.body.userLikeList
-		}, { 
-			where : {
-				userId : req.body.userId 
-			}
-		})
-
-		await Promise.all([like,list]).then((data) => {
-			if(data)
-			result = true;
-		});
+		await UserInfo.decrement('userLike', { where : {
+			userId : req.query.userId
+		}})
+        result = true;
     } catch(err) {
-        console.log(__filename + " 에서 유저 정보 좋아요 업데이트 에러 발생 내용= " + err);
+        console.log(__filename + " 에서 좋아요 감소 에러 발생 내용= " + err);
         result = false;
     }
     res.send(result);
 });
 
-// 유저 클릭 수 1씩 증가시키기
-router.put("/clickupdate", async(req, res) => {
+// 좋아요 수 1씩 증가시키기
+router.get("/increment", async(req, res) => {
 	let result = null;
     try {
-		await UserInfo.increment('userClick', { where : {
-			userId : req.body.userId
+		await UserInfo.increment('userLike', { where : {
+			userId : req.query.userId
 		}})
         result = true;
     } catch(err) {
-        console.log(__filename + " 에서 유저 정보 클릭 업데이트 에러 발생 내용= " + err);
+        console.log(__filename + " 에서 좋아요 증가 에러 발생 내용= " + err);
         result = false;
     }
     res.send(result);

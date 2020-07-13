@@ -19,6 +19,8 @@ let emailAuth = require('./routes/emailAuth');
 let portfolioRouter = require('./routes/portfolio');
 let awardRouter = require('./routes/award');
 let certificateRouter = require('./routes/certificate');
+let activityRouter = require('./routes/activity');
+let likeRouter = require('./routes/like');
 const configs = require('./server-configs.js');
 
 const models = require('./models');
@@ -57,6 +59,8 @@ app.use('/emailAuth', emailAuth);
 app.use('/portfolios', portfolioRouter);
 app.use('/awards', awardRouter);
 app.use('/certificates', certificateRouter);
+app.use('/activitys', activityRouter);
+app.use('/likes', likeRouter);
 require('./passport.js')(passport);
 
 // --------------------------- 노드 메일러 이메일 인증 -------------------

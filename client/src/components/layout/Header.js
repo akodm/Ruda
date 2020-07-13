@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 
 class Header extends Component {
     render() {
-        const { user, openClose } = this.props;
+        const { user, openClose, loadSet } = this.props;
         return (
             <div className="Header">
                 <nav  className="Header-nav">
                     <div className="Header-nav-menu">
-                        <Link to="/"><img src="/Images/RUDALogore.png" alt="IMG" className="Header-logo" /></Link>
+                        <a href="/"><img src="/Images/RUDALogore.png" alt="IMG" className="Header-logo" /></a>
                         <Link to="/company"><div className="Header-nav-menu-span">기업</div></Link>
                         <Link to="/rookie"><div className="Header-nav-menu-span">인재</div></Link>
                     </div>
