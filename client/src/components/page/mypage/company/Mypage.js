@@ -13,13 +13,27 @@ class Mypage extends Component {
         super(props);
         this.state={
             btnNum:0,
+           
+            awardData:[],
+
             load : false,
         }
     }
 
     async componentDidMount() {
         try {
+            let award = axios.get(`${config.app.s_url}/awards/all?userId=${this.props.userInfo.userId}`);
+            await Promise.all([award/*,activity*/]).then(data => {
+                award = data[0].data;
+            });
+
+            this.setState({ 
+                awardData : award, 
+                //activityData : activity,
+            });
+
         } catch(err) {
+            console.log("company mypage data load err : " + err);
         }
         this.setState({ load : true });
     }
@@ -27,7 +41,7 @@ class Mypage extends Component {
     MenuClick(num){ this.setState({ btnNum:num }) }
 
     render() {
-        const {btnNum,load}=this.state;
+        const {btnNum,load,awardData}=this.state;
         const { companyInfo, user } = this.props;
         return (
             <div className="Mypage">
@@ -39,7 +53,9 @@ class Mypage extends Component {
                             2 => 마이페이지 수정 ( 개인화면 ) */}
                             {
                                 btnNum === 0 ?
-                                <Profile companyInfo={companyInfo} /> :
+                                <Profile 
+                                companyInfo={companyInfo} 
+                                awardData={awardData} /> :
                                 btnNum === 1 ?
                                 load && <Hire load={load} userEmail={user.email} userId={companyInfo.userId} userName={companyInfo.companyName}/>
                                 :

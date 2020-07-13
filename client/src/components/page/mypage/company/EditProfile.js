@@ -23,7 +23,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 class EditProfile extends Component {
     constructor(props) {
         super(props);
-        const {companyInfo}=this.props;
+        const {companyInfo,awardData}=this.props;
         this.state = {
             progress : null,
             // 기본 정보
@@ -54,6 +54,11 @@ class EditProfile extends Component {
             workDateState : companyInfo.companyWorkDateState,
             workDate :  companyInfo.companyWorkDate,
             occupation : companyInfo.companyOccupation,
+
+            // 수상이력 관련
+            awardname:"",
+            awarddate:"",
+            awards:awardData || [],
 
             // 준비한 질문
             question : companyInfo.companyQuestion,
@@ -206,6 +211,37 @@ class EditProfile extends Component {
         this.setState({ load : true });
     }
 
+    async addAward(){
+        const { companyInfo }=this.props;
+        const {awardname,awardcate,awarddate,awards} =this.state;
+
+        try{
+            const result= await axios.post(`${config.app.s_url}/awards/create`,{
+                userId:companyInfo.userId,
+                awardName:awardname,
+                awardDate :awarddate,
+            })
+            console.log(result);
+            this.setState({ 
+                awards : awards.concat(result.data),
+                awardname:"",
+                awarddate:"",
+            });
+        }
+        catch(err){
+            console.log("user award add create err : "+err);
+        }
+    }
+
+    async deleteAward(id){
+        try{
+            const result= await axios.delete(`${config.app.s_url}/awards/delete?id=${id}`);
+            this.setState({ awards : this.state.awards.filter(data => { return id !== data.id }) });
+        }
+        catch(err){
+            console.log("user award delete err : "+err);
+        }
+    }
     render() {
         const { load,
             imgPreview,
@@ -213,6 +249,7 @@ class EditProfile extends Component {
             field,tags,since,ageAvg,rule,intro,welfare,
             request,workCate,workDateState,workDate,occupation,
             question,
+            awardname,awarddate,awards,
         } = this.state;
         return (
             <div className="Info-rookie-main">
@@ -315,8 +352,30 @@ class EditProfile extends Component {
                         }
                     </div>
                 </div>
-                 {/*저장버튼*/}
-                 <div style={{margin:"50px"}}>
+                {/*수상경력 박스*/}
+                <div className="Info-rookie-title">수상이력</div>
+                    <div className="Info-rookie-body">
+                        <div className="Info-rookie-dateLayout">
+                            <TextField variant="outlined" onChange={this.onChangeValue.bind(this)} name="awardname" value={awardname} label="수상명 " />
+                            <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="awarddate" value={awarddate} label="수상 날짜" />
+                            <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addAward.bind(this)}>
+                                <AddIcon style={{ color : "#646464",fontSize:"large"}}/> 
+                            </span>
+                        </div>
+                                {
+                                awards.map((data,i) => {
+                                    return  <div className="Info-rookie-dateLayout" key={i}>
+                                    <TextField variant="outlined" InputProps={{ readOnly: true}} name="awardname" value={data.awardName} label="수상명 " />
+                                    <TextField InputProps={{ readOnly: true}} style={{width:"130px", marginLeft:"20px"}} variant="outlined" name="awarddate" value={data.awardDate} label="수상 날짜" />
+                                    <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.deleteAward.bind(this,data.id)}>
+                                        <ClearIcon style={{ color : "rgb(223, 86, 86)",fontSize:"small"}}/>
+                                    </span>
+                                </div>
+                                })
+                            }
+                    </div>
+                {/*저장버튼*/}
+                <div style={{margin:"50px"}}>
                     <button className="profile-edit" onClick={this.addFile.bind(this)}><SaveIcon style={{fontSize:"large",margin:"5px"}}/>프로필저장</button>
                 </div>
             </div>

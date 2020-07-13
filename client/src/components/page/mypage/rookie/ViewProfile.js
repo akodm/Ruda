@@ -60,7 +60,7 @@ class ViewProfile extends Component {
     EditProfile(){this.props.change(false)}
      
     render() {
-        const { userInfo,awardData,certificateData} = this.props;
+        const { userInfo,awardData,certificateData,activityData} = this.props;
         const Tag = userInfo.userTags;
         const Keyword = userInfo.userKeyword;
         const Specialty = userInfo.userSpecialty;
@@ -137,12 +137,18 @@ class ViewProfile extends Component {
                                     {userInfo.userWorkDateState==="미정"?"":
                                     <div className="profile-text">
                                         <AssignmentIndIcon style={{fontSize:"medium",margin:"10px"}}/>
-                                        <p>근무:{userInfo.userWorkDateState}</p>
-                                    </div>}           
-                                    {userInfo.userWorkDateState==="직접입력"?<div className="profile-text">
+                                        <p>{userInfo.userWorkDateState}</p>
+                                    </div> 
+                                    }
+                                    {userInfo.userWorkDateState==="미정"?"":
+                                    <div className="profile-text">
                                         <CalendarTodayIcon style={{fontSize:"medium",margin:"10px"}}/>
-                                        <p>근무가능날짜:{userInfo.userTrainingDate}</p>
-                                    </div>:""}
+                                        {userInfo.userWorkDate==="직접입력"?
+                                        <p>{userInfo.userTraningDate}</p>:
+                                        <p>{userInfo.userWorkDate}</p>
+                                        } 
+                                    </div>
+                                    }
                                 </div>
                                 <div className="profile-intro"><hr></hr>
                                     <p className="profile-intro-title" >COUNT</p>
@@ -288,9 +294,12 @@ class ViewProfile extends Component {
                                                         <div className="profile-title-line"></div>
                                                     </div>
                                                     <div>
-                                                        <p className="profile-inschool-text">대림테크페어 참여</p>
-                                                        <p className="profile-inschool-text">동아리회장</p>
-                                                        <p className="profile-inschool-text">학생회활동</p>
+                                                        {/*activityData.map(function(data,i){
+                                                            return   <div className="profile-skill-info-Awards-text" key={i}>
+                                                            <p>{data.activityDate}{data.activityEndDate===""?"":"~"+data.activityEndDate}</p>
+                                                            <p>{data.activityName}</p>
+                                                        </div>
+                                                    })*/}
                                                     </div>
                                                 </div>
                                                 <div className="profile-outschool">
@@ -299,9 +308,12 @@ class ViewProfile extends Component {
                                                         <div className="profile-title-line"></div>
                                                     </div>
                                                     <div>
-                                                        <p className="profile-outschool-text">안양시공모전참여</p>
-                                                        <p className="profile-outschool-text">동아리회장</p>
-                                                        <p className="profile-outschool-text">학생회활동</p>
+                                                       {/*activityData.map(function(data,i){
+                                                            return   <div className="profile-skill-info-Awards-text" key={i}>
+                                                            <p>{data.activityDate}{data.activityEndDate===""?"":"~"+data.activityEndDate}</p>
+                                                            <p>{data.activityName}</p>
+                                                        </div>
+                                                    })*/}
                                                     </div>
                                                 </div>   
                                             </div>

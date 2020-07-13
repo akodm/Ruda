@@ -15,13 +15,16 @@ class Profile extends Component {
         })
     }
     render() {
-        const {companyInfo}=this.props;
+        const {companyInfo,awardData}=this.props;
         const {ChangeProfile}=this.state;
         return(
             <div className="Profile">
                 {
                     ChangeProfile ?
-                    <ViewProfile companyInfo={companyInfo} change={this.ChangeProfiles.bind(this)}/>
+                    <ViewProfile 
+                    companyInfo={companyInfo} 
+                    awardData={awardData}
+                    change={this.ChangeProfiles.bind(this)}/>
                     :
                     <EditProfile companyInfo={companyInfo} change={this.ChangeProfiles.bind(this)}/>
                 }

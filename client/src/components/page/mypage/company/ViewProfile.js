@@ -60,7 +60,7 @@ class ViewProfile extends Component {
 
     render() {
         //const{imgPreview}=this.state;
-        const { companyInfo } = this.props;
+        const { companyInfo,awardData } = this.props;
         const tag = companyInfo.companyTags;
         const Request = companyInfo.companyRequest;
         const Welfare = companyInfo.companyWelfare;
@@ -163,8 +163,10 @@ class ViewProfile extends Component {
                             </div>
                             <div className="Mypage-profile-content-userinfo-data">
                                 <div className="profile-keyword-info">
-                                    <p className="profile-keyword-title">기술스택</p>
-                                    <div style={{height:"1000px"}}></div>
+                                <div className="profile-chart-info-title">
+                                    <div className="profile-title-text">기술스택</div>
+                                    <div className="profile-title-line"></div>
+                                </div>
                                     <div className="stack">
                                     {
                                         tag.map(function(str,i){
@@ -174,7 +176,10 @@ class ViewProfile extends Component {
                                         })
                                     }
                                     </div>
-                                    <p className="profile-keyword-title">채용조건</p>
+                                    <div className="profile-chart-info-title">
+                                        <div className="profile-title-text">채용조건</div>
+                                        <div className="profile-title-line"></div>
+                                    </div>
                                     <div className="stack">
                                     {
                                         Request.map(function(str,i){
@@ -184,7 +189,10 @@ class ViewProfile extends Component {
                                         })
                                     }
                                     </div>
-                                    <p className="profile-keyword-title">사내복지</p>
+                                    <div className="profile-chart-info-title">
+                                        <div className="profile-title-text">사내복지</div>
+                                        <div className="profile-title-line"></div>
+                                    </div>
                                     <div className="stack">
                                     {
                                         Welfare.map(function(str,i){
@@ -194,7 +202,10 @@ class ViewProfile extends Component {
                                         })
                                     }
                                     </div>
-                                    <p className="profile-keyword-title">사내규칙</p>
+                                    <div className="profile-chart-info-title">
+                                        <div className="profile-title-text">사내규칙</div>
+                                        <div className="profile-title-line"></div>
+                                    </div>
                                     <div className="stack">
                                     {
                                         Rule.map(function(str,i){
@@ -204,26 +215,22 @@ class ViewProfile extends Component {
                                         })
                                     }
                                     </div>
+                                    {awardData[0] &&
                                     <div>
-                                        <p className="profile-skill-title">수상이력</p>
+                                        <div className="profile-chart-info-title">
+                                            <div className="profile-title-text">수상경력</div>
+                                            <div className="profile-title-line"></div>
+                                        </div>
                                         <div className="profile-skill-info-Awards">
-                                            <div className="profile-skill-info-Awards-text">
-                                                <p>대림대학교</p>
-                                                <p>캡스톤디자인</p>
-                                                <p>2020/02/02</p>
-                                            </div>
-                                            <div className="profile-skill-info-Awards-text">
-                                                <p>대림대학교</p>
-                                                <p>캡스톤디자인</p>
-                                                <p>2020/02/02</p>
-                                            </div>
-                                            <div className="profile-skill-info-Awards-text">
-                                                <p>대림대학교</p>
-                                                <p>캡스톤디자인</p>
-                                                <p>2020/02/02</p>
-                                            </div>
+                                                {awardData.map(function(data,i){
+                                                    return   <div className="profile-skill-info-Awards-text" key={i}>
+                                                    <p>{data.awardName}</p>
+                                                    <p>{data.awardDate}</p>
+                                                </div>
+                                            })}
                                         </div>
                                     </div>
+                                    }
                                 </div>
                             </div>
                         </div>

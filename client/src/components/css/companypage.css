@@ -148,6 +148,16 @@
     font-size: 15px;
     height: 20px;
 }
+.profile-title-text {
+    width: 100px;
+}
+
+.profile-title-line {
+    height: 2px;
+    width: 100%;
+    margin-left: 10px;
+    background-color: rgb(158, 158, 158);
+}
 .profile-username{
     text-align: center;
     font-weight: 600;
