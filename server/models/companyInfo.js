@@ -65,11 +65,11 @@ module.exports = (sequelize, DataTypes) => {
         companyLike : {
             type: DataTypes.INTEGER(11),    // 추천 받은 수
         },
-        companyClick : {
-            type: DataTypes.INTEGER(11),    // 클릭된 수
-        },
         companyUrl : {
             type: DataTypes.STRING,     // 기업 사이트 주소
+        },
+        companyHistory : {
+            type: DataTypes.JSON,     // 기업 연혁 { year, text }
         },
         companyState : {
             type: DataTypes.STRING(10),     // 기업의 현재 채용 상태

@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
         User.hasMany(models.mail);
         User.hasMany(models.hireBoard);
         User.hasMany(models.portfolio);
+        User.hasMany(models.award);
+        User.hasMany(models.certificate);
+        User.hasMany(models.activity);
+        User.hasMany(models.like);
     }
     return User;
 };

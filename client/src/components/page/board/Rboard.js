@@ -1,38 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Pagination from '@material-ui/lab/Pagination';
-import axios from 'axios';
 
 import '../../css/board.css';
 import Rsearch from './Rsearch';
 import RookieCard from '../../component/RookieCard';
 
-import config from '../../../client-configs';
-
 class Rboard extends Component {
     constructor(props){
         super(props);
         this.state={
-            userList:[],
+            userList : this.props.data,
             
             selectValue : "new",
         }
     }
 
-    async componentDidMount(){
-        try{
-            const result = await axios.get(`${config.app.s_url}/userInfos/yall`);
-            if(result.data){
-                this.setState({ userList : result.data });
-            }
-        }catch(err){
-            console.log("rookie card list err : " + err);
-            alert("데이터 로드 중 에러 발생");
-        }
-    }
-
     render() {
-        const {userList, selectValue} =this.state;
+        const { userList, selectValue } =this.state;
         return (
             <div className="Rookie">
                 <div className="Rookie-title">

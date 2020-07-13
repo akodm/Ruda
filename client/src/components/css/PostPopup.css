@@ -8,4 +8,20 @@
     background-color: rgba(134, 133, 133, 0.226);
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+}
+
+.postPopup-div {
+    animation-name: post;
+    animation-duration: 0.5s;
+}
+
+@keyframes post {
+    0% {
+        opacity: 0;
+        margin-top: 20%;
+    }
+    100% {
+        opacity: 1;
+    }
 }

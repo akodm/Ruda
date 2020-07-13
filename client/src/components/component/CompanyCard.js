@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 class CompanyCard extends Component {
     render() {
+        const { userList } = this.props;
         return (
             <div className="Company-Card">
             <div className="Company-Card-header">
@@ -16,17 +17,22 @@ class CompanyCard extends Component {
             </div>
             <div className="Company-Card-Profile">
                 <div className="Company-Card-Profile-img">
-                    <img alt="img"  src="/Images/company.png"/>
+                    <img alt="img"  src={userList.companyImageUrl || "/Images/company.png"}/>
                 </div>
                 <div className="Company-Card-Profile-info">
-                    <span className="Company-Card-Profile-info-name">하이루키</span>
-                    <span className="Company-Card-Profile-info-text">안녕하세요 구직 채용 서비스를 제공하는 하이루키입니다.</span>
-                    <span className="Company-Card-Profile-info-position">웹서비스개발</span>
-                    <span className="Company-Card-Profile-info-pt">여기는 뭐쓰지?</span>
+                    <span className="Company-Card-Profile-info-name">{userList.companyName || "알수없음"}</span>
+                    <span className="Company-Card-Profile-info-text">{userList.companyIntro || "안녕하세요."}</span>
+                    <span className="Company-Card-Profile-info-position">{userList.companyField || "알수없음"}</span>
+                    <span className="Company-Card-Profile-info-pt">{userList.companyAdd || "주소 미선택"}</span>
                     <div className="Company-Card-Profile-info-tags">
-                        <span className="Company-Card-Profile-info-tags-tag">#JAVA</span>
-                        <span className="Company-Card-Profile-info-tags-tag">#PHP</span>
-                        <span className="Company-Card-Profile-info-tags-tag">#Node.js</span>
+                        {
+                            userList.companyTags ? userList.companyTags.map((data,i) => {
+                                if(i > 3) return null;
+                                return <span key={i} className="Company-Card-Profile-info-tags-tag">{data}</span>
+                            })
+                            :
+                            <span className="Company-Card-Profile-info-tags-tag">선택한 태그가 없습니다.</span>
+                        }
                     </div>
                 </div>
             </div>

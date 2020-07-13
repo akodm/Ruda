@@ -65,7 +65,6 @@ class ViewProfile extends Component {
         const Keyword = userInfo.userKeyword;
         const Specialty = userInfo.userSpecialty;
         const {likeBtn,shareAlert,success}=this.state;
-
         return userInfo ? (
             <div className="Mypage-profile">
                 {/* 공유하기 팝업 */}

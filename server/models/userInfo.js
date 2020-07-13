@@ -77,32 +77,14 @@ module.exports = (sequelize, DataTypes) => {
         userHireBool : {
             type: DataTypes.STRING(10),     // 채용 여부
         },
-        userState : {
-            type: DataTypes.STRING(10),     // 현재 구직 상태
+        userSuggestion : {
+            type: DataTypes.JSON,     // 받은 제안
         },
         userLike : {
             type: DataTypes.INTEGER(11),    // 받은 관심있어요 수
         },
-        userLikeList : {
-            type: DataTypes.JSON,    // 관심있어요를 준 사람
-        },
-        userSuggestion : {
-            type: DataTypes.JSON,     // 받은 제안
-        },
-        userCA: {                       //교내활동
-            type: DataTypes.STRING,    
-        },
-        userCADate: {                   //교내활동기간
-            type: DataTypes.STRING,    
-        },
-        userOut: {                        //교외활동
-            type: DataTypes.STRING,    
-        },
-       userOutDate: {                   //교외활동기간
-            type: DataTypes.STRING,    
-        },
-        userClick : {
-            type: DataTypes.INTEGER(11),    // 클릭된 수
+        userState : {
+            type: DataTypes.STRING(10),     // 현재 구직 상태
         },
     });
     UserInfo.associate = function(models) {

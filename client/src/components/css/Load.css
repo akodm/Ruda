@@ -9,4 +9,5 @@
     height: 100%;
     background-color: #50505033;
     z-index: 3000;
+    overflow: hidden;
 }

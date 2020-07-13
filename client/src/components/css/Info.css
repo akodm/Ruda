@@ -40,6 +40,18 @@
     border-radius: 10px;
     border: 1px solid rgba(148, 148, 148, 0.562);
     box-shadow: 0px 3px 50px 10px rgba(143, 143, 143, 0.432);
+    animation-name: info-popup;
+    animation-duration: 0.6s;
+}
+
+@keyframes info-popup {
+    0% {
+        margin-top: 20%;
+        opacity: 0;
+    }
+    100% {
+
+    }
 }
 
 .Info-select {
@@ -59,6 +71,22 @@
 
 .Info-main-title{
     color:#646464; 
+    animation-name: info-title;
+    animation-duration: 3s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+@keyframes info-title {
+    0% {
+        width: 0px;
+        opacity: 0;
+    }
+    100% {
+        width: 700px;
+    }
 }
 
 /* ------------------------ Rookie ------------------------*/
