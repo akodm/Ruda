@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Avatar from '@material-ui/core/Avatar';
 
 class CompanyCard extends Component {
     render() {
@@ -8,7 +9,7 @@ class CompanyCard extends Component {
             <div className="Company-Card-header">
                 <div className="Company-Card-like">
                     <img alt="img"  src="/Images/1216649.svg" width="12px"height="12px"/>
-                    <span>14</span>
+                    <span>{userList.companyLike || 0}</span>
                 </div>
                 <div className="Company-Card-state">
                     <div className="Company-search-title-state-training"></div>
@@ -17,7 +18,7 @@ class CompanyCard extends Component {
             </div>
             <div className="Company-Card-Profile">
                 <div className="Company-Card-Profile-img">
-                    <img alt="img"  src={userList.companyImageUrl || "/Images/company.png"}/>
+                    <Avatar alt="img" style={{border:"1px solid rgba(125, 125, 125, 0.1)",height:"80px", width:"80px"}} src={userList.companyImageUrl || "/Images/company.png"} />
                 </div>
                 <div className="Company-Card-Profile-info">
                     <span className="Company-Card-Profile-info-name">{userList.companyName || "알수없음"}</span>

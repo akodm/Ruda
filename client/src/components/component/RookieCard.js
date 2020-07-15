@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Avatar from '@material-ui/core/Avatar';
 
 class RookieCard extends Component {
     render() {
@@ -17,13 +18,13 @@ class RookieCard extends Component {
                 </div>
                 <div className="Rookie-Card-Profile">
                     <div className="Rookie-Card-Profile-img" >
-                        <img src={userList.userImageUrl || "Images/new_icon.png"} alt="img"/>
+                        <Avatar alt="img" style={{border:"1px solid rgba(125, 125, 125, 0.1)",height:"80px", width:"80px"}} src={userList.userImageUrl || "Images/new_icon.png"} />
                     </div>
                     <div className="Rookie-Card-Profile-info">
                         <span className="Rookie-Card-Profile-info-name">{userList.userName || "알수없음"}</span>
                         <span className="Rookie-Card-Profile-info-text">{userList.userIntro || "안녕하세요."}</span>
                         <span className="Rookie-Card-Profile-info-position">{userList.userField || "미정"}</span>
-                        <span className="Rookie-Card-Profile-info-pt">포트폴리오 14개</span>
+                        <span className="Rookie-Card-Profile-info-pt">{userList.userAdd || "알수없음"}</span>
                         <div className="Rookie-Card-Profile-info-tags">
                             { 
                                 userList.userTags[0] ? userList.userTags.map((data,i) => {

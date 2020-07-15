@@ -49,7 +49,7 @@ export default function AutoCreatable(props) {
             return option;
         }}
         renderOption={(option) => option}
-        style={{ width: props.width }}
+        style={{ width: props.width, marginBottom : props.marginBottom, margin: props.margin }}
         freeSolo
         blurOnSelect={props.blur}
         renderInput={(params) => (

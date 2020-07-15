@@ -1,18 +1,24 @@
 /*company board*/
 
 /*CompanyTitle*/
+.company-div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 .Company{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-family: NanumSquareEB;
+    width: 60%;
 }
 .Company-title{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 1150px;
+    width: 100%;
     margin: 20px;
     color: #929292;
     
@@ -28,21 +34,23 @@
 
 /*CompanySerch*/
 .Company-search{
-    width: 1109px;
-    height: 306px;
     box-shadow: 0 0 8px 0.2px rgba(131, 131, 131, 0.13);
     border: solid 1px #eeeeee;
     border-radius: 7px;
     margin-bottom: 15px;
-
+    width: 100%;
+}
+.Company-layout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .Company-search-title{
-    width: 1100px;
+    width: 100%;
     justify-content: space-between;
     display: flex;
     flex-direction: row;
     margin: 20px;
-
 }
 .Company-search-title-title{
     color: #929292;
@@ -51,7 +59,6 @@
 }
 .Company-search-title-states{
     display: flex;
-    width: 150px;
     justify-content: center;
     flex-direction: row;
     margin-right: 20px;
@@ -60,7 +67,6 @@
     justify-content: center;
     flex-direction: row;
     display: flex;
-    width: 100px;
     height: 15px;
     align-items: center;
     font-size: 12px;
@@ -89,6 +95,13 @@
 
 .Company-search-div {
     width: 90%;
+    margin-bottom: 45px;
+}
+
+.Company-search-box-layout {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
 }
 
 .Company-search-search {
@@ -96,6 +109,33 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+}
+
+.Company-search-tag-box {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.Company-search-tag-list {
+    width: 100%;
+    height: 150px;
+    margin-top: 10px;
+    border: 1px solid rgba(153, 153, 153, 0.479);
+    border-radius: 5px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.Company-search-field-box {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 /*CompanyS Card*/
@@ -198,10 +238,10 @@
 .Company-CardView{
     display: flex;
     flex-direction: row;
-    max-width: 1160px;
     flex-wrap: wrap;
     margin-bottom: 50px;
-    padding-left: 32px;
+    justify-content: center;
+    max-width: 1130px;
 }
 .Company-CardView-PagiNation{
     margin: 40px;
