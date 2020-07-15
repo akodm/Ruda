@@ -9,6 +9,7 @@ import '../css/Popup.css';
 // layout components
 import Header from './Header';
 import Footer from './Footer';
+import DevMessage from '../component/DevMessage';
 import UpDown from '../component/UpDown';
 import Popup from '../component/Popup';
 
@@ -130,7 +131,8 @@ class Base extends Component {
                         {/* Not Found Page 주소에 일치하는 패스가 없을 경우 */}
                         <Route component={NotFound} ></Route>
                     </Switch>
-
+                    {/*개발자에게 문의버튼 */}
+                    <DevMessage/>
                     {/*화면업다운버튼*/ }
                     <UpDown />
                     {/*하단 */}
