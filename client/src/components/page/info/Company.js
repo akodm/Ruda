@@ -45,8 +45,9 @@ class Company extends Component {
 
             // 채용 조건
             request : [],
-            workCate: "",
+            workCate: "채용",
             workDateState : "상시",
+            workDateDate : "",
             workDate : "",
             occupation : "",
 
@@ -109,9 +110,10 @@ class Company extends Component {
         const { imgUrl,
             name,ceo,phone,address1,address2,companyurl,
             field,tags,since,ageAvg,rule,intro,welfare,
-            request,workCate,workDateState,workDate,occupation,
+            request,workCate,workDateState,workDate,workDateDate,occupation,
             question 
         } = this.state;
+        console.log(workDateState)
         try {
             let userCateUpdat = axios.put(`${config.app.s_url}/users/updatecate`, {
                 userCate : "company",
@@ -142,11 +144,10 @@ class Company extends Component {
                 companyOccupation : occupation,
                 companyWorkCate :  workCate,
                 companyWorkDate : workDate,
-                companyworkDateState : workDateState,
+                companyWorkDateState : workDateState,
                 
 				companyQuestion: question,
             });
-
             await Promise.all([userCateUpdat,result]).then(data => {
                 userCateUpdat = data[0];
                 result = data[1];
@@ -155,7 +156,6 @@ class Company extends Component {
             console.log(userCateUpdat.data, result.data);
             if(result.data){
                 alert("기본입력이 완료되었습니다.");
-                window.location.href = "/";
             } else {
                 alert("잘못된 값이 있습니다. 다시 시도해주세요.");
             }
@@ -232,6 +232,7 @@ class Company extends Component {
             question,
             agreeCheck,
         } = this.state;
+        console.log(workDateState)
         return (
             <div className="Info-rookie-main">
                 { !load && <Load /> }
@@ -329,7 +330,7 @@ class Company extends Component {
                         }
                         {
                             workDateState === "직접입력" &&
-                            <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"200px", marginRight:"10px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="workDate" value={workDate} label="근무희망 날짜  ~부터" />
+                            <TextField value={workDate} helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"200px", marginRight:"10px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="workDate" label="근무희망 날짜  ~부터" />
                         }
                     </div>
                 </div>

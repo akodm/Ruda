@@ -5,8 +5,11 @@ import EditProfile from './EditProfile';
 class Profile extends Component {
     constructor(props){
         super(props);
+        const {awardData,activityData}=this.props;
         this.state={
             ChangeProfile:true,
+            awardData,
+            activityData,
         }
     }
     ChangeProfiles(bool){
@@ -14,8 +17,16 @@ class Profile extends Component {
             ChangeProfile:bool,
         })
     }
+    awardConcat(data) { this.setState(current => ({ awardData : current.awardData.concat(data) })) }
+    
+    awardDelete(data){this.setState({awardData:data})};
+
+    activityConcat(data) { this.setState(current => ({ activityData : current.activityData.concat(data) })) }
+
+    activityDelete(data){this.setState({activityData:data})};
+
     render() {
-        const {companyInfo,awardData}=this.props;
+        const {companyInfo,awardData,activityData,}=this.props;
         const {ChangeProfile}=this.state;
         return(
             <div className="Profile">
@@ -24,9 +35,14 @@ class Profile extends Component {
                     <ViewProfile 
                     companyInfo={companyInfo} 
                     awardData={awardData}
+                    activityData={activityData}
                     change={this.ChangeProfiles.bind(this)}/>
                     :
-                    <EditProfile companyInfo={companyInfo} change={this.ChangeProfiles.bind(this)}/>
+                    <EditProfile 
+                    companyInfo={companyInfo}
+                    awardData={awardData}
+                    activityData={activityData}
+                    change={this.ChangeProfiles.bind(this)}/>
                 }
             </div>
       );

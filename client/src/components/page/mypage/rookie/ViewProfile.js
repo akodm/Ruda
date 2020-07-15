@@ -12,7 +12,6 @@ import HouseIcon from '@material-ui/icons/House';
 import PhoneIcon from '@material-ui/icons/Phone';
 import SchoolIcon from '@material-ui/icons/School';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import PeopleIcon from '@material-ui/icons/People';
 import WorkIcon from '@material-ui/icons/Work';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
@@ -65,6 +64,7 @@ class ViewProfile extends Component {
         const Keyword = userInfo.userKeyword;
         const Specialty = userInfo.userSpecialty;
         const {likeBtn,shareAlert,success}=this.state;
+        console.log(activityData);
         return userInfo ? (
             <div className="Mypage-profile">
                 {/* 공유하기 팝업 */}
@@ -101,28 +101,30 @@ class ViewProfile extends Component {
                                 <div  className="profile-userinfo"><hr></hr>
                                     <p className="profile-intro-title" >INFO</p>
                                     <div className="profile-text">
-                                        <EmailIcon style={{fontSize:"medium",margin:"10px"}}/>
+                                        <EmailIcon style={{fontSize:"medium"}}/>
                                         <p>{userInfo.user.email}</p>
                                     </div>
-                                    <div className="profile-text">
-                                        <LanguageIcon style={{fontSize:"medium",margin:"10px"}}/>
-                                        <p>{userInfo.userUrl}</p>
+                                    {userInfo.userUrl &&
+                                     <div className="profile-text">
+                                        <LanguageIcon style={{fontSize:"medium"}}/>
+                                        <p><a href={userInfo.userUrl}>{userInfo.userUrl}</a></p>
                                     </div>
+                                    }
                                     <div className="profile-text">
-                                        <PhoneIcon style={{fontSize:"medium",margin:"10px"}}/>
+                                        <PhoneIcon style={{fontSize:"medium"}}/>
                                         <p>{userInfo.userPhone}</p>
                                     </div>
                                     <div className="profile-text">
-                                        <HouseIcon style={{fontSize:"medium",margin:"10px"}}/>
+                                        <HouseIcon style={{fontSize:"medium"}}/>
                                         <p>{userInfo.userAdd}</p>
                                     </div>
                                     <div className="profile-text">
-                                        <SchoolIcon style={{fontSize:"medium",margin:"10px"}}/>
+                                        <SchoolIcon style={{fontSize:"medium"}}/>
                                         <p>{userInfo.userUnvcity}/{userInfo.userAttend}</p>
                                     </div>
-                                    {userInfo.userMilitary=="해당없음"?"":
+                                    {userInfo.userMilitary==="해당없음"?"":
                                     <div className="profile-text">
-                                        <LocalPlayIcon  style={{fontSize:"medium",margin:"10px"}}/>
+                                        <LocalPlayIcon  style={{fontSize:"medium"}}/>
                                         <p>{userInfo.userMilitary}</p>
                                     </div>}
                                 </div>
@@ -130,24 +132,20 @@ class ViewProfile extends Component {
                                 <div className="profile-intro"><hr></hr>
                                     <p className="profile-intro-title" >POSITION</p>
                                     <div className="profile-text">
-                                        <WorkIcon style={{fontSize:"medium",margin:"10px"}}/>
+                                        <WorkIcon style={{fontSize:"medium"}}/>
                                         <p>{userInfo.userField} </p>
                                     </div>
-                                    {userInfo.userWorkDateState==="미정"?"":
                                     <div className="profile-text">
-                                        <AssignmentIndIcon style={{fontSize:"medium",margin:"10px"}}/>
-                                        <p>{userInfo.userWorkDateState}</p>
-                                    </div> 
-                                    }
-                                    {userInfo.userWorkDateState==="미정"?"":
+                                        <AssignmentIndIcon style={{fontSize:"medium"}}/>
+                                        <p>근무형태{userInfo.userWorkDateState}</p>
+                                    </div>
                                     <div className="profile-text">
-                                        <CalendarTodayIcon style={{fontSize:"medium",margin:"10px"}}/>
+                                        <CalendarTodayIcon style={{fontSize:"medium"}}/>
                                         {userInfo.userWorkDate==="직접입력"?
-                                        <p>{userInfo.userTraningDate}</p>:
-                                        <p>{userInfo.userWorkDate}</p>
+                                        <p>근무날짜:{userInfo.userTraningDate}</p>:
+                                        <p>근무날짜:{userInfo.userWorkDate}</p>
                                         } 
                                     </div>
-                                    }
                                 </div>
                                 <div className="profile-intro"><hr></hr>
                                     <p className="profile-intro-title" >COUNT</p>
@@ -259,7 +257,7 @@ class ViewProfile extends Component {
                                                 </div>
                                                 <div className="profile-skill-info-certificate">
                                                     {certificateData.map(function(data,i){
-                                                        return <div className="profile-skill-info-certificate-text">
+                                                        return <div className="profile-skill-info-certificate-text" key={i}>
                                                         <p>{data.certificateCate}</p>
                                                         <p>{data.certificateName}</p>
                                                         <p>{data.certificateDate}</p>
@@ -268,7 +266,7 @@ class ViewProfile extends Component {
                                                 </div>
                                             </div>
                                             }
-                                          {awardData[0] &&
+                                            {awardData[0] &&
                                             <div>
                                                 <div className="profile-chart-info-title">
                                                     <div className="profile-title-text">수상경력</div>
@@ -284,8 +282,7 @@ class ViewProfile extends Component {
                                                     })}
                                                 </div>
                                             </div>
-                                          }
-                                            
+                                            }
                                             <div className="Mypage-profile-content-storyprofile">
                                                 <div className="profile-inschool">
                                                     <div className="profile-chart-info-title">
@@ -293,12 +290,15 @@ class ViewProfile extends Component {
                                                         <div className="profile-title-line"></div>
                                                     </div>
                                                     <div>
-                                                        {/*activityData.map(function(data,i){
-                                                            return   <div className="profile-skill-info-Awards-text" key={i}>
-                                                            <p>{data.activityDate}{data.activityEndDate===""?"":"~"+data.activityEndDate}</p>
-                                                            <p>{data.activityName}</p>
-                                                        </div>
-                                                    })*/}
+                                                        {activityData &&
+                                                            activityData.map(function(data,i){
+                                                                return data.activityCate === "교내" &&
+                                                                <div className="profile-skill-info-Awards-text" key={i}>
+                                                                       <p>{data.activityStartDate}{data.activityEndDate && "~"+data.activityEndDate}</p>
+                                                                    <p>{data.activityName}</p>
+                                                                </div>
+                                                            })
+                                                        }  
                                                     </div>
                                                 </div>
                                                 <div className="profile-outschool">
@@ -307,12 +307,15 @@ class ViewProfile extends Component {
                                                         <div className="profile-title-line"></div>
                                                     </div>
                                                     <div>
-                                                       {/*activityData.map(function(data,i){
-                                                            return   <div className="profile-skill-info-Awards-text" key={i}>
-                                                            <p>{data.activityDate}{data.activityEndDate===""?"":"~"+data.activityEndDate}</p>
-                                                            <p>{data.activityName}</p>
-                                                        </div>
-                                                    })*/}
+                                                        {activityData &&
+                                                            activityData.map(function(data,i){
+                                                                return data.activityCate === "교외" &&
+                                                                <div className="profile-skill-info-Awards-text" key={i}>
+                                                                    <p>{data.activityStartDate}{data.activityEndDate && "~"+data.activityEndDate}</p>
+                                                                    <p>{data.activityName}</p>
+                                                                </div>
+                                                            })
+                                                        }  
                                                     </div>
                                                 </div>   
                                             </div>

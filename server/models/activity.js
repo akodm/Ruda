@@ -6,16 +6,16 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true
         },
         activityCate : {
-            type: DataTypes.STRING,         // 수상 구분
+            type: DataTypes.STRING,         // 활동 구분
         },
         activityName : {
-            type: DataTypes.STRING,         // 수상 이름
+            type: DataTypes.STRING,         // 활동 이름
         },
         activityStartDate : {
-            type: DataTypes.STRING,         // 수상 날짜
+            type: DataTypes.STRING,         // 활동 시작 날짜
         },
         activityEndDate : {
-            type: DataTypes.STRING,         // 수상 날짜
+            type: DataTypes.STRING,         // 활동 끝 날짜
         },
     });
     Activity.associate = function(models) {
