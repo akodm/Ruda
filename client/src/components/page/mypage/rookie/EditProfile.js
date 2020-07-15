@@ -21,7 +21,8 @@ import ClearIcon from '@material-ui/icons/Clear';
 class EditProfile extends Component {
     constructor(props) {
         super(props);
-        const {userInfo, awardData, certificateData}=this.props;
+        const {userInfo, awardData, certificateData,activityData}=this.props;
+        console.log(activityData);
         this.state = {
             progress : null,
             // 개인정보
@@ -73,14 +74,11 @@ class EditProfile extends Component {
             certificates:certificateData || [],
 
             //교내활동
-            inSchools:[],
-            inSchoolname:"",
-            inSchooldate:"",
-
-            //교외활동
-            outSchool:[],
-            inSchoolname:"",
-            outSchooldate:"",
+            activitycate:"교내",
+            activityname:"",
+            activitystartdate:"",
+            activityenddate:"",
+            activitys:activityData || [],
 
             load : false,
         }
@@ -263,33 +261,36 @@ class EditProfile extends Component {
             console.log("user certificate add create err : "+err);
         }
     }
-    async addInSchool(){
+   
+    async addActivity(){
         const {userInfo}=this.props;
-        const {inschools,inSchoolname,inSchooldate} =this.state;
+        const {activitycate,activityname,activitystartdate, activityenddate,activitys} =this.state;
 
         try{
-            
+            const result= await axios.post(`${config.app.s_url}/activitys/create`,{
+                userId:userInfo.userId,
+                activityCate:activitycate,
+                activityName :activityname,
+                activityStartDate:activitystartdate,
+                activityEndDate:activityenddate
+            })
+            this.setState({ 
+                activitys:activitys.concat(result.data),
+                activitycate :"교내",
+                activityname:"",
+                activitystartdate:"",
+                activityenddate:"",
+            });
+            console.log(result.data);
         }
         catch(err){
-           
-        }
-    }
-    
-    async addOutSchool(){
-        const {userInfo}=this.props;
-        const {outschools,outSchoolname,outSchooldate} =this.state;
-
-        try{
-            
-        }
-        catch(err){
-           
+            console.log("user activity add create err : "+err);
         }
     }
     
     async deleteAward(id){
         try{
-            const result= await axios.delete(`${config.app.s_url}/awards/delete?id=${id}`);
+            await axios.delete(`${config.app.s_url}/awards/delete?id=${id}`);
             this.setState({ awards : this.state.awards.filter(data => { return id !== data.id }) });
         }
         catch(err){
@@ -298,27 +299,24 @@ class EditProfile extends Component {
     }
     async deleteCertificate(id){
         try{
-            const result= await axios.delete(`${config.app.s_url}/certificates/delete?id=${id}`);
+            await axios.delete(`${config.app.s_url}/certificates/delete?id=${id}`);
             this.setState({ certificates : this.state.certificates.filter(data => { return id !== data.id }) });
         }
         catch(err){
             console.log("user certificate delete err : "+err);
         }
     }
-    async deleteInSchool(id){
+   
+    async deleteActivity(id){
         try{
-           
+            await axios.delete(`${config.app.s_url}/activitys/delete?id=${id}`);
+            this.setState({ activitys : this.state.activitys.filter(data => { return id !== data.id }) });
         }
         catch(err){
+            console.log("user activity delete err : "+err);
         }
     }
-    async deleteOutSchool(id){
-        try{
-           
-        }
-        catch(err){
-        }
-    }
+
     async SaveProfile() {
         const { userInfo } = this.props;
         const { imgUrl,
@@ -371,11 +369,11 @@ class EditProfile extends Component {
             load,univercity,field,
             awardname,awarddate,awardcate,awards,
             certificatedate,certificatename,certificatecate,certificates,
-            inschools,inSchoolname,inSchooldate,outSchools,outSchoolname,outSchooldate,} = this.state;
+            activitys,activitycate,activityname,activitystartdate,activityenddate,} = this.state;
+        
         return (
             <div className="EditProfile">
                 { !load &&  <Load /> }
-
                 {/* 개인정보 박스 */}
                 <div className="Info-rookie-title">*개인정보</div>
                 <div className="Info-rookie-body">
@@ -481,12 +479,14 @@ class EditProfile extends Component {
                             value={workDateState} func={(e) => this.setState({ workDateState : e })}
                             label={"취업유무"} option={["취업희망","실습희망","실습후 취업희망","미정"]} text={"취업유무"} style={{marginRight:"20px"}}
                         />
+                        { workDateState ==="미정"?"":
                         <SelectBox 
-                            value={trainingDateState} func={(e) => this.setState({ trainingDateState : e })}
+                            value={workDate} func={(e) => this.setState({ workDate : e })}
                             label={"근무실습가능 날짜"} option={["상시","졸업 후","실습 강의 시","직접입력","미정"]} text={"근무/실습 날짜"} style={{marginRight:"20px"}}
                         />
+                        }
                         {
-                            trainingDateState === "직접입력" &&
+                            workDate === "직접입력" &&
                             <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginRight:"10px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="trainingDate" value={trainingDate} label="실습가능 날짜" />
                         }
                     </div>
@@ -506,7 +506,7 @@ class EditProfile extends Component {
                             <AddIcon style={{ color : "#646464",fontSize:"large"}}/> 
                         </span>
                     </div>
-                            {
+                        {
                             awards.map((data,i) => {
                                 return  <div className="Info-rookie-dateLayout" key={i}>
                                 <SelectBox 
@@ -521,7 +521,7 @@ class EditProfile extends Component {
                             </div>
                             })
                         }
-                </div>
+                    </div>
 
                 {/*자격증*/}
                 <div className="Info-rookie-title">자격증</div>
@@ -547,48 +547,38 @@ class EditProfile extends Component {
                             })
                         }
                 </div>
-                <div className="Info-rookie-title">교내활동</div>
+                <div className="Info-rookie-title">교내/교외 활동</div>
                 <div className="Info-rookie-body">
                     <div className="Info-rookie-dateLayout">
-                        <TextField variant="outlined" style={{marginRight:"20px"}} onChange={this.onChangeValue.bind(this)} name="inSchoolname" value={inSchoolname} label="활동명" />
-                        <TextField helperText={moment(new Date()).format("YYYY/MM")} style={{width:"130px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="inSchooldate" value={inSchooldate} label="활동 날짜" />
-                        <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addInSchool.bind(this)}>
+                        <SelectBox 
+                            value={activitycate} func={(e) => this.setState({ activitycate : e })}
+                            label={"활동"} option={["교내","교외"]} text={"활동"} style={{marginRight:"20px"}}
+                        />
+                        <TextField variant="outlined" style={{marginRight:"20px"}} onChange={this.onChangeValue.bind(this)} name="activityname" value={activityname} label="활동명" />
+                        <TextField helperText={moment(new Date()).format("YYYY/MM/YY")} style={{width:"130px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="activitystartdate" value={activitystartdate} label="활동 시작 날짜" />
+                        <TextField helperText={moment(new Date()).format("YYYY/MM/YY")} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="activityenddate" value={activityenddate} label="활동 끝 날짜" />
+                        <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addActivity.bind(this)}>
                         <AddIcon style={{ color : "#646464",fontSize:"large"}}/> 
                         </span>
                     </div>
-                        {/*
-                            inschools.map((data,i) => {
+                        {
+                            activitys.map((data,i) => {
                                 return  <div className="Info-rookie-dateLayout" key={i}>
-                                    <TextField variant="outlined" InputProps={{ readOnly: true}}  style={{marginRight:"20px"}} onChange={this.onChangeValue.bind(this)} name="inSchoolname" value={data.inSchoolname} label="활동명" />
-                                    <TextField helperText={moment(new Date()).format("YYYY/MM")} InputProps={{ readOnly: true}} style={{width:"130px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="inSchooldate" value={data.inSchooldate} label="활동 날짜" />
-                                    <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.deleteInSchool.bind(this,data.id)}>
+                                    <SelectBox 
+                                        value={data.activityCate} func={(e) => this.setState({ activitycate : e })}
+                                        label={"활동"} option={["교내","교외"]} text={"활동"} style={{marginRight:"20px"}} InputProps={{ readOnly: true}}
+                                    />
+                                    <TextField variant="outlined" style={{marginRight:"20px"}} InputProps={{ readOnly: true}} onChange={this.onChangeValue.bind(this)} name="activityname" value={data.activityName} label="활동명" />
+                                    <TextField InputProps={{ readOnly: true}} style={{width:"130px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="activitystartdate" value={data.activityStartDate} label="활동 시작 날짜" />
+                                    <TextField InputProps={{ readOnly: true}} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="activityenddate" value={data.activityEndDate} label="활동 끝 날짜" />
+                                    <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.deleteActivity.bind(this,data.id)}>
                                         <ClearIcon style={{ color : "rgb(223, 86, 86)",fontSize:"small"}}/>
                                     </span>
                             </div>
                             })
-                        */}
+                        }
                 </div>
-                <div className="Info-rookie-title">교외활동</div>
-                <div className="Info-rookie-body">
-                    <div className="Info-rookie-dateLayout">
-                    <TextField variant="outlined" style={{marginRight:"20px"}} onChange={this.onChangeValue.bind(this)} name="outSchoolname" value={outSchoolname} label="활동명" />
-                        <TextField helperText={moment(new Date()).format("YYYY/MM")} style={{width:"130px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="outSchooldate" value={outSchooldate} label="활동 날짜" />
-                        <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addOutSchool.bind(this)}>
-                        <AddIcon style={{ color : "#646464",fontSize:"large"}}/> 
-                        </span>
-                    </div>
-                        {/*
-                           outschools.map((data,i) => {
-                            return  <div className="Info-rookie-dateLayout" key={i}>
-                                <TextField variant="outlined" style={{marginRight:"20px"}} InputProps={{ readOnly: true}}  onChange={this.onChangeValue.bind(this)} name="outSchoolname" value={outSchoolname} label="활동명" />
-                                <TextField helperText={moment(new Date()).format("YYYY/MM")} InputProps={{ readOnly: true}}  style={{width:"130px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="outSchooldate" value={outSchooldate} label="활동 날짜" />
-                                <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.deleteOutSchool.bind(this,data.id)}>
-                                    <ClearIcon style={{ color : "rgb(223, 86, 86)",fontSize:"small"}}/>
-                                </span>
-                            </div> 
-                           })
-                        */}
-                </div>
+                <h5>이름,자기소개,이메일,개인사이트주소,핸드폰번호,거주지,대학,희망분야,근무형태,근무날짜는 필수입력사항입니다.</h5>
                 {/*저장버튼*/}
                 <div style={{margin:"50px"}}>
                     <button className="profile-edit" onClick={this.addFile.bind(this)}><SaveIcon style={{fontSize:"large",margin:"5px"}}/>프로필저장</button>

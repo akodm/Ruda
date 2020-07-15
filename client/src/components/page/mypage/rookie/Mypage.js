@@ -17,6 +17,7 @@ class mypage extends Component {
             portfolioData : [],
             awardData:[],
             certificateData:[],
+            activityData:[],
 
             load : false,
         }
@@ -28,20 +29,23 @@ class mypage extends Component {
             let result = axios.get(`${config.app.s_url}/portfolios/all?userId=${this.props.userInfo.userId}`);
             let award = axios.get(`${config.app.s_url}/awards/all?userId=${this.props.userInfo.userId}`);
             let certificate = axios.get(`${config.app.s_url}/certificates/all?userId=${this.props.userInfo.userId}`);
+            let activity = axios.get(`${config.app.s_url}/activitys/all?userId=${this.props.userInfo.userId}`);
 
             // 배열에 위의 실행할 값들을 넣음.
             // 해당 배열들이 모두 실행되면 콜백으로 결과값을 받고, 배열 순서대로 전달해줌.
-            await Promise.all([result, award, certificate]).then(data => {
+            await Promise.all([result, award, certificate,activity]).then(data => {
                 result = data[0].data;
                 award = data[1].data;
                 certificate = data[2].data;
+                activity = data[3].data;
             });
 
             // 실행 결과 값들을 스태이트에 반영.
             this.setState({ 
                 portfolioData : result, 
                 awardData : award, 
-                certificateData : certificate 
+                certificateData : certificate ,
+                activityData : activity,
             });
 
         } catch(err) {
@@ -55,7 +59,7 @@ class mypage extends Component {
     portfolioConcat(data) { this.setState(current => ({ portfolioData : current.portfolioData.concat(data) })) }
     
     render() {
-        const { btnNum, portfolioData, load, awardData, certificateData }=this.state;
+        const { btnNum, portfolioData, load, awardData, certificateData,activityData }=this.state;
         const { userInfo, user, loginState } = this.props;
         return (
             <div className="Mypage">
@@ -71,6 +75,7 @@ class mypage extends Component {
                                 userInfo={userInfo}
                                 awardData={awardData}
                                 certificateData={certificateData}
+                                activityData={activityData}
                                 /> 
                                 :
                                 btnNum === 1 ?
@@ -81,6 +86,7 @@ class mypage extends Component {
                                     userId={userInfo.userId} 
                                     userName={userInfo.userName} 
                                     portfolio={portfolioData} 
+                                    activityData={activityData}
                                     addPortfolio={this.portfolioConcat.bind(this)} />
                                 :
                                 loginState && <Setting userInfo={userInfo}/>

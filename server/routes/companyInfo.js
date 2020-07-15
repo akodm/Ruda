@@ -137,7 +137,8 @@ router.put("/update", async(req, res) => {
 			companyRequest : req.body.companyRequest,
 
 			companyWorkCate : req.body.companyWorkCate,
-            companyWorkDate : req.body.companyWorkDate,
+			companyWorkDate : req.body.companyWorkDate,
+			companyWorkDateState : req.body.companyWorkDateState,
 			companyWelfare : req.body.companyWelfare,
 			
 			companyQuestion: req.body.companyQuestion,

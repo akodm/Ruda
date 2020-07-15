@@ -32,6 +32,7 @@ class Company extends Component {
             address1 : "",
             address2 : "",
             addressState : false,
+            companyUrl:"",
 
             // 기업 분야
             field : "",
@@ -44,8 +45,9 @@ class Company extends Component {
 
             // 채용 조건
             request : [],
-            workCate: "",
+            workCate: "채용",
             workDateState : "상시",
+            workDateDate : "",
             workDate : "",
             occupation : "",
 
@@ -106,11 +108,12 @@ class Company extends Component {
     async saveStartBtn() {
         const { user } = this.props;
         const { imgUrl,
-            name,ceo,phone,address1,address2,
+            name,ceo,phone,address1,address2,companyurl,
             field,tags,since,ageAvg,rule,intro,welfare,
-            request,workCate,workDateState,workDate,occupation,
+            request,workCate,workDateState,workDate,workDateDate,occupation,
             question 
         } = this.state;
+        console.log(workDateState)
         try {
             let userCateUpdat = axios.put(`${config.app.s_url}/users/updatecate`, {
                 userCate : "company",
@@ -127,7 +130,8 @@ class Company extends Component {
 				companyCEO: ceo,
 				companyPhone: phone,
                 companyAdd: address,
-                
+
+                companyUrl:companyurl,
 				companyField: field,
 				companyTags: tags,
 				companySince : since,
@@ -140,11 +144,10 @@ class Company extends Component {
                 companyOccupation : occupation,
                 companyWorkCate :  workCate,
                 companyWorkDate : workDate,
-                companyworkDateState : workDateState,
+                companyWorkDateState : workDateState,
                 
 				companyQuestion: question,
             });
-
             await Promise.all([userCateUpdat,result]).then(data => {
                 userCateUpdat = data[0];
                 result = data[1];
@@ -153,7 +156,6 @@ class Company extends Component {
             console.log(userCateUpdat.data, result.data);
             if(result.data){
                 alert("기본입력이 완료되었습니다.");
-                window.location.href = "/";
             } else {
                 alert("잘못된 값이 있습니다. 다시 시도해주세요.");
             }
@@ -224,12 +226,13 @@ class Company extends Component {
     render() {
         const { load,
             imgPreview,
-            name,ceo,phone,address1,address2,addressState,
+            name,ceo,phone,address1,address2,addressState,companyurl,
             field,tags,since,ageAvg,rule,intro,welfare,
             request,workCate,workDateState,workDate,
             question,
             agreeCheck,
         } = this.state;
+        console.log(workDateState)
         return (
             <div className="Info-rookie-main">
                 { !load && <Load /> }
@@ -268,7 +271,10 @@ class Company extends Component {
                 </div>
                 <div className="Info-rookie-title">기업소개</div>
                 <div className="Info-rookie-body">
-                    <TextField style={{marginBottom:"10px"}} helperText="구직자에게 소개할 기업의 분야가 무엇인지 알려주세요" required label="기업 분야" variant="outlined" value={field} name="field" onChange={this.onChangeValue.bind(this)} />
+                    <div style={{display:"flex",flexDirection:"row",marginBottom:"20px"}}>
+                        <TextField style={{width:"340px",marginRight:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="companyurl" value={companyurl} id="outlined-required" label="기업사이트 주소" />
+                        <AutoCreateBox value={field} width={340} blur={true} text={"기업의 분야를 입력해주세요."} list={dataList.app.comfieldList} clear={false} onChange={(e) => this.setState({ field : e })}  />
+                    </div>
                     <AutoCreateBox blur={false} width={700} text={"기업에서 다루는 기술에 대한 태그를 검색하여 최대 6개까지 추가하세요!"} list={dataList.app.tagList} clear={true} onChange={this.addChips.bind(this,"tag")} />
                     <div className="Info-tag-box">
                         {
@@ -324,7 +330,7 @@ class Company extends Component {
                         }
                         {
                             workDateState === "직접입력" &&
-                            <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"200px", marginRight:"10px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="workDate" value={workDate} label="근무희망 날짜  ~부터" />
+                            <TextField value={workDate} helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"200px", marginRight:"10px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="workDate" label="근무희망 날짜  ~부터" />
                         }
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 //import '../../../css/companypage.css';
 import config from '../../../../client-configs';
-
+import '../../../css/companypage.css';
 import axios from 'axios';
 
 import Profile from './Profile';
@@ -13,13 +13,30 @@ class Mypage extends Component {
         super(props);
         this.state={
             btnNum:0,
+           
+            awardData:[],
+            activityData:[],
             load : false,
         }
     }
 
     async componentDidMount() {
         try {
+            let award = axios.get(`${config.app.s_url}/awards/all?userId=${this.props.companyInfo.userId}`);
+            let activity = axios.get(`${config.app.s_url}/activitys/all?userId=${this.props.companyInfo.userId}`);
+
+            await Promise.all([award,activity]).then(data => {
+                award = data[0].data;
+                activity = data[1].data;
+            });
+
+            this.setState({ 
+                awardData : award, 
+                activityData : activity,
+            });
+
         } catch(err) {
+            console.log("company mypage data load err : " + err);
         }
         this.setState({ load : true });
     }
@@ -27,7 +44,7 @@ class Mypage extends Component {
     MenuClick(num){ this.setState({ btnNum:num }) }
 
     render() {
-        const {btnNum,load}=this.state;
+        const {btnNum,load,awardData,activityData}=this.state;
         const { companyInfo, user } = this.props;
         return (
             <div className="Mypage">
@@ -39,7 +56,11 @@ class Mypage extends Component {
                             2 => 마이페이지 수정 ( 개인화면 ) */}
                             {
                                 btnNum === 0 ?
-                                <Profile companyInfo={companyInfo} /> :
+                                <Profile 
+                                companyInfo={companyInfo} 
+                                awardData={awardData}
+                                activityData={activityData}
+                                /> :
                                 btnNum === 1 ?
                                 load && <Hire load={load} userEmail={user.email} userId={companyInfo.userId} userName={companyInfo.companyName}/>
                                 :
@@ -47,11 +68,11 @@ class Mypage extends Component {
                             }
                     </div>
                     <div className="Mypage-btns">
-                        <button className={btnNum === 0?"Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,0)}>프로필</button>
-                        <button className={btnNum === 1?"Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,1)}>채용공고</button>
+                        <button className={btnNum === 0?"cMypage-menu-click":"cMypage-menu-none"} onClick={this.MenuClick.bind(this,0)}>프로필</button>
+                        <button className={btnNum === 1?"cMypage-menu-click":"cMypage-menu-none"} onClick={this.MenuClick.bind(this,1)}>채용공고</button>
                         {
                             user.email &&
-                            <button className={btnNum === 2?"Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,2)}>마이페이지</button>
+                            <button className={btnNum === 2?"cMypage-menu-click":"cMypage-menu-none"} onClick={this.MenuClick.bind(this,2)}>마이페이지</button>
                         }
                     </div>
                 </div>
