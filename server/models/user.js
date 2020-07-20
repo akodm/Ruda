@@ -22,7 +22,6 @@ module.exports = (sequelize, DataTypes) => {
     });
     User.associate = function(models) {
         User.hasMany(models.mail);
-        User.hasMany(models.hireBoard);
         User.hasMany(models.portfolio);
         User.hasMany(models.award);
         User.hasMany(models.certificate);

@@ -205,7 +205,6 @@ class EditProfile extends Component {
             companyQuestion: question,
         });
 
-        console.log( result.data+"프로필수정");
         if(result.data){
             alert("수정이 완료되었습니다.");
            window.location.href='/';
@@ -217,7 +216,7 @@ class EditProfile extends Component {
 
     async addAward(){
         const { companyInfo }=this.props;
-        const {awardname,awardcate,awarddate,awards} =this.state;
+        const {awardname,awarddate,awards} =this.state;
 
         try{
             const result= await axios.post(`${config.app.s_url}/awards/create`,{
@@ -225,7 +224,6 @@ class EditProfile extends Component {
                 awardName:awardname,
                 awardDate :awarddate,
             })
-            console.log(result);
             this.setState({ 
                 awards : awards.concat(result.data),
                 awardname:"",
@@ -233,7 +231,7 @@ class EditProfile extends Component {
             });
         }
         catch(err){
-            console.log("user award add create err : "+err);
+            console.log("user award add create err");
         }
     }
     async addActivity(){
@@ -254,17 +252,17 @@ class EditProfile extends Component {
             console.log(result.data);
         }
         catch(err){
-            console.log("user activity add create err : "+err);
+            console.log("user activity add create err");
         }
     }
     
     async deleteAward(id){
         try{
-            const result= await axios.delete(`${config.app.s_url}/awards/delete?id=${id}`);
+            await axios.delete(`${config.app.s_url}/awards/delete?id=${id}`);
             this.setState({ awards : this.state.awards.filter(data => { return id !== data.id }) });
         }
         catch(err){
-            console.log("user award delete err : "+err);
+            console.log("user award delete err");
         }
     }
     async deleteActivity(id){
@@ -273,7 +271,7 @@ class EditProfile extends Component {
             this.setState({ activitys : this.state.activitys.filter(data => { return id !== data.id }) });
         }
         catch(err){
-            console.log("user activity delete err : "+err);
+            console.log("user activity delete err");
         }
     }
 
@@ -283,7 +281,6 @@ class EditProfile extends Component {
             name,ceo,phone,addressState,address1,address2,companyurl,
             field,tags,since,ageAvg,rule,intro,welfare,
             request,workCate,workDateState,workDate,occupation,
-            question,
             awardname,awarddate,awards,
             activityname,activitydate,activitys,
         } = this.state;

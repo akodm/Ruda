@@ -38,12 +38,6 @@ module.exports = (sequelize, DataTypes) => {
         userMilitary : {
             type: DataTypes.STRING(10),     // 군필 여부
         },
-        userAwards : {
-            type: DataTypes.JSON,     // 수상 이력
-        },
-        userCertification : {
-            type: DataTypes.JSON,     // 자격증
-        },
         userIntro : {
             type: DataTypes.STRING,     // 자기 소개
         },

@@ -422,7 +422,7 @@ class Portfolio extends Component {
                                         <h3 style={{display:"flex",alignItems:"center"}}><AssignmentLateOutlinedIcon/><span style={{marginLeft:"10px"}}>포트폴리오가 없습니다.</span></h3>
                                         <span className="portfolio-guide">
                                             다른사람에게 어필할 포트폴리오를 작성하세요. <br></br>
-                                            포트폴리오의 주소를 추가하여 다른 사람이 쉽게 확인 할 수 있습니다. <br></br>
+                                            포트폴리오에 주소를 추가하여 다른 사람이 쉽게 확인 할 수 있습니다. <br></br>
                                             태그를 추가하여 어떤 기술이나 전공을 담았는지 알려줄 수 있습니다. <br></br>
                                             이미지를 첨부하고, 간단한 소개글을 넣어 어떤 포트폴리오인지 알 수 있게 해주세요. <br></br>
                                         </span>

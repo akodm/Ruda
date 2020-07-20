@@ -41,13 +41,10 @@ module.exports = (sequelize, DataTypes) => {
         companyWelfare : {
             type: DataTypes.JSON,     // 기업의 복지
         },
-        companyAwards : {
-            type: DataTypes.JSON,     // 기업이 수상한 이력
-        },
         companyRequest : {
             type: DataTypes.JSON,     // 기업에서 필요로 하는 최소 조건
         },
-        companyWorkCate : {             //
+        companyWorkCate : {             
             type: DataTypes.STRING(10),
         },
         companyWorkDateState : {

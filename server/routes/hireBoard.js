@@ -24,8 +24,7 @@ router.get("/one", async (req, res) => {
 	try {
 		const result = await HireBoard.findOne({
 			where : {
-				id : req.query.id,
-                userId : req.body.userId,
+                userId : req.query.userId,
 			}
 		});
 		res.send(result);
@@ -44,6 +43,9 @@ router.post("/create", async(req, res) => {
             content: req.body.content, 
             files: req.body.files, 
             boardTag: req.body.boardTag,
+            startDate : req.body.startDate,
+            endDate : req.body.endDate,
+            field : req.body.field,
             userId : req.body.userId,
         });
     } catch(err) {
@@ -61,9 +63,11 @@ router.put("/update", async(req, res) => {
             content: req.body.content, 
             files : req.body.files,
             boardTag : req.body.boardTag,
+            startDate : req.body.startDate,
+            endDate : req.body.endDate,
+            field : req.body.field,
             }, {
             where: {
-                id : req.body.id,
                 userId : req.body.userId,
             }
         });
@@ -81,8 +85,7 @@ router.delete("/delete", async(req, res) => {
     try {
         await HireBoard.destroy({
             where: {
-                id: req.query.id,
-                userId : req.body.userId,
+                userId : req.query.userId,
             }
 		});
 		result = true;

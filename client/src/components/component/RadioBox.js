@@ -4,7 +4,7 @@ import Radio from '@material-ui/core/Radio';
 class RadioBox extends Component {
     render() {
         return (
-            <div style={this.props.style || {}}>
+            <div style={this.props.style || {}} className={this.props.className || ""}>
                 {
                     this.props.option.map((data,i) => {
                         return <Radio

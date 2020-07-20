@@ -361,11 +361,11 @@ class EditProfile extends Component {
     }
    
     render() {
-        const { imgPreview, imgUrl,
+        const { imgPreview,
             name,phone,address1,addressState,military,
             univercityCate,univercityState,univercityStart,univercityEnd,startErr,endErr,subject,
             tags,keywords,specialty,introduce,introduceErr,privateUrl,
-            workDateState,workDate,trainingDateState,trainingDate,
+            workDateState,workDate,trainingDate,
             load,univercity,field,
             awardname,awarddate,awardcate,awards,
             certificatedate,certificatename,certificatecate,certificates,

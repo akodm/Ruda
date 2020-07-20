@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,         // 내용
         },
         files : {
-            type: DataTypes.JSON,         // 주고받은 파일 주소
+            type: DataTypes.STRING,         // 주고받은 파일 주소
         },
         readState : {
             type: DataTypes.STRING,         // 읽은지 여부

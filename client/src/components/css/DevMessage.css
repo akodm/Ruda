@@ -15,6 +15,7 @@
     align-items: center;
     flex-direction: row;
     box-shadow: 0px 0px 10px rgba(128, 128, 128, 0.158);
+    cursor: pointer;
 }
 .DevMessage:hover{
     background-color: #e9f6ff2f;
@@ -26,7 +27,46 @@
     z-index: 1100;
     bottom: 7%;
     left: 2%;
-    width: 350px;
+    width: 300px;
     height: 500px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     box-shadow: 0px 0px 10px rgba(128, 128, 128, 0.158);
+}
+
+.DevMessage-title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.DevMessage-email {
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.DevMessage-content {
+    width: 90%;
+    resize: none;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid rgba(138, 138, 138, 0.397);
+    margin-top: 20px;
+    min-height: 380px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.DevMessage-btn {
+    cursor: pointer;
+    margin-top: 10px;
+    background-color: rgba(105, 234, 243, 0.295);
+    border-radius: 10px;
+    padding: 8px;
+}
+
+.DevMessage-btn:hover {
+    background-color: rgba(105, 234, 243, 0.623);
 }

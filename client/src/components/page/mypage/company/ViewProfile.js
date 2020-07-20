@@ -63,10 +63,7 @@ class ViewProfile extends Component {
         const Request = companyInfo.companyRequest;
         const Welfare = companyInfo.companyWelfare;
         const Rule = companyInfo.companyRule;
-        const {likeBtn,shareAlert,success,add}=this.state;
-
-        console.log(activityData);
-        
+        const {likeBtn,shareAlert,success}=this.state;
         return companyInfo ? (
             <div className="Mypage-profile">
                 {/* 공유하기 팝업 */}

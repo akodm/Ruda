@@ -46,29 +46,29 @@ class Cboard extends Component {
         return (
             <div className="company-div">
 
-            <div className="Company">
+                <div className="Company">
 
-                {/* 가장 상단 타이틀 */}
-                <div className="Company-title">
-                    <span>기업</span>
+                    {/* 가장 상단 타이틀 */}
+                    <div className="Company-title">
+                        <span>기업</span>
+                    </div>
+
+                    {/* 검색 부분 */}
+                    <Csearch listFilter={this.listFilter.bind(this)} />
+
+                    {/* 카드 뷰 부분 */}
+                    <div className="Company-CardView">
+                        { userList && userList.map(function(str,i){
+                            if(i < count - rowCount|| i >= count) return null;
+                            return <Link to={`/mypage/${str.userId}`} key={i}><CompanyCard userList={userList[i]}/></Link>;
+                        }) }
+                    </div>
+
+                    {/* 페이지네이션 버튼 */}
+                    <div className="Company-CardView-PagiNation">
+                        <Pagination onChange={(e, c) => this.setState({ pagenation : c })} count={pageCount} />
+                    </div>
                 </div>
-
-                {/* 검색 부분 */}
-                <Csearch listFilter={this.listFilter.bind(this)} />
-
-                {/* 카드 뷰 부분 */}
-                <div className="Company-CardView">
-                    { userList && userList.map(function(str,i){
-                        if(i < count - rowCount|| i >= count) return null;
-                        return <Link to={`/mypage/${str.userId}`} key={i}><CompanyCard userList={userList[i]}/></Link>;
-                    }) }
-                </div>
-
-                {/* 페이지네이션 버튼 */}
-                <div className="Company-CardView-PagiNation">
-                    <Pagination onChange={(e, c) => this.setState({ pagenation : c })} count={pageCount} />
-                </div>
-            </div>
             </div>
         );
     }

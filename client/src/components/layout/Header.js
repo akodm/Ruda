@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 class Header extends Component {
     render() {
-        const { user, openClose, loadSet } = this.props;
+        const { user, openClose } = this.props;
         return (
             <div className="Header">
                 <nav  className="Header-nav">

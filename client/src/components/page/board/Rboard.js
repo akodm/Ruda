@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Pagination from '@material-ui/lab/Pagination';
 
@@ -43,19 +44,25 @@ class Rboard extends Component {
         let count = pagenation * rowCount;
         let pageCount = userList.length > 0 ? Math.ceil(userList.length / 16) : "1";
         return (
-            <div className="Rookie">
-                <div className="Rookie-title">
-                    <span>인재</span>
-                </div>
-                <Rsearch listFilter={this.listFilter.bind(this)} />
-                <div className="Rookie-CardView">
-                    { userList && userList.map(function(str,i){
-                        if(i < count - rowCount|| i >= count) return null;
-                        return <Link to={`/mypage/${str.userId}`} key={i}><RookieCard userList={userList[i]}/></Link>;
-                    }) }
-                </div>
-                <div className="Rookie-CardView-PagiNation">
-                    <Pagination onChange={(e, c) => this.setState({ pagenation : c })} count={pageCount} />
+            <div className="company-div">
+                <div  className="Company">
+                    
+                    <div className="Company-title">
+                        <span>인재</span>
+                    </div>
+
+                    <Rsearch listFilter={this.listFilter.bind(this)} />
+
+                    <div className="Rookie-CardView">
+                        { userList && userList.map(function(str,i){
+                            if(i < count - rowCount|| i >= count) return null;
+                            return <Link to={`/mypage/${str.userId}`} key={i}><RookieCard userList={userList[i]}/></Link>;
+                        }) }
+                    </div>
+
+                    <div className="Rookie-CardView-PagiNation">
+                        <Pagination onChange={(e, c) => this.setState({ pagenation : c })} count={pageCount} />
+                    </div>
                 </div>
             </div>
         );

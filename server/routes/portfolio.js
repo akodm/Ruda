@@ -29,6 +29,24 @@ router.get("/all", async (req, res) => {
 	}
 });
 
+// 유저 포트폴리오 한명의 전체 갯수
+router.get("/count", async (req, res) => {
+	try {
+		const result = await Portfolio.count({
+			include : [
+				{ model: User }
+			],
+			where : {
+				userId : req.query.userId
+			},
+		});
+		res.send(result);
+	} catch (err) {
+		console.log(__filename + " 에서 유저 포트폴리오 전체 검색 에러 발생 내용= " + err);
+		res.send(false);
+	}
+});
+
 // 유저 포트폴리오 한개 조회
 router.get("/one", async (req, res) => {
 	try {
