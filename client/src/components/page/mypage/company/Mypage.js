@@ -11,28 +11,35 @@ import Setting from './Setting';
 class Mypage extends Component {
     constructor(props) {
         super(props);
-        this.state={
-            btnNum:0,
+        this.state = {
+            btnNum : 0,
            
-            awardData:[],
-            activityData:[],
+            awardData : [],
+            activityData : [],
+            hireData : [],
+
             load : false,
         }
     }
 
     async componentDidMount() {
+        const { companyInfo } = this.props;
         try {
-            let award = axios.get(`${config.app.s_url}/awards/all?userId=${this.props.companyInfo.userId}`);
-            let activity = axios.get(`${config.app.s_url}/activitys/all?userId=${this.props.companyInfo.userId}`);
+            let award = axios.get(`${config.app.s_url}/awards/all?userId=${companyInfo.userId}`);
+            let activity = axios.get(`${config.app.s_url}/activitys/all?userId=${companyInfo.userId}`);
+            let hire = axios.get(`${config.app.s_url}/hireBoards/one?userId=${companyInfo.userId}`);
 
-            await Promise.all([award,activity]).then(data => {
+
+            await Promise.all([award,activity, hire]).then(data => {
                 award = data[0].data;
                 activity = data[1].data;
+                hire = data[2].data;
             });
 
             this.setState({ 
                 awardData : award, 
                 activityData : activity,
+                hireData : hire,
             });
 
         } catch(err) {
@@ -43,9 +50,11 @@ class Mypage extends Component {
 
     MenuClick(num){ this.setState({ btnNum:num }) }
 
+    hireSet(data) { this.setState({ hireData : data }); }
+
     render() {
-        const {btnNum,load,awardData,activityData}=this.state;
-        const { companyInfo, user } = this.props;
+        const { btnNum, load, awardData, activityData, hireData } = this.state;
+        const { companyInfo, user, loginState } = this.props;
         return (
             <div className="Mypage">
                 <div className="Mypage-frame">
@@ -62,7 +71,16 @@ class Mypage extends Component {
                                 activityData={activityData}
                                 /> :
                                 btnNum === 1 ?
-                                load && <Hire load={load} userEmail={user.email} userId={companyInfo.userId} userName={companyInfo.companyName}/>
+                                load && 
+                                    <Hire 
+                                        loginState={loginState} 
+                                        load={load} 
+                                        userEmail={user.email} 
+                                        userId={companyInfo.userId} 
+                                        userName={companyInfo.companyName} 
+                                        hireData={hireData}
+                                        hireSet={this.hireSet.bind(this)}
+                                    />
                                 :
                                 user.email && <Setting />
                             }

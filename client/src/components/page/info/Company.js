@@ -110,10 +110,9 @@ class Company extends Component {
         const { imgUrl,
             name,ceo,phone,address1,address2,companyurl,
             field,tags,since,ageAvg,rule,intro,welfare,
-            request,workCate,workDateState,workDate,workDateDate,occupation,
+            request,workCate,workDateState,workDate,occupation,
             question 
         } = this.state;
-        console.log(workDateState)
         try {
             let userCateUpdat = axios.put(`${config.app.s_url}/users/updatecate`, {
                 userCate : "company",
@@ -153,14 +152,14 @@ class Company extends Component {
                 result = data[1];
             })
 
-            console.log(userCateUpdat.data, result.data);
             if(result.data){
                 alert("기본입력이 완료되었습니다.");
+                window.location.href = "/";
             } else {
                 alert("잘못된 값이 있습니다. 다시 시도해주세요.");
             }
         } catch(err) {
-            console.log("user info save err : " + err);
+            console.log("user info save err");
         }
         this.setState({ load : true });
     }
@@ -229,10 +228,8 @@ class Company extends Component {
             name,ceo,phone,address1,address2,addressState,companyurl,
             field,tags,since,ageAvg,rule,intro,welfare,
             request,workCate,workDateState,workDate,
-            question,
             agreeCheck,
         } = this.state;
-        console.log(workDateState)
         return (
             <div className="Info-rookie-main">
                 { !load && <Load /> }
@@ -264,7 +261,7 @@ class Company extends Component {
                             style={{width:"450px",marginRight:"25px"}}
                             InputProps={{ readOnly: true }} variant="outlined"
                         />
-                        <TextField helperText="상세주소를 입력해주세요" style={{width:"200px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="address2" value={address2} id="outlined-required" label="나머지 주소" />
+                        <TextField helperText="상세주소를 입력해주세요" style={{width:"200px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="address2" value={address2} label="나머지 주소" />
                     </div>
                     {/* 주소지 검색 API */}
                     <PostCode open={addressState} close={() => this.setState({ addressState : false })} func={(data) => this.setState({ address1 : data })} />
@@ -272,7 +269,7 @@ class Company extends Component {
                 <div className="Info-rookie-title">기업소개</div>
                 <div className="Info-rookie-body">
                     <div style={{display:"flex",flexDirection:"row",marginBottom:"20px"}}>
-                        <TextField style={{width:"340px",marginRight:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="companyurl" value={companyurl} id="outlined-required" label="기업사이트 주소" />
+                        <TextField style={{width:"340px",marginRight:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="companyurl" value={companyurl} label="기업사이트 주소" />
                         <AutoCreateBox value={field} width={340} blur={true} text={"기업의 분야를 입력해주세요."} list={dataList.app.comfieldList} clear={false} onChange={(e) => this.setState({ field : e })}  />
                     </div>
                     <AutoCreateBox blur={false} width={700} text={"기업에서 다루는 기술에 대한 태그를 검색하여 최대 6개까지 추가하세요!"} list={dataList.app.tagList} clear={true} onChange={this.addChips.bind(this,"tag")} />

@@ -25,7 +25,7 @@ router.get("/all", async (req, res) => {
 	}
 });
 
-// 기업 정보 한명 조회
+// 기업 정보 채용 전체 조회
 router.get("/yall", async (req, res) => {
 	try {
 		const result = await CompanyInfo.findAll({
@@ -34,7 +34,7 @@ router.get("/yall", async (req, res) => {
 			],
 			where : {
 				companyState : {
-					[Op.or] : ["채용"]
+					[Op.like] : "%채용%"
 				}
 			},
 		});
@@ -59,55 +59,6 @@ router.get("/one", async (req, res) => {
 		res.send(result);
 	} catch (err) {
 		console.log(__filename + " 에서 기업 정보 한명 검색 에러 발생 내용= " + err);
-		res.send(false);
-	}
-});
-
-// 기업 정보 필터 검색
-/**
- *  필터 검색 기준
- *  기업 주소지의 구 기준 => 구로구, 안양시, 등
- *  기업이 찾는 희망 직종 또는 기업의 분야
- *  기업이 가지고 있는 태그 중 일치하는 문자열
- */
-router.post("/popup", async (req, res) => {
-	let address = (req.body.add).split(" ");
-	let tagQuery = "";
-	let addQuery = "";
-
-	if(address[1]) {
-		address.forEach((data,i) => {
-			if(i >= 2) return;
-			else if(i !== 0) {
-				addQuery += `companyAdd like '%${data}%'`;
-			}
-		});
-	}
-
-	if(req.body.tag && req.body.tag[0]) {
-		req.body.tag.forEach((data,i) => {
-			if(i + 1 === req.body.tag.length) {
-				tagQuery += "companyTags like '%" + data + "%'";
-			} else {
-				tagQuery += "companyTags like '%" + data + "%' or ";
-			}
-		});
-	}
-
-	try {
-		const result = await CompanyInfo.findAll({
-			where : {
-				[Op.or] : {
-					companyTags : models.Sequelize.literal(tagQuery),
-					companyAdd : models.Sequelize.literal(addQuery),
-					companyField : { [Op.like] : "%" + req.body.add + "%" },
-					companyOccupation : { [Op.like] : "%" + req.body.add + "%" },
-				}
-			}
-		});
-		res.send(result);
-	} catch (err) {
-		console.log(__filename + " 에서 기업 정보 필터 검색 에러 발생 내용= " + err);
 		res.send(false);
 	}
 });
@@ -253,6 +204,145 @@ router.delete("/delete", async(req, res) => {
 		console.log(__filename + " 에서 기업 정보 삭제 에러 발생 내용= " + err);
 	}
 	res.send(result);
+});
+
+// ======================= 검색 부분 ===================== //
+
+// 기업 정보 필터 검색
+/**
+ *  필터 검색 기준
+ *  기업 주소지의 구 기준 => 구로구, 안양시, 등
+ *  기업이 찾는 희망 직종 또는 기업의 분야
+ *  기업이 가지고 있는 태그 중 일치하는 문자열
+ */
+router.post("/popup", async (req, res) => {
+	let address = (req.body.add).split(" ");
+	let tagQuery = "";
+	let addQuery = "";
+
+	if(address[1]) {
+		address.forEach((data,i) => {
+			if(i >= 2) return;
+			else if(i !== 0) {
+				addQuery += `companyAdd like '%${data}%'`;
+			}
+		});
+	}
+
+	if(req.body.tag && req.body.tag[0]) {
+		req.body.tag.forEach((data,i) => {
+			if(i + 1 === req.body.tag.length) {
+				tagQuery += "companyTags like '%" + data + "%'";
+			} else {
+				tagQuery += "companyTags like '%" + data + "%' or ";
+			}
+		});
+	}
+
+	try {
+		const result = await CompanyInfo.findAll({
+			where : {
+				[Op.and] : {
+					[Op.or] : {
+						companyTags : models.Sequelize.literal(tagQuery),
+						companyAdd : models.Sequelize.literal(addQuery),
+						companyField : { [Op.like] : "%" + req.body.add + "%" },
+						companyOccupation : { [Op.like] : "%" + req.body.add + "%" },
+					},
+					companyState : { [Op.like] : "%채용%" }
+				}
+			}
+		});
+		res.send(result);
+	} catch (err) {
+		console.log(__filename + " 에서 기업 정보 필터 검색 에러 발생 내용= " + err);
+		res.send(false);
+	}
+});
+
+// 게시판 필터
+router.post("/search", async (req, res) => {
+	let filter = req.body.data;
+	let queryAdd = [];
+	let queryField = [];
+	let queryOcc = [];
+	let queryTags = [];
+	let queryReq = [];
+	let queryWel = [];
+
+	let text = "empty";
+	let add = "";
+	let field = "";
+	let occupation = "";
+	let tag = "";
+	let request = "";
+	let	welfare = "";
+
+	if(filter && filter[0]) {
+		filter.forEach((data,i) => {
+			switch(data.row) {
+				case "companyAdd" : 
+					queryAdd.push(`${data.row} like '%${data.data}%'`); break;
+				case "companyField" : 
+					queryField.push(`${data.row} like '%${data.data}%'`);
+					queryOcc.push(`companyOccupation like '%${data.data}%'`); break;
+				case "companyTags" : 
+					queryTags.push(`${data.row} like '%${data.data}%'`); break;
+				case "companyRequest" : 
+					queryReq.push(`${data.row} like '%${data.data}%'`); break;
+				case "companyWelfare" : 
+					queryWel.push(`${data.row} like '%${data.data}%'`); break;
+				default : text = data.data;
+			}
+		});
+
+		queryAdd.forEach((data,i) => {
+			add += (i + 1 === queryAdd.length) ? data : data + " or ";
+		});
+
+		queryField.forEach((data,i) => {
+			field += (i + 1 === queryField.length) ? data : data + " or ";
+		});
+
+		queryOcc.forEach((data,i) => {
+			occupation += (i + 1 === queryOcc.length) ? data : data + " or ";
+		});
+
+		queryTags.forEach((data,i) => {
+			tag += (i + 1 === queryTags.length) ? data : data + " or ";
+		});
+
+		queryReq.forEach((data,i) => {
+			request += (i + 1 === queryReq.length) ? data : data + " or ";
+		});
+
+		queryWel.forEach((data,i) => {
+			welfare += (i + 1 === queryWel.length) ? data : data + " or ";
+		});
+	}
+
+	try {
+		const result = await CompanyInfo.findAll({
+			where : {
+				[Op.and] : {
+					[Op.or] : {
+						companyName : { [Op.like] : "%" + text + "%" },
+						companyAdd : models.Sequelize.literal(add),
+						companyTags : models.Sequelize.literal(tag),
+						companyField : models.Sequelize.literal(field),
+						companyOccupation : models.Sequelize.literal(occupation),
+						companyRequest : models.Sequelize.literal(request),
+						companyWelfare : models.Sequelize.literal(welfare),
+					},
+					companyState : { [Op.like] : "%채용%" }
+				}
+			}
+		});
+		res.send(result);
+	} catch (err) {
+		console.log(__filename + " 에서 기업 정보 필터 검색 에러 발생 내용= " + err);
+		res.send(false);
+	}
 });
 
 module.exports = router;

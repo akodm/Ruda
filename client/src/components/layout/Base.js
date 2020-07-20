@@ -132,7 +132,7 @@ class Base extends Component {
                         <Route component={NotFound} ></Route>
                     </Switch>
                     {/*개발자에게 문의버튼 */}
-                    <DevMessage/>
+                    <DevMessage user={user} />
                     {/*화면업다운버튼*/ }
                     <UpDown />
                     {/*하단 */}

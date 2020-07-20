@@ -7,7 +7,6 @@ import '../../css/Login.css';
 
 import InputTag from '../../component/InputTag';
 
-
 class Login extends Component {
     constructor(props) {
         super(props);

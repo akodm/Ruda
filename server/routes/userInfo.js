@@ -64,46 +64,6 @@ router.get("/yall", async (req, res) => {
 	}
 });
 
-// 유저 정보 필터 검색
-/**
- *  필터 검색 기준
- *  유저 주소지의 구 기준 => 구로구, 안양시, 등
- *  유저 희망 직종
- *  유저가 가지고 있는 태그 중 일치하는 문자열
- */
-router.post("/popup", async (req, res) => {
-	let address = (req.body.add).split(" ");
-	let tagQuery = "";
-	let addQuery = `userAdd like '%${address[1]}%'`;
-
-	if(req.body.tag && req.body.tag[0]) {
-		req.body.tag.forEach((data,i) => {
-			if(i + 1 === req.body.tag.length) {
-				tagQuery += "userTags like '%" + data + "%'";
-			} else {
-				tagQuery += "userTags like '%" + data + "%' or ";
-			}
-		});
-	}
-
-	try {
-		const result = await UserInfo.findAll({
-			where : {
-				[Op.or] : {
-					userTags : models.Sequelize.literal(tagQuery),
-					userAdd : models.Sequelize.literal(addQuery),
-					userField : { [Op.like] : "%" + req.body.field + "%" },
-					userField : { [Op.like] : "%" + req.body.occupation + "%" },
-				}
-			}
-		});
-		res.send(result);
-	} catch (err) {
-		console.log(__filename + " 에서 유저 정보 필터 검색 에러 발생 내용= " + err);
-		res.send(false);
-	}
-});
-
 // 유저 정보 한명 조회
 router.get("/one", async (req, res) => {
 	try {
@@ -261,6 +221,110 @@ router.delete("/delete", async(req, res) => {
 		console.log(__filename + " 에서 유저 정보 삭제 에러 발생 내용= " + err);
 	}
 	res.send(result);
+});
+
+// ======================== 검색 부분 ======================== //
+
+// 게시판 필터
+router.post("/search", async (req, res) => {
+	let filter = req.body.data;
+	let queryAdd = [];
+	let queryField = [];
+	let queryTags = [];
+
+	let text = "empty";
+	let add = "";
+	let field = "";
+	let tag = "";
+
+	if(filter && filter[0]) {
+		filter.forEach((data,i) => {
+			switch(data.row) {
+				case "userAdd" : 
+					queryAdd.push(`${data.row} like '%${data.data}%'`); break;
+				case "userField" : 
+					queryField.push(`${data.row} like '%${data.data}%'`); break;
+				case "userTags" : 
+					queryTags.push(`${data.row} like '%${data.data}%'`); break;
+				default : text = data.data;
+			}
+		});
+
+		queryAdd.forEach((data,i) => {
+			add += (i + 1 === queryAdd.length) ? data : data + " or ";
+		});
+
+		queryField.forEach((data,i) => {
+			field += (i + 1 === queryField.length) ? data : data + " or ";
+		});
+
+		queryTags.forEach((data,i) => {
+			tag += (i + 1 === queryTags.length) ? data : data + " or ";
+		});
+	}
+
+	try {
+		const result = await UserInfo.findAll({
+			where : {
+				[Op.and] : {
+					[Op.or] : {
+						userName : { [Op.like] : "%" + text + "%" },
+						userAdd : models.Sequelize.literal(add),
+						userTags : models.Sequelize.literal(tag),
+						userField : models.Sequelize.literal(field),
+					},
+					userState : { [Op.or] : {
+						[Op.like] : "%구직%",
+						[Op.like] : "%실습%"
+					} }
+				}
+			}
+		});
+		res.send(result);
+	} catch (err) {
+		console.log(__filename + " 에서 유저 정보 필터 검색 에러 발생 내용= " + err);
+		res.send(false);
+	}
+});
+
+// 유저 정보 필터 검색
+/**
+ *  필터 검색 기준
+ *  유저 주소지의 구 기준 => 구로구, 안양시, 등
+ *  유저 희망 직종
+ *  유저가 가지고 있는 태그 중 일치하는 문자열
+ */
+router.post("/popup", async (req, res) => {
+	let address = (req.body.add).split(" ");
+	let tagQuery = "";
+	let addQuery = `userAdd like '%${address[1]}%'`;
+
+	if(req.body.tag && req.body.tag[0]) {
+		req.body.tag.forEach((data,i) => {
+			if(i + 1 === req.body.tag.length) {
+				tagQuery += "userTags like '%" + data + "%'";
+			} else {
+				tagQuery += "userTags like '%" + data + "%' or ";
+			}
+		});
+	}
+
+	try {
+		const result = await UserInfo.findAll({
+			where : {
+				[Op.or] : {
+					userTags : models.Sequelize.literal(tagQuery),
+					userAdd : models.Sequelize.literal(addQuery),
+					userField : { [Op.like] : "%" + req.body.field + "%" },
+					userField : { [Op.like] : "%" + req.body.occupation + "%" },
+				}
+			}
+		});
+		res.send(result);
+	} catch (err) {
+		console.log(__filename + " 에서 유저 정보 필터 검색 에러 발생 내용= " + err);
+		res.send(false);
+	}
 });
 
 module.exports = router;

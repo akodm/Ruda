@@ -267,7 +267,7 @@ class Rookie extends Component {
             name,phone,address1,addressState,military,
             univercityCate,univercityState,univercityStart,univercityEnd,startErr,endErr,
             tags,keywords,specialty,introduce,introduceErr,privateUrl,
-            workDateState,trainingDateState,workDate,trainingDate,
+            workDateState,workDate,trainingDate,
             agreeCheck,load
         } = this.state;
         return (

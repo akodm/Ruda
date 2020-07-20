@@ -6,7 +6,7 @@ import FormControl from '@material-ui/core/FormControl';
 class SelectBox extends Component {
     render() {
         return (
-            <div style={this.props.style || {}}>
+            <div style={this.props.style || {}} className={this.props.className || ""}>
                 <FormControl variant="outlined" disabled={this.props.disabled || false}>
                     <InputLabel htmlFor="outlined-age-native-simple">{this.props.text}</InputLabel>
                     <Select

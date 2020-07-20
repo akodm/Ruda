@@ -88,7 +88,7 @@ app.get("/nodemailer", async(req,res) => {
     ranStr = ranStr.toUpperCase();
 
     let mailOption = {
-      from : configs.app.user,
+      from : configs.app.emailUser,
       to : req.query.userEmail,
       subject : "하이루키에서 이메일 인증 메일을 발송하였습니다.",
       html : `<img style="width:'80px'; height:40px;" src='cid:logo@cid'/><br><br>`+ 
@@ -148,6 +148,50 @@ app.get("/nodemailer", async(req,res) => {
     res.send(true);
   } catch(err) {
     console.log(__filename + "에서 노드 메일러 에러 발생 : " + err);
+    res.send(false);
+  }
+});
+
+app.post("/developermail", async(req,res) => {
+  try {
+    let mailOption = {
+      from : configs.app.user,
+      to : configs.app.user,
+      subject : `문의사항이 도착했습니다. ${req.body.email}`,
+      html : `<img style="width:'80px'; height:40px;" src='cid:logo@cid'/><br><br>`+ 
+      `<pre>${req.body.content}</pre><br><br>` +
+      `<img style="width:'400px'; height:400px;" src='cid:bg@cid'/>`,
+      attachments: [{
+        filename: 'Logo.png',
+        path: __dirname +'/public/images/RUDALogore.png',
+        cid: 'logo@cid'
+      },{
+        filename: 'Bg.png',
+        path: __dirname +'/public/images/mainimg.png',
+        cid: 'bg@cid'
+      }],
+    }
+
+    const transport = nodemailer.createTransport({
+      service : configs.app.type,
+      auth : {
+        user : configs.app.emailUser,
+        pass : configs.app.emailPass,
+      }
+    });
+
+    await transport.sendMail(mailOption, (err, info) => {
+      if(err) {
+        console.log(err);
+      } else {
+        console.log("노드 메일러 정보 --------------------");
+        console.log(info);
+      }
+    });
+
+    res.send(true);
+  } catch(err) {
+    console.log("개발자에게 메일 보내는 중 에러 발생 : ", err);
     res.send(false);
   }
 });

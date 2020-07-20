@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         content : {
             type: DataTypes.STRING,         // 내용
-            allowNull: false
         },
         files : {
             type: DataTypes.JSON,         // 올린 파일 이미지 등
@@ -24,6 +23,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         endDate : {
             type: DataTypes.STRING(10),         // 종료일
+        },
+        field : {
+            type: DataTypes.STRING,         // 채용하는 분야
         }
     });
     HireBoard.associate = function(models) {

@@ -5,7 +5,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 class CheckBox extends Component {
     render() {
         return (
-            <div style={this.props.style || {}}>
+            <div style={this.props.style || {}} className={this.props.className || ""}>
                 <FormControlLabel
                     control={
                     <Checkbox
