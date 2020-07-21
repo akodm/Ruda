@@ -67,14 +67,14 @@ class Company extends Component {
     // firebase에 이미지 업로드 및 저장 함수 실행
     addFile() {
         const { imgData,
-            name,phone,address1,field,
+            name,phone,address1,field,ceo,companyurl,since,intro,workCate,
             agreeCheck
         } = this.state;
         if(!agreeCheck) {
             alert("이용수칙에 동의해주세요.");
             return;
         }
-        if(!name || !phone || !address1 || !field) {
+        if(!name || !phone || !address1 || !field || !companyurl || !ceo || !since || !intro || !workCate) {
             alert("필수 입력 사항을 입력해주세요.");
             return;
         }
@@ -331,6 +331,7 @@ class Company extends Component {
                         }
                     </div>
                 </div>
+                <h5>기업이름, 기업소개, 이메일, 기업사이트주소, 기업번호, 기업위치, 기업대표, 기업분야, 채용형태, 기업설립일은 필수입력사항입니다.</h5>
                 <div className="Info-rookie-agree">
                     <CheckBox check={agreeCheck} func={(e) => this.setState({ agreeCheck : e })} name="agree" color="primary" />
                     <span>하이루키는 신입 채용 서비스입니다. <span style={{color:"red"}}>기업</span>으로서 이용하심에 동의하십니까?</span>

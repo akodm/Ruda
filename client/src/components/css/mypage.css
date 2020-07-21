@@ -280,7 +280,12 @@ hr {
     background-color:#f799f5;
     border-radius: 50%;
 }
-
+.profile-user-state-none{
+    width: 8px;
+    height: 8px;
+    background-color:#c5c5c5;
+    border-radius: 50%;
+}
 /*-프로필수정버튼-*/
 .profile-edit{
     border: none;

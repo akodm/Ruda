@@ -64,7 +64,6 @@ class ViewProfile extends Component {
         const Keyword = userInfo.userKeyword;
         const Specialty = userInfo.userSpecialty;
         const {likeBtn,shareAlert,success}=this.state;
-        console.log(activityData);
         return userInfo ? (
             <div className="Mypage-profile">
                 {/* 공유하기 팝업 */}
@@ -86,9 +85,30 @@ class ViewProfile extends Component {
                                 <div className="profile-profile">
                                     <p>프로필</p>
                                     <div className="profile-user-state">
-                                        <div className="profile-user-state-training"style={{marginRight:"5px"}}></div><p style={{fontSize:"small", marginRight:"10px"}}>실습</p>
-                                        <div className="profile-user-state-hire" style={{marginRight:"5px"}}></div><p style={{fontSize:"small",marginLeft:"10px"}}>구직</p>
-                                    </div>
+                                        {
+                                            (userInfo.userWorkDateState==="미정"&&
+                                            <>
+                                                <div className="profile-user-state-none"style={{marginRight:"5px"}}></div><p style={{fontSize:"small", marginRight:"10px"}}>구직/실습 미정</p>
+                                            </>
+                                            )||
+                                            (userInfo.userWorkDateState==="실습희망"&&
+                                            <>
+                                                <div className="profile-user-state-training"style={{marginRight:"5px"}}></div><p style={{fontSize:"small", marginRight:"10px"}}>실습</p>
+                                            </>
+                                            )||
+                                            (userInfo.userWorkDateState==="취업희망"&&
+                                            <>
+                                                <div className="profile-user-state-hire" style={{marginRight:"5px"}}></div><p style={{fontSize:"small",marginLeft:"10px"}}>구직</p>
+                                            </>
+                                            )||
+                                            (userInfo.userWorkDateState==="실습후 취업희망"&&
+                                            <>
+                                                <div className="profile-user-state-training"style={{marginRight:"5px"}}></div><p style={{fontSize:"small", marginRight:"10px"}}>실습</p>
+                                                <div className="profile-user-state-hire" style={{marginRight:"5px"}}></div><p style={{fontSize:"small",marginLeft:"10px"}}>구직</p>
+                                            </>
+                                            )
+                                        }
+                                    </div>  
                                 </div>
                                 <Avatar alt="img" src={userInfo.userImageUrl || "/Image/login_img.png"} style={{width:"100px", height:"100px"}} />
                                 <p className="profile-username">{userInfo.userName}</p>
@@ -137,15 +157,17 @@ class ViewProfile extends Component {
                                     </div>
                                     <div className="profile-text">
                                         <AssignmentIndIcon style={{fontSize:"medium"}}/>
-                                        <p>근무형태{userInfo.userWorkDateState}</p>
+                                        <p>근무형태:{userInfo.userWorkDateState}</p>
                                     </div>
+                                    {userInfo.userWorkDateState !=="미정" &&
                                     <div className="profile-text">
                                         <CalendarTodayIcon style={{fontSize:"medium"}}/>
-                                        {userInfo.userWorkDate==="직접입력"?
-                                        <p>근무날짜:{userInfo.userTraningDate}</p>:
-                                        <p>근무날짜:{userInfo.userWorkDate}</p>
+                                        {userInfo.userWorkDate !=="직접입력"?
+                                        <p>근무날짜:{userInfo.userWorkDate}</p>:
+                                        <p>근무날짜:{userInfo.userTraningDate}</p>
                                         } 
                                     </div>
+                                    }
                                 </div>
                                 <div className="profile-intro"><hr></hr>
                                     <p className="profile-intro-title" >COUNT</p>
@@ -306,17 +328,19 @@ class ViewProfile extends Component {
                                                         <div className="profile-title-text">교외활동</div>
                                                         <div className="profile-title-line"></div>
                                                     </div>
-                                                    <div>
-                                                        {activityData &&
-                                                            activityData.map(function(data,i){
-                                                                return data.activityCate === "교외" &&
-                                                                <div className="profile-skill-info-Awards-text" key={i}>
-                                                                    <p>{data.activityStartDate}{data.activityEndDate && "~"+data.activityEndDate}</p>
-                                                                    <p>{data.activityName}</p>
-                                                                </div>
-                                                            })
-                                                        }  
-                                                    </div>
+                                                    {activityData? 
+                                                        <div>
+                                                            { 
+                                                                activityData.map(function(data,i){
+                                                                    return data.activityCate === "교외" &&
+                                                                    <div className="profile-skill-info-Awards-text" key={i}>
+                                                                        <p>{data.activityStartDate}{data.activityEndDate && "~"+data.activityEndDate}</p>
+                                                                        <p>{data.activityName}</p>
+                                                                    </div>
+                                                                })
+                                                            }  
+                                                        </div>:<p>등록된 교외활동이 없습니다.</p>
+                                                    }
                                                 </div>   
                                             </div>
                                         </div>

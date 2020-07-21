@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
 /* -------------------------- top ----------------------- */
 
 .Main-new {
@@ -5,7 +7,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: NanumSquareB;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .Main-new-Div {
@@ -15,7 +17,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    font-family: NanumSquareB;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .Main-new-right {
@@ -25,7 +27,7 @@
 }
 
 .Main-new-title {
-    font-family: NanumSquareEB;
+    font-family: 'Nanum Gothic', sans-serif;
     font-size: 24px;
     color:#646464; 
     font-weight: 600;
@@ -33,7 +35,7 @@
 }
 
 .Main-new-subTitle {
-    font-family: NanumSquareEB;
+    font-family: 'Nanum Gothic', sans-serif;
     font-size: 18px;
     color:#646464; 
     font-weight: 600;
@@ -41,7 +43,7 @@
 }
 
 .Main-new-text {
-    font-family: NanumSquareEB;
+    font-family: 'Nanum Gothic', sans-serif;
     font-size: 15.5px;
     color:#646464; 
     font-weight: 600;
@@ -76,7 +78,7 @@
     opacity: 0.7;
     background-color: #ffffff;
     border: 1px solid #9781d0;
-    font-family: NanumSquareEB;
+    font-family: 'Nanum Gothic', sans-serif;
     font-size: 14px;
     color:#646464; 
     font-weight: 600;
@@ -91,7 +93,7 @@
 }
 
 .Main-new-es {
-    font-family: NanumSquareB;
+    font-family: 'Nanum Gothic', sans-serif;
     font-size: 14px;
     color:#646464; 
     font-weight: 600;
@@ -156,7 +158,7 @@
 }
 
 .Main-new-itemTitle {
-    font-family: NanumSquareB;
+    font-family: 'Nanum Gothic', sans-serif;
     font-size: 16px;
     color:#646464; 
     font-weight: 600;
@@ -165,7 +167,7 @@
 }
 
 .Main-new-itemSpan {
-    font-family: NanumSquareB;
+    font-family: 'Nanum Gothic', sans-serif;
     font-size: 14px;
     color:#646464; 
     font-weight: 500;
@@ -211,7 +213,7 @@
 }
 
 .Main-new-bottomIntro {
-    font-family: NanumSquareEB;
+    font-family: 'Nanum Gothic', sans-serif;
     font-size: 18px;
     color:#646464;
     font-size: 18px;

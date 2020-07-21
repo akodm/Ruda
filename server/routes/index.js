@@ -21,7 +21,7 @@ router.post("/developermail", async(req,res) => {
     let mailOption = {
       from : configs.app.emailUser,
       to : configs.app.emailUser,
-      subject : `문의사항이 도착했습니다.`,
+      subject : `[${req.body.title}]문의사항이 도착했습니다.`,
       html : `<img style="width:'80px'; height:40px;" src='cid:logo@cid'/><br><br>`+ 
       `<span>보낸 이 : ${req.body.email}</span><br>` +
       `<pre>문의 내용 : ${req.body.content}</pre><br><br>`

@@ -85,8 +85,29 @@ class ViewProfile extends Component {
                                 <div className="profile-profile">
                                     <p>프로필</p>
                                     <div className="profile-user-state">
-                                        <div className="profile-user-state-training"style={{marginRight:"5px"}}></div><p style={{fontSize:"small", marginRight:"10px"}}>실습</p>
-                                        <div className="profile-user-state-hire" style={{marginRight:"5px"}}></div><p style={{fontSize:"small",marginLeft:"10px"}}>구직</p>
+                                        {
+                                            (companyInfo.companyWorkCate==="미정"&&
+                                            <>
+                                                <div className="profile-user-state-none"style={{marginRight:"5px"}}></div><p style={{fontSize:"small", marginRight:"10px"}}>채용/실습생 미정</p>
+                                            </>
+                                            )||
+                                            (companyInfo.companyWorkCate==="실습생채용"&&
+                                            <>
+                                                <div className="profile-user-state-training"style={{marginRight:"5px"}}></div><p style={{fontSize:"small", marginRight:"10px"}}>실습생</p>
+                                            </>
+                                            )||
+                                            (companyInfo.companyWorkCate==="채용"&&
+                                            <>
+                                                <div className="profile-user-state-hire" style={{marginRight:"5px"}}></div><p style={{fontSize:"small",marginLeft:"10px"}}>채용</p>
+                                            </>
+                                            )||
+                                            (companyInfo.companyWorkCate==="실습 후 채용"&&
+                                            <>
+                                                <div className="profile-user-state-training"style={{marginRight:"5px"}}></div><p style={{fontSize:"small", marginRight:"10px"}}>실습생</p>
+                                                <div className="profile-user-state-hire" style={{marginRight:"5px"}}></div><p style={{fontSize:"small",marginLeft:"10px"}}>채용</p>
+                                            </>
+                                            )
+                                        }
                                     </div>
                                 </div>
                                 <Avatar alt="img" src={companyInfo.companyImageUrl || "/Image/login_img.png"} style={{width:"100px", height:"100px"}} />
@@ -118,10 +139,12 @@ class ViewProfile extends Component {
                                         <HouseIcon style={{fontSize:"medium"}}/>
                                         <p>{companyInfo.companyAdd}</p>
                                     </div>
-                                    <div className="profile-text">
-                                        <PeopleIcon style={{fontSize:"medium"}}/>
-                                        <p>평균연령: {companyInfo.companyAgeAvg}세</p>
-                                    </div>
+                                    {companyInfo.companyAgeAvg &&
+                                        <div className="profile-text">
+                                            <PeopleIcon style={{fontSize:"medium"}}/>
+                                            <p>평균연령: {companyInfo.companyAgeAvg}세</p>
+                                        </div>
+                                    }
                                     <div className="profile-text">
                                         <ApartmentIcon style={{fontSize:"medium"}}/>
                                         <p>설립일: {companyInfo.companySince}</p>
@@ -138,6 +161,7 @@ class ViewProfile extends Component {
                                         <AssignmentIndIcon style={{fontSize:"medium"}}/>
                                         <p>채용형태:{companyInfo.companyWorkCate}</p>
                                     </div>
+                                    {companyInfo.companyWorkCate !== "미정" &&
                                     <div className="profile-text">
                                         <CalendarTodayIcon style={{fontSize:"medium"}}/>
                                         {companyInfo.companyWorkDateState ==="직접입력"?
@@ -145,6 +169,7 @@ class ViewProfile extends Component {
                                         <p>채용날짜:{companyInfo.companyWorkDateState}</p>
                                         } 
                                     </div>
+                                    }
                                 </div>
                                 <div className="profile-intro"><hr></hr>
                                     <p className="profile-intro-title" >COUNT</p>
