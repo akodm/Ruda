@@ -177,10 +177,12 @@
 .portfolio-idx-contentBox {
     margin-top: 40px;
     width: 100%;
+    display: flex;
     margin-bottom: 10px;
     line-height: 30px;
     font-size: 16px;
     font-weight: 500;
+    white-space: pre-line;
 }
 
 .portfolio-idx-layout {

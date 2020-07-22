@@ -11,18 +11,15 @@ module.exports = (sequelize, DataTypes) => {
         content : {
             type: DataTypes.STRING,         // 내용
         },
-        files : {
-            type: DataTypes.STRING,         // 주고받은 파일 주소
-        },
         readState : {
-            type: DataTypes.STRING,         // 읽은지 여부
+            type: DataTypes.BOOLEAN,        // 읽은지 여부
         },
-        targetUser : {
-            type: DataTypes.JSON,         // 메시지의 상대방
+        target : {
+            type: DataTypes.INTEGER(11),    // 받는 이
         }
     });
     Mail.associate = function(models) {
-        Mail.belongsTo(models.user)
+        Mail.belongsTo(models.user)         // 보낸 이
     }
     return Mail;
 };

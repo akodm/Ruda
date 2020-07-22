@@ -60,7 +60,7 @@
     font-weight: 600;
 }
 
-.Header-nav-recommendbtn, .Header-nav-recommendbtn div{
+.Header-nav-recommendbtn, .Header-right div{
     padding-right: 10px;
     padding-left: 10px;
     cursor:pointer;
@@ -72,9 +72,12 @@
     width: 200px;
     justify-content: center;
 }
-.Header-nav-recommendbtn div:hover { 
+.Header-nav-recommendbtn {
+    width: 50%;
+    height: 75px;
+}
+.Header-nav-recommendbtn:hover { 
     color:#008fbb;
-    background-color: #e8f8ff73;
 }
 
 @media all and (min-width:1px) and (max-width:1300px) {
@@ -110,6 +113,12 @@
     .Header-nav-recommendbtn div {
         display: none;
     }
+}
+
+.Header-nav-layout {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 /* ----------------------- UpDown ------------------ */

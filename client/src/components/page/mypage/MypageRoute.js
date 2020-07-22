@@ -70,8 +70,10 @@ class MypageRoute extends Component {
             <div style={{width:"100%"}}>
                 {
                     userInfo ? 
-                    (userInfo.user.userCate === "user" ? <Rookie userInfo={userInfo} {...this.props} loginState={loginState} /> 
-                    : <Company companyInfo={userInfo} {...this.props} loginState={loginState} /> 
+                    (userInfo.user.userCate === "user" ? 
+                    <Rookie userInfo={userInfo} {...this.props} loginState={loginState} /> 
+                    : 
+                    <Company companyInfo={userInfo} {...this.props} loginState={loginState} /> 
                     ) 
                     : load ? <NotFound /> : ""
                 }

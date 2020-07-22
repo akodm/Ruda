@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import Chart from '../../../component/Chart';
+
+import axios from 'axios';
+import config from '../../../../client-configs';
 import TagChip from '../../../component/TagChip';
+import ProposalPopup from '../../../component/ProposalPopup';
 
 import Avatar from '@material-ui/core/Avatar';
 import EditIcon from '@material-ui/icons/Edit';
-//import SaveIcon from '@material-ui/icons/Save';
 import EmailIcon from '@material-ui/icons/Email';
 import LanguageIcon from '@material-ui/icons/Language';
 import HouseIcon from '@material-ui/icons/House';
@@ -26,10 +28,11 @@ class ViewProfile extends Component {
         super(props);
         this.state={
             imgPreview:"",
-            likeBtn:"none",
             shareAlert:"none",
             url :new URL(window.location.href),
             success:"none",
+
+            open : false,
         }
     }
     savepdf(){
@@ -56,14 +59,56 @@ class ViewProfile extends Component {
 
     EditProfile(){this.props.change(false)}
 
+    async likeSet() {
+        const { like, likeToggle, user, loginState, companyInfo } = this.props;
+        if(loginState) {
+            alert("본인을 추천 할 수 없습니다.");
+            return;
+        }
+        try {
+            if(like) {
+                let result = axios.delete(`${config.app.s_url}/likes/delete?userId=${user.id}&infoUserId=${companyInfo.userId}`);
+                let count = axios.get(`${config.app.s_url}/companyInfos/decrement?userId=${companyInfo.userId}`);
+
+                await Promise.all([result, count]).then(data => {
+                    result = data[0];
+                });
+
+                if(!result.data) {
+                    alert("추천 기능이 제대로 동작하지 않았습니다. 잠시 후 시도해 주세요.");
+                    return;
+                }
+                likeToggle(false);
+            }  else {
+                let result = axios.post(`${config.app.s_url}/likes/create`, {
+                    infoUserId : companyInfo.userId, userId : user.id,
+                });
+                let count = axios.get(`${config.app.s_url}/companyInfos/increment?userId=${companyInfo.userId}`);
+
+                await Promise.all([result, count]).then(data => {
+                    result = data[0];
+                });
+
+                if(!result.data) {
+                    alert("추천 기능이 제대로 동작하지 않았습니다. 잠시 후 시도해 주세요.");
+                    return;
+                }
+                likeToggle(true);
+            }
+        } catch(err) {
+            console.log("추천 기능 도중 에러 발생 : ", err);
+        }
+    }
+
+    psoposalPopupOpenClose(bool) { this.setState({ open : bool }) }
+
     render() {
-        //const{imgPreview}=this.state;
-        const { companyInfo,awardData,activityData } = this.props;
+        const { companyInfo,awardData,activityData,like,loginState,user } = this.props;
         const tag = companyInfo.companyTags;
         const Request = companyInfo.companyRequest;
         const Welfare = companyInfo.companyWelfare;
         const Rule = companyInfo.companyRule;
-        const {likeBtn,shareAlert,success}=this.state;
+        const {shareAlert,success,open}=this.state;
         return companyInfo ? (
             <div className="Mypage-profile">
                 {/* 공유하기 팝업 */}
@@ -78,6 +123,10 @@ class ViewProfile extends Component {
                         <p style={{display:success,fontSize:"14px",color:"#11addd"}}>복사가 완료되었습니다.</p> 
                     </div>
                 </div>
+
+                {/* 제안하기 팝업 */}
+                { open && <ProposalPopup guide={"기업에게 전달할 내용을 작성해주세요."} text={"기업에게 메시지 보내기"} user={user} info={companyInfo} psoposalPopupOpenClose={this.psoposalPopupOpenClose.bind(this)} /> }
+
                 <div className="Mypage-profile-Maininfo">
                     <div className="Mypage-profile-content-mainprofile">
                         <div className="Mypage-profile-content-userinfo">
@@ -162,12 +211,15 @@ class ViewProfile extends Component {
                                         <div className="Mypage-pages-title-icons-icon-c">
                                             <ShareIcon onClick={this.shareLink.bind(this)}/>
                                         </div>
-                                        <div className="Mypage-pages-title-icons-icon-c" >
-                                            {likeBtn==="none"?<FavoriteBorderIcon />:<FavoriteIcon style={{ color : "#11addd"}}/>}
+                                        <div className="Mypage-pages-title-icons-icon-c" onClick={this.likeSet.bind(this)}>
+                                            {!like ? <FavoriteBorderIcon />:<FavoriteIcon style={{ color : "#11addd"}}/>}
                                        </div>
-                                        <div className="Mypage-pages-title-icons-icon-c">
-                                            <MailOutlineIcon/>
-                                        </div>
+                                       {
+                                           !loginState &&
+                                           <div className="Mypage-pages-title-icons-icon-c">
+                                                <MailOutlineIcon onClick={() => this.setState({ open : true })}/>
+                                            </div>
+                                       }
                                     </div>
                                 </div>
                             </div>

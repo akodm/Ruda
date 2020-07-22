@@ -42,7 +42,7 @@ class Rboard extends Component {
     render() {
         const { userList, pagenation, rowCount } =this.state;
         let count = pagenation * rowCount;
-        let pageCount = userList.length > 0 ? Math.ceil(userList.length / 16) : "1";
+        let pageCount = userList.length > 0 ? Math.ceil(userList.length / 16) : 1;
         return (
             <div className="company-div">
                 <div  className="Company">

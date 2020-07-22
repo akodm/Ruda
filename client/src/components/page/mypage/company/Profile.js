@@ -26,7 +26,7 @@ class Profile extends Component {
     activityDelete(data){this.setState({activityData:data})};
 
     render() {
-        const {companyInfo,awardData,activityData,}=this.props;
+        const {companyInfo,awardData,activityData,like,likeToggle,loginState,user}=this.props;
         const {ChangeProfile}=this.state;
         return(
             <div className="Profile">
@@ -36,6 +36,10 @@ class Profile extends Component {
                     companyInfo={companyInfo} 
                     awardData={awardData}
                     activityData={activityData}
+                    user={user}
+                    like={like}
+                    likeToggle={(data) => likeToggle(data)}
+                    loginState={loginState}
                     change={this.ChangeProfiles.bind(this)}/>
                     :
                     <EditProfile 

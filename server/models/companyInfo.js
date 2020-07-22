@@ -68,9 +68,6 @@ module.exports = (sequelize, DataTypes) => {
         companyHistory : {
             type: DataTypes.JSON,     // 기업 연혁 { year, text }
         },
-        companyState : {
-            type: DataTypes.STRING(10),     // 기업의 현재 채용 상태
-        },
     });
     CompanyInfo.associate = function(models) {
         CompanyInfo.belongsTo(models.user);

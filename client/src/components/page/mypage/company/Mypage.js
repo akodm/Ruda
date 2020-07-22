@@ -18,28 +18,32 @@ class Mypage extends Component {
             activityData : [],
             hireData : [],
 
+            like : false,
+
             load : false,
         }
     }
 
     async componentDidMount() {
-        const { companyInfo } = this.props;
+        const { companyInfo, user } = this.props;
         try {
             let award = axios.get(`${config.app.s_url}/awards/all?userId=${companyInfo.userId}`);
             let activity = axios.get(`${config.app.s_url}/activitys/all?userId=${companyInfo.userId}`);
             let hire = axios.get(`${config.app.s_url}/hireBoards/one?userId=${companyInfo.userId}`);
+            let like = axios.get(`${config.app.s_url}/likes/one?userId=${user.id}&infoUserId=${companyInfo.userId}`);
 
-
-            await Promise.all([award,activity, hire]).then(data => {
+            await Promise.all([award,activity, hire, like]).then(data => {
                 award = data[0].data;
                 activity = data[1].data;
                 hire = data[2].data;
+                like = data[3].data;
             });
 
             this.setState({ 
                 awardData : award, 
                 activityData : activity,
                 hireData : hire,
+                like : like ? true : false,
             });
 
         } catch(err) {
@@ -52,8 +56,10 @@ class Mypage extends Component {
 
     hireSet(data) { this.setState({ hireData : data }); }
 
+    likeToggle(data) { this.setState({ like : data })}
+
     render() {
-        const { btnNum, load, awardData, activityData, hireData } = this.state;
+        const { btnNum, load, awardData, activityData, hireData, like } = this.state;
         const { companyInfo, user, loginState } = this.props;
         return (
             <div className="Mypage">
@@ -69,6 +75,10 @@ class Mypage extends Component {
                                 companyInfo={companyInfo} 
                                 awardData={awardData}
                                 activityData={activityData}
+                                like={like}
+                                user={user}
+                                loginState={loginState}
+                                likeToggle={this.likeToggle.bind(this)}
                                 /> :
                                 btnNum === 1 ?
                                 load && 

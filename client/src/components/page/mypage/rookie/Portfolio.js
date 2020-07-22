@@ -372,7 +372,7 @@ class Portfolio extends Component {
                         return <div className="portfolio-list-div" key={i}>
                             <div className="portfolio-idx-title">{data.title}<div>{loginState && <EditOutlinedIcon style={{cursor:"pointer"}} onClick={this.onChangeUpdate.bind(this, data, i)} />}{ loginState && <DeleteForeverOutlinedIcon style={{cursor:"pointer"}} onClick={this.portfolioDelete.bind(this, data.id)} />}</div></div>
                             <div className="portfolio-idx-date"><span>{data.startDate}~{data.endDate || "진행 중"}</span><span>구분: {data.projectCate}</span></div>
-                            <div className="portfolio-idx-contentBox"><span>{data.content}</span></div>
+                            <pre className="portfolio-idx-contentBox">{data.content}</pre>
                             <div className="portfolio-idx-layout">
                                 <div className="portfolio-idx-left">
                                     <div className="portfolio-idx-partnerTitle" style={{marginBottom:"15px"}}>나의 역할 : {data.position}</div>

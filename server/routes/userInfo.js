@@ -52,8 +52,11 @@ router.get("/yall", async (req, res) => {
 				{ model: User }
 			],
 			where : {
-				userState : {
-					[Op.or] : ["구직","구직/실습","실습"]
+				userTraningDateState : {
+					[Op.or] : [{
+						[Op.like] : "%취업%",
+						[Op.like] : "%실습%"
+					}]
 				},
 			}
 		});
@@ -163,7 +166,6 @@ router.put("/update", async(req, res) => {
 
 			userSuggestion : req.body.userSuggestion,
             userHireBool : req.body.userHireBool,
-            userState : req.body.userState,
             }, {
             where: {
                 userId : req.body.userId
@@ -273,10 +275,12 @@ router.post("/search", async (req, res) => {
 						userTags : models.Sequelize.literal(tag),
 						userField : models.Sequelize.literal(field),
 					},
-					userState : { [Op.or] : {
-						[Op.like] : "%구직%",
-						[Op.like] : "%실습%"
-					} }
+					userTraningDateState : {
+						[Op.or] : [{
+							[Op.like] : "%취업%",
+							[Op.like] : "%실습%"
+						}]
+					},
 				}
 			}
 		});
@@ -312,11 +316,19 @@ router.post("/popup", async (req, res) => {
 	try {
 		const result = await UserInfo.findAll({
 			where : {
-				[Op.or] : {
-					userTags : models.Sequelize.literal(tagQuery),
-					userAdd : models.Sequelize.literal(addQuery),
-					userField : { [Op.like] : "%" + req.body.field + "%" },
-					userField : { [Op.like] : "%" + req.body.occupation + "%" },
+				[Op.and] : {
+					[Op.or] : {
+						userTags : models.Sequelize.literal(tagQuery),
+						userAdd : models.Sequelize.literal(addQuery),
+						userField : { [Op.like] : "%" + req.body.field + "%" },
+						userField : { [Op.like] : "%" + req.body.occupation + "%" },
+					},
+					userTraningDateState : {
+						[Op.or] : [{
+							[Op.like] : "%취업%",
+							[Op.like] : "%실습%"
+						}]
+					},
 				}
 			}
 		});

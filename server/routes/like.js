@@ -27,18 +27,43 @@ router.get("/all", async (req, res) => {
 	}
 });
 
+router.get("/one", async (req, res) => {
+	try {
+		const result = await Like.findOne({
+			include : [
+				{ model: User }
+			],
+			where : {
+				userId : req.query.userId,
+				infoUserId : req.query.infoUserId,
+			},
+		});
+		res.send(result);
+	} catch (err) {
+		console.log(__filename + " 에서 유저 Like 하나 검색 에러 발생 내용= " + err);
+		res.send(false);
+	}
+});
+
 // 유저 Like 생성
 // userId => 좋아요를 누른 사용자 아이디
 // infoUserId => 좋아요 누른 페이지의 유저 아이디
 router.post("/create", async(req, res) => {
 	let result = null;
     try{
-        result = await Like.create({
-			infoUserId : req.body.infoUserId,
-			userId : req.body.userId,
+        result = await Like.findOrCreate({
+			where : {
+				infoUserId : req.body.infoUserId,
+				userId : req.body.userId,
+			},
+			defaults : {
+				infoUserId : req.body.infoUserId,
+				userId : req.body.userId,
+			}
 		});
     } catch(err) {
 		console.log(__filename + " 에서 유저 Like 생성 에러 발생 내용= " + err);
+		res.send(false);
     }
     res.send(result);
 });

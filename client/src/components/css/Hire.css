@@ -180,6 +180,7 @@
     border: none;
     resize: none;
     line-height: 25px;
+    white-space: pre-line;
 }
 
 .hire-box-field {

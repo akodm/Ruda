@@ -77,9 +77,6 @@ module.exports = (sequelize, DataTypes) => {
         userLike : {
             type: DataTypes.INTEGER(11),    // 받은 관심있어요 수
         },
-        userState : {
-            type: DataTypes.STRING(10),     // 현재 구직 상태
-        },
     });
     UserInfo.associate = function(models) {
         UserInfo.belongsTo(models.user);

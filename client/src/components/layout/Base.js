@@ -5,6 +5,7 @@ import axios from 'axios';
 import config from '../../client-configs';  // 컨피그 파일
 import '../css/Layout.css';
 import '../css/Popup.css';
+import '../css/MsgBox.css';
 
 // layout components
 import Header from './Header';
@@ -12,6 +13,7 @@ import Footer from './Footer';
 import DevMessage from '../component/DevMessage';
 import UpDown from '../component/UpDown';
 import Popup from '../component/Popup';
+import Msg from '../component/MessageBox';
 
 import NotFound from './NotFound';
 
@@ -24,6 +26,9 @@ import Info from '../page/info/Info';   // info
 import Cboard from '../page/board/Cboard';  // rookie board
 import Rboard from '../page/board/Rboard';  // company board
 import Mypage from '../page/mypage/MypageRoute';    // mypage
+
+import socketio from 'socket.io-client';
+const socket = socketio.connect(`${config.app.s_url}`);
 
 class Base extends Component {
     constructor(props){
@@ -38,8 +43,12 @@ class Base extends Component {
 
             userBoardData : [],
             companyBoardData : [],
+            receiveData : [],
+            sendData : [],
 
             open : { view : false, cate : "user" },
+            msg : false,
+            unReadMsg : 0,
 
             load : false,
         }
@@ -65,13 +74,26 @@ class Base extends Component {
                     }
                 })
                 let userId = await axios.get(`${config.app.s_url}/users/oneemail?userEmail=${verify.data.email}&authCate=${verify.data.tag}`);
+                
+                let recv = axios.get(`${config.app.s_url}/mails/receive?&target=${userId.data.id}`);
+                let send = axios.get(`${config.app.s_url}/mails/send?userId=${userId.data.id}`);
+
+                await Promise.all([recv, send]).then(data => {
+                    recv = data[0].data;
+                    send = data[1].data;
+                })
+                console.log(recv)
+                console.log(send)
+
                 this.setState({
                     user : {
                         id : userId.data.id,
                         tag : verify.data.tag,
                         email : verify.data.email,
                         cate : userId.data.userCate,
-                    }
+                    },
+                    receiveData : recv,
+                    sendData : send
                 });
             }
 
@@ -79,6 +101,7 @@ class Base extends Component {
                 userBoardData : (await rookies).data,
                 companyBoardData : (await companys).data,
             });
+
         } catch(err) {
             console.log("verify err : " + err);
             localStorage.removeItem("users");
@@ -106,14 +129,17 @@ class Base extends Component {
     // 로드 세팅
     loadSet(bool) { this.setState({ load : bool }); }
 
+    // 메시지 팝업 제어
+    msgOpenClose(bool) { this.setState({ msg : bool }); }
+
     render() {
-        const { user, userBoardData, companyBoardData, load, open } = this.state;
+        const { user, userBoardData, companyBoardData, load, open, msg, unReadMsg, receiveData, sendData } = this.state;
         return load ? (
             <div className="base-main">
                  <Router>
                     <div style={{height:"75px",width:"100%"}}></div>
                     {/*상단 */}
-                    <Header loadSet={this.loadSet.bind(this)} user={user} openClose={this.openClose.bind(this)} />
+                    <Header unReadMsg={unReadMsg} loadSet={this.loadSet.bind(this)} user={user} openClose={this.openClose.bind(this)} msgOpenClose={this.msgOpenClose.bind(this)} />
 
                     { open.view && <Popup user={user} open={open} openClose={this.openClose.bind(this)} boardData={ open.cate === "company" ? userBoardData : companyBoardData } /> }
                      <Switch>
@@ -131,6 +157,7 @@ class Base extends Component {
                         {/* Not Found Page 주소에 일치하는 패스가 없을 경우 */}
                         <Route component={NotFound} ></Route>
                     </Switch>
+                    { user.email && msg && <Msg socket={socket} receiveData={receiveData} sendData={sendData} user={user} msg={msg} msgOpenClose={this.msgOpenClose.bind(this)} /> }
                     {/*개발자에게 문의버튼 */}
                     <DevMessage user={user} />
                     {/*화면업다운버튼*/ }

@@ -27,3 +27,7 @@ input::placeholder {
 div, a, span, input, input::placeholder, textarea, textarea::placeholder, pre {
     font-family: 'BBTreeGB';
 }
+
+pre {
+    white-space: pre-wrap;
+}

@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import config from '../../../../client-configs';
 
 import Chart from '../../../component/Chart';
 import TagChip from '../../../component/TagChip';
+import ProposalPopup from '../../../component/ProposalPopup';
 
 import Avatar from '@material-ui/core/Avatar';
 import EditIcon from '@material-ui/icons/Edit';
@@ -28,10 +31,11 @@ class ViewProfile extends Component {
         super(props);
         this.state={
             imgPreview:"",
-            likeBtn:"none",
             shareAlert:"none",
             url :new URL(window.location.href),
             success:"none",
+
+            open : false,
         }
     }
     savepdf(){
@@ -57,14 +61,56 @@ class ViewProfile extends Component {
     close(){this.setState({shareAlert:"none",})}
 
     EditProfile(){this.props.change(false)}
-     
+
+    async likeSet() {
+        const { like, likeToggle, userInfo, user, loginState } = this.props;
+        if(loginState) {
+            alert("본인을 추천 할 수 없습니다.");
+            return;
+        }
+        try {
+            if(like) {
+                let result = axios.delete(`${config.app.s_url}/likes/delete?userId=${user.id}&infoUserId=${userInfo.userId}`);
+                let count = axios.get(`${config.app.s_url}/userInfos/decrement?userId=${userInfo.userId}`);
+
+                await Promise.all([result, count]).then(data => {
+                    result = data[0];
+                });
+
+                if(!result.data) {
+                    alert("추천 기능이 제대로 동작하지 않았습니다. 잠시 후 시도해 주세요.");
+                    return;
+                }
+                likeToggle(false);
+            }  else {
+                let result = axios.post(`${config.app.s_url}/likes/create`, {
+                    infoUserId : userInfo.userId, userId : user.id,
+                });
+                let count = axios.get(`${config.app.s_url}/userInfos/increment?userId=${userInfo.userId}`);
+
+                await Promise.all([result, count]).then(data => {
+                    result = data[0];
+                });
+
+                if(!result.data) {
+                    alert("추천 기능이 제대로 동작하지 않았습니다. 잠시 후 시도해 주세요.");
+                    return;
+                }
+                likeToggle(true);
+            }
+        } catch(err) {
+            console.log("추천 기능 도중 에러 발생 : ", err);
+        }
+    }
+
+    psoposalPopupOpenClose(bool) { this.setState({ open : bool }) }
+    
     render() {
-        const { userInfo,awardData,certificateData,activityData} = this.props;
+        const { userInfo,awardData,certificateData,activityData,like,loginState,user } = this.props;
         const Tag = userInfo.userTags;
         const Keyword = userInfo.userKeyword;
         const Specialty = userInfo.userSpecialty;
-        const {likeBtn,shareAlert,success}=this.state;
-        console.log(activityData);
+        const {shareAlert,success,open}=this.state;
         return userInfo ? (
             <div className="Mypage-profile">
                 {/* 공유하기 팝업 */}
@@ -79,6 +125,10 @@ class ViewProfile extends Component {
                         <p style={{display:success,fontSize:"14px",color:"#11addd"}}>복사가 완료되었습니다.</p> 
                     </div>
                 </div>
+
+                {/* 제안하기 팝업 */}
+                { open && <ProposalPopup guide={"구직자에게 제안할 내용을 작성해주세요."} text={"채용/실습 제안하기"} user={user} info={userInfo} psoposalPopupOpenClose={this.psoposalPopupOpenClose.bind(this)} /> }
+
                 <div className="Mypage-profile-Maininfo">
                     <div className="Mypage-profile-content-mainprofile">
                        <div className="Mypage-profile-content-userinfo">
@@ -163,12 +213,15 @@ class ViewProfile extends Component {
                                         <div className="Mypage-pages-title-icons-icon">
                                             <ShareIcon onClick={this.shareLink.bind(this)}/>
                                         </div>
-                                        <div className="Mypage-pages-title-icons-icon" >
-                                            {likeBtn==="none"?<FavoriteBorderIcon />:<FavoriteIcon style={{ color : "#11addd"}}/>}
+                                        <div className="Mypage-pages-title-icons-icon" onClick={this.likeSet.bind(this)}>
+                                            {!like ? <FavoriteBorderIcon /> : <FavoriteIcon style={{ color : "#11addd"}}/>}
                                         </div>
-                                        <div className="Mypage-pages-title-icons-icon">
-                                            <MailOutlineIcon/>
-                                        </div>
+                                        {
+                                           !loginState &&
+                                           <div className="Mypage-pages-title-icons-icon-c">
+                                                <MailOutlineIcon onClick={() => this.setState({ open : true })}/>
+                                            </div>
+                                       }
                                     </div>
                                 </div>
                             </div>

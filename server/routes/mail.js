@@ -5,7 +5,7 @@ let models = require("../models");
 // DB Setting --------------------------------------------------------
 const Mail = models.mail;
 const User = models.user;
-const Op = models.sequelize.Op;
+const Op = models.Sequelize.Op;
 
 // DB CRUD -----------------------------------------------------------
 
@@ -26,20 +26,38 @@ router.get("/all", async (req, res) => {
 	}
 });
 
-// 유저 메일 한명 조회
-router.get("/one", async (req, res) => {
+// 유저 받은 메일 전체 조회
+router.get("/receive", async (req, res) => {
 	try {
-		const result = await Mail.findOne({
+		const result = await Mail.findAll({
 			include : [
 				{ model: User }
 			],
 			where : {
-				userId : req.query.userId
-			},
+				target : req.query.target,
+			}
 		});
 		res.send(result);
 	} catch (err) {
-		console.log(__filename + " 에서 유저 메일 한명 검색 에러 발생 내용= " + err);
+		console.log(__filename + " 에서 유저 받은 메일 전체 검색 에러 발생 내용= " + err);
+		res.send(false);
+	}
+});
+
+// 유저 보낸 메일 전체 조회
+router.get("/send", async (req, res) => {
+	try {
+		const result = await Mail.findAll({
+			include : [
+				{ model: User }
+			],
+			where : {
+				userId : req.query.userId,
+			}
+		});
+		res.send(result);
+	} catch (err) {
+		console.log(__filename + " 에서 유저 보낸 메일 전체 검색 에러 발생 내용= " + err);
 		res.send(false);
 	}
 });
@@ -49,12 +67,12 @@ router.post("/create", async(req, res) => {
 	let result = null;
     try{
         result = await Mail.create({
-				title : req.body.title,
-				content : req.body.content,
-				files : req.body.files,
-				userId : req.body.userId,
-				targetUser : req.body.targetUser,
-			});
+			title : req.body.title,
+			content : req.body.content,
+			target : req.body.target,
+			userId : req.body.userId,
+			readState : false
+		});
     } catch(err) {
 		console.log(__filename + " 에서 유저 메일 생성 에러 발생 내용= " + err);
     }
@@ -66,13 +84,12 @@ router.put("/update", async(req, res) => {
     let result = null;
     try {
         await Mail.update({ 
-            title : req.body.title,
+			title : req.body.title,
 			content : req.body.content,
-			files : req.body.files,
+			readState : req.body.readState,
             }, {
             where: {
 				id : req.body.id,
-				userId : req.body.userId,
             }
         });
         result = true;
@@ -90,7 +107,6 @@ router.delete("/delete", async(req, res) => {
         await Mail.destroy({
             where: {
 				id: req.query.id,
-				userId : req.query.userId,
             }
 		});
 		result = true;

@@ -27,10 +27,9 @@ class Profile extends Component {
     awardDelete(data){this.setState({awardData:data})};
     certificateDelete(data){this.setState({certificateData:data})};
     activityDelete(data){this.setState({activityData:data})};
-    
 
     render() {
-        const { userInfo, awardData, certificateData,activityData} = this.props;
+        const { userInfo, user, awardData, certificateData, activityData, like, likeToggle, loginState } = this.props;
         const { ChangeProfile } = this.state;
         return (
             <div className="Profile">
@@ -41,7 +40,11 @@ class Profile extends Component {
                         certificateData={certificateData} 
                         activityData={activityData}
                         userInfo={userInfo} 
+                        user={user}
+                        loginState={loginState}
                         change={this.ChangeProfiles.bind(this)}
+                        like={like}
+                        likeToggle={(data) => likeToggle(data)}
                     />
                     :
                     <EditProfile 

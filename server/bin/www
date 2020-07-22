@@ -32,7 +32,7 @@ let io = socket(server);
 io.sockets.on('connect', (socket) => {
   console.log('유저 접속');
 
-  socket.on('sned', (data) => {
+  socket.on('send', (data) => {
     console.log("전송한 메시지 : " + data.msg);
   });
 

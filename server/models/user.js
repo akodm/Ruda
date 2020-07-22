@@ -21,12 +21,12 @@ module.exports = (sequelize, DataTypes) => {
         },
     });
     User.associate = function(models) {
-        User.hasMany(models.mail);
         User.hasMany(models.portfolio);
         User.hasMany(models.award);
         User.hasMany(models.certificate);
         User.hasMany(models.activity);
         User.hasMany(models.like);
+        User.hasMany(models.mail);
     }
     return User;
 };

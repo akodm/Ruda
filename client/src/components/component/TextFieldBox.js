@@ -17,7 +17,7 @@ class TextFieldBox extends Component {
         if(value.length >= max) { component.setState({ [errName] : true });
         } else { component.setState({ [errName] : false }); }
 
-        if(/[!@#$%^&*(){}.?\/~`'";:,+_=|]/g.test(e.target.value)) {
+        if(/[@#$%^&*(){}?`'";:+_=|]/g.test(e.target.value)) {
             component.setState({ [name] : "" });
             return;
         }
@@ -32,7 +32,7 @@ class TextFieldBox extends Component {
         if(value.length >= max) { component.setState({ [errName] : true });
         } else { component.setState({ [errName] : false }); }
 
-        if(/[!@#$%^&*(){}.?\/~`'";:,+_=|]/g.test(e.target.value) || /\D{1,}/g.test(e.target.value)) {
+        if(/[!@#$%^&*(){}.?~`'";:,+_=|]/g.test(e.target.value) || /\D{1,}/g.test(e.target.value)) {
             component.setState({ [name] : "" });
             return;
         }
@@ -47,7 +47,7 @@ class TextFieldBox extends Component {
         if(value.length >= max) { component.setState({ [errName] : true });
         } else { component.setState({ [errName] : false }); }
 
-        if(/[!@#$%^&*(){}.?\/~`'";:,+_=|]/g.test(e.target.value) || /\D{1,}/g.test(e.target.value)) {
+        if(/[!@#$%^&*(){}.?~`'";:,+_=|]/g.test(e.target.value) || /\D{1,}/g.test(e.target.value)) {
             component.setState({ [name] : "" });
             return;
         }
