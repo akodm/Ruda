@@ -1,0 +1,99 @@
+.DevMessage{
+    position: fixed;
+    z-index: 1000;
+    bottom: 2%;
+    left: 2%;
+    width: 180px;
+    height: 45px;
+    font-size: 1rem;
+    color:#89b1d9;
+    font-weight: 600;
+    background-color: white;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    box-shadow: 0px 0px 10px rgba(128, 128, 128, 0.158);
+    cursor: pointer;
+}
+.DevMessage:hover{
+    background-color: #f6feff;
+}
+.DevMessage-pop{
+    position: fixed;
+    background-color: white;
+    border-radius: 10px;
+    z-index: 1100;
+    bottom: 8%;
+    left: 2%;
+    width: 300px;
+    height: 500px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 0px 10px rgba(128, 128, 128, 0.158);
+    animation-name: DevMessage;
+    animation-duration: 0.5s;
+}
+
+@keyframes DevMessage {
+    0% {
+        opacity: 0;
+        margin-top:60% ;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+.DevMessage-title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: #96c2ee;
+    font-weight: 600;
+}
+
+.DevMessage-text {
+    margin-top: 10px;
+    font-size: 12px;
+    font-size: small;
+    color: #969696;
+}
+.DevMessage-mailtitle-select{
+    width: 97%;
+    height: 10%;
+    padding:3px;
+    resize: none;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid rgba(138, 138, 138, 0.397);
+    margin-top: 20px;
+}
+.DevMessage-content {
+    width: 90%;
+    resize: none;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid rgba(138, 138, 138, 0.397);
+    margin-top: 10px;
+    min-height: 320px;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+.DevMessage-btn {
+    cursor: pointer;
+    margin-top: 10px;
+    background-color: #96c2ee;
+    border-radius: 10px;
+    padding: 8px;
+    color: #ffffff;
+}
+
+.DevMessage-btn:hover {
+    background-color: #a0c8f0;
+}

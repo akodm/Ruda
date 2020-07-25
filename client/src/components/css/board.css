@@ -1,0 +1,443 @@
+/*company board*/
+
+/*CompanyTitle*/
+.company-div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.Company{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: NanumSquareEB;
+    width: 60%;
+}
+.Company-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin: 20px;
+    color: #929292;
+    
+}
+.Company-title span{
+    font-weight: 600;
+    font-size: 14pt;
+}
+.Company-title-select{
+    color: #686868;
+    border: none;
+}
+
+/*CompanySerch*/
+.Company-search{
+    box-shadow: 0 0 8px 0.2px rgba(131, 131, 131, 0.13);
+    border: solid 1px #eeeeee;
+    border-radius: 7px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+.Company-layout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Company-search-title{
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+}
+.Company-search-title-title{
+    color: #929292;
+    font-size: 15px;
+    font-weight: 600;
+}
+.Company-search-title-states{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-right: 20px;
+}
+.Company-search-title-state{
+    justify-content: center;
+    flex-direction: row;
+    display: flex;
+    height: 15px;
+    align-items: center;
+    font-size: 12px;
+}
+.Company-search-title-state span{
+    margin: 10px;
+}
+.Company-search-title-state-training{
+    width: 8px;
+    height: 8px;
+    background-color:#a5ccf5;
+    border-radius: 50%;
+
+}
+.Company-search-title-state-hire{
+    width: 8px;
+    height: 8px;
+    background-color:#f799f5;
+    border-radius: 50%;
+}
+
+.Company-search-content {
+    display: flex;
+    justify-content: center;
+}
+
+.Company-search-div {
+    width: 90%;
+    margin-bottom: 45px;
+}
+
+.Company-search-box-layout {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.Company-search-search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Company-search-tag-box {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.Company-search-tag-list {
+    width: 100%;
+    height: 150px;
+    margin-top: 10px;
+    border: 1px solid rgba(153, 153, 153, 0.479);
+    border-radius: 5px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.Company-search-field-box {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+/*CompanyS Card*/
+.Company-Card{
+    display: flex;
+    flex-direction: column;
+    width: 230px;
+    height: 310px;
+    border-radius: 7px;
+    box-shadow: 0 0 8px 0.2px rgba(131, 131, 131, 0.13);
+    border: solid 1px #eeeeee;
+    padding: 10px;
+    margin: 15px;
+    
+}
+.Company-Card:hover{
+    background-color: #ececec63;
+}
+.Company-Card-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.Company-Card-like span{
+    font-size: 14px;
+    align-items: center;
+    margin: 5px;
+    
+}
+.Company-Card-state{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 10px;
+    height: 30px;
+}
+.Company-Card-Profile-img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+.Company-Card-Profile-img img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #f1f1f1;
+}
+.Company-Card-Profile-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: NanumSquareEB;
+    width: 220px;
+    text-align: center;
+    margin: 5px;
+    color: #4b4b4b;
+}
+.Company-Card-Profile-info-name{
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: 600;
+}
+.Company-Card-Profile-info-text{
+    font-size: 12px;
+    margin-top: 10px;
+    width: 200px;
+    line-height: 20px;
+}
+.Company-Card-Profile-info-position{
+    margin-top: 10px;
+    font-size: 14px;
+    color: #3274b6;
+}
+.Company-Card-Profile-info-pt{
+    margin-top: 10px;
+    font-size: 14px;
+    color: #f14c7e;
+}
+.Company-Card-Profile-info-tags{
+    margin-top: 10px;
+    font-size: 13px;
+
+}
+.Company-Card-Profile-info-tags-tag{
+    margin: 5px;
+    color: #8b8b8b;
+}
+.Company-Card-addLook{
+    width:230px ;
+    height: 40px;
+    border: none;
+    background-color: #89b1d9;
+    color: white;
+    font-size: 14px;
+    margin-top: 5px;
+}
+/*Company-CardView*/
+.Company-CardView{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+    justify-content: center;
+    max-width: 1130px;
+}
+.Company-CardView-PagiNation{
+    margin: 40px;
+}
+
+/* Rookie board*/
+
+/*RookieTitle*/
+.Rookie{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: NanumSquareEB;
+    width: 100%;
+}
+.Rookie-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 1150px;
+    margin: 20px;
+    color: #929292;
+}
+.Rookie-title span{
+    font-weight: 600;
+    font-size: 14pt;
+}
+.Rookie-title-select{
+    color: #686868;
+    border: none;
+}
+
+/*RookieSerch*/
+.Rookie-search{
+    width: 1109px;
+    height: 166px;
+    box-shadow: 0 0 8px 0.2px rgba(131, 131, 131, 0.13);
+    border: solid 1px #eeeeee;
+    border-radius: 7px;
+    margin-bottom: 15px;
+
+}
+.Rookie-search-title{
+    width: 1100px;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+
+}
+.Rookie-search-title-title{
+    color: #929292;
+    font-size: 15px;
+    font-weight: 600;
+}
+.Rookie-search-title-states{
+    display: flex;
+    width: 150px;
+    justify-content: center;
+    flex-direction: row;
+    margin-right: 20px;
+}
+.Rookie-search-title-state{
+    justify-content: center;
+    flex-direction: row;
+    display: flex;
+    width: 100px;
+    height: 15px;
+    align-items: center;
+    font-size: 12px;
+}
+.Rookie-search-title-state span{
+    margin: 10px;
+}
+.Rookie-search-title-state-training{
+    width: 8px;
+    height: 8px;
+    background-color:#a5ccf5;
+    border-radius: 50%;
+
+}
+.Rookie-search-title-state-hire{
+    width: 8px;
+    height: 8px;
+    background-color:#f799f5;
+    border-radius: 50%;
+}
+
+/*RookieSerch*/
+.Rookie-Card{
+    display: flex;
+    flex-direction: column;
+    width: 230px;
+    height: 310px;
+    border-radius: 7px;
+    box-shadow: 0 0 8px 0.2px rgba(131, 131, 131, 0.13);
+    border: solid 1px #eeeeee;
+    padding: 10px;
+    margin: 15px;
+}
+.Rookie-Card:hover{
+    background-color: #f1f1f198;
+}
+.Rookie-Card-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.Rookie-Card-like span{
+    font-size: 14px;
+    align-items: center;
+    margin: 5px;
+    
+}
+.Rookie-Card-state{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 10px;
+    height: 30px;
+}
+.Rookie-Card-Profile-img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+.Rookie-Card-Profile-img img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #f1f1f1;
+}
+.Rookie-Card-Profile-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: NanumSquareEB;
+    width: 220px;
+    text-align: center;
+    margin: 5px;
+    color: #4b4b4b;
+}
+.Rookie-Card-Profile-info-name{
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: 600;
+}
+.Rookie-Card-Profile-info-text{
+    font-size: 12px;
+    margin-top: 10px;
+    width: 200px;
+    line-height: 20px;
+}
+.Rookie-Card-Profile-info-position{
+    margin-top: 10px;
+    font-size: 14px;
+    color: #3274b6;
+}
+.Rookie-Card-Profile-info-pt{
+    margin-top: 10px;
+    font-size: 14px;
+    color: #f14c7e;
+}
+.Rookie-Card-Profile-info-tags{
+    margin-top: 10px;
+    font-size: 13px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.Rookie-Card-Profile-info-tags-tag{
+    margin: 5px;
+    color: #8b8b8b;
+}
+.Rookie-Card-addLook{
+    width:230px ;
+    height: 40px;
+    border: none;
+    background-color: #89b1d9;
+    color: white;
+    font-size: 14px;
+    margin-top: 5px;
+}
+/*Rookie-CardView*/
+.Rookie-CardView {
+    display: flex;
+    flex-direction: row;
+    max-width: 1160px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+    padding-left: 32px;
+}
+.Rookie-CardView-PagiNation{
+    margin: 40px;
+}

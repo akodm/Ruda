@@ -1,0 +1,243 @@
+/* 포트폴리오 css */
+.portfolio{
+    padding:40px;
+}
+.portfolio-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    
+}
+
+.portfolio-first {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    line-height: 40px;
+    text-align: center;
+    margin-bottom: 200px;
+    margin-top: 80px;
+    height: 200px;
+}
+
+.portfolio-guideDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.portfolio-content {
+    display: flex;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    align-items: center;
+}
+
+.portfolio-content:hover {
+    color:#5590c0;
+}
+
+.portfolio-guide {
+    font-size: 14px;
+}
+
+/* ------------------ 포트폴리오 추가창 css ------------------- */ 
+
+.portfolio-popup {
+    position: fixed;
+    width: 100%;
+    height: 101.7%;
+    background-color: rgba(104, 103, 103, 0.548);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    top: 2%;
+    left: 0;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+@keyframes portfolio {
+    0% {
+        opacity: 0;
+        margin-top: 20%;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.portfolio-popup > ::-webkit-scrollbar,::-webkit-scrollbar-thumb{width: 5px;background-color: rgb(189, 189, 189);border-radius: 3px;}
+.portfolio-popup > ::-webkit-scrollbar-track{background-color: white;border-radius: 10x;}
+
+.portfolio-add-div {
+    width: 600px;
+    padding: 12px;
+    min-height: 800px;
+    max-height: 800px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(172, 172, 172);
+    border-radius: 3px;
+    align-self: center;
+    background-color: white;
+    box-shadow: 0px 3px 10px 0px rgb(180, 180, 180);
+    overflow-y: auto;
+    opacity: 1;
+    animation-name: portfolio;
+    animation-duration: 0.5s;
+}
+
+.portfolio-add-title {
+    display: flex;
+    justify-content: center;
+    margin: 25px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.rowLayout {
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+    align-items: center;
+}
+
+.portfolio-textarea {
+    resize: none;
+    min-height: 100px;
+    margin-bottom: 25px;
+    border: 1px solid rgb(187, 187, 187);
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 10px;
+    font-weight: 500;
+}
+.portfolio-textarea::placeholder {
+    color: rgba(112, 112, 112, 0.808);
+}
+
+.portfolio-partner-div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-height: 50px;
+    overflow: auto;
+}
+
+.portfolio-img-div {
+    width: 100%;
+    height: 250px;
+    border: 1px solid rgb(187, 187, 187);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+.portfolio-close {
+    margin: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.protfolio-rowLayout {
+    display: flex;
+    align-items: center;
+}
+
+/* ------------------------ 포트폴리오 뷰 -------------------- */
+
+.portfolio-list-div {
+    border-bottom: 1px solid rgba(102, 102, 102, 0.418);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 25px;
+}
+
+.portfolio-idx-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.portfolio-idx-date {
+    font-size: 14px;
+    color: rgba(71, 71, 71, 0.767);
+    display: flex;
+    justify-content: space-between;
+}
+
+.portfolio-idx-contentBox {
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    margin-bottom: 10px;
+    line-height: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    white-space: pre-line;
+}
+
+.portfolio-idx-layout {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.portfolio-idx-left {
+    width: 73%;
+    display: flex;
+    flex-direction: column;
+}
+
+.portfolio-idx-right {
+    width: 27%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.portfolio-idx-partnerTitle {
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.portfolio-idx-partnerBox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+    width: 70%;
+}
+
+.portfolio-idx-imageArr {
+    display: flex;
+    flex-direction: row;
+    width: 270px;
+    flex-wrap: wrap;
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+.portfolio-imageviewDiv {
+    min-width: 200px;
+    width: 900px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.portfolio-imaPre {
+    width: 100%;
+    height: auto;
+}

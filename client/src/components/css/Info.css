@@ -1,0 +1,180 @@
+/* ------------------------ Info Main ------------------------*/
+.Info-main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(230, 230, 230, 0.247);
+    font-family: NanumSquareB;
+  
+}
+
+.Info-main > h2 {
+    margin-top: 100px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.Info-seltText1 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.Info-seltText2 {
+    text-align: center;
+    font-size: 14px;
+    margin: 10px;
+    line-height: 30px;
+}
+
+.Info-companySelt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 600px;
+    height: 300px;
+    background-color: rgba(255, 255, 255, 0.932);
+    border-radius: 10px;
+    border: 1px solid rgba(148, 148, 148, 0.562);
+    box-shadow: 0px 3px 50px 10px rgba(143, 143, 143, 0.432);
+    animation-name: info-popup;
+    animation-duration: 0.6s;
+}
+
+@keyframes info-popup {
+    0% {
+        margin-top: 20%;
+        opacity: 0;
+    }
+    100% {
+
+    }
+}
+
+.Info-select {
+    width: 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.Info-body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Info-main-title{
+    color:#646464; 
+    animation-name: info-title;
+    animation-duration: 3s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+@keyframes info-title {
+    0% {
+        width: 0px;
+        opacity: 0;
+    }
+    100% {
+        width: 700px;
+    }
+}
+
+/* ------------------------ Rookie ------------------------*/
+/* 개인정보 */
+.Info-rookie-main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.Info-rookie-title {
+    width: 700px;
+    margin: 10px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.Info-rookie-body {
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid rgba(175, 175, 175, 0.281);
+    margin-bottom: 10px;
+    padding: 50px;
+}
+
+.Info-rookie-imgLayout {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+}
+
+.Info-rookie-inputLayoutDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+/* 최근 학력 */
+
+.Info-rookie-dateLayout {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+/* 본인 어필 */
+
+.Info-tag-box {
+    width: 700px;
+    min-height: 100px;
+    overflow-y: auto;
+    border: 1px solid rgba(102, 102, 102, 0.363);
+    border-radius: 5px;
+    margin-top: 25px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.Info-rookie-agree {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* ------------------------ Company ------------------------*/
+
+.Info-company-Layout {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.Info-company-ruleChip {
+    border: 1px solid rgba(68, 0, 255, 0.534);
+    margin: 10px;
+    border-radius: 7px;
+    padding: 5px;
+    cursor: pointer;
+    color: #646464;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+

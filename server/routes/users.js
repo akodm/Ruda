@@ -5,6 +5,7 @@ let crypto = require("crypto");
 let configs = require("../server-configs");
 let passport = require('passport');
 let jwt = require('jsonwebtoken');
+const config = require('../server-configs');
 
 // DB Setting --------------------------------------------------------
 const User = models.user;
@@ -268,7 +269,7 @@ router.get('/google/callback',
 		} catch(err) {
 			console.log(__filename + " 에서 유저 생성 에러 발생 내용= " + err);
 		}
-        res.redirect(`http://localhost:3000/easy?state=${state}&value=${req.user._json.email}&tag=google`);
+        res.redirect(`${config.app.c_local}/easy?state=${state}&value=${req.user._json.email}&tag=google`);
 	}
 );
 
@@ -295,7 +296,7 @@ router.get('/facebook/callback',
 		} catch(err) {
 			console.log(__filename + " 에서 유저 생성 에러 발생 내용= " + err);
 		}
-        res.redirect(`http://localhost:3000/easy?state=${state}&value=${req.user._json.id}&tag=facebook`);
+        res.redirect(`${config.app.c_local}/easy?state=${state}&value=${req.user._json.id}&tag=facebook`);
 	}
 );
 
@@ -321,16 +322,21 @@ router.get('/naver/callback', passport.authenticate('naver', { session : false, 
 		} catch(err) {
 			console.log(__filename + " 에서 유저 생성 에러 발생 내용= " + err);
 		}
-        res.redirect(`http://localhost:3000/easy?state=${state}&value=${req.user._json.email}&tag=naver`);
+        res.redirect(`${config.app.c_local}/easy?state=${state}&value=${req.user._json.email}&tag=naver`);
     }
 );
 
 // 로컬 스토리지에 있는 태그와 토큰값을 검증해서 되돌려줌
 router.get('/verify', passport.authenticate('jwt', { session: false }), (req, res) => {
-	res.json({
-		tag : req.user.authCate,
-        email: req.user.email,
-    });
+	try {
+		res.json({
+			tag : req.user.authCate,
+			email: req.user.email,
+		});
+	} catch(err) {
+		console.log("verify expire : ", err);
+		res.send(false);
+	}
 });
 
 router.get('/logout', (req,res) => {
@@ -339,7 +345,7 @@ router.get('/logout', (req,res) => {
 	} catch (err) {
 		console.log(__filename + "에서 에러 : " + err);
 	}
-	res.redirect("http://localhost:3000/");
+	res.redirect(`${config.app.c_local}`);
 });
 
 // 구글, 페이스북, 네이버
@@ -369,7 +375,7 @@ function oauthLogin(payload) {
 	//	email : user.email 
 	//} = json type obj (require)
 	let result = null;
-	result = jwt.sign(payload, configs.app.secretKey, { expiresIn: 1 });
+	result = jwt.sign(payload, configs.app.secretKey, { expiresIn: '24h' });
 	result = {
 		tag : payload.tag,
 		token : "Bearer " + result

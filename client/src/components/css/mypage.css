@@ -1,0 +1,420 @@
+.Mypage{
+    width: 100%;
+    display: flex;
+    background-color: rgba(230, 230, 230, 0.247);
+    font-family: NanumSquareB;
+    color:#727272;
+    flex-direction: column;
+}
+.Mypage-frame{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+hr {
+    border: 1px solid rgba(0, 0, 0, 0.363);
+}
+/*-마이페이지 -*/
+.Mypage-pages{
+    width: 1100px;
+    background-color: white;
+    border: 1px solid rgba(228, 228, 228, 0.692);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-radius: 20px;
+}
+/*-마이페이지 타이틀-*/
+.Mypage-pages-title-frame{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+.Mypage-pages-title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+}
+.hochi{
+    width: 25px;
+    height: 25px;
+    margin: 15px;
+} 
+.Mypage-pages-title-icons{
+    display: flex;
+    flex-direction: row;
+}
+.Mypage-pages-title-icons-icon{
+    margin: 20px;
+    color: rgb(177, 177, 177);
+}
+.Mypage-pages-title-icons-icon:hover{
+    color: #11addd;
+    cursor: pointer;
+}
+.Mypage-input{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.Mypage-content {
+    width: 100%;
+}
+
+.Mypage-content-main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/*-마이페이지 프로필 타이틀 및 틀-*/
+
+.Mypage-profile-title{
+    font-size: 18px;
+    color:#838383;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.Mypage-profile-title-icons{
+    color: rgb(184, 184, 184);
+    margin-left:10px; 
+}
+.Mypage-profile-title-icons:hover{
+    color: rgb(126, 126, 126);
+}
+/*--프로필 왼쪽영역-*/
+.Mypage-profile-content-mainprofile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    width: 100%;
+}
+.profileimg{
+    border-radius: 50%;
+    width: 130px;
+    height: 130px;
+}
+.Mypage-profile-content-userinfo{
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.Mypage-profile-content-userinfo-graph{
+    display: flex;
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: center;
+    width: 100%;
+}
+.Mypage-profile-content-userinfo-data{
+    display: flex;
+    flex-direction: column; 
+    width: 100%;
+    padding:30px;
+}
+.Mypage-profile-content-userinfo-info{
+    display: flex;
+    flex-direction: column; 
+}
+.Mypage-profile-content-userinfo-profile{
+    width: 25%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    background-color: #c2effd;
+    align-items: center;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.profile-intro,.profile-userinfo{
+    font-size: 14px;
+    width: 100%; 
+}
+.profile-intro-title,.profile-userinfo-title{
+    text-align: center;
+    font-weight: 600;
+    font-size: 15px;
+    height: 20px;
+}
+.profile-intro-title {
+    color: black;
+}
+.profile-username{
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+}
+.profile-text{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    margin-bottom:3px;
+    font-size: 14px;
+}
+.profile-profile{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 10px;
+}
+
+.profile-text > p{
+    margin: 10px;
+    font-size: 14px;
+}
+
+/*--프로필 오른쪽영역-*/
+
+.profile-chart-info{
+    width: 300px;
+    height:280px;
+    margin-left: 0px;
+    justify-content: center;
+
+}
+
+.profile-title-text {
+    width: 100px;
+}
+
+.profile-title-line {
+    height: 2px;
+    width: 100%;
+    margin-left: 10px;
+    background-color: rgb(158, 158, 158);
+}
+
+.profile-chart-info-title,.profile-keyword-title,.profile-skill-title,.profile-inschool-title,.profile-outschool-title,.profile-chart-info-title{
+    font-size: 18px;
+    font-weight: 600;
+    margin: 10px;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-chart-info-title {
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+
+.profile-chart-info-text{
+    font-size: 14px;
+    margin-left: 30px;
+}
+.profile-keyword-text{
+    margin-left: 30px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.keyword,.stack{
+    display: flex;
+    flex-direction: row;
+    margin-left: 30px;
+}
+
+
+.profile-outschool {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+.profile-inschool {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+.profile-skill-info-certificate-text,.profile-skill-info-Awards-text{
+    display: flex;
+    flex-direction: row;
+    font-size: 14px;
+    justify-content: space-around;
+}
+.profile-inschool-text,.profile-outschool-text{
+    font-size: 14px;
+    height: 35px;
+    align-items: center;
+    padding-left: 25px;
+}
+.profile-inschool-text>p ,.profile-outschool-text > p {
+    margin-left: 30px;
+}
+.Mypage-profile-content-storyprofile{
+    display: flex;
+    flex-direction: row;
+}
+
+/*유저상태*/
+.profile-user-state{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    height: 30px;
+    font-weight: 500;
+}
+.profile-user-state-training{
+    width: 8px;
+    height: 8px;
+    background-color:#a5ccf5;
+    border-radius: 50%;
+}
+.profile-user-state-hire{
+    width: 8px;
+    height: 8px;
+    background-color:#f799f5;
+    border-radius: 50%;
+}
+.profile-user-state-none{
+    width: 8px;
+    height: 8px;
+    background-color:#c5c5c5;
+    border-radius: 50%;
+}
+/*-프로필수정버튼-*/
+.profile-edit{
+    border: none;
+    width: 100%;
+    height: 40px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    align-items: center;
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    background-color:rgb(241, 241, 241); 
+}
+.profile-edit:hover{
+    background-color: rgb(224, 224, 224);
+}
+
+.profile-edit-null {
+    border: none;
+    width: 100%;
+    height: 40px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    align-items: center;
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+}
+
+/*--메뉴버튼--*/
+.Mypage-btns{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    top:20px;
+    margin-right: -100px;
+}
+.Mypage-menu-click {
+    width: 85px;
+    height: 45px;
+    border: none;
+    margin-bottom: 10px;
+    font-size: 14px;
+    background-color: #94ddf3;
+    color:white;
+}
+.Mypage-menu-none {
+    width: 85px;
+    height: 45px;
+    border: none;
+    margin-bottom: 10px;
+    font-size: 14px;
+    background-color: #ffffff;
+    border: 1px solid rgba(209, 209, 209, 0.692);
+}
+.Mypage-menu-none:hover {
+    background-color:#8cd1ff38;
+}
+
+/*수정페이지*/
+.EditProfile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color:  #ffffff;
+    font-family: NanumSquareB;
+    padding:40px;
+    border-radius: 20px;
+}
+
+/*-공유 알림창-*/
+.shareAlert{
+    position: fixed;
+    flex-direction: column;
+    right: 100px;
+    bottom: 30px;
+    width: 400px;
+    height: 110px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(212, 212, 212, 0.432);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding:10px;
+    display: "none";
+}
+.shareAlert-input{
+    font-size: medium;
+    border-radius: 5px;
+    align-items: center;
+    text-align: left;
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+    height: 35px;
+    border: 1px solid rgba(182, 182, 182, 0.801);
+    font-size: small;
+}
+
+.shareAlert-input-box{
+    height: 25px;
+    border: none;
+    margin: 5px;
+    width: 300px;
+}
+.shareAlert-btns{
+    border: none;
+    background-color: #11addd;
+    width: 100px;
+    height: 35px;
+    color: white;
+}
+.close-shareAlert{
+    justify-content:right;
+    width:"230px";
+    font-size:12px;
+    width:90%;
+    text-align:right;
+    position: absolute;
+    top: 14px;
+}
+/*-프린트설정-*/
+@media print {
+  
+  }
+  @page{
+ 
+}
+ 

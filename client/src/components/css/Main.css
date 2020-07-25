@@ -1,0 +1,388 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
+/* -------------------------- top ----------------------- */
+
+.Main-new {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+.Main-new-Div {
+    width: 100%;
+    height: 516px;
+    background-color: #e8faff8f;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+.Main-new-right {
+    display: flex;
+    flex-direction: column;
+    margin-right: 101px;
+}
+
+.Main-new-title {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 24px;
+    color:#646464; 
+    font-weight: 600;
+    margin-top: 96px;
+}
+
+.Main-new-subTitle {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 18px;
+    color:#646464; 
+    font-weight: 600;
+    margin-top: 46px;
+}
+
+.Main-new-text {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 15.5px;
+    color:#646464; 
+    font-weight: 600;
+    margin-top: 50px;
+    line-height: 30px;
+}
+
+.Main-new-loginDiv {
+    display: flex;
+    flex-direction: row;
+    margin-top: 55px;
+    margin-bottom: 12px;
+}
+
+.Main-new-insert {
+    width: 122px;
+    height: 38px;
+    opacity: 0.7;
+    background-color: #ffffff;
+    border: 1px solid #9781d0;
+    font-family: NanumSquareEB;
+    font-size: 14px;
+    color:#646464; 
+    margin-right: 15px;
+    font-weight: 600;
+}
+.Main-new-insert:hover { background-color: #f7f4ff;color: #4e3692}
+
+.Main-new-login {
+    width: 122px;
+    height: 38px;
+    opacity: 0.7;
+    background-color: #ffffff;
+    border: 1px solid #9781d0;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 14px;
+    color:#646464; 
+    font-weight: 600;
+}
+.Main-new-login:hover  { background-color: #f7f4ff;color: #4e3692 }
+
+.Main-new-line {
+    width: 283px;
+    height: 2px;
+    background-color: #7979792c;
+    margin-bottom: 15px;
+}
+
+.Main-new-es {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 14px;
+    color:#646464; 
+    font-weight: 600;
+}
+.Main-new-es:hover { color: #9781d0; }
+
+.Main-new-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.liu {
+    width: 676px;
+    height: 478px;
+}
+
+/* -------------------------- center ----------------------- */
+
+.Main-new-center {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+   
+}
+
+.Main-new-centerTitle {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    color:#646464;
+}
+
+.Main-new-centerBody {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
+    width: 75%;
+    flex-wrap: wrap;
+    margin-bottom: 200px;
+}
+
+.Main-new-centerItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 290px;
+    width: 275px;
+    border-radius: 10px;
+    box-shadow: 0 0 9.8px 0.2px rgba(131, 131, 131, 0.17);
+    border: solid 1px #eeeeee;
+    background-color: #ffffff;
+    margin: 10px;
+    overflow: hidden;
+}
+
+.Main-new-itemImg {
+    width: 70px;
+    height: 70px;
+}
+
+.Main-new-itemTitle {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 16px;
+    color:#646464; 
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+.Main-new-itemSpan {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 14px;
+    color:#646464; 
+    font-weight: 500;
+    margin: 3px;
+    width: 220px;
+    text-align: center;
+}
+
+/* -------------------------- bottom ----------------------- */
+
+.Main-new-bottom {
+    opacity: 1;
+    width: 100%;
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    transition-property: all;
+    transition-duration: 2s;
+}
+
+.Main-new-bottom-none {
+    opacity: 0;
+    width: 100%;
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    transition-property: all;
+    transition-duration: 1s;
+}
+
+.Main-new-bottomIntroDiv1 {
+    position: absolute;
+    top: 20px;
+}
+
+.Main-new-bottomIntroDiv2 {
+    position: absolute;
+    top: 320px;
+}
+
+.Main-new-bottomIntro {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 18px;
+    color:#646464;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.Main-new-bottomTop {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #6bcffd3a;
+    overflow: auto;
+}
+
+.Main-new-bottomItemDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px  70px 0px 70px;
+    width: 150px;
+    height: 200px;
+    overflow-y: hidden;
+}
+
+.Main-new-bottomItemTitle {
+    margin-top: 25px;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    color:#646464; 
+}
+
+.Main-new-bottomItemSpan {
+    font-weight: 500;
+    font-size: 13px;
+    margin: 3px;
+    text-align: center;
+    color:#646464; 
+
+}
+
+.Main-new-bottomBot {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddd1ffa1;
+    overflow: auto;
+}
+
+
+/* --------------- 반응형 처리 --------------- */
+/* --------------- Media Query --------------- */
+/* ------------ Responsible Degign ----------- */
+
+/* -------------------------- top ----------------------- */
+
+@media all and (min-width:0px) and (max-width:1450px) {
+    .Main-new-bottomTop {
+        width: 100%;
+        height: 300px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: #6bcffd3a;
+        overflow: auto;
+    }
+
+    .Main-new-bottomBot {
+        width: 100%;
+        height: 300px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: #ddd1ffa1;
+        overflow: auto;
+    }
+}
+
+@media all and (min-width:1100px) and (max-width:1300px) {
+    .Main-new-right {
+        display: flex;
+        flex-direction: column;
+        margin-right: 25px;
+    }
+    
+    .Main-new-title {
+        font-family: NanumSquareEB;
+        font-size: 18px;
+        color:#646464;
+        font-weight: 600;
+        margin-top: 96px;
+    }
+    
+    .Main-new-subTitle {
+        font-family: NanumSquareEB;
+        font-size: 14px;
+        color:#646464; 
+        font-weight: 600;
+        margin-top: 46px;
+    }
+    
+    .Main-new-text {
+        font-family: NanumSquareEB;
+        font-size: 12px;
+        color:#646464;
+        font-weight: 600;
+        margin-top: 50px;
+        line-height: 30px;
+    }
+}
+
+@media all and (min-width:1px) and (max-width:1100px) {
+    .Main-new-Div {
+        width: 100%;
+        height: 1000px;
+        background-color: #e8faff8f;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .Main-new-right {
+        width: 100%;
+        margin-left: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .Main-new-title {
+        font-family: NanumSquareEB;
+        font-size: 22px;
+        color:#646464;
+        font-weight: 600;
+        margin-top: 0px;
+    }
+    
+    .Main-new-subTitle {
+        font-family: NanumSquareEB;
+        font-size: 18px;
+        color:#646464;
+        font-weight: 600;
+        margin-top: 46px;
+    }
+    
+    .Main-new-text {
+        font-family: NanumSquareEB;
+        font-size: 16px;
+        color:#646464;
+        font-weight: 600;
+        margin-top: 50px;
+        line-height: 30px;
+        text-align: center;
+    }
+
+    .Main-new-left {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 25px;
+    }
+}

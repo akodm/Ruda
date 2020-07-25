@@ -10,15 +10,23 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         content : {
-            type: DataTypes.STRING,         // 내용
-            allowNull: false
+            type: DataTypes.TEXT,         // 내용
         },
         files : {
-            type: DataTypes.STRING,         // 올린 파일 이미지 등
+            type: DataTypes.JSON,         // 올린 파일 이미지 등
         },
         boardTag : {
-            type: DataTypes.STRING,         // 게시판 내의 달린 태그
+            type: DataTypes.JSON,         // 게시판 내의 달린 태그
         },
+        startDate : {
+            type: DataTypes.STRING(10),         // 시작일
+        },
+        endDate : {
+            type: DataTypes.STRING(10),         // 종료일
+        },
+        field : {
+            type: DataTypes.STRING,         // 채용하는 분야
+        }
     });
     HireBoard.associate = function(models) {
         HireBoard.belongsTo(models.user);

@@ -13,7 +13,7 @@ let ExtractJwt = require('passport-jwt').ExtractJwt;
 let opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = config.app.secretKey;
-opts.ignoreExpiration = true;
+opts.jsonWebTokenOptions = { expiresIn : '24h' }
 
 module.exports = passport => {
     passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
@@ -34,7 +34,7 @@ module.exports = passport => {
     passport.use(new GoogleStrategy({
         clientID: config.app.googleId,
         clientSecret: config.app.googleSd,
-        callbackURL: "http://localhost:5000/users/google/callback"
+        callbackURL: `${config.app.s_local}/users/google/callback`
       },
       function(accessToken, refreshToken, profile, cb) {
         return cb(null, profile)
@@ -44,7 +44,7 @@ module.exports = passport => {
     passport.use(new FacebookStrategy({
         clientID: config.app.facebookId,
         clientSecret: config.app.facebookSd,
-        callbackURL: 'http://localhost:5000/users/facebook/callback'
+        callbackURL: `${config.app.s_local}/users/facebook/callback`
       },
       function(accessToken, refreshToken, profile, cb) {
         return cb(null, profile);
@@ -54,7 +54,7 @@ module.exports = passport => {
     passport.use(new NaverStrategy({
         clientID: config.app.naverId,
         clientSecret: config.app.naverSd,
-        callbackURL: "http://localhost:5000/users/naver/callback"
+        callbackURL: `${config.app.s_local}/users/naver/callback`
     }, 
       function(accessToken, refreshToken, profile, done) {
         return done(null, profile);
