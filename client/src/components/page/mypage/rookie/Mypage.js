@@ -34,7 +34,7 @@ class mypage extends Component {
             let certificate = axios.get(`${config.app.s_url}/certificates/all?userId=${userInfo.userId}`);
             let activity = axios.get(`${config.app.s_url}/activitys/all?userId=${userInfo.userId}`);
             let like = axios.get(`${config.app.s_url}/likes/one?userId=${user.id}&infoUserId=${userInfo.userId}`);
-
+            
             // 배열에 위의 실행할 값들을 넣음.
             // 해당 배열들이 모두 실행되면 콜백으로 결과값을 받고, 배열 순서대로 전달해줌.
             await Promise.all([result, award, certificate, activity, like]).then(data => {
@@ -55,7 +55,7 @@ class mypage extends Component {
             });
 
         } catch(err) {
-            console.log("rookie mypage data load err : " + err);
+            console.log("rookie mypage data load err : ");
         }
         this.setState({ load : true });
     }
@@ -68,7 +68,7 @@ class mypage extends Component {
     
     render() {
         const { btnNum, portfolioData, load, awardData, certificateData,activityData,like }=this.state;
-        const { userInfo, user, loginState } = this.props;
+        const { userInfo, user, loginState, infoMount, boardMount, mailReload } = this.props;
         return (
             <div className="Mypage">
                 <div className="Mypage-frame">
@@ -88,6 +88,9 @@ class mypage extends Component {
                                 activityData={activityData}
                                 like={like}
                                 likeToggle={this.likeToggle.bind(this)}
+                                infoMount={() => infoMount()}
+                                boardMount={() => boardMount()}
+                                mailReload={() => mailReload()}
                                 /> 
                                 :
                                 btnNum === 1 ?

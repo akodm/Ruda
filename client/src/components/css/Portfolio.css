@@ -228,15 +228,13 @@
 }
 
 .portfolio-imageviewDiv {
-    width: 700px;
-    height: 700px;
+    min-width: 200px;
+    width: 900px;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid rgba(146, 146, 146, 0.575);
-    box-shadow: 0px 1px 50px 50px rgba(190, 190, 190, 0.644);
     overflow: hidden;
-    background-color: rgba(255, 255, 255, 0.548);
 }
 
 .portfolio-imaPre {

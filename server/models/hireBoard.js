@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         content : {
-            type: DataTypes.STRING,         // 내용
+            type: DataTypes.TEXT,         // 내용
         },
         files : {
             type: DataTypes.JSON,         // 올린 파일 이미지 등

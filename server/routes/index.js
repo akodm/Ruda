@@ -3,25 +3,12 @@ var router = express.Router();
 let nodemailer = require('nodemailer');
 let configs = require('../server-configs');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', Wel : 'Welcome to ' });
-});
-
-router.get('/test', function(req, res, next) {
-    res.render('index', { title: 'TEST PAGE - PM2', Wel : 'This is ' });
-});
-
-router.get('/socketTest', function(req, res, next) {
-  res.send(true);
-});
-
 router.post("/developermail", async(req,res) => {
   try {
     let mailOption = {
       from : configs.app.emailUser,
       to : configs.app.emailUser,
-      subject : `문의사항이 도착했습니다.`,
+      subject : `[${req.body.title}]문의사항이 도착했습니다.`,
       html : `<img style="width:'80px'; height:40px;" src='cid:logo@cid'/><br><br>`+ 
       `<span>보낸 이 : ${req.body.email}</span><br>` +
       `<pre>문의 내용 : ${req.body.content}</pre><br><br>`

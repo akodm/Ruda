@@ -34,7 +34,10 @@ router.get("/yall", async (req, res) => {
 			],
 			where : {
 				companyWorkCate : {
-					[Op.or] : ["채용","실습 후 채용","실습생채용"]
+					[Op.or] : [
+						{ [Op.like] : "%채용%" },
+						{ [Op.like] : "%실습%" }
+					]
 				}
 			},
 		});
@@ -80,6 +83,7 @@ router.post("/create", async (req, res) => {
 				companyCEO: req.body.companyCEO,
 				companyPhone: req.body.companyPhone,
 				companyAdd: req.body.companyAdd,
+				companyAddRest : req.body.companyAddRest,
 				companyUrl: req.body.companyUrl,
 
 				companyField: req.body.companyField,
@@ -123,6 +127,7 @@ router.put("/update", async(req, res) => {
 			companyCEO: req.body.companyCEO,
 			companyPhone: req.body.companyPhone,
 			companyAdd: req.body.companyAdd,
+			companyAddRest : req.body.companyAddRest,
 			companyUrl: req.body.companyUrl,
 
 			companyField: req.body.companyField,
@@ -245,7 +250,12 @@ router.post("/popup", async (req, res) => {
 						companyField : { [Op.like] : "%" + req.body.add + "%" },
 						companyOccupation : { [Op.like] : "%" + req.body.add + "%" },
 					},
-					companyWorkCate : { [Op.or] : ["채용","실습 후 채용","실습생채용"] }
+					companyWorkCate : {
+						[Op.or] : [
+							{ [Op.like] : "%채용%" },
+							{ [Op.like] : "%실습%" }
+						]
+					}
 				}
 			}
 		});
@@ -330,7 +340,12 @@ router.post("/search", async (req, res) => {
 						companyRequest : models.Sequelize.literal(request),
 						companyWelfare : models.Sequelize.literal(welfare),
 					},
-					companyWorkCate : { [Op.or] : ["채용","실습 후 채용","실습생채용"] }
+					companyWorkCate : {
+						[Op.or] : [
+							{ [Op.like] : "%채용%" },
+							{ [Op.like] : "%실습%" }
+						]
+					}
 				}
 			}
 		});

@@ -181,9 +181,9 @@ class EditProfile extends Component {
     // firebase에 이미지 업로드 및 저장 함수 실행
     addFile() {
         const { imgData,
-            name,phone,address1,univercity,subject,
+            name,phone,address1,univercity,subject,military,field,workDateState,introduce,
             } = this.state;
-        if(!name || !phone || !address1 || !univercity || !subject) {
+        if(!name || !phone || !address1 || !univercity || !subject || !military || !field || !workDateState || !introduce) {
             alert("필수 입력 사항을 입력해주세요.");
             return;
         }
@@ -326,36 +326,40 @@ class EditProfile extends Component {
             field,workDateState,trainingDateState,workDate,trainingDate
         } = this.state;
  
-        const result = await axios.put(`${config.app.s_url}/userInfos/update`,{
-            userId :userInfo.id,
-            userImageUrl : imgUrl, 
+        try {
+            const result = await axios.put(`${config.app.s_url}/userInfos/update`,{
+                userId :userInfo.id,
+                userImageUrl : imgUrl, 
 
-            userName : name, userPhone : phone, userAdd : address1, userMilitary : military,
-            userUnivercityCate : univercityCate,
-            userUnvcity : univercity, userSubject : subject,
-            userAttendStartDate : univercityStart,
-            userAttendEndDate : univercityEnd,
-            userAttend : univercityState,
+                userName : name, userPhone : phone, userAdd : address1, userMilitary : military,
+                userUnivercityCate : univercityCate,
+                userUnvcity : univercity, userSubject : subject,
+                userAttendStartDate : univercityStart,
+                userAttendEndDate : univercityEnd,
+                userAttend : univercityState,
 
-            userTags : tags,
-            userKeyword : keywords,
-            userSpecialty : specialty,
-            userIntro : introduce,
-            userUrl : privateUrl,
+                userTags : tags,
+                userKeyword : keywords,
+                userSpecialty : specialty,
+                userIntro : introduce,
+                userUrl : privateUrl,
 
-            userField : field,
-            userTraningDateState : trainingDateState,
-            userWorkDateState : workDateState,
-            userWorkDate : workDate,
-            userTraningDate : trainingDate,
-        });
+                userField : field,
+                userTraningDateState : trainingDateState,
+                userWorkDateState : workDateState,
+                userWorkDate : workDate,
+                userTraningDate : trainingDate,
+            });
 
-        console.log( result.data+"프로필수정");
-        if(result.data){
-            alert("수정이 완료되었습니다.");
-            window.location.href = "/";
-        } else {
-            alert("잘못된 값이 있습니다. 다시 시도해주세요.");
+            console.log( result.data+"프로필수정");
+            if(result.data){
+                alert("수정이 완료되었습니다.");
+                window.location.href = "/";
+            } else {
+                alert("잘못된 값이 있습니다. 다시 시도해주세요.");
+            }
+        } catch(err) {
+            console.log("save profile err");
         }
         this.setState({ load : true });
     }
@@ -475,11 +479,12 @@ class EditProfile extends Component {
                 <div className="Info-rookie-body">
                     <AutoCreateBox blur={true} width={400} text={"희망하는 분야를 입력하세요."} list={dataList.app.fieldList} value={field} clear={false} onChange={(e) => this.setState({ field : e })} />
                     <div className="Info-rookie-dateLayout">
-                        <SelectBox 
+                    <SelectBox 
                             value={workDateState} func={(e) => this.setState({ workDateState : e })}
                             label={"취업유무"} option={["취업희망","실습희망","실습후 취업희망","미정"]} text={"취업유무"} style={{marginRight:"20px"}}
                         />
-                        { workDateState ==="미정"?"":
+                        {
+                            workDateState !== "미정" &&
                         <SelectBox 
                             value={workDate} func={(e) => this.setState({ workDate : e })}
                             label={"근무실습가능 날짜"} option={["상시","졸업 후","실습 강의 시","직접입력","미정"]} text={"근무/실습 날짜"} style={{marginRight:"20px"}}
@@ -578,7 +583,7 @@ class EditProfile extends Component {
                             })
                         }
                 </div>
-                <h5>이름,자기소개,이메일,개인사이트주소,핸드폰번호,거주지,대학,희망분야,근무형태,근무날짜는 필수입력사항입니다.</h5>
+                <h5>이름, 자기소개, 이메일, 전화번호, 거주지, 희망분야, 구직형태, 병역여부, 대학, 전공, 은 필수입력사항입니다.</h5>
                 {/*저장버튼*/}
                 <div style={{margin:"50px"}}>
                     <button className="profile-edit" onClick={this.addFile.bind(this)}><SaveIcon style={{fontSize:"large",margin:"5px"}}/>프로필저장</button>

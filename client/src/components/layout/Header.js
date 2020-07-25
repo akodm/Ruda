@@ -3,6 +3,13 @@ import { Link } from 'react-router-dom';
 import Badge from '@material-ui/core/Badge';
 
 class Header extends Component {
+
+    logout() {
+        localStorage.removeItem("users");
+        alert("로그아웃 되었습니다.");
+        window.location.href = "/";
+    }
+
     render() {
         const { user, openClose, msgOpenClose, unReadMsg } = this.props;
         return (
@@ -19,20 +26,22 @@ class Header extends Component {
                             <div className="Header-nav-layout">
                                 { user.email && <div className="Header-nav-recommendbtn" onClick={() => msgOpenClose(true)}>
                                         <Badge color="secondary" badgeContent={unReadMsg}>
-                                            메시지함
+                                            메일함
                                         </Badge>
                                     </div>
                                 }
                                 <div className="Header-nav-recommendbtn" onClick={() => user.email ? openClose(true, "user") : alert("로그인 후 이용해주세요.")}>추천기업</div>
+                                { user.email && <div className="Header-logout" onClick={this.logout.bind(this)}>로그아웃</div> }
                             </div>
                             :
                             <div className="Header-nav-layout">
                                 { user.email && <div className="Header-nav-recommendbtn" onClick={() => msgOpenClose(true)}>
                                         <Badge color="secondary" badgeContent={unReadMsg}>
-                                            메시지함
+                                            메일함
                                         </Badge>
                                     </div>}
                                 <div className="Header-nav-recommendbtn" onClick={() => user.email ? openClose(true, "company") : alert("로그인 후 이용해주세요.")}>추천인재</div>
+                                { user.email && <div className="Header-logout" onClick={this.logout.bind(this)}>로그아웃</div> }
                             </div>
                         }
                     </div>

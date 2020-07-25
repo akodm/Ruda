@@ -210,7 +210,7 @@ class Rookie extends Component {
                 alert("잘못된 값이 있습니다. 다시 시도해주세요.");
             }
         } catch(err) {
-            console.log("user info save err : " + err);
+            console.log("user info save err : " );
         }
         this.setState({ load : true });
     }
@@ -218,7 +218,7 @@ class Rookie extends Component {
     // firebase에 이미지 업로드 및 저장 함수 실행
     addFile() {
         const { imgData,
-            name,phone,address1,univercity,subject,
+            name,phone,address1,univercity,subject,military,field,workDateState,introduce,
             startErr,endErr,specialtyErr,introduceErr,
             agreeCheck } = this.state;
         if(!agreeCheck) {
@@ -229,7 +229,7 @@ class Rookie extends Component {
             alert("잘못된 값이 있습니다. 다시 확인해주세요.");
             return;
         }
-        if(!name || !phone || !address1 || !univercity || !subject) {
+        if(!name || !phone || !address1 || !univercity || !subject || !military || !field || !workDateState || !introduce) {
             alert("필수 입력 사항을 입력해주세요.");
             return;
         }
@@ -387,6 +387,7 @@ class Rookie extends Component {
                         }
                     </div>
                 </div>
+                <h5>이름, 자기소개, 이메일, 전화번호, 거주지, 희망분야, 구직형태, 병역여부, 대학, 전공, 은 필수입력사항입니다.</h5>
                 <div className="Info-rookie-agree">
                     <CheckBox check={agreeCheck} func={(e) => this.setState({ agreeCheck : e })} name="agree" color="primary" />
                     <span>하이루키는 신입 채용 서비스입니다. <span style={{color:"red"}}>신입 구직자</span>로서 이용하심에 동의하십니까?</span>

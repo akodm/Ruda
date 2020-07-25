@@ -43,11 +43,14 @@ class Hire extends Component {
             titleErr, startDateErr, endDateErr
         } = this.state;
         const { userId, hireSet } = this.props;
+
         if(!title) { alert("제목을 입력해주세요."); }
+
         if(titleErr || startDateErr || endDateErr) {
             alert("잘못된 내용이 있습니다. 다시 확인해주세요.");
             return;
         }
+        
         try {
             const result = await axios.post(`${config.app.s_url}/hireBoards/create`, {
                 title,
@@ -67,7 +70,7 @@ class Hire extends Component {
             }
             this.stateNull();
         } catch(err) {
-            console.log("hire add / updat err : ", err);
+            console.log("hire add / updat err : ");
         }
     }
 
@@ -100,7 +103,7 @@ class Hire extends Component {
             }
             this.stateNull();
             } catch(err) {
-            console.log("hire add / updat err : ", err);
+            console.log("hire add / updat err : ");
         }
     }
 
@@ -118,7 +121,7 @@ class Hire extends Component {
                 return;
             }
         } catch(err) {
-            console.log("delete hire err : ", err);
+            console.log("delete hire err : ");
         }
     }
 

@@ -39,9 +39,10 @@ class Easy extends Component {
                     cate : userId.data.userCate
                 });
                 this.props.history.push("/");
+                this.props.loginMount(true);
             }
         } catch(err) {
-            console.log("소셜 로그인 에러" + err);
+            console.log("소셜 로그인 에러");
             alert("서버에러가 발생하였습니다. 다시 시도해주세요.");
             localStorage.removeItem("users");
         }

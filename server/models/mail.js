@@ -9,13 +9,16 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,         // 제목
         },
         content : {
-            type: DataTypes.STRING,         // 내용
+            type: DataTypes.TEXT,         // 내용
         },
         readState : {
             type: DataTypes.BOOLEAN,        // 읽은지 여부
         },
         target : {
             type: DataTypes.INTEGER(11),    // 받는 이
+        },
+        userInfo : {
+            type: DataTypes.JSON,    // 보낸 이 정보
         }
     });
     Mail.associate = function(models) {

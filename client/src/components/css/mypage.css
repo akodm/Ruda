@@ -280,7 +280,12 @@ hr {
     background-color:#f799f5;
     border-radius: 50%;
 }
-
+.profile-user-state-none{
+    width: 8px;
+    height: 8px;
+    background-color:#c5c5c5;
+    border-radius: 50%;
+}
 /*-프로필수정버튼-*/
 .profile-edit{
     border: none;
@@ -296,6 +301,18 @@ hr {
 }
 .profile-edit:hover{
     background-color: rgb(224, 224, 224);
+}
+
+.profile-edit-null {
+    border: none;
+    width: 100%;
+    height: 40px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    align-items: center;
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
 }
 
 /*--메뉴버튼--*/

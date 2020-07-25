@@ -60,11 +60,12 @@ class ViewProfile extends Component {
     EditProfile(){this.props.change(false)}
 
     async likeSet() {
-        const { like, likeToggle, user, loginState, companyInfo } = this.props;
+        const { like, likeToggle, user, loginState, companyInfo, infoMount, boardMount } = this.props;
         if(loginState) {
             alert("본인을 추천 할 수 없습니다.");
             return;
         }
+        if(!user.email) { alert("로그인 후 이용해주세요."); return; }
         try {
             if(like) {
                 let result = axios.delete(`${config.app.s_url}/likes/delete?userId=${user.id}&infoUserId=${companyInfo.userId}`);
@@ -78,6 +79,7 @@ class ViewProfile extends Component {
                     alert("추천 기능이 제대로 동작하지 않았습니다. 잠시 후 시도해 주세요.");
                     return;
                 }
+
                 likeToggle(false);
             }  else {
                 let result = axios.post(`${config.app.s_url}/likes/create`, {
@@ -95,15 +97,18 @@ class ViewProfile extends Component {
                 }
                 likeToggle(true);
             }
+
+            infoMount();
+            boardMount();
         } catch(err) {
-            console.log("추천 기능 도중 에러 발생 : ", err);
+            console.log("추천 기능 도중 에러 발생 : ");
         }
     }
 
-    psoposalPopupOpenClose(bool) { this.setState({ open : bool }) }
+    proposalPopupOpenClose(bool) { this.setState({ open : bool }) }
 
     render() {
-        const { companyInfo,awardData,activityData,like,loginState,user } = this.props;
+        const { companyInfo,awardData,activityData,like,loginState,user,mailReload } = this.props;
         const tag = companyInfo.companyTags;
         const Request = companyInfo.companyRequest;
         const Welfare = companyInfo.companyWelfare;
@@ -125,7 +130,7 @@ class ViewProfile extends Component {
                 </div>
 
                 {/* 제안하기 팝업 */}
-                { open && <ProposalPopup guide={"기업에게 전달할 내용을 작성해주세요."} text={"기업에게 메시지 보내기"} user={user} info={companyInfo} psoposalPopupOpenClose={this.psoposalPopupOpenClose.bind(this)} /> }
+                { open && <ProposalPopup mailReload={() => mailReload()} guide={"기업에게 전달할 내용을 작성해주세요."} text={"기업에게 메시지 보내기"} user={user} info={companyInfo} proposalPopupOpenClose={this.proposalPopupOpenClose.bind(this)} /> }
 
                 <div className="Mypage-profile-Maininfo">
                     <div className="Mypage-profile-content-mainprofile">
@@ -134,8 +139,29 @@ class ViewProfile extends Component {
                                 <div className="profile-profile">
                                     <p>프로필</p>
                                     <div className="profile-user-state">
-                                        <div className="profile-user-state-training"style={{marginRight:"5px"}}></div><p style={{fontSize:"small", marginRight:"10px"}}>실습</p>
-                                        <div className="profile-user-state-hire" style={{marginRight:"5px"}}></div><p style={{fontSize:"small",marginLeft:"10px"}}>구직</p>
+                                        {
+                                            (companyInfo.companyWorkCate==="미정"&&
+                                            <>
+                                                <div className="profile-user-state-none"style={{marginRight:"5px"}}></div><p style={{fontSize:"small", marginRight:"10px"}}>채용/실습생 미정</p>
+                                            </>
+                                            )||
+                                            (companyInfo.companyWorkCate==="실습생채용"&&
+                                            <>
+                                                <div className="profile-user-state-training"style={{marginRight:"5px"}}></div><p style={{fontSize:"small", marginRight:"10px"}}>실습생</p>
+                                            </>
+                                            )||
+                                            (companyInfo.companyWorkCate==="채용"&&
+                                            <>
+                                                <div className="profile-user-state-hire" style={{marginRight:"5px"}}></div><p style={{fontSize:"small",marginLeft:"10px"}}>채용</p>
+                                            </>
+                                            )||
+                                            (companyInfo.companyWorkCate==="실습 후 채용"&&
+                                            <>
+                                                <div className="profile-user-state-training"style={{marginRight:"5px"}}></div><p style={{fontSize:"small", marginRight:"10px"}}>실습생</p>
+                                                <div className="profile-user-state-hire" style={{marginRight:"5px"}}></div><p style={{fontSize:"small",marginLeft:"10px"}}>채용</p>
+                                            </>
+                                            )
+                                        }
                                     </div>
                                 </div>
                                 <Avatar alt="img" src={companyInfo.companyImageUrl || "/Image/login_img.png"} style={{width:"100px", height:"100px"}} />
@@ -167,10 +193,12 @@ class ViewProfile extends Component {
                                         <HouseIcon style={{fontSize:"medium"}}/>
                                         <p>{companyInfo.companyAdd}</p>
                                     </div>
-                                    <div className="profile-text">
-                                        <PeopleIcon style={{fontSize:"medium"}}/>
-                                        <p>평균연령: {companyInfo.companyAgeAvg}세</p>
-                                    </div>
+                                    {companyInfo.companyAgeAvg &&
+                                        <div className="profile-text">
+                                            <PeopleIcon style={{fontSize:"medium"}}/>
+                                            <p>평균연령: {companyInfo.companyAgeAvg}세</p>
+                                        </div>
+                                    }
                                     <div className="profile-text">
                                         <ApartmentIcon style={{fontSize:"medium"}}/>
                                         <p>설립일: {companyInfo.companySince}</p>
@@ -187,6 +215,7 @@ class ViewProfile extends Component {
                                         <AssignmentIndIcon style={{fontSize:"medium"}}/>
                                         <p>채용형태:{companyInfo.companyWorkCate}</p>
                                     </div>
+                                    {companyInfo.companyWorkCate !== "미정" &&
                                     <div className="profile-text">
                                         <CalendarTodayIcon style={{fontSize:"medium"}}/>
                                         {companyInfo.companyWorkDateState ==="직접입력"?
@@ -194,6 +223,7 @@ class ViewProfile extends Component {
                                         <p>채용날짜:{companyInfo.companyWorkDateState}</p>
                                         } 
                                     </div>
+                                    }
                                 </div>
                                 <div className="profile-intro"><hr></hr>
                                     <p className="profile-intro-title" >COUNT</p>
@@ -202,7 +232,11 @@ class ViewProfile extends Component {
                                         <p>{companyInfo.companyLike}명이 좋아합니다. </p>
                                     </div>
                                 </div>
-                                <button className="profile-edit" onClick={this.EditProfile.bind(this)}> <EditIcon style={{fontSize:"medium",height:"40px"}}/>프로필수정</button>
+                                {
+                                    loginState ? <button className="profile-edit" onClick={this.EditProfile.bind(this)}><EditIcon style={{fontSize:"medium",height:"40px"}}/>프로필수정</button>
+                                    :
+                                    <div className="profile-edit-null"></div>
+                                }
                                 <div className="Mypage-pages-title">
                                     <div className="Mypage-pages-title-icons">    
                                         <div className="Mypage-pages-title-icons-icon-c">
@@ -215,7 +249,7 @@ class ViewProfile extends Component {
                                             {!like ? <FavoriteBorderIcon />:<FavoriteIcon style={{ color : "#11addd"}}/>}
                                        </div>
                                        {
-                                           !loginState &&
+                                           !loginState && user.email &&
                                            <div className="Mypage-pages-title-icons-icon-c">
                                                 <MailOutlineIcon onClick={() => this.setState({ open : true })}/>
                                             </div>

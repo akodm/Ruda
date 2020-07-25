@@ -32,7 +32,7 @@ class Rboard extends Component {
                 });
                 this.setState({ userList : result.data });
             } catch(err) {
-                console.log("company board filter err : ", err);
+                console.log("company board filter err : ");
             }
         } else {
             this.setState({ userList : this.props.data });

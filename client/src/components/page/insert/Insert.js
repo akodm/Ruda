@@ -60,7 +60,7 @@ class Insert extends Component {
             alert("회원가입이 완료되었습니다.");
             this.props.history.push("/login");
         } catch(err) {
-            console.log("insert save or insert to login err : " + err);
+            console.log("insert save or insert to login err : ");
             alert("서버에러로 회원가입에 실패하였습니다.");
         }
     }
@@ -88,7 +88,7 @@ class Insert extends Component {
             this.setState({ emailck : true, });
             this.emailAuth();
         } catch (err) {
-            console.log("user insert create err : " + err);
+            console.log("user insert create err : ");
         }
     }
     

@@ -212,8 +212,9 @@
 }
 
 .hire-img {
-    max-width: 500px;
-    max-height: 500px;
+    width: 900px;
+    min-width: 150px;
+    max-height: auto;
     background-color: white;
 }
 

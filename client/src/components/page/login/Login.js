@@ -64,10 +64,11 @@ class Login extends Component {
                 cate : userId.data.userCate
             });
             this.props.history.push("/");
+            this.props.loginMount(true);
         } catch(err){
-            console.log("user login err : " + err);
-            alert("서버에러가 발생하였습니다. 다시 시도해주세요.");
+            console.log("user login err : ");
             localStorage.removeItem("users");
+            alert("서버에러가 발생하였습니다. 다시 시도해주세요.");
         }
     }
 

@@ -69,15 +69,16 @@
     flex-direction: row;
     height: 100%;
     align-items: center;
-    width: 200px;
     justify-content: center;
 }
 .Header-nav-recommendbtn {
-    width: 50%;
     height: 75px;
 }
 .Header-nav-recommendbtn:hover { 
     color:#008fbb;
+}
+.Header-logout:hover {
+    color: #008fbb;
 }
 
 @media all and (min-width:1px) and (max-width:1300px) {
@@ -102,6 +103,16 @@
         padding-left: 10px;
         cursor:pointer;
         font-weight: 600;
+        font-size: 12px;
+    }
+}
+
+@media all and (min-width:1px) and (max-width:600px) {
+    .Header-nav-recommendbtn {
+        font-size: 12px;
+    }
+
+    .Header-logout {
         font-size: 12px;
     }
 }

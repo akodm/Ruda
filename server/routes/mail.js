@@ -70,6 +70,7 @@ router.post("/create", async(req, res) => {
 			title : req.body.title,
 			content : req.body.content,
 			target : req.body.target,
+			userInfo : req.body.userInfo,
 			userId : req.body.userId,
 			readState : false
 		});

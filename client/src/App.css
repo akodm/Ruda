@@ -1,8 +1,9 @@
-@font-face { font-family: 'BBTreeGB'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGB.woff') format('woff'); font-weight: normal; font-style: normal; }
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
 html, body, .app-main, #root, .app-main {
     width: 100%;
     height: 100%;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 html {
@@ -20,14 +21,10 @@ button {
 
 input::placeholder {
     color: #bbbbbb;
-    font-family: 나눔스퀘어;
+    font-family: 'Nanum Gothic', sans-serif;
     font-size: 14px;
 }
 
-div, a, span, input, input::placeholder, textarea, textarea::placeholder, pre {
-    font-family: 'BBTreeGB';
-}
-
-pre {
-    white-space: pre-wrap;
+div, a, span, input, input::placeholder, textarea, textarea::placeholder, pre,p,h1,h2,h3{
+    font-family: 'Nanum Gothic', sans-serif;
 }

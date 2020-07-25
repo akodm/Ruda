@@ -32,9 +32,8 @@ class EditProfile extends Component {
             name : companyInfo.companyName,
             ceo : companyInfo.companyCEO,
             phone : companyInfo.companyPhone,
-            address : companyInfo.companyAdd,
-            address1 :"",
-            address2 : "",
+            address1 :companyInfo.companyAdd,
+            address2 : companyInfo.companyAddRest,
             addressState : "",
 
             // 기업 분야
@@ -79,9 +78,9 @@ class EditProfile extends Component {
     // firebase에 이미지 업로드 및 저장 함수 실행
     addFile() {
         const { imgData,
-            name,phone,address1,field,
+            name,phone,address1,field,ceo,companyurl,since,intro,workCate
         } = this.state;
-        if(!name || !phone || !address1 || !field) {
+        if(!name || !phone || !address1 || !field || !companyurl || !ceo || !since || !intro || !workCate) {
             alert("필수 입력 사항을 입력해주세요.");
             return;
         }
@@ -177,39 +176,43 @@ class EditProfile extends Component {
             question 
         } = this.state;
         
-        let address = address1 + "-" + address2;
-        const result = await axios.put(`${config.app.s_url}/companyInfos/update`,{
-            userId : companyInfo.id,
-            companyImageUrl: imgUrl,
+        try {
+            const result = await axios.put(`${config.app.s_url}/companyInfos/update`,{
+                userId : companyInfo.id,
+                companyImageUrl: imgUrl,
 
-            companyName: name,
-            companyCEO: ceo,
-            companyPhone: phone,
-            companyAdd: address,
-            
-            companyUrl:companyurl,
-            companyField: field,
-            companyTags: tags,
-            companySince : since,
-            companyAgeAvg : ageAvg,
-            companyRule: rule,
-            companyIntro : intro,
-            companyWelfare : welfare,
-            
-            companyRequest : request,
-            companyOccupation : occupation,
-            companyWorkCate :  workCate,
-            companyWorkDate : workDate,
-            companyworkDateState : workDateState,
-            
-            companyQuestion: question,
-        });
+                companyName: name,
+                companyCEO: ceo,
+                companyPhone: phone,
+                companyAdd: address1,
+                companyAddRest : address2,
+                
+                companyUrl:companyurl,
+                companyField: field,
+                companyTags: tags,
+                companySince : since,
+                companyAgeAvg : ageAvg,
+                companyRule: rule,
+                companyIntro : intro,
+                companyWelfare : welfare,
+                
+                companyRequest : request,
+                companyOccupation : occupation,
+                companyWorkCate :  workCate,
+                companyWorkDate : workDate,
+                companyworkDateState : workDateState,
+                
+                companyQuestion: question,
+            });
 
-        if(result.data){
-            alert("수정이 완료되었습니다.");
-           window.location.href='/';
-        } else {
-            alert("잘못된 값이 있습니다. 다시 시도해주세요.");
+            if(result.data){
+                alert("수정이 완료되었습니다.");
+            window.location.href='/';
+            } else {
+                alert("잘못된 값이 있습니다. 다시 시도해주세요.");
+            }
+        } catch(err) {
+            console.log("save profile");
         }
         this.setState({ load : true });
     }
@@ -284,14 +287,6 @@ class EditProfile extends Component {
             awardname,awarddate,awards,
             activityname,activitydate,activitys,
         } = this.state;
-
-
-        const {companyInfo}=this.props;
-        const address = companyInfo.companyAdd; 
-        const add = address.split('-');
-        const add1 =add[0];
-        const add2 =add[1];
-        
         return (
             <div className="Info-rookie-main">
                 { !load && <Load /> }
@@ -332,7 +327,7 @@ class EditProfile extends Component {
                 <div className="Info-rookie-body">
                     <div style={{display:"flex",flexDirection:"row",marginBottom:"20px"}}>
                         <TextField style={{width:"340px",marginRight:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="companyurl" value={companyurl} id="outlined-required" label="기업사이트 주소" />
-                        <AutoCreateBox value={field} width={340} blur={true} text={"기업의 분야를 입력해주세요."} list={dataList.app.comfieldList} clear={false} onChange={(e) => this.setState({ field : e })}  />
+                        <AutoCreateBox value={field} width={340} blur={true} text={"* 기업의 분야를 입력해주세요."} list={dataList.app.comfieldList} clear={false} onChange={(e) => this.setState({ field : e })}  />
                     </div>
                     <AutoCreateBox blur={false} width={700} text={"기업에서 다루는 기술에 대한 태그를 검색하여 최대 6개까지 추가하세요!"} list={dataList.app.tagList} clear={true} onChange={this.addChips.bind(this,"tag")} />
                     <div className="Info-tag-box">
@@ -438,7 +433,7 @@ class EditProfile extends Component {
                             })
                         }
                 </div>
-                {/*<h5>기업이름,자기소개,이메일,개인사이트주소,핸드폰번호,거주지,대학,희망분야,근무형태,근무날짜는 필수입력사항입니다.</h5>*/}
+                <h5>기업이름, 기업소개, 이메일, 기업사이트주소, 기업번호, 기업위치, 기업대표, 기업분야, 채용형태, 기업설립일은 필수입력사항입니다.</h5>
                 {/*저장버튼*/}
                 <div style={{margin:"50px"}}>
                     <button className="profile-edit" onClick={this.addFile.bind(this)}><SaveIcon style={{fontSize:"large",margin:"5px"}}/>프로필저장</button>

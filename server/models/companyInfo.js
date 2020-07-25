@@ -9,10 +9,13 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(20),     // 기업 이름
         },
         companyPhone : {
-            type: DataTypes.STRING(11),     // 기업 번호
+            type: DataTypes.STRING(20),     // 기업 번호
         },
         companyAdd : {
             type: DataTypes.STRING(100),     // 주소
+        },
+        companyAddRest : {
+            type: DataTypes.STRING(100),     // 나머지 주소
         },
         companyImageUrl : {
             type: DataTypes.STRING,     // 기업 사진 - firebase 이미지 경로
@@ -33,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(10),     // 기업 평균 연령
         },
         companyIntro : {
-            type: DataTypes.STRING,     // 기업 소개
+            type: DataTypes.TEXT,     // 기업 소개
         },
         companyRule : {
             type: DataTypes.JSON,     // 사내 규칙

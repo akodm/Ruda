@@ -47,7 +47,7 @@ class Mypage extends Component {
             });
 
         } catch(err) {
-            console.log("company mypage data load err : " + err);
+            console.log("company mypage data load err : ");
         }
         this.setState({ load : true });
     }
@@ -60,7 +60,7 @@ class Mypage extends Component {
 
     render() {
         const { btnNum, load, awardData, activityData, hireData, like } = this.state;
-        const { companyInfo, user, loginState } = this.props;
+        const { companyInfo, user, loginState, infoMount, boardMount, mailReload } = this.props;
         return (
             <div className="Mypage">
                 <div className="Mypage-frame">
@@ -79,6 +79,9 @@ class Mypage extends Component {
                                 user={user}
                                 loginState={loginState}
                                 likeToggle={this.likeToggle.bind(this)}
+                                infoMount={() => infoMount()}
+                                boardMount={() => boardMount()}
+                                mailReload={() => mailReload()}
                                 /> :
                                 btnNum === 1 ?
                                 load && 

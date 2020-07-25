@@ -67,14 +67,14 @@ class Company extends Component {
     // firebase에 이미지 업로드 및 저장 함수 실행
     addFile() {
         const { imgData,
-            name,phone,address1,field,
+            name,phone,address1,field,ceo,companyUrl,since,intro,workCate,
             agreeCheck
         } = this.state;
         if(!agreeCheck) {
             alert("이용수칙에 동의해주세요.");
             return;
         }
-        if(!name || !phone || !address1 || !field) {
+        if(!name || !phone || !address1 || !field || !companyUrl || !ceo || !since || !intro || !workCate) {
             alert("필수 입력 사항을 입력해주세요.");
             return;
         }
@@ -108,7 +108,7 @@ class Company extends Component {
     async saveStartBtn() {
         const { user } = this.props;
         const { imgUrl,
-            name,ceo,phone,address1,address2,companyurl,
+            name,ceo,phone,address1,address2,companyUrl,
             field,tags,since,ageAvg,rule,intro,welfare,
             request,workCate,workDateState,workDate,occupation,
             question 
@@ -119,7 +119,6 @@ class Company extends Component {
                 id : user.id
             });
 
-            let address = address1 + "-" + address2;
             let result = axios.post(`${config.app.s_url}/companyInfos/create`, {
                 userId : user.id,
 
@@ -128,9 +127,10 @@ class Company extends Component {
                 companyName: name,
 				companyCEO: ceo,
 				companyPhone: phone,
-                companyAdd: address,
+                companyAdd: address1,
+                companyAddRest : address2,
 
-                companyUrl:companyurl,
+                companyUrl:companyUrl,
 				companyField: field,
 				companyTags: tags,
 				companySince : since,
@@ -225,7 +225,7 @@ class Company extends Component {
     render() {
         const { load,
             imgPreview,
-            name,ceo,phone,address1,address2,addressState,companyurl,
+            name,ceo,phone,address1,address2,addressState,companyUrl,
             field,tags,since,ageAvg,rule,intro,welfare,
             request,workCate,workDateState,workDate,
             agreeCheck,
@@ -269,7 +269,7 @@ class Company extends Component {
                 <div className="Info-rookie-title">기업소개</div>
                 <div className="Info-rookie-body">
                     <div style={{display:"flex",flexDirection:"row",marginBottom:"20px"}}>
-                        <TextField style={{width:"340px",marginRight:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="companyurl" value={companyurl} label="기업사이트 주소" />
+                        <TextField style={{width:"340px",marginRight:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="companyUrl" value={companyUrl} label="기업사이트 주소" />
                         <AutoCreateBox value={field} width={340} blur={true} text={"기업의 분야를 입력해주세요."} list={dataList.app.comfieldList} clear={false} onChange={(e) => this.setState({ field : e })}  />
                     </div>
                     <AutoCreateBox blur={false} width={700} text={"기업에서 다루는 기술에 대한 태그를 검색하여 최대 6개까지 추가하세요!"} list={dataList.app.tagList} clear={true} onChange={this.addChips.bind(this,"tag")} />
@@ -331,6 +331,7 @@ class Company extends Component {
                         }
                     </div>
                 </div>
+                <h5>기업이름, 기업소개, 이메일, 기업사이트주소, 기업번호, 기업위치, 기업대표, 기업분야, 채용형태, 기업설립일은 필수입력사항입니다.</h5>
                 <div className="Info-rookie-agree">
                     <CheckBox check={agreeCheck} func={(e) => this.setState({ agreeCheck : e })} name="agree" color="primary" />
                     <span>하이루키는 신입 채용 서비스입니다. <span style={{color:"red"}}>기업</span>으로서 이용하심에 동의하십니까?</span>

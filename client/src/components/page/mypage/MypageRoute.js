@@ -23,6 +23,11 @@ class MypageRoute extends Component {
     }
 
     async componentDidMount() {
+        await this.infoMount();
+        this.setState({ load : true })
+    }
+
+    async infoMount() {
         try {
             // 주소에 id가 있을경우
             if(this.state.id) {
@@ -55,14 +60,13 @@ class MypageRoute extends Component {
                 })
             }
         } catch(err) {
-            console.log("mypage load err : " + err);
+            console.log("mypage load err : ");
         }
-        this.setState({ load : true })
     }
 
     render() {
         const { rookie, company, load } = this.state;
-        const { user } = this.props;
+        const { user, boardMount, mailReload } = this.props;
         let userInfo = rookie || company || null;
         let loginState = false;
         if(userInfo && userInfo.userId) { loginState = (user.id === userInfo.userId); }
@@ -71,9 +75,9 @@ class MypageRoute extends Component {
                 {
                     userInfo ? 
                     (userInfo.user.userCate === "user" ? 
-                    <Rookie userInfo={userInfo} {...this.props} loginState={loginState} /> 
+                    <Rookie mailReload={() => mailReload()} boardMount={() => boardMount()} infoMount={this.infoMount.bind(this)} userInfo={userInfo} {...this.props} loginState={loginState} /> 
                     : 
-                    <Company companyInfo={userInfo} {...this.props} loginState={loginState} /> 
+                    <Company mailReload={() => mailReload()} boardMount={() => boardMount()} infoMount={this.infoMount.bind(this)} companyInfo={userInfo} {...this.props} loginState={loginState} /> 
                     ) 
                     : load ? <NotFound /> : ""
                 }
