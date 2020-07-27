@@ -85,46 +85,8 @@ router.post("/create", async(req, res) => {
 });
 
 // 유저 업데이트
-router.put("/updatecate", async(req, res) => {
-    let result = null;
-    try {
-        await User.update({ 
-            userCate: req.body.userCate,
-            }, {
-            where: {
-                id : req.body.id,
-            }
-        });
-        result = true;
-    } catch(err) {
-        console.log(__filename + " 에서 유저 업데이트 에러 발생 내용= " + err);
-        result = false;
-    }
-    res.send(result);
-});
-
-// 유저 업데이트
-router.put("/updateemail", async(req, res) => {
-    let result = null;
-    let userPass = await hashFunc(req.body.userPass);
-    try {
-        await User.update({ 
-            userPass: userPass,
-            }, {
-            where: {
-                email : req.body.userEmail,
-                authCate : req.body.authCate,
-            }
-        });
-        result = true;
-    } catch(err) {
-        console.log(__filename + " 에서 유저 업데이트 에러 발생 내용= " + err);
-        result = false;
-    }
-    res.send(result);
-});
-
-// 유저 업데이트
+// 만약 비밀번호 찾기를 유저 인포 라우터에서 처리를 마치고,
+// 비밀번호를 변경할시에, 아이디를 토대로 입력받은 유저 비밀번호로 변경
 router.put("/updateid", async(req, res) => {
     let result = null;
     let userPass = await hashFunc(req.body.userPass);
@@ -147,13 +109,11 @@ router.put("/updateid", async(req, res) => {
 // 유저 삭제
 router.delete("/delete", async(req, res) => {
     let result = false;
-    let wheres = req.query.id ? 
-    { where: { id: req.query.userId } }
-     : 
-    { where: { email: req.query.userEmail, authCate : req.query.authCate } }
     try {
         await User.destroy({
-            wheres
+            where : {
+				id : req.query.id,
+			}
 		});
 		result = true;
     } catch(err) {
@@ -182,39 +142,6 @@ router.post("/loginuser", async (req, res) => {
 		console.log(__filename + " 에서 유저 로그인 체크 에러 발생 내용= " + err);
     }
     res.send(check);
-});
-
-// 유저 이메일 찾기
-router.get("/useremail", async (req, res) => {
-    let result = null;
-	try {
-		result = await User.findOne({
-			where : {
-                userName : req.query.userName,
-                userPhone :  req.query.userPhone,
-			}
-        });
-	} catch (err) {
-		console.log(__filename + " 에서 유저 이메일 찾기 에러 발생 내용= " + err);
-    }
-    res.send(result);
-});
-
-// 유저 비밀번호 찾기
-router.get("/userpass", async (req, res) => {
-    let result = null;
-	try {
-		result = await User.findOne({
-			where : {
-                userName : req.query.userName,
-                email :  req.query.userEmail,
-                userPhone :  req.query.userPhone,
-			}
-        });
-	} catch (err) {
-		console.log(__filename + " 에서 유저 비밀번호 찾기 에러 발생 내용= " + err);
-    }
-    res.send(result);
 });
 
 // 유저 중복 이메일 검색

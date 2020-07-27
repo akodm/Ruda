@@ -24,6 +24,7 @@ let models = require("../models");
 
 // DB Setting --------------------------------------------------------
 const UserInfo = models.userInfo;
+const CompanyInfo = models.companyInfo;
 const User = models.user;
 const Op = models.Sequelize.Op;
 
@@ -82,6 +83,102 @@ router.get("/one", async (req, res) => {
 	} catch (err) {
 		console.log(__filename + " 에서 유저 정보 한명 검색 에러 발생 내용= " + err);
 		res.send(false);
+	}
+});
+
+// 유저 정보 이메일 찾기
+// userName, userPhone <- 참고 쿼리 스트링
+router.get("/emailfind", async (req, res) => {
+	// 응답할 데이터
+	let sendData = null;
+	let user = null;
+	let company = null;
+	try {
+		user = UserInfo.findOne({
+			include : [ { model: User } ],
+			where : {
+				userName : req.query.userName,
+				userPhone : req.query.userPhone
+			},
+		});
+		company = CompanyInfo.findOne({
+			include : [ { model: User } ],
+			where : {
+				companyName : req.query.userName,
+				companyPhone : req.query.userPhone
+			}
+		});
+
+		await Promise.all([user, company]).then(data => {
+			user = data[0];
+			company = data[1];
+		});
+
+		let result = company || user;
+		// 조회 결과가 있다면
+		if(result && result.user && result.user.dataValues) {
+			result = result.user.dataValues;
+			// 조회 결과가 하이루키 가입 이메일일 경우 데이터 대입
+			if(result.authCate === "highrookie") {
+				sendData = result.email;
+			}
+		}
+
+		// 조회 결과가 있다면 해당 이메일값 반환
+		// 조회 결과가 없다면 null 값 반환 => 하이루키 가입이 아닐 경우에도 null
+		res.send(sendData);
+	} catch (err) {
+		console.log(__filename + " 에서 유저 정보 한명 검색 에러 발생 내용= " + err);
+		res.send(false);	// 에러 발생시 false 값
+	}
+});
+
+// 유저 정보 비밀번호 찾기
+// userName, userPhone, email <- 참고 쿼리 스트링
+router.get("/passwordfind", async (req, res) => {
+	// 응답할 데이터
+	let sendData = null;
+	let user = null;
+	let company = null;
+	try {
+		user = UserInfo.findOne({
+			include : [ { model: User } ],
+			where : {
+				userName : req.query.userName,
+				userPhone : req.query.userPhone
+			},
+		});
+		company = CompanyInfo.findOne({
+			include : [ { model: User } ],
+			where : {
+				companyName : req.query.userName,
+				companyPhone : req.query.userPhone
+			}
+		});
+
+		await Promise.all([user, company]).then(data => {
+			user = data[0];
+			company = data[1];
+		});
+
+		let result = company || user;
+		// 조회 결과가 있다면
+		if(result && result.user && result.user.dataValues) {
+			result = result.user.dataValues;
+			// 조회 결과가 하이루키 가입 이메일일 경우 데이터 대입
+			// 이메일만 비교 추가 그리고 비밀번호 찾기 성공 시 -> 유저 객체 자체 반환
+			// 유저 객체에서 아이디 전달해준 값 중 아이디 값을 통해서 유저 업데이트 실행해야됨
+			if(result.authCate === "highrookie" && result.email === req.query.email) {
+				sendData = result;
+			}
+		}
+
+		// 조회 결과가 있다면 해당 이메일값 반환
+		// 조회 결과가 없다면 null 값 반환 => 하이루키 가입이 아닐 경우에도 null
+		res.send(sendData);
+	} catch (err) {
+		console.log(__filename + " 에서 유저 정보 한명 검색 에러 발생 내용= " + err);
+		res.send(false);	// 에러 발생시 false 값
 	}
 });
 
