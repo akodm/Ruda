@@ -387,7 +387,7 @@ class Rookie extends Component {
                         }
                     </div>
                 </div>
-                <h5>이름, 자기소개, 이메일, 전화번호, 거주지, 희망분야, 구직형태, 병역여부, 대학, 전공, 은 필수입력사항입니다.</h5>
+                <h5>이름, 자기소개, 이메일, 전화번호, 거주지, 희망분야, 구직형태, 병역여부, 대학, sh전공, 은 필수입력사항입니다.</h5>
                 <div className="Info-rookie-agree">
                     <CheckBox check={agreeCheck} func={(e) => this.setState({ agreeCheck : e })} name="agree" color="primary" />
                     <span>하이루키는 신입 채용 서비스입니다. <span style={{color:"red"}}>신입 구직자</span>로서 이용하심에 동의하십니까?</span>

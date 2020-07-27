@@ -22,6 +22,8 @@ import Main from '../page/main/Main';   // main
 import Login from '../page/login/Login';    // login
 import Easy from '../page/login/Easy';  // easy login
 import Insert from '../page/insert/Insert'; // insert
+import Searchuser from '../page/searchuser/Searchuser'; //searchuser
+
 import Info from '../page/info/Info';   // info
 import Cboard from '../page/board/Cboard';  // rookie board
 import Rboard from '../page/board/Rboard';  // company board
@@ -196,7 +198,8 @@ class Base extends Component {
                         <Route path="/easy" render={props => user.email ? <NotFound/> : <Easy loginMount={this.loginMount.bind(this)} set={this.setUser.bind(this)} {...props} />} ></Route>
                         <Route path="/login" render={props => user.email ? <NotFound/> :  <Login loginMount={this.loginMount.bind(this)} set={this.setUser.bind(this)} {...props} />} ></Route>
                         <Route path="/insert" render={props => user.email ? <NotFound/> : <Insert {...props} /> }></Route>
-                        
+                        <Route path="/Searchuser" render={props => user.email ? <NotFound/> : <Searchuser {...props} /> }></Route>
+
                         <Route path="/company" render={props => <Cboard data={companyBoardData} user={user} {...props} /> }></Route>
                         <Route path="/rookie" render={props => <Rboard data={userBoardData} user={user} {...props}/>}></Route>
                         

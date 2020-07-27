@@ -195,3 +195,23 @@
 .Footer_text{
     margin: 5px;
 }
+
+/* ----------------------- Print ------------------ */
+@media print {
+    .Header,.Footer,.updown,div.profile-user-state,div.Mypage-btns,div.Mypage-pages-title-icons ,div.DevMessage,button.profile-edit,div.count{
+        display: none;
+    }
+    div.Mypage-pages{
+        border: none;
+        position: absolute;
+        top: 1cm;
+        left: 2cm;
+    }
+    div.portfolio{
+        page-break-before: always;
+    }
+}
+@page{
+    size: A4;
+    margin: 0.05cm;
+}

@@ -259,97 +259,94 @@ class ViewProfile extends Component {
                             </div>
                             <div className="Mypage-profile-content-userinfo-data">
                                 <div className="profile-keyword-info">
-                                    {tag[0] &&
-                                        <>
-                                            <div className="profile-chart-info-title">
-                                                <div className="profile-title-text">기술스택</div>
-                                                <div className="profile-title-line"></div>
-                                            </div>
-                                            <div className="stack">
-                                                {
-                                                    tag.map(function(str,i){
-                                                    return <div className="chip-margin" key={i}>
-                                                        <TagChip name={str} size="small" color="primary" variant="outlined" />
-                                                    </div>;
-                                                    })
-                                                }
-                                            </div>
-                                        </>
-                                    }
-                                    {Request[0] &&
-                                        <>
-                                            <div className="profile-chart-info-title">
-                                                <div className="profile-title-text">채용조건</div>
-                                                <div className="profile-title-line"></div>
-                                            </div>
-                                            <div className="stack">
-                                                {
-                                                    Request.map(function(str,i){
-                                                    return <div className="chip-margin" key={i}>
-                                                        <TagChip name={str} size="small" color="primary" variant="outlined" />
-                                                    </div>;
-                                                    })
-                                                }
-                                            </div>
-                                        </>
-                                    }
-                                    {Welfare[0] &&
-                                        <>
-                                            <div className="profile-chart-info-title">
-                                                <div className="profile-title-text">사내복지</div>
-                                                <div className="profile-title-line"></div>
-                                            </div>
-                                            <div className="stack">
+                                    <div className="profile-chart-info-title">
+                                        <div className="profile-title-text">기술스택</div>
+                                        <div className="profile-title-line"></div>
+                                    </div>
+                                    {tag[0]?
+                                        <div className="stack">
                                             {
-                                                Welfare.map(function(str,i){
+                                                tag.map(function(str,i){
                                                 return <div className="chip-margin" key={i}>
                                                     <TagChip name={str} size="small" color="primary" variant="outlined" />
                                                 </div>;
                                                 })
                                             }
-                                             </div>
-                                        </>
-                                    }
-                                    {Rule[0] &&
-                                        <>
-                                            <div className="profile-chart-info-title">
-                                                <div className="profile-title-text">사내규칙</div>
-                                                <div className="profile-title-line"></div>
-                                            </div>
-                                            <div className="stack">
-                                                {
-                                                    Rule.map(function(str,i){
-                                                    return <div className="chip-margin" key={i}>
-                                                        <TagChip name={str} size="small" color="primary" variant="outlined" />
-                                                    </div>;
-                                                    })
-                                                }
-                                            </div>
-                                        </>
-                                    }
-                                   
-                                    {awardData[0] &&
-                                    <div>
-                                        <div className="profile-chart-info-title">
-                                            <div className="profile-title-text">수상경력</div>
-                                            <div className="profile-title-line"></div>
                                         </div>
-                                        <div className="profile-skill-info-Awards">
-                                                {awardData.map(function(data,i){
-                                                    return   <div className="profile-skill-info-Awards-text" key={i}>
-                                                    <p>{data.awardDate}</p>
-                                                    <p>{data.awardName}</p>
-                                                </div>
-                                            })}
-                                        </div>
+                                        :<p className="addspan">프로필 수정을 통해 기술스택을 추가해주세요</p>
+                                    }
+                                    <div className="profile-chart-info-title">
+                                        <div className="profile-title-text">채용조건</div>
+                                        <div className="profile-title-line"></div>
                                     </div>
-                                    }
-                                    {activityData[0] &&
-                                    <div>
-                                        <div className="profile-chart-info-title">
-                                            <div className="profile-title-text">기업연혁</div>
-                                            <div className="profile-title-line"></div>
+                                    {Request[0] ?
+                                        <div className="stack">
+                                            {
+                                                Request.map(function(str,i){
+                                                return <div className="chip-margin" key={i}>
+                                                    <TagChip name={str} size="small" color="primary" variant="outlined" />
+                                                </div>;
+                                                })
+                                            }
                                         </div>
+                                        :<p className="addspan">프로필 수정을 통해 채용조건을 추가해주세요</p>
+                                    }
+                                    <div className="profile-chart-info-title">
+                                        <div className="profile-title-text">사내복지</div>
+                                        <div className="profile-title-line"></div>
+                                    </div>
+                                    {Welfare[0] ?
+                                        <div className="stack">
+                                        {
+                                            Welfare.map(function(str,i){
+                                            return <div className="chip-margin" key={i}>
+                                                <TagChip name={str} size="small" color="primary" variant="outlined" />
+                                            </div>;
+                                            })
+                                        }
+                                        </div>
+                                        :<p className="addspan">프로필 수정을 통해 채용조건을 추가해주세요</p>
+                                    }
+                                    <div className="profile-chart-info-title">
+                                        <div className="profile-title-text">사내규칙</div>
+                                        <div className="profile-title-line"></div>
+                                    </div>
+                                    {Rule[0] ?
+                                        <div className="stack">
+                                            {
+                                                Rule.map(function(str,i){
+                                                return <div className="chip-margin" key={i}>
+                                                    <TagChip name={str} size="small" color="primary" variant="outlined" />
+                                                </div>;
+                                                })
+                                            }
+                                        </div>
+                                        :<p className="addspan">프로필 수정을 통해 채용조건을 추가해주세요</p>
+                                    }
+                                 
+                                    <div className="profile-chart-info-title">
+                                        <div className="profile-title-text">수상경력</div>
+                                        <div className="profile-title-line"></div>
+                                    </div>
+                                    {
+                                    awardData[0] ?
+                                        <div className="profile-skill-info-Awards">
+                                            {awardData.map(function(data,i){
+                                                return   <div className="profile-skill-info-Awards-text" key={i}>
+                                                <p>{data.awardDate}</p>
+                                                <p>{data.awardName}</p>
+                                            </div>
+                                        })
+                                        }
+                                    </div>
+                                    :<p className="addspan">프로필 수정을 통해 채용조건을 추가해주세요</p>
+                                    }
+                                    <div className="profile-chart-info-title">
+                                        <div className="profile-title-text">기업연혁</div>
+                                        <div className="profile-title-line"></div>
+                                    </div>
+                                    {
+                                    activityData[0] ?
                                         <div className="profile-skill-info-Awards">
                                                 {activityData.map(function(data,i){
                                                     return   <div className="profile-skill-info-Awards-text" key={i}>
@@ -358,7 +355,7 @@ class ViewProfile extends Component {
                                                 </div>
                                             })}
                                         </div>
-                                    </div>
+                                    :<p className="addspan">프로필 수정을 통해 채용조건을 추가해주세요</p>
                                     }
                                 </div>
                             </div>

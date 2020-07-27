@@ -258,7 +258,13 @@ hr {
     display: flex;
     flex-direction: row;
 }
-
+.addspan{
+   font-size: small;
+   text-align: center; 
+   height: 70px;
+   margin: 80px;
+   align-items: center;
+}  
 /*유저상태*/
 .profile-user-state{
     display: flex;
@@ -410,11 +416,3 @@ hr {
     position: absolute;
     top: 14px;
 }
-/*-프린트설정-*/
-@media print {
-  
-  }
-  @page{
- 
-}
- 

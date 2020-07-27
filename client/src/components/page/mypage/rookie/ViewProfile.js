@@ -39,7 +39,8 @@ class ViewProfile extends Component {
         }
     }
     savepdf(){
-        document.title = '이름님의 이력서';
+        const {userInfo}=this.props;
+        document.title = userInfo.userName+'님의 이력서';
         window.print();
     }
 
@@ -225,7 +226,7 @@ class ViewProfile extends Component {
                                     </div>
                                     }
                                 </div>
-                                <div className="profile-intro"><hr></hr>
+                                <div className="profile-intro count"><hr></hr>
                                     <p className="profile-intro-title" >COUNT</p>
                                     <div className="profile-text">
                                         <FavoriteIcon style={{fontSize:"medium",margin:"10px"}}/>
@@ -273,12 +274,11 @@ class ViewProfile extends Component {
                                 </div>
                                 <div className="Mypage-profile-content-userinfo-info">
                                         <div className="profile-keyword-info">
-                                            {Tag[0] &&
-                                            <div>
                                                 <div className="profile-chart-info-title"> 
                                                     <div className="profile-title-text">기술스택</div>
                                                     <div className="profile-title-line"></div>
                                                 </div>
+                                            {Tag[0] ?    
                                                 <div className="stack">
                                                     {
                                                         Tag.map(function(str,i){
@@ -288,17 +288,15 @@ class ViewProfile extends Component {
                                                         })
                                                     }
                                                 </div>
-                                            </div>
-                                            }
-                                            {(Keyword[0] || Specialty[0]) &&
-                                            <div>
+                                            : <p className="addspan">프로필 수정을 통해 기술스택을 추가해주세요</p>}
                                             <div>
                                                 <div className="profile-chart-info-title">
                                                     <div className="profile-title-text">키워드</div>
                                                     <div className="profile-title-line"></div>
                                                 </div>
                                             </div>
- 
+                                            {(Keyword[0] || Specialty[0]) ?
+                                            <div>
                                                 {Keyword[0] &&
                                                 <div>
                                                     <p className="profile-keyword-text">성격</p>
@@ -328,14 +326,15 @@ class ViewProfile extends Component {
                                                 </div>
                                              }
                                              </div>
-                                        }       
+                                        :<p className="addspan">프로필 수정을 통해 키워드를 추가해주세요</p>}       
                                         <div className="profile-skill-info">
-                                            {certificateData[0] &&
+                                          
                                             <div>
                                                 <div className="profile-chart-info-title">
                                                     <div className="profile-title-text">자격증</div>
                                                     <div className="profile-title-line"></div>
                                                 </div>
+                                                {certificateData[0] ?
                                                 <div className="profile-skill-info-certificate">
                                                     {certificateData.map(function(data,i){
                                                         return <div className="profile-skill-info-certificate-text" key={i}>
@@ -345,14 +344,16 @@ class ViewProfile extends Component {
                                                     </div>
                                                 })}
                                                 </div>
+                                                :<p className="addspan">프로필 수정을 통해 자격증을 추가해주세요</p>}
                                             </div>
-                                            }
-                                            {awardData[0] &&
+                                        
+                                   
                                             <div>
                                                 <div className="profile-chart-info-title">
                                                     <div className="profile-title-text">수상경력</div>
                                                     <div className="profile-title-line"></div>
                                                 </div>
+                                                {awardData[0]?
                                                 <div className="profile-skill-info-Awards">
                                                         {awardData.map(function(data,i){
                                                             return   <div className="profile-skill-info-Awards-text" key={i}>
@@ -361,17 +362,21 @@ class ViewProfile extends Component {
                                                             <p>{data.awardDate}</p>
                                                         </div>
                                                     })}
-                                                </div>
+                                                </div>:
+                                                <p className="addspan">프로필 수정을 통해 수상경력을 추가해주세요</p>
+                                                }
+                                                
                                             </div>
-                                            }
+                                          
                                             <div className="Mypage-profile-content-storyprofile">
                                                 <div className="profile-inschool">
                                                     <div className="profile-chart-info-title">
                                                         <div className="profile-title-text">교내활동</div>
                                                         <div className="profile-title-line"></div>
                                                     </div>
-                                                    <div>
-                                                        {activityData &&
+                                                    {activityData[1]?
+                                                        <div>
+                                                            {
                                                             activityData.map(function(data,i){
                                                                 return data.activityCate === "교내" &&
                                                                 <div className="profile-skill-info-Awards-text" key={i}>
@@ -380,14 +385,15 @@ class ViewProfile extends Component {
                                                                 </div>
                                                             })
                                                         }  
-                                                    </div>
+                                                    </div>:<p className="addspan">프로필 수정을 통해 교내활동을 추가해주세요</p>
+                                                    }
                                                 </div>
                                                 <div className="profile-outschool">
                                                     <div className="profile-chart-info-title">
                                                         <div className="profile-title-text">교외활동</div>
                                                         <div className="profile-title-line"></div>
                                                     </div>
-                                                    {activityData? 
+                                                    {activityData[1]? 
                                                         <div>
                                                             { 
                                                                 activityData.map(function(data,i){
@@ -398,7 +404,7 @@ class ViewProfile extends Component {
                                                                     </div>
                                                                 })
                                                             }  
-                                                        </div>:<p>등록된 교외활동이 없습니다.</p>
+                                                        </div>:<p className="addspan">프로필 수정을 통해 교외활동을 추가해주세요</p>
                                                     }
                                                 </div>   
                                             </div>
