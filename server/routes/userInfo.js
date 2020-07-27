@@ -85,6 +85,71 @@ router.get("/one", async (req, res) => {
 	}
 });
 
+// 유저 정보 이메일 찾기
+// userName, userPhone <- 참고 쿼리 스트링
+router.get("/emailfind", async (req, res) => {
+	// 응답할 데이터
+	let data = null;
+	try {
+		const result = await UserInfo.findOne({
+			include : [
+				{ model: User }
+			],
+			where : {
+				userName : req.query.userName,
+				userPhone : req.query.userPhone
+			},
+		});
+		// 조회 결과가 있다면
+		if(result && result.user && result.user.dataValues) {
+			let user = result.user.dataValues;
+			// 조회 결과가 하이루키 가입 이메일일 경우 데이터 대입
+			if(user.authCate === "highrookie") {
+				data = user.email;
+			}
+		}
+		// 조회 결과가 있다면 해당 이메일값 반환
+		// 조회 결과가 없다면 null 값 반환 => 하이루키 가입이 아닐 경우에도 null
+		res.send(data);
+	} catch (err) {
+		console.log(__filename + " 에서 유저 정보 한명 검색 에러 발생 내용= " + err);
+		res.send(false);	// 에러 발생시 false 값
+	}
+});
+
+// 유저 정보 비밀번호 찾기
+// userName, userPhone, email <- 참고 쿼리 스트링
+router.get("/passwordfind", async (req, res) => {
+	// 응답할 데이터
+	let data = null;
+	try {
+		const result = await UserInfo.findOne({
+			include : [
+				{ model: User }
+			],
+			where : {
+				userName : req.query.userName,
+				userPhone : req.query.userPhone
+			},
+		});
+		// 조회 결과가 있다면
+		if(result && result.user && result.user.dataValues) {
+			let user = result.user.dataValues;
+			// 가입 방식이 하이루키이며, 조회된 이메일과 입력한 이메일이 같을 경우
+			// 조회된 데이터가 다 맞을경우, 유저 객체를 반환 -> 반환된 아이디를 참고로 비밀번호 변경에 사용해야함
+			if(user.authCate === "highrookie" && user.email === req.query.email) {
+				data = user;
+			}
+		}
+		// 조회 결과가 있다면 해당 이메일값 반환
+		// 조회 결과가 없다면 null 값 반환 => 하이루키가 아니거나, 이메일이 다를경우 null 반환
+		res.send(data);
+	} catch (err) {
+		console.log(__filename + " 에서 유저 정보 한명 검색 에러 발생 내용= " + err);
+		res.send(false);	// 에러 발생시 false 값
+	}
+});
+
 // 유저 정보 생성
 router.post("/create", async(req, res) => {
 	let result = false;
