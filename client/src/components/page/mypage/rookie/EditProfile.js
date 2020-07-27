@@ -22,7 +22,6 @@ class EditProfile extends Component {
     constructor(props) {
         super(props);
         const {userInfo, awardData, certificateData,activityData}=this.props;
-        console.log(activityData);
         this.state = {
             progress : null,
             // 개인정보

@@ -24,7 +24,15 @@ class RookieCard extends Component {
                         <span className="Rookie-Card-Profile-info-name">{userList.userName || "알수없음"}</span>
                         <span className="Rookie-Card-Profile-info-text">{userList.userIntro || "안녕하세요."}</span>
                         <span className="Rookie-Card-Profile-info-position">{userList.userField || "미정"}</span>
-                        <span className="Rookie-Card-Profile-info-pt">{userList.userAdd || "알수없음"}</span>
+                        <div className="Rookie-Card-Profile-info-tags">
+                            {
+                                userList.userKeyword[0] ? userList.userKeyword.map((data,i) => {
+                                    return <span key={i} className="Rookie-Card-Profile-info-pt">{data}</span>
+                                })
+                                :
+                                <span className="Rookie-Card-Profile-info-pt">키워드가 없습니다.</span>
+                            }
+                        </div>
                         <div className="Rookie-Card-Profile-info-tags">
                             { 
                                 userList.userTags[0] ? userList.userTags.map((data,i) => {

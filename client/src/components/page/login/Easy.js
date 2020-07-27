@@ -71,7 +71,7 @@ class Easy extends Component {
                     </div>
                     <div className="easy-bottom">
                         <div className="easy-line"></div>
-                        <span className="easy-text">또는</span>
+                        <div className="easy-text">또는</div>
                         <div className="easy-line"></div>
                     </div>
                     <span className="easy-easy"><Link to="/login">하이루키 계정으로 로그인하기</Link></span>

@@ -117,7 +117,6 @@
     flex-direction: row;
     justify-content: center;
     width: 100%;
-    flex-wrap: wrap;
 }
 
 .Company-search-tag-list {
@@ -404,7 +403,7 @@
     color: #3274b6;
 }
 .Rookie-Card-Profile-info-pt{
-    margin-top: 10px;
+    margin: 5px;
     font-size: 14px;
     color: #f14c7e;
 }
@@ -436,8 +435,18 @@
     max-width: 1160px;
     flex-wrap: wrap;
     margin-bottom: 50px;
-    padding-left: 32px;
 }
 .Rookie-CardView-PagiNation{
     margin: 40px;
+}
+
+@media (max-width:880px) {
+    .Company-search-tag-box {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        flex-wrap: wrap;
+    }
 }

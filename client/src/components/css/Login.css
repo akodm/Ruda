@@ -121,3 +121,29 @@
 
 /* ----------------------------------------- */
 /* ----------------------------------------- */
+@media (max-width:840px) {
+    .login-div {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .login-text {
+        width: 30px;
+    }
+}
+
+@media (max-width:480px) {
+    .login-inputDiv {
+        overflow: hidden;
+    }
+
+    .login-search {
+        font-family: NanumSquareR;
+        font-size: 12px;
+        color: #9a9a9a;
+        margin-bottom: 43px;
+        text-align: center;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+}

@@ -106,3 +106,34 @@
     color: #608eb4;
     font-weight: 600;
 }
+
+@media (max-width:840px) {
+    .insert-div {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .insert-text {
+        width: 30px;
+    }
+}
+
+@media (max-width:430px) {
+    .insert-box {
+        width: 54px;
+        height: 33px;
+        background-color: #96c0e2;
+        border: none;
+        margin-left: 10px;
+        font-family: NanumSquareR;
+        font-size: 12px;
+        text-align: center;
+        color: #ffffff;
+    }
+
+    .insert-inputBox {
+        display: flex;
+        flex-direction: row;
+        margin-left: 65px;
+    }
+}

@@ -32,6 +32,7 @@
     color:#646464; 
     font-weight: 600;
     margin-top: 96px;
+    text-align: center;
 }
 
 .Main-new-subTitle {
@@ -107,8 +108,8 @@
 }
 
 .liu {
-    width: 676px;
-    height: 478px;
+    width: 100%;
+    height: auto;
 }
 
 /* -------------------------- center ----------------------- */

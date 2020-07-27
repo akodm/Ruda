@@ -53,10 +53,10 @@ router.get("/yall", async (req, res) => {
 			],
 			where : {
 				userTraningDateState : {
-					[Op.or] : [{
-						[Op.like] : "%취업%",
-						[Op.like] : "%실습%"
-					}]
+					[Op.or] : [
+						{ [Op.like] : "%취업%" }, 
+						{ [Op.like] : "%실습%" }
+					]
 				},
 			}
 		});
@@ -276,10 +276,10 @@ router.post("/search", async (req, res) => {
 						userField : models.Sequelize.literal(field),
 					},
 					userTraningDateState : {
-						[Op.or] : [{
-							[Op.like] : "%취업%",
-							[Op.like] : "%실습%"
-						}]
+						[Op.or] : [
+							{ [Op.like] : "%취업%" },
+							{ [Op.like] : "%실습%" }
+						]
 					},
 				}
 			}
@@ -324,10 +324,10 @@ router.post("/popup", async (req, res) => {
 						userField : { [Op.like] : "%" + req.body.occupation + "%" },
 					},
 					userTraningDateState : {
-						[Op.or] : [{
-							[Op.like] : "%취업%",
-							[Op.like] : "%실습%"
-						}]
+						[Op.or] : [
+							{ [Op.like] : "%취업%" },
+							{ [Op.like] : "%실습%" }
+						]
 					},
 				}
 			}
