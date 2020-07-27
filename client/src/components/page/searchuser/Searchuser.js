@@ -28,9 +28,9 @@ class Searchuser extends Component {
     async shearchId() {
         const {name,phone}=this.state;
         try{
-        let result =await axios.get(`${config.app.s_url}/userinfos/one?userName=${name}`);
+        let result =await axios.get(`${config.app.s_url}/userinfos/emailfind?userName=${name}&&userPhone=${phone}`);
         if(result.data){
-            console.log("아이디 찾을수 있ㅇ요");
+            alert(result.data);
         }else{
            alert("일치하는 정보가 없습니다.") ;
         }
@@ -39,12 +39,18 @@ class Searchuser extends Component {
        }
     }
     // pw 찾기 버튼을 누를경우
-    shearchPw() {
+    async shearchPw() {
+        const {email,name2,phone2}=this.state;
         try{
-
-        }catch(err){
-            console.log("비밀번호 찾기 오류 "+err);
+        let result = await axios.get(`${config.app.s_url}/userinfos/passwordfind?email=${email}userName=${name2}&&userPhone=${phone2}`);
+        if(result.data){
+            alert(result.data);
+        }else{
+           alert("일치하는 정보가 없습니다.") ;
         }
+       }catch(err){
+           console.log("비밀번호 찾기 오류 "+err);
+       }
     }
 
     // props로 넘겨줄 함수, 매개변수로 들어오는 값 세 가지를 셋 스태이트 시킴
