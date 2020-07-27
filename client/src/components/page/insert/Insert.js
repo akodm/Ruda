@@ -20,7 +20,6 @@ class Insert extends Component {
             emailcodeValid : { state : true, result : false }, // 이메일 인증 코드 밸리데이션
             passwordValid : { state : true, result : false }, // 패스워드 밸리데이션
             passwordconfirmValid : { state : true, result : false }, // 패스워드 확인 밸리데이션
-        
         }
     }
 
@@ -160,7 +159,7 @@ class Insert extends Component {
                     <button className="insert-btn" onClick={this.insertBtn.bind(this)}>회원가입</button>
                     <div className="insert-bottom">
                         <div className="insert-line"></div>
-                        <span className="insert-text">또는</span>
+                        <div className="insert-text">또는</div>
                         <div className="insert-line"></div>
                     </div>
                     <span className="insert-easy"><Link to="/easy">간편하게 회원가입하기</Link></span>

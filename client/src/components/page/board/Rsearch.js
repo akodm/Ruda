@@ -85,9 +85,9 @@ class Rsearch extends Component {
                         <div className="Company-search-box-layout">
                             {/* 태그 검색 부분 */}
                             <div className="Company-search-tag-box">
-                                <AutoCreateBox margin={"5px"} value={address} blur={true} width={300} text={"주소 입력"} list={[]} clear={true} onChange={(e) => this.setState({ filters : filters.concat({ row : "userAdd", data : e }) })} />
-                                <AutoCreateBox margin={"5px"} value={field} blur={true} width={300} text={"희망 분야"} list={dataList.app.fieldList} clear={true} onChange={(e) => this.setState({ filters : filters.concat({ row : "userField", data : e }) })} />
-                                <AutoCreateBox margin={"5px"} value={tag} blur={true} width={300} text={"태그 입력"} list={dataList.app.tagList} clear={true} onChange={(e) => this.setState({ filters : filters.concat({ row : "userTags", data : e }) })} />
+                                <AutoCreateBox margin={"5px"} value={address} blur={true} width={"100%"} text={"주소 입력"} list={[]} clear={true} onChange={(e) => this.setState({ filters : filters.concat({ row : "userAdd", data : e }) })} />
+                                <AutoCreateBox margin={"5px"} value={field} blur={true} width={"100%"} text={"희망 분야"} list={dataList.app.fieldList} clear={true} onChange={(e) => this.setState({ filters : filters.concat({ row : "userField", data : e }) })} />
+                                <AutoCreateBox margin={"5px"} value={tag} blur={true} width={"100%"} text={"태그 입력"} list={dataList.app.tagList} clear={true} onChange={(e) => this.setState({ filters : filters.concat({ row : "userTags", data : e }) })} />
                             </div>
                         </div>
 

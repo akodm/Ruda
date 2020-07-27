@@ -88,3 +88,14 @@
 .oauth-img:hover {
     box-shadow: 0px 0px 1px 1px rgba(102, 101, 101, 0.527);
 }
+
+@media (max-width:830px) {
+    .easy-div {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .easy-text {
+        width: 30px;
+    }
+}

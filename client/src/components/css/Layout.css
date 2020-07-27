@@ -132,6 +132,15 @@
     align-items: center;
 }
 
+@media (max-width:500px) {
+    .Header-nav-menu div {
+        width: 30px;
+        color:#646464;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}
+
 /* ----------------------- UpDown ------------------ */
 
 .updown{

@@ -11,7 +11,10 @@ class MsgLeftItem extends Component {
     async readSet() {
         try {
             const { data, mailReload, setView, _if } = this.props;
-            if(!_if) { return; }
+            if(!_if) { 
+                setView();
+                return; 
+            }
             await axios.put(`${config.app.s_url}/mails/update`, {
                 id : data.id,
                 readState : true,
