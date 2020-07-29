@@ -84,6 +84,24 @@ router.post("/create", async(req, res) => {
     res.send(result);
 });
 
+router.put("/updatecate", async(req, res) => {
+    let result = null;
+    try {
+        await User.update({ 
+            userCate: req.body.userCate,
+            }, {
+            where: {
+                id : req.body.id,
+            }
+        });
+        result = true;
+    } catch(err) {
+        console.log(__filename + " 에서 유저 업데이트 에러 발생 내용= " + err);
+        result = false;
+    }
+    res.send(result);
+});
+
 // 유저 업데이트
 // 만약 비밀번호 찾기를 유저 인포 라우터에서 처리를 마치고,
 // 비밀번호를 변경할시에, 아이디를 토대로 입력받은 유저 비밀번호로 변경
