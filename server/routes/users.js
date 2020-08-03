@@ -193,7 +193,7 @@ router.get("/dup", async (req, res) => {
 
 // 구글로 로그인 -> 이메일 받아서 유저 생성
 router.get('/google/callback',
-    passport.authenticate('google', { scope: ['email'], session : false, failureRedirect: 'http://localhost:3000/' }),
+    passport.authenticate('google', { scope: ['email'], session : false, failureRedirect: `${config.app.c_local}/easy` }),
     async(req, res) => {
 		let state = false;
 		console.log(req.user._json)
@@ -220,7 +220,7 @@ router.get('/google/callback',
 
 // 페이스북으로 로그인 -> 이메일이 없어서 아이디를 받아서 유저 생성
 router.get('/facebook/callback', 
-  	passport.authenticate('facebook', { scope: ['public_profile','email'], session : false, failureRedirect: 'http://localhost:3000/' }),
+  	passport.authenticate('facebook', { scope: ['public_profile','email'], session : false, failureRedirect: `${config.app.c_local}/easy` }),
   	async(req, res) => {
 		console.log(req.user._json)
 		let state = false;
@@ -246,7 +246,7 @@ router.get('/facebook/callback',
 );
 
 // 네이버로 로그인 -> 이메일 받아서 유저 생성
-router.get('/naver/callback', passport.authenticate('naver', { session : false, failureRedirect: 'http://localhost:3000/' }),
+router.get('/naver/callback', passport.authenticate('naver', { session : false, failureRedirect: `${config.app.c_local}/easy` }),
 	async(req,res) => {
 		console.log(req.user._json);
 		let state = false;

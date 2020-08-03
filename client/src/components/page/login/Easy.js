@@ -66,7 +66,7 @@ class Easy extends Component {
                     <span className="easy-title">간편로그인 / 회원가입</span>
                     <div className="easy-oauthDiv">
                         <div className="easy-btn" onClick={this.oauthClick.bind(this,0)} ><img alt="img" src="/Images/btn_google_signin_light_normal_web.png" className="oauth-img" /></div>
-                        <div className="easy-btn" onClick={this.oauthClick.bind(this,1)} ><img alt="img"  src="/Images/facelogin.png" width="185px" height="40px" className="oauth-img"/></div>
+                        {/* <div className="easy-btn" onClick={this.oauthClick.bind(this,1)} ><img alt="img"  src="/Images/facelogin.png" width="185px" height="40px" className="oauth-img"/></div> */}
                         <div className="easy-btn" onClick={this.oauthClick.bind(this,2)} ><img alt="img"  src="/Images/naverlogin.png" className="oauth-img" /></div>
                     </div>
                     <div className="easy-bottom">

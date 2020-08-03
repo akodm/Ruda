@@ -316,20 +316,20 @@ class Rookie extends Component {
                     {/* 첫번째 라인 */}
                     <div className="Info-rookie-imgLayout">
                         <SelectBox 
-                            value={univercityCate} func={(e) => this.setState({ univercityCate : e })}
+                            style2={{width:"200px", marginBottom:"10px"}} value={univercityCate} func={(e) => this.setState({ univercityCate : e })}
                             label={"학력"} option={["대학","고졸"]} text={"학력"} style={{marginRight:"20px"}}
                         />
-                        <AutoCreateBox blur={true} width={200} text={univercityCate === "대학" ? "대학교 이름 *" : "고등학교 이름 *"} list={univercityCate === "대학" ? dataList.app.univercityList : dataList.app.highschoolList} clear={false} onChange={(e) => this.setState({ univercity : e })} />
-                        <div style={{marginLeft:"25px"}}>
-                            <AutoCreateBox blur={true} width={200} text="전공 *" list={univercityCate === "대학" ? dataList.app.subjectList : []} clear={false} onChange={(e) => this.setState({ subject : e })} />
+                        <AutoCreateBox marginLeft={25} blur={true} width={200} text={univercityCate === "대학" ? "대학교 이름 *" : "고등학교 이름 *"} list={univercityCate === "대학" ? dataList.app.univercityList : dataList.app.highschoolList} clear={false} onChange={(e) => this.setState({ univercity : e })} />
+                        <div className="Info-rookie-class">
+                            <AutoCreateBox marginBottom={"10px"} blur={true} width={200} text="전공 *" list={univercityCate === "대학" ? dataList.app.subjectList : []} clear={false} onChange={(e) => this.setState({ subject : e })} />
                         </div>
                     </div>
-                    <div className="Info-rookie-dateLayout">
-                        <TextField error={startErr} helperText={"2014"} style={{width:"150px", marginRight:"25px",marginLeft:"18px"}} variant="outlined" onChange={this.onChangeValueDate.bind(this)} name="univercityStart" value={univercityStart} label="입학년도" />
-                        <TextField error={endErr} helperText={moment(new Date()).format("YYYY")} style={{width:"150px", marginRight:"10px"}} variant="outlined" onChange={this.onChangeValueDate.bind(this)} name="univercityEnd" value={univercityEnd} label="졸업년도" />
+                    <div className="Info-rookie-dateLayout" style={{marginLeft: "20px"}}>
+                        <TextField error={startErr} helperText={"2014"} style={{width:"150px", marginRight:"25px", marginBottom:"10px"}} variant="outlined" onChange={this.onChangeValueDate.bind(this)} name="univercityStart" value={univercityStart} label="입학년도" />
+                        <TextField error={endErr} helperText={moment(new Date()).format("YYYY")} style={{width:"150px", marginRight:"20px", marginBottom:"10px"}} variant="outlined" onChange={this.onChangeValueDate.bind(this)} name="univercityEnd" value={univercityEnd} label="졸업년도" />
                         <SelectBox 
-                            value={univercityState} func={(e) => this.setState({ univercityState : e })}
-                            label={"재학구분"} option={["재학","졸업","휴학","중퇴"]} text={"재학구분"} style={{marginRight:"20px",marginLeft:"15px"}}
+                            style2={{width:"100px"}} value={univercityState} func={(e) => this.setState({ univercityState : e })}
+                            label={"재학구분"} option={["재학","졸업","휴학","중퇴"]} text={"재학구분"} style={{marginRight:"20px"}}
                         />
                     </div>
                 </div>
@@ -337,7 +337,7 @@ class Rookie extends Component {
                 {/* 본인 어필 박스 */}
                 <div className="Info-rookie-title">자기소개</div>
                 <div className="Info-rookie-body">
-                    <AutoCreateBox blur={false} width={700} text={"자신있는 기술에 대한 태그를 검색하여 최대한 골고루, 최대 6개까지 추가하세요!"} list={dataList.app.tagList} clear={true} onChange={this.addChips.bind(this,"tag")} />
+                    <AutoCreateBox blur={false} width={"100%"} text={"자신있는 기술에 대한 태그를 검색하여 최대한 골고루, 최대 6개까지 추가하세요!"} list={dataList.app.tagList} clear={true} onChange={this.addChips.bind(this,"tag")} />
                     <div className="Info-tag-box">
                         {
                             tags.map((data,i) => {
@@ -345,7 +345,7 @@ class Rookie extends Component {
                             })
                         }
                     </div>
-                    <AutoCreateBox blur={false} width={700} text={"자신의 성격에 대한 주관적인 키워드를 최대 3개까지 등록하세요!"} list={dataList.app.keywordList} clear={true} onChange={this.addChips.bind(this,"key")} />
+                    <AutoCreateBox blur={false} width={"100%"} text={"자신의 성격에 대한 주관적인 키워드를 최대 3개까지 등록하세요!"} list={dataList.app.keywordList} clear={true} onChange={this.addChips.bind(this,"key")} />
                     <div className="Info-tag-box">
                         {
                             keywords.map((data,i) => {
@@ -353,7 +353,7 @@ class Rookie extends Component {
                             })
                         }
                     </div>
-                    <AutoCreateBox blur={false} width={700} text={"자신의 특기 또는 취미 키워드를 최대 5개까지 등록하세요!"} list={dataList.app.specialtyList} clear={true} onChange={this.addChips.bind(this,"spc")} />
+                    <AutoCreateBox blur={false} width={"100%"} text={"자신의 특기 또는 취미 키워드를 최대 5개까지 등록하세요!"} list={dataList.app.specialtyList} clear={true} onChange={this.addChips.bind(this,"spc")} />
                     <div className="Info-tag-box">
                         {
                             specialty.map((data,i) => {
@@ -368,26 +368,26 @@ class Rookie extends Component {
                 {/* 구직정보 박스 */}
                 <div className="Info-rookie-title">구직정보</div>
                 <div className="Info-rookie-body">
-                    <AutoCreateBox blur={true} width={400} text={"희망하는 분야를 입력하세요."} list={dataList.app.fieldList} clear={false} onChange={(e) => this.setState({ field : e })} />
+                    <AutoCreateBox blur={true} width={"100%"} text={"희망하는 분야를 입력하세요."} list={dataList.app.fieldList} clear={false} onChange={(e) => this.setState({ field : e })} />
                     <div className="Info-rookie-dateLayout">
                         <SelectBox 
                             value={workDateState} func={(e) => this.setState({ workDateState : e })}
-                            label={"취업유무"} option={["취업희망","실습희망","실습후 취업희망","미정"]} text={"취업유무"} style={{marginRight:"20px"}}
+                            label={"취업유무"} option={["취업희망","실습희망","실습후 취업희망","미정"]} text={"취업유무"} style={{marginRight:"20px", marginTop:"15px"}}
                         />
                         {
                             workDateState !== "미정" &&
                         <SelectBox 
                             value={workDate} func={(e) => this.setState({ workDate : e })}
-                            label={"근무실습가능 날짜"} option={["상시","졸업 후","실습 강의 시","직접입력","미정"]} text={"근무/실습 날짜"} style={{marginRight:"20px"}}
+                            label={"근무실습가능 날짜"} option={["상시","졸업 후","실습 강의 시","직접입력","미정"]} text={"근무/실습 날짜"} style={{marginRight:"20px", marginTop:"15px"}}
                         />
                         }
                         {
                             workDate === "직접입력" &&
-                            <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginRight:"10px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="trainingDate" value={trainingDate} label="실습가능 날짜" />
+                            <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginRight:"10px", marginTop:"15px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="trainingDate" value={trainingDate} label="가능 날짜" />
                         }
                     </div>
                 </div>
-                <h5>이름, 자기소개, 이메일, 전화번호, 거주지, 희망분야, 구직형태, 병역여부, 대학, sh전공, 은 필수입력사항입니다.</h5>
+                <h5>이름, 자기소개, 이메일, 전화번호, 거주지, 희망분야, 구직형태, 병역여부, 대학, 전공, 은 필수입력사항입니다.</h5>
                 <div className="Info-rookie-agree">
                     <CheckBox check={agreeCheck} func={(e) => this.setState({ agreeCheck : e })} name="agree" color="primary" />
                     <span>하이루키는 신입 채용 서비스입니다. <span style={{color:"red"}}>신입 구직자</span>로서 이용하심에 동의하십니까?</span>

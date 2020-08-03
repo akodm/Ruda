@@ -74,7 +74,7 @@ class Company extends Component {
             alert("이용수칙에 동의해주세요.");
             return;
         }
-        if(!name || !phone || !address1 || !field || !companyUrl || !ceo || !since || !intro || !workCate) {
+        if(!name || !phone || !address1 || !field || !companyUrl || !intro || !workCate) {
             alert("필수 입력 사항을 입력해주세요.");
             return;
         }
@@ -246,8 +246,8 @@ class Company extends Component {
                         {/* 신상 정보 */}
                         <div className="Info-rookie-inputLayoutDiv">
                             <div>
-                                <TextField helperText="기업명" required label="기업명" variant="outlined" value={name} name="name" onChange={this.onChangeValue.bind(this)} />
-                                <TextField style={{marginLeft:"10px"}} helperText="선택 입력" label="기업 대표 이름" variant="outlined" value={ceo} name="ceo" onChange={this.onChangeValue.bind(this)} />
+                                <TextField style={{marginRight:"10px"}} helperText="기업명" required label="기업명" variant="outlined" value={name} name="name" onChange={this.onChangeValue.bind(this)} />
+                                <TextField helperText="선택 입력" label="기업 대표 이름" variant="outlined" value={ceo} name="ceo" onChange={this.onChangeValue.bind(this)} />
                             </div>
                             <TextField helperText="-빼고 입력해주세요" required label="기업 전화번호" variant="outlined" value={phone} name="phone" onChange={this.onChangeValue.bind(this)} />
                         </div>
@@ -258,7 +258,7 @@ class Company extends Component {
                             id="outlined-read-only-input" label="기업 주소를 검색하여 주세요. 시/도/구"
                             value={address1} required
                             onClick={() => this.setState({ addressState : true })}
-                            style={{width:"450px",marginRight:"25px"}}
+                            style={{width:"450px",marginRight:"25px", marginBottom:"10px"}}
                             InputProps={{ readOnly: true }} variant="outlined"
                         />
                         <TextField helperText="상세주소를 입력해주세요" style={{width:"200px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="address2" value={address2} label="나머지 주소" />
@@ -272,7 +272,7 @@ class Company extends Component {
                         <TextField style={{width:"340px",marginRight:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="companyUrl" value={companyUrl} label="기업사이트 주소" />
                         <AutoCreateBox value={field} width={340} blur={true} text={"기업의 분야를 입력해주세요."} list={dataList.app.comfieldList} clear={false} onChange={(e) => this.setState({ field : e })}  />
                     </div>
-                    <AutoCreateBox blur={false} width={700} text={"기업에서 다루는 기술에 대한 태그를 검색하여 최대 6개까지 추가하세요!"} list={dataList.app.tagList} clear={true} onChange={this.addChips.bind(this,"tag")} />
+                    <AutoCreateBox blur={false} width={"100%"} text={"기업에서 다루는 기술에 대한 태그를 검색하여 최대 6개까지 추가하세요!"} list={dataList.app.tagList} clear={true} onChange={this.addChips.bind(this,"tag")} />
                     <div className="Info-tag-box">
                         {
                             tags.map((data,i) => {
@@ -284,7 +284,7 @@ class Company extends Component {
                         <TextField style={{width:"48%"}} helperText="숫자만 입력해주세요." label={`기업 설립일. ${moment(new Date()).format("YYYY")}`} variant="outlined" value={since} name="since" onChange={this.onChangeValue.bind(this)} />
                         <TextField style={{width:"48%"}} helperText="선택 입력. 숫자만 입력해주세요." label="기업 평균 연령" variant="outlined" value={ageAvg} name="ageAvg" onChange={this.onChangeValue.bind(this)} />
                     </div>
-                    <AutoCreateBox blur={false} width={700} text={"기업을 소개할 기업의 사내 규칙을 최대 5개까지 입력해주세요! 선택입력"} list={[]} clear={true} onChange={this.addChips.bind(this,"rule")} />
+                    <AutoCreateBox blur={false} width={"100%"} text={"기업을 소개할 기업의 사내 규칙을 최대 5개까지 입력해주세요! 선택입력"} list={[]} clear={true} onChange={this.addChips.bind(this,"rule")} />
                     <div className="Info-tag-box" style={{flexDirection:"column"}}>
                         {
                             rule.map((data,i) => {
@@ -292,7 +292,7 @@ class Company extends Component {
                             })
                         }
                     </div>
-                    <AutoCreateBox blur={false} width={700} text={"기업에서 제공하는 복리후생 및 제도에 대해 알려주세요! 최대 10개. 예) 내일채움공제"} list={dataList.app.welfareList} clear={true} onChange={this.addChips.bind(this,"wel")} />
+                    <AutoCreateBox blur={false} width={"100%"} text={"기업에서 제공하는 복리후생 및 제도에 대해 알려주세요! 최대 10개. 예) 내일채움공제"} list={dataList.app.welfareList} clear={true} onChange={this.addChips.bind(this,"wel")} />
                     <div className="Info-tag-box">
                         {
                             welfare.map((data,i) => {
@@ -304,7 +304,7 @@ class Company extends Component {
                 </div>
                 <div className="Info-rookie-title">채용정보</div>
                 <div className="Info-rookie-body">
-                    <AutoCreateBox blur={false} width={700} text={"구직자에게 바라는 기술스택이나 최소 요건에 대해 등록하세요!"} list={dataList.app.requestList} clear={true} onChange={this.addChips.bind(this,"req")} />
+                    <AutoCreateBox blur={false} width={"100%"} text={"구직자에게 바라는 기술스택이나 최소 요건에 대해 등록하세요!"} list={dataList.app.requestList} clear={true} onChange={this.addChips.bind(this,"req")} />
                     <div className="Info-tag-box">
                         {
                             request.map((data,i) => {
@@ -312,7 +312,7 @@ class Company extends Component {
                             })
                         }
                     </div>
-                    <AutoCreateBox blur={true} width={400} text={"희망하는 채용 분야를 입력하세요."} list={dataList.app.fieldList} clear={false} onChange={(e) => this.setState({ occupation : e })} />
+                    <AutoCreateBox blur={true} width={"100%"} text={"희망하는 채용 분야를 입력하세요."} list={dataList.app.fieldList} clear={false} onChange={(e) => this.setState({ occupation : e })} />
                     <div className="Info-rookie-dateLayout">
                     <SelectBox 
                             value={workCate} func={(e) => this.setState({ workCate : e })}
@@ -327,11 +327,11 @@ class Company extends Component {
                         }
                         {
                             workDateState === "직접입력" &&
-                            <TextField value={workDate} helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"200px", marginRight:"10px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="workDate" label="근무희망 날짜  ~부터" />
+                            <TextField value={workDate} helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"200px", marginRight:"10px", marginTop:"15px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="workDate" label="희망 날짜  ~부터" />
                         }
                     </div>
                 </div>
-                <h5>기업이름, 기업소개, 이메일, 기업사이트주소, 기업번호, 기업위치, 기업대표, 기업분야, 채용형태, 기업설립일은 필수입력사항입니다.</h5>
+                <h5>기업이름, 기업소개, 기업사이트주소, 기업번호, 기업위치, 기업분야, 채용형태는 필수입력사항입니다.</h5>
                 <div className="Info-rookie-agree">
                     <CheckBox check={agreeCheck} func={(e) => this.setState({ agreeCheck : e })} name="agree" color="primary" />
                     <span>하이루키는 신입 채용 서비스입니다. <span style={{color:"red"}}>기업</span>으로서 이용하심에 동의하십니까?</span>

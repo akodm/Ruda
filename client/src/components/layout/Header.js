@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Badge from '@material-ui/core/Badge';
+import MenuIcon from '@material-ui/icons/Menu';
 
 class Header extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            open : false,
+        }
+    }
 
     logout() {
         localStorage.removeItem("users");
@@ -10,8 +17,18 @@ class Header extends Component {
         window.location.href = "/";
     }
 
+    headerMedia() {
+        const { user } = this.props;
+        if(!user.email) {
+            alert("로그인 후 이용해주세요.");
+            return;
+        }
+        this.setState({ open : this.state.open ? false : true })
+    }
+
     render() {
         const { user, openClose, msgOpenClose, unReadMsg } = this.props;
+        const { open } = this.state;
         return (
             <div className="Header">
                 <nav  className="Header-nav">
@@ -42,6 +59,21 @@ class Header extends Component {
                                     </div>}
                                 <div className="Header-nav-recommendbtn" onClick={() => user.email ? openClose(true, "company") : alert("로그인 후 이용해주세요.")}>추천인재</div>
                                 { user.email && <div className="Header-logout" onClick={this.logout.bind(this)}>로그아웃</div> }
+                            </div>
+                        }
+                    </div>
+                    <div className="Header-right-media">
+                        <MenuIcon onClick={this.headerMedia.bind(this)} style={{cursor:"pointer"}} />
+                        {
+                            user.email && open &&
+                            <div className="Header-right-media-list">
+                                <div onClick={() => msgOpenClose(true)} className="Header-right-media-list-li">
+                                    <Badge color="secondary" badgeContent={unReadMsg}>
+                                        메일함
+                                    </Badge>
+                                </div>
+                                <div onClick={() => user.cate === "user" ? openClose(true, "user") : openClose(true, "company")} className="Header-right-media-list-li">추천목록</div>
+                                <div onClick={this.logout.bind(this)} className="Header-right-media-list-li">로그아웃</div>
                             </div>
                         }
                     </div>

@@ -81,17 +81,17 @@ class Csearch extends Component {
                                 value={textInput}
                                 onChange={(e) => this.setState({ textInput : e.target.value })}
                             />
-                            <Button onClick={this.searchBtn} startIcon={<SearchIcon />} style={{height:"57px", width:"100px",marginLeft:"10px"}} color="primary" variant="outlined">검색</Button>
+                            <Button size="small" onClick={this.searchBtn} startIcon={<SearchIcon />} style={{height:"57px", width:"100px",marginLeft:"10px"}} color="primary" variant="outlined">검색</Button>
                         </div>
 
                         <div className="Company-search-box-layout">
                             {/* 태그 검색 부분 */}
                             <div className="Company-search-tag-box">
-                                <AutoCreateBox margin={"5px"} value={address} blur={true} width={"100%"} text={"주소 입력"} list={[]} clear={true} onChange={(e) => this.setState({ filters : filters.concat({ row : "companyAdd", data : e }) })} />
-                                <AutoCreateBox margin={"5px"} value={field} blur={true} width={"100%"} text={"분야, 직종"} list={dataList.app.fieldList} clear={true} onChange={(e) => this.setState({ filters : filters.concat({ row : "companyField", data : e }) })} />
-                                <AutoCreateBox margin={"5px"} value={tag} blur={true} width={"100%"} text={"태그 입력"} list={dataList.app.tagList} clear={true} onChange={(e) => this.setState({ filters : filters.concat({ row : "companyTags", data : e }) })} />
-                                <AutoCreateBox margin={"5px"} value={request} blur={true} width={"100%"} text={"최소 조건"} list={dataList.app.requestList} clear={true} onChange={(e) => this.setState({ filters : filters.concat({ row : "companyRequest", data : e }) })} />
-                                <AutoCreateBox margin={"5px"} value={welfare} blur={true} width={"100%"} text={"복리후생"} list={dataList.app.welfareList} clear={true} onChange={(e) => this.setState({ filters : filters.concat({ row : "companyWelfare", data : e }) })} />
+                                <AutoCreateBox size="small" margin={"5px"} value={address} blur={true} width={"100%"} text={"주소 입력"} list={[]} clear={true} onChange={(e) => this.setState({ filters : filters.concat({ row : "companyAdd", data : e }) })} />
+                                <AutoCreateBox size="small" margin={"5px"} value={field} blur={true} width={"100%"} text={"분야, 직종"} list={dataList.app.fieldList} clear={true} onChange={(e) => this.setState({ filters : filters.concat({ row : "companyField", data : e }) })} />
+                                <AutoCreateBox size="small" margin={"5px"} value={tag} blur={true} width={"100%"} text={"태그 입력"} list={dataList.app.tagList} clear={true} onChange={(e) => this.setState({ filters : filters.concat({ row : "companyTags", data : e }) })} />
+                                <AutoCreateBox size="small" margin={"5px"} value={request} blur={true} width={"100%"} text={"최소 조건"} list={dataList.app.requestList} clear={true} onChange={(e) => this.setState({ filters : filters.concat({ row : "companyRequest", data : e }) })} />
+                                <AutoCreateBox size="small" margin={"5px"} value={welfare} blur={true} width={"100%"} text={"복리후생"} list={dataList.app.welfareList} clear={true} onChange={(e) => this.setState({ filters : filters.concat({ row : "companyWelfare", data : e }) })} />
                             </div>
                         </div>
 

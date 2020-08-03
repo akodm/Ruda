@@ -233,7 +233,11 @@ class ViewProfile extends Component {
                                         <p>{userInfo.userLike}명이 좋아합니다. </p>
                                     </div>
                                 </div>
-                                <button className="profile-edit" onClick={this.EditProfile.bind(this)}> <EditIcon style={{fontSize:"medium",height:"40px"}}/>프로필수정</button>
+                                {
+                                    loginState ? <button className="profile-edit" onClick={this.EditProfile.bind(this)}> <EditIcon style={{fontSize:"medium",height:"40px"}}/>프로필수정</button>
+                                    :
+                                    <div className="profile-edit-null"></div>
+                                }
                                 <div className="Mypage-pages-title">
                                     <div className="Mypage-pages-title-icons">    
                                         <div className="Mypage-pages-title-icons-icon">
@@ -288,7 +292,8 @@ class ViewProfile extends Component {
                                                         })
                                                     }
                                                 </div>
-                                            : <p className="addspan">프로필 수정을 통해 기술스택을 추가해주세요</p>}
+                                                :<p className="addspan">{ loginState ? "프로필 수정을 통해 기술스택을 추가해주세요" : "작성된 기술스택이 없습니다."}</p>
+                                                }
                                             <div>
                                                 <div className="profile-chart-info-title">
                                                     <div className="profile-title-text">키워드</div>
@@ -326,7 +331,8 @@ class ViewProfile extends Component {
                                                 </div>
                                              }
                                              </div>
-                                        :<p className="addspan">프로필 수정을 통해 키워드를 추가해주세요</p>}       
+                                            :<p className="addspan">{ loginState ? "프로필 수정을 통해 키워드를 추가해주세요" : "작성된 키워드가 없습니다."}</p>
+                                        }       
                                         <div className="profile-skill-info">
                                           
                                             <div>
@@ -344,7 +350,8 @@ class ViewProfile extends Component {
                                                     </div>
                                                 })}
                                                 </div>
-                                                :<p className="addspan">프로필 수정을 통해 자격증을 추가해주세요</p>}
+                                                :<p className="addspan">{ loginState ? "프로필 수정을 통해 자격증을 추가해주세요" : "작성된 자격증이 없습니다."}</p>
+                                                }
                                             </div>
                                         
                                    
@@ -362,8 +369,8 @@ class ViewProfile extends Component {
                                                             <p>{data.awardDate}</p>
                                                         </div>
                                                     })}
-                                                </div>:
-                                                <p className="addspan">프로필 수정을 통해 수상경력을 추가해주세요</p>
+                                                </div>
+                                                :<p className="addspan">{ loginState ? "프로필 수정을 통해 수상경력을 추가해주세요" : "작성된 수상경력이 없습니다."}</p>
                                                 }
                                                 
                                             </div>
@@ -385,7 +392,8 @@ class ViewProfile extends Component {
                                                                 </div>
                                                             })
                                                         }  
-                                                    </div>:<p className="addspan">프로필 수정을 통해 교내활동을 추가해주세요</p>
+                                                    </div>
+                                                    :<p className="addspan">{ loginState ? "프로필 수정을 통해 교내활동을 추가해주세요" : "작성된 교내활동이 없습니다."}</p>
                                                     }
                                                 </div>
                                                 <div className="profile-outschool">
@@ -404,7 +412,8 @@ class ViewProfile extends Component {
                                                                     </div>
                                                                 })
                                                             }  
-                                                        </div>:<p className="addspan">프로필 수정을 통해 교외활동을 추가해주세요</p>
+                                                        </div>
+                                                        :<p className="addspan">{ loginState ? "프로필 수정을 통해 교외활동을 추가해주세요" : "작성된 교외활동이 없습니다."}</p>
                                                     }
                                                 </div>   
                                             </div>

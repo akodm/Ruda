@@ -10,6 +10,9 @@ module.exports = {
       time: true,
       env: {
         "NODE_ENV": 'development'
+      },
+      watch_options : {
+        followStmlinks : false
       }
     }
   ]

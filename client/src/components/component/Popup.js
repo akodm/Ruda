@@ -30,6 +30,8 @@ class Popup extends Component {
                 company = data[1].data;
             });
 
+            if(!rookie && !company) return;
+            
             const cate = rookie ? "rookie" : "company";
             await this.setState({ [cate] : cate === "rookie" ? rookie : company });
 

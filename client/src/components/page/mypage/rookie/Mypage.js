@@ -6,7 +6,6 @@ import axios from 'axios';
 
 import Profile from './Profile';
 import Portfolio from './Portfolio';
-import Setting from './Setting';
 
 class mypage extends Component {
     constructor(props) {
@@ -78,7 +77,7 @@ class mypage extends Component {
                             1 => 포트폴리오
                             2 => 마이페이지 수정 ( 개인화면 ) */}
                             {
-                                btnNum === 0 ?
+                                !btnNum ?
                                 load && <Profile
                                 user={user}
                                 loginState={loginState}
@@ -93,27 +92,20 @@ class mypage extends Component {
                                 mailReload={() => mailReload()}
                                 /> 
                                 :
-                                btnNum === 1 ?
                                 load && <Portfolio 
-                                    load={load} 
-                                    loginState={loginState}
-                                    userEmail={user.email} 
-                                    userId={userInfo.userId} 
-                                    userName={userInfo.userName} 
-                                    portfolio={portfolioData} 
-                                    activityData={activityData}
-                                    addPortfolio={this.portfolioConcat.bind(this)} />
-                                :
-                                loginState && <Setting userInfo={userInfo}/>
+                                load={load} 
+                                loginState={loginState}
+                                userEmail={user.email} 
+                                userId={userInfo.userId} 
+                                userName={userInfo.userName} 
+                                portfolio={portfolioData} 
+                                activityData={activityData}
+                                addPortfolio={this.portfolioConcat.bind(this)} />
                             }
                         </div>
                         <div className="Mypage-btns">
-                            <button className={btnNum === 0?"Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,0)}>프로필</button>
-                            <button className={btnNum === 1?"Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,1)}>포트폴리오</button>
-                            {
-                                loginState &&
-                                <button className={btnNum === 2?"Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,2)}>마이페이지</button>
-                            }
+                            <button className={!btnNum ? "Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,0)}>프로필</button>
+                            <button className={btnNum ? "Mypage-menu-click":"Mypage-menu-none"} onClick={this.MenuClick.bind(this,1)}>포트폴리오</button>
                         </div>
                     </div>
                 </div>

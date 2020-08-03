@@ -15,7 +15,7 @@
 .popup-div {
     background-color: white;
     border: 1px solid rgba(158, 158, 158, 0.432);
-    width: 60%;
+    width: 900px;
     padding: 25px;
     min-height: 200px;
     animation-name: popup;
@@ -114,4 +114,29 @@
 .popup-bot-text {
     font-size: 13px;
     font-weight: 500;
+}
+
+@media (max-width:990px) {
+    .popup-div {
+        width: 100%;
+        padding: 0px;
+    }
+
+    .popup-title-text {
+        font-size: 15px;
+        margin: 10px;
+    }
+
+    .popup-content-title {
+        font-size: 12px;
+        width: 100;
+    }
+
+    .popup-null-text {
+        font-size: 16px;
+    }
+
+    .popup-bot-text {
+        font-size: 10px;
+    }
 }

@@ -66,7 +66,6 @@ class Searchuser extends Component {
         try{
             let result = await axios.get(`${config.app.s_url}/userinfos/passwordfind?email=${email}&userName=${name2}&userPhone=${phone2}`);
         if(result.data){
-            console.log(result.data);
             await this.setState({ data : result.data.id });
             this.openClose(true);
         }else{
