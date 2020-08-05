@@ -96,7 +96,7 @@
 .Main-new-es {
     font-family: 'Nanum Gothic', sans-serif;
     font-size: 14px;
-    color:#646464; 
+    color:#838383; 
     font-weight: 600;
 }
 .Main-new-es:hover { color: #9781d0; }
@@ -182,16 +182,17 @@
 .Main-new-bottom {
     width: 100%;
     min-height: 600px;
-    background-color: rgb(0, 183, 255);
+    background-color: #b2d8ff;
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
 }
 
 .Main-new-bottom-text {
-    font-size: 30px;
+    font-size: 18px;
     font-weight: 600;
-    width: 50%;
+    width: 35%;
     color: white;
     line-height: 55px;
     display: flex;
@@ -200,18 +201,38 @@
 }
 
 .Main-new-bottom-img-div {
-    width: 50%;
+    width: 35%;
     display: flex;
     justify-content: center;
     margin: 15px;
 }
 
 .Main-new-bottom-img {
-    width: 600px;
+    width: 550px;
     height: auto;
-    box-shadow: 0px 11px 11px 1px rgba(97, 97, 97, 0.555);
+    box-shadow: 0px 0px 5px  rgba(44, 100, 122, 0.288);
 }
 
+
+.Main-new-bottom-text>.start{
+    display: flex;
+    flex-direction: column;
+}
+.start>button{
+    width: 70%;
+    height: 50px;
+    margin:50px;
+    border: none;
+    color:#646464; 
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #ffffff;
+
+}
+.start>button:hover{
+    background-color: #f7f4fd;color: #7e7edf;
+}
 /* --------------- 반응형 처리 --------------- */
 @media all and (min-width:1100px) and (max-width:1300px) {
     .Main-new-right {
@@ -314,10 +335,14 @@
 @media (max-width:700px) {
     .Main-new-bottom {
         flex-direction: column;
+        width: 100%;
     }
-    
+    .mobile{
+        flex-direction: column-reverse;
+    }
     .Main-new-bottom-text {
-        font-size: 20px;
+        font-size: 16px;
+        
     }
     
     .Main-new-bottom-img-div {

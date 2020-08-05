@@ -7,7 +7,6 @@ import ProposalPopup from '../../../component/ProposalPopup';
 
 import Avatar from '@material-ui/core/Avatar';
 import EditIcon from '@material-ui/icons/Edit';
-import EmailIcon from '@material-ui/icons/Email';
 import LanguageIcon from '@material-ui/icons/Language';
 import HouseIcon from '@material-ui/icons/House';
 import PhoneIcon from '@material-ui/icons/Phone';
@@ -173,10 +172,6 @@ class ViewProfile extends Component {
                                 {/* 인포 */}
                                 <div  className="profile-userinfo"><hr></hr>
                                     <p className="profile-intro-title" >INFO</p>
-                                    <div className="profile-text">
-                                        <EmailIcon style={{fontSize:"medium"}}/>
-                                        <p>{companyInfo.user.email}</p>
-                                    </div>
                                     <div className="profile-text">
                                         <FaceIcon style={{fontSize:"medium"}}/>
                                         <p>대표: {companyInfo.companyCEO}</p>

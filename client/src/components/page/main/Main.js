@@ -19,7 +19,10 @@ class Main extends Component {
             withDisplay : false,
         }
     }
-
+    start = () =>{
+        window.scrollTo({top:0,left:0,behavior:"smooth"});
+    }
+    
     render() {
         const { itemCount } = this.state;
         return (
@@ -50,31 +53,34 @@ class Main extends Component {
                 </div>
 
                 {/* 메인 하단 부분 */}
-                <div className="Main-new-bottom">
+                <div className="Main-new-bottom mobile">
                     <div className="Main-new-bottom-text">
                         사이트 내 회원가입 혹은 소셜 회원가입/로그인을 통해 <br></br>
                         간편하게 회원가입 및 로그인 할 수 있습니다. <br></br>
-                        불필요한 정보 입력없이 시작하세요.
+                        불필요한 정보 입력없이 시작해보세요!.
                     </div>
                     <div className="Main-new-bottom-img-div">
                         <img src="/Images/oauth.png" alt="img" className="Main-new-bottom-img"></img>
                     </div>
                 </div>
                 <div className="Main-new-bottom" style={{backgroundColor: "white"}}>
+                    <div className="Main-new-bottom-img-div">
+                        <img src="/Images/mypage.png" alt="img" className="Main-new-bottom-img"></img>
+                    </div>
                     <div className="Main-new-bottom-text" style={{color:"black"}}>
                         구직자, 기업 중 선택하여 기본 정보 등록 후, <br></br>
                         자신만의 마이페이지를 확인할 수 있습니다. <br></br>
                         마이페이지와 포트폴리오 등 내용을 채워보세요!
                     </div>
-                    <div className="Main-new-bottom-img-div">
-                        <img src="/Images/mypage.png" alt="img" className="Main-new-bottom-img"></img>
-                    </div>
                 </div>
-                <div className="Main-new-bottom" style={{backgroundColor:"rgba(128, 128, 128, 0.63)"}}>
+                <div className="Main-new-bottom mobile" style={{backgroundColor:"#ccccff",marginBottom:"100px"}}>
                     <div className="Main-new-bottom-text">
-                        게시판에서 인재와 기업의 카드를 확인하고, <br></br>
-                        다른 사람의 마이페이지를 볼 수 있습니다. <br></br>
-                        구직 또는 채용을 등록해보세요!
+                        <div className="start">
+                            게시판에서 인재와 기업의 카드를 확인하고, <br></br>
+                            다른 사람의 마이페이지를 볼 수 있습니다. <br></br>
+                            구직 또는 채용을 등록해보세요!
+                            <button onClick={this.start.bind(this)}>하이루키 시작하기</button>
+                        </div>
                     </div>
                     <div className="Main-new-bottom-img-div">
                         <img src="/Images/board.png" alt="img" className="Main-new-bottom-img"></img>
