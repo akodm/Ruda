@@ -7,9 +7,9 @@ export default function Footer() {
                 <img src="/Images/footer_logo.png" alt="FOOTERIMG"></img>
             </div>
             <div className="Footer_notice">
-                <span className="Footer_text">ADD   |  경기도 안양시  |  TELL  |  032)1234-1234</span>
-                <span className="Footer_text">EMAIL   |  rmeodprp0856@naver.com  | a8456452@naver.com</span>
-                <span className="Footer_text">고객센터  |  회사소개  |  광고문의 </span>
+                <span className="Footer_text">ADD   |  경기도 안양시 동안구 비산동 임곡로 29 대림대학교 </span>
+                <span className="Footer_text">EMAIL   |  front - rmeodprp0856@naver.com  | back - a8456452@naver.com </span>
+                {/*<span className="Footer_text"> 고객센터  |  회사소개  |  광고문의 </span>*/}
             </div>
         </div>
     );

@@ -27,7 +27,7 @@ class PostPopup extends Component {
                     <DaumPostcode
                         onComplete={this.handleComplete.bind(this)}
                         height="600"
-                        width="700"
+                        width="100%"
                         animation
                         style={{
                             border:"1px solid rgba(120, 120, 120, 0.5)",

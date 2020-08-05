@@ -29,6 +29,7 @@ export default function AutoCreatable(props) {
             }
             return filtered;
         }}
+        size={props.size}
         selectOnFocus
         clearOnEscape	
         clearOnBlur={props.clear}
@@ -49,7 +50,7 @@ export default function AutoCreatable(props) {
             return option;
         }}
         renderOption={(option) => option}
-        style={{ width: props.width || "100%", marginTop : props.marginTop, marginBottom : props.marginBottom, margin: props.margin }}
+        style={{ width: props.width || "100%", marginTop : props.marginTop, marginBottom : props.marginBottom, margin: props.margin, marginRight: props.marginLeft }}
         freeSolo
         blurOnSelect={props.blur}
         renderInput={(params) => (

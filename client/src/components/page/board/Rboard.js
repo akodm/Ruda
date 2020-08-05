@@ -20,14 +20,13 @@ class Rboard extends Component {
             pagenation : 1, // 첫 페이지
             rowCount : 16,  // 페이지의 로우 갯수
         }
-        this.listFilter = this.listFilter.bind(this)
     }
 
     // 검색 필터가 수행될 시 데이터베이스에 필터 값들을 전달 후 반환 값을 다시 뿌려줌
     async listFilter(data) {
         if(data) {
             try {
-                const result = await axios.post(`${config.app.s_url}/companyInfos/search`, {
+                const result = await axios.post(`${config.app.s_url}/userInfos/search`, {
                     data,
                 });
                 this.setState({ userList : result.data });
@@ -55,6 +54,7 @@ class Rboard extends Component {
 
                     <div className="Rookie-CardView">
                         { userList && userList.map(function(str,i){
+                            if(str.userWorkDateState === "미정") return null;
                             if(i < count - rowCount|| i >= count) return null;
                             return <Link to={`/mypage/${str.userId}`} key={i}><RookieCard userList={userList[i]}/></Link>;
                         }) }

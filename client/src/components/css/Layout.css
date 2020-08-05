@@ -81,6 +81,46 @@
     color: #008fbb;
 }
 
+.Header-right-media {
+    display: none;
+    position: relative;
+}
+
+.Header-right-media-list {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    font-weight: bold;
+    top: 0;
+    margin-top: 48px;
+    overflow: hidden;
+    border: 1px solid rgba(185, 185, 185, 0.562);
+    box-shadow: 0px 5px 5px 1px rgba(151, 151, 151, 0.445);
+    animation-name: list;
+    animation-duration: 0.5s;
+}
+
+@keyframes list {
+    0% {
+        opacity: 0;
+        height: 0px;
+    }
+    100% {
+        height: 110px;
+    }
+}
+
+.Header-right-media-list-li {
+    background-color: white;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.Header-right-media-list-li:hover {
+    color: rgb(0, 38, 255);
+}
+
 @media all and (min-width:1px) and (max-width:1300px) {
     .Header-nav{
         width: 100%;
@@ -107,7 +147,7 @@
     }
 }
 
-@media all and (min-width:1px) and (max-width:600px) {
+@media all and (min-width:1px) and (max-width:1300px) {
     .Header-nav-recommendbtn {
         font-size: 12px;
     }
@@ -117,7 +157,19 @@
     }
 }
 
-@media all and (min-width:1px) and (max-width:300px) {
+@media (max-width:440px) {
+    .Header-right {
+        display: none;
+    }
+
+    .Header-right-media {
+        display: flex;
+        width: 80px;
+        justify-content: center;
+    }
+}
+
+@media all and (min-width:1px) and (max-width:310px) {
     .Header-logo {
         display: none;
     }
@@ -190,7 +242,7 @@
     text-align: center;
     font-size: 9pt;
     color: #c7c7c7;
-    margin-left: 100P;
+    margin-left: 100px;
 }
 .Footer_text{
     margin: 5px;

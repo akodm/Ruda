@@ -72,7 +72,7 @@
 .Info-main-title{
     color:#646464; 
     animation-name: info-title;
-    animation-duration: 3s;
+    animation-duration: 7s;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -83,9 +83,6 @@
     0% {
         width: 0px;
         opacity: 0;
-    }
-    100% {
-        width: 700px;
     }
 }
 
@@ -178,3 +175,88 @@
 }
 
 
+@media (max-width:830px) {
+    .Info-companySelt {
+        width: 100%;
+    }
+
+    .Info-main-title {
+        color:#646464; 
+        animation-name: info-title;
+        animation-duration: 3s;
+        width: 100%;
+        font-size: 15px;
+    }
+
+    .Info-rookie-body {
+        width: 85%;
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        border: 1px solid rgba(175, 175, 175, 0.281);
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+
+    .Info-rookie-title {
+        width: 90%;
+        margin: 10px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+    
+    .Info-rookie-imgLayout {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 20px;
+    }
+
+    .Info-tag-box {
+        width: 100%;
+        min-height: 100px;
+        overflow-y: auto;
+        border: 1px solid rgba(102, 102, 102, 0.363);
+        border-radius: 5px;
+        margin-top: 25px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
+    }
+    
+    .Info-rookie-dateLayout {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-top: 20px;
+    }
+
+    .Info-rookie-body > div > div > label {
+        font-size: 14px;
+        margin-right: 20px;
+    }
+
+    .Info-rookie-body > div > div > div > label {
+        font-size: 14px;
+        margin-right: 20px;
+    }
+
+    .Info-rookie-main > h5 {
+        text-align: center;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .Info-rookie-agree {
+        text-align: center;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+@media (max-width:564px) {
+    .Info-rookie-class {
+        margin-top: 10px;
+    } 
+}

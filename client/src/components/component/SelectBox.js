@@ -18,6 +18,7 @@ class SelectBox extends Component {
                         name: this.props.label,
                         id: 'outlined-age-native-simple',
                     }}
+                    style={this.props.style2 || {}}
                     >
                     { this.props.option.map((data,i) => {
                         return <option key={i} value={data}>{data}</option>

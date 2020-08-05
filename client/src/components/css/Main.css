@@ -96,7 +96,7 @@
 .Main-new-es {
     font-family: 'Nanum Gothic', sans-serif;
     font-size: 14px;
-    color:#646464; 
+    color:#838383; 
     font-weight: 600;
 }
 .Main-new-es:hover { color: #9781d0; }
@@ -180,127 +180,60 @@
 /* -------------------------- bottom ----------------------- */
 
 .Main-new-bottom {
-    opacity: 1;
     width: 100%;
-    margin-bottom: 100px;
+    min-height: 600px;
+    background-color: #b2d8ff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.Main-new-bottom-text {
+    font-size: 18px;
+    font-weight: 600;
+    width: 35%;
+    color: white;
+    line-height: 55px;
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+}
+
+.Main-new-bottom-img-div {
+    width: 35%;
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+}
+
+.Main-new-bottom-img {
+    width: 550px;
+    height: auto;
+    box-shadow: 0px 0px 5px  rgba(44, 100, 122, 0.288);
+}
+
+
+.Main-new-bottom-text>.start{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    position: relative;
-    transition-property: all;
-    transition-duration: 2s;
 }
-
-.Main-new-bottom-none {
-    opacity: 0;
-    width: 100%;
-    margin-bottom: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    transition-property: all;
-    transition-duration: 1s;
-}
-
-.Main-new-bottomIntroDiv1 {
-    position: absolute;
-    top: 20px;
-}
-
-.Main-new-bottomIntroDiv2 {
-    position: absolute;
-    top: 320px;
-}
-
-.Main-new-bottomIntro {
+.start>button{
+    width: 70%;
+    height: 50px;
+    margin:50px;
+    border: none;
+    color:#646464; 
     font-family: 'Nanum Gothic', sans-serif;
-    font-size: 18px;
-    color:#646464;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
-}
-
-.Main-new-bottomTop {
-    width: 100%;
-    height: 300px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    background-color: #6bcffd3a;
-    overflow: auto;
-}
-
-.Main-new-bottomItemDiv {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 30px  70px 0px 70px;
-    width: 150px;
-    height: 200px;
-    overflow-y: hidden;
-}
-
-.Main-new-bottomItemTitle {
-    margin-top: 25px;
-    font-weight: 600;
-    font-size: 14px;
-    text-align: center;
-    color:#646464; 
-}
-
-.Main-new-bottomItemSpan {
-    font-weight: 500;
-    font-size: 13px;
-    margin: 3px;
-    text-align: center;
-    color:#646464; 
+    background-color: #ffffff;
 
 }
-
-.Main-new-bottomBot {
-    width: 100%;
-    height: 300px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    background-color: #ddd1ffa1;
-    overflow: auto;
+.start>button:hover{
+    background-color: #f7f4fd;color: #7e7edf;
 }
-
-
 /* --------------- 반응형 처리 --------------- */
-/* --------------- Media Query --------------- */
-/* ------------ Responsible Degign ----------- */
-
-/* -------------------------- top ----------------------- */
-
-@media all and (min-width:0px) and (max-width:1450px) {
-    .Main-new-bottomTop {
-        width: 100%;
-        height: 300px;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        background-color: #6bcffd3a;
-        overflow: auto;
-    }
-
-    .Main-new-bottomBot {
-        width: 100%;
-        height: 300px;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        background-color: #ddd1ffa1;
-        overflow: auto;
-    }
-}
-
 @media all and (min-width:1100px) and (max-width:1300px) {
     .Main-new-right {
         display: flex;
@@ -385,5 +318,38 @@
         justify-content: center;
         align-items: center;
         margin-top: 25px;
+    }
+}
+
+@media (max-width:1200px) {
+    .Main-new-bottom {
+        flex-direction: column;
+    }
+    
+    .Main-new-bottom-text {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width:700px) {
+    .Main-new-bottom {
+        flex-direction: column;
+        width: 100%;
+    }
+    .mobile{
+        flex-direction: column-reverse;
+    }
+    .Main-new-bottom-text {
+        font-size: 16px;
+        
+    }
+    
+    .Main-new-bottom-img-div {
+        width: 90%;
+    }
+    
+    .Main-new-bottom-img {
+        width: 100%;
     }
 }

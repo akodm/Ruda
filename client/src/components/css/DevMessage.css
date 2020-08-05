@@ -97,3 +97,22 @@
 .DevMessage-btn:hover {
     background-color: #a0c8f0;
 }
+
+@media (max-width:360px) {
+    .DevMessage-pop{
+        position: fixed;
+        background-color: white;
+        border-radius: 10px;
+        z-index: 1100;
+        bottom: 8%;
+        width: 95%;
+        height: 500px;
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0px 0px 10px rgba(128, 128, 128, 0.158);
+        animation-name: DevMessage;
+        animation-duration: 0.5s;
+    }
+}

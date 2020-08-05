@@ -273,7 +273,7 @@ class ViewProfile extends Component {
                                                 })
                                             }
                                         </div>
-                                        :<p className="addspan">프로필 수정을 통해 기술스택을 추가해주세요</p>
+                                        :<p className="addspan">{ loginState ? "프로필 수정을 통해 기술스택을 추가해주세요" : "작성된 기술스택이 없습니다."}</p>
                                     }
                                     <div className="profile-chart-info-title">
                                         <div className="profile-title-text">채용조건</div>
@@ -289,7 +289,7 @@ class ViewProfile extends Component {
                                                 })
                                             }
                                         </div>
-                                        :<p className="addspan">프로필 수정을 통해 채용조건을 추가해주세요</p>
+                                        :<p className="addspan">{ loginState ? "프로필 수정을 통해 채용조건을 추가해주세요" : "작성된 채용조건이 없습니다."}</p>
                                     }
                                     <div className="profile-chart-info-title">
                                         <div className="profile-title-text">사내복지</div>
@@ -305,7 +305,7 @@ class ViewProfile extends Component {
                                             })
                                         }
                                         </div>
-                                        :<p className="addspan">프로필 수정을 통해 채용조건을 추가해주세요</p>
+                                        :<p className="addspan">{ loginState ? "프로필 수정을 통해 사내복지을 추가해주세요" : "작성된 사내복지가 없습니다."}</p>
                                     }
                                     <div className="profile-chart-info-title">
                                         <div className="profile-title-text">사내규칙</div>
@@ -321,7 +321,7 @@ class ViewProfile extends Component {
                                                 })
                                             }
                                         </div>
-                                        :<p className="addspan">프로필 수정을 통해 채용조건을 추가해주세요</p>
+                                        :<p className="addspan">{ loginState ? "프로필 수정을 통해 사내규칙을 추가해주세요" : "작성된 사내규칙이 없습니다."}</p>
                                     }
                                  
                                     <div className="profile-chart-info-title">
@@ -336,10 +336,10 @@ class ViewProfile extends Component {
                                                 <p>{data.awardDate}</p>
                                                 <p>{data.awardName}</p>
                                             </div>
-                                        })
-                                        }
-                                    </div>
-                                    :<p className="addspan">프로필 수정을 통해 채용조건을 추가해주세요</p>
+                                            })
+                                            }
+                                        </div>
+                                        :<p className="addspan">{ loginState ? "프로필 수정을 통해 수상경력을 추가해주세요" : "작성된 수상경력이 없습니다."}</p>
                                     }
                                     <div className="profile-chart-info-title">
                                         <div className="profile-title-text">기업연혁</div>
@@ -355,7 +355,7 @@ class ViewProfile extends Component {
                                                 </div>
                                             })}
                                         </div>
-                                    :<p className="addspan">프로필 수정을 통해 채용조건을 추가해주세요</p>
+                                        :<p className="addspan">{ loginState ? "프로필 수정을 통해 기업연혁을 추가해주세요" : "작성된 기업연혁이 없습니다."}</p>
                                     }
                                 </div>
                             </div>

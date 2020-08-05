@@ -29,8 +29,8 @@ import Cboard from '../page/board/Cboard';  // rookie board
 import Rboard from '../page/board/Rboard';  // company board
 import Mypage from '../page/mypage/MypageRoute';    // mypage
 
-import Chart from '../component/Chart';
 import socketio from 'socket.io-client';
+import ChartApi from '../component/ChartApi';
 
 class Base extends Component {
     constructor(props){
@@ -203,7 +203,7 @@ class Base extends Component {
 
                         <Route path="/company" render={props => <Cboard data={companyBoardData} user={user} {...props} /> }></Route>
                         <Route path="/rookie" render={props => <Rboard data={userBoardData} user={user} {...props}/>}></Route>
-                        <Route render={props => <Chart user={user} {...props}/>} ></Route>
+                       
                         <Route path="/mypage/:id" render={props => <Mypage mailReload={this.mailReload.bind(this)} boardMount={this.boardMount.bind(this)} user={user} {...props} /> }></Route>
                         {/* Not Found Page 주소에 일치하는 패스가 없을 경우 */}
                         <Route component={NotFound} ></Route>
@@ -212,6 +212,9 @@ class Base extends Component {
                     {/*개발자에게 문의버튼 */}
                     <DevMessage user={user} />
                     {/*화면업다운버튼*/ }
+                    <div style={{display:"none"}}>
+                        <ChartApi user={user}/>
+                    </div>
                     <UpDown />
                     {/*하단 */}
                     <Footer />

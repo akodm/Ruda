@@ -6,7 +6,6 @@ import axios from 'axios';
 
 import Profile from './Profile';
 import Hire from './Hire';
-import Setting from './Setting';
 
 class Mypage extends Component {
     constructor(props) {
@@ -83,28 +82,21 @@ class Mypage extends Component {
                                 boardMount={() => boardMount()}
                                 mailReload={() => mailReload()}
                                 /> :
-                                btnNum === 1 ?
                                 load && 
-                                    <Hire 
-                                        loginState={loginState} 
-                                        load={load} 
-                                        userEmail={user.email} 
-                                        userId={companyInfo.userId} 
-                                        userName={companyInfo.companyName} 
-                                        hireData={hireData}
-                                        hireSet={this.hireSet.bind(this)}
-                                    />
-                                :
-                                user.email && <Setting />
+                                <Hire 
+                                    loginState={loginState} 
+                                    load={load} 
+                                    userEmail={user.email} 
+                                    userId={companyInfo.userId} 
+                                    userName={companyInfo.companyName} 
+                                    hireData={hireData}
+                                    hireSet={this.hireSet.bind(this)}
+                                />
                             }
                     </div>
                     <div className="Mypage-btns">
-                        <button className={btnNum === 0?"cMypage-menu-click":"cMypage-menu-none"} onClick={this.MenuClick.bind(this,0)}>프로필</button>
-                        <button className={btnNum === 1?"cMypage-menu-click":"cMypage-menu-none"} onClick={this.MenuClick.bind(this,1)}>채용공고</button>
-                        {
-                            user.email &&
-                            <button className={btnNum === 2?"cMypage-menu-click":"cMypage-menu-none"} onClick={this.MenuClick.bind(this,2)}>마이페이지</button>
-                        }
+                        <button className={!btnNum ? "cMypage-menu-click":"cMypage-menu-none"} onClick={this.MenuClick.bind(this,0)}>프로필</button>
+                        <button className={btnNum ? "cMypage-menu-click":"cMypage-menu-none"} onClick={this.MenuClick.bind(this,1)}>채용공고</button>
                     </div>
                 </div>
             </div>

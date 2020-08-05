@@ -1,0 +1,25 @@
+.Chart{
+    height: 100%;
+
+}
+.Chart-Main{
+    filter: blur(4px);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    -ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
+}
+.ChartSet{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top:200px;
+    right: 210px;
+    text-shadow: rgb(255, 255, 255) 1px 0 10px;    
+    color: #646464;
+}
+.ChartSet>p{
+    background-color: rgba(255, 255, 255, 0.788);
+
+}

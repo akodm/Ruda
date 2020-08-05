@@ -118,7 +118,7 @@ router.post("/create", async (req, res) => {
 
 // 기업 정보 수정
 router.put("/update", async(req, res) => {
-    let result = null;
+	let result = null;
     try {
         await CompanyInfo.update({ 
 			companyImageUrl: req.body.companyImageUrl,

@@ -248,6 +248,7 @@ hr {
 .profile-inschool-text,.profile-outschool-text{
     font-size: 14px;
     height: 35px;
+    width: 100%;
     align-items: center;
     padding-left: 25px;
 }
@@ -259,10 +260,10 @@ hr {
     flex-direction: row;
 }
 .addspan{
-   font-size: small;
+   font-size: 15px;
    text-align: center; 
    height: 70px;
-   margin: 80px;
+   margin-top: 70px;
    align-items: center;
 }  
 /*유저상태*/
@@ -303,7 +304,7 @@ hr {
     display: flex;
     flex-direction:row;
     justify-content: center;
-    background-color:rgb(241, 241, 241); 
+    background-color:rgb(255, 255, 255); 
 }
 .profile-edit:hover{
     background-color: rgb(224, 224, 224);

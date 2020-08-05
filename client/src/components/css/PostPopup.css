@@ -14,6 +14,7 @@
 .postPopup-div {
     animation-name: post;
     animation-duration: 0.5s;
+    width: 700px;
 }
 
 @keyframes post {
@@ -23,5 +24,11 @@
     }
     100% {
         opacity: 1;
+    }
+}
+
+@media (max-width:730px) {
+    .postPopup-div {
+        width: 100%;
     }
 }
