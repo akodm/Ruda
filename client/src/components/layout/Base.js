@@ -29,7 +29,7 @@ import Cboard from '../page/board/Cboard';  // rookie board
 import Rboard from '../page/board/Rboard';  // company board
 import Mypage from '../page/mypage/MypageRoute';    // mypage
 
-import socketio from 'socket.io-client';
+// import socketio from 'socket.io-client';
 
 class Base extends Component {
     constructor(props){
@@ -50,8 +50,6 @@ class Base extends Component {
             open : { view : false, cate : "user" },
             msg : false,
             unReadMsg : 0,
-
-            socket : null,
 
             load : false,
         }
@@ -102,7 +100,6 @@ class Base extends Component {
                     receiveData : recv,
                     sendData : send,
                     unReadMsg : unReadCount,
-                    socket : socketio.connect(`${config.app.s_url}`)
                 });
             }
         } catch(err) {
@@ -182,7 +179,7 @@ class Base extends Component {
     msgOpenClose(bool) { this.setState({ msg : bool }); }
 
     render() {
-        const { user, userBoardData, companyBoardData, load, open, msg, unReadMsg, receiveData, sendData, socket } = this.state;
+        const { user, userBoardData, companyBoardData, load, open, msg, unReadMsg, receiveData, sendData } = this.state;
         return load ? (
             <div className="base-main">
                  <Router>
@@ -207,7 +204,7 @@ class Base extends Component {
                         {/* Not Found Page 주소에 일치하는 패스가 없을 경우 */}
                         <Route component={NotFound} ></Route>
                     </Switch>
-                    { user.email && msg && <Msg mailReload={this.mailReload.bind(this)} socket={socket} receiveData={receiveData} sendData={sendData} user={user} msg={msg} msgOpenClose={this.msgOpenClose.bind(this)} /> }
+                    { user.email && msg && <Msg mailReload={this.mailReload.bind(this)} receiveData={receiveData} sendData={sendData} user={user} msg={msg} msgOpenClose={this.msgOpenClose.bind(this)} /> }
                     {/*개발자에게 문의버튼 */}
                     <DevMessage user={user} />
                     {/*화면업다운버튼*/ }

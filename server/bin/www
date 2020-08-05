@@ -25,22 +25,22 @@ app.set('port', port);
  */
 var server = http.createServer(app);
 
-let socket = require('socket.io');
-let io = socket(server);
+// let socket = require('socket.io');
+// let io = socket(server);
 
 /* ------------------------------- socket.io -------------------------------*/
 
-io.sockets.on('connect', (socket) => {
-  console.log('유저 접속');
+// io.sockets.on('connect', (socket) => {
+//   console.log('유저 접속');
 
-  socket.on('send', (data) => {
-    console.log("전송한 메시지 : " + data.msg);
-  });
+//   socket.on('send', (data) => {
+//     console.log("전송한 메시지 : " + data.msg);
+//   });
 
-  socket.on('disconnect', () => {
-    console.log("접속 종료");
-  });
-});
+//   socket.on('disconnect', () => {
+//     console.log("접속 종료");
+//   });
+// });
 
 /* ------------------------------------------------------------------------- */
 
