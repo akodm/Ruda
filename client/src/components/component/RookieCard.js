@@ -4,6 +4,14 @@ import Avatar from '@material-ui/core/Avatar';
 class RookieCard extends Component {
     render() {
         const userList = this.props.userList;
+        let state = null;
+        switch(userList.userWorkDateState) {
+            case "취업희망" : state = 1; break;
+            case "실습희망" : state = 2; break;
+            case "실습후 취업희망" : state = 3; break;
+            default : state = 0; break;
+        }
+
         return (
             <div className="Rookie-Card">
                 <div className="Rookie-Card-header">
@@ -11,10 +19,15 @@ class RookieCard extends Component {
                         <img src="/Images/1216649.svg" width="12px"height="12px" alt="img"/>
                         <span>{userList.userLike || "0"}</span>
                     </div>
-                    <div className="Rookie-Card-state">
-                        <div className="Rookie-search-title-state-training"></div>
-                        <div className="Rookie-search-title-state-hire"></div>
-                    </div>
+                    {
+                        state ?
+                        <div className="Rookie-Card-state">
+                            { state === 1 || state === 3 ? <div className="Rookie-search-title-state-hire"></div> : <div></div> }
+                            { state === 2 || state === 3 ? <div className="Rookie-search-title-state-training"></div> : <div></div> }
+                        </div> 
+                        :
+                        <div></div>
+                    }
                 </div>
                 <div className="Rookie-Card-Profile">
                     <div className="Rookie-Card-Profile-img" >

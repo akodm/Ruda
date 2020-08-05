@@ -67,7 +67,7 @@ class Company extends Component {
     // firebase에 이미지 업로드 및 저장 함수 실행
     addFile() {
         const { imgData,
-            name,phone,address1,field,ceo,companyUrl,since,intro,workCate,
+            name,phone,address1,field,companyUrl,intro,workCate,
             agreeCheck
         } = this.state;
         if(!agreeCheck) {

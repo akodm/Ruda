@@ -178,7 +178,7 @@ class EditProfile extends Component {
         
         try {
             const result = await axios.put(`${config.app.s_url}/companyInfos/update`,{
-                userId : companyInfo.id,
+                userId : companyInfo.userId,
                 companyImageUrl: imgUrl,
 
                 companyName: name,
@@ -200,7 +200,7 @@ class EditProfile extends Component {
                 companyOccupation : occupation,
                 companyWorkCate :  workCate,
                 companyWorkDate : workDate,
-                companyworkDateState : workDateState,
+                companyWorkDateState : workDateState,
                 
                 companyQuestion: question,
             });
@@ -372,13 +372,13 @@ class EditProfile extends Component {
                     <AutoCreateBox value={occupation} blur={true} width={400} text={"희망하는 채용 분야를 입력하세요."} list={dataList.app.fieldList} clear={false} onChange={(e) => this.setState({ occupation : e })} />
                     <div className="Info-rookie-dateLayout">
                         <SelectBox 
-                            value={workCate} func={(e) => this.setState({ workCate : e })}  name={workCate}
+                            value={workCate} func={(e) => this.setState({ workCate : e })}  name="workCate"
                             label={"채용구분"} option={["채용","실습생채용","실습 후 채용","미정"]} text={"채용구분"} style={{marginRight:"20px"}}
                         />
                         {
                             workCate !== "미정" &&
                             <SelectBox 
-                                value={workDateState} func={(e) => this.setState({ workDateState : e })} name={workDateState}
+                                value={workDateState} func={(e) => this.setState({ workDateState : e })} name="workDateState"
                                 label={"채용희망 날짜"} option={["상시","졸업 후","직접입력","미정"]} text={"채용희망 날짜"} style={{marginRight:"20px"}}
                         />
                         }
