@@ -201,8 +201,6 @@ class Rookie extends Component {
                 userCateUpdat = data[0];
                 result = data[1];
             })
-
-            console.log(userCateUpdat.data, result.data);
             if(result.data){
                 alert("기본입력이 완료되었습니다.");
                 window.location.href = "/";

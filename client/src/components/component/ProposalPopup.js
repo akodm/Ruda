@@ -46,7 +46,7 @@ class ProposalPopup extends Component {
             mailReload();
             proposalPopupOpenClose(false);
         } catch(err) {
-            console.log("message send err : ", err);
+            console.log("message send err : ");
         }
     }
 

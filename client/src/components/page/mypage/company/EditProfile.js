@@ -252,7 +252,6 @@ class EditProfile extends Component {
                 activityname:"",
                 activitydate:"",
             });
-            console.log(result.data);
         }
         catch(err){
             console.log("user activity add create err");

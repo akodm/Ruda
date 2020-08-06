@@ -150,7 +150,7 @@ class Portfolio extends Component {
                 alert("잘못된 값이 있습니다. 다시 시도해주세요.");
             }
         } catch(err) {
-            console.log("portfolio save err : " + err);
+            console.log("portfolio save err : ");
         }
         this.setState({ loaded : true });
     }

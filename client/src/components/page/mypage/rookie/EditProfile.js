@@ -234,7 +234,7 @@ class EditProfile extends Component {
             });
         }
         catch(err){
-            console.log("user award add create err : "+err);
+            console.log("user award add create err : ");
         }
     }
     
@@ -257,7 +257,7 @@ class EditProfile extends Component {
             });
         }
         catch(err){
-            console.log("user certificate add create err : "+err);
+            console.log("user certificate add create err : ");
         }
     }
    
@@ -280,10 +280,9 @@ class EditProfile extends Component {
                 activitystartdate:"",
                 activityenddate:"",
             });
-            console.log(result.data);
         }
         catch(err){
-            console.log("user activity add create err : "+err);
+            console.log("user activity add create err : ");
         }
     }
     
@@ -293,7 +292,7 @@ class EditProfile extends Component {
             this.setState({ awards : this.state.awards.filter(data => { return id !== data.id }) });
         }
         catch(err){
-            console.log("user award delete err : "+err);
+            console.log("user award delete err : ");
         }
     }
     async deleteCertificate(id){
@@ -302,7 +301,7 @@ class EditProfile extends Component {
             this.setState({ certificates : this.state.certificates.filter(data => { return id !== data.id }) });
         }
         catch(err){
-            console.log("user certificate delete err : "+err);
+            console.log("user certificate delete err : ");
         }
     }
    
@@ -312,7 +311,7 @@ class EditProfile extends Component {
             this.setState({ activitys : this.state.activitys.filter(data => { return id !== data.id }) });
         }
         catch(err){
-            console.log("user activity delete err : "+err);
+            console.log("user activity delete err : ");
         }
     }
 
@@ -349,8 +348,6 @@ class EditProfile extends Component {
                 userWorkDate : workDate,
                 userTraningDate : trainingDate,
             });
-
-            console.log( result.data+"프로필수정");
             if(result.data){
                 alert("수정이 완료되었습니다.");
                 window.location.href = "/";

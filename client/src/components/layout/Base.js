@@ -151,7 +151,7 @@ class Base extends Component {
                 companyBoardData : (await companys).data,
             });
         } catch(err) {
-            console.log("board mount err : ", err);
+            console.log("board mount err : ");
         }
     }
 

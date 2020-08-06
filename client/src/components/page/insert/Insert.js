@@ -37,7 +37,6 @@ class Insert extends Component {
             let authResult = axios.get(`${config.app.s_url}/emailAuth/one?token=${emailcode}&email=${email}`);
 
             await Promise.all([emailAuth, authResult]).then((data) => {
-                console.log(data)
                 emailAuth = data[0];
                 authResult = data[1];
             });
@@ -99,7 +98,7 @@ class Insert extends Component {
             alert("이메일 인증을 발송하였습니다.");
             
         } catch(err) {
-            console.log("email auth err : " + err)
+            console.log("email auth err : ")
         }
     }
 

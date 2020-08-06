@@ -57,7 +57,8 @@ class Searchuser extends Component {
            alert("일치하는 정보가 없습니다.") ;
         }
        }catch(err){
-           console.log("아이디 찾기 오류 "+err);
+           console.log("아이디 찾기 오류 ");
+           alert("아이디를 찾는 도중 에러가 발생했습니다.")
        }
     }
     // pw 찾기 버튼을 누를경우
@@ -72,7 +73,8 @@ class Searchuser extends Component {
            alert("일치하는 정보가 없습니다.") ;
         }
        }catch(err){
-           console.log("비밀번호 찾기 오류 "+err);
+           console.log("비밀번호 찾기 오류 ");
+           alert("비밀번호를 찾는 도중 에러가 발생했습니다.");
        }
     }
 

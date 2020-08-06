@@ -44,7 +44,6 @@ class ViewProfile extends Component {
         document.body.appendChild(dummy);
         dummy.value = window.location.href;
         dummy.select();
-        console.log(dummy);
         document.execCommand("copy");
         document.body.removeChild(dummy);
         this.setState({

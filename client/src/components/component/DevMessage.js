@@ -45,7 +45,7 @@ class DevMessage extends Component {
                 alert("메일을 보내는 중 에러가 발생했습니다. 다시 시도해주세요.");
             }
         } catch(err) {
-            console.log("mail send err : ", err);
+            console.log("mail send err : ");
             alert("메일을 보내는 중 에러가 발생했습니다. 다시 시도해주세요.");
         }
     }

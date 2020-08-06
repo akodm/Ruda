@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import config from '../../client-configs';
 
 class MsgRightItem extends Component {
     render() {
@@ -22,7 +23,7 @@ class MsgRightItem extends Component {
                 <div className="rightItem-date-text">날짜 : { moment(viewItem.createdAt).format("YYYY. MM. DD") }</div>
                 <div className="rightItem-user">
                     { !num &&  
-                        <a href={`http://localhost:3000/mypage/${viewItem.userId}`}>답장하러 가기</a>
+                        <a href={`${config.app.c_url}/mypage/${viewItem.userId}`}>답장하러 가기</a>
                     }
                 </div>
             </div>

@@ -68,13 +68,15 @@ require('./passport.js')(passport);
  * 4. 도중 이메일이나 인증 코드를 변경할 시 체크를 위한 디비 조회 -> 이메일, 코드
  * 5. 조회 결과 이메일과 코드가 사이트 내 인풋 값과 일치할 시 성공 - 아닐 시 실패
  */
-
 app.get("/nodemailer", async(req,res) => {
   try {
     let nowDatePlusMt = moment().add(5, 'minutes').format();
 
     const transport = nodemailer.createTransport({
       service : configs.app.type,
+      host : configs.app.mailHost,
+      port : configs.app.mailPort,
+      secure : config.app.secure,
       auth : {
         user : configs.app.emailUser,
         pass : configs.app.emailPass,

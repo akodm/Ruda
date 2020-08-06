@@ -52,7 +52,7 @@ class Popup extends Component {
             }
             this.setState({ result : filter.data });
         } catch(err) {
-            console.log("popup data load err : ", err);
+            console.log("popup data load err : ");
         }
         this.setState({ load : true });
     }
