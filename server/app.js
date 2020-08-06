@@ -21,7 +21,9 @@ let awardRouter = require('./routes/award');
 let certificateRouter = require('./routes/certificate');
 let activityRouter = require('./routes/activity');
 let likeRouter = require('./routes/like');
-const configs = require('./server-configs.js');
+
+let configs = {};
+process.env.NODE_ENV === "development" ? configs = require('./server-configs') : configs = require('./server-configs');
 
 const models = require('./models');
 const EmailAuth = models.emailAuth;
@@ -76,7 +78,7 @@ app.get("/nodemailer", async(req,res) => {
       service : configs.app.type,
       host : configs.app.mailHost,
       port : configs.app.mailPort,
-      secure : config.app.secure,
+      secure : configs.app.secure,
       auth : {
         user : configs.app.emailUser,
         pass : configs.app.emailPass,

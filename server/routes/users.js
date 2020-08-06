@@ -2,10 +2,12 @@ let express = require("express");
 let router = express.Router();
 let models = require("../models");
 let crypto = require("crypto");
-let configs = require("../server-configs");
 let passport = require('passport');
 let jwt = require('jsonwebtoken');
-const config = require('../server-configs');
+
+let configs = {};
+process.env.NODE_ENV === "development" ? configs = require('../server-configs') : configs = require('../server-configs');
+
 
 // DB Setting --------------------------------------------------------
 const User = models.user;
@@ -193,7 +195,7 @@ router.get("/dup", async (req, res) => {
 
 // 구글로 로그인 -> 이메일 받아서 유저 생성
 router.get('/google/callback',
-    passport.authenticate('google', { scope: ['email'], session : false, failureRedirect: `${config.app.c_local}/easy` }),
+    passport.authenticate('google', { scope: ['email'], session : false, failureRedirect: `${configs.app.c_local}/easy` }),
     async(req, res) => {
 		let state = false;
 		console.log(req.user._json)
@@ -214,13 +216,13 @@ router.get('/google/callback',
 		} catch(err) {
 			console.log(__filename + " 에서 유저 생성 에러 발생 내용= " + err);
 		}
-        res.redirect(`${config.app.c_local}/easy?state=${state}&value=${req.user._json.email}&tag=google`);
+        res.redirect(`${configs.app.c_local}/easy?state=${state}&value=${req.user._json.email}&tag=google`);
 	}
 );
 
 // 페이스북으로 로그인 -> 이메일이 없어서 아이디를 받아서 유저 생성
 router.get('/facebook/callback', 
-  	passport.authenticate('facebook', { scope: ['public_profile','email'], session : false, failureRedirect: `${config.app.c_local}/easy` }),
+  	passport.authenticate('facebook', { scope: ['public_profile','email'], session : false, failureRedirect: `${configs.app.c_local}/easy` }),
   	async(req, res) => {
 		console.log(req.user._json)
 		let state = false;
@@ -241,12 +243,12 @@ router.get('/facebook/callback',
 		} catch(err) {
 			console.log(__filename + " 에서 유저 생성 에러 발생 내용= " + err);
 		}
-        res.redirect(`${config.app.c_local}/easy?state=${state}&value=${req.user._json.id}&tag=facebook`);
+        res.redirect(`${configs.app.c_local}/easy?state=${state}&value=${req.user._json.id}&tag=facebook`);
 	}
 );
 
 // 네이버로 로그인 -> 이메일 받아서 유저 생성
-router.get('/naver/callback', passport.authenticate('naver', { session : false, failureRedirect: `${config.app.c_local}/easy` }),
+router.get('/naver/callback', passport.authenticate('naver', { session : false, failureRedirect: `${configs.app.c_local}/easy` }),
 	async(req,res) => {
 		console.log(req.user._json);
 		let state = false;
@@ -267,7 +269,7 @@ router.get('/naver/callback', passport.authenticate('naver', { session : false, 
 		} catch(err) {
 			console.log(__filename + " 에서 유저 생성 에러 발생 내용= " + err);
 		}
-        res.redirect(`${config.app.c_local}/easy?state=${state}&value=${req.user._json.email}&tag=naver`);
+        res.redirect(`${configs.app.c_local}/easy?state=${state}&value=${req.user._json.email}&tag=naver`);
     }
 );
 
@@ -290,7 +292,7 @@ router.get('/logout', (req,res) => {
 	} catch (err) {
 		console.log(__filename + "에서 에러 : " + err);
 	}
-	res.redirect(`${config.app.c_local}`);
+	res.redirect(`${configs.app.c_local}`);
 });
 
 // 구글, 페이스북, 네이버

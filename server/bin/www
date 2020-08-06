@@ -10,7 +10,9 @@ let http = require('http');
 let moment = require('moment');
 // let redis = require('redis');
 // let client = redis.createClient();
-let configs = require('../server-configs');
+let configs = {};
+process.env.NODE_ENV === "development" ? configs = require('../server-configs') : configs = require('../server-configs');
+
 const models = require("../models");
 
 
@@ -24,25 +26,6 @@ app.set('port', port);
  * Create HTTP server.
  */
 var server = http.createServer(app);
-
-// let socket = require('socket.io');
-// let io = socket(server);
-
-/* ------------------------------- socket.io -------------------------------*/
-
-// io.sockets.on('connect', (socket) => {
-//   console.log('유저 접속');
-
-//   socket.on('send', (data) => {
-//     console.log("전송한 메시지 : " + data.msg);
-//   });
-
-//   socket.on('disconnect', () => {
-//     console.log("접속 종료");
-//   });
-// });
-
-/* ------------------------------------------------------------------------- */
 
 /**
  * Listen on provided port, on all network interfaces.

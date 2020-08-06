@@ -1,5 +1,7 @@
 let models = require('./models');
-let config = require('./server-configs');
+
+let configs = {};
+process.env.NODE_ENV === "development" ? configs = require('./server-configs') : configs = require('./server-configs');
 
 const User = models.user;
 
@@ -12,7 +14,7 @@ let ExtractJwt = require('passport-jwt').ExtractJwt;
 
 let opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = config.app.secretKey;
+opts.secretOrKey = configs.app.secretKey;
 opts.jsonWebTokenOptions = { expiresIn : '24h' }
 
 module.exports = passport => {
@@ -32,9 +34,9 @@ module.exports = passport => {
     }));
 
     passport.use(new GoogleStrategy({
-        clientID: config.app.googleId,
-        clientSecret: config.app.googleSd,
-        callbackURL: `${config.app.s_local}/users/google/callback`
+        clientID: configs.app.googleId,
+        clientSecret: configs.app.googleSd,
+        callbackURL: `${configs.app.s_local}/users/google/callback`
       },
       function(accessToken, refreshToken, profile, cb) {
         return cb(null, profile)
@@ -42,9 +44,9 @@ module.exports = passport => {
     ));
 
     passport.use(new FacebookStrategy({
-        clientID: config.app.facebookId,
-        clientSecret: config.app.facebookSd,
-        callbackURL: `${config.app.s_local}/users/facebook/callback`
+        clientID: configs.app.facebookId,
+        clientSecret: configs.app.facebookSd,
+        callbackURL: `${configs.app.s_local}/users/facebook/callback`
       },
       function(accessToken, refreshToken, profile, cb) {
         return cb(null, profile);
@@ -52,9 +54,9 @@ module.exports = passport => {
     );
 
     passport.use(new NaverStrategy({
-        clientID: config.app.naverId,
-        clientSecret: config.app.naverSd,
-        callbackURL: `${config.app.s_local}/users/naver/callback`
+        clientID: configs.app.naverId,
+        clientSecret: configs.app.naverSd,
+        callbackURL: `${configs.app.s_local}/users/naver/callback`
     }, 
       function(accessToken, refreshToken, profile, done) {
         return done(null, profile);

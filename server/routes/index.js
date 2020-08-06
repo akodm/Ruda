@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 let nodemailer = require('nodemailer');
-let configs = require('../server-configs');
+
+let configs = {};
+process.env.NODE_ENV === "development" ? configs = require('../server-configs') : configs = require('../server-configs');
 
 router.post("/developermail", async(req,res) => {
   try {
@@ -22,6 +24,9 @@ router.post("/developermail", async(req,res) => {
 
     const transport = nodemailer.createTransport({
       service : configs.app.type,
+      host : configs.app.mailHost,
+      port : configs.app.mailPort,
+      secure : configs.app.secure,
       auth : {
         user : configs.app.emailUser,
         pass : configs.app.emailPass,
