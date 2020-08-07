@@ -369,7 +369,7 @@ class ViewProfile extends Component {
                                                         <div className="profile-title-text">교내활동</div>
                                                         <div className="profile-title-line"></div>
                                                     </div>
-                                                    {activityData[1]?
+                                                    {activityData[0]?
                                                         <div>
                                                             {
                                                             activityData.map(function(data,i){
@@ -389,7 +389,7 @@ class ViewProfile extends Component {
                                                         <div className="profile-title-text">교외활동</div>
                                                         <div className="profile-title-line"></div>
                                                     </div>
-                                                    {activityData[1]? 
+                                                    {activityData[0]? 
                                                         <div>
                                                             { 
                                                                 activityData.map(function(data,i){

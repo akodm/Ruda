@@ -225,7 +225,12 @@ class EditProfile extends Component {
                 awardName:awardname,
                 awardDate :awarddate,
                 awardCate:awardcate,
-            })
+            });
+
+            if(result.data) {
+                alert("추가하였습니다.");
+            };
+
             this.setState({ 
                 awards : awards.concat(result.data),
                 awardname:"",
@@ -248,7 +253,12 @@ class EditProfile extends Component {
                 certificateName:certificatename,
                 certificateCate :certificatecate,
                 certificateDate:certificatedate,
-            })
+            });
+
+            if(result.data) {
+                alert("추가하였습니다.");
+            };
+
             this.setState({ 
                 certificates : certificates.concat(result.data),
                 certificatename:"",
@@ -272,7 +282,12 @@ class EditProfile extends Component {
                 activityName :activityname,
                 activityStartDate:activitystartdate,
                 activityEndDate:activityenddate
-            })
+            });
+
+            if(result.data) {
+                alert("추가하였습니다.");
+            };
+
             this.setState({ 
                 activitys:activitys.concat(result.data),
                 activitycate :"교내",
@@ -358,6 +373,12 @@ class EditProfile extends Component {
             console.log("save profile err");
         }
         this.setState({ load : true });
+    }
+
+    numberChange(e) {
+        if(/^[0-9/]*$/g.test(e.target.value) || !e.target.value) {
+            this.setState({ [e.target.name] : e.target.value })
+        }
     }
    
     render() {
@@ -488,7 +509,7 @@ class EditProfile extends Component {
                         }
                         {
                             workDate === "직접입력" &&
-                            <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginRight:"10px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="trainingDate" value={trainingDate} label="실습가능 날짜" />
+                            <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginRight:"10px"}} variant="outlined" onChange={this.numberChange.bind(this)} name="trainingDate" value={trainingDate} label="실습가능 날짜" />
                         }
                     </div>
                 </div>
@@ -502,22 +523,22 @@ class EditProfile extends Component {
                             label={"수여"} option={["교내","교외"]} text={"수여"} style={{marginRight:"20px"}}
                         />
                         <TextField variant="outlined" onChange={this.onChangeValue.bind(this)} name="awardname" value={awardname} label="수상명 " />
-                        <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="awarddate" value={awarddate} label="수상 날짜" />
+                        <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.numberChange.bind(this)} name="awarddate" value={awarddate} label="수상 날짜" />
                         <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addAward.bind(this)}>
-                            <AddIcon style={{ color : "#646464",fontSize:"large"}}/> 
+                            <AddIcon style={{ color : "#646464",fontSize:"large",cursor:"pointer"}}/> 
                         </span>
                     </div>
                         {
                             awards.map((data,i) => {
                                 return  <div className="Info-rookie-dateLayout" key={i}>
                                 <SelectBox 
-                                    value={data.awardCate} InputProps={{ readOnly: true}}
+                                    value={data.awardCate} disabled
                                     label={"수여"} option={["교내","교외"]} text={"수여"} style={{marginRight:"20px"}}
                                 />
-                                <TextField variant="outlined" InputProps={{ readOnly: true}} name="awardname" value={data.awardName} label="수상명 " />
-                                <TextField InputProps={{ readOnly: true}} style={{width:"130px", marginLeft:"20px"}} variant="outlined" name="awarddate" value={data.awardDate} label="수상 날짜" />
+                                <TextField disabled variant="outlined" name="awardname" value={data.awardName} label="수상명 " />
+                                <TextField disabled style={{width:"130px", marginLeft:"20px"}} variant="outlined" name="awarddate" value={data.awardDate} label="수상 날짜" />
                                 <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.deleteAward.bind(this,data.id)}>
-                                    <ClearIcon style={{ color : "rgb(223, 86, 86)",fontSize:"small"}}/>
+                                    <ClearIcon style={{ color : "rgb(223, 86, 86)",fontSize:"small",cursor:"pointer"}}/>
                                 </span>
                             </div>
                             })
@@ -530,19 +551,19 @@ class EditProfile extends Component {
                     <div className="Info-rookie-dateLayout">
                         <TextField variant="outlined" style={{marginRight:"20px"}} onChange={this.onChangeValue.bind(this)} name="certificatecate" value={certificatecate} label="발급기관" />
                         <TextField variant="outlined" onChange={this.onChangeValue.bind(this)} name="certificatename" value={certificatename} label="자격증이름 " />
-                        <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="certificatedate" value={certificatedate} label="발급 날짜" />
+                        <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.numberChange.bind(this)} name="certificatedate" value={certificatedate} label="발급 날짜" />
                         <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addCertificate.bind(this)}>
-                        <AddIcon style={{ color : "#646464",fontSize:"large"}}/> 
+                        <AddIcon style={{ color : "#646464",fontSize:"large",cursor:"pointer"}}/> 
                         </span>
                     </div>
                         {
                             certificates.map((data,i) => {
                                 return  <div className="Info-rookie-dateLayout" key={i}>
-                                <TextField variant="outlined" style={{marginRight:"20px"}} InputProps={{ readOnly: true}} name="certificatecate" value={data.certificateCate} label="발급기관" />
-                                <TextField variant="outlined" InputProps={{ readOnly: true}} name="certificatename" value={data.certificateName} label="자격증이름 " />
-                                <TextField InputProps={{ readOnly: true}} style={{width:"130px", marginLeft:"20px"}} variant="outlined" name="certificatedate" value={data.certificateDate} label="발급 날짜" />
+                                <TextField disabled variant="outlined" style={{marginRight:"20px"}} name="certificatecate" value={data.certificateCate} label="발급기관" />
+                                <TextField disabled variant="outlined" name="certificatename" value={data.certificateName} label="자격증이름 " />
+                                <TextField disabled style={{width:"130px", marginLeft:"20px"}} variant="outlined" name="certificatedate" value={data.certificateDate} label="발급 날짜" />
                                 <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.deleteCertificate.bind(this,data.id)}>
-                                    <ClearIcon style={{ color : "rgb(223, 86, 86)",fontSize:"small"}}/>
+                                    <ClearIcon style={{ color : "rgb(223, 86, 86)",fontSize:"small",cursor:"pointer"}}/>
                                 </span>
                             </div>
                             })
@@ -556,24 +577,24 @@ class EditProfile extends Component {
                             label={"활동"} option={["교내","교외"]} text={"활동"} style={{marginRight:"20px"}}
                         />
                         <TextField variant="outlined" style={{marginRight:"20px"}} onChange={this.onChangeValue.bind(this)} name="activityname" value={activityname} label="활동명" />
-                        <TextField helperText={moment(new Date()).format("YYYY/MM/YY")} style={{width:"130px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="activitystartdate" value={activitystartdate} label="활동 시작 날짜" />
-                        <TextField helperText={moment(new Date()).format("YYYY/MM/YY")} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="activityenddate" value={activityenddate} label="활동 끝 날짜" />
+                        <TextField helperText={moment(new Date()).format("YYYY/MM/YY")} style={{width:"130px"}} variant="outlined" onChange={this.numberChange.bind(this)} name="activitystartdate" value={activitystartdate} label="활동 시작 날짜" />
+                        <TextField helperText={moment(new Date()).format("YYYY/MM/YY")} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.numberChange.bind(this)} name="activityenddate" value={activityenddate} label="활동 끝 날짜" />
                         <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addActivity.bind(this)}>
-                        <AddIcon style={{ color : "#646464",fontSize:"large"}}/> 
+                        <AddIcon style={{ color : "#646464",fontSize:"large", cursor:"pointer"}}/> 
                         </span>
                     </div>
                         {
                             activitys.map((data,i) => {
                                 return  <div className="Info-rookie-dateLayout" key={i}>
                                     <SelectBox 
-                                        value={data.activityCate} func={(e) => this.setState({ activitycate : e })}
-                                        label={"활동"} option={["교내","교외"]} text={"활동"} style={{marginRight:"20px"}} InputProps={{ readOnly: true}}
+                                        value={data.activityCate} func={(e) => this.setState({ activitycate : e })} disabled
+                                        label={"활동"} option={["교내","교외"]} text={"활동"} style={{marginRight:"20px"}}
                                     />
-                                    <TextField variant="outlined" style={{marginRight:"20px"}} InputProps={{ readOnly: true}} onChange={this.onChangeValue.bind(this)} name="activityname" value={data.activityName} label="활동명" />
-                                    <TextField InputProps={{ readOnly: true}} style={{width:"130px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="activitystartdate" value={data.activityStartDate} label="활동 시작 날짜" />
-                                    <TextField InputProps={{ readOnly: true}} style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="activityenddate" value={data.activityEndDate} label="활동 끝 날짜" />
+                                    <TextField disabled variant="outlined" style={{marginRight:"20px"}} onChange={this.onChangeValue.bind(this)} name="activityname" value={data.activityName} label="활동명" />
+                                    <TextField disabled style={{width:"130px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="activitystartdate" value={data.activityStartDate} label="활동 시작 날짜" />
+                                    <TextField disabled style={{width:"130px", marginLeft:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="activityenddate" value={data.activityEndDate} label="활동 끝 날짜" />
                                     <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.deleteActivity.bind(this,data.id)}>
-                                        <ClearIcon style={{ color : "rgb(223, 86, 86)",fontSize:"small"}}/>
+                                        <ClearIcon style={{ color : "rgb(223, 86, 86)",fontSize:"small", cursor:"pointer"}}/>
                                     </span>
                             </div>
                             })

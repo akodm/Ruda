@@ -66,7 +66,7 @@ class PortfolioPopup extends Component {
             startDate, startMonth, endDate, endMonth, ingDate,
             projectUrl, projectCate, projectCateInput, position,
             partner, partnerList, tag, tagList, content,
-            imagesUrl, imageLoad, textBtn,
+            imagesUrl, imageLoad, textBtn, numberChange
         } = this.props;
         return (
             <div className="portfolio-popup" style={{display: addView.view ? "flex" : "none"}}>
@@ -77,12 +77,12 @@ class PortfolioPopup extends Component {
                     
                     {/* 날짜 입력 */}
                     <div className="rowLayout">
-                        <TextField helperText={moment(new Date()).subtract(2, "year").format("YYYY")} name="startDate" onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} value={startDate} style={{width:"108px"}} label="시작년도 *" type="search" variant="outlined" />
+                        <TextField helperText={moment(new Date()).subtract(2, "year").format("YYYY")} name="startDate" onChange={(e) => numberChange(e)} onPaste={this.onChangeValue.bind(this)} value={startDate} style={{width:"108px"}} label="시작년도 *" type="search" variant="outlined" />
                         <SelectBox 
                             value={startMonth} func={this.onChangeDate.bind(this, "startMonth")} style={{marginBottom:"22px",marginLeft:"20px",marginRight:"20px"}}
                             label={"월 *"} option={["1","2","3","4","5","6","7","8","9","10","11","12"]} text={"월 *"}
                         />
-                        <TextField disabled={ingDate && true} helperText={moment(new Date()).format("YYYY")} name="endDate" onChange={this.onChangeValue.bind(this)} onPaste={this.onChangeValue.bind(this)} value={endDate} style={{width:"108px",margin:"12px"}} label="종료년도" type="search" variant="outlined" />
+                        <TextField disabled={ingDate && true} helperText={moment(new Date()).format("YYYY")} name="endDate" onChange={(e) => numberChange(e)} onPaste={this.onChangeValue.bind(this)} value={endDate} style={{width:"108px",margin:"12px"}} label="종료년도" type="search" variant="outlined" />
                         <SelectBox 
                             disabled={ingDate && true} value={endMonth} func={this.onChangeDate.bind(this, "endMonth")} style={{marginBottom:"22px",marginLeft:"10px"}}
                             label={"월"} option={["1","2","3","4","5","6","7","8","9","10","11","12"]} text={"월"}

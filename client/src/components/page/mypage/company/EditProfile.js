@@ -120,6 +120,12 @@ class EditProfile extends Component {
         this.setState({ [e.target.name] : e.target.value })
     }
 
+    numberChange(e) {
+        if(/^[0-9/]*$/g.test(e.target.value) || !e.target.value) {
+            this.setState({ [e.target.name] : e.target.value })
+        }
+    }
+
     // 태그, 키워드, 취미 및 특기 추가 함수
     addChips(cate, e) {
         switch(cate) {
@@ -226,7 +232,12 @@ class EditProfile extends Component {
                 userId:companyInfo.userId,
                 awardName:awardname,
                 awardDate :awarddate,
-            })
+            });
+
+            if(result.data) {
+                alert("추가하였습니다.");
+            } 
+            
             this.setState({ 
                 awards : awards.concat(result.data),
                 awardname:"",
@@ -246,7 +257,12 @@ class EditProfile extends Component {
                 userId:companyInfo.userId,
                 activityName :activityname,
                 activityStartDate:activitydate,
-            })
+            });
+
+            if(result.data) {
+                alert("추가하였습니다.");
+            } 
+
             this.setState({ 
                 activitys:activitys.concat(result.data),
                 activityname:"",
@@ -262,6 +278,7 @@ class EditProfile extends Component {
         try{
             await axios.delete(`${config.app.s_url}/awards/delete?id=${id}`);
             this.setState({ awards : this.state.awards.filter(data => { return id !== data.id }) });
+            alert("삭제되었습니다.");
         }
         catch(err){
             console.log("user award delete err");
@@ -271,6 +288,7 @@ class EditProfile extends Component {
         try{
             await axios.delete(`${config.app.s_url}/activitys/delete?id=${id}`);
             this.setState({ activitys : this.state.activitys.filter(data => { return id !== data.id }) });
+            alert("삭제되었습니다.");
         }
         catch(err){
             console.log("user activity delete err");
@@ -328,7 +346,7 @@ class EditProfile extends Component {
                         <TextField style={{width:"340px",marginRight:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="companyurl" value={companyurl} id="outlined-required" label="기업사이트 주소" />
                         <AutoCreateBox value={field} width={340} blur={true} text={"* 기업의 분야를 입력해주세요."} list={dataList.app.comfieldList} clear={false} onChange={(e) => this.setState({ field : e })}  />
                     </div>
-                    <AutoCreateBox blur={false} width={700} text={"기업에서 다루는 기술에 대한 태그를 검색하여 최대 6개까지 추가하세요!"} list={dataList.app.tagList} clear={true} onChange={this.addChips.bind(this,"tag")} />
+                    <AutoCreateBox blur={false} width={"100%"} text={"기업에서 다루는 기술에 대한 태그를 검색하여 최대 6개까지 추가하세요!"} list={dataList.app.tagList} clear={true} onChange={this.addChips.bind(this,"tag")} />
                     <div className="Info-tag-box">
                         {
                             tags.map((data,i) => {
@@ -337,10 +355,10 @@ class EditProfile extends Component {
                         }
                     </div>
                     <div className="Info-company-Layout" style={{marginTop:"10px",marginBottom:"15px"}}>
-                        <TextField style={{width:"48%"}} helperText="숫자만 입력해주세요." label={`기업 설립일. ${moment(new Date()).format("YYYY")}`} variant="outlined" value={since} name="since" onChange={this.onChangeValue.bind(this)} />
+                        <TextField style={{width:"48%"}} helperText="숫자만 입력해주세요." label={`기업 설립일. ${moment(new Date()).format("YYYY")}`} variant="outlined" value={since} name="since" onChange={this.numberChange.bind(this)} />
                         <TextField style={{width:"48%"}} helperText="선택 입력. 숫자만 입력해주세요." label="기업 평균 연령" variant="outlined" value={ageAvg} name="ageAvg" onChange={this.onChangeValue.bind(this)} />
                     </div>
-                    <AutoCreateBox blur={false} width={700} text={"기업을 소개할 기업의 사내 규칙을 최대 5개까지 입력해주세요! 선택입력"} list={[]} clear={true} onChange={this.addChips.bind(this,"rule")} />
+                    <AutoCreateBox blur={false} width={"100%"} text={"기업을 소개할 기업의 사내 규칙을 최대 5개까지 입력해주세요! 선택입력"} list={[]} clear={true} onChange={this.addChips.bind(this,"rule")} />
                     <div className="Info-tag-box" style={{flexDirection:"column"}}>
                         {
                             rule.map((data,i) => {
@@ -348,7 +366,7 @@ class EditProfile extends Component {
                             })
                         }
                     </div>
-                    <AutoCreateBox blur={false} width={700} text={"기업에서 제공하는 복리후생 및 제도에 대해 알려주세요! 최대 10개. 예) 내일채움공제"} list={dataList.app.welfareList} clear={true} onChange={this.addChips.bind(this,"wel")} />
+                    <AutoCreateBox blur={false} width={"100%"} text={"기업에서 제공하는 복리후생 및 제도에 대해 알려주세요! 최대 10개. 예) 내일채움공제"} list={dataList.app.welfareList} clear={true} onChange={this.addChips.bind(this,"wel")} />
                     <div className="Info-tag-box">
                         {
                             welfare.map((data,i) => {
@@ -360,7 +378,7 @@ class EditProfile extends Component {
                 </div>
                 <div className="Info-rookie-title">채용정보</div>
                 <div className="Info-rookie-body">
-                    <AutoCreateBox blur={false} width={700} text={"구직자에게 바라는 기술스택이나 최소 요건에 대해 등록하세요!"} list={dataList.app.requestList} clear={true} onChange={this.addChips.bind(this,"req")} />
+                    <AutoCreateBox blur={false} width={"100%"} text={"구직자에게 바라는 기술스택이나 최소 요건에 대해 등록하세요!"} list={dataList.app.requestList} clear={true} onChange={this.addChips.bind(this,"req")} />
                     <div className="Info-tag-box">
                         {
                             request.map((data,i) => {
@@ -383,7 +401,7 @@ class EditProfile extends Component {
                         }
                         {
                             workDateState === "직접입력" &&
-                            <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"200px", marginRight:"10px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="workDate" value={workDate} label="근무희망 날짜  ~부터" />
+                            <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"200px", marginRight:"10px"}} variant="outlined" onChange={this.numberChange.bind(this)} name="workDate" value={workDate} label="근무희망 날짜  ~부터" />
                         }
                     </div>
                 </div>
@@ -391,45 +409,49 @@ class EditProfile extends Component {
                 <div className="Info-rookie-title">수상이력</div>
                 <div className="Info-rookie-body">
                     <div className="Info-rookie-dateLayout">
-                        <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginRight:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="awarddate" value={awarddate} label="수상 날짜" />
+                        <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginRight:"20px"}} variant="outlined" onChange={this.numberChange.bind(this)} name="awarddate" value={awarddate} label="수상 날짜" />
                         <TextField variant="outlined" onChange={this.onChangeValue.bind(this)} name="awardname" value={awardname} label="수상명 " />
                         <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addAward.bind(this)}>
-                            <AddIcon style={{ color : "#646464",fontSize:"large"}}/> 
+                            <AddIcon style={{ color : "#646464",fontSize:"large",cursor:"pointer"}}/> 
                         </span>
                     </div>
                         {
-                            awards.map((data,i) => {
+                            awards[0] ? awards.map((data,i) => {
                                 return  <div className="Info-rookie-dateLayout" key={i}>
-                                <TextField InputProps={{ readOnly: true}} style={{width:"130px", marginRight:"20px"}} variant="outlined" name="awarddate" value={data.awardDate} label="수상 날짜" />
-                                <TextField variant="outlined" InputProps={{ readOnly: true}} name="awardname" value={data.awardName} label="수상명 " />
+                                <TextField disabled style={{width:"130px", marginRight:"20px"}} variant="outlined" name="awarddate" value={data.awardDate} label="수상 날짜" />
+                                <TextField variant="outlined" disabled name="awardname" value={data.awardName} label="수상명 " />
                                 <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.deleteAward.bind(this,data.id)}>
-                                    <ClearIcon style={{ color : "rgb(223, 86, 86)",fontSize:"small"}}/>
+                                    <ClearIcon style={{ color : "rgb(223, 86, 86)",fontSize:"small",cursor:"pointer"}}/>
                                 </span>
                             </div>
                             })
+                            :
+                            <div></div>
                         }
                 </div>
-                {/*수상경력 박스*/}
+                {/*기업연혁 박스*/}
                 <div className="Info-rookie-title">기업연혁</div>
                 <div className="Info-rookie-body">
                     <p style={{fontSize:"small"}}>낮은년도 순으로 입력해주시길 바랍니다.</p>
                     <div className="Info-rookie-dateLayout">
-                        <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginRight:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="activitydate" value={activitydate} label="날짜" />
+                        <TextField helperText={moment(new Date()).format("YYYY/MM/DD")} style={{width:"130px", marginRight:"20px"}} variant="outlined" onChange={this.numberChange.bind(this)} name="activitydate" value={activitydate} label="날짜" />
                         <TextField variant="outlined" onChange={this.onChangeValue.bind(this)} name="activityname" value={activityname} label="내용 " />
                         <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.addActivity.bind(this)}>
-                            <AddIcon style={{ color : "#646464",fontSize:"large"}}/> 
+                            <AddIcon style={{ color : "#646464",fontSize:"large",cursor:"pointer"}}/> 
                         </span>
                     </div>
                         {
-                            activitys.map((data,i) => {
+                            activitys[0] ? activitys.map((data,i) => {
                                 return  <div className="Info-rookie-dateLayout" key={i}>
-                                <TextField InputProps={{ readOnly: true}} style={{width:"130px", marginRight:"20px"}} variant="outlined" name="awarddate" value={data.activityStartDate} label="날짜" />
-                                <TextField variant="outlined" InputProps={{ readOnly: true}} name="activityname" value={data.activityName} label="내용 " />
+                                <TextField disabled style={{width:"130px", marginRight:"20px"}} variant="outlined" name="awarddate" value={data.activityStartDate} label="날짜" />
+                                <TextField disabled variant="outlined" name="activityname" value={data.activityName} label="내용 " />
                                 <span style={{fontSize:"30px",marginLeft:"20px"}} onClick={this.deleteActivity.bind(this,data.id)}>
-                                    <ClearIcon style={{ color : "rgb(223, 86, 86)",fontSize:"small"}}/>
+                                    <ClearIcon style={{ color : "rgb(223, 86, 86)",fontSize:"small",cursor:"pointer"}}/>
                                 </span>
                             </div>
                             })
+                            :
+                            <div></div>
                         }
                 </div>
                 <h5>기업이름, 기업소개, 이메일, 기업사이트주소, 기업번호, 기업위치, 기업대표, 기업분야, 채용형태, 기업설립일은 필수입력사항입니다.</h5>

@@ -260,6 +260,11 @@ class Portfolio extends Component {
             addView : { view : false, create : false },
         })
     }
+    numberChange(e) {
+        if(/^[0-9/]*$/g.test(e.target.value) || !e.target.value) {
+            this.setState({ [e.target.name] : e.target.value })
+        }
+    }
 
     /* -------------------------------------------------=== 추가/수정/삭제 버튼 누를 시 === */
 
@@ -353,6 +358,7 @@ class Portfolio extends Component {
                         textBtn={addView.create ? "포트폴리오 추가" : "포트폴리오 수정"}
                         addView={addView}
 
+                        numberChange={this.numberChange.bind(this)}
                         onChangeValue={this.onChangeValue.bind(this)}
                         onChangeDate={this.onChangeDate.bind(this)}
                         addChips={this.addChips.bind(this)}
