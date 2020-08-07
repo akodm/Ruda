@@ -79,6 +79,8 @@ class ViewProfile extends Component {
                 if(!result.data) {
                     alert("추천 기능이 제대로 동작하지 않았습니다. 잠시 후 시도해 주세요.");
                     return;
+                } else {
+                    alert("추천을 취소합니다.");
                 }
 
                 likeToggle(false);
@@ -95,7 +97,10 @@ class ViewProfile extends Component {
                 if(!result.data) {
                     alert("추천 기능이 제대로 동작하지 않았습니다. 잠시 후 시도해 주세요.");
                     return;
+                } else {
+                    alert("추천하였습니다.");
                 }
+                
                 likeToggle(true);
             }
 

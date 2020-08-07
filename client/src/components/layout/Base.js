@@ -124,6 +124,9 @@ class Base extends Component {
             let unReadCount = 0;
             recv.forEach(data => { if(!data.readState) unReadCount++; });
 
+            if(recv) recv = recv.reverse();
+            if(send) send = send.reverse();
+
             this.setState({
                 receiveData : recv,
                 sendData : send,

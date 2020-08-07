@@ -57,7 +57,7 @@ class Csearch extends Component {
                                 <div className="Company-search-title-state-training"></div><span>실습</span>
                             </div>
                             <div className="Company-search-title-state">
-                                <div className="Company-search-title-state-hire"></div><span>일반</span>
+                                <div className="Company-search-title-state-hire"></div><span>채용</span>
                             </div>
                         </div>
                     </div>

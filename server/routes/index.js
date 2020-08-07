@@ -28,8 +28,13 @@ router.post("/developermail", async(req,res) => {
       port : configs.app.mailPort,
       secure : configs.app.secure,
       auth : {
+        type : "OAuth2",
         user : configs.app.emailUser,
-        pass : configs.app.emailPass,
+        clientId : configs.app.mailClient,
+        clientSecret : configs.app.mailSecret,
+        refreshToken : configs.app.refresh,
+        accessToken : configs.app.access,
+        expire : configs.app.mailExp,
       }
     });
 

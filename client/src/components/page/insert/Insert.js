@@ -139,10 +139,10 @@ class Insert extends Component {
                         value={password} 
                         onChange={(e) => this.setState({ password : e.target.value })} 
                         regExp={/^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[*!@#$%^&+=/]).*$/} 
-                        regSpan="잘못된 비밀번호 형식입니다." 
+                        regSpan="특수문자,문자,숫자 포함 8~15자리 이내" 
                         name="password" 
                         type="password" 
-                        placeholder="특수문자,문자,숫자 포함 8~15자리 이내"
+                        placeholder="비밀번호를 입력해주세요."
                     ></InputTag>
                     <InputTag 
                         validation={this.validSet.bind(this)} 

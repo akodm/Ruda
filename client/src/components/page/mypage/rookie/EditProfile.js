@@ -326,7 +326,7 @@ class EditProfile extends Component {
  
         try {
             const result = await axios.put(`${config.app.s_url}/userInfos/update`,{
-                userId :userInfo.id,
+                userId :userInfo.userId,
                 userImageUrl : imgUrl, 
 
                 userName : name, userPhone : phone, userAdd : address1, userMilitary : military,
