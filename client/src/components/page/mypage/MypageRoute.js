@@ -19,10 +19,19 @@ class MypageRoute extends Component {
             company : null,
 
             load : false,
+            pc_ : false,
         }
     }
 
     async componentDidMount() {
+        // 지원되는 기기 ( 현재 반응형 진행중이기에 모바일은 불가 )
+        if (window.innerWidth <= 1331) {
+            alert("마이페이지의 경우 모바일 또는 1330px 미만의 화면에서 사용이 불가합니다.");
+            return;
+        } else {
+            await this.setState({ pc_ : true });
+        }
+
         await this.infoMount();
         this.setState({ load : true })
     }
@@ -65,22 +74,12 @@ class MypageRoute extends Component {
     }
 
     render() {
-        const { rookie, company, load } = this.state;
+        const { rookie, company, load, pc_ } = this.state;
         const { user, boardMount, mailReload } = this.props;
         let userInfo = rookie || company || null;
         let loginState = false;
         if(userInfo && userInfo.userId) { loginState = (user.id === userInfo.userId); }
 
-        // 지원되는 기기 ( 현재 반응형 진행중이기에 모바일은 불가 )
-        let filter = "win16|win32|win64|mac|macintel";
-        let pc_ = false;
-        if (navigator.platform ) {
-            if (filter.indexOf(navigator.platform.toLowerCase()) < 0) {
-                alert("마이페이지의 경우 모바일이 불가합니다. PC버전으로 이용해주세요.");
-            } else {
-                pc_ = true;
-            }
-        }
         return pc_ ? (
             <div style={{width:"100%"}}>
                 {

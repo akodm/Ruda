@@ -69,9 +69,6 @@ router.post("/create", async(req, res) => {
             defaults : {
                 email : req.body.userEmail,
                 userPass: userPass, 
-                userName: req.body.userName, 
-                userPhone : req.body.userPhone,
-                userAdd: req.body.userAdd,
                 userCate : req.body.userCate,
                 authCate : "highrookie",
             }
