@@ -4,7 +4,7 @@
 
 ##### - Daelim Project -
 
--   url : http://ec2-35-170-167-129.compute-1.amazonaws.com/
+-   domain : 미정
 -   React-Express
 -   Client-Server
 -   v. 1.0 (beta)
