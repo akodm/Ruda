@@ -65,7 +65,7 @@ class DevMessage extends Component {
                         <select className="DevMessage-mailtitle-select" value={title} name="title" onChange={(e) => this.setState({ title : e.target.value })} >
                             <option value="이용문의" >이용문의</option>
                             <option value="불편사항" >불편사항</option>
-                            <option value="불편사항" >기타</option>
+                            <option value="기타" >기타</option>
                         </select>
                         <textarea name="content" onChange={(e) => this.setState({ content : e.target.value })} value={content} className="DevMessage-content"></textarea>
                         <div className="DevMessage-btn" onClick={this.mailSend.bind(this)}>메일 보내기</div>

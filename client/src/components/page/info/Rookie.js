@@ -118,6 +118,7 @@ class Rookie extends Component {
     addChips(cate, e) {
         switch(cate) {
             case "tag" : 
+                if(this.state.tags.indexOf(e)) { console.log(e, this.state.tags.indexOf(e)) }
                 if(this.state.tags.length > 5) {
                     alert("태그는 최대 6개까지만 선택가능합니다.");
                     return;
@@ -227,7 +228,7 @@ class Rookie extends Component {
             alert("잘못된 값이 있습니다. 다시 확인해주세요.");
             return;
         }
-        if(!name || !phone || !address1 || !univercity || !subject || !military || !field || !workDateState || !introduce) {
+        if(!name || !phone || !address1 || !univercity || !subject || !field || !workDateState || !introduce) {
             alert("필수 입력 사항을 입력해주세요.");
             return;
         }
@@ -359,14 +360,14 @@ class Rookie extends Component {
                             })
                         }
                     </div>
-                    <TextField error={introduceErr} helperText="간단한 자기 소개 50자 내외" style={{marginTop:"15px"}} variant="outlined" onChange={this.onChangeValueLimit.bind(this)} name="introduce" value={introduce} label="자기 소개" />
+                    <TextField required error={introduceErr} helperText="간단한 자기 소개 50자 내외" style={{marginTop:"15px"}} variant="outlined" onChange={this.onChangeValueLimit.bind(this)} name="introduce" value={introduce} label="자기 소개" />
                     <TextField helperText="개인 블로그나 웹 사이트 등 주소를 입력해주세요." style={{marginTop:"15px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="privateUrl" value={privateUrl} label="개인 사이트 URL " />
                 </div>
 
                 {/* 구직정보 박스 */}
                 <div className="Info-rookie-title">구직정보</div>
                 <div className="Info-rookie-body">
-                    <AutoCreateBox blur={true} width={"100%"} text={"희망하는 분야를 입력하세요."} list={dataList.app.fieldList} clear={false} onChange={(e) => this.setState({ field : e })} />
+                    <AutoCreateBox blur={true} width={"100%"} text={"희망하는 분야를 입력하세요.*"} list={dataList.app.fieldList} clear={false} onChange={(e) => this.setState({ field : e })} />
                     <div className="Info-rookie-dateLayout">
                         <SelectBox 
                             value={workDateState} func={(e) => this.setState({ workDateState : e })}
@@ -385,7 +386,7 @@ class Rookie extends Component {
                         }
                     </div>
                 </div>
-                <h5>이름, 자기소개, 이메일, 전화번호, 거주지, 희망분야, 구직형태, 병역여부, 대학, 전공, 은 필수입력사항입니다.</h5>
+                <h5>이름, 자기소개, 전화번호, 거주지, 희망분야, 대학, 전공, 은 필수입력사항입니다.</h5>
                 <div className="Info-rookie-agree">
                     <CheckBox check={agreeCheck} func={(e) => this.setState({ agreeCheck : e })} name="agree" color="primary" />
                     <span>하이루키는 신입 채용 서비스입니다. <span style={{color:"red"}}>신입 구직자</span>로서 이용하심에 동의하십니까?</span>
