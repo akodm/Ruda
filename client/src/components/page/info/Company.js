@@ -67,14 +67,14 @@ class Company extends Component {
     // firebase에 이미지 업로드 및 저장 함수 실행
     addFile() {
         const { imgData,
-            name,phone,address1,field,companyUrl,intro,workCate,
+            name,phone,address1,field,intro,occupation,
             agreeCheck
         } = this.state;
         if(!agreeCheck) {
             alert("이용수칙에 동의해주세요.");
             return;
         }
-        if(!name || !phone || !address1 || !field || !companyUrl || !intro || !workCate) {
+        if(!name || !phone || !address1 || !field || !intro || !occupation) {
             alert("필수 입력 사항을 입력해주세요.");
             return;
         }
@@ -177,34 +177,36 @@ class Company extends Component {
 
     // 태그, 키워드, 취미 및 특기 추가 함수
     addChips(cate, e) {
+        const { tags, rule, welfare, request } = this.state;
+        let dup = false;
         switch(cate) {
-            case "tag" : 
-                if(this.state.tags.length > 5) {
-                    alert("태그는 최대 6개까지만 선택 가능합니다.");
-                    return;
-                }
-                this.setState({ tags : this.state.tags.concat(e) })
+            case "tag" :
+                if(tags.length > 5) { alert("태그는 최대 6개까지만 선택가능합니다."); return; }
+
+                for(let value of tags) { if(e === value) { alert("이미 추가되어있습니다."); dup = true; break; } }
+
+                if(!dup) this.setState({ tags : tags.concat(e) });
                 break;
             case "rule" :
-                if(this.state.rule.length > 4) {
-                    alert("규칙은 최대 5개까지만 선택 가능합니다.");
-                    return;
-                }
-                this.setState({ rule : this.state.rule.concat(e) })
+                if(rule.length > 4) { alert("규칙은 최대 5개까지만 선택가능합니다."); return; }
+
+                for(let value of rule) { if(e === value) { alert("이미 추가되어있습니다."); dup = true; break; } }
+
+                if(!dup) this.setState({ rule : rule.concat(e) });
                 break;
             case "wel" :
-                if(this.state.welfare.length > 9) {
-                    alert("복지는 최대 10개까지만 선택 가능합니다.");
-                    return;
-                }
-                this.setState({ welfare : this.state.welfare.concat(e) })
+                if(welfare.length > 9) { alert("복지는 최대 10개까지만 선택가능합니다."); return; }
+
+                for(let value of welfare) { if(e === value) { alert("이미 추가되어있습니다."); dup = true; break; } }
+
+                if(!dup) this.setState({ welfare : welfare.concat(e) });
                 break;
-            case "req" :
-                if(this.state.request.length > 9) {
-                    alert("조건은 최대 10개까지만 선택 가능합니다.");
-                    return;
-                }
-                this.setState({ request : this.state.request.concat(e) })
+            case "req" : 
+                if(request.length > 9) { alert("조건은 최대 10개까지만 선택가능합니다."); return; }
+                
+                for(let value of request) { if(e === value) { alert("이미 추가되어있습니다."); dup = true; break; } }
+               
+                if(!dup) this.setState({ request : request.concat(e) });
                 break;
             default : break;
         }
@@ -270,7 +272,7 @@ class Company extends Component {
                 <div className="Info-rookie-body">
                     <div style={{display:"flex",flexDirection:"row",marginBottom:"20px"}}>
                         <TextField style={{width:"340px",marginRight:"20px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="companyUrl" value={companyUrl} label="기업사이트 주소" />
-                        <AutoCreateBox value={field} width={340} blur={true} text={"기업의 분야를 입력해주세요."} list={dataList.app.comfieldList} clear={false} onChange={(e) => this.setState({ field : e })}  />
+                        <AutoCreateBox value={field} width={340} blur={true} text={"기업의 분야를 입력해주세요. *"} list={dataList.app.comfieldList} clear={false} onChange={(e) => this.setState({ field : e })}  />
                     </div>
                     <AutoCreateBox blur={false} width={"100%"} text={"기업에서 다루는 기술에 대한 태그를 검색하여 최대 6개까지 추가하세요!"} list={dataList.app.tagList} clear={true} onChange={this.addChips.bind(this,"tag")} />
                     <div className="Info-tag-box">
@@ -300,7 +302,7 @@ class Company extends Component {
                             })
                         }
                     </div>
-                    <TextField helperText="간단하게 기업에 대해 소개해주세요" label="기업 소개" variant="outlined" value={intro} name="intro" onChange={this.onChangeValue.bind(this)} />
+                    <TextField required helperText="간단하게 기업에 대해 소개해주세요" label="기업 소개" variant="outlined" value={intro} name="intro" onChange={this.onChangeValue.bind(this)} />
                 </div>
                 <div className="Info-rookie-title">채용정보</div>
                 <div className="Info-rookie-body">
@@ -312,7 +314,7 @@ class Company extends Component {
                             })
                         }
                     </div>
-                    <AutoCreateBox blur={true} width={"100%"} text={"희망하는 채용 분야를 입력하세요."} list={dataList.app.fieldList} clear={false} onChange={(e) => this.setState({ occupation : e })} />
+                    <AutoCreateBox blur={true} width={"100%"} text={"희망하는 채용 분야를 입력하세요. *"} list={dataList.app.fieldList} clear={false} onChange={(e) => this.setState({ occupation : e })} />
                     <div className="Info-rookie-dateLayout">
                     <SelectBox 
                             value={workCate} func={(e) => this.setState({ workCate : e })}
@@ -331,7 +333,7 @@ class Company extends Component {
                         }
                     </div>
                 </div>
-                <h5>기업이름, 기업소개, 기업사이트주소, 기업번호, 기업위치, 기업분야, 채용형태는 필수입력사항입니다.</h5>
+                <h5>기업이름, 기업소개, 기업번호, 기업위치, 기업분야, 채용형태는 필수입력사항입니다.</h5>
                 <div className="Info-rookie-agree">
                     <CheckBox check={agreeCheck} func={(e) => this.setState({ agreeCheck : e })} name="agree" color="primary" />
                     <span>하이루키는 신입 채용 서비스입니다. <span style={{color:"red"}}>기업</span>으로서 이용하심에 동의하십니까?</span>

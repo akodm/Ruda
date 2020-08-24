@@ -116,28 +116,29 @@ class Rookie extends Component {
 
     // 태그, 키워드, 취미 및 특기 추가 함수
     addChips(cate, e) {
+        const { tags, keywords, specialty } = this.state;
+        let dup = false;
         switch(cate) {
-            case "tag" : 
-                if(this.state.tags.indexOf(e)) { console.log(e, this.state.tags.indexOf(e)) }
-                if(this.state.tags.length > 5) {
-                    alert("태그는 최대 6개까지만 선택가능합니다.");
-                    return;
-                }
-                this.setState({ tags : this.state.tags.concat(e) })
+            case "tag" :
+                if(tags.length > 5) { alert("태그는 최대 6개까지만 선택가능합니다."); return; }
+
+                for(let value of tags) { if(e === value) { alert("이미 추가되어있습니다."); dup = true; break; } }
+
+                if(!dup) this.setState({ tags : tags.concat(e) });
                 break;
             case "key" : 
-                if(this.state.keywords.length > 2) {
-                    alert("키워드는 최대 3개까지만 선택가능합니다.");
-                    return;
-                }
-                this.setState({ keywords : this.state.keywords.concat(e) })
+                if(keywords.length > 2) { alert("키워드는 최대 3개까지만 선택가능합니다."); return; }
+                
+                for(let value of keywords) { if(e === value) { alert("이미 추가되어있습니다."); dup = true; break; } }
+               
+                if(!dup) this.setState({ keywords : keywords.concat(e) });
                 break;
             case "spc" : 
-                if(this.state.specialty.length > 4) {
-                    alert("특기,취미는 최대 5개까지만 선택가능합니다.");
-                    return;
-                }
-                this.setState({ specialty : this.state.specialty.concat(e) })
+                if(specialty.length > 2) { alert("취미는 최대 3개까지만 선택가능합니다."); return; }
+                
+                for(let value of specialty) { if(e === value) { alert("이미 추가되어있습니다."); dup = true; break; } }
+               
+                if(!dup) this.setState({ specialty : specialty.concat(e) });
                 break;
             default : break;
         }
@@ -217,7 +218,7 @@ class Rookie extends Component {
     // firebase에 이미지 업로드 및 저장 함수 실행
     addFile() {
         const { imgData,
-            name,phone,address1,univercity,subject,military,field,workDateState,introduce,
+            name,phone,address1,univercity,subject,field,workDateState,introduce,
             startErr,endErr,specialtyErr,introduceErr,
             agreeCheck } = this.state;
         if(!agreeCheck) {
