@@ -212,14 +212,14 @@ class ViewProfile extends Component {
                                     </div>
                                     <div className="profile-text">
                                         <AssignmentIndIcon style={{fontSize:"medium"}}/>
-                                        <p>근무형태:{userInfo.userWorkDateState}</p>
+                                        <p>구직상태:{userInfo.userWorkDateState}</p>
                                     </div>
-                                    {userInfo.userWorkDateState !=="미정" &&
+                                    {userInfo.userWorkDateState ==="미정"?"":
                                     <div className="profile-text">
                                         <CalendarTodayIcon style={{fontSize:"medium"}}/>
                                         {userInfo.userWorkDate !=="직접입력"?
-                                        <p>근무날짜:{userInfo.userWorkDate}</p>:
-                                        <p>근무날짜:{userInfo.userTraningDate}</p>
+                                        <p>구직날짜:{userInfo.userWorkDate}</p>:
+                                        <p>구직날짜:{userInfo.userTraningDate}</p>
                                         } 
                                     </div>
                                     }
@@ -249,7 +249,7 @@ class ViewProfile extends Component {
                                         </div>
                                         {
                                            !loginState && user.email &&
-                                           <div className="Mypage-pages-title-icons-icon-c">
+                                           <div className="Mypage-pages-title-icons-icon">
                                                 <MailOutlineIcon onClick={() => this.setState({ open : true })}/>
                                             </div>
                                        }
