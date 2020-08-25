@@ -47,7 +47,6 @@ class Company extends Component {
             request : [],
             workCate: "채용",
             workDateState : "상시",
-            workDateDate : "",
             workDate : "",
             occupation : "",
 

@@ -53,10 +53,9 @@ class Rookie extends Component {
 
             // 구직 관련
             field : "", // 희망 취업 분야
-            workDateState : "상시",  // 일할 수 있는 날짜 선택 박스 -> 비선택 / 상시 / 졸업 후 / 정해진 날짜
-            workDate : "",  // 일할 수 있는 날짜
-            trainingDateState : "실습 강의 시",   // 실습 할 수 있는 날짜 선택 박스 -> 비선택 / 상시 / 졸업 후 / 정해진 날짜
-            trainingDate : "",  // 실습 여부 시 실습 가능 날짜
+            workDateState : "취업희망",  // 일할 수 있는 날짜 선택 박스 -> 비선택 / 상시 / 졸업 후 / 정해진 날짜
+            workDate : "상시",  // 일할 수 있는 날짜
+            trainingDate : moment(new Date()).format("YYYY/MM/DD"),  // 실습 여부 시 실습 가능 날짜
 
             agreeCheck : false,
             load : false,
@@ -166,7 +165,7 @@ class Rookie extends Component {
             name,phone,address1,military,
             univercityCate,univercity,subject,univercityState,univercityStart,univercityEnd,
             tags,keywords,specialty,introduce,privateUrl,
-            field,workDateState,trainingDateState,workDate,trainingDate
+            field,workDateState,workDate,trainingDate
         } = this.state;
 
         try {
@@ -193,7 +192,6 @@ class Rookie extends Component {
                 userUrl : privateUrl,
 
                 userField : field,
-                userTraningDateState : trainingDateState,
                 userWorkDateState : workDateState,
                 userWorkDate : workDate,
                 userTraningDate : trainingDate,

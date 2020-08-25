@@ -53,7 +53,7 @@ router.get("/yall", async (req, res) => {
 				{ model: User }
 			],
 			where : {
-				userTraningDateState : {
+				userWorkDateState : {
 					[Op.or] : [
 						{ [Op.like] : "%취업%" }, 
 						{ [Op.like] : "%실습%" }
@@ -256,7 +256,6 @@ router.put("/update", async(req, res) => {
 			userUrl : req.body.userUrl,
 
 			userField: req.body.userField,
-			userTraningDateState : req.body.userTraningDateState,
 			userWorkDateState : req.body.userWorkDateState,
 			userWorkDate : req.body.userWorkDate,
 			userTraningDate : req.body.userTraningDate,

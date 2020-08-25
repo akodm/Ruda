@@ -78,9 +78,9 @@ class EditProfile extends Component {
     // firebase에 이미지 업로드 및 저장 함수 실행
     addFile() {
         const { imgData,
-            name,phone,address1,field,ceo,companyurl,since,intro,workCate
+            name,phone,address1,field,occupation,intro
         } = this.state;
-        if(!name || !phone || !address1 || !field || !companyurl || !ceo || !since || !intro || !workCate) {
+        if(!name || !phone || !address1 || !field || !intro || !occupation) {
             alert("필수 입력 사항을 입력해주세요.");
             return;
         }
@@ -454,7 +454,7 @@ class EditProfile extends Component {
                             <div></div>
                         }
                 </div>
-                <h5>기업이름, 기업소개, 이메일, 기업사이트주소, 기업번호, 기업위치, 기업대표, 기업분야, 채용형태, 기업설립일은 필수입력사항입니다.</h5>
+                <h5>기업이름, 기업소개, 기업번호, 기업위치, 기업분야, 채용형태는 필수입력사항입니다.</h5>
                 {/*저장버튼*/}
                 <div style={{margin:"50px"}}>
                     <button className="profile-edit" onClick={this.addFile.bind(this)}><SaveIcon style={{fontSize:"large",margin:"5px"}}/>프로필저장</button>
