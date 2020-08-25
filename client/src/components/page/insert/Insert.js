@@ -56,7 +56,7 @@ class Insert extends Component {
             localStorage.setItem("users",userdata);
     
             alert("회원가입이 완료되었습니다.");
-            this.props.history.push("/login");
+            window.location.href = "/";
         } catch(err) {
             console.log("insert save or insert to login err : ");
             alert("서버에러로 회원가입에 실패하였습니다.");
@@ -95,7 +95,7 @@ class Insert extends Component {
         const { email } = this.state;
         try {
             await axios.get(`${config.app.s_url}/nodemailer?userEmail=${email}`);
-            alert("이메일 인증을 발송하였습니다.");
+            alert("이메일을 발송 중입니다. 1~5분이 소요되며, 5분 뒤에도 메일이 안올 경우, 다시 시도해 주세요.");
             
         } catch(err) {
             console.log("email auth err : ")

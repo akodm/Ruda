@@ -26,7 +26,7 @@ class MypageRoute extends Component {
     async componentDidMount() {
         // 지원되는 기기 ( 현재 반응형 진행중이기에 모바일은 불가 )
         if (window.innerWidth <= 1331) {
-            alert("마이페이지의 경우 모바일 또는 1330px 미만의 화면에서 사용이 불가합니다.");
+            alert("마이페이지의 경우 모바일 또는 1330px 미만의 화면에서 정상적인 사용이 불가합니다.");
             return;
         } else {
             await this.setState({ pc_ : true });

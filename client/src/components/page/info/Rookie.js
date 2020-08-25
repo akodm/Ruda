@@ -54,9 +54,8 @@ class Rookie extends Component {
             // 구직 관련
             field : "", // 희망 취업 분야
             workDateState : "취업희망",  // 일할 수 있는 날짜 선택 박스 -> 비선택 / 상시 / 졸업 후 / 정해진 날짜
-            workDate : "",  // 일할 수 있는 날짜
-            trainingDateState : "실습 강의 시",   // 실습 할 수 있는 날짜 선택 박스 -> 비선택 / 상시 / 졸업 후 / 정해진 날짜
-            trainingDate : "",  // 실습 여부 시 실습 가능 날짜
+            workDate : "상시",  // 일할 수 있는 날짜
+            trainingDate : moment(new Date()).format("YYYY/MM/DD"),  // 실습 여부 시 실습 가능 날짜
 
             agreeCheck : false,
             load : false,
@@ -116,27 +115,29 @@ class Rookie extends Component {
 
     // 태그, 키워드, 취미 및 특기 추가 함수
     addChips(cate, e) {
+        const { tags, keywords, specialty } = this.state;
+        let dup = false;
         switch(cate) {
-            case "tag" : 
-                if(this.state.tags.length > 5) {
-                    alert("태그는 최대 6개까지만 선택가능합니다.");
-                    return;
-                }
-                this.setState({ tags : this.state.tags.concat(e) })
+            case "tag" :
+                if(tags.length > 5) { alert("태그는 최대 6개까지만 선택가능합니다."); return; }
+
+                for(let value of tags) { if(e === value) { alert("이미 추가되어있습니다."); dup = true; break; } }
+
+                if(!dup) this.setState({ tags : tags.concat(e) });
                 break;
             case "key" : 
-                if(this.state.keywords.length > 2) {
-                    alert("키워드는 최대 3개까지만 선택가능합니다.");
-                    return;
-                }
-                this.setState({ keywords : this.state.keywords.concat(e) })
+                if(keywords.length > 2) { alert("키워드는 최대 3개까지만 선택가능합니다."); return; }
+                
+                for(let value of keywords) { if(e === value) { alert("이미 추가되어있습니다."); dup = true; break; } }
+               
+                if(!dup) this.setState({ keywords : keywords.concat(e) });
                 break;
             case "spc" : 
-                if(this.state.specialty.length > 4) {
-                    alert("특기,취미는 최대 5개까지만 선택가능합니다.");
-                    return;
-                }
-                this.setState({ specialty : this.state.specialty.concat(e) })
+                if(specialty.length > 2) { alert("취미는 최대 3개까지만 선택가능합니다."); return; }
+                
+                for(let value of specialty) { if(e === value) { alert("이미 추가되어있습니다."); dup = true; break; } }
+               
+                if(!dup) this.setState({ specialty : specialty.concat(e) });
                 break;
             default : break;
         }
@@ -164,7 +165,7 @@ class Rookie extends Component {
             name,phone,address1,military,
             univercityCate,univercity,subject,univercityState,univercityStart,univercityEnd,
             tags,keywords,specialty,introduce,privateUrl,
-            field,workDateState,trainingDateState,workDate,trainingDate
+            field,workDateState,workDate,trainingDate
         } = this.state;
 
         try {
@@ -191,7 +192,6 @@ class Rookie extends Component {
                 userUrl : privateUrl,
 
                 userField : field,
-                userTraningDateState : trainingDateState,
                 userWorkDateState : workDateState,
                 userWorkDate : workDate,
                 userTraningDate : trainingDate,
@@ -216,7 +216,7 @@ class Rookie extends Component {
     // firebase에 이미지 업로드 및 저장 함수 실행
     addFile() {
         const { imgData,
-            name,phone,address1,univercity,subject,military,field,workDateState,introduce,
+            name,phone,address1,univercity,subject,field,workDateState,introduce,
             startErr,endErr,specialtyErr,introduceErr,
             agreeCheck } = this.state;
         if(!agreeCheck) {
@@ -227,7 +227,7 @@ class Rookie extends Component {
             alert("잘못된 값이 있습니다. 다시 확인해주세요.");
             return;
         }
-        if(!name || !phone || !address1 || !univercity || !subject || !military || !field || !workDateState || !introduce) {
+        if(!name || !phone || !address1 || !univercity || !subject || !field || !workDateState || !introduce) {
             alert("필수 입력 사항을 입력해주세요.");
             return;
         }
@@ -359,14 +359,14 @@ class Rookie extends Component {
                             })
                         }
                     </div>
-                    <TextField error={introduceErr} helperText="간단한 자기 소개 50자 내외" style={{marginTop:"15px"}} variant="outlined" onChange={this.onChangeValueLimit.bind(this)} name="introduce" value={introduce} label="자기 소개" />
+                    <TextField required error={introduceErr} helperText="간단한 자기 소개 50자 내외" style={{marginTop:"15px"}} variant="outlined" onChange={this.onChangeValueLimit.bind(this)} name="introduce" value={introduce} label="자기 소개" />
                     <TextField helperText="개인 블로그나 웹 사이트 등 주소를 입력해주세요." style={{marginTop:"15px"}} variant="outlined" onChange={this.onChangeValue.bind(this)} name="privateUrl" value={privateUrl} label="개인 사이트 URL " />
                 </div>
 
                 {/* 구직정보 박스 */}
                 <div className="Info-rookie-title">구직정보</div>
                 <div className="Info-rookie-body">
-                    <AutoCreateBox blur={true} width={"100%"} text={"희망하는 분야를 입력하세요."} list={dataList.app.fieldList} clear={false} onChange={(e) => this.setState({ field : e })} />
+                    <AutoCreateBox blur={true} width={"100%"} text={"희망하는 분야를 입력하세요.*"} list={dataList.app.fieldList} clear={false} onChange={(e) => this.setState({ field : e })} />
                     <div className="Info-rookie-dateLayout">
                         <SelectBox 
                             value={workDateState} func={(e) => this.setState({ workDateState : e })}
@@ -385,7 +385,7 @@ class Rookie extends Component {
                         }
                     </div>
                 </div>
-                <h5>이름, 자기소개, 이메일, 전화번호, 거주지, 희망분야, 구직형태, 병역여부, 대학, 전공, 은 필수입력사항입니다.</h5>
+                <h5>이름, 자기소개, 전화번호, 거주지, 희망분야, 대학, 전공, 은 필수입력사항입니다.</h5>
                 <div className="Info-rookie-agree">
                     <CheckBox check={agreeCheck} func={(e) => this.setState({ agreeCheck : e })} name="agree" color="primary" />
                     <span>하이루키는 신입 채용 서비스입니다. <span style={{color:"red"}}>신입 구직자</span>로서 이용하심에 동의하십니까?</span>

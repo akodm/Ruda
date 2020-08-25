@@ -144,12 +144,12 @@ class ViewProfile extends Component {
                                         {
                                             (companyInfo.companyWorkCate==="미정"&&
                                             <>
-                                                <div className="profile-user-state-none"style={{marginRight:"5px"}}></div><p style={{fontSize:"small", marginRight:"10px"}}>채용/실습생 미정</p>
+                                                <div className="profile-user-state-none"style={{marginRight:"5px"}}></div><p style={{fontSize:"small", marginRight:"10px"}}>채용/실습 미정</p>
                                             </>
                                             )||
                                             (companyInfo.companyWorkCate==="실습생채용"&&
                                             <>
-                                                <div className="profile-user-state-training"style={{marginRight:"5px"}}></div><p style={{fontSize:"small", marginRight:"10px"}}>실습생</p>
+                                                <div className="profile-user-state-training"style={{marginRight:"5px"}}></div><p style={{fontSize:"small", marginRight:"10px"}}>실습채용</p>
                                             </>
                                             )||
                                             (companyInfo.companyWorkCate==="채용"&&
@@ -159,7 +159,7 @@ class ViewProfile extends Component {
                                             )||
                                             (companyInfo.companyWorkCate==="실습 후 채용"&&
                                             <>
-                                                <div className="profile-user-state-training"style={{marginRight:"5px"}}></div><p style={{fontSize:"small", marginRight:"10px"}}>실습생</p>
+                                                <div className="profile-user-state-training"style={{marginRight:"5px"}}></div><p style={{fontSize:"small", marginRight:"10px"}}>실습채용</p>
                                                 <div className="profile-user-state-hire" style={{marginRight:"5px"}}></div><p style={{fontSize:"small",marginLeft:"10px"}}>채용</p>
                                             </>
                                             )

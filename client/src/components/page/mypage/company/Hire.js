@@ -302,7 +302,8 @@ class Hire extends Component {
                                     loginState ? 
                                     <div className="hire-center-guide">
                                         채용 공고를 등록하여 구직자들에게 공개하세요! <br></br>
-                                        좌측 상단에 채용 공고 생성을 클릭하여 공고를 등록할 수 있습니다!
+                                        좌측 상단에 채용공고 생성을 클릭하여 공고를 등록할 수 있습니다! <br></br>
+                                        <span style={{color:"red"}}>최대 하나의 채용공고</span>만 생성 가능합니다!
                                     </div>
                                     :
                                     <div className="hire-center-guide">

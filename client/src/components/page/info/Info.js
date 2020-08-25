@@ -24,7 +24,7 @@ class Info extends Component {
                         <div className="Info-seltText1">기업으로 선택하였습니다.</div>
                         <div className="Info-seltText2">하이루키는 신입 구직자만을 위한 사이트입니다.<br></br> 게시판 혹은 추천 기능을 통해 신입, 실습생을 찾아볼 수 있습니다.</div>
                         <div className="Info-rookie-imgLayout">
-                            <Button onClick={() => this.setState({ open : false })} color="primary">
+                            <Button onClick={() => this.setState({ open : false, selectUser : 0 })} color="primary">
                                 구직자로 하겠습니다.
                             </Button>
                             <Button onClick={() => this.setState({ open : false, selectUser : 1 })} color="primary" autoFocus>
