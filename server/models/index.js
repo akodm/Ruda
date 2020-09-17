@@ -5,15 +5,12 @@ const Sequelize = require("sequelize");
 
 const configs = require('../server-configs.js');
 
-// 로컬에서 배포 실행용
-// const config = require("../server_config");
-
-// let config = {};
-// process.env.NODE_ENV === 'development' ? config = require('../devServer_config') : config = require('../server_config');
- 
 const db = {};
  
-const sequelize = new Sequelize(configs.app.db, configs.app.root, configs.app.pass, { host: configs.app.host, dialect: configs.app.dia, timezone: '+09:00' });
+const sequelize = new Sequelize(configs.app.db, configs.app.root, configs.app.pass, { host: configs.app.host, dialect: configs.app.dia, timezone: '+09:00', define: {
+    charset: "utf8mb4",
+    collate: "utf8mb4_unicode_ci"
+} });
 
 sequelize.authenticate().then(() => {
     console.log("연결 성공");
