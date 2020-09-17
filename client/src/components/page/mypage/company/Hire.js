@@ -308,6 +308,7 @@ class Hire extends Component {
                                     :
                                     <div className="hire-center-guide">
                                         아직 등록된 공고가 없습니다.
+                                        <img src="/Images/mainimg.png"/>
                                     </div>
                                 }
                             </div>

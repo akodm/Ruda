@@ -10,10 +10,10 @@ class Main extends Component {
         this.state = {
             // 설명 카드
             itemCount : [
-                <Items src="/Images/pt_icon.png" title="나만의 프로필 제작" span1="종이서류보다 깔끔하게 작성할 수 있어요." span2="나의 프로필/포트폴리오를 관리해보세요." />,
-                <Items src="/Images/easy_icon.png" title="간편한 구인구직" span1="부담스럽지 않은 구직!" span2="사이트 내 채팅을 통해 기업과 연락해보세요!" />,
-                <Items src="/Images/level_icon.png" title="발전의 기회" span1="버튼 하나로 쉽게 나를 어필할 수 있어요!" span2="나의 상태를 변경해보세요." />,
-                <Items src="/Images/new_icon.png" title="새로운 인재 발견" span1="새로운 인재를 발견할 수 있어요." span2="기업과 맞는 실습/신입을 찾아보세요!" />
+                <Items src="/Images/pt_icon.png" title="나만의 프로필 제작" span1="나의 프로필,포트폴리오를 손쉽게 관리해보세요" span2="완성된 프로필,포트폴리오를 공유해보세요" />,
+                <Items src="/Images/easy_icon.png" title="간편한 구인구직" span1="부담스럽지 않은 구직!" span2="사이트 내 채팅을 통해 기업과 가까이 소통해보세요!" />,
+                <Items src="/Images/level_icon.png" title="발전의 기회" span1="다른사람들의 포트폴리오를 보고 참고해보세요" span2="더 나은 포트폴리오로 성장 할 수 있어요." />,
+                <Items src="/Images/new_icon.png" title="새로운 인재 발견" span1="새로운 인재를 발견할 수 있어요." span2="우리 기업과 맞는 실습/신입을 찾아보세요!" />
             ],
             // 스크롤 div 표시 효과를 위한 값
             withDisplay : false,
@@ -51,39 +51,33 @@ class Main extends Component {
                 <div className="Main-new-centerBody">
                     { itemCount.map((data,i) => { return <div key={i}>{data}</div> }) }
                 </div>
-
-                {/* 메인 하단 부분 */}
-                <div className="Main-new-bottom mobile">
-                    <div className="Main-new-bottom-text">
-                        사이트 내 회원가입 혹은 소셜 회원가입/로그인을 통해 <br></br>
-                        간편하게 회원가입 및 로그인 할 수 있습니다. <br></br>
-                        불필요한 정보 입력없이 시작해보세요!.
+                <div className="Main-new-bottom">
+                    <div className="bottom-box" style={{backgroundColor:"#cae4ffe1"}}>
+                        <div className="bottom-box-content rever" >
+                            <h1>간편하게 이용하세요!</h1>
+                            <p>사이트 내 회원가입 혹은 소셜 회원가입/로그인을 통해 </p>
+                            <p>간편하게 회원가입 및 로그인 할 수 있습니다.</p>
+                            <p>불필요한 정보 입력없이 시작해보세요!.</p>
+                        </div>
+                        <img src="/Images/oauth.png"/>
                     </div>
-                    <div className="Main-new-bottom-img-div">
-                        <img src="/Images/oauth.png" alt="img" className="Main-new-bottom-img"></img>
-                    </div>
-                </div>
-                <div className="Main-new-bottom" style={{backgroundColor: "white"}}>
-                    <div className="Main-new-bottom-img-div">
-                        <img src="/Images/mypage.png" alt="img" className="Main-new-bottom-img"></img>
-                    </div>
-                    <div className="Main-new-bottom-text" style={{color:"black"}}>
-                        구직자, 기업 중 선택하여 기본 정보 등록 후, <br></br>
-                        자신만의 마이페이지를 확인할 수 있습니다. <br></br>
-                        마이페이지와 포트폴리오 등 내용을 채워보세요!
-                    </div>
-                </div>
-                <div className="Main-new-bottom mobile" style={{backgroundColor:"#ccccff",marginBottom:"100px"}}>
-                    <div className="Main-new-bottom-text">
-                        <div className="start">
-                            게시판에서 인재와 기업의 카드를 확인하고, <br></br>
-                            다른 사람의 마이페이지를 볼 수 있습니다. <br></br>
-                            구직 또는 채용을 등록해보세요!
-                            <button onClick={this.start.bind(this)}>하이루키 시작하기</button>
+                    <div className="bottom-box" >
+                        <img src="/Images/oauth.png"/>
+                        <div className="bottom-box-content " style={{color:"#646464"}}>
+                            <h1>나만의 구직페이지를 구성하세요!</h1>
+                            <p>구직자, 기업 중 선택하여 기본 정보 등록 후, </p>
+                            <p>자신만의 마이페이지를 확인할 수 있습니다. </p>
+                            <p>마이페이지와 포트폴리오 등 내용을 채워보세요!</p>
                         </div>
                     </div>
-                    <div className="Main-new-bottom-img-div">
-                        <img src="/Images/board.png" alt="img" className="Main-new-bottom-img"></img>
+                    <div className="bottom-box" style={{backgroundColor:"#ccccffd5"}}>
+                        <div className="bottom-box-content rever">
+                            <h1>자유롭게 구직활동을 해보세요!</h1>
+                            <p>게시판에서 인재와 기업의 카드를 확인하고.</p>
+                            <p>다른 사람의 마이페이지를 볼 수 있습니다.</p>
+                            <p> 구직 또는 채용을 등록해보세요!</p>
+                        </div>
+                        <img src="/Images/oauth.png"/>
                     </div>
                 </div>
             </div>
