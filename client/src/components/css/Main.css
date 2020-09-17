@@ -194,12 +194,11 @@
     width: 100%;
     justify-content: space-evenly;
     text-align: left;
-    margin-top: 50px;
     align-items: center;
+    padding: 50px;
 }
-.bottom-box>img{
-    margin: 20px;
-    width: 500px;
+.bottom-box>.bottom-box-img>img{
+    width: 100%;
     box-shadow: 0px 0px 5px rgb(180, 180, 180);
 }
 .bottom-box-content>p{
@@ -207,8 +206,10 @@
     font-weight: 600;
 }
 .bottom-box-content>h1{
-    margin: 40px 40px 40px 0px;
     font-size: 1.7em;
+}
+.bottom-box-img{
+    width: 450px;
 }
 
 /* --------------- 반응형 처리 --------------- */
@@ -242,6 +243,10 @@
         font-weight: 600;
         margin-top: 50px;
         line-height: 30px;
+    }
+
+    .bottom-box-img{
+        width: 350px;
     }
 }
 
@@ -295,7 +300,25 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 25px;
+    }
+    .bottom-box{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-evenly;
+        text-align: center;
+        align-items: center;
+    }
+    .bottom-box-content>p{
+        font-size: 1em;
+        font-weight: 600;
+        text-align: center;
+    }
+    .bottom-box-content>h1{
+        font-size: 1.5em;
+    }
+    .bottom-box-img{
+        width: 300px;
     }
 }
 
@@ -306,26 +329,27 @@
     .rever{
         flex-direction: column-reverse;
     }
+    
 }
 
 @media (max-width:700px) {
+    .Main-new-center{
+        height: 200px;
+    }
     .Main-new-bottom {
-        flex-direction: column;
+        flex-direction: column-reverse;
         width: 100%;
     }
     .mobile{
-        flex-direction: column-reverse;
+        display: flex;
+        flex-direction: column;
     }
-    .Main-new-bottom-text {
-        font-size: 16px;
+    .Main-new-bottom {
+        font-size: 14px;
         
     }
     
     .Main-new-bottom-img-div {
         width: 90%;
-    }
-    
-    .Main-new-bottom-img {
-        width: 100%;
     }
 }

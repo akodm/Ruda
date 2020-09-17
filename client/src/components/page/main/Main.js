@@ -53,17 +53,21 @@ class Main extends Component {
                 </div>
                 <div className="Main-new-bottom">
                     <div className="bottom-box" style={{backgroundColor:"#cae4ffe1"}}>
-                        <div className="bottom-box-content rever" >
+                        <div className="bottom-box-content" >
                             <h1>간편하게 이용하세요!</h1>
                             <p>사이트 내 회원가입 혹은 소셜 회원가입/로그인을 통해 </p>
                             <p>간편하게 회원가입 및 로그인 할 수 있습니다.</p>
                             <p>불필요한 정보 입력없이 시작해보세요!.</p>
                         </div>
-                        <img src="/Images/oauth.png"/>
+                        <div className="bottom-box-img">
+                            <img src="/Images/oauth.png"/>
+                        </div>
                     </div>
                     <div className="bottom-box" >
-                        <img src="/Images/oauth.png"/>
-                        <div className="bottom-box-content " style={{color:"#646464"}}>
+                        <div className="bottom-box-img">
+                            <img src="/Images/oauth.png"/>
+                        </div>
+                        <div className="bottom-box-content" style={{color:"#646464"}}>
                             <h1>나만의 구직페이지를 구성하세요!</h1>
                             <p>구직자, 기업 중 선택하여 기본 정보 등록 후, </p>
                             <p>자신만의 마이페이지를 확인할 수 있습니다. </p>
@@ -71,13 +75,15 @@ class Main extends Component {
                         </div>
                     </div>
                     <div className="bottom-box" style={{backgroundColor:"#ccccffd5"}}>
-                        <div className="bottom-box-content rever">
+                        <div className="bottom-box-content">
                             <h1>자유롭게 구직활동을 해보세요!</h1>
                             <p>게시판에서 인재와 기업의 카드를 확인하고.</p>
                             <p>다른 사람의 마이페이지를 볼 수 있습니다.</p>
                             <p> 구직 또는 채용을 등록해보세요!</p>
                         </div>
-                        <img src="/Images/oauth.png"/>
+                        <div className="bottom-box-img">
+                            <img src="/Images/oauth.png"/>
+                        </div>
                     </div>
                 </div>
             </div>

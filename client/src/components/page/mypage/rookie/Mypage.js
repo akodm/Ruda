@@ -68,6 +68,7 @@ class mypage extends Component {
     render() {
         const { btnNum, portfolioData, load, awardData, certificateData,activityData,like }=this.state;
         const { userInfo, user, loginState, infoMount, boardMount, mailReload } = this.props;
+        console.log(userInfo+"유저인포");
         return (
             <div className="Mypage">
                 <div className="Mypage-frame">
