@@ -13,7 +13,10 @@ const configs = require('../server-configs.js');
  
 const db = {};
  
-const sequelize = new Sequelize(configs.app.db, configs.app.root, configs.app.pass, { host: configs.app.host, dialect: configs.app.dia, timezone: '+09:00' });
+const sequelize = new Sequelize(configs.app.db, configs.app.root, configs.app.pass, { host: configs.app.host, dialect: configs.app.dia, timezone: '+09:00', define: {
+    charset: "utf8mb4",
+    collate: "utf8mb4_unicode_ci"
+} });
 
 sequelize.authenticate().then(() => {
     console.log("연결 성공");
