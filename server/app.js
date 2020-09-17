@@ -30,13 +30,11 @@ const EmailAuth = models.emailAuth;
 
 let app = express();
 
-// 앱 설정
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", configs.app.c_local);
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token, Authorization, multipart/form-data");
-  next();
-});
+const cors = require("cors");
+app.use(cors({
+  origin: configs.app.c_local,
+  credentials: true
+}));
 
 app.use(logger('dev'));
 app.use(express.json());

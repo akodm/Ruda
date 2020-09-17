@@ -41,7 +41,7 @@ class Main extends Component {
                         <Link to ="/easy"><span className="Main-new-es">간편하게 회원가입/로그인하기</span></Link>
                     </div>
                     <div className="Main-new-left">
-                        <img src="/images/mainimg.png" alt="Liu" className="liu"></img>
+                        <img src="/Images/mainimg.png" alt="Liu" className="liu"></img>
                     </div>
                 </div>
                 {/* 메인 중단 부분 */}
