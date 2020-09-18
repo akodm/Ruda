@@ -172,7 +172,7 @@ class Rookie extends Component {
             let userCateUpdat = axios.put(`${config.app.s_url}/users/updatecate`, {
                 userCate : "user",
                 id : user.id
-            })
+            });
 
             let result = axios.post(`${config.app.s_url}/userInfos/create`, {
                 userId : user.id,

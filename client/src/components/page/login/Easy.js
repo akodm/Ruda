@@ -27,7 +27,7 @@ class Easy extends Component {
                 await Promise.all([authLogin, userId]).then(data => {
                     authLogin = data[0];
                     userId = data[1];
-                })
+                });
 
                 let userdata = JSON.stringify(authLogin.data);
                 localStorage.setItem("users",userdata);
@@ -53,7 +53,6 @@ class Easy extends Component {
         let href = "";
         switch(tags) {
             case 0 : href = `${config.app.s_url}/users/google`; break;
-            case 1 : href = `${config.app.s_url}/users/naver`; break;
             default : href = ``; break;
         }
         if(href) { window.location.href = href; }
@@ -66,7 +65,6 @@ class Easy extends Component {
                     <span className="easy-title">간편로그인 / 회원가입</span>
                     <div className="easy-oauthDiv">
                         <div className="easy-btn" onClick={this.oauthClick.bind(this, 0)} ><img alt="img" src="/Images/btn_google_signin_light_normal_web.png" className="oauth-img" /></div>
-                        <div className="easy-btn" onClick={this.oauthClick.bind(this, 1)} ><img alt="img"  src="/Images/naverlogin.png" className="oauth-img" /></div>
                     </div>
                     <div className="easy-bottom">
                         <div className="easy-line"></div>

@@ -8,31 +8,20 @@ let jwt = require('jsonwebtoken');
 let configs = {};
 process.env.NODE_ENV === "development" ? configs = require('../server-configs') : configs = require('../server-configs');
 
-
 // DB Setting --------------------------------------------------------
 const User = models.user;
 
 // DB CRUD -----------------------------------------------------------
 
-// 전체 유저 검색
-router.get("/all", async (req, res) => {
-	try {
-		const result = await User.findAll();
-		res.send(result);
-	} catch (err) {
-		console.log(__filename + " 에서 유저 전체 검색 에러 발생 내용= " + err);
-		res.send(false);
-	}
-});
-
 // 유저 한명 검색
 router.get("/oneemail", async (req, res) => {
 	try {
 		const result = await User.findOne({
+			attributes : ["id", "email", "authCate", "userCate"],
 			where : {
                 email : req.query.userEmail,
                 authCate : req.query.authCate,
-			}
+			},
 		});
 		res.send(result);
 	} catch (err) {
@@ -45,6 +34,7 @@ router.get("/oneemail", async (req, res) => {
 router.get("/oneid", async (req, res) => {
 	try {
 		const result = await User.findOne({
+			attributes : ["id", "email", "authCate", "userCate"],
 			where : {
                 id : req.query.userId,
 			}

@@ -10,27 +10,12 @@ const Op = models.Sequelize.Op;
 
 // DB CRUD -----------------------------------------------------------
 
-// 기업 정보 전체 조회
-router.get("/all", async (req, res) => {
-	try {
-		const result = await CompanyInfo.findAll({
-			include : [
-				{ model: User }
-			]
-		});
-		res.send(result);
-	} catch (err) {
-		console.log(__filename + " 에서 기업 정보 전체 검색 에러 발생 내용= " + err);
-		res.send(false);
-	}
-});
-
 // 기업 정보 채용 전체 조회
 router.get("/yall", async (req, res) => {
 	try {
 		const result = await CompanyInfo.findAll({
 			include : [
-				{ model: User }
+				{ model: User, attributes: ["id", "email", "userCate", "authCate"] }
 			],
 			where : {
 				companyWorkCate : {
@@ -53,7 +38,7 @@ router.get("/one", async (req, res) => {
 	try {
 		const result = await CompanyInfo.findOne({
 			include : [
-				{ model: User }
+				{ model: User, attributes: ["id", "email", "userCate", "authCate"] }
 			],
 			where : {
 				userId : req.query.userId,
@@ -243,19 +228,17 @@ router.post("/popup", async (req, res) => {
 	try {
 		const result = await CompanyInfo.findAll({
 			where : {
-				[Op.and] : {
-					[Op.or] : {
-						companyTags : models.Sequelize.literal(tagQuery),
-						companyAdd : models.Sequelize.literal(addQuery),
-						companyField : { [Op.like] : "%" + req.body.add + "%" },
-						companyOccupation : { [Op.like] : "%" + req.body.add + "%" },
-					},
-					companyWorkCate : {
-						[Op.or] : [
-							{ [Op.like] : "%채용%" },
-							{ [Op.like] : "%실습%" }
-						]
-					}
+				[Op.or] : [
+					{companyTags : models.Sequelize.literal(tagQuery)},
+					{companyAdd : models.Sequelize.literal(addQuery)},
+					{companyField : { [Op.like] : "%" + req.body.add + "%" }},
+					{companyOccupation : { [Op.like] : "%" + req.body.add + "%" }},
+				],
+				companyWorkCate : {
+					[Op.or] : [
+						{ [Op.like] : "%채용%" },
+						{ [Op.like] : "%실습%" }
+					]
 				}
 			}
 		});
@@ -330,22 +313,20 @@ router.post("/search", async (req, res) => {
 	try {
 		const result = await CompanyInfo.findAll({
 			where : {
-				[Op.and] : {
-					[Op.or] : {
-						companyName : { [Op.like] : "%" + text + "%" },
-						companyAdd : models.Sequelize.literal(add),
-						companyTags : models.Sequelize.literal(tag),
-						companyField : models.Sequelize.literal(field),
-						companyOccupation : models.Sequelize.literal(occupation),
-						companyRequest : models.Sequelize.literal(request),
-						companyWelfare : models.Sequelize.literal(welfare),
-					},
-					companyWorkCate : {
-						[Op.or] : [
-							{ [Op.like] : "%채용%" },
-							{ [Op.like] : "%실습%" }
-						]
-					}
+				[Op.or] : [
+					{companyName : { [Op.like] : "%" + text + "%" }},
+					{companyAdd : models.Sequelize.literal(add)},
+					{companyTags : models.Sequelize.literal(tag)},
+					{companyField : models.Sequelize.literal(field)},
+					{companyOccupation : models.Sequelize.literal(occupation)},
+					{companyRequest : models.Sequelize.literal(request)},
+					{companyWelfare : models.Sequelize.literal(welfare)},
+				],
+				companyWorkCate : {
+					[Op.or] : [
+						{ [Op.like] : "%채용%" },
+						{ [Op.like] : "%실습%" }
+					]
 				}
 			}
 		});
