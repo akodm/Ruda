@@ -2,26 +2,6 @@ var express = require("express");
 var router = express.Router();
 let models = require("../models");
 
-// let multer = require('multer');
-// let path = require('path');
-
-// multer setting ----------------------------------------------------
-
-// const upload = multer({
-// 	storage: multer.diskStorage({
-// 	  	destination: function (req, file, cb) {
-// 			cb(null, 'public/upload/');
-// 	  	},
-// 	  	filename: function (req, file, cb) {
-// 			cb(null, new Date().valueOf() + path.extname(file.originalname));
-// 	  	}
-// 	}),
-// });
-// router.post("/upload", upload.single("profile"), async(req,res) => {
-// 	console.log(req.body.userId);
-// 	console.log(req.file.filename)
-// });
-
 // DB Setting --------------------------------------------------------
 const UserInfo = models.userInfo;
 const CompanyInfo = models.companyInfo;
@@ -35,7 +15,12 @@ router.get("/all", async (req, res) => {
 	try {
 		const result = await UserInfo.findAll({
 			include : [
-				{ model: User }
+				{ model: User, attributes: ["id", "email", "userCate", "authCate"] }	
+			],
+			attributes: [
+				"id", "userName", "userImageUrl", "userIntro",
+				"userKeyword", "userTags", "userField", 
+				"userWorkDateState", "userLike", "userId"
 			]
 		});
 		res.send(result);
@@ -50,7 +35,12 @@ router.get("/yall", async (req, res) => {
 	try {
 		const result = await UserInfo.findAll({
 			include : [
-				{ model: User }
+				{ model: User, attributes: ["id", "email", "userCate", "authCate"] }
+			],
+			attributes: [
+				"id", "userName", "userImageUrl", "userIntro",
+				"userKeyword", "userTags", "userField", 
+				"userWorkDateState", "userLike", "userId"
 			],
 			where : {
 				userWorkDateState : {
@@ -73,7 +63,7 @@ router.get("/one", async (req, res) => {
 	try {
 		const result = await UserInfo.findOne({
 			include : [
-				{ model: User }
+				{ model: User, attributes: ["id", "email", "userCate", "authCate"] }
 			],
 			where : {
 				userId : req.query.userId
@@ -364,20 +354,18 @@ router.post("/search", async (req, res) => {
 	try {
 		const result = await UserInfo.findAll({
 			where : {
-				[Op.and] : {
-					[Op.or] : {
-						userName : { [Op.like] : "%" + text + "%" },
-						userAdd : models.Sequelize.literal(add),
-						userTags : models.Sequelize.literal(tag),
-						userField : models.Sequelize.literal(field),
-					},
-					userTraningDateState : {
-						[Op.or] : [
-							{ [Op.like] : "%취업%" },
-							{ [Op.like] : "%실습%" }
-						]
-					},
-				}
+				[Op.or] : [
+					{ userName : { [Op.like] : "%" + text + "%" }},
+					{ userAdd : models.Sequelize.literal(add) },
+					{ userTags : models.Sequelize.literal(tag) },
+					{ userField : models.Sequelize.literal(field)},
+				],
+				userWorkDateState : {
+					[Op.or] : [
+						{ [Op.like] : "%취업%" },
+						{ [Op.like] : "%실습%" }
+					]
+				},
 			}
 		});
 		res.send(result);
@@ -412,20 +400,18 @@ router.post("/popup", async (req, res) => {
 	try {
 		const result = await UserInfo.findAll({
 			where : {
-				[Op.and] : {
-					[Op.or] : {
-						userTags : models.Sequelize.literal(tagQuery),
-						userAdd : models.Sequelize.literal(addQuery),
-						userField : { [Op.like] : "%" + req.body.field + "%" },
-						userField : { [Op.like] : "%" + req.body.occupation + "%" },
-					},
-					userTraningDateState : {
-						[Op.or] : [
-							{ [Op.like] : "%취업%" },
-							{ [Op.like] : "%실습%" }
-						]
-					},
-				}
+				[Op.or] : [
+					{ userTags : models.Sequelize.literal(tagQuery) },
+					{ userAdd : models.Sequelize.literal(addQuery) },
+					{ userField : { [Op.like] : "%" + req.body.field + "%" } },
+					{ userField : { [Op.like] : "%" + req.body.occupation + "%" } },
+				],
+				userWorkDateState : {
+					[Op.or] : [
+						{ [Op.like] : "%취업%" },
+						{ [Op.like] : "%실습%" }
+					]
+				},
 			}
 		});
 		res.send(result);

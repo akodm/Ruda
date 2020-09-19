@@ -49,7 +49,7 @@ class Insert extends Component {
             await axios.post(`${config.app.s_url}/users/create`,{
                 userEmail:email,
                 userPass:password,
-            })
+            });
 
             const authLogin = await axios.get(`${config.app.s_url}/users/oauthlogin?tag=highrookie&email=${email}`);
             let userdata = JSON.stringify(authLogin.data);

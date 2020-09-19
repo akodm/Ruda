@@ -74,7 +74,8 @@ class Base extends Component {
                     headers : {
                         "Authorization" : getUser.token, 
                     }
-                })
+                });
+
                 let userId = await axios.get(`${config.app.s_url}/users/oneemail?userEmail=${verify.data.email}&authCate=${verify.data.tag}`);
                 
                 let recv = axios.get(`${config.app.s_url}/mails/receive?&target=${userId.data.id}`);
@@ -83,7 +84,7 @@ class Base extends Component {
                 await Promise.all([recv, send]).then(data => {
                     recv = data[0].data;
                     send = data[1].data;
-                })
+                });
     
                 let unReadCount = 0;
                 recv.forEach(data => { if(!data.readState) unReadCount++; });

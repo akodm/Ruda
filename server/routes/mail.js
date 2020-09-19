@@ -16,7 +16,7 @@ router.get("/all", async (req, res) => {
 	try {
 		const result = await Mail.findAll({
 			include : [
-				{ model: User }
+				{ model: User, attributes: ["id", "email", "userCate", "authCate"] }
 			]
 		});
 		res.send(result);
@@ -31,7 +31,7 @@ router.get("/receive", async (req, res) => {
 	try {
 		const result = await Mail.findAll({
 			include : [
-				{ model: User }
+				{ model: User, attributes: ["id", "email", "userCate", "authCate"] }
 			],
 			where : {
 				target : req.query.target,
@@ -49,7 +49,7 @@ router.get("/send", async (req, res) => {
 	try {
 		const result = await Mail.findAll({
 			include : [
-				{ model: User }
+				{ model: User, attributes: ["id", "email", "userCate", "authCate"] }
 			],
 			where : {
 				userId : req.query.userId,

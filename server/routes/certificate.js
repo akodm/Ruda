@@ -16,7 +16,7 @@ router.get("/all", async (req, res) => {
 	try {
 		const result = await Certificate.findAll({
 			include : [
-				{ model: User }
+				{ model: User, attributes: ["id", "email", "userCate", "authCate"] }
 			],
 			where : {
 				userId : req.query.userId
@@ -34,7 +34,7 @@ router.get("/one", async (req, res) => {
 	try {
 		const result = await Certificate.findOne({
 			include : [
-				{ model: User }
+				{ model: User, attributes: ["id", "email", "userCate", "authCate"] }
 			],
 			where : {
 				userId : req.query.userId
