@@ -146,7 +146,7 @@
     border-radius: 7px;
     box-shadow: 0 0 8px 0.2px rgba(131, 131, 131, 0.13);
     border: solid 1px #eeeeee;
-    padding: 10px;
+    padding: 25px;
     margin: 15px;
     
 }
@@ -339,7 +339,7 @@
     border-radius: 7px;
     box-shadow: 0 0 8px 0.2px rgba(131, 131, 131, 0.13);
     border: solid 1px #eeeeee;
-    padding: 10px;
+    padding: 25px;
     margin: 15px;
 }
 .Rookie-Card:hover{
