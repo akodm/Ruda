@@ -119,6 +119,7 @@ class ViewProfile extends Component {
         const Keyword = userInfo.userKeyword;
         const Specialty = userInfo.userSpecialty;
         const {shareAlert,success,open}=this.state;
+
         return userInfo ? (
             <div className="Mypage-profile">
                 {/* 공유하기 팝업 */}
@@ -187,11 +188,19 @@ class ViewProfile extends Component {
                                     }
                                     <div className="profile-text">
                                         <PhoneIcon style={{fontSize:"medium"}}/>
-                                        <p>{userInfo.userPhone}</p>
+                                        <p>
+                                            {
+                                                user.cate === "company" ? userInfo.userPhone : (loginState ? userInfo.userPhone : "기업에게만 공개됩니다.")
+                                            }
+                                        </p>
                                     </div>
                                     <div className="profile-text">
                                         <HouseIcon style={{fontSize:"medium"}}/>
-                                        <p>{userInfo.userAdd}</p>
+                                        <p>
+                                            {
+                                                user.cate === "company" ? userInfo.userAdd : (loginState ? userInfo.userAdd : "기업에게만 공개됩니다.")
+                                            }
+                                        </p>
                                     </div>
                                     <div className="profile-text">
                                         <SchoolIcon style={{fontSize:"medium"}}/>
