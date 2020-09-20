@@ -10,8 +10,22 @@ const Op = models.Sequelize.Op;
 
 // DB CRUD -----------------------------------------------------------
 
+const sct = require("../security");
+const security = new sct();
+
+function sctFuncNext(req, res, next) {
+	const sct_result = security.originCheck(req);
+
+	if(!sct_result) {
+		res.send(false);
+		return;
+	}
+
+	next();
+}
+
 // 기업 정보 채용 전체 조회
-router.get("/yall", async (req, res) => {
+router.get("/yall", sctFuncNext, async (req, res) => {
 	try {
 		const result = await CompanyInfo.findAll({
 			include : [
@@ -34,7 +48,7 @@ router.get("/yall", async (req, res) => {
 });
 
 // 기업 정보 한명 조회
-router.get("/one", async (req, res) => {
+router.get("/one", sctFuncNext, async (req, res) => {
 	try {
 		const result = await CompanyInfo.findOne({
 			include : [
@@ -52,7 +66,7 @@ router.get("/one", async (req, res) => {
 });
 
 // 기업 정보 생성
-router.post("/create", async (req, res) => {
+router.post("/create", sctFuncNext, async (req, res) => {
 	let result = false;
 	try {
 		await CompanyInfo.findOrCreate({
@@ -102,7 +116,7 @@ router.post("/create", async (req, res) => {
 });
 
 // 기업 정보 수정
-router.put("/update", async(req, res) => {
+router.put("/update", sctFuncNext, async(req, res) => {
 	let result = null;
     try {
         await CompanyInfo.update({ 
@@ -147,7 +161,7 @@ router.put("/update", async(req, res) => {
 });
 
 // 좋아요 수 1씩 감소시키기
-router.get("/decrement", async(req, res) => {
+router.get("/decrement", sctFuncNext, async(req, res) => {
 	let result = null;
     try {
 		await CompanyInfo.decrement('companyLike', { where : {
@@ -162,7 +176,7 @@ router.get("/decrement", async(req, res) => {
 });
 
 // 좋아요 수 1씩 증가시키기
-router.get("/increment", async(req, res) => {
+router.get("/increment", sctFuncNext, async(req, res) => {
 	let result = null;
     try {
 		await CompanyInfo.increment('companyLike', { where : {
@@ -177,7 +191,7 @@ router.get("/increment", async(req, res) => {
 });
 
 // 기업 정보 삭제
-router.delete("/delete", async(req, res) => {
+router.delete("/delete", sctFuncNext, async(req, res) => {
 	let result = false;
     try {
         await CompanyInfo.destroy({
@@ -201,7 +215,7 @@ router.delete("/delete", async(req, res) => {
  *  기업이 찾는 희망 직종 또는 기업의 분야
  *  기업이 가지고 있는 태그 중 일치하는 문자열
  */
-router.post("/popup", async (req, res) => {
+router.post("/popup", sctFuncNext, async (req, res) => {
 	let address = (req.body.add).split(" ");
 	let tagQuery = "";
 	let addQuery = "";
@@ -250,7 +264,7 @@ router.post("/popup", async (req, res) => {
 });
 
 // 게시판 필터
-router.post("/search", async (req, res) => {
+router.post("/search", sctFuncNext, async (req, res) => {
 	let filter = req.body.data;
 	let queryAdd = [];
 	let queryField = [];
