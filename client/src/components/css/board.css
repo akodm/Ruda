@@ -9,9 +9,9 @@
 .Company{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     font-family: NanumSquareEB;
+    min-height: 900px;
     width: 60%;
 }
 .Company-title{
