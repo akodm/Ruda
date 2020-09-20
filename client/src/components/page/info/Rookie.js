@@ -351,7 +351,7 @@ class Rookie extends Component {
                             })
                         }
                     </div>
-                    <AutoCreateBox blur={false} width={"100%"} text={"자신의 특기 또는 취미 키워드를 최대 5개까지 등록하세요!"} list={dataList.app.specialtyList} clear={true} onChange={this.addChips.bind(this,"spc")} />
+                    <AutoCreateBox blur={false} width={"100%"} text={"자신의 특기 또는 취미 키워드를 최대 3개까지 등록하세요!"} list={dataList.app.specialtyList} clear={true} onChange={this.addChips.bind(this,"spc")} />
                     <div className="Info-tag-box">
                         {
                             specialty.map((data,i) => {

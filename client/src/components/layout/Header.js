@@ -23,7 +23,7 @@ class Header extends Component {
             alert("로그인 후 이용해주세요.");
             return;
         }
-        this.setState({ open : this.state.open ? false : true })
+        this.setState({ open : true });
     }
 
     render() {
@@ -65,15 +65,18 @@ class Header extends Component {
                     <div className="Header-right-media">
                         <MenuIcon onClick={this.headerMedia.bind(this)} style={{cursor:"pointer"}} />
                         {
-                            user.email && open &&
-                            <div className="Header-right-media-list">
-                                <div onClick={() => msgOpenClose(true)} className="Header-right-media-list-li">
-                                    <Badge color="secondary" badgeContent={unReadMsg}>
-                                        메일함
-                                    </Badge>
+                            open &&
+                            <div className="Header-right-media-layout">
+                                <div className="Header-right-media-overlay" onClick={() => this.setState({ open : false })}></div>
+                                <div className="Header-right-media-content">
+                                    <div onClick={() => msgOpenClose(true)} className="Header-right-media-list-li">
+                                        <Badge color="secondary" badgeContent={unReadMsg}>
+                                            메일함
+                                        </Badge>
+                                    </div>
+                                    <div onClick={() => user.cate === "user" ? openClose(true, "user") : openClose(true, "company")} className="Header-right-media-list-li">추천목록</div>
+                                    <div onClick={this.logout.bind(this)} className="Header-right-media-list-li">로그아웃</div>
                                 </div>
-                                <div onClick={() => user.cate === "user" ? openClose(true, "user") : openClose(true, "company")} className="Header-right-media-list-li">추천목록</div>
-                                <div onClick={this.logout.bind(this)} className="Header-right-media-list-li">로그아웃</div>
                             </div>
                         }
                     </div>
