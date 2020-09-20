@@ -13,7 +13,7 @@
 .Main-new-Div {
     width: 100%;
     height: 516px;
-    background-color: #e8faff8f;
+    background-color: #ddf7ffc2;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -180,45 +180,49 @@
 /* -------------------------- bottom ----------------------- */
 
 .Main-new-bottom {
-    width: 100%;
-    min-height: 600px;
-    background-color: #b2d8ff;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  color:#ffffff;
+}
+
+.bottom-box{
     display: flex;
     flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+    text-align: left;
     align-items: center;
-    justify-content: center;
-}
 
-.Main-new-bottom-text {
-    font-size: 18px;
+
+}
+.bottom-box-r{
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+    justify-content: space-evenly;
+    text-align: left;
+    align-items: center;
+}
+.bottom-box>.bottom-box-img>img,.bottom-box-r>.bottom-box-img>img{
+    width: 100%;
+    box-shadow: 0px 0px 5px rgb(180, 180, 180);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.bottom-box-content>p{
+    font-size: 1.2em;
     font-weight: 600;
-    width: 35%;
-    color: white;
-    line-height: 55px;
-    display: flex;
-    justify-content: center;
-    margin: 15px;
 }
-
-.Main-new-bottom-img-div {
-    width: 35%;
-    display: flex;
-    justify-content: center;
-    margin: 15px;
+.bottom-box-content>h1{
+    font-size: 1.7em;
 }
-
-.Main-new-bottom-img {
-    width: 550px;
-    height: auto;
-    box-shadow: 0px 0px 5px  rgba(44, 100, 122, 0.288);
+.bottom-box-img{
+    width: 450px;
 }
-
-
-.Main-new-bottom-text>.start{
-    display: flex;
-    flex-direction: column;
-}
-.start>button{
+button.start{
     width: 70%;
     height: 50px;
     margin:50px;
@@ -228,10 +232,10 @@
     font-size: 16px;
     font-weight: 600;
     background-color: #ffffff;
-
 }
-.start>button:hover{
-    background-color: #f7f4fd;color: #7e7edf;
+button.start:hover{
+    background-color: #d080ff70;
+    color: #ffffff;
 }
 /* --------------- 반응형 처리 --------------- */
 @media all and (min-width:1100px) and (max-width:1300px) {
@@ -264,6 +268,10 @@
         font-weight: 600;
         margin-top: 50px;
         line-height: 30px;
+    }
+
+    .bottom-box-img{
+        width: 350px;
     }
 }
 
@@ -317,39 +325,75 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 25px;
+    }
+    .bottom-box{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-evenly;
+        text-align: center;
+        align-items: center;
+    }
+    .bottom-box-content>p{
+        font-size: 1em;
+        font-weight: 600;
+        text-align: center;
+    }
+    .bottom-box-content>h1{
+        font-size: 1.5em;
+    }
+    .bottom-box-img{
+        width: 300px;
     }
 }
 
 @media (max-width:1200px) {
-    .Main-new-bottom {
+    .bottom-box{
+        display: flex;
         flex-direction: column;
+        width: 100%;
+        justify-content: space-evenly;
+        text-align: left;
+        align-items: center;
+    }
+    .bottom-box-r{
+        display: flex;
+        flex-direction: column-reverse;
+        width: 100%;
+        justify-content: space-evenly;
+        text-align: left;
+        align-items: center;
     }
     
-    .Main-new-bottom-text {
-        width: 100%;
-        text-align: center;
-    }
 }
 
 @media (max-width:700px) {
+    .Main-new-center{
+        height: 200px;
+    }
     .Main-new-bottom {
-        flex-direction: column;
+        flex-direction: column-reverse;
         width: 100%;
     }
     .mobile{
-        flex-direction: column-reverse;
+        display: flex;
+        flex-direction: column;
     }
-    .Main-new-bottom-text {
-        font-size: 16px;
+    .Main-new-bottom {
+        font-size: 14px;
         
     }
     
     .Main-new-bottom-img-div {
         width: 90%;
     }
-    
-    .Main-new-bottom-img {
+
+    .bottom-box{
+        display: flex;
+        flex-direction: column-reverse;
         width: 100%;
+        text-align: left;
+        align-items: center;
     }
+    
 }

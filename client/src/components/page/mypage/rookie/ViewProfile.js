@@ -36,6 +36,7 @@ class ViewProfile extends Component {
             open : false,
         }
     }
+
     savepdf(){
         const {userInfo}=this.props;
         document.title = userInfo.userName+'님의 이력서';
@@ -114,12 +115,11 @@ class ViewProfile extends Component {
     proposalPopupOpenClose(bool) { this.setState({ open : bool }) }
     
     render() {
-        const { userInfo,awardData,certificateData,activityData,like,loginState,user,mailReload } = this.props;
+        const { userInfo,awardData,certificateData,activityData,like,loginState,user,mailReload, portfolioData,activityIn,activityOut } = this.props;
         const Tag = userInfo.userTags;
         const Keyword = userInfo.userKeyword;
         const Specialty = userInfo.userSpecialty;
         const {shareAlert,success,open}=this.state;
-
         return userInfo ? (
             <div className="Mypage-profile">
                 {/* 공유하기 팝업 */}
@@ -221,14 +221,14 @@ class ViewProfile extends Component {
                                     </div>
                                     <div className="profile-text">
                                         <AssignmentIndIcon style={{fontSize:"medium"}}/>
-                                        <p>근무형태:{userInfo.userWorkDateState}</p>
+                                        <p>구직상태:{userInfo.userWorkDateState}</p>
                                     </div>
-                                    {userInfo.userWorkDateState !=="미정" &&
+                                    {userInfo.userWorkDateState ==="미정"?"":
                                     <div className="profile-text">
                                         <CalendarTodayIcon style={{fontSize:"medium"}}/>
                                         {userInfo.userWorkDate !=="직접입력"?
-                                        <p>근무날짜:{userInfo.userWorkDate}</p>:
-                                        <p>근무날짜:{userInfo.userTraningDate}</p>
+                                        <p>구직날짜:{userInfo.userWorkDate}</p>:
+                                        <p>구직날짜:{userInfo.userTraningDate}</p>
                                         } 
                                     </div>
                                     }
@@ -258,7 +258,7 @@ class ViewProfile extends Component {
                                         </div>
                                         {
                                            !loginState && user.email &&
-                                           <div className="Mypage-pages-title-icons-icon-c">
+                                           <div className="Mypage-pages-title-icons-icon">
                                                 <MailOutlineIcon onClick={() => this.setState({ open : true })}/>
                                             </div>
                                        }
@@ -271,7 +271,15 @@ class ViewProfile extends Component {
                                     <div className="profile-title-line"></div>
                                 </div>
                                 <div className="Mypage-profile-content-userinfo-graph">
-                                    <Chart  />
+                                    <Chart 
+                                        userInfo={userInfo}
+                                        awardData={awardData}
+                                        certificateData={certificateData}
+                                        activityData={activityData}
+                                        portfolioData={portfolioData} 
+                                        activityIn={activityIn}
+                                        activityOut={activityOut}
+                                        />
                                 </div>
                                 <div className="Mypage-profile-content-userinfo-info">
                                         <div className="profile-keyword-info">

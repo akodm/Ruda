@@ -21,12 +21,18 @@
     margin-bottom: 200px;
     margin-top: 80px;
     height: 300px;
+
 }
 
 .portfolio-guideDiv {
     display: flex;
     flex-direction: column;
     align-items: center;
+    -ms-user-select: none; 
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .portfolio-content {

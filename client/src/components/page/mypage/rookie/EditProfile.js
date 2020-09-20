@@ -237,6 +237,7 @@ class EditProfile extends Component {
                 awarddate:"",
                 awardcate:"교내",
             });
+            
         }
         catch(err){
             console.log("user award add create err : ");
