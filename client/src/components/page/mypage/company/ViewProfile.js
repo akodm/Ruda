@@ -125,9 +125,9 @@ class ViewProfile extends Component {
                     <div style={{width:"80%"}}>
                         <div className="shareAlert-input">
                             <input className="shareAlert-input-box" readOnly value={window.location.href} ></input>
-                            <button className="shareAlert-btn" onClick={() => this.copyCodeToClipboard()}>링크복사</button>    
+                            <button className="shareAlert-btns-c" onClick={() => this.copyCodeToClipboard()}>링크복사</button>    
                         </div>
-                        <p style={{display:success,fontSize:"14px",color:"#11addd"}}>복사가 완료되었습니다.</p> 
+                        <p style={{display:success,fontSize:"14px",color:"rgb(200, 194, 255)"}}>복사가 완료되었습니다.</p> 
                     </div>
                 </div>
 

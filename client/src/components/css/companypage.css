@@ -377,9 +377,9 @@ margin: 20px;
     margin: 5px;
     width: 300px;
 }
-.shareAlert-btns{
+.shareAlert-btns-c{
     border: none;
-    background-color: #11addd;
+    background-color: rgb(200, 194, 255);
     width: 100px;
     height: 35px;
     color: white;
