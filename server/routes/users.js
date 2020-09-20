@@ -13,8 +13,22 @@ const User = models.user;
 
 // DB CRUD -----------------------------------------------------------
 
+const sct = require("../security");
+const security = new sct();
+
+function sctFuncNext(req, res, next) {
+	const sct_result = security.originCheck(req);
+
+	if(!sct_result) {
+		res.send(false);
+		return;
+	}
+
+	next();
+}
+
 // 유저 한명 검색
-router.get("/oneemail", async (req, res) => {
+router.get("/oneemail", sctFuncNext, async (req, res) => {
 	try {
 		const result = await User.findOne({
 			attributes : ["id", "email", "authCate", "userCate"],
@@ -31,7 +45,7 @@ router.get("/oneemail", async (req, res) => {
 });
 
 // 유저 한명 검색
-router.get("/oneid", async (req, res) => {
+router.get("/oneid", sctFuncNext, async (req, res) => {
 	try {
 		const result = await User.findOne({
 			attributes : ["id", "email", "authCate", "userCate"],
@@ -47,7 +61,7 @@ router.get("/oneid", async (req, res) => {
 });
 
 // 유저 생성
-router.post("/create", async(req, res) => {
+router.post("/create", sctFuncNext, async(req, res) => {
     let result = false;
     let userPass = await hashFunc(req.body.userPass);
     try{
@@ -73,7 +87,7 @@ router.post("/create", async(req, res) => {
     res.send(result);
 });
 
-router.put("/updatecate", async(req, res) => {
+router.put("/updatecate", sctFuncNext, async(req, res) => {
     let result = null;
     try {
         await User.update({ 
@@ -94,7 +108,7 @@ router.put("/updatecate", async(req, res) => {
 // 유저 업데이트
 // 만약 비밀번호 찾기를 유저 인포 라우터에서 처리를 마치고,
 // 비밀번호를 변경할시에, 아이디를 토대로 입력받은 유저 비밀번호로 변경
-router.put("/updateid", async(req, res) => {
+router.put("/updateid", sctFuncNext, async(req, res) => {
     let result = null;
     let userPass = await hashFunc(req.body.userPass);
     try {
@@ -114,7 +128,7 @@ router.put("/updateid", async(req, res) => {
 });
 
 // 유저 삭제
-router.delete("/delete", async(req, res) => {
+router.delete("/delete", sctFuncNext, async(req, res) => {
     let result = false;
     try {
         await User.destroy({
@@ -132,7 +146,7 @@ router.delete("/delete", async(req, res) => {
 // ------------------------------------- 기본 CURD 외의 라우터 및 함수 --------------------------//
 
 // 유저 로그인 체크
-router.post("/loginuser", async (req, res) => {
+router.post("/loginuser", sctFuncNext, async (req, res) => {
     let check = false;
     let userPass = await hashFunc(req.body.userPass);
 	try {
@@ -152,7 +166,7 @@ router.post("/loginuser", async (req, res) => {
 });
 
 // 유저 중복 이메일 검색
-router.get("/dup", async (req, res) => {
+router.get("/dup", sctFuncNext, async (req, res) => {
     let result = false;
 	try {
 		const data = await User.findOne({
@@ -288,7 +302,7 @@ router.get('/facebook', passport.authenticate('facebook', { scope : ['public_pro
 router.get('/naver', passport.authenticate('naver', { session : false }));
 
 // 로그인 시 토큰값을 돌려줌 -> 로컬 스토리지에 저장
-router.get("/oauthlogin" , async(req,res) => {
+router.get("/oauthlogin", async(req,res) => {
 	const user = req.query;
 	const payload = {
 		tag : user.tag,

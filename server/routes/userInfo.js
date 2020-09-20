@@ -10,8 +10,22 @@ const Op = models.Sequelize.Op;
 
 // DB CRUD -----------------------------------------------------------
 
+const sct = require("../security");
+const security = new sct();
+
+function sctFuncNext(req, res, next) {
+	const sct_result = security.originCheck(req);
+
+	if(!sct_result) {
+		res.send(false);
+		return;
+	}
+
+	next();
+}
+
 // 유저 정보 전체 조회
-router.get("/all", async (req, res) => {
+router.get("/all", sctFuncNext, async (req, res) => {
 	try {
 		const result = await UserInfo.findAll({
 			include : [
@@ -31,7 +45,7 @@ router.get("/all", async (req, res) => {
 });
 
 // 유저 구직 및 실습 중 정보 전체 조회
-router.get("/yall", async (req, res) => {
+router.get("/yall", sctFuncNext, async (req, res) => {
 	try {
 		const result = await UserInfo.findAll({
 			include : [
@@ -59,7 +73,7 @@ router.get("/yall", async (req, res) => {
 });
 
 // 유저 정보 한명 조회
-router.get("/one", async (req, res) => {
+router.get("/one", sctFuncNext, async (req, res) => {
 	try {
 		const result = await UserInfo.findOne({
 			include : [
@@ -78,7 +92,7 @@ router.get("/one", async (req, res) => {
 
 // 유저 정보 이메일 찾기
 // userName, userPhone <- 참고 쿼리 스트링
-router.get("/emailfind", async (req, res) => {
+router.get("/emailfind", sctFuncNext, async (req, res) => {
 	// 응답할 데이터
 	let sendData = null;
 	let user = null;
@@ -125,7 +139,7 @@ router.get("/emailfind", async (req, res) => {
 
 // 유저 정보 비밀번호 찾기
 // userName, userPhone, email <- 참고 쿼리 스트링
-router.get("/passwordfind", async (req, res) => {
+router.get("/passwordfind", sctFuncNext, async (req, res) => {
 	// 응답할 데이터
 	let sendData = null;
 	let user = null;
@@ -173,7 +187,7 @@ router.get("/passwordfind", async (req, res) => {
 });
 
 // 유저 정보 생성
-router.post("/create", async(req, res) => {
+router.post("/create", sctFuncNext, async(req, res) => {
 	let result = false;
 	try {
 		await UserInfo.findOrCreate({
@@ -221,7 +235,7 @@ router.post("/create", async(req, res) => {
 });
 
 // 유저 정보 수정
-router.put("/update", async(req, res) => {
+router.put("/update", sctFuncNext, async(req, res) => {
 	let result = null;
     try {
         await UserInfo.update({ 
@@ -266,7 +280,7 @@ router.put("/update", async(req, res) => {
 });
 
 // 좋아요 수 1씩 감소시키기
-router.get("/decrement", async(req, res) => {
+router.get("/decrement", sctFuncNext, async(req, res) => {
 	let result = null;
     try {
 		await UserInfo.decrement('userLike', { where : {
@@ -281,7 +295,7 @@ router.get("/decrement", async(req, res) => {
 });
 
 // 좋아요 수 1씩 증가시키기
-router.get("/increment", async(req, res) => {
+router.get("/increment", sctFuncNext, async(req, res) => {
 	let result = null;
     try {
 		await UserInfo.increment('userLike', { where : {
@@ -296,7 +310,7 @@ router.get("/increment", async(req, res) => {
 });
 
 // 유저 정보 삭제
-router.delete("/delete", async(req, res) => {
+router.delete("/delete", sctFuncNext, async(req, res) => {
 	let result = false;
     try {
         await UserInfo.destroy({
@@ -314,7 +328,7 @@ router.delete("/delete", async(req, res) => {
 // ======================== 검색 부분 ======================== //
 
 // 게시판 필터
-router.post("/search", async (req, res) => {
+router.post("/search", sctFuncNext, async (req, res) => {
 	let filter = req.body.data;
 	let queryAdd = [];
 	let queryField = [];
@@ -382,7 +396,7 @@ router.post("/search", async (req, res) => {
  *  유저 희망 직종
  *  유저가 가지고 있는 태그 중 일치하는 문자열
  */
-router.post("/popup", async (req, res) => {
+router.post("/popup", sctFuncNext, async (req, res) => {
 	let address = (req.body.add).split(" ");
 	let tagQuery = "";
 	let addQuery = `userAdd like '%${address[1]}%'`;

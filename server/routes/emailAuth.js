@@ -8,19 +8,22 @@ const EmailAuth = models.emailAuth;
 
 // DB CRUD -----------------------------------------------------------
 
-// 전체 오스 검색
-router.get("/all", async (req, res) => {
-	try {
-		const result = await EmailAuth.findAll();
-		res.send(result);
-	} catch (err) {
-		console.log(__filename + " 에서 오스 전체 검색 에러 발생 내용= " + err);
+const sct = require("../security");
+const security = new sct();
+
+function sctFuncNext(req, res, next) {
+	const sct_result = security.originCheck(req);
+
+	if(!sct_result) {
 		res.send(false);
+		return;
 	}
-});
+
+	next();
+}
 
 // 오스 하나 검색
-router.get("/one", async (req, res) => {
+router.get("/one", sctFuncNext, async (req, res) => {
 	try {
 		const result = await EmailAuth.findOne({
 			where : {
@@ -35,41 +38,10 @@ router.get("/one", async (req, res) => {
 	}
 });
 
-// 오스 생성
-router.post("/create", async(req, res) => {
-    let result = false;
-    try{
-        await EmailAuth.create({
-				email : req.body.email,
-                token: req.body.token, 
-                expire: req.body.expire,
-            });
-    } catch(err) {
-		console.log(__filename + " 에서 오스 생성 에러 발생 내용= " + err);
-    }
-    res.send(result);
-});
-
-// 오스 삭제
-router.delete("/delete", async(req, res) => {
-	let result = false;
-    try {
-        await EmailAuth.destroy({
-            where: {
-                token: req.query.token
-            }
-		});
-		result = true;
-    } catch(err) {
-		console.log(__filename + " 에서 오스 삭제 에러 발생 내용= " + err);
-	}
-	res.send(result);
-});
-
 // ------------------------------------- 기본 CURD 외의 라우터 및 함수 --------------------------//
 
 // 오스 인증 체크
-router.post("/emailauth", async (req, res) => {
+router.post("/emailauth", sctFuncNext, async (req, res) => {
     let check = false;
 	try {
 		const result = await EmailAuth.findOne({
