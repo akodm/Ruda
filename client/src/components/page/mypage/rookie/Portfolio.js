@@ -89,8 +89,9 @@ class Portfolio extends Component {
                 alert("잘못된 값이 있습니다. 다시 시도해주세요.");
             }
         } catch(err) {
-            console.log("portfolio save err : ");
+            alert("포트폴리오가 추가되지 않았습니다.");
         }
+        
         this.setState({ loaded : true });
     }
 
@@ -150,7 +151,7 @@ class Portfolio extends Component {
                 alert("잘못된 값이 있습니다. 다시 시도해주세요.");
             }
         } catch(err) {
-            console.log("portfolio save err : ");
+            alert("포트폴리오가 수정되지 않았습니다.");
         }
         this.setState({ loaded : true });
     }
@@ -170,7 +171,8 @@ class Portfolio extends Component {
                 alert("포트폴리오 삭제가 정상적으로 처리되지 않았습니다.");
             }
         } catch(err) {
-            console.log("portfolio delete err : ");
+            alert("포트폴리오가 삭제되지 않았습니다.");
+            return;
         }
     }
 
@@ -191,7 +193,6 @@ class Portfolio extends Component {
                     .child(image.name)
                     .getDownloadURL()
                     .then(async url => {
-                        console.log("image upload !!")
                         await this.setState({ imagesUrl : 
                             this.state.imagesUrl.concat({
                                 data : url,

@@ -240,7 +240,7 @@ class EditProfile extends Component {
             
         }
         catch(err){
-            console.log("user award add create err : ");
+            console.log("user award add create err");
         }
     }
     
@@ -268,7 +268,7 @@ class EditProfile extends Component {
             });
         }
         catch(err){
-            console.log("user certificate add create err : ");
+            console.log("user certificate add create err");
         }
     }
    
@@ -298,7 +298,7 @@ class EditProfile extends Component {
             });
         }
         catch(err){
-            console.log("user activity add create err : ");
+            console.log("user activity add create err");
         }
     }
     
@@ -308,7 +308,7 @@ class EditProfile extends Component {
             this.setState({ awards : this.state.awards.filter(data => { return id !== data.id }) });
         }
         catch(err){
-            console.log("user award delete err : ");
+            console.log("user award delete err");
         }
     }
     async deleteCertificate(id){
@@ -317,7 +317,7 @@ class EditProfile extends Component {
             this.setState({ certificates : this.state.certificates.filter(data => { return id !== data.id }) });
         }
         catch(err){
-            console.log("user certificate delete err : ");
+            console.log("user certificate delete err");
         }
     }
    
@@ -327,7 +327,7 @@ class EditProfile extends Component {
             this.setState({ activitys : this.state.activitys.filter(data => { return id !== data.id }) });
         }
         catch(err){
-            console.log("user activity delete err : ");
+            console.log("user activity delete err");
         }
     }
 

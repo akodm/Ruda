@@ -55,7 +55,7 @@ class mypage extends Component {
                 like : like ? true : false,
             });
         } catch(err) {
-            console.log("rookie mypage data load err : ");
+            console.log("rookie mypage data load err");
         }
         this.setState({ load : true })
     }

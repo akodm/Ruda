@@ -26,7 +26,6 @@ class Profile extends Component {
                 activityIn:activityIn,
                 activityOut:activityOut,
             }
-            console.log(activityIn,activityOut);
         }
     }
 

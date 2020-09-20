@@ -108,7 +108,8 @@ class ViewProfile extends Component {
             infoMount();
             boardMount();
         } catch(err) {
-            console.log("추천 기능 도중 에러 발생 : ");
+            alert("추천 기능 도중 에러 발생 : ");
+            return;
         }
     }
 
