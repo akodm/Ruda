@@ -86,34 +86,45 @@
     position: relative;
 }
 
-.Header-right-media-list {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    font-size: 14px;
-    font-weight: bold;
+.Header-right-media-layout {
+    width: 100%;
+    height: 100%;
     top: 0;
-    margin-top: 48px;
-    overflow: hidden;
-    border: 1px solid rgba(185, 185, 185, 0.562);
-    box-shadow: 0px 5px 5px 1px rgba(151, 151, 151, 0.445);
-    animation-name: list;
-    animation-duration: 0.5s;
+    left: 0;
+    background-color: rgba(167, 167, 167, 0.432);
+    position: fixed;
+    z-index: 10000;
 }
 
-@keyframes list {
+.Header-right-media-overlay {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 9998;
+}
+
+.Header-right-media-content {
+    height: 100%;
+    width: 120px;
+    background-color: white;
+    position: fixed;
+    right: 0;
+    z-index: 10001;
+    animation-name: side-menu;
+    animation-duration: 0.7s;
+}
+
+@keyframes side-menu {
     0% {
-        opacity: 0;
-        height: 0px;
-    }
-    100% {
-        height: 110px;
+        width: 0px;
     }
 }
 
 .Header-right-media-list-li {
-    background-color: white;
-    padding: 10px;
+    margin-top: 35px;
+    white-space: nowrap;
     cursor: pointer;
 }
 
