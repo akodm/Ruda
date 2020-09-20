@@ -195,11 +195,22 @@
     justify-content: space-evenly;
     text-align: left;
     align-items: center;
-    padding: 50px;
+
+
 }
-.bottom-box>.bottom-box-img>img{
+.bottom-box-r{
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+    justify-content: space-evenly;
+    text-align: left;
+    align-items: center;
+}
+.bottom-box>.bottom-box-img>img,.bottom-box-r>.bottom-box-img>img{
     width: 100%;
     box-shadow: 0px 0px 5px rgb(180, 180, 180);
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .bottom-box-content>p{
     font-size: 1.2em;
@@ -211,7 +222,21 @@
 .bottom-box-img{
     width: 450px;
 }
-
+button.start{
+    width: 70%;
+    height: 50px;
+    margin:50px;
+    border: none;
+    color:#646464; 
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #ffffff;
+}
+button.start:hover{
+    background-color: #d080ff70;
+    color: #ffffff;
+}
 /* --------------- 반응형 처리 --------------- */
 @media all and (min-width:1100px) and (max-width:1300px) {
     .Main-new-right {
@@ -323,11 +348,21 @@
 }
 
 @media (max-width:1200px) {
-    .bottom-box {
+    .bottom-box{
+        display: flex;
         flex-direction: column;
+        width: 100%;
+        justify-content: space-evenly;
+        text-align: left;
+        align-items: center;
     }
-    .rever{
+    .bottom-box-r{
+        display: flex;
         flex-direction: column-reverse;
+        width: 100%;
+        justify-content: space-evenly;
+        text-align: left;
+        align-items: center;
     }
     
 }
@@ -352,4 +387,13 @@
     .Main-new-bottom-img-div {
         width: 90%;
     }
+
+    .bottom-box{
+        display: flex;
+        flex-direction: column-reverse;
+        width: 100%;
+        text-align: left;
+        align-items: center;
+    }
+    
 }

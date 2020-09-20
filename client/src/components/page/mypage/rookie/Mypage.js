@@ -21,11 +21,13 @@ class mypage extends Component {
             like : false,
 
             load : false,
+
         }
     }
 
     async componentDidMount() {
         const { userInfo, user } = this.props;
+      
         try {
             // 서로 관련이 없는 경우 아래와 같은 방식으로 전부 다 한번에 처리 가능.
             let result = axios.get(`${config.app.s_url}/portfolios/all?userId=${userInfo.userId}`);
@@ -43,7 +45,7 @@ class mypage extends Component {
                 activity = data[3].data;
                 like = data[4].data;
             });
-
+      
             // 실행 결과 값들을 스태이트에 반영.
             this.setState({ 
                 portfolioData : result, 
@@ -52,12 +54,13 @@ class mypage extends Component {
                 activityData : activity,
                 like : like ? true : false,
             });
-
         } catch(err) {
             console.log("rookie mypage data load err : ");
         }
-        this.setState({ load : true });
+        this.setState({ load : true })
     }
+
+
 
     MenuClick(num){ this.setState({ btnNum:num }) }
 
@@ -68,7 +71,7 @@ class mypage extends Component {
     render() {
         const { btnNum, portfolioData, load, awardData, certificateData,activityData,like }=this.state;
         const { userInfo, user, loginState, infoMount, boardMount, mailReload } = this.props;
-        console.log(userInfo+"유저인포");
+
         return (
             <div className="Mypage">
                 <div className="Mypage-frame">
@@ -86,6 +89,7 @@ class mypage extends Component {
                                 awardData={awardData}
                                 certificateData={certificateData}
                                 activityData={activityData}
+                                portfolioData={portfolioData} 
                                 like={like}
                                 likeToggle={this.likeToggle.bind(this)}
                                 infoMount={() => infoMount()}
