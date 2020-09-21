@@ -4,7 +4,6 @@
 npx create-react-app client
 npm start
 npm run build
-serve -s -p 3000 build
 ```
 
 -   파이어 베이스 파일 저장소 이용

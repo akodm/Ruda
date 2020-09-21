@@ -4,7 +4,6 @@
 
 ##### - Daelim Project -
 
--   domain : 미정
 -   React-Express
 -   Client-Server
 -   v. 1.0 (beta)
@@ -13,31 +12,28 @@
 
 경력없는 신입들만을 위한 신입 구직구직 웹 서비스 입니다.
 
-시범단계이고, 대림대학교 학생들 중 모바일인터넷과 학생만을 수용합니다.
+베타 버전으로, 대림대학교 모바일인터넷과 학생만을 수용합니다.
 
 ### 기술 스택
 
 ```js
 -CLIENT-
 React.js
-React-Router
+React-Router-Dom
 Material UI
-Fortawesome
 Apexcharts Graph
-Socket.io-client ( ing ... )
 Firebase-Storage => File Upload/Save
 
 -SERVER-
 Node.js - Express
-API
+REST API
 Sequelize ORM
-Mysql, Redis    => Database Caching
+Mysql           => Database
 Axios
 JWT             => Session
 Nodemailer      => Email Auth
-Passport        => Google, Facebook, Naver
+Passport        => Google
 Pm2
-Socket.io ( ing ... )
 
 -TOOLS-
 VsCode
@@ -47,7 +43,8 @@ Postman
 Sourcetree
 
 -Cloud-
-Aws Educate ( ubuntu 18.04 )
+Aws Educate ( ubuntu 18.04 ) => GCP ( ubuntu 18.04 )
+Nginx Proxy Server
 client => pm2 ( /build ) ( serve )
 server => pm2 ( --env production )
 ```
@@ -58,8 +55,6 @@ server => pm2 ( --env production )
 Insert or oAuth -> Login ->
 basic Info Set -> Profile Confirm -> Board or Recommend Popup
 ```
-
--   현재 테스트 중으로 도메인 및 https가 없어 소셜 로그인이 불가합니다. ( 구글, 페이스북, 네이버 )
 
 ### 부족한 사항
 
