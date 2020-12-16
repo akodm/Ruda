@@ -4,6 +4,10 @@
 
 ##### - Daelim Project -
 
+# <<<<<<< HEAD
+
+-   domain : 서버 다운
+    > > > > > > > junmyeong
 -   React-Express
 -   Client-Server
 -   v. 1.0 (beta)
@@ -43,8 +47,9 @@ Postman
 Sourcetree
 
 -Cloud-
-Aws Educate ( ubuntu 18.04 ) => GCP ( ubuntu 18.04 )
-Nginx Proxy Server
+Aws Educate -> GCP
+Nginx
+Lets Encrypt SSL
 client => pm2 ( /build ) ( serve )
 server => pm2 ( --env production )
 ```
@@ -58,5 +63,22 @@ basic Info Set -> Profile Confirm -> Board or Recommend Popup
 
 ### 부족한 사항
 
--   크롬 외 브라우저에서 소셜 로그인이 제대로 동작하지 않음.
--   모바일 반응형 페이지 ( 마이페이지 ) 아직 부족.
+-   모바일 반응형 페이지 ( 마이페이지 ) 부족.
+
+---
+
+도메인에 Https 적용 ( Lets Encrypt )  
+![IMG](./read/https.PNG)
+
+메인페이지  
+![IMG](./read/mainpage.PNG)
+
+소셜 로그인 ( 구글 )  
+![IMG](./read/login.PNG)
+
+메일함과 포트폴리오 관리 페이지  
+![IMG](./read/mailbox.PNG)  
+![IMG](./read/portfolio.PNG)
+
+Nginx & SSL  
+![IMG](./read/setup.PNG)
