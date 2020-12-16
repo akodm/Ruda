@@ -4,7 +4,7 @@
 
 ##### - Daelim Project -
 
--   domain : 미정
+-   domain : 서버 다운
 -   React-Express
 -   Client-Server
 -   v. 1.0 (beta)
@@ -24,7 +24,6 @@ React-Router
 Material UI
 Fortawesome
 Apexcharts Graph
-Socket.io-client ( ing ... )
 Firebase-Storage => File Upload/Save
 
 -SERVER-
@@ -37,7 +36,6 @@ JWT             => Session
 Nodemailer      => Email Auth
 Passport        => Google, Facebook, Naver
 Pm2
-Socket.io ( ing ... )
 
 -TOOLS-
 VsCode
@@ -47,7 +45,9 @@ Postman
 Sourcetree
 
 -Cloud-
-Aws Educate ( ubuntu 18.04 )
+Aws Educate -> GCP
+Nginx
+Lets Encrypt SSL
 client => pm2 ( /build ) ( serve )
 server => pm2 ( --env production )
 ```
@@ -59,9 +59,24 @@ Insert or oAuth -> Login ->
 basic Info Set -> Profile Confirm -> Board or Recommend Popup
 ```
 
--   현재 테스트 중으로 도메인 및 https가 없어 소셜 로그인이 불가합니다. ( 구글, 페이스북, 네이버 )
-
 ### 부족한 사항
 
--   크롬 외 브라우저에서 소셜 로그인이 제대로 동작하지 않음.
--   모바일 반응형 페이지 ( 마이페이지 ) 아직 부족.
+-   모바일 반응형 페이지 ( 마이페이지 ) 부족.
+
+---
+
+도메인에 Https 적용 ( Lets Encrypt )  
+[IMG](./read/https.PNG)
+
+메인페이지  
+[IMG](./read/mainpage.PNG)
+
+소셜 로그인 ( 구글 )  
+[IMG](./read/login.PNG)
+
+메일함과 포트폴리오 관리 페이지  
+[IMG](./read/mailbox.PNG)  
+[IMG](./read/portfolio.PNG)
+
+Nginx & SSL  
+[IMG](./read/setup.PNG)
