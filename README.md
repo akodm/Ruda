@@ -66,17 +66,17 @@ basic Info Set -> Profile Confirm -> Board or Recommend Popup
 ---
 
 도메인에 Https 적용 ( Lets Encrypt )  
-[IMG](./read/https.PNG)
+![IMG](./read/https.PNG)
 
 메인페이지  
-[IMG](./read/mainpage.PNG)
+![IMG](./read/mainpage.PNG)
 
 소셜 로그인 ( 구글 )  
-[IMG](./read/login.PNG)
+![IMG](./read/login.PNG)
 
 메일함과 포트폴리오 관리 페이지  
-[IMG](./read/mailbox.PNG)  
-[IMG](./read/portfolio.PNG)
+![IMG](./read/mailbox.PNG)  
+![IMG](./read/portfolio.PNG)
 
 Nginx & SSL  
-[IMG](./read/setup.PNG)
+![IMG](./read/setup.PNG)
