@@ -7,7 +7,6 @@
 # <<<<<<< HEAD
 
 -   domain : 서버 다운
-    > > > > > > > junmyeong
 -   React-Express
 -   Client-Server
 -   v. 1.0 (beta)
