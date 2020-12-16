@@ -3,9 +3,6 @@
 ### Jo junmyeong & Ko yuri
 
 ##### - Daelim Project -
-
-# <<<<<<< HEAD
-
 -   domain : 서버 다운
 -   React-Express
 -   Client-Server
